@@ -34,6 +34,24 @@
         <style>
             @import url('//fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap');
             @import url('//fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans:500&display=swap');
+
+            :root{
+                --radius:15px;
+                --color-primary:239 92 41;
+                --color-success:61 143 31;
+                --color-danger:143 31 32;
+                --color-secondary:43 43 64;
+                --color-50:244 244 245;
+                --color-100:222 222 226;
+                --color-200:210 210 219;
+                --color-300:130 130 164;
+                --color-400:94 94 127;
+                --color-500:66 66 91;
+                --color-600:27 27 33;
+                --color-700:20 20 22;
+                --color-800:7 7 9;
+                --color-900:7 7 12;
+            }
         </style>
 
         @yield('assets')

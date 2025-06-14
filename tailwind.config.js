@@ -1,16 +1,23 @@
 const colors = require('tailwindcss/colors');
 
+function revix(variable) {
+  return ({ opacityValue }) =>
+    opacityValue !== undefined
+      ? `rgb(var(${variable}) / ${opacityValue})`
+      : `rgb(var(${variable}))`;
+}
+
 const gray = {
-    50: 'hsl(216, 33%, 97%)',
-    100: 'hsl(214, 15%, 91%)',
-    200: 'hsl(210, 16%, 82%)',
-    300: 'hsl(211, 13%, 65%)',
-    400: 'hsl(211, 10%, 53%)',
-    500: 'hsl(211, 12%, 43%)',
-    600: 'hsl(209, 14%, 37%)',
-    700: 'hsl(209, 18%, 30%)',
-    800: 'hsl(209, 20%, 25%)',
-    900: 'hsl(210, 24%, 16%)',
+    50: revix('--color-50'),
+    100: revix('--color-100'),
+    200: revix('--color-200'),
+    300: revix('--color-300'),
+    400: revix('--color-400'),
+    500: revix('--color-500'),
+    600: revix('--color-600'),
+    700: revix('--color-700'),
+    800: revix('--color-800'),
+    900: revix('--color-900'),
 };
 
 module.exports = {
@@ -30,6 +37,10 @@ module.exports = {
                 gray: gray,
                 neutral: gray,
                 cyan: colors.cyan,
+                revix: revix('--color-primary'),
+                success: revix('--color-success'),
+                danger: revix('--color-danger'),
+                secondary: revix('--color-secondary'),
             },
             fontSize: {
                 '2xs': '0.625rem',
@@ -40,6 +51,9 @@ module.exports = {
             borderColor: theme => ({
                 default: theme('colors.neutral.400', 'currentColor'),
             }),
+            borderRadius: {
+                ui: 'var(--radius)',
+            },
         },
     },
     plugins: [

@@ -3,19 +3,29 @@ import classNames from 'classnames';
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
 
-interface TextProps {
+interface TitleProps {
     className?: string;
-    children: React.ReactChild | React.ReactFragment | React.ReactPortal;
+    children: React.ReactNode;
+    scheme?: 'gray' | 'primary';
 }
 
 const Gradient = styled.div`
-    ${tw`leading-tight bg-gradient-to-tl from-gray-50 via-gray-100 to-gray-200 bg-clip-text text-transparent`}
+    ${tw`leading-tight bg-gradient-to-tl bg-clip-text text-transparent font-semibold`}
 `;
 
-export const GradientTitle = ({ className, children }: TextProps) => (
-    <Gradient
-        className={classNames('font-semibold', className)}
-    >
-        {children}
-    </Gradient>
-);
+const gradientClasses: Record<NonNullable<TitleProps['scheme']>, string> = {
+    primary: 'from-revix/60 via-revix/80 to-revix/90',
+    gray: 'from-gray-50 via-gray-100 to-gray-200',
+};
+
+export const Title = ({ className, children, scheme = 'gray' }: TitleProps) => {
+    const colorClass = gradientClasses[scheme];
+
+    return (
+        <Gradient className={classNames(colorClass, className)}>
+            {children}
+        </Gradient>
+    );
+};
+
+export default Title;

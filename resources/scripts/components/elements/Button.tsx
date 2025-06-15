@@ -11,15 +11,15 @@ interface Props {
 }
 
 const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
-    ${tw`relative inline-block rounded p-2 uppercase tracking-wide text-sm transition-all duration-150 border`};
+    ${tw`relative inline-block rounded-ui p-2 tracking-wide text-base font-semibold transition-all duration-150 border`};
 
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${(props) => !props.isSecondary && tw`bg-primary-500 border-primary-600 border text-primary-50`};
+            ${(props) => !props.isSecondary && tw`bg-primary-500/80 border-primary-600/80 border text-primary-50`};
 
             &:hover:not(:disabled) {
-                ${tw`bg-primary-600 border-primary-700`};
+                ${tw`bg-primary-600/80 border-primary-700/80`};
             }
         `};
 
@@ -71,7 +71,7 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
 
     ${(props) => props.size === 'xsmall' && tw`px-2 py-1 text-xs`};
     ${(props) => (!props.size || props.size === 'small') && tw`px-4 py-2`};
-    ${(props) => props.size === 'large' && tw`p-4 text-sm`};
+    ${(props) => props.size === 'large' && tw`p-4 text-xl`};
     ${(props) => props.size === 'xlarge' && tw`p-4 w-full`};
 
     ${(props) =>

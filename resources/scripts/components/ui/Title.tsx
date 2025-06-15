@@ -9,12 +9,12 @@ interface TextProps {
 }
 
 const Gradient = styled.div`
-    ${tw`leading-tight font-semibold bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 bg-clip-text text-transparent`}
+    ${tw`leading-tight bg-gradient-to-tl from-gray-50 via-gray-100 to-gray-200 bg-clip-text text-transparent`}
 `;
 
 export const GradientTitle = ({ className, children }: TextProps) => (
     <Gradient
-        className={classNames('text-3xl pb-3', className)}
+        className={classNames('font-semibold', className)}
     >
         {children}
     </Gradient>

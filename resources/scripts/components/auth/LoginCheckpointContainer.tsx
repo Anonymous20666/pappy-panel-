@@ -9,7 +9,7 @@ import useFlash from '@/plugins/useFlash';
 import { FlashStore } from '@/state/flashes';
 import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
-import Button from '@/components/elements/Button';
+import { Button } from '@/components/elements/button/index';
 
 interface Values {
     code: string;
@@ -28,9 +28,8 @@ const LoginCheckpointContainer = () => {
 
     return (
         <LoginFormContainer title={'Device Checkpoint'} css={tw`w-full flex`}>
-            <div css={tw`mt-6`}>
+            <div css={tw`mt-3`}>
                 <Field
-                    light
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
                     title={isMissingDevice ? 'Recovery Code' : 'Authentication Code'}
                     description={
@@ -43,27 +42,27 @@ const LoginCheckpointContainer = () => {
                     autoFocus
                 />
             </div>
-            <div css={tw`mt-6`}>
-                <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
+            <div css={tw`mt-3`}>
+                <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>
                     Continue
                 </Button>
             </div>
-            <div css={tw`mt-6 text-center`}>
+            <div css={tw`mt-3 text-center`}>
                 <span
                     onClick={() => {
                         setFieldValue('code', '');
                         setFieldValue('recoveryCode', '');
                         setIsMissingDevice((s) => !s);
                     }}
-                    css={tw`cursor-pointer text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
+                    css={tw`cursor-pointer text-sm text-revix/80 tracking-wide no-underline hover:text-revix/50`}
                 >
                     {!isMissingDevice ? "I've Lost My Device" : 'I Have My Device'}
                 </span>
             </div>
-            <div css={tw`mt-6 text-center`}>
+            <div css={tw`mt-3 text-center`}>
                 <Link
                     to={'/auth/login'}
-                    css={tw`text-xs text-neutral-500 tracking-wide uppercase no-underline hover:text-neutral-700`}
+                    css={tw`text-sm text-revix/80 tracking-wide no-underline hover:text-revix/50`}
                 >
                     Return to Login
                 </Link>

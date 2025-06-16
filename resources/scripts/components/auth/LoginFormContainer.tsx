@@ -24,7 +24,7 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
         <Form {...props} ref={ref}>
           <CardContainer>
             <div className='flex gap-x-2 items-center content-center font-semibold text-lg text-gray-50 pb-5'>
-             <img src="/revix/logo.png" alt="revix" css={tw`h-[50px]`} />
+             <img src="/revix/logo.png" alt="revix" css={tw`h-[3rem]`} />
             </div>
             <Card>
                 {title && <Title className="text-3xl text-center pb-3">{title}</Title>}

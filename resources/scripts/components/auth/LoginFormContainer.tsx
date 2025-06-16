@@ -14,16 +14,23 @@ const Container = styled.div`
     ${tw`my-auto mx-auto`}
 `;
 
+const CardContainer = styled.div`
+    ${tw`max-w-[28.125rem] w-screen p-5`}
+`;
+
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
     <Container>
         <FlashMessageRender css={tw`mb-2 px-1`} />
         <Form {...props} ref={ref}>
-          <div className="max-w-[450px] w-screen p-5">
+          <CardContainer>
+            <div className='flex gap-x-2 items-center content-center font-semibold text-lg text-gray-50 pb-5'>
+             <img src="/revix/logo.png" alt="revix" css={`height:50px;`} />
+            </div>
             <Card>
                 {title && <Title className="text-3xl text-center pb-3">{title}</Title>}
                 {props.children}
             </Card>
-          </div>
+          </CardContainer>
         </Form>
         <p css={tw`text-center text-neutral-500 text-xs mt-4`}>
             &copy; 2015 - {new Date().getFullYear()}&nbsp;

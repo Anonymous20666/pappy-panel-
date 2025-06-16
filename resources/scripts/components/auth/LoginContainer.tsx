@@ -10,6 +10,8 @@ import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
+import Label from '@/components/elements/Label';
+import { KeyIcon, UserIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
 
 interface Values {
     username: string;
@@ -19,6 +21,7 @@ interface Values {
 const LoginContainer = ({ history }: RouteComponentProps) => {
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
+    const [show, setShow] = useState(false);
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
@@ -75,9 +78,17 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'Login to Continue'} css={tw`w-full flex`}>
-                    <Field type={'text'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
-                    <div css={tw`mt-6`}>
-                        <Field type={'password'} label={'Password'} name={'password'} disabled={isSubmitting} />
+                    <Field icon={UserIcon} type={'text'} placeholder={'Username or Email'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
+                    <div css={tw`mt-3`}>
+                    <Label>Password</Label>
+                    <div css={tw`relative`}>
+                        <Field icon={KeyIcon} type={show ? 'text' : 'password'} placeholder={'Password'} name={'password'} disabled={isSubmitting} />
+                            <button type={'button'} css={tw`absolute border-l-2 top-[10px] right-[6px] py-2 p-1 border-gray-300 text-gray-300`} onClick={() => setShow(!show)}>
+                                {show 
+                                ? <EyeOffIcon className="h-5 w-5" />
+                                : <EyeIcon className="h-5 w-5" />}
+                            </button>
+                    </div>
                     </div>
                     <div css={tw`mt-6`}>
                         <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>

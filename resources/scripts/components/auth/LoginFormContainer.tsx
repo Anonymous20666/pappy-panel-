@@ -18,14 +18,18 @@ const CardContainer = styled.div`
     ${tw`max-w-[28.125rem] w-screen p-5`}
 `;
 
+const LogoContainer = styled.div`
+    ${tw`flex gap-x-2 pb-5`}
+`;
+
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (
     <Container>
         <FlashMessageRender css={tw`mb-2 px-1`} />
         <Form {...props} ref={ref}>
           <CardContainer>
-            <div className='flex gap-x-2 items-center content-center font-semibold text-lg text-gray-50 pb-5'>
+            <LogoContainer>
              <img src="/revix/logo.png" alt="revix" css={tw`h-[3rem]`} />
-            </div>
+            </LogoContainer>
             <Card>
                 {title && <Title className="text-3xl text-center pb-3">{title}</Title>}
                 {props.children}

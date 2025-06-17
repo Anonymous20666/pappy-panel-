@@ -12,6 +12,7 @@ import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
+import { AtSymbolIcon } from '@heroicons/react/solid';
 
 interface Values {
     email: string;
@@ -74,6 +75,7 @@ export default () => {
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={'Request Password Reset'} css={tw`w-full flex`}>
                     <Field
+                        icon={AtSymbolIcon}
                         label={'Email'}
                         description={
                             'Enter your account email address to receive instructions on resetting your password.'

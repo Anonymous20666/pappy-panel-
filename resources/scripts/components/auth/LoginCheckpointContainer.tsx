@@ -10,6 +10,7 @@ import { FlashStore } from '@/state/flashes';
 import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
+import { DotsHorizontalIcon } from '@heroicons/react/solid';
 
 interface Values {
     code: string;
@@ -30,6 +31,7 @@ const LoginCheckpointContainer = () => {
         <LoginFormContainer title={'Device Checkpoint'} css={tw`w-full flex`}>
             <div css={tw`mt-3`}>
                 <Field
+                    icon={DotsHorizontalIcon}
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
                     title={isMissingDevice ? 'Recovery Code' : 'Authentication Code'}
                     description={

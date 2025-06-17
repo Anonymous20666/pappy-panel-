@@ -33,6 +33,10 @@ interface RouteDefinition {
 
 interface ServerRouteDefinition extends RouteDefinition {
     permission: string | string[] | null;
+    nestId?: number;
+    eggId?: number;
+    nestIds?: number[];
+    eggIds?: number[];
 }
 
 interface Routes {

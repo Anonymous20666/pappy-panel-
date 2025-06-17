@@ -6,6 +6,12 @@ import ResetPasswordContainer from '@/components/auth/ResetPasswordContainer';
 import LoginCheckpointContainer from '@/components/auth/LoginCheckpointContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import { useHistory, useLocation } from 'react-router';
+import styled from 'styled-components/macro';
+import tw from 'twin.macro';
+
+const RouterContainer = styled.div`
+    ${tw`flex flex-col min-h-screen h-full`}
+`;
 
 export default () => {
     const history = useHistory();
@@ -13,8 +19,7 @@ export default () => {
     const { path } = useRouteMatch();
 
     return (
-        <div className={'min-h-screen h-full'}>
-           <div className={'flex flex-col min-h-screen h-full'}>
+        <RouterContainer>
             <Switch location={location}>
                 <Route path={`${path}/login`} component={LoginContainer} exact />
                 <Route path={`${path}/login/checkpoint`} component={LoginCheckpointContainer} />
@@ -25,7 +30,6 @@ export default () => {
                     <NotFound onBack={() => history.push('/auth/login')} />
                 </Route>
             </Switch>
-           </div>
-        </div>
+        </RouterContainer>
     );
 };

@@ -42,7 +42,9 @@ const NavItem = ({ route }: Props) => {
             (route.eggId && route.eggId === eggId) ||
             (!route.eggIds && !route.nestIds && !route.nestId && !route.eggId)) && (
             <NavLink id={route.name} to={to(route.path, true)} exact={route.exact}>
-                {route.name}
+                <span className="flex items-center">
+                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name}
+                </span>
             </NavLink>
         )
     );

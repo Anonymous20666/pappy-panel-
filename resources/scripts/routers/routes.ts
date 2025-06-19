@@ -13,6 +13,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import { TerminalIcon, FolderIcon, FingerPrintIcon, DatabaseIcon, CalendarIcon, UserGroupIcon, ArchiveIcon, LightningBoltIcon, PlayIcon, CogIcon } from '@heroicons/react/solid'
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -76,6 +77,7 @@ export default {
             permission: null,
             name: 'Console',
             component: ServerConsole,
+            icon: TerminalIcon,
             exact: true,
         },
         {
@@ -83,6 +85,7 @@ export default {
             permission: 'file.*',
             name: 'Files',
             component: FileManagerContainer,
+            icon: FolderIcon,
         },
         {
             path: '/files/:action(edit|new)',
@@ -95,12 +98,14 @@ export default {
             permission: 'database.*',
             name: 'Databases',
             component: DatabasesContainer,
+            icon: DatabaseIcon,
         },
         {
             path: '/schedules',
             permission: 'schedule.*',
             name: 'Schedules',
             component: ScheduleContainer,
+            icon: CalendarIcon,
         },
         {
             path: '/schedules/:id',
@@ -113,36 +118,42 @@ export default {
             permission: 'user.*',
             name: 'Users',
             component: UsersContainer,
+            icon: UserGroupIcon,
         },
         {
             path: '/backups',
             permission: 'backup.*',
             name: 'Backups',
             component: BackupContainer,
+            icon: ArchiveIcon,
         },
         {
             path: '/network',
             permission: 'allocation.*',
             name: 'Network',
             component: NetworkContainer,
+            icon: LightningBoltIcon,
         },
         {
             path: '/startup',
             permission: 'startup.*',
             name: 'Startup',
             component: StartupContainer,
+            icon: PlayIcon,
         },
         {
             path: '/settings',
             permission: ['settings.*', 'file.sftp'],
             name: 'Settings',
             component: SettingsContainer,
+            icon: CogIcon,
         },
         {
             path: '/activity',
             permission: 'activity.*',
             name: 'Activity',
             component: ServerActivityLogContainer,
+            icon: FingerPrintIcon,
         },
     ],
 } as Routes;

@@ -1,7 +1,7 @@
 import TransferListener from '@/components/server/TransferListener';
 import React, { useEffect, useState } from 'react';
 import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
-import NavigationBar from '@/components/NavigationBar';
+import Navbar from '@/components/ui/Navbar';
 import TransitionRouter from '@/TransitionRouter';
 import WebsocketHandler from '@/components/server/WebsocketHandler';
 import { ServerContext } from '@/state/server';
@@ -11,15 +11,18 @@ import Spinner from '@/components/elements/Spinner';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
 import { httpErrorToHuman } from '@/api/http';
 import { useStoreState } from 'easy-peasy';
-import SubNavigation from '@/components/elements/SubNavigation';
 import InstallListener from '@/components/server/InstallListener';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
+import ServerSidebar from '@/components/ui/sidebar/ServerSidebar';
+import { XIcon, MenuIcon } from '@heroicons/react/solid';
+import { LogoContainer } from '@/components/ui/LogoContainer';
+import tw from 'twin.macro';
+import { RouterContainer } from '@/components/ui/RouterContainer';
+import { ContentContainer } from '@/components/ui/ContentContainer';
 
 interface Props {
     route: any;
@@ -50,12 +53,33 @@ const NavItem = ({ route }: Props) => {
     );
 };
 
+const ServerNavigation = () => {
+  return (
+    <>
+    {routes.server
+        .filter((route) => !!route.name)
+        .map((route) =>
+    route.permission ? (
+        <Can key={route.path} action={route.permission} matchAny>
+            <NavItem route={route} />
+        </Can>
+    ) : (
+        <React.Fragment key={route.path}>
+            <NavItem route={route} />
+        </React.Fragment>
+    )
+    )}
+    </>
+  );
+};
+
 export default () => {
     const match = useRouteMatch<{ id: string }>();
     const location = useLocation();
 
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [error, setError] = useState('');
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
 
     const id = ServerContext.useStoreState((state) => state.server.data?.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
@@ -96,7 +120,7 @@ export default () => {
 
     return (
         <React.Fragment key={'server-router'}>
-            <NavigationBar />
+            <RouterContainer>
             {!uuid || !id ? (
                 error ? (
                     <ServerError message={error} />
@@ -105,31 +129,36 @@ export default () => {
                 )
             ) : (
                 <>
-                    <CSSTransition timeout={150} classNames={'fade'} appear in>
-                        <SubNavigation>
-                            <div>
-                                {routes.server
-                                    .filter((route) => !!route.name)
-                                    .map((route) =>
-                                 route.permission ? (
-                                    <Can key={route.path} action={route.permission} matchAny>
-                                        <NavItem route={route} />
-                                    </Can>
-                                  ) : (
-                                    <React.Fragment key={route.path}>
-                                        <NavItem route={route} />
-                                    </React.Fragment>
-                                  )
-                                )}
-                                {rootAdmin && (
-                                    // eslint-disable-next-line react/jsx-no-target-blank
-                                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                                        <FontAwesomeIcon icon={faExternalLinkAlt} />
-                                    </a>
-                                )}
-                            </div>
-                        </SubNavigation>
+                <Navbar>
+                        <div className="lg:hidden">
+                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 pt-2 pb-2 pl-2 rounded-ui">
+                               {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" /> }
+                             </button>
+                        </div>
+                        <LogoContainer>
+                            <img src="/revix/logo.png" alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                        </LogoContainer>
+                </Navbar>
+                <ContentContainer>
+                    {isSidebarOpen && (
+                           <div 
+                            onClick={() => setSidebarOpen(false)}
+                            className="fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden"
+                            />
+                        )}
+                    <CSSTransition timeout={150} classNames="fade">
+                        <ServerSidebar isOpen={isSidebarOpen}>
+                                <ServerNavigation />
+                        </ServerSidebar>
                     </CSSTransition>
+                    {isSidebarOpen && (
+                        <div className="lg:hidden fixed z-50 right-0 top-[68px]">
+                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-l-ui">
+                               <XIcon className="w-6 h-6" />
+                             </button>
+                        </div>
+                     )}
+                    <div className="w-full flex-1 overflow-y-auto">
                     <InstallListener />
                     <TransferListener />
                     <WebsocketHandler />
@@ -159,8 +188,11 @@ export default () => {
                             </TransitionRouter>
                         </ErrorBoundary>
                     )}
+                    </div>
+                </ContentContainer>
                 </>
             )}
+        </RouterContainer>
         </React.Fragment>
     );
 };

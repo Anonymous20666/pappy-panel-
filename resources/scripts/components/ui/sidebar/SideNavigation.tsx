@@ -1,0 +1,16 @@
+import styled from 'styled-components/macro';
+import tw from 'twin.macro';
+
+export const SideNavigation = styled.div`
+  ${tw`flex flex-col gap-1 pb-4`};
+
+  & > a {
+    ${tw`flex items-center ml-2 mr-2 px-5 py-2 text-sm font-medium text-gray-200 rounded-ui transition-all duration-300`};
+
+    &:hover,
+    &:focus,
+    &.active {
+      ${tw`text-revix bg-gray-800`};
+    }
+  }
+`;

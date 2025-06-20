@@ -4,6 +4,7 @@ import styled from 'styled-components/macro';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import Card from '@/components/ui/Card'
 import Title from '@/components/ui/Title';
+import { LogoContainer } from '@/components/ui/LogoContainer';
 import tw from 'twin.macro';
 
 type Props = React.DetailedHTMLProps<React.FormHTMLAttributes<HTMLFormElement>, HTMLFormElement> & {
@@ -16,10 +17,6 @@ const Container = styled.div`
 
 const CardContainer = styled.div`
     ${tw`max-w-[28.125rem] w-screen p-5`}
-`;
-
-const LogoContainer = styled.div`
-    ${tw`flex gap-x-2 pb-5`}
 `;
 
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => (

@@ -23,6 +23,7 @@ import { LogoContainer } from '@/components/ui/LogoContainer';
 import tw from 'twin.macro';
 import { RouterContainer } from '@/components/ui/RouterContainer';
 import { ContentContainer } from '@/components/ui/ContentContainer';
+import TopServerDetails from '@/components/server/TopServerDetails';
 
 interface Props {
     route: any;
@@ -166,6 +167,7 @@ export default () => {
                         <ConflictStateRenderer />
                     ) : (
                         <ErrorBoundary>
+                            <TopServerDetails />
                             <TransitionRouter>
                                 <Switch location={location}>
                                     {routes.server.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {

@@ -89,10 +89,7 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
     });
 
     return (
-        <div className={classNames('grid grid-cols-6 gap-2 md:gap-4', className)}>
-            <StatBlock icon={faWifi} title={'Address'} copyOnClick={allocation}>
-                {allocation}
-            </StatBlock>
+        <div className={className}>
             <StatBlock
                 icon={faClock}
                 title={'Uptime'}
@@ -105,27 +102,6 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 ) : (
                     capitalize(status)
                 )}
-            </StatBlock>
-            <StatBlock icon={faMicrochip} title={'CPU Load'} color={getBackgroundColor(stats.cpu, limits.cpu)}>
-                {status === 'offline' ? (
-                    <span className={'text-gray-400'}>Offline</span>
-                ) : (
-                    <Limit limit={textLimits.cpu}>{stats.cpu.toFixed(2)}%</Limit>
-                )}
-            </StatBlock>
-            <StatBlock
-                icon={faMemory}
-                title={'Memory'}
-                color={getBackgroundColor(stats.memory / 1024, limits.memory * 1024)}
-            >
-                {status === 'offline' ? (
-                    <span className={'text-gray-400'}>Offline</span>
-                ) : (
-                    <Limit limit={textLimits.memory}>{bytesToString(stats.memory)}</Limit>
-                )}
-            </StatBlock>
-            <StatBlock icon={faHdd} title={'Disk'} color={getBackgroundColor(stats.disk / 1024, limits.disk * 1024)}>
-                <Limit limit={textLimits.disk}>{bytesToString(stats.disk)}</Limit>
             </StatBlock>
             <StatBlock icon={faCloudDownloadAlt} title={'Network (Inbound)'}>
                 {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.rx)}

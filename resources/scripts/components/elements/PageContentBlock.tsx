@@ -3,6 +3,7 @@ import ContentContainer from '@/components/elements/ContentContainer';
 import { CSSTransition } from 'react-transition-group';
 import tw from 'twin.macro';
 import FlashMessageRender from '@/components/FlashMessageRender';
+import Title from '@/components/ui/Title';
 
 export interface PageContentBlockProps {
     title?: string;
@@ -20,8 +21,9 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
     return (
         <CSSTransition timeout={150} classNames={'fade'} appear in>
             <>
-                <ContentContainer css={tw`my-4 sm:my-10`} className={className}>
+                <ContentContainer css={tw`my-2`} className={className}>
                     {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
+                    <Title className="text-4xl">{title}</Title>
                     {children}
                 </ContentContainer>
                 <ContentContainer css={tw`mb-4`}>

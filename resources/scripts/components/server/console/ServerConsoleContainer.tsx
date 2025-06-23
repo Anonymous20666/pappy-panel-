@@ -5,7 +5,7 @@ import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import isEqual from 'react-fast-compare';
 import Spinner from '@/components/elements/Spinner';
 import Features from '@feature/Features';
-import Console from '@/components/server/console/Console';
+import ConsoleBlock from '@/components/server/console/ConsoleBlock';
 import StatGraphs from '@/components/server/console/StatGraphs';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
@@ -32,9 +32,9 @@ const ServerConsoleContainer = () => {
                         : 'This server is currently being transferred to another node and all actions are unavailable.'}
                 </Alert>
             )}
-            <div className={'my-4 mx-2'}>
+            <div className={'my-4'}>
                     <Spinner.Suspense>
-                        <Console />
+                        <ConsoleBlock />
                     </Spinner.Suspense>
             </div>
             <div className={'mt-2'}>

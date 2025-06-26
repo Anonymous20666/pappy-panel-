@@ -3,7 +3,7 @@ import { Server } from '@/api/server/getServer';
 import getServers from '@/api/getServers';
 import ServerRow from '@/components/dashboard/ServerRow';
 import Spinner from '@/components/elements/Spinner';
-import PageContentBlock from '@/components/elements/PageContentBlock';
+import ContentBlock from '@//components/ui/ContentBlock';
 import useFlash from '@/plugins/useFlash';
 import { useStoreState } from 'easy-peasy';
 import { usePersistedState } from '@/plugins/usePersistedState';
@@ -49,7 +49,7 @@ export default () => {
     }, [error]);
 
     return (
-        <PageContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
+        <ContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
             {rootAdmin && (
                 <div css={tw`mb-2 flex justify-end items-center`}>
                     <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
@@ -81,6 +81,6 @@ export default () => {
                     }
                 </Pagination>
             )}
-        </PageContentBlock>
+        </ContentBlock>
     );
 };

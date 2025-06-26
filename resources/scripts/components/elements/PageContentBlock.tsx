@@ -24,7 +24,7 @@ const PageContentBlock: React.FC<PageContentBlockProps> = ({ title, showFlashKey
                     {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
                     {children}
                 </ContentContainer>
-                <ContentContainer css={tw`mb-4`}>
+                <ContentContainer css={tw`mt-4 mb-4`}>
                     <p css={tw`text-center text-neutral-500 text-xs`}>
                         <a
                             rel={'noopener nofollow noreferrer'}

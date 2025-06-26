@@ -95,7 +95,6 @@ const TopServerDetails = () => {
             <div className={"flex items-center gap-x-3"}>
               <Title className="text-3xl">{name}</Title>
             </div>
-          <div className="border border-gray-600 p-2 rounded-ui">
           <Can
             action={["control.start", "control.stop", "control.restart"]}
             matchAny
@@ -103,7 +102,6 @@ const TopServerDetails = () => {
             <PowerButtons className="md:grid grid-cols-3 gap-2 hidden" />
             <PowerButtons className="md:hidden grid-cols-3 gap-2 grid mt-5 pt-5" />
           </Can>
-          </div>
         </UtilContainer>
     </Card>
       <div className="w-full sm:hidden flex justify-center mb-2 mt-2">

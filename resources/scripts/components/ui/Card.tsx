@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 const CardDefault = styled.div`
-    ${tw`rounded-ui bg-gray-700`}
+    ${tw`rounded-ui bg-gray-700 border border-gray-600`}
 `;
 
 export default ({ className, children }: CardProps) => (

@@ -1,10 +1,8 @@
 import React,{useState} from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
-import NavigationBar from '@/components/NavigationBar';
+import { Route, Switch } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import TransitionRouter from '@/TransitionRouter';
-import SubNavigation from '@/components/elements/SubNavigation';
 import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
 import routes from '@/routers/routes';
@@ -43,13 +41,6 @@ export default () => {
                     <CSSTransition timeout={150} classNames="fade">
                         <DashboardSidebar isOpen={isSidebarOpen} />
                     </CSSTransition>
-                    {isSidebarOpen && (
-                        <div className="lg:hidden fixed z-50 right-0 top-[68px]">
-                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-l-ui">
-                               <XIcon className="w-6 h-6" />
-                             </button>
-                        </div>
-                     )}
             <div className="w-full flex-1 overflow-y-auto">
             <TransitionRouter>
                 <React.Suspense fallback={<Spinner centered />}>

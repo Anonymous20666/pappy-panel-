@@ -152,13 +152,6 @@ export default () => {
                                 <ServerNavigation />
                         </ServerSidebar>
                     </CSSTransition>
-                    {isSidebarOpen && (
-                        <div className="lg:hidden fixed z-50 right-0 top-[68px]">
-                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-l-ui">
-                               <XIcon className="w-6 h-6" />
-                             </button>
-                        </div>
-                     )}
                     <div className="w-full flex-1 overflow-y-auto">
                     <InstallListener />
                     <TransferListener />

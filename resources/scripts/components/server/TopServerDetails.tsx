@@ -90,7 +90,7 @@ const TopServerDetails = () => {
 
   return (
     <Container>
-      <Card className={`border border-gray-600 p-2 rounded-ui`}>
+      <Card className={`!p-4 !px-8`}>
         <UtilContainer>
             <div className={"flex items-center gap-x-3"}>
               <Title className="text-3xl">{name}</Title>

@@ -13,6 +13,7 @@ import Card from "@/components/ui/Card";
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import Title from "@/components/ui/Title";
+import { StatBlock } from '@/components/ui/StatBlock';
 
 type Stats = Record<"memory" | "cpu" | "disk", number>;
 
@@ -27,14 +28,13 @@ const Container = styled.div`
   ${tw`relative z-10 pt-4`};
 `;
 
-const StatBlock = styled.div`
-  ${tw`flex items-center gap-2 p-2 rounded-ui bg-gray-700/50 backdrop-blur-sm border border-gray-600`};
-`;
-
 const UtilContainer = styled.div`
   ${tw`mx-auto w-full md:flex items-center justify-between max-w-[75rem]`};
 `;
 
+const StatContainer = styled.div`
+  ${tw`flex flex-wrap justify-center gap-3 sm:gap-4 mt-2 `};
+`;
 const TopServerDetails = () => {
   const [stats, setStats] = useState<Stats>({
     memory: 0,
@@ -106,14 +106,14 @@ const TopServerDetails = () => {
     </Card>
       <div className="w-full sm:hidden flex justify-center mb-2 mt-2">
       <button
-        className="w-full py-2 bg-gray-700 border border-secondary-100 text-gray-100 rounded-input"
+        className="w-full py-2 bg-gray-700 border border-gray-600 text-gray-100 rounded-ui"
         onClick={() => setShowStats((prev) => !prev)}
       >
         {showStats ? "Hide Stats " : "Show Stats"}
       </button>
       </div>
-        <div className={`flex flex-wrap justify-center gap-3 sm:gap-4 mt-2 ${showStats ? '' : 'hidden'} sm:flex`}>
-          <StatBlock>
+        <StatContainer className={`${showStats ? '' : 'hidden'} sm:flex`}>
+          <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <GlobeIcon />
             </span>
@@ -126,7 +126,7 @@ const TopServerDetails = () => {
             </CopyOnClick>
           </StatBlock>
 
-          <StatBlock>
+          <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <ChipIcon />
             </span>
@@ -139,7 +139,7 @@ const TopServerDetails = () => {
             </span>
           </StatBlock>
 
-          <StatBlock>
+          <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <FontAwesomeIcon icon={faMemory} />
             </span>
@@ -152,7 +152,7 @@ const TopServerDetails = () => {
             </span>
           </StatBlock>
 
-          <StatBlock>
+          <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <SaveIcon />
             </span>
@@ -161,7 +161,7 @@ const TopServerDetails = () => {
             </span>
           </StatBlock>
 
-          <StatBlock>
+          <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <HashtagIcon />
             </span>
@@ -169,7 +169,7 @@ const TopServerDetails = () => {
               <span className="text-sm text-white/90">{id}</span>
             </CopyOnClick>
           </StatBlock>
-        </div>
+        </StatContainer>
     </Container>
   );
 };

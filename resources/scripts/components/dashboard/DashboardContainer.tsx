@@ -3,7 +3,7 @@ import { Server } from '@/api/server/getServer';
 import getServers from '@/api/getServers';
 import ServerRow from '@/components/dashboard/ServerRow';
 import Spinner from '@/components/elements/Spinner';
-import ContentBlock from '@//components/ui/ContentBlock';
+import PageContentBlock from '@/components/elements/PageContentBlock';
 import useFlash from '@/plugins/useFlash';
 import { useStoreState } from 'easy-peasy';
 import { usePersistedState } from '@/plugins/usePersistedState';
@@ -13,6 +13,9 @@ import useSWR from 'swr';
 import { PaginatedResult } from '@/api/http';
 import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
+import Card from '@/components/ui/Card';
+import Title from '@/components/ui/Title';
+import { EmojiSadIcon } from '@heroicons/react/solid';
 
 export default () => {
     const { search } = useLocation();
@@ -49,22 +52,32 @@ export default () => {
     }, [error]);
 
     return (
-        <ContentBlock title={'Dashboard'} showFlashKey={'dashboard'}>
+        <PageContentBlock className="pr-2" title={'Dashboard'} showFlashKey={'dashboard'}>
+            <div className="grid lg:grid-cols-2 gap-2 py-4">
+                <div>
+                    <Title className="text-4xl">Dashboard</Title>
+                </div>
             {rootAdmin && (
-                <div css={tw`mb-2 flex justify-end items-center`}>
-                    <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
-                        {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
-                    </p>
-                    <Switch
-                        name={'show_all_servers'}
-                        defaultChecked={showOnlyAdmin}
-                        onChange={() => setShowOnlyAdmin((s) => !s)}
-                    />
+                <div className="flex lg:justify-end justify-center">
+                    <div className="mb-2 pt-4">
+                        <div className="flex lg:justify-end sm:justify-center items-center space-x-2">
+                            <p className="uppercase text-xs text-gray-400">
+                                {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
+                            </p>
+                            <Switch
+                                name={'show_all_servers'}
+                                defaultChecked={showOnlyAdmin}
+                                onChange={() => setShowOnlyAdmin((s) => !s)}
+                             />
+                        </div>
+                    </div>
                 </div>
             )}
+            </div>
             {!servers ? (
                 <Spinner centered size={'large'} />
             ) : (
+                <div className='grid lg:grid-cols-2 gap-3'>
                 <Pagination data={servers} onPageSelect={setPage}>
                     {({ items }) =>
                         items.length > 0 ? (
@@ -72,15 +85,14 @@ export default () => {
                                 <ServerRow key={server.uuid} server={server} css={index > 0 ? tw`mt-2` : undefined} />
                             ))
                         ) : (
-                            <p css={tw`text-center text-sm text-neutral-400`}>
-                                {showOnlyAdmin
-                                    ? 'There are no other servers to display.'
-                                    : 'There are no servers associated with your account.'}
-                            </p>
+                            <Card css={tw`col-span-1 lg:col-span-2`}>
+                                <p className="flex justify-center text-center text-sm text-gray-400"><EmojiSadIcon className="w-5 h-5 mr-1" /> {showOnlyAdmin ? 'There are no other servers to display.' : 'There are no servers associated with your account.'}</p>
+                            </Card>
                         )
                     }
                 </Pagination>
+                </div>
             )}
-        </ContentBlock>
+        </PageContentBlock>
     );
 };

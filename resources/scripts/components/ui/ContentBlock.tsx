@@ -6,14 +6,16 @@ import Title from '@/components/ui/Title';
 
 interface Props extends PageContentBlockProps {
     title: string;
+    description?: string;
 }
 
-const ContentBlock: React.FC<Props> = ({ title, children, ...props }) => {
+const ContentBlock: React.FC<Props> = ({ title, description, children, ...props }) => {
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
 
     return (
         <PageContentBlock title={`${title} | ${name}`} {...props}>
             <Title className="text-4xl">{title}</Title>
+            <p className="text-xs text-gray-500">{description}</p>
             {children}
         </PageContentBlock>
     );

@@ -4,6 +4,8 @@ import tw from 'twin.macro';
 import { SideNavigation } from './SideNavigation';
 import { Link } from 'react-router-dom';
 import Avatar from '@/components/ui/Avatar';
+import { useStoreState } from 'easy-peasy';
+import { ApplicationStore } from '@/state';
 
 interface Props {
     isOpen?: boolean;
@@ -30,6 +32,10 @@ const Container = styled.div<{ isOpen: boolean }>`
 `;
 
 const ServerSidebar = ({ children, isOpen = false }: Props) => {
+    const nameFirst = useStoreState(state => state.user.data?.name_first);
+    const nameLast = useStoreState(state => state.user.data?.name_last);
+    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
+    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     return (
         <Container isOpen={isOpen}>
         <div className="sticky w-fit text-white p-4 rounded-ui">
@@ -37,9 +43,9 @@ const ServerSidebar = ({ children, isOpen = false }: Props) => {
                     <Avatar className="w-10" /> 
             <div className="flex flex-col">
                 <span className="text-xs tracking-widest uppercase text-white/50">
-                    Administrator
+                   {rootAdmin ? 'Administrator' : {name} + 'User'}
                 </span>
-                <span className="text-sm font-semibold">BXD CEO</span>
+                <span className="text-sm font-semibold">{nameFirst} {nameLast}</span>
             </div>
                 </Link>
         </div>

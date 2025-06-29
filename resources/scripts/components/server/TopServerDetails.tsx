@@ -33,7 +33,7 @@ const UtilContainer = styled.div`
 `;
 
 const StatContainer = styled.div`
-  ${tw`flex flex-wrap justify-center gap-3 sm:gap-4 mt-2 `};
+  ${tw`lg:flex flex-wrap justify-center gap-3 sm:gap-4 mt-2 `};
 `;
 const TopServerDetails = () => {
   const [stats, setStats] = useState<Stats>({
@@ -112,7 +112,7 @@ const TopServerDetails = () => {
         {showStats ? "Hide Stats " : "Show Stats"}
       </button>
       </div>
-        <StatContainer className={`${showStats ? '' : 'hidden'} sm:flex`}>
+        <StatContainer className={`${showStats ? '' : 'hidden'} flex`}>
           <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
             <span className="w-5 text-gray-300">
               <GlobeIcon />

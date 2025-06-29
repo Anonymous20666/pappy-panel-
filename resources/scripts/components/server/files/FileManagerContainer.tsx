@@ -22,6 +22,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
+import Card from '@/components/ui/Card';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -62,7 +63,7 @@ export default () => {
     return (
         <ServerContentBlock title={'File Manager'} showFlashKey={'files'}>
             <ErrorBoundary>
-                <div className={'flex flex-wrap-reverse md:flex-nowrap mb-4'}>
+                <Card className={'flex flex-wrap-reverse md:flex-nowrap mb-1 mt-2 !rounded-b-none !px-2 !py-3'}>
                     <FileManagerBreadcrumbs
                         renderLeft={
                             <FileActionCheckbox
@@ -83,12 +84,12 @@ export default () => {
                             </NavLink>
                         </div>
                     </Can>
-                </div>
+                </Card>
             </ErrorBoundary>
             {!files ? (
                 <Spinner size={'large'} centered />
             ) : (
-                <>
+                <Card className="!rounded-t-none !p-3">
                     {!files.length ? (
                         <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
                     ) : (
@@ -109,7 +110,7 @@ export default () => {
                             </div>
                         </CSSTransition>
                     )}
-                </>
+                </Card>
             )}
         </ServerContentBlock>
     );

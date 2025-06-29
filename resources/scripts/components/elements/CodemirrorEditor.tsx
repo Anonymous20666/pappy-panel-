@@ -91,6 +91,18 @@ const EditorContainer = styled.div`
     .CodeMirror {
         font-size: 12px;
         line-height: 1.375rem;
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .CodeMirror-scroll {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    .CodeMirror-gutters {
+        background: transparent !important;
+        background-color: transparent !important;
     }
 
     .CodeMirror-linenumber {
@@ -104,6 +116,7 @@ const EditorContainer = styled.div`
         margin-right: 0.25rem;
     }
 `;
+
 
 export interface Props {
     style?: React.CSSProperties;

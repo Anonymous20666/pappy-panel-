@@ -8,7 +8,7 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import FileNameModal from '@/components/server/files/FileNameModal';
 import Can from '@/components/elements/Can';
 import FlashMessageRender from '@/components/FlashMessageRender';
-import PageContentBlock from '@/components/elements/PageContentBlock';
+import ContentBlock from '@/components/ui/ContentBlock';
 import { ServerError } from '@/components/elements/ScreenBlock';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
@@ -20,6 +20,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { encodePathSegments, hashToPath } from '@/helpers';
 import { dirname } from 'path';
 import CodemirrorEditor from '@/components/elements/CodemirrorEditor';
+import Card from '@/components/ui/Card';
 
 export default () => {
     const [error, setError] = useState('');
@@ -84,14 +85,15 @@ export default () => {
     }
 
     return (
-        <PageContentBlock>
+        <ContentBlock title={'File Editor'}>
             <FlashMessageRender byKey={'files:view'} css={tw`mb-4`} />
             <ErrorBoundary>
-                <div css={tw`mb-4`}>
+                <Card css={tw`!rounded-b-none !px-2 !py-6 mb-1 mt-2`}>
                     <FileManagerBreadcrumbs withinFileEditor isNewFile={action !== 'edit'} />
-                </div>
+                </Card>
             </ErrorBoundary>
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
+             <Card className="!rounded-none mb-1">
                 <div css={tw`mb-4 p-4 border-l-4 bg-neutral-900 rounded border-cyan-400`}>
                     <p css={tw`text-neutral-300 text-sm`}>
                         You&apos;re editing a <code css={tw`font-mono bg-black rounded py-px px-1`}>.pteroignore</code>{' '}
@@ -101,6 +103,7 @@ export default () => {
                         <code css={tw`font-mono bg-black rounded py-px px-1`}>!</code>).
                     </p>
                 </div>
+             </Card>
             )}
             <FileNameModal
                 visible={modalVisible}
@@ -110,7 +113,7 @@ export default () => {
                     save(name);
                 }}
             />
-            <div css={tw`relative`}>
+            <Card css={tw`relative !p-1 !rounded-none mb-1`}>
                 <SpinnerOverlay visible={loading} />
                 <CodemirrorEditor
                     mode={mode}
@@ -128,9 +131,9 @@ export default () => {
                         }
                     }}
                 />
-            </div>
-            <div css={tw`flex justify-end mt-4`}>
-                <div css={tw`flex-1 sm:flex-none rounded bg-neutral-900 mr-4`}>
+            </Card>
+            <Card css={tw`flex justify-end !rounded-t-none !px-2 !py-3`}>
+                <div css={tw`flex-1 sm:flex-none rounded-ui bg-gray-700 border border-gray-600 mr-4`}>
                     <Select value={mode} onChange={(e) => setMode(e.currentTarget.value)}>
                         {modes.map((mode) => (
                             <option key={`${mode.name}_${mode.mime}`} value={mode.mime}>
@@ -152,7 +155,7 @@ export default () => {
                         </Button>
                     </Can>
                 )}
-            </div>
-        </PageContentBlock>
+            </Card>
+        </ContentBlock>
     );
 };

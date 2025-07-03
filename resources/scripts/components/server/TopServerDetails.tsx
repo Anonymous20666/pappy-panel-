@@ -4,7 +4,7 @@ import { SocketEvent, SocketRequest } from "@/components/server/events";
 import useWebsocketEvent from "@/plugins/useWebsocketEvent";
 import PowerButtons from "@/components/server/console/PowerButtons";
 import CopyOnClick from "@/components/elements/CopyOnClick";
-import { GlobeIcon, ChipIcon, HashtagIcon, SaveIcon} from "@heroicons/react/solid";
+import { GlobeIcon, ChipIcon, HashtagIcon, SaveIcon, ExternalLinkIcon} from "@heroicons/react/solid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMemory } from '@fortawesome/free-solid-svg-icons';
 import Can from "@/components/elements/Can";
@@ -14,6 +14,7 @@ import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import Title from "@/components/ui/Title";
 import { StatBlock } from '@/components/ui/StatBlock';
+import { useStoreState } from 'easy-peasy';
 
 type Stats = Record<"memory" | "cpu" | "disk", number>;
 
@@ -49,6 +50,8 @@ const TopServerDetails = () => {
     const connected = ServerContext.useStoreState((state) => state.socket.connected);
     const instance = ServerContext.useStoreState((state) => state.socket.instance);
     const limits = ServerContext.useStoreState((state) => state.server.data!.limits);
+    const serverId = ServerContext.useStoreState((state) => state.server.data?.internalId);
+    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
 
     const textLimits = useMemo(
         () => ({
@@ -94,6 +97,12 @@ const TopServerDetails = () => {
         <UtilContainer>
             <div className={"flex items-center gap-x-3"}>
               <Title className="text-3xl">{name}</Title>
+                {rootAdmin && (
+                  // eslint-disable-next-line react/jsx-no-target-blank
+                  <a href={`/admin/servers/view/${serverId}`} target={'_blank'} className="h-5 w-5">
+                    <ExternalLinkIcon />
+                  </a>
+                )}
             </div>
           <Can
             action={["control.start", "control.stop", "control.restart"]}

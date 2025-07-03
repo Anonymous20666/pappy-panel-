@@ -58,14 +58,14 @@ const DashboardSidebar = ({ isOpen = false }: Props) => {
                         <NavLink to="/account" exact>
                             <UserCircleIcon className={`w-5 mr-1`} /> Account Overview
                         </NavLink>
-                        <NavLink to="/account/activity" exact>
-                            <FingerPrintIcon className={`w-5 mr-1`} /> Activity
+                        <NavLink to="/account/api" exact>
+                            <LockClosedIcon className={`w-5 mr-1`} /> API Keys
                         </NavLink>
-                        <NavLink to="/account/ssh-keys" exact>
+                        <NavLink to="/account/ssh" exact>
                             <KeyIcon className={`w-5 mr-1`} /> SSH Keys
                         </NavLink>
-                        <NavLink to="/account/api-keys" exact>
-                            <LockClosedIcon className={`w-5 mr-1`} /> API Keys
+                        <NavLink to="/account/activity" exact>
+                            <FingerPrintIcon className={`w-5 mr-1`} /> Activity
                         </NavLink>
                </SideNavigation>
         </Container>

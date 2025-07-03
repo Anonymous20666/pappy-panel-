@@ -51,13 +51,13 @@ export default {
     account: [
         {
             path: '/',
-            name: 'Account',
+            name: 'Account Overview',
             component: AccountOverviewContainer,
             exact: true,
         },
         {
             path: '/api',
-            name: 'API Credentials',
+            name: 'API Keys',
             component: AccountApiContainer,
         },
         {

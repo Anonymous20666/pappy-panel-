@@ -32,7 +32,7 @@ const ServerConsoleContainer = () => {
                         : 'This server is currently being transferred to another node and all actions are unavailable.'}
                 </Alert>
             )}
-            <div className={'my-4'}>
+            <div>
                     <Spinner.Suspense>
                         <ConsoleBlock />
                     </Spinner.Suspense>

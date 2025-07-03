@@ -22,7 +22,6 @@ export interface ModalProps extends RequiredModalProps {
 
 export const ModalMask = styled.div`
     ${tw`fixed z-50 overflow-auto flex w-full inset-0`};
-    background: rgba(0, 0, 0, 0.7);
 `;
 
 const ModalContainer = styled.div<{ alignTop?: boolean }>`
@@ -90,6 +89,7 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <Fade in={render} timeout={150} appear={appear || true} unmountOnExit onExited={() => onDismissed()}>
             <ModalMask
+                className="bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out"
                 onClick={(e) => e.stopPropagation()}
                 onContextMenu={(e) => e.stopPropagation()}
                 onMouseDown={(e) => {
@@ -130,7 +130,7 @@ const Modal: React.FC<ModalProps> = ({
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-neutral-800 p-3 sm:p-4 md:p-6 rounded shadow-md overflow-y-scroll transition-all duration-150`}
+                        css={tw`bg-gray-700 border border-gray-600 p-3 sm:p-4 md:p-6 rounded-ui shadow-md overflow-y-scroll transition-all duration-150`}
                     >
                         {children}
                     </div>

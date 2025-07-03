@@ -23,7 +23,7 @@ interface Params {
 }
 
 const CronBox = ({ title, value }: { title: string; value: string }) => (
-    <div css={tw`bg-neutral-700 rounded p-3`}>
+    <div css={tw`bg-gray-700 rounded-ui p-3`}>
         <p css={tw`text-neutral-300 text-sm`}>{title}</p>
         <p css={tw`text-xl font-medium text-neutral-100`}>{value}</p>
     </div>
@@ -85,9 +85,9 @@ export default () => {
             ) : (
                 <>
                     <ScheduleCronRow cron={schedule.cron} css={tw`sm:hidden bg-neutral-700 rounded mb-4 p-3`} />
-                    <div css={tw`rounded shadow`}>
+                    <div css={tw`rounded-ui shadow bg-gray-700 border border-gray-600`}>
                         <div
-                            css={tw`sm:flex items-center bg-neutral-900 p-3 sm:p-6 border-b-4 border-neutral-600 rounded-t`}
+                            css={tw`sm:flex items-center p-3 sm:p-6 border-b-4 border-neutral-600 rounded-t`}
                         >
                             <div css={tw`flex-1`}>
                                 <h3 css={tw`flex items-center text-neutral-100 text-2xl`}>

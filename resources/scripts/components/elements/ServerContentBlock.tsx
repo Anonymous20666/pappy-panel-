@@ -15,7 +15,7 @@ const ServerContentBlock: React.FC<Props> = ({ title, children, ...props }) => {
 
     return (
         <PageContentBlock title={`(${servername}) ${title} | ${name}`} {...props}>
-            <Title className="text-4xl">{title}</Title>
+            <Title className="text-4xl mb-2">{title}</Title>
             {children}
         </PageContentBlock>
     );

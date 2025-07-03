@@ -14,7 +14,7 @@ import Gravatar from '@/components/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import TitledGreyBox from '../elements/TitledGreyBox';
-import Title from '../ui/Title';
+import Title from '@/components/ui/Title';
 import { LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
 

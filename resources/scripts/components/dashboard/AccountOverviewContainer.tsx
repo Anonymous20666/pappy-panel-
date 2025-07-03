@@ -17,6 +17,7 @@ import TitledGreyBox from '../elements/TitledGreyBox';
 import Title from '@/components/ui/Title';
 import { LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
+import ThemeSelector from '@/components/ui/ThemeEngine';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -78,6 +79,9 @@ export default () => {
                 </Card>
                 <TitledGreyBox title={'Update Email Address'} showFlashes={'account:email'}>
                     <UpdateEmailAddressForm />
+                </TitledGreyBox>
+                <TitledGreyBox title={'Theme Selector'}>
+                    <ThemeSelector />
                 </TitledGreyBox>
                 </div>
                 <div className={'flex flex-col gap-4'}>

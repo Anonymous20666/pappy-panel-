@@ -16,6 +16,7 @@ import { CSSTransition } from 'react-transition-group';
 import DashboardSidebar from '@/components/ui/sidebar/DashboardSidebar';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
+import Announcement from '@/components/ui/Announcement';
 
 export default () => {
     const location = useLocation();
@@ -49,6 +50,7 @@ export default () => {
                 <React.Suspense fallback={<Spinner centered />}>
                     <Switch location={location}>
                         <Route path={'/'} exact>
+                            <Announcement />
                             <DashboardContainer />
                         </Route>
                         {routes.account.map(({ path, component: Component }) => (

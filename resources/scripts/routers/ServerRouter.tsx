@@ -25,6 +25,7 @@ import { RouterContainer } from '@/components/ui/RouterContainer';
 import { ContentContainer } from '@/components/ui/ContentContainer';
 import TopServerDetails from '@/components/server/TopServerDetails';
 import { ApplicationStore } from '@/state';
+import Announcement from '@/components/ui/Announcement';
 
 interface Props {
     route: any;
@@ -163,6 +164,7 @@ export default () => {
                     ) : (
                         <ErrorBoundary>
                             <TopServerDetails />
+                            <Announcement />
                             <TransitionRouter>
                                 <Switch location={location}>
                                     {routes.server.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {

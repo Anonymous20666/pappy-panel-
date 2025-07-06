@@ -6,6 +6,7 @@ use Pterodactyl\Http\Middleware\Admin\Servers\ServerInstalled;
 
 Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 
+
 /*
 |--------------------------------------------------------------------------
 | Location Controller Routes
@@ -225,4 +226,31 @@ Route::group(['prefix' => 'nests'], function () {
     Route::delete('/view/{nest:id}', [Admin\Nests\NestController::class, 'destroy']);
     Route::delete('/egg/{egg:id}', [Admin\Nests\EggController::class, 'destroy']);
     Route::delete('/egg/{egg:id}/variables/{variable:id}', [Admin\Nests\EggVariableController::class, 'destroy']);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Revix Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/revix
+|
+*/
+Route::group(['prefix' => 'revix'], function () {
+    Route::get('/', [Admin\Revix\GeneralController::class, 'index'])->name('admin.revix');
+    Route::post('/', [Admin\Revix\GeneralController::class, 'store']);
+
+    Route::post('/reset', [Admin\Revix\RevixController::class, 'resetToDefaults'])->name('admin.revix.reset');
+
+    Route::get('/colors', [Admin\Revix\ColorsController::class, 'index'])->name('admin.revix.colors');
+    Route::post('/colors', [Admin\Revix\ColorsController::class, 'store']);
+
+    Route::get('/looks', [Admin\Revix\LookNFeelController::class, 'index'])->name('admin.revix.looks');
+    Route::post('/looks', [Admin\Revix\LookNFeelController::class, 'store']);
+
+    Route::get('/alerts', [Admin\Revix\AlertController::class, 'index'])->name('admin.revix.alerts');
+    Route::post('/alerts', [Admin\Revix\AlertController::class, 'store']);
+
+    Route::get('/site', [Admin\Revix\SiteController::class, 'index'])->name('admin.revix.site');
+    Route::post('/site', [Admin\Revix\SiteController::class, 'store']);
 });

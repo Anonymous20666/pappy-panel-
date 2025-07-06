@@ -36,6 +36,7 @@ const DashboardSidebar = ({ isOpen = false }: Props) => {
     const nameLast = useStoreState(state => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
+
     return (
         <Container isOpen={isOpen}>
         <div className="sticky w-fit text-white p-4 rounded-ui">

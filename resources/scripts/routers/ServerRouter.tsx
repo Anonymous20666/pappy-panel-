@@ -24,6 +24,7 @@ import tw from 'twin.macro';
 import { RouterContainer } from '@/components/ui/RouterContainer';
 import { ContentContainer } from '@/components/ui/ContentContainer';
 import TopServerDetails from '@/components/server/TopServerDetails';
+import { ApplicationStore } from '@/state';
 
 interface Props {
     route: any;
@@ -88,6 +89,7 @@ export default () => {
     const serverId = ServerContext.useStoreState((state) => state.server.data?.internalId);
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
+    const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
 
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
@@ -137,7 +139,7 @@ export default () => {
                              </button>
                         </div>
                         <LogoContainer>
-                            <img src="/revix/logo.png" alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                            <img src={logo} alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
                         </LogoContainer>
                 </Navbar>
                 <ContentContainer>

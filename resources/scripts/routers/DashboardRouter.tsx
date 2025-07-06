@@ -14,10 +14,13 @@ import tw from 'twin.macro';
 import { ContentContainer } from '@/components/ui/ContentContainer';
 import { CSSTransition } from 'react-transition-group';
 import DashboardSidebar from '@/components/ui/sidebar/DashboardSidebar';
+import { ApplicationStore } from '@/state';
+import { useStoreState } from 'easy-peasy';
 
 export default () => {
     const location = useLocation();
     const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
 
     return (
         <RouterContainer>
@@ -28,7 +31,7 @@ export default () => {
                              </button>
                         </div>
                         <LogoContainer>
-                            <img src="/revix/logo.png" alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                            <img src={logo} alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
                         </LogoContainer>
             </Navbar>
             <ContentContainer>

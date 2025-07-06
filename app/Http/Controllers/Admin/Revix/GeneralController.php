@@ -36,9 +36,9 @@ class GeneralController extends Controller
      */
     public function store(GeneralSettingsFormRequest $request): RedirectResponse
     {   
-        $themeSelector = filter_var($request->input('revix:customCopyright'), FILTER_VALIDATE_BOOLEAN);
+        $customCopyright = filter_var($request->input('revix:customCopyright'), FILTER_VALIDATE_BOOLEAN);
         $this->settings->set('revix:logo', $request->input('revix:logo'));
-        $this->settings->set('revix:customCopyright', $request->input('revix:customCopyright'));
+        $this->settings->set('revix:customCopyright', $customCopyright);
         $this->settings->set('revix:copyright', $request->input('revix:copyright'));
 
         $this->alert->success('General settings have been updated successfully.')->flash();

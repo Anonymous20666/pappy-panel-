@@ -32,16 +32,10 @@
     <div class="grid grid-cols-2 gap-4">
         <p class="block text-xl font-medium text-gray-700 dark:text-gray-300">Border Settings</p><br>
         <div class="flex flex-col">
-        <label class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300" for="revix:allocationBlur">
-            Box Radius
+        <label class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300" for="revix:radius">
+            Border Radius
         </label>
-        <input type="text" name="revix:radiusBox" id="revix:radiusBox" value="{{ old('revix:radiusBox', $radiusBox) }}"  class="px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
-        </div>
-        <div class="flex flex-col">
-        <label class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300" for="revix:allocationBlur">
-            Input Radius
-        </label>
-        <input type="text" name="revix:radiusInput" id="revix:radiusInput" value="{{ old('revix:radiusInput', $radiusInput) }}"  class="px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
+        <input type="text" name="revix:radius" id="revix:radius" value="{{ old('revix:radius', $radius) }}"  class="px-3 py-2 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
         </div>
     </div>
     <div class="border-t border-gray-700"></div>

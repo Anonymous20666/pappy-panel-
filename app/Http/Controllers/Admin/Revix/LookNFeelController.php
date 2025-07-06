@@ -28,8 +28,7 @@ class LookNFeelController extends Controller
             'themeSelector' => $this->settings->get('revix:themeSelector', true) ? 'true' : 'false',
             'background' => $this->settings->get('revix:background', 'none'),
             'allocationBlur' => $this->settings->get('revix:allocationBlur', true) ? 'true' : 'false',
-            'radiusBox' => $this->settings->get('revix:radiusBox', '15px'),
-            'radiusInput' => $this->settings->get('revix:radiusInput', '15px'),
+            'radius' => $this->settings->get('revix:radius', '15px'),
         ]);
     }
 
@@ -43,8 +42,7 @@ class LookNFeelController extends Controller
 
         $this->settings->set('revix:themeSelector', $themeSelector);
         $this->settings->set('revix:background', $request->input('revix:background'));
-        $this->settings->set('revix:radiusBox', $request->input('revix:radiusBox'));
-        $this->settings->set('revix:radiusInput', $request->input('revix:radiusInput'));
+        $this->settings->set('revix:radius', $request->input('revix:radius'));
         $this->settings->set('revix:allocationBlur', $allocationBlur);
 
         $this->alert->success('Look & Feel settings have been updated successfully.')->flash();

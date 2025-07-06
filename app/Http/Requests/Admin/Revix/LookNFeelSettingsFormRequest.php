@@ -15,8 +15,7 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
             'revix:themeSelector' => 'required|in:true,false',
             'revix:background' => 'required|string',
             'revix:allocationBlur' => 'required|in:true,false',
-            'revix:radiusBox' => 'required|string',
-            'revix:radiusInput' => 'required|string',
+            'revix:radius' => 'required|string',
         ];
     }
 }

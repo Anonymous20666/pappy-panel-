@@ -42,7 +42,7 @@ export default () => {
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-
+    const themeSelector = useStoreState((state) => state.revix.data!.themeSelector);
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
@@ -80,9 +80,11 @@ export default () => {
                 <TitledGreyBox title={'Update Email Address'} showFlashes={'account:email'}>
                     <UpdateEmailAddressForm />
                 </TitledGreyBox>
+                {themeSelector ?
                 <TitledGreyBox title={'Theme Selector'}>
                     <ThemeSelector />
                 </TitledGreyBox>
+                : ''}
                 </div>
                 <div className={'flex flex-col gap-4'}>
                 <TitledGreyBox title={'Update Password'} showFlashes={'account:password'}>

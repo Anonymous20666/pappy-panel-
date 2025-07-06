@@ -80,7 +80,12 @@ export default ({ server, className }: { server: Server; className?: string }) =
                 backgroundImage: `url('/revix/default-bg.png')`,
             }}
         >
-          <div className={"z-[-1] absolute inset-0 rounded-ui bg-black/10 backdrop-blur-sm"}/>
+          <div
+            className={"z-[-1] absolute inset-0 rounded-ui backdrop-blur-sm"}
+            css={
+              "background-image: linear-gradient(0deg, rgb(var(--color-700)) 10%, color-mix(in srgb, rgb(var(--color-700)) 35%, transparent) 55%);"
+            }
+          />
           <div className="flex items-center justify-between pb-5">
             <Title className="text-2xl">{server.name}</Title>
             <StatusIndicator server={server} />

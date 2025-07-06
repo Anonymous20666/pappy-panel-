@@ -98,7 +98,7 @@
                     type="submit" 
                     class="px-6 py-2.5 bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-700 hover:to-orange-800 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 flex items-center space-x-2"
                 >
-                    <i data-lucide="save" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-floppy-disk"></i>
                     <span class="hidden sm:block">Save changes</span>
                 </button>
             </div>

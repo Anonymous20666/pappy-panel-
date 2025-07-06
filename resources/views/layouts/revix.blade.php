@@ -70,35 +70,35 @@
             <nav class="flex flex-col space-y-2 px-2">
                 <a href="{{ route('admin.revix') }}" 
                    class="{{ Route::currentRouteName() !== 'admin.revix' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
-                    <i data-lucide="zap" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-bolt"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         General Options
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.colors') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
-                    <i data-lucide="palette" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-palette"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Color Options
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.looks') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
-                    <i data-lucide="sparkle" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-swatchbook"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Look 'N Feel
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.alerts') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
-                    <i data-lucide="megaphone" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-bullhorn"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Alerts
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.site') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
-                    <i data-lucide="cog" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-gear"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Site Meta Settings
                     </span>
@@ -109,14 +109,14 @@
         <div class="flex flex-col space-y-2 px-2">
             <a href="https://docs.revix.cc" 
                class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-gray-800/50 border border-gray-700 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-all duration-200">
-                <i data-lucide="book-text" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <i class="fa-solid fa-book"></i>
                 <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                     Documentation
                 </div>
             </a>
             <a href="{{ route('admin.index') }}" 
                class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-gray-800/50 border border-gray-700 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-all duration-200">
-                <i data-lucide="arrow-left" class="w-4 h-4 md:w-5 md:h-5"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
                 <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                     Back to Admin
                 </div>
@@ -124,7 +124,7 @@
             <form action="{{ route('admin.revix.reset') }}" method="POST" onsubmit="return confirm('Are you sure you want to reset Revix settings to default?');">
                 @csrf
                 <button type="submit" class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-red-800/50 border border-red-700 text-red-400 hover:bg-red-700/50 hover:text-red-300 transition-all duration-200">
-                    <i data-lucide="trash" class="w-4 h-4 md:w-5 md:h-5"></i>
+                    <i class="fa-solid fa-trash-can"></i>
                     <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                         Reset Revix to Defaults
                     </div>
@@ -235,7 +235,7 @@
 @endif
 
 <footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-gray-950 border-t border-gray-800 items-center justify-center text-xs text-gray-400 z-40">
-    <span>&copy; Revix 2025 | Designed by DevNexLabs</span>
+    <span>&copy; Revix 2025 | Build {{ config('revix.build') }}</span>
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>

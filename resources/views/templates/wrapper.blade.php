@@ -57,21 +57,21 @@ function revix($hex) {
             @import url('//fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans:500&display=swap');
 
             :root{
-                --radius:15px;
-                --color-primary:239 92 41;
-                --color-success:61 143 31;
-                --color-danger:143 31 32;
-                --color-secondary:43 43 64;
-                --color-50:244 244 245;
-                --color-100:222 222 226;
-                --color-200:210 210 219;
-                --color-300:130 130 164;
-                --color-400:94 94 127;
-                --color-500:66 66 91;
-                --color-600:27 27 33;
-                --color-700:20 20 22;
-                --color-800:7 7 9;
-                --color-900:7 7 12;
+                --radius:{{ $revixConfiguration['radius'] }};
+                --color-primary:{{ revix($revixConfiguration['colorPrimary']) }};
+                --color-success:{{ revix($revixConfiguration['colorSuccess']) }};
+                --color-danger:{{ revix($revixConfiguration['colorDanger']) }};
+                --color-secondary:{{ revix($revixConfiguration['colorSecondary']) }};
+                --color-50:{{ revix($revixConfiguration['color50']) }};
+                --color-100:{{ revix($revixConfiguration['color100']) }};
+                --color-200:{{ revix($revixConfiguration['color200']) }};
+                --color-300:{{ revix($revixConfiguration['color300']) }};
+                --color-400:{{ revix($revixConfiguration['color400']) }};
+                --color-500:{{ revix($revixConfiguration['color500']) }};
+                --color-600:{{ revix($revixConfiguration['color600']) }};
+                --color-700:{{ revix($revixConfiguration['color700']) }};
+                --color-800:{{ revix($revixConfiguration['color800']) }};
+                --color-900:{{ revix($revixConfiguration['color900']) }};
             }
         </style>
 

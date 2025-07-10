@@ -15,7 +15,7 @@ import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import TitledGreyBox from '../elements/TitledGreyBox';
 import Title from '@/components/ui/Title';
-import { LogoutIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
 import ThemeSelector from '@/components/ui/ThemeEngine';
 
@@ -67,9 +67,17 @@ export default () => {
                             <Title className="mb-1 text-2xl">
                                 {nameFirst} {nameLast}
                             </Title>
+                            <div className={"flex items-center gap-x-1"}>
                             <span className="text-sm text-gray-400">
                                 {rootAdmin ? 'Administrator' : {name} + 'User'}
                             </span>
+                {rootAdmin && (
+                  // eslint-disable-next-line react/jsx-no-target-blank
+                  <a href={`/admin`} target={'_blank'} className="h-5 w-5">
+                    <ExternalLinkIcon />
+                  </a>
+                )}
+                </div>
                             <div className="mt-1">
                             <button className="flex items-center space-x-1" onClick={onTriggerLogout}>
                                 <span className="text-danger/80">Logout</span> <LogoutIcon className="w-5 h-5 text-danger/80" />

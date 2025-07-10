@@ -77,7 +77,7 @@ export default ({ server, className }: { server: Server; className?: string }) =
       <Card className="!p-0">
         <div className="rounded-ui bg-center bg-cover bg-no-repeat bg-center relative px-6 pt-6 pb-6 z-10"
             style={{
-                backgroundImage: `url('/revix/default-bg.png')`,
+                backgroundImage: `url(${server.eggBanner ? server.eggBanner : '/revix/default-bg.png'})`,
             }}
         >
           <div

@@ -74,6 +74,7 @@ class ServerTransformer extends BaseClientTransformer
             'is_transferring' => !is_null($server->transfer),
             'nest_id' => $server->nest_id,
             'egg_id' => $server->egg_id,
+            'egg_banner' => $server->egg->banner,
         ];
     }
 

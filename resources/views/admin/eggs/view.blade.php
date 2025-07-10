@@ -67,6 +67,11 @@
                                 <p class="text-muted small">A simple, human-readable name to use as an identifier for this Egg.</p>
                             </div>
                             <div class="form-group">
+                                <label for="pBanner" class="control-label">Egg banner</label>
+                                <input type="text" id="pBanner" name="banner" value="{{ $egg->banner }}" class="form-control" />
+                                <p class="text-muted small">This is the globally unique banner image url for this Egg which will be shown in certain parts of the panel.</p>
+                            </div>
+                            <div class="form-group">
                                 <label for="pUuid" class="control-label">UUID</label>
                                 <input type="text" id="pUuid" readonly value="{{ $egg->uuid }}" class="form-control" />
                                 <p class="text-muted small">This is the globally unique identifier for this Egg which the Daemon uses as an identifier.</p>

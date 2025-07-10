@@ -97,6 +97,7 @@ class Egg extends Model
         'script_entry',
         'script_container',
         'copy_script_from',
+        'banner',
     ];
 
     /**
@@ -132,6 +133,7 @@ class Egg extends Model
         'config_files' => 'required_without:config_from|nullable|json',
         'update_url' => 'sometimes|nullable|string',
         'force_outgoing_ip' => 'sometimes|boolean',
+        'banner' => 'string|nullable',
     ];
 
     protected $attributes = [
@@ -142,6 +144,7 @@ class Egg extends Model
         'config_logs' => null,
         'config_files' => null,
         'update_url' => null,
+        'banner' => null,
     ];
 
     /**

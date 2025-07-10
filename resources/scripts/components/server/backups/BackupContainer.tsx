@@ -10,6 +10,8 @@ import getServerBackups, { Context as ServerBackupContext } from '@/api/swr/getS
 import { ServerContext } from '@/state/server';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import Pagination from '@/components/elements/Pagination';
+import Card from '@/components/ui/Card';
+import { ArchiveIcon } from '@heroicons/react/solid';
 
 const BackupContainer = () => {
     const { page, setPage } = useContext(ServerBackupContext);
@@ -55,9 +57,12 @@ const BackupContainer = () => {
                 }
             </Pagination>
             {backupLimit === 0 && (
-                <p css={tw`text-center text-sm text-neutral-300`}>
-                    Backups cannot be created for this server because the backup limit is set to 0.
+                <Card>
+                <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                    <ArchiveIcon className="w-5 h-5 mr-1" />
+                    Backups cannot be created for this server.
                 </p>
+                </Card>
             )}
             <Can action={'backup.create'}>
                 <div css={tw`mt-6 sm:flex items-center justify-end`}>

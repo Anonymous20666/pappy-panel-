@@ -13,6 +13,8 @@ import tw from 'twin.macro';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import { Button } from '@/components/elements/button/index';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
+import Card from '@/components/ui/Card';
+import { ClockIcon } from '@heroicons/react/solid';
 
 export default () => {
     const match = useRouteMatch();
@@ -45,9 +47,12 @@ export default () => {
             ) : (
                 <>
                     {schedules.length === 0 ? (
-                        <p css={tw`text-sm text-center text-neutral-300`}>
+                        <Card>
+                        <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                            <ClockIcon className="w-5 h-5 mr-1" />
                             There are no schedules configured for this server.
                         </p>
+                        </Card>
                     ) : (
                         schedules.map((schedule) => (
                             <GreyRowBox
@@ -65,7 +70,7 @@ export default () => {
                         ))
                     )}
                     <Can action={'schedule.create'}>
-                        <div css={tw`mt-8 flex justify-end`}>
+                        <div css={tw`mt-2 flex justify-end`}>
                             <EditScheduleModal visible={visible} onModalDismissed={() => setVisible(false)} />
                             <Button type={'button'} onClick={() => setVisible(true)}>
                                 Create schedule

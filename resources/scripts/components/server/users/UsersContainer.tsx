@@ -11,6 +11,8 @@ import { httpErrorToHuman } from '@/api/http';
 import Can from '@/components/elements/Can';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import tw from 'twin.macro';
+import Card from '@/components/ui/Card';
+import { UsersIcon } from '@heroicons/react/solid';
 
 export default () => {
     const [loading, setLoading] = useState(true);
@@ -51,12 +53,14 @@ export default () => {
         <ServerContentBlock title={'Users'}>
             <FlashMessageRender byKey={'users'} css={tw`mb-4`} />
             {!subusers.length ? (
-                <p css={tw`text-center text-sm text-neutral-300`}>It looks like you don&apos;t have any subusers.</p>
+                <Card>
+                <p css={tw`flex justify-center text-center text-sm text-gray-400`}><UsersIcon className="w-5 h-5 mr-1" /> It looks like you don&apos;t have any subusers.</p>
+                </Card>
             ) : (
                 subusers.map((subuser) => <UserRow key={subuser.uuid} subuser={subuser} />)
             )}
             <Can action={'user.create'}>
-                <div css={tw`flex justify-end mt-6`}>
+                <div css={tw`flex justify-end mt-2`}>
                     <AddSubuserButton />
                 </div>
             </Can>

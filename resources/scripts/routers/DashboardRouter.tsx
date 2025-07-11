@@ -27,7 +27,7 @@ export default () => {
         <RouterContainer>
             <Navbar>
                         <div className="lg:hidden">
-                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 pt-2 pb-2 pl-2 rounded-ui">
+                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-ui">
                                {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" /> }
                              </button>
                         </div>

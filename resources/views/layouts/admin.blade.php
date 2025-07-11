@@ -85,6 +85,12 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
+                        <li class="header">CUSTOMIZATION</li>
+                        <li class="{{ Route::currentRouteName() !== 'admin.revix' ?: 'active' }}">
+                            <a href="{{ route('admin.revix') }}">
+                                <i class="fa fa-paint-brush"></i> <span>Revix Editor</span>
+                            </a>
+                        </li>
                         <li class="header">MANAGEMENT</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                             <a href="{{ route('admin.databases') }}">

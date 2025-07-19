@@ -74,7 +74,7 @@ const TopServerDetails = () => {
         }
 
         instance.send(SocketRequest.SEND_STATS);
-    }, [instance, connected]);;
+    }, [instance, connected]);
 
     useWebsocketEvent(SocketEvent.STATS, (data) => {
         let stats: any = {};

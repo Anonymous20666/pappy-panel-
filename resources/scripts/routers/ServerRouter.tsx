@@ -87,7 +87,6 @@ export default () => {
     const id = ServerContext.useStoreState((state) => state.server.data?.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data?.uuid);
     const inConflictState = ServerContext.useStoreState((state) => state.server.inConflictState);
-    const serverId = ServerContext.useStoreState((state) => state.server.data?.internalId);
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
     const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);

@@ -47,7 +47,7 @@ const FileUploadList = () => {
                             <Spinner progress={(file.loaded / file.total) * 100} className={'w-6 h-6'} />
                         </div>
                     </Tooltip>
-                    <Code className={'flex-1 truncate'}>{name}</Code>
+                    <Code>{name}</Code>
                     <button
                         onClick={cancelFileUpload.bind(this, name)}
                         className={'text-gray-500 hover:text-gray-200 transition-colors duration-75'}

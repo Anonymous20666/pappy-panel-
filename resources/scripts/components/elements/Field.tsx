@@ -7,7 +7,6 @@ import styled from 'styled-components/macro';
 
 interface OwnProps {
     name: string;
-    light?: boolean;
     icon?: React.ComponentType<{ className?: string }>;
     label?: string;
     description?: string;
@@ -21,7 +20,7 @@ const IconWrapper = styled.div`
 type Props = OwnProps & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'name'>;
 
 const Field = forwardRef<HTMLInputElement, Props>(
-    ({ id, name, light = false, icon: Icon, label, description, validate, ...props }, ref) => (
+    ({ id, name, icon: Icon, label, description, validate, ...props }, ref) => (
         <FormikField innerRef={ref} name={name} validate={validate}>
             {({ field, form: { errors, touched } }: FieldProps) => (
                 <div>

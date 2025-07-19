@@ -1,21 +1,16 @@
 import React, { memo } from 'react';
 import { ServerContext } from '@/state/server';
-import Can from '@/components/elements/Can';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import isEqual from 'react-fast-compare';
 import Spinner from '@/components/elements/Spinner';
 import Features from '@feature/Features';
 import ConsoleBlock from '@/components/server/console/ConsoleBlock';
-import StatGraphs from '@/components/server/console/StatGraphs';
-import PowerButtons from '@/components/server/console/PowerButtons';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
 import { Alert } from '@/components/elements/alert';
 
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
 const ServerConsoleContainer = () => {
-    const name = ServerContext.useStoreState((state) => state.server.data!.name);
-    const description = ServerContext.useStoreState((state) => state.server.data!.description);
     const isInstalling = ServerContext.useStoreState((state) => state.server.isInstalling);
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState((state) => state.server.data!.eggFeatures, isEqual);

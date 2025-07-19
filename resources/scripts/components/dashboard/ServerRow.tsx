@@ -1,34 +1,24 @@
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEthernet, faHdd, faMemory, faMicrochip, faServer } from '@fortawesome/free-solid-svg-icons';
+import { faMemory } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
-import getServerResourceUsage, { ServerPowerState, ServerStats } from '@/api/server/getServerResourceUsage';
+import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResourceUsage';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
-import tw from 'twin.macro';
 import Spinner from '@/components/elements/Spinner';
-import styled from 'styled-components/macro';
-import isEqual from 'react-fast-compare';
 import Card from '@/components/ui/Card';
-import { ChipIcon, GlobeIcon, SaveIcon, StatusOfflineIcon } from '@heroicons/react/solid';
+import { ChipIcon, GlobeIcon, SaveIcon } from '@heroicons/react/solid';
 import Title from '@/components/ui/Title';
 import { StatBlock } from '@/components/ui/StatBlock';
-import StatusIndicator from '../ui/StatusIndicator';
+import StatusIndicator from '@/components/ui/StatusIndicator';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
 const isAlarmState = (current: number, limit: number): boolean => limit > 0 && current / (limit * 1024 * 1024) >= 0.9;
 
-const Icon = memo(
-    styled(FontAwesomeIcon)<{ $alarm: boolean }>`
-        ${(props) => (props.$alarm ? tw`text-red-400` : tw`text-neutral-500`)};
-    `,
-    isEqual
-);
-
 type Timer = ReturnType<typeof setInterval>;
 
-export default ({ server, className }: { server: Server; className?: string }) => {
+export default ({ server }: { server: Server; }) => {
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);

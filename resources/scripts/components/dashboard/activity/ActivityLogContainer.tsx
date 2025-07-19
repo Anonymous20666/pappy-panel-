@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityLogFilters, useActivityLogs } from '@/api/account/activity';
 import { useFlashKey } from '@/plugins/useFlash';
-import PageContentBlock from '@/components/elements/PageContentBlock';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import { Link } from 'react-router-dom';
 import PaginationFooter from '@/components/elements/table/PaginationFooter';

@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResourceUsage';
-import tw from 'twin.macro';
-import styled from 'styled-components/macro';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.

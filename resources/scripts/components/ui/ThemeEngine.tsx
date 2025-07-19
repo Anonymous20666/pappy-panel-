@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { XIcon } from "@heroicons/react/solid";
 
-const paletteKeys = ["Petrascia", "Pink", "Purple", "Orange", "Red", "Midnight", "Monochrome"] as const;
+const paletteKeys = ["Theme1", "Theme2", "Theme3", "Theme4", "Theme5", "Theme6", "Theme7"] as const;
 
 type PaletteKey = typeof paletteKeys[number];
 
 const palettes: Record<PaletteKey, Record<string, string>> = {
-  Petrascia: {
+  Theme1: {
+    displayName: "Petrascia",
     primary: "#3b82f6", 
     50:  "#f8f9fa", 
     100: "#e1e4e8",   
@@ -19,7 +20,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#2f3741",  
     900: "#1d232b",  
   },
-  Pink: {
+  Theme2: {
+    displayName: "Pink",
     primary: "#D11EB2",
     50:  "#f8f9fa", 
     100: "#D7CFD6",
@@ -32,7 +34,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#280D25",
     900: "#160613",
   },
-  Purple: {
+  Theme3: {
+    displayName: "Purple",
     primary: "#8423C0",
     50:  "#f8f9fa", 
     100: "#D3D0D7",
@@ -45,7 +48,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#1B0E27",
     900: "#0E0615",
   },
-  Orange: {
+  Theme4: {
+    displayName: "Orange",
     primary: "#CF721B",
     50:  "#f8f9fa", 
     100: "#CBC2C0",
@@ -58,7 +62,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#270F0A",
     900: "#150704",
   },
-  Red: {
+  Theme5: {
+    displayName: "Red",
     primary: "#C81B1B",
     50:  "#f8f9fa", 
     100: "#C0B5B2",
@@ -71,7 +76,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#270F08",
     900: "#150603",
   },
-  Midnight: {
+  Theme6: {
+    displayName: "Midnight",
     primary: "#6366f1",
     50:  "#f8fafc",
     100: "#f1f5f9",
@@ -84,7 +90,8 @@ const palettes: Record<PaletteKey, Record<string, string>> = {
     800: "#1e293b",
     900: "#0f172a",
   },
-  Monochrome: {
+  Theme7: {
+    displayName: "Monochrome",
     primary: "#000000",
     50:  "#ffffff",
     100: "#f5f5f5",
@@ -135,7 +142,7 @@ const applyTheme = (colors: Record<string, string>) => {
 
 const clearTheme = () => {
   const root = document.documentElement;
-  Object.keys(palettes.Pink).forEach((key) => {
+  Object.keys(palettes.Theme1).forEach((key) => {
     root.style.removeProperty(`--color-${key}`);
   });
 };
@@ -190,7 +197,7 @@ const ThemeSelector = () => {
                 selected === name ? "ring-2 ring-revix" : ""
               }`}
               style={{ background: gradient }}
-              title={name}
+              title={palettes[name].displayName}
             />
           );
         })}

@@ -10,7 +10,8 @@ export const SideNavigation = styled.div`
     &:hover,
     &:focus,
     &.active {
-      ${tw`text-revix bg-gray-800`};
+      ${tw`text-revix`};
+      background-color: rgb(var(--color-primary) / 0.2);
     }
   }
 `;

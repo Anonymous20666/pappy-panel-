@@ -18,6 +18,7 @@ import Title from '@/components/ui/Title';
 import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
 import ThemeSelector from '@/components/ui/ThemeEngine';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -62,6 +63,7 @@ export default () => {
             <Container css={[tw`grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4`]}>
                 <div className={'flex flex-col gap-4'}>
                 <Card className="overflow-hidden">
+                    <SpinnerOverlay visible={isLoggingOut} />
                         <div className="flex flex-col items-center py-8">
                             <Gravatar className="w-24 h-24 mb-3 shadow-lg" />
                             <Title className="mb-1 text-2xl">

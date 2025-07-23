@@ -67,142 +67,20 @@
                 <div>
                     <h3 class="text-lg font-bold text-gray-200 mb-1">Theme colors</h3>                   
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        @foreach ([50,100,200,300,400,500,600,700,800,900] as $shade)
                         <div class="space-y-2">
-                            <label for="revix:color50" class="block text-sm font-medium text-gray-300">Gray 50</label>
+                            <label for="revix:color{{ $shade }}" class="block text-sm font-medium text-gray-300">Gray {{ $shade }}</label>
                             <div class="flex items-center space-x-2">
                                 <input 
                                     type="color" 
                                     class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color50" 
-                                    id="revix:color50"
-                                    value="{{ old('revix:color50', $color50) }}" 
+                                    name="revix:color{{ $shade }}" 
+                                    id="revix:color{{ $shade }}"
+                                    value="{{ old('revix:color'.$shade, ${'color'.$shade}) }}" 
                                 />
                             </div>
                         </div>
-                        <div class="space-y-2">
-                            <label for="revix:color100" class="block text-sm font-medium text-gray-300">Gray 100</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color100" 
-                                    id="revix:color100"
-                                    value="{{ old('revix:color100', $color100) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 200 -->
-                        <div class="space-y-2">
-                            <label for="revix:color200" class="block text-sm font-medium text-gray-300">Gray 200</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color200" 
-                                    id="revix:color200"
-                                    value="{{ old('revix:color200', $color200) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 300 -->
-                        <div class="space-y-2">
-                            <label for="revix:color300" class="block text-sm font-medium text-gray-300">Gray 300</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color300" 
-                                    id="revix:color300"
-                                    value="{{ old('revix:color300', $color300) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 400 -->
-                        <div class="space-y-2">
-                            <label for="revix:color400" class="block text-sm font-medium text-gray-300">Gray 400</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color400" 
-                                    id="revix:color400"
-                                    value="{{ old('revix:color400', $color400) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 500 -->
-                        <div class="space-y-2">
-                            <label for="revix:color500" class="block text-sm font-medium text-gray-300">Gray 500</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color500" 
-                                    id="revix:color500"
-                                    value="{{ old('revix:color500', $color500) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 600 -->
-                        <div class="space-y-2">
-                            <label for="revix:color600" class="block text-sm font-medium text-gray-300">Gray 600</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color600" 
-                                    id="revix:color600"
-                                    value="{{ old('revix:color600', $color600) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 700 -->
-                        <div class="space-y-2">
-                            <label for="revix:color700" class="block text-sm font-medium text-gray-300">Gray 700</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color700" 
-                                    id="revix:color700"
-                                    value="{{ old('revix:color700', $color700) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 800 -->
-                        <div class="space-y-2">
-                            <label for="revix:color800" class="block text-sm font-medium text-gray-300">Gray 800</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color800" 
-                                    id="revix:color800"
-                                    value="{{ old('revix:color800', $color800) }}" 
-                                />
-                            </div>
-                        </div>
-
-                        <!-- Gray 900 -->
-                        <div class="space-y-2">
-                            <label for="revix:color900" class="block text-sm font-medium text-gray-300">Gray 900</label>
-                            <div class="flex items-center space-x-2">
-                                <input 
-                                    type="color" 
-                                    class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
-                                    name="revix:color900" 
-                                    id="revix:color900"
-                                    value="{{ old('revix:color900', $color900) }}" 
-                                />
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 </div>

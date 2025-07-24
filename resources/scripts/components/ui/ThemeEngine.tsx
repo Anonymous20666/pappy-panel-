@@ -5,118 +5,41 @@ const paletteKeys = ["Theme1", "Theme2", "Theme3", "Theme4", "Theme5", "Theme6",
 
 type PaletteKey = typeof paletteKeys[number];
 
-const palettes: Record<PaletteKey, Record<string, string>> = {
-  Theme1: {
-    displayName: "Petrascia",
-    primary: "#3b82f6", 
-    50:  "#f8f9fa", 
-    100: "#e1e4e8",   
-    200: "#c5cbd3",    
-    300: "#9aa5b1",  
-    400: "#6c7885",   
-    500: "#55606d",   
-    600: "#47505c",  
-    700: "#38414d",  
-    800: "#2f3741",  
-    900: "#1d232b",  
-  },
-  Theme2: {
-    displayName: "Pink",
-    primary: "#D11EB2",
-    50:  "#f8f9fa", 
-    100: "#D7CFD6",
-    200: "#BEAABB",
-    300: "#A2739B",
-    400: "#7C5978",
-    500: "#765E78",
-    600: "#5A4256",
-    700: "#361F32",
-    800: "#280D25",
-    900: "#160613",
-  },
-  Theme3: {
-    displayName: "Purple",
-    primary: "#8423C0",
-    50:  "#f8f9fa", 
-    100: "#D3D0D7",
-    200: "#B4ABB8",
-    300: "#8F7A9E",
-    400: "#6D5A79",
-    500: "#695C74",
-    600: "#4D3F56",
-    700: "#291F34",
-    800: "#1B0E27",
-    900: "#0E0615",
-  },
-  Theme4: {
-    displayName: "Orange",
-    primary: "#CF721B",
-    50:  "#f8f9fa", 
-    100: "#CBC2C0",
-    200: "#B6A3A0",
-    300: "#9E766F",
-    400: "#765954",
-    500: "#77584F",
-    600: "#553E3B",
-    700: "#341E1A",
-    800: "#270F0A",
-    900: "#150704",
-  },
-  Theme5: {
-    displayName: "Red",
-    primary: "#C81B1B",
-    50:  "#f8f9fa", 
-    100: "#C0B5B2",
-    200: "#AD9693",
-    300: "#966A68",
-    400: "#71524D",
-    500: "#6C554E",
-    600: "#503B36",
-    700: "#331C17",
-    800: "#270F08",
-    900: "#150603",
-  },
-  Theme6: {
-    displayName: "Midnight",
-    primary: "#6366f1",
-    50:  "#f8fafc",
-    100: "#f1f5f9",
-    200: "#e2e8f0",
-    300: "#cbd5e1",
-    400: "#94a3b8",
-    500: "#64748b",
-    600: "#475569",
-    700: "#334155",
-    800: "#1e293b",
-    900: "#0f172a",
-  },
-  Theme7: {
-    displayName: "Monochrome",
-    primary: "#000000",
-    50:  "#ffffff",
-    100: "#f5f5f5",
-    200: "#e5e5e5",
-    300: "#d4d4d4",
-    400: "#a3a3a3",
-    500: "#737373",
-    600: "#525252",
-    700: "#404040",
-    800: "#262626",
-    900: "#171717",
-  },
+type ThemeData = {
+  displayName: string;
+  primary: string;
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
 };
 
+declare global {
+  interface Window {
+    RevixConfiguration?: any;
+  }
+}
+
 const getCookie = (name: string): string | null => {
+  if (typeof document === 'undefined') return null;
   const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
   return match ? decodeURIComponent(match[2]) : null;
 };
 
 const setCookie = (name: string, value: string, days = 30) => {
+  if (typeof document === 'undefined') return;
   const expires = new Date(Date.now() + days * 864e5).toUTCString();
   document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
 };
 
 const deleteCookie = (name: string) => {
+  if (typeof document === 'undefined') return;
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 };
 
@@ -133,27 +56,59 @@ const hexToRgbString = (hex: string) => {
   return `${r} ${g} ${b}`;
 };
 
-const applyTheme = (colors: Record<string, string>) => {
+const getThemeFromConfig = (key: PaletteKey): ThemeData => {
+  const conf = typeof window !== 'undefined' ? window.RevixConfiguration || {} : {};
+  const t = conf[key.toLowerCase()] || {};
+  return {
+    displayName: t.name || key,
+    primary: t.colorPrimary,
+    50: t.color50,
+    100: t.color100,
+    200: t.color200,
+    300: t.color300,
+    400: t.color400,
+    500: t.color500,
+    600: t.color600,
+    700: t.color700,
+    800: t.color800,
+    900: t.color900,
+  };
+};
+
+const applyTheme = (colors: ThemeData) => {
+  if (typeof document === 'undefined') return;
   const root = document.documentElement;
-  for (const [key, hex] of Object.entries(colors)) {
+  Object.entries(colors).forEach(([key, hex]) => {
     root.style.setProperty(`--color-${key}`, hexToRgbString(hex));
-  }
+  });
 };
 
 const clearTheme = () => {
+  if (typeof document === 'undefined') return;
   const root = document.documentElement;
-  Object.keys(palettes.Theme1).forEach((key) => {
-    root.style.removeProperty(`--color-${key}`);
+  paletteKeys.forEach((key) => {
+    Object.keys(getThemeFromConfig(key)).forEach(k => {
+      root.style.removeProperty(`--color-${k}`);
+    });
   });
 };
 
 const ThemeSelector = () => {
   const [selected, setSelected] = useState<"default" | PaletteKey>("default");
+  const [themes, setThemes] = useState<Record<PaletteKey, ThemeData> | null>(null);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const loadedThemes: Record<PaletteKey, ThemeData> = {} as any;
+    for (const key of paletteKeys) {
+      loadedThemes[key] = getThemeFromConfig(key);
+    }
+    setThemes(loadedThemes);
+
     const saved = getCookie("theme");
     if (saved && paletteKeys.includes(saved as PaletteKey)) {
-      applyTheme(palettes[saved as PaletteKey]);
+      applyTheme(loadedThemes[saved as PaletteKey]);
       setSelected(saved as PaletteKey);
     } else {
       clearTheme();
@@ -162,15 +117,19 @@ const ThemeSelector = () => {
   }, []);
 
   const handleThemeChange = (theme: "default" | PaletteKey) => {
+    if (!themes) return;
+
     setSelected(theme);
     if (theme === "default") {
       clearTheme();
       deleteCookie("theme");
     } else {
-      applyTheme(palettes[theme]);
+      applyTheme(themes[theme]);
       setCookie("theme", theme);
     }
   };
+
+  if (!themes) return null;
 
   return (
     <div className="px-4 py-2">
@@ -186,7 +145,7 @@ const ThemeSelector = () => {
         </button>
 
         {paletteKeys.map((name) => {
-          const theme = palettes[name];
+          const theme = themes[name];
           const gradient = `conic-gradient(at top left, ${theme.primary}, ${theme[600]}, ${theme[800]})`;
 
           return (
@@ -197,7 +156,7 @@ const ThemeSelector = () => {
                 selected === name ? "ring-2 ring-revix" : ""
               }`}
               style={{ background: gradient }}
-              title={palettes[name].displayName}
+              title={theme.displayName}
             />
           );
         })}
@@ -210,9 +169,12 @@ export default ThemeSelector;
 
 export const ThemeLoader = () => {
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const themeName = getCookie("theme");
-    if (themeName && themeName in palettes) {
-      applyTheme(palettes[themeName as keyof typeof palettes]);
+    if (themeName && paletteKeys.includes(themeName as PaletteKey)) {
+      const theme = getThemeFromConfig(themeName as PaletteKey);
+      applyTheme(theme);
     }
   }, []);
 

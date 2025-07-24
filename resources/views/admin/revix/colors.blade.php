@@ -65,7 +65,7 @@
                 </div>
                 <div class="border-t border-gray-700"></div>
                 <div>
-                    <h3 class="text-lg font-bold text-gray-200 mb-1">Theme colors</h3>                   
+                    <h3 class="text-lg font-bold text-gray-200 mb-1">Default colors</h3>                   
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @foreach ([50,100,200,300,400,500,600,700,800,900] as $shade)
                         <div class="space-y-2">
@@ -83,6 +83,62 @@
                         @endforeach
                     </div>
                 </div>
+
+                @foreach (range(1,7) as $theme)
+                    @php
+                        $themeVar = 'theme' . $theme;
+                    @endphp
+                    <div class="border-t border-gray-700"></div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-200 mb-1">Theme{{ $theme }} Settings</h3>                   
+                        <div class="space-y-3 mb-3">
+                            <label class="block text-sm font-medium text-gray-300" for="revix:theme{{ $theme }}:name">
+                                Theme{{ $theme }} Name
+                            </label>
+                            <input
+                                type="text"
+                                id="revix:theme{{ $theme }}:name"
+                                name="revix:theme{{ $theme }}:name"
+                                value="{{ old("revix:theme{$theme}:name", ${$themeVar}['name'] ?? '') }}"
+                                class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                placeholder="Theme{{ $theme }} Display name"
+                            />
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-300" for="revix:theme{{ $theme }}:colorPrimary">
+                                    Theme{{ $theme }} Primary
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <input
+                                        type="color"
+                                        id="revix:theme{{ $theme }}:colorPrimary"
+                                        name="revix:theme{{ $theme }}:colorPrimary"
+                                        value="{{ old("revix:theme{$theme}:colorPrimary", ${$themeVar}['colorPrimary'] ?? '') }}"
+                                        class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer"
+                                    />
+                                </div>
+                            </div>
+
+                            @foreach ([50,100,200,300,400,500,600,700,800,900] as $shade)
+                            <div class="space-y-2">
+                                <label for="revix:theme{{ $theme }}:color{{ $shade }}" class="block text-sm font-medium text-gray-300">
+                                    Theme{{ $theme }} {{ $shade }}
+                                </label>
+                                <div class="flex items-center space-x-2">
+                                    <input 
+                                        type="color" 
+                                        class="h-10 w-16 rounded border border-gray-600 bg-gray-700 cursor-pointer" 
+                                        name="revix:theme{{ $theme }}:color{{ $shade }}" 
+                                        id="revix:theme{{ $theme }}:color{{ $shade }}"
+                                        value="{{ old("revix:theme{$theme}:color{$shade}", ${$themeVar}['color'.$shade] ?? '') }}" 
+                                    />
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
 </div>
 </div>
 

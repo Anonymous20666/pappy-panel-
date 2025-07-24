@@ -13,5 +13,5 @@ return [
     */
 
     'version' => '2.0',
-    'build' => 'Y25R2C03B',
+    'build' => 'Y25R2C04B',
 ];

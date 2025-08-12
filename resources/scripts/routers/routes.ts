@@ -30,6 +30,7 @@ interface RouteDefinition {
     name: string | undefined;
     component: React.ComponentType;
     exact?: boolean;
+    icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 interface ServerRouteDefinition extends RouteDefinition {
@@ -44,7 +45,11 @@ interface Routes {
     // All of the routes available under "/account"
     account: RouteDefinition[];
     // All of the routes available under "/server/:id"
-    server: ServerRouteDefinition[];
+    server: {
+        control: ServerRouteDefinition[];
+        management: ServerRouteDefinition[];
+        administration: ServerRouteDefinition[];
+    };
 }
 
 export default {
@@ -71,7 +76,8 @@ export default {
             component: ActivityLogContainer,
         },
     ],
-    server: [
+    server: {
+        control: [
         {
             path: '/',
             permission: null,
@@ -94,6 +100,22 @@ export default {
             component: FileEditContainer,
         },
         {
+            path: '/startup',
+            permission: 'startup.*',
+            name: 'Startup',
+            component: StartupContainer,
+            icon: PlayIcon,
+        },
+        {
+            path: '/network',
+            permission: 'allocation.*',
+            name: 'Network',
+            component: NetworkContainer,
+            icon: LightningBoltIcon,
+        },
+        ],
+        management: [
+        {
             path: '/databases',
             permission: 'database.*',
             name: 'Databases',
@@ -114,32 +136,20 @@ export default {
             component: ScheduleEditContainer,
         },
         {
-            path: '/users',
-            permission: 'user.*',
-            name: 'Users',
-            component: UsersContainer,
-            icon: UserGroupIcon,
-        },
-        {
             path: '/backups',
             permission: 'backup.*',
             name: 'Backups',
             component: BackupContainer,
             icon: ArchiveIcon,
         },
+        ],
+        administration: [
         {
-            path: '/network',
-            permission: 'allocation.*',
-            name: 'Network',
-            component: NetworkContainer,
-            icon: LightningBoltIcon,
-        },
-        {
-            path: '/startup',
-            permission: 'startup.*',
-            name: 'Startup',
-            component: StartupContainer,
-            icon: PlayIcon,
+            path: '/users',
+            permission: 'user.*',
+            name: 'Users',
+            component: UsersContainer,
+            icon: UserGroupIcon,
         },
         {
             path: '/settings',
@@ -155,5 +165,6 @@ export default {
             component: ServerActivityLogContainer,
             icon: FingerPrintIcon,
         },
-    ],
+        ],
+    },
 } as Routes;

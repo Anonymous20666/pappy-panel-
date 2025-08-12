@@ -58,21 +58,30 @@ const NavItem = ({ route }: Props) => {
 
 const ServerNavigation = () => {
   return (
-    <>
-    {routes.server
-        .filter((route) => !!route.name)
-        .map((route) =>
-    route.permission ? (
-        <Can key={route.path} action={route.permission} matchAny>
-            <NavItem route={route} />
-        </Can>
-    ) : (
-        <React.Fragment key={route.path}>
-            <NavItem route={route} />
-        </React.Fragment>
-    )
-    )}
-    </>
+   <>
+    {[
+        { label: 'Control', routes: routes.server.control },
+        { label: 'Management', routes: routes.server.management },
+        { label: 'Administration', routes: routes.server.administration },
+    ].map(({ label, routes }) => (
+        <div key={label}>
+            <span className="label">{label}</span>
+            {routes
+                .filter((route) => !!route.name)
+                .map((route) =>
+                    route.permission ? (
+                        <Can key={route.path} action={route.permission} matchAny>
+                            <NavItem route={route} />
+                        </Can>
+                    ) : (
+                        <React.Fragment key={route.path}>
+                            <NavItem route={route} />
+                        </React.Fragment>
+                    )
+                )}
+        </div>
+    ))}
+   </>
   );
 };
 
@@ -166,7 +175,37 @@ export default () => {
                             <Announcement />
                             <TransitionRouter>
                                 <Switch location={location}>
-                                    {routes.server.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
+                                    {routes.server.control.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
+                                        return (
+                                            ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
+                                            (eggIds && eggIds.includes(serverEggId ?? 0)) ||
+                                            (nestId && serverNestId === nestId) ||
+                                            (eggId && serverEggId === eggId) ||
+                                            (!eggIds && !nestIds && !nestId && !eggId)) && (
+                                            <PermissionRoute key={path} permission={permission} path={to(path)} exact>
+                                                <Spinner.Suspense>
+                                                    <Component />
+                                                </Spinner.Suspense>
+                                            </PermissionRoute>
+                                        )
+                                    );
+                                    })}
+                                    {routes.server.management.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
+                                        return (
+                                            ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
+                                            (eggIds && eggIds.includes(serverEggId ?? 0)) ||
+                                            (nestId && serverNestId === nestId) ||
+                                            (eggId && serverEggId === eggId) ||
+                                            (!eggIds && !nestIds && !nestId && !eggId)) && (
+                                            <PermissionRoute key={path} permission={permission} path={to(path)} exact>
+                                                <Spinner.Suspense>
+                                                    <Component />
+                                                </Spinner.Suspense>
+                                            </PermissionRoute>
+                                        )
+                                    );
+                                    })}
+                                    {routes.server.administration.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
                                         return (
                                             ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
                                             (eggIds && eggIds.includes(serverEggId ?? 0)) ||

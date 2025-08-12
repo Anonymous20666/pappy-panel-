@@ -128,7 +128,7 @@ const TopServerDetails = () => {
             </span>
             <CopyOnClick text={allocation}>
               <span
-                className={`duration-300 text-sm text-white/90`}
+                className={`duration-300 text-sm text-gray-100`}
               >
                 {allocation}
               </span>
@@ -139,7 +139,7 @@ const TopServerDetails = () => {
             <span className="w-5 text-gray-300">
               <ChipIcon />
             </span>
-            <span className="text-sm text-white/90">
+            <span className="text-sm text-gray-100">
                 {status === 'offline' ? (
                     <Limit limit={textLimits.cpu}>0%</Limit>
                 ) : (
@@ -152,7 +152,7 @@ const TopServerDetails = () => {
             <span className="w-5 text-gray-300">
               <FontAwesomeIcon icon={faMemory} />
             </span>
-            <span className="text-sm text-white/90">
+            <span className="text-sm text-gray-100">
                 {status === 'offline' ? (
                     <Limit limit={textLimits.memory}>0 MiB</Limit>
                 ) : (
@@ -165,7 +165,7 @@ const TopServerDetails = () => {
             <span className="w-5 text-gray-300">
               <SaveIcon />
             </span>
-            <span className="text-sm text-white/90">
+            <span className="text-sm text-gray-100">
               <Limit limit={textLimits.disk}>{bytesToString(stats.disk)}</Limit>
             </span>
           </StatBlock>
@@ -175,7 +175,7 @@ const TopServerDetails = () => {
               <HashtagIcon />
             </span>
             <CopyOnClick text={id}>
-              <span className="text-sm text-white/90">{id}</span>
+              <span className="text-sm text-gray-100">{id}</span>
             </CopyOnClick>
           </StatBlock>
         </StatContainer>

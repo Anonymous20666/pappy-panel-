@@ -120,7 +120,7 @@ export default ({ server }: { server: Server; }) => {
                 <GlobeIcon />
               </span>
               <span
-                className={`duration-300 text-xs sm:text-sm text-white/90`}
+                className={`duration-300 text-xs sm:text-sm text-gray-100`}
               >
                 {server.allocations
                   .filter((alloc) => alloc.isDefault)

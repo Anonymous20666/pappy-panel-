@@ -71,7 +71,7 @@ export default () => {
                             </Title>
                             <div className={"flex items-center gap-x-1"}>
                             <span className="text-sm text-gray-400">
-                                {rootAdmin ? 'Administrator' : {name} + 'User'}
+                                {rootAdmin ? 'Administrator' : name + ' User'}
                             </span>
                 {rootAdmin && (
                   // eslint-disable-next-line react/jsx-no-target-blank

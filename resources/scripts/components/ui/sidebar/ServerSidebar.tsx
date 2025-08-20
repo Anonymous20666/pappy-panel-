@@ -43,7 +43,7 @@ const ServerSidebar = ({ children, isOpen = false }: Props) => {
                     <Avatar className="w-10" /> 
             <div className="flex flex-col">
                 <span className="text-xs tracking-widest uppercase text-white/50">
-                   {rootAdmin ? 'Administrator' : {name} + 'User'}
+                   {rootAdmin ? 'Administrator' : name + ' User'}
                 </span>
                 <span className="text-sm font-semibold">{nameFirst} {nameLast}</span>
             </div>

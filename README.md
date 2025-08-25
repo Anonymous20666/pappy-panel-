@@ -23,7 +23,8 @@ Stop settling for less. Make game servers a first class citizen on your platform
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Revix offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
-<img width="1366" height="587" alt="image" src="https://github.com/user-attachments/assets/f0e66f5e-dcad-426f-91ef-a2b91d5bef26" />
+<img width="1366" height="621" alt="image" src="https://github.com/user-attachments/assets/45cb0085-26e8-4f1c-93f8-feecd4f7def0" />
+
 
 ## License
 

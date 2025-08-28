@@ -4,6 +4,8 @@ export interface RevixSettings {
     logo: string;
     customCopyright: boolean;
     copyright: string;
+    isUnderMaintenance: boolean;
+    maintenance: string;
     themeSelector: boolean;
     allocationBlur: boolean;
     alertType: string;

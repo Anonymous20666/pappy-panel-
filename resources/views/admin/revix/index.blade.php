@@ -57,6 +57,31 @@
                     placeholder="Powered by [Revix](https://revix.cc)"
                 />
     </div>
+    <div class="space-y-3 !mb-20">
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300" for="revix:isUnderMaintenance">
+            Maintenance
+        </label>
+        <select 
+            name="revix:isUnderMaintenance" 
+            id="revix:isUnderMaintenance"
+            class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+        >
+            <option value="true" {{ old('revix:isUnderMaintenance', $isUnderMaintenance) === 'true' ? 'selected' : '' }}>
+                Enabled
+            </option>
+            <option value="false" {{ old('revix:isUnderMaintenance', $isUnderMaintenance) === 'false' ? 'selected' : '' }}>
+                Disabled
+            </option>
+        </select>
+                <input
+                    type="text" 
+                    id="revix:maintenance" 
+                    name="revix:maintenance" 
+                    value="{{ old('revix:maintenance', $maintenance) }}" 
+                    class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    placeholder="Maintenance description."
+                />
+    </div>
     </div>
     <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl rounded-xl sm:border border-gray-700 bg-gray-950/60 pt-2 mt-6 px-4 mb-2">
         <div class="flex items-center justify-between pb-2">

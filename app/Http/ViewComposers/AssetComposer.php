@@ -126,6 +126,8 @@ class AssetComposer
             'logo' => '/revix/logo.png',
             'customCopyright' => true,
             'copyright' => 'Powered by [Revix](https://revix.cc)',
+            'isUnderMaintenance' => false,
+            'maintenance' => 'We are currently under maintenance. Kindly check back later!',
             'colorPrimary' => '#EF5C29',
             'colorSuccess' => '#3D8F1F',
             'colorDanger' => '#8F1F20',

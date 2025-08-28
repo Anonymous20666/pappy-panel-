@@ -15,6 +15,8 @@ class GeneralSettingsFormRequest extends AdminFormRequest
             'revix:logo' => 'required|string',
             'revix:customCopyright' => 'required|in:true,false',
             'revix:copyright' => 'required|string',
+            'revix:isUnderMaintenance' => 'required|in:true,false',
+            'revix:maintenance' => 'required|string',
         ];
     }
 }

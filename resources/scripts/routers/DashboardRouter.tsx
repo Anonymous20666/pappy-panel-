@@ -17,13 +17,20 @@ import DashboardSidebar from '@/components/ui/sidebar/DashboardSidebar';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
 import Announcement from '@/components/ui/Announcement';
+import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
+import Maintenance from '@/components/ui/Maintenance';
 
 export default () => {
     const location = useLocation();
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
-
+    const isUnderMaintenance = useStoreState((state) => state.revix.data?.isUnderMaintenance);
+    const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     return (
+    <>
+    {isUnderMaintenance && !rootAdmin ? (
+        <Maintenance />
+    ) : (
         <RouterContainer>
             <Navbar>
                         <div className="lg:hidden">
@@ -51,6 +58,7 @@ export default () => {
                     <Switch location={location}>
                         <Route path={'/'} exact>
                             <Announcement />
+                            <MaintenanceAlert />
                             <DashboardContainer />
                         </Route>
                         {routes.account.map(({ path, component: Component }) => (
@@ -67,5 +75,7 @@ export default () => {
             </div>
             </ContentContainer>
         </RouterContainer>
+    )}
+    </>
     );
 };

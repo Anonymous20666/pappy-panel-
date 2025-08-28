@@ -26,6 +26,8 @@ import { ContentContainer } from '@/components/ui/ContentContainer';
 import TopServerDetails from '@/components/server/TopServerDetails';
 import { ApplicationStore } from '@/state';
 import Announcement from '@/components/ui/Announcement';
+import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
+import Maintenance from '@/components/ui/Maintenance';
 
 interface Props {
     route: any;
@@ -89,7 +91,8 @@ export default () => {
     const match = useRouteMatch<{ id: string }>();
     const location = useLocation();
 
-    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
+    const isUnderMaintenance = useStoreState((state) => state.revix.data?.isUnderMaintenance);
+    const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     const [error, setError] = useState('');
     const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -132,6 +135,9 @@ export default () => {
 
     return (
         <React.Fragment key={'server-router'}>
+        {isUnderMaintenance && !rootAdmin ? (
+            <Maintenance />
+        ) : (
             <RouterContainer>
             {!uuid || !id ? (
                 error ? (
@@ -173,6 +179,7 @@ export default () => {
                         <ErrorBoundary>
                             <TopServerDetails />
                             <Announcement />
+                            <MaintenanceAlert />
                             <TransitionRouter>
                                 <Switch location={location}>
                                     {routes.server.control.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
@@ -230,6 +237,7 @@ export default () => {
                 </>
             )}
         </RouterContainer>
+        )}
         </React.Fragment>
     );
 };

@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Facade;
 return [
     /*
     |--------------------------------------------------------------------------
-    | Revix Version
+    | Reviactyl Version
     |--------------------------------------------------------------------------
-    | This value is set when creating a Revix release. You should not
-    | change this value. Otherwise you may face issues with the theme.
+    | This value is set when creating a Reviactyl release. You should not
+    | change this value unless you're maintaining your own release.
     |
     */
 

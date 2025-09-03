@@ -7,7 +7,7 @@ import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResou
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
 import Spinner from '@/components/elements/Spinner';
 import Card from '@/components/ui/Card';
-import { ChipIcon, GlobeIcon, SaveIcon } from '@heroicons/react/solid';
+import { ChipIcon, GlobeIcon, SaveIcon, ExclamationIcon } from '@heroicons/react/solid';
 import Title from '@/components/ui/Title';
 import { StatBlock } from '@/components/ui/StatBlock';
 import StatusIndicator from '@/components/ui/StatusIndicator';
@@ -95,8 +95,8 @@ export default ({ server }: { server: Server; }) => {
               ) : server.isTransferring || server.status ? (
                 <React.Fragment>
                   <StatBlock className="backdrop-blur-sm bg-yellow-500/50 border border-yellow-500/70">
-                    <span className="w-4 sm:w-5 text-gray-300">
-                      <ChipIcon />
+                    <span className="w-4 sm:w-5 text-yellow-500">
+                      <ExclamationIcon />
                     </span>
                     <p>
                       {" "}

@@ -43,7 +43,7 @@
         </div>
         <div class="flex flex-col">
             <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Revix Editor</span>
-            <span class="text-xs text-gray-400 -mt-1 hidden md:block">Release v{{ config('revix.version') }}</span>
+            <span class="text-xs text-gray-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
         </div>
     </a>
     
@@ -235,7 +235,7 @@
 @endif
 
 <footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-gray-950 border-t border-gray-800 items-center justify-center text-xs text-gray-400 z-40">
-    <span>&copy; Revix 2025 | Build {{ config('revix.build') }}</span>
+    <span>&copy; Revix 2025 | Build {{ config('reviactyl.build') }}</span>
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>

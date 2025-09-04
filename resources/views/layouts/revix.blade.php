@@ -9,41 +9,18 @@
     <link rel="shortcut icon" href="/revix/icon.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 </head>
-<body id="app" class="bg-gray-950 text-gray-100 h-screen overflow-hidden">
-<nav class="fixed top-0 left-0 right-0 h-20 flex items-center justify-between bg-gray-900/50 backdrop-blur-md border-b border-gray-800 p-3 md:p-4 z-50">
+<body id="app" class="bg-zinc-950 text-zinc-100 h-screen overflow-hidden">
+<nav class="fixed top-0 left-0 right-0 h-20 flex items-center justify-between bg-zinc-900/50 backdrop-blur-md border-b border-zinc-800 p-3 md:p-4 z-50">
     <a href="{{ route('index') }}" class="flex items-center space-x-2 md:space-x-3 group">
         <div class="p-1.5 md:p-2 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg md:rounded-xl group-hover:scale-105 transition-transform duration-200">
             <img src="/revix/icon.png" alt="Revix Logo" class="h-4 w-4 md:h-6 md:w-6 filter brightness-0 invert">
         </div>
         <div class="flex flex-col">
             <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Revix Editor</span>
-            <span class="text-xs text-gray-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
+            <span class="text-xs text-zinc-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
         </div>
     </a>
     
@@ -53,53 +30,53 @@
             <i class="fa-brands fa-discord text-sm md:text-lg"></i>
             <span class="font-medium text-sm md:text-base hidden sm:inline">Discord</span>
         </a>
-        <a href="{{ route('account') }}" class="flex items-center space-x-2 md:space-x-3 px-2 md:px-4 py-1.5 md:py-2 bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700 rounded-lg transition-all duration-200 group">
+        <a href="{{ route('account') }}" class="flex items-center space-x-2 md:space-x-3 px-2 md:px-4 py-1.5 md:py-2 bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700 rounded-lg transition-all duration-200 group">
             <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(Auth::user()->email)) }}?s=160" 
-                 class="h-6 w-6 md:h-8 md:w-8 rounded-full ring-2 ring-gray-600 group-hover:ring-orange-500 transition-colors duration-200" 
+                 class="h-6 w-6 md:h-8 md:w-8 rounded-full ring-2 ring-zinc-600 group-hover:ring-orange-500 transition-colors duration-200" 
                  alt="User Image">
             <div class="flex flex-col hidden md:block">
-                <span class="text-sm font-medium text-gray-200">{{ Auth::user()->name_first }} {{ Auth::user()->name_last }}</span>
+                <span class="text-sm font-medium text-zinc-200">{{ Auth::user()->name_first }} {{ Auth::user()->name_last }}</span>
             </div>
         </a>
     </div>
 </nav>
 
 <div class="fixed top-20 left-0 right-0 bottom-6 flex">
-    <aside class="w-16 bg-gray-900/30 backdrop-blur-md border-r border-gray-800 flex flex-col justify-between py-4 md:py-6 flex-shrink-0 z-40">
+    <aside class="w-16 bg-zinc-900/30 backdrop-blur-md border-r border-zinc-800 flex flex-col justify-between py-4 md:py-6 flex-shrink-0 z-40">
         <div class="flex flex-col space-y-3 md:space-y-4">
             <nav class="flex flex-col space-y-2 px-2">
                 <a href="{{ route('admin.revix') }}" 
                    class="{{ Route::currentRouteName() !== 'admin.revix' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bolt"></i>
-                    <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
+                    <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         General Options
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.colors') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-palette"></i>
-                    <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
+                    <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Color Options
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.looks') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-swatchbook"></i>
-                    <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
+                    <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Look 'N Feel
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.alerts') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bullhorn"></i>
-                    <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
+                    <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Alerts
                     </span>
                 </a>
                 <a href="{{ route('admin.revix.site') }}" 
                    class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-gear"></i>
-                    <span class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
+                    <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Site Meta Settings
                     </span>
                 </a>
@@ -108,16 +85,16 @@
         
         <div class="flex flex-col space-y-2 px-2">
             <a href="https://docs.revix.cc" 
-               class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-gray-800/50 border border-gray-700 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-all duration-200">
+               class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300 transition-all duration-200">
                 <i class="fa-solid fa-book"></i>
-                <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
+                <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                     Documentation
                 </div>
             </a>
             <a href="{{ route('admin.index') }}" 
-               class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-gray-800/50 border border-gray-700 text-gray-400 hover:bg-gray-700/50 hover:text-gray-300 transition-all duration-200">
+               class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300 transition-all duration-200">
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
+                <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                     Back to Admin
                 </div>
             </a>
@@ -125,7 +102,7 @@
                 @csrf
                 <button type="submit" class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-red-800/50 border border-red-700 text-red-400 hover:bg-red-700/50 hover:text-red-300 transition-all duration-200">
                     <i class="fa-solid fa-trash-can"></i>
-                    <div class="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
+                    <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
                         Reset Revix to Defaults
                     </div>
                 </button>
@@ -135,7 +112,7 @@
 
     <main class="flex-1 flex overflow-hidden">
         @if($sideEditor)
-            <div class="flex-1 bg-gray-900/30 backdrop-blur-md border-r border-gray-800 flex flex-col">
+            <div class="flex-1 bg-zinc-900/30 backdrop-blur-md border-r border-zinc-800 flex flex-col">
                 <div class="flex-1 overflow-y-auto p-4 lg:p-6">
                     @if (count($errors) > 0)
                         <div class="mb-4 lg:mb-6 bg-red-900/20 border border-red-800 text-red-300 px-3 lg:px-4 py-2 lg:py-3 rounded-lg lg:rounded-xl backdrop-blur-sm">
@@ -155,7 +132,7 @@
                 </div>
             </div>
 
-            <div class="hidden sm:block w-auto bg-gray-900/30 backdrop-blur-md border-l border-gray-800 p-4 flex items-start justify-end">
+            <div class="hidden sm:block w-auto bg-zinc-900/30 backdrop-blur-md border-l border-zinc-800 p-4 flex items-start justify-end">
                 <div class="bg-white rounded-lg shadow-2xl resize-left overflow-hidden" style="width: 375px; height: calc(100vh - 140px); min-width: 280px; max-width: 800px;">
                     <iframe src="/" class="w-full h-full border-0" title="Preview"></iframe>
                 </div>
@@ -234,7 +211,7 @@
 </div>
 @endif
 
-<footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-gray-950 border-t border-gray-800 items-center justify-center text-xs text-gray-400 z-40">
+<footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-zinc-950 border-t border-zinc-800 items-center justify-center text-xs text-zinc-400 z-40">
     <span>&copy; Revix 2025 | Build {{ config('reviactyl.build') }}</span>
 </footer>
 

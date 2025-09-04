@@ -31,3 +31,13 @@ Stop settling for less. Make game servers a first class citizen on your platform
 Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/revixlabs/reviactyl/blob/develop/PTERO_LICENSE.md))
 
 Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [AGPL v3](https://github.com/revixlabs/reviactyl/blob/develop/LICENSE))
+
+## Star History
+
+<a href="https://www.star-history.com/#revixlabs/reviactyl&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date" />
+ </picture>
+</a>

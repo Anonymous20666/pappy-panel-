@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Revix;
+namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
 
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\ViewComposers\AssetComposer;
 
-class RevixController extends Controller
+class ReviactylController extends Controller
 {
     public function __construct(
         private AssetComposer $assetComposer,
@@ -15,14 +15,14 @@ class RevixController extends Controller
     ) {}
 
     /**
-     * Reset Revix theme settings to default.
+     * Reset Reviactyl theme settings to default.
      */
     public function resetToDefaults(): RedirectResponse
     {
-        $this->assetComposer->resetRevixDefaults();
+        $this->assetComposer->resetReviactylDefaults();
 
         $this->alert->success('All settings have been reset to defaults.')->flash();
 
-        return redirect()->route('admin.revix');
+        return redirect()->route('admin.reviactyl');
     }
 }

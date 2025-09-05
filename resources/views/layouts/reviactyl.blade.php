@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Revix Editor - @yield('title')</title>
+    <title>Reviactyl Editor - @yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/revix/icon.png">
+    <link rel="shortcut icon" href="/reviactyl/icon.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -16,16 +16,16 @@
 <nav class="fixed top-0 left-0 right-0 h-20 flex items-center justify-between bg-zinc-900/50 backdrop-blur-md border-b border-zinc-800 p-3 md:p-4 z-50">
     <a href="{{ route('index') }}" class="flex items-center space-x-2 md:space-x-3 group">
         <div class="p-1.5 md:p-2 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg md:rounded-xl group-hover:scale-105 transition-transform duration-200">
-            <img src="/revix/icon.png" alt="Revix Logo" class="h-4 w-4 md:h-6 md:w-6 filter brightness-0 invert">
+            <img src="/reviactyl/icon.png" alt="Reviactyl Logo" class="h-4 w-4 md:h-6 md:w-6 filter brightness-0 invert">
         </div>
         <div class="flex flex-col">
-            <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Revix Editor</span>
+            <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Reviactyl Editor</span>
             <span class="text-xs text-zinc-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
         </div>
     </a>
     
     <div class="flex items-center space-x-2 md:space-x-6">
-        <a href="https://revix.cc/discord" target="_blank" 
+        <a href="https://reviactyl.cc/discord" target="_blank" 
            class="flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 rounded-lg text-indigo-300 hover:text-indigo-200 transition-all duration-200">
             <i class="fa-brands fa-discord text-sm md:text-lg"></i>
             <span class="font-medium text-sm md:text-base hidden sm:inline">Discord</span>
@@ -45,36 +45,36 @@
     <aside class="w-16 bg-zinc-900/30 backdrop-blur-md border-r border-zinc-800 flex flex-col justify-between py-4 md:py-6 flex-shrink-0 z-40">
         <div class="flex flex-col space-y-3 md:space-y-4">
             <nav class="flex flex-col space-y-2 px-2">
-                <a href="{{ route('admin.revix') }}" 
-                   class="{{ Route::currentRouteName() !== 'admin.revix' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.reviactyl') }}" 
+                   class="{{ Route::currentRouteName() !== 'admin.reviactyl' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bolt"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         General Options
                     </span>
                 </a>
-                <a href="{{ route('admin.revix.colors') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.reviactyl.colors') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-palette"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Color Options
                     </span>
                 </a>
-                <a href="{{ route('admin.revix.looks') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.reviactyl.looks') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-swatchbook"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Look 'N Feel
                     </span>
                 </a>
-                <a href="{{ route('admin.revix.alerts') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.reviactyl.alerts') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Alerts
                     </span>
                 </a>
-                <a href="{{ route('admin.revix.site') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.revix.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.reviactyl.site') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-gear"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Site Meta Settings
@@ -84,7 +84,7 @@
         </div>
         
         <div class="flex flex-col space-y-2 px-2">
-            <a href="https://docs.revix.cc" 
+            <a href="https://docs.reviactyl.cc" 
                class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300 transition-all duration-200">
                 <i class="fa-solid fa-book"></i>
                 <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
@@ -98,12 +98,12 @@
                     Back to Admin
                 </div>
             </a>
-            <form action="{{ route('admin.revix.reset') }}" method="POST" onsubmit="return confirm('Are you sure you want to reset Revix settings to default?');">
+            <form action="{{ route('admin.reviactyl.reset') }}" method="POST" onsubmit="return confirm('Are you sure you want to reset Reviactyl settings to default?');">
                 @csrf
                 <button type="submit" class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-red-800/50 border border-red-700 text-red-400 hover:bg-red-700/50 hover:text-red-300 transition-all duration-200">
                     <i class="fa-solid fa-trash-can"></i>
                     <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
-                        Reset Revix to Defaults
+                        Reset Reviactyl to Defaults
                     </div>
                 </button>
             </form>
@@ -212,7 +212,7 @@
 @endif
 
 <footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-zinc-950 border-t border-zinc-800 items-center justify-center text-xs text-zinc-400 z-40">
-    <span>&copy; Revix 2025 | Build {{ config('reviactyl.build') }}</span>
+    <span>&copy; Reviactyl 2025 | Build {{ config('reviactyl.build') }}</span>
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>

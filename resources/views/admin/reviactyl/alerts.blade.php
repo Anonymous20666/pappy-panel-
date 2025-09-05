@@ -1,51 +1,51 @@
-@extends('layouts.revix', ['sideEditor' => true])
+@extends('layouts.reviactyl', ['sideEditor' => true])
 
 @section('title')
     Alert Settings
 @endsection
 
 @section('content')
-<form action="{{ route('admin.revix.alerts') }}" method="POST" class="h-full flex flex-col">
+<form action="{{ route('admin.reviactyl.alerts') }}" method="POST" class="h-full flex flex-col">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-white mb-2">Alert settings</h1>
-        <p class="text-zinc-400 text-sm">Change the alert settings of Revix Theme.</p>
+        <p class="text-zinc-400 text-sm">Change the alert settings of Reviactyl Theme.</p>
     </div>
     <div class="flex-1 space-y-6">
     <div class="space-y-3">
-        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="revix:alertType">
+        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:alertType">
             Alert Type
         </label>
         <select 
-            name="revix:alertType" 
-            id="revix:alertType"
+            name="reviactyl:alertType" 
+            id="reviactyl:alertType"
             class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
         >
-            <option value="info" {{ old('revix:alertType', $alertType) === 'info' ? 'selected' : '' }}>
+            <option value="info" {{ old('reviactyl:alertType', $alertType) === 'info' ? 'selected' : '' }}>
                 Info
             </option>
-            <option value="announcement" {{ old('revix:alertType', $alertType) === 'announcement' ? 'selected' : '' }}>
+            <option value="announcement" {{ old('reviactyl:alertType', $alertType) === 'announcement' ? 'selected' : '' }}>
                 Announcement
             </option>
-            <option value="success" {{ old('revix:alertType', $alertType) === 'success' ? 'selected' : '' }}>
+            <option value="success" {{ old('reviactyl:alertType', $alertType) === 'success' ? 'selected' : '' }}>
                 Success
             </option>
-            <option value="warning" {{ old('revix:alertType', $alertType) === 'warning' ? 'selected' : '' }}>
+            <option value="warning" {{ old('reviactyl:alertType', $alertType) === 'warning' ? 'selected' : '' }}>
                 Warning
             </option>
-            <option value="danger" {{ old('revix:alertType', $alertType) === 'danger' ? 'selected' : '' }}>
+            <option value="danger" {{ old('reviactyl:alertType', $alertType) === 'danger' ? 'selected' : '' }}>
                 Danger
             </option>
-            <option value="disabled" {{ old('revix:alertType', $alertType) === 'disabled' ? 'selected' : '' }}>
+            <option value="disabled" {{ old('reviactyl:alertType', $alertType) === 'disabled' ? 'selected' : '' }}>
                 Disabled
             </option>
         </select>
                 <input
                     type="text" 
-                    id="revix:alertMessage" 
-                    name="revix:alertMessage" 
-                    value="{{ old('revix:alertMessage', $alertMessage) }}" 
+                    id="reviactyl:alertMessage" 
+                    name="reviactyl:alertMessage" 
+                    value="{{ old('reviactyl:alertMessage', $alertMessage) }}" 
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                    placeholder="**bold** [link](https://revix.cc)"
+                    placeholder="**bold** [link](https://reviactyl.cc)"
                 />
     </div>
     </div>

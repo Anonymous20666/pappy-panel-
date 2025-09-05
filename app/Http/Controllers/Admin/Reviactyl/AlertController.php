@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Revix;
+namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Revix\AlertSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Reviactyl\AlertSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class AlertController extends Controller
@@ -24,9 +24,9 @@ class AlertController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.revix.alerts', [
-            'alertType' => $this->settings->get('revix:alertType', 'info'),
-            'alertMessage' => $this->settings->get('revix:alertMessage', '**Welcome to Revix!** You can modify Theme Look & Feel at [Revix Editor](/admin/revix) at the administration area.'),
+        return $this->view->make('admin.reviactyl.alerts', [
+            'alertType' => $this->settings->get('reviactyl:alertType', 'info'),
+            'alertMessage' => $this->settings->get('reviactyl:alertMessage', '**Welcome to Reviactyl!** You can modify Theme Look & Feel at [Reviactyl Editor](/admin/reviactyl) at the administration area.'),
         ]);
     }
 
@@ -35,11 +35,11 @@ class AlertController extends Controller
      */
     public function store(AlertSettingsFormRequest $request): RedirectResponse
     {
-        $this->settings->set('revix:alertType', $request->input('revix:alertType'));
-        $this->settings->set('revix:alertMessage', $request->input('revix:alertMessage'));
+        $this->settings->set('reviactyl:alertType', $request->input('reviactyl:alertType'));
+        $this->settings->set('reviactyl:alertMessage', $request->input('reviactyl:alertMessage'));
 
         $this->alert->success('Alert settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.revix.alerts');
+        return redirect()->route('admin.reviactyl.alerts');
     }
 }

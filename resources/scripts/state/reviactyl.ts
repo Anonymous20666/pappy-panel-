@@ -1,6 +1,6 @@
 import { action, Action } from 'easy-peasy';
 
-export interface RevixSettings {
+export interface ReviactylSettings {
     logo: string;
     customCopyright: boolean;
     copyright: string;
@@ -12,17 +12,17 @@ export interface RevixSettings {
     alertMessage: string;
 }
 
-export interface RevixSettingsStore {
-    data?: RevixSettings;
-    setRevix: Action<RevixSettingsStore, RevixSettings>;
+export interface ReviactylSettingsStore {
+    data?: ReviactylSettings;
+    setReviactyl: Action<ReviactylSettingsStore, ReviactylSettings>;
 }
 
-const revix: RevixSettingsStore = {
+const reviactyl: ReviactylSettingsStore = {
     data: undefined,
 
-    setRevix: action((state, payload) => {
+    setReviactyl: action((state, payload) => {
         state.data = payload;
     }),
 };
 
-export default revix;
+export default reviactyl;

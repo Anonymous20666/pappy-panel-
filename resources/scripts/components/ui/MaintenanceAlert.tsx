@@ -14,7 +14,7 @@ const AlertContainer = styled.div`
 `;
 
 const MaintenanceAlert = () => {
-    const isUnderMaintenance = useStoreState((state: ApplicationStore) => state.revix.data!.isUnderMaintenance);
+    const isUnderMaintenance = useStoreState((state: ApplicationStore) => state.reviactyl.data!.isUnderMaintenance);
     return (
         <>
         {isUnderMaintenance ?

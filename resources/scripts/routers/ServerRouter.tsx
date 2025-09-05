@@ -91,7 +91,7 @@ export default () => {
     const match = useRouteMatch<{ id: string }>();
     const location = useLocation();
 
-    const isUnderMaintenance = useStoreState((state) => state.revix.data?.isUnderMaintenance);
+    const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     const [error, setError] = useState('');
     const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -101,7 +101,7 @@ export default () => {
     const inConflictState = ServerContext.useStoreState((state) => state.server.inConflictState);
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
-    const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
+    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
 
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
@@ -154,7 +154,7 @@ export default () => {
                              </button>
                         </div>
                         <LogoContainer>
-                            <img src={logo} alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                            <img src={logo} alt="reviactyl" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
                         </LogoContainer>
                 </Navbar>
                 <ContentContainer>

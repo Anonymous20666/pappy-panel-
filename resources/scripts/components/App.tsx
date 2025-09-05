@@ -4,7 +4,7 @@ import { Route, Router, Switch } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
 import { store } from '@/state';
 import { SiteSettings } from '@/state/settings';
-import { RevixSettings } from '@/state/revix';
+import { ReviactylSettings } from '@/state/reviactyl';
 import ProgressBar from '@/components/elements/ProgressBar';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import tw from 'twin.macro';
@@ -23,7 +23,7 @@ const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
-    RevixConfiguration?: RevixSettings;
+    ReviactylConfiguration?: ReviactylSettings;
     PterodactylUser?: {
         uuid: string;
         username: string;
@@ -43,7 +43,7 @@ interface ExtendedWindow extends Window {
 setupInterceptors(history);
 
 const App = () => {
-    const { PterodactylUser, SiteConfiguration, RevixConfiguration } = window as ExtendedWindow;
+    const { PterodactylUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
     if (PterodactylUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
             uuid: PterodactylUser.uuid,
@@ -63,8 +63,8 @@ const App = () => {
         store.getActions().settings.setSettings(SiteConfiguration!);
     }
 
-    if (!store.getState().revix.data) {
-        store.getActions().revix.setRevix(RevixConfiguration!);
+    if (!store.getState().reviactyl.data) {
+        store.getActions().reviactyl.setReviactyl(ReviactylConfiguration!);
     }
 
     return (

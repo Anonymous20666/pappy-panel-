@@ -20,8 +20,8 @@ const CardContainer = styled.div`
 `;
 
 export default () => {
-    const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
-    const maintenance = useStoreState((state) => state.revix.data!.maintenance);
+    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const maintenance = useStoreState((state) => state.reviactyl.data!.maintenance);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
@@ -35,7 +35,7 @@ export default () => {
          <Container>
           <CardContainer>
             <LogoContainer>
-             <img src={logo} alt="revix" css={tw`h-[3rem]`} />
+             <img src={logo} alt="reviactyl" css={tw`h-[3rem]`} />
             </LogoContainer>
             <Card>
                 <SpinnerOverlay visible={isLoggingOut} />

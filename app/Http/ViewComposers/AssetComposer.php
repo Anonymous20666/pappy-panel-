@@ -11,7 +11,7 @@ class AssetComposer
     /**
      * AssetComposer constructor.
      */
-    private array $revixDefaults;
+    private array $reviactylDefaults;
     
     private array $Theme1 = [
         "name" => "Petrascia",
@@ -122,10 +122,10 @@ class AssetComposer
         private AssetHashService $assetHashService,
         private SettingsRepositoryInterface $settings
     ) {
-        $this->revixDefaults = [
-            'logo' => '/revix/logo.png',
+        $this->reviactylDefaults = [
+            'logo' => '/reviactyl/logo.png',
             'customCopyright' => true,
-            'copyright' => 'Powered by [Revix](https://revix.cc)',
+            'copyright' => 'Powered by [Reviactyl](https://reviactyl.cc)',
             'isUnderMaintenance' => false,
             'maintenance' => 'We are currently under maintenance. Kindly check back later!',
             'colorPrimary' => '#EF5C29',
@@ -154,12 +154,12 @@ class AssetComposer
             'radius' => '15px',
             'allocationBlur' => true,
             'alertType' => 'info',
-            'alertMessage' => '**Welcome to Revix!** You can modify Theme Look & Feel at [Revix Editor](/admin/revix) at the administration area.',
+            'alertMessage' => '**Welcome to Reviactyl!** You can modify Theme Look & Feel at [Reviactyl Editor](/admin/reviactyl) at the administration area.',
             'site_color' => '#EF5C29',
-            'site_title' => 'Revix Theme',
-            'site_description' => 'Our official control panel made better with Revix.',
-            'site_image' => '/revix/logo.png',
-            'site_favicon' => '/revix/icon.png',
+            'site_title' => 'Reviactyl Theme',
+            'site_description' => 'Our official control panel made better with Reviactyl.',
+            'site_image' => '/reviactyl/logo.png',
+            'site_favicon' => '/reviactyl/icon.png',
         ];
     }
 
@@ -177,21 +177,21 @@ class AssetComposer
                 'siteKey' => config('recaptcha.website_key') ?? '',
             ],
         ]);
-        $view->with('revixConfiguration', 
-            $this->getRevixSettings(),
+        $view->with('reviactylConfiguration', 
+            $this->getReviactylSettings(),
         );
     }
 
-    private function getRevixSettings(): array
+    private function getReviactylSettings(): array
     {
         $settings = [];
 
-        foreach ($this->revixDefaults as $key => $default) {
+        foreach ($this->reviactylDefaults as $key => $default) {
             if (preg_match('/^theme[1-7]$/', $key) && is_array($default)) {
                 $theme = [];
 
                 foreach ($default as $subkey => $subdefault) {
-                    $val = $this->settings->get("revix:{$key}:{$subkey}", $subdefault);
+                    $val = $this->settings->get("reviactyl:{$key}:{$subkey}", $subdefault);
 
                     if (!is_scalar($val)) {
                         $val = $subdefault;
@@ -202,7 +202,7 @@ class AssetComposer
 
                 $settings[$key] = $theme;
             } else {
-                $val = $this->settings->get("revix:{$key}", $default);
+                $val = $this->settings->get("reviactyl:{$key}", $default);
 
                 if (!is_scalar($val) && !is_array($val)) {
                     $val = $default;
@@ -215,15 +215,15 @@ class AssetComposer
         return $settings;
     }
 
-    public function resetRevixDefaults(): void
+    public function resetReviactylDefaults(): void
     {
-        foreach ($this->revixDefaults as $key => $value) {
+        foreach ($this->reviactylDefaults as $key => $value) {
             if (preg_match('/^theme[1-7]$/', $key) && is_array($value)) {
                 foreach ($value as $subkey => $subvalue) {
-                    $this->settings->set("revix:{$key}:{$subkey}", $subvalue);
+                    $this->settings->set("reviactyl:{$key}:{$subkey}", $subvalue);
                 }
             } else {
-                $this->settings->set("revix:{$key}", $value);
+                $this->settings->set("reviactyl:{$key}", $value);
             }
         }
     }

@@ -3,7 +3,7 @@ import flashes, { FlashStore } from '@/state/flashes';
 import user, { UserStore } from '@/state/user';
 import permissions, { GloablPermissionsStore } from '@/state/permissions';
 import settings, { SettingsStore } from '@/state/settings';
-import revix, { RevixSettingsStore } from '@/state/revix';
+import reviactyl, { ReviactylSettingsStore } from '@/state/reviactyl';
 import progress, { ProgressStore } from '@/state/progress';
 
 export interface ApplicationStore {
@@ -12,7 +12,7 @@ export interface ApplicationStore {
     user: UserStore;
     settings: SettingsStore;
     progress: ProgressStore;
-    revix: RevixSettingsStore;
+    reviactyl: ReviactylSettingsStore;
 }
 
 const state: ApplicationStore = {
@@ -21,7 +21,7 @@ const state: ApplicationStore = {
     user,
     settings,
     progress,
-    revix,
+    reviactyl,
 };
 
 export const store = createStore(state);

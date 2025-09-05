@@ -13,8 +13,8 @@ const Copyright = styled.div`
 `;
 
 export default () => {
-    const customCopyright = useStoreState((state) => state.revix.data!.customCopyright);
-    const copyright = useStoreState((state) => state.revix.data!.copyright);
+    const customCopyright = useStoreState((state) => state.reviactyl.data!.customCopyright);
+    const copyright = useStoreState((state) => state.reviactyl.data!.copyright);
   return (
     <Container>
       <Copyright>

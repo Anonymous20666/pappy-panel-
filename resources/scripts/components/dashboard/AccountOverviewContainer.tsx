@@ -43,7 +43,7 @@ export default () => {
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const themeSelector = useStoreState((state) => state.revix.data!.themeSelector);
+    const themeSelector = useStoreState((state) => state.reviactyl.data!.themeSelector);
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {

@@ -86,9 +86,9 @@
                             </a>
                         </li>
                         <li class="header">CUSTOMIZATION</li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.revix' ?: 'active' }}">
-                            <a href="{{ route('admin.revix') }}">
-                                <i class="fa fa-paint-brush"></i> <span>Revix Editor</span>
+                        <li class="{{ Route::currentRouteName() !== 'admin.reviactyl' ?: 'active' }}">
+                            <a href="{{ route('admin.reviactyl') }}">
+                                <i class="fa fa-paint-brush"></i> <span>Reviactyl Editor</span>
                             </a>
                         </li>
                         <li class="header">MANAGEMENT</li>

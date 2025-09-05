@@ -9,15 +9,15 @@
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
             <meta name="csrf-token" content="{{ csrf_token() }}">
             <meta name="robots" content="noindex">
-            <meta name="title" content="{{ $revixConfiguration['site_title'] }}" />
-            <meta name="description" content="{{ $revixConfiguration['site_description'] }}" />
-            <link rel="icon" type="image/x-icon" href="{{ $revixConfiguration['site_favicon'] }}">
-            <meta name="theme-color" content="{{ $revixConfiguration['site_color'] }}"/>
+            <meta name="title" content="{{ $reviactylConfiguration['site_title'] }}" />
+            <meta name="description" content="{{ $reviactylConfiguration['site_description'] }}" />
+            <link rel="icon" type="image/x-icon" href="{{ $reviactylConfiguration['site_favicon'] }}">
+            <meta name="theme-color" content="{{ $reviactylConfiguration['site_color'] }}"/>
             <meta property="og:type" content="website" />
             <meta property="og:url" content="{{config('app.url', 'https://localhost')}}" />
-            <meta property="og:title" content="{{ $revixConfiguration['site_title'] }}" />
-            <meta property="og:description" content="{{ $revixConfiguration['site_description'] }}" />
-            <meta property="og:image" content="{{ $revixConfiguration['site_image'] }}" />
+            <meta property="og:title" content="{{ $reviactylConfiguration['site_title'] }}" />
+            <meta property="og:description" content="{{ $reviactylConfiguration['site_description'] }}" />
+            <meta property="og:image" content="{{ $reviactylConfiguration['site_image'] }}" />
         @show
 
         @section('user-data')
@@ -31,14 +31,14 @@
                     window.SiteConfiguration = {!! json_encode($siteConfiguration) !!};
                 </script>
             @endif
-            @if(!empty($revixConfiguration))
+            @if(!empty($reviactylConfiguration))
                 <script>
-                    window.RevixConfiguration = {!! json_encode($revixConfiguration) !!};
+                    window.ReviactylConfiguration = {!! json_encode($reviactylConfiguration) !!};
                 </script>
             @endif
         @show
 @php
-function revix($hex) {
+function reviactyl($hex) {
     $hex = str_replace('#', '', $hex);
     if (strlen($hex) === 3) {
         $r = hexdec(str_repeat($hex[0], 2));
@@ -57,21 +57,21 @@ function revix($hex) {
             @import url('//fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans:500&display=swap');
 
             :root{
-                --radius:{{ $revixConfiguration['radius'] }};
-                --color-primary:{{ revix($revixConfiguration['colorPrimary']) }};
-                --color-success:{{ revix($revixConfiguration['colorSuccess']) }};
-                --color-danger:{{ revix($revixConfiguration['colorDanger']) }};
-                --color-secondary:{{ revix($revixConfiguration['colorSecondary']) }};
-                --color-50:{{ revix($revixConfiguration['color50']) }};
-                --color-100:{{ revix($revixConfiguration['color100']) }};
-                --color-200:{{ revix($revixConfiguration['color200']) }};
-                --color-300:{{ revix($revixConfiguration['color300']) }};
-                --color-400:{{ revix($revixConfiguration['color400']) }};
-                --color-500:{{ revix($revixConfiguration['color500']) }};
-                --color-600:{{ revix($revixConfiguration['color600']) }};
-                --color-700:{{ revix($revixConfiguration['color700']) }};
-                --color-800:{{ revix($revixConfiguration['color800']) }};
-                --color-900:{{ revix($revixConfiguration['color900']) }};
+                --radius:{{ $reviactylConfiguration['radius'] }};
+                --color-primary:{{ reviactyl($reviactylConfiguration['colorPrimary']) }};
+                --color-success:{{ reviactyl($reviactylConfiguration['colorSuccess']) }};
+                --color-danger:{{ reviactyl($reviactylConfiguration['colorDanger']) }};
+                --color-secondary:{{ reviactyl($reviactylConfiguration['colorSecondary']) }};
+                --color-50:{{ reviactyl($reviactylConfiguration['color50']) }};
+                --color-100:{{ reviactyl($reviactylConfiguration['color100']) }};
+                --color-200:{{ reviactyl($reviactylConfiguration['color200']) }};
+                --color-300:{{ reviactyl($reviactylConfiguration['color300']) }};
+                --color-400:{{ reviactyl($reviactylConfiguration['color400']) }};
+                --color-500:{{ reviactyl($reviactylConfiguration['color500']) }};
+                --color-600:{{ reviactyl($reviactylConfiguration['color600']) }};
+                --color-700:{{ reviactyl($reviactylConfiguration['color700']) }};
+                --color-800:{{ reviactyl($reviactylConfiguration['color800']) }};
+                --color-900:{{ reviactyl($reviactylConfiguration['color900']) }};
             }
         </style>
 

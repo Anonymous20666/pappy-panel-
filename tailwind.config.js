@@ -1,6 +1,6 @@
 const colors = require('tailwindcss/colors');
 
-function revix(variable) {
+function reviactyl(variable) {
   return ({ opacityValue }) =>
     opacityValue !== undefined
       ? `rgb(var(${variable}) / ${opacityValue})`
@@ -8,16 +8,16 @@ function revix(variable) {
 }
 
 const gray = {
-    50: revix('--color-50'),
-    100: revix('--color-100'),
-    200: revix('--color-200'),
-    300: revix('--color-300'),
-    400: revix('--color-400'),
-    500: revix('--color-500'),
-    600: revix('--color-600'),
-    700: revix('--color-700'),
-    800: revix('--color-800'),
-    900: revix('--color-900'),
+    50: reviactyl('--color-50'),
+    100: reviactyl('--color-100'),
+    200: reviactyl('--color-200'),
+    300: reviactyl('--color-300'),
+    400: reviactyl('--color-400'),
+    500: reviactyl('--color-500'),
+    600: reviactyl('--color-600'),
+    700: reviactyl('--color-700'),
+    800: reviactyl('--color-800'),
+    900: reviactyl('--color-900'),
 };
 
 module.exports = {
@@ -37,10 +37,10 @@ module.exports = {
                 gray: gray,
                 neutral: gray,
                 cyan: colors.cyan,
-                revix: revix('--color-primary'),
-                success: revix('--color-success'),
-                danger: revix('--color-danger'),
-                secondary: revix('--color-secondary'),
+                reviactyl: reviactyl('--color-primary'),
+                success: reviactyl('--color-success'),
+                danger: reviactyl('--color-danger'),
+                secondary: reviactyl('--color-secondary'),
             },
             fontSize: {
                 '2xs': '0.625rem',

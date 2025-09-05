@@ -23,8 +23,8 @@ import Maintenance from '@/components/ui/Maintenance';
 export default () => {
     const location = useLocation();
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const logo = useStoreState((state: ApplicationStore) => state.revix.data!.logo);
-    const isUnderMaintenance = useStoreState((state) => state.revix.data?.isUnderMaintenance);
+    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     return (
     <>
@@ -39,7 +39,7 @@ export default () => {
                              </button>
                         </div>
                         <LogoContainer>
-                            <img src={logo} alt="revix" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                            <img src={logo} alt="reviactyl" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
                         </LogoContainer>
             </Navbar>
             <ContentContainer>

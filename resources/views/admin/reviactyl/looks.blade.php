@@ -1,29 +1,29 @@
-@extends('layouts.revix', ['sideEditor' => true])
+@extends('layouts.reviactyl', ['sideEditor' => true])
 
 @section('title')
     Look & Feel
 @endsection
 
 @section('content')
-<form action="{{ route('admin.revix.looks') }}" method="POST" class="h-full flex flex-col">
+<form action="{{ route('admin.reviactyl.looks') }}" method="POST" class="h-full flex flex-col">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-white mb-2">Look & Feel</h1>
-        <p class="text-zinc-400 text-sm">Change the look & feel of Revix Theme.</p>
+        <p class="text-zinc-400 text-sm">Change the look & feel of Reviactyl Theme.</p>
     </div>
 <div class="flex-1 space-y-6 pb-[80px]">
     <div class="space-y-3">
-        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="revix:themeSelector">
+        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:themeSelector">
             Theme Selector
         </label>
         <select 
-            name="revix:themeSelector" 
-            id="revix:themeSelector"
+            name="reviactyl:themeSelector" 
+            id="reviactyl:themeSelector"
             class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
         >
-            <option value="true" {{ old('revix:themeSelector', $themeSelector) === 'true' ? 'selected' : '' }}>
+            <option value="true" {{ old('reviactyl:themeSelector', $themeSelector) === 'true' ? 'selected' : '' }}>
                 Enabled
             </option>
-            <option value="false" {{ old('revix:themeSelector', $themeSelector) === 'false' ? 'selected' : '' }}>
+            <option value="false" {{ old('reviactyl:themeSelector', $themeSelector) === 'false' ? 'selected' : '' }}>
                 Disabled
             </option>
         </select>
@@ -32,41 +32,41 @@
     <div class="grid grid-cols-2 gap-4">
         <p class="block text-xl font-medium text-zinc-700 dark:text-zinc-300">Border Settings</p><br>
         <div class="flex flex-col">
-        <label class="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="revix:radius">
+        <label class="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:radius">
             Border Radius
         </label>
-        <input type="text" name="revix:radius" id="revix:radius" value="{{ old('revix:radius', $radius) }}"  class="px-3 py-2 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
+        <input type="text" name="reviactyl:radius" id="reviactyl:radius" value="{{ old('reviactyl:radius', $radius) }}"  class="px-3 py-2 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
         </div>
     </div>
     <div class="border-t border-zinc-700"></div>
     <div class="space-y-3">
-        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="revix:allocationBlur">
+        <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:allocationBlur">
             Allocation Blur
         </label>
         <select 
-            name="revix:allocationBlur" 
-            id="revix:allocationBlur"
+            name="reviactyl:allocationBlur" 
+            id="reviactyl:allocationBlur"
             class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
         >
-            <option value="true" {{ old('revix:allocationBlur', $allocationBlur) === 'true' ? 'selected' : '' }}>
+            <option value="true" {{ old('reviactyl:allocationBlur', $allocationBlur) === 'true' ? 'selected' : '' }}>
                 Enabled
             </option>
-            <option value="false" {{ old('revix:allocationBlur', $allocationBlur) === 'false' ? 'selected' : '' }}>
+            <option value="false" {{ old('reviactyl:allocationBlur', $allocationBlur) === 'false' ? 'selected' : '' }}>
                 Disabled
             </option>
         </select>
     </div>
     <div class="border-t border-zinc-700"></div>
         <div class="space-y-3">
-            <label for="revix:background" class="block text-sm font-medium text-zinc-300">
+            <label for="reviactyl:background" class="block text-sm font-medium text-zinc-300">
                 Panel Background
             </label>
             <div class="relative">
                 <input
                     type="text" 
-                    id="revix:background" 
-                    name="revix:background" 
-                    value="{{ old('revix:background', $background) }}" 
+                    id="reviactyl:background" 
+                    name="reviactyl:background" 
+                    value="{{ old('reviactyl:background', $background) }}" 
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="Enter background url or 'none' to disable"
                 />

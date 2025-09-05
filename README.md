@@ -1,10 +1,10 @@
 <p align="center">
-<a href="https://revix.cc/">
+<a href="https://reviactyl.cc/">
 <img height="313" alt="image" src="https://github.com/user-attachments/assets/d21579b9-8b64-4e01-95bf-975a718bcf49" />
 </a>
 </p>
 
-# Revix Theme for Pterodactyl (Reviactyl)
+# Reviactyl Theme for Pterodactyl (Reviactyl)
 > [!WARNING]
 > Reviactyl is still being developed. Issues are taken as feedback.
 
@@ -19,25 +19,25 @@ Stop settling for less. Make game servers a first class citizen on your platform
 
 ## Features
 
-* ` 🌩️ ` **Customizable Options**: Revix Offers various* options that lets you customize the panel to your liking.
+* ` 🌩️ ` **Customizable Options**: Reviactyl Offers various* options that lets you customize the panel to your liking.
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
-* ` 🖥️ ` **Modern UI**: Revix offers a modern and sleek UI that's more accessible than other modifications on market.
+* ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
 <img width="1366" height="621" alt="image" src="https://github.com/user-attachments/assets/45cb0085-26e8-4f1c-93f8-feecd4f7def0" />
 
 
 ## License
 
-Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/revixlabs/reviactyl/blob/develop/PTERO_LICENSE.md))
+Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyllabs/reviactyl/blob/develop/PTERO_LICENSE.md))
 
-Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [AGPL v3](https://github.com/revixlabs/reviactyl/blob/develop/LICENSE))
+Reviactyl™, Copyright © 2025 ReviactylLabs and contributors. (Licensed under [AGPL v3](https://github.com/reviactyllabs/reviactyl/blob/develop/LICENSE))
 
 ## Star History
 
-<a href="https://www.star-history.com/#revixlabs/reviactyl&Date">
+<a href="https://www.star-history.com/#reviactyllabs/reviactyl&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=revixlabs/reviactyl&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=reviactyllabs/reviactyl&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=reviactyllabs/reviactyl&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=reviactyllabs/reviactyl&type=Date" />
  </picture>
 </a>

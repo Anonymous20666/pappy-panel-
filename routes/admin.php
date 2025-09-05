@@ -230,27 +230,27 @@ Route::group(['prefix' => 'nests'], function () {
 
 /*
 |--------------------------------------------------------------------------
-| Revix Controller Routes
+| Reviactyl Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/revix
+| Endpoint: /admin/reviactyl
 |
 */
-Route::group(['prefix' => 'revix'], function () {
-    Route::get('/', [Admin\Revix\GeneralController::class, 'index'])->name('admin.revix');
-    Route::post('/', [Admin\Revix\GeneralController::class, 'store']);
+Route::group(['prefix' => 'reviactyl'], function () {
+    Route::get('/', [Admin\Reviactyl\GeneralController::class, 'index'])->name('admin.reviactyl');
+    Route::post('/', [Admin\Reviactyl\GeneralController::class, 'store']);
 
-    Route::post('/reset', [Admin\Revix\RevixController::class, 'resetToDefaults'])->name('admin.revix.reset');
+    Route::post('/reset', [Admin\Reviactyl\ReviactylController::class, 'resetToDefaults'])->name('admin.reviactyl.reset');
 
-    Route::get('/colors', [Admin\Revix\ColorsController::class, 'index'])->name('admin.revix.colors');
-    Route::post('/colors', [Admin\Revix\ColorsController::class, 'store']);
+    Route::get('/colors', [Admin\Reviactyl\ColorsController::class, 'index'])->name('admin.reviactyl.colors');
+    Route::post('/colors', [Admin\Reviactyl\ColorsController::class, 'store']);
 
-    Route::get('/looks', [Admin\Revix\LookNFeelController::class, 'index'])->name('admin.revix.looks');
-    Route::post('/looks', [Admin\Revix\LookNFeelController::class, 'store']);
+    Route::get('/looks', [Admin\Reviactyl\LookNFeelController::class, 'index'])->name('admin.reviactyl.looks');
+    Route::post('/looks', [Admin\Reviactyl\LookNFeelController::class, 'store']);
 
-    Route::get('/alerts', [Admin\Revix\AlertController::class, 'index'])->name('admin.revix.alerts');
-    Route::post('/alerts', [Admin\Revix\AlertController::class, 'store']);
+    Route::get('/alerts', [Admin\Reviactyl\AlertController::class, 'index'])->name('admin.reviactyl.alerts');
+    Route::post('/alerts', [Admin\Reviactyl\AlertController::class, 'store']);
 
-    Route::get('/site', [Admin\Revix\SiteController::class, 'index'])->name('admin.revix.site');
-    Route::post('/site', [Admin\Revix\SiteController::class, 'store']);
+    Route::get('/site', [Admin\Reviactyl\SiteController::class, 'index'])->name('admin.reviactyl.site');
+    Route::post('/site', [Admin\Reviactyl\SiteController::class, 'store']);
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Admin\Revix;
+namespace Pterodactyl\Http\Requests\Admin\Reviactyl;
 
 use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
 
@@ -12,8 +12,8 @@ class AlertSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'revix:alertType' => 'required|string',
-            'revix:alertMessage' => 'required|string',
+            'reviactyl:alertType' => 'required|string',
+            'reviactyl:alertMessage' => 'required|string',
         ];
     }
 }

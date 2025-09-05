@@ -15,8 +15,8 @@ const AlertContainer = styled.div`
 `;
 
 const Announcement = () => {
-    const alertType = useStoreState((state: ApplicationStore) => state.revix.data!.alertType);
-    const alertMessage = useStoreState((state: ApplicationStore) => state.revix.data!.alertMessage);
+    const alertType = useStoreState((state: ApplicationStore) => state.reviactyl.data!.alertType);
+    const alertMessage = useStoreState((state: ApplicationStore) => state.reviactyl.data!.alertMessage);
     return (
         <Container>
             {alertType !== 'disabled' ?
@@ -24,7 +24,7 @@ const Announcement = () => {
                ${alertType === 'info'
                     ? 'bg-blue-500/10 border-blue-500'
                     : alertType === 'announcement'
-                    ? 'bg-revix/10 border-revix'
+                    ? 'bg-reviactyl/10 border-reviactyl'
                     : alertType === 'danger'
                     ? 'bg-danger/10 border-danger'
                     : alertType === 'success'
@@ -38,7 +38,7 @@ const Announcement = () => {
                 {alertType === 'info'
                     ? <InformationCircleIcon className="h-5 w-5 font-bold !text-blue-500" />
                     : alertType === 'announcement'
-                    ? <BellIcon className="h-5 w-5 font-bold !text-revix" />
+                    ? <BellIcon className="h-5 w-5 font-bold !text-reviactyl" />
                     : alertType === 'danger'
                     ? <InboxInIcon className="h-5 w-5 font-bold !text-danger/50" />
                     : alertType === 'success'

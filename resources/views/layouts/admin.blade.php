@@ -85,10 +85,10 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
-                        <li class="header">CUSTOMIZATION</li>
-                        <li class="{{ Route::currentRouteName() !== 'admin.reviactyl' ?: 'active' }}">
-                            <a href="{{ route('admin.reviactyl') }}">
-                                <i class="fa fa-paint-brush"></i> <span>Reviactyl Editor</span>
+                        <li class="header">REVIACTYL</li>
+                        <li class="{{ Route::currentRouteName() !== 'admin.designify' ?: 'active' }}">
+                            <a href="{{ route('admin.designify') }}">
+                                <i class="fa fa-paint-brush"></i> <span>Designify</span>
                             </a>
                         </li>
                         <li class="header">MANAGEMENT</li>

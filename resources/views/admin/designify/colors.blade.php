@@ -1,11 +1,11 @@
-@extends('layouts.reviactyl', ['sideEditor' => true])
+@extends('layouts.designify', ['sideEditor' => true])
 
 @section('title')
     Color Settings
 @endsection
 
 @section('content')
-<form action="{{ route('admin.reviactyl.colors') }}" method="POST" class="h-full flex flex-col">
+<form action="{{ route('admin.designify.colors') }}" method="POST" class="h-full flex flex-col">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-white mb-2">Color settings</h1>
         <p class="text-zinc-400 text-sm">Change the color scheme of Reviactyl Theme.</p>

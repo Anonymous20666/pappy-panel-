@@ -1,11 +1,11 @@
-@extends('layouts.reviactyl', ['sideEditor' => true])
+@extends('layouts.designify', ['sideContent' => true])
 
 @section('title')
     Site Settings
 @endsection
 
 @section('content')
-<form action="{{ route('admin.reviactyl.site') }}" method="POST" class="h-full flex flex-col">
+<form action="{{ route('admin.designify.site') }}" method="POST" class="h-full flex flex-col">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-white mb-2">Site settings</h1>
         <p class="text-zinc-400 text-sm">Change the meta content of your panel.</p>
@@ -105,4 +105,22 @@
         </div>
     </div>
 </form>
+@endsection
+@section('sidecontent')
+<span class="font-bold">Discord Preview:</span>
+<div class="border border-zinc-600 p-4 max-w-xl rounded-lg text-white font-sans">
+
+  <p class="text-sky-400 hover:underline text-sm block mb-2">
+    {{ config('app.url') }}/auth/login
+  </p>
+
+  <div class="bg-[#2b2d31] rounded-md border-l-4 border-[{{ old('reviactyl:site_color', $site_color) }}] rounded-r-md p-3">
+    <h2 class="text-sky-400 text-sm font-semibold mb-1">{{ old('reviactyl:site_title', $site_title) }}</h2>
+    <p class="text-sm text-gray-200 mb-3">{{ old('reviactyl:site_description', $site_description) }}</p>
+    <div class="flex items-center space-x-3">
+      <img src="{{ old('reviactyl:site_image', $site_image) }}" alt="site image" class="w-auto h-20 rounded-md" />
+    </div>
+  </div>
+</div>
+
 @endsection

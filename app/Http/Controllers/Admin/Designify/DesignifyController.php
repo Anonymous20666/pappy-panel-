@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\ViewComposers\AssetComposer;
 
-class ReviactylController extends Controller
+class DesignifyController extends Controller
 {
     public function __construct(
         private AssetComposer $assetComposer,
@@ -23,6 +23,6 @@ class ReviactylController extends Controller
 
         $this->alert->success('All settings have been reset to defaults.')->flash();
 
-        return redirect()->route('admin.reviactyl');
+        return redirect()->route('admin.designify');
     }
 }

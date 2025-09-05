@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Reviactyl\ColorSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Designify\ColorSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class ColorsController extends Controller
@@ -24,7 +24,7 @@ class ColorsController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.reviactyl.colors', [
+        return $this->view->make('admin.designify.colors', [
             'colorPrimary' => $this->settings->get('reviactyl:colorPrimary', '#EF5C29'),
             'colorSuccess' => $this->settings->get('reviactyl:colorSuccess', '#3D8F1F'),
             'colorDanger' => $this->settings->get('reviactyl:colorDanger', '#8F1F20'),
@@ -253,6 +253,6 @@ class ColorsController extends Controller
 
         $this->alert->success('Color settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.reviactyl.colors');
+        return redirect()->route('admin.designify.colors');
     }
 }

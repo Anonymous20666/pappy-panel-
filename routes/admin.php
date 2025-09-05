@@ -233,24 +233,26 @@ Route::group(['prefix' => 'nests'], function () {
 | Reviactyl Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/reviactyl
+| Endpoint: /admin/designify
 |
 */
-Route::group(['prefix' => 'reviactyl'], function () {
-    Route::get('/', [Admin\Reviactyl\GeneralController::class, 'index'])->name('admin.reviactyl');
-    Route::post('/', [Admin\Reviactyl\GeneralController::class, 'store']);
+Route::group(['prefix' => 'designify'], function () {
+    Route::view('/', 'admin.designify.index')->name('admin.designify');
 
-    Route::post('/reset', [Admin\Reviactyl\ReviactylController::class, 'resetToDefaults'])->name('admin.reviactyl.reset');
+    Route::get('/general', [Admin\Designify\GeneralController::class, 'index'])->name('admin.designify.general');
+    Route::post('/general', [Admin\Designify\GeneralController::class, 'store']);
 
-    Route::get('/colors', [Admin\Reviactyl\ColorsController::class, 'index'])->name('admin.reviactyl.colors');
-    Route::post('/colors', [Admin\Reviactyl\ColorsController::class, 'store']);
+    Route::post('/reset', [Admin\Designify\DesignifyController::class, 'resetToDefaults'])->name('admin.designify.reset');
 
-    Route::get('/looks', [Admin\Reviactyl\LookNFeelController::class, 'index'])->name('admin.reviactyl.looks');
-    Route::post('/looks', [Admin\Reviactyl\LookNFeelController::class, 'store']);
+    Route::get('/colors', [Admin\Designify\ColorsController::class, 'index'])->name('admin.designify.colors');
+    Route::post('/colors', [Admin\Designify\ColorsController::class, 'store']);
 
-    Route::get('/alerts', [Admin\Reviactyl\AlertController::class, 'index'])->name('admin.reviactyl.alerts');
-    Route::post('/alerts', [Admin\Reviactyl\AlertController::class, 'store']);
+    Route::get('/looks', [Admin\Designify\LookNFeelController::class, 'index'])->name('admin.designify.looks');
+    Route::post('/looks', [Admin\Designify\LookNFeelController::class, 'store']);
 
-    Route::get('/site', [Admin\Reviactyl\SiteController::class, 'index'])->name('admin.reviactyl.site');
-    Route::post('/site', [Admin\Reviactyl\SiteController::class, 'store']);
+    Route::get('/alerts', [Admin\Designify\AlertController::class, 'index'])->name('admin.designify.alerts');
+    Route::post('/alerts', [Admin\Designify\AlertController::class, 'store']);
+
+    Route::get('/site', [Admin\Designify\SiteController::class, 'index'])->name('admin.designify.site');
+    Route::post('/site', [Admin\Designify\SiteController::class, 'store']);
 });

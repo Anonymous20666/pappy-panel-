@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Reviactyl\LookNFeelSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Designify\LookNFeelSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class LookNFeelController extends Controller
@@ -24,7 +24,7 @@ class LookNFeelController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.reviactyl.looks', [
+        return $this->view->make('admin.designify.looks', [
             'themeSelector' => $this->settings->get('reviactyl:themeSelector', true) ? 'true' : 'false',
             'background' => $this->settings->get('reviactyl:background', 'none'),
             'allocationBlur' => $this->settings->get('reviactyl:allocationBlur', true) ? 'true' : 'false',
@@ -47,6 +47,6 @@ class LookNFeelController extends Controller
 
         $this->alert->success('Look & Feel settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.reviactyl.looks');
+        return redirect()->route('admin.designify.looks');
     }
 }

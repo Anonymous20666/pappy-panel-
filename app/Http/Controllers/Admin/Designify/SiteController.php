@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Reviactyl\SiteSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Designify\SiteSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class SiteController extends Controller
@@ -24,7 +24,7 @@ class SiteController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.reviactyl.site', [
+        return $this->view->make('admin.designify.site', [
             'site_color' => $this->settings->get('reviactyl:site_color', '#EF5C29'),
             'site_title' => $this->settings->get('reviactyl:site_title', 'Reviactyl Theme'),
             'site_description' => $this->settings->get('reviactyl:site_description', 'Our official control panel made better with Reviactyl.'),
@@ -46,6 +46,6 @@ class SiteController extends Controller
 
         $this->alert->success('Site settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.reviactyl.site');
+        return redirect()->route('admin.designify.site');
     }
 }

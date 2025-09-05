@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Admin\Reviactyl;
+namespace Pterodactyl\Http\Requests\Admin\Designify;
 
 use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
 

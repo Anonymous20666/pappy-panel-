@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Reviactyl\AlertSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Designify\AlertSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class AlertController extends Controller
@@ -24,7 +24,7 @@ class AlertController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.reviactyl.alerts', [
+        return $this->view->make('admin.designify.alerts', [
             'alertType' => $this->settings->get('reviactyl:alertType', 'info'),
             'alertMessage' => $this->settings->get('reviactyl:alertMessage', '**Welcome to Reviactyl!** You can modify Theme Look & Feel at [Reviactyl Editor](/admin/reviactyl) at the administration area.'),
         ]);
@@ -40,6 +40,6 @@ class AlertController extends Controller
 
         $this->alert->success('Alert settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.reviactyl.alerts');
+        return redirect()->route('admin.designify.alerts');
     }
 }

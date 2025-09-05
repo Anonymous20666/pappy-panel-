@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Reviactyl Editor - @yield('title')</title>
+    <title>Designify - @yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="/reviactyl/icon.png">
@@ -15,11 +15,8 @@
 <body id="app" class="bg-zinc-950 text-zinc-100 h-screen overflow-hidden">
 <nav class="fixed top-0 left-0 right-0 h-20 flex items-center justify-between bg-zinc-900/50 backdrop-blur-md border-b border-zinc-800 p-3 md:p-4 z-50">
     <a href="{{ route('index') }}" class="flex items-center space-x-2 md:space-x-3 group">
-        <div class="p-1.5 md:p-2 bg-gradient-to-br from-orange-500 to-red-600 rounded-lg md:rounded-xl group-hover:scale-105 transition-transform duration-200">
-            <img src="/reviactyl/icon.png" alt="Reviactyl Logo" class="h-4 w-4 md:h-6 md:w-6 filter brightness-0 invert">
-        </div>
         <div class="flex flex-col">
-            <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Reviactyl Editor</span>
+            <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Designify</span>
             <span class="text-xs text-zinc-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
         </div>
     </a>
@@ -45,36 +42,36 @@
     <aside class="w-16 bg-zinc-900/30 backdrop-blur-md border-r border-zinc-800 flex flex-col justify-between py-4 md:py-6 flex-shrink-0 z-40">
         <div class="flex flex-col space-y-3 md:space-y-4">
             <nav class="flex flex-col space-y-2 px-2">
-                <a href="{{ route('admin.reviactyl') }}" 
-                   class="{{ Route::currentRouteName() !== 'admin.reviactyl' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.designify.general') }}" 
+                   class="{{ Route::currentRouteName() !== 'admin.designify.general' ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bolt"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         General Options
                     </span>
                 </a>
-                <a href="{{ route('admin.reviactyl.colors') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.designify.colors') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.designify.colors') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-palette"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Color Options
                     </span>
                 </a>
-                <a href="{{ route('admin.reviactyl.looks') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.designify.looks') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.designify.looks') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-swatchbook"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Look 'N Feel
                     </span>
                 </a>
-                <a href="{{ route('admin.reviactyl.alerts') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.designify.alerts') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.designify.alerts') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-bullhorn"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Alerts
                     </span>
                 </a>
-                <a href="{{ route('admin.reviactyl.site') }}" 
-                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.reviactyl.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
+                <a href="{{ route('admin.designify.site') }}" 
+                   class="{{ ! starts_with(Route::currentRouteName(), 'admin.designify.site') ?: 'bg-orange-600/20 border border-orange-500/30 ring-2 ring-orange-500 bg-orange-600/30' }} group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl text-orange-500 hover:bg-orange-600/30 hover:text-orange-300 transition-all duration-200">
                     <i class="fa-solid fa-gear"></i>
                     <span class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-100 pointer-events-none hidden md:block">
                         Site Meta Settings
@@ -98,7 +95,7 @@
                     Back to Admin
                 </div>
             </a>
-            <form action="{{ route('admin.reviactyl.reset') }}" method="POST" onsubmit="return confirm('Are you sure you want to reset Reviactyl settings to default?');">
+            <form action="{{ route('admin.designify.reset') }}" method="POST" onsubmit="return confirm('Are you sure you want to reset Reviactyl settings to default?');">
                 @csrf
                 <button type="submit" class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-red-800/50 border border-red-700 text-red-400 hover:bg-red-700/50 hover:text-red-300 transition-all duration-200">
                     <i class="fa-solid fa-trash-can"></i>
@@ -111,7 +108,6 @@
     </aside>
 
     <main class="flex-1 flex overflow-hidden">
-        @if($sideEditor)
             <div class="flex-1 bg-zinc-900/30 backdrop-blur-md border-r border-zinc-800 flex flex-col">
                 <div class="flex-1 overflow-y-auto p-4 lg:p-6">
                     @if (count($errors) > 0)
@@ -131,60 +127,36 @@
                     @yield('content')
                 </div>
             </div>
-
+        @if(!empty($sideEditor))
             <div class="hidden sm:block w-auto bg-zinc-900/30 backdrop-blur-md border-l border-zinc-800 p-4 flex items-start justify-end">
                 <div class="bg-white rounded-lg shadow-2xl resize-left overflow-hidden" style="width: 375px; height: calc(100vh - 140px); min-width: 280px; max-width: 800px;">
                     <iframe src="/" class="w-full h-full border-0" title="Preview"></iframe>
                 </div>
             </div>
+        @elseif(!empty($sideContent))
+            <div class="hidden sm:flex w-auto bg-zinc-900/30 backdrop-blur-md border-l border-zinc-800 p-4 items-center justify-center">
+                <div class="shadow-2xl overflow-hidden" style="width: 375px; height: calc(100vh - 140px); min-width: 280px; max-width: 800px;">
+                    <div class="w-full h-full bg-zinc-800/80 border border-zinc-600 rounded-xl p-10">
+                        @yield('sidecontent')
+                    </div>
+                </div>
+            </div>
         @else
-            <div class="flex-1 overflow-y-auto p-4 md:p-6">
-                <div class="max-w-7xl mx-auto">
-                    @if (count($errors) > 0)
-                        <div class="mb-4 lg:mb-6 bg-red-900/20 border border-red-800 text-red-300 px-4 lg:px-6 py-3 lg:py-4 rounded-xl lg:rounded-2xl backdrop-blur-sm">
-                            <div class="flex items-center space-x-2 mb-2 lg:mb-3">
-                                <i class="fas fa-exclamation-triangle text-red-400"></i>
-                                <p class="font-medium text-base lg:text-lg">Error</p>
-                            </div>
-                            <ul class="list-disc ml-5 lg:ml-6 space-y-1 text-sm lg:text-base">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+            <div class="hidden sm:flex w-auto bg-zinc-900/30 backdrop-blur-md border-l border-zinc-800 p-4 items-center justify-center">
+                <div class="shadow-2xl overflow-hidden" style="width: 375px; height: calc(100vh - 140px); min-width: 280px; max-width: 800px;">
+                    <div class="w-full h-full bg-zinc-800/80 border border-zinc-600 rounded-xl text-center p-10 flex flex-col items-center justify-center">
+                        <div class="flex items-center justify-center space-x-2 mb-2">
+                            <img src="/reviactyl/designify.png" class="h-10" alt="logo" />
+                            <h1 class="text-white text-3xl font-semibold">Designify</h1>
                         </div>
-                    @endif
-
-                    @foreach (Alert::getMessages() as $type => $messages)
-                        @foreach ($messages as $message)
-                            @php
-                                $alertClass = match($type) {
-                                    'danger' => 'bg-red-900/20 border-red-800 text-red-300',
-                                    'success' => 'bg-green-900/20 border-green-800 text-green-300',
-                                    default => 'bg-blue-900/20 border-blue-800 text-blue-300'
-                                };
-                                $iconClass = match($type) {
-                                    'danger' => 'fas fa-times-circle text-red-400',
-                                    'success' => 'fas fa-check-circle text-green-400',
-                                    default => 'fas fa-info-circle text-blue-400'
-                                };
-                            @endphp
-                            <div class="mb-4 lg:mb-6 {{ $alertClass }} border px-4 lg:px-6 py-3 lg:py-4 rounded-xl lg:rounded-2xl backdrop-blur-sm">
-                                <div class="flex items-start space-x-2 lg:space-x-3">
-                                    <i class="{{ $iconClass }} mt-1"></i>
-                                    <div class="flex-1">{!! $message !!}</div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endforeach
-
-                    @yield('content')
+                        <p class="text-gray-400 text-sm mb-8">v{{ config('reviactyl.version') }}</p>
+                    </div>
                 </div>
             </div>
         @endif
     </main>
 </div>
 
-@if($sideEditor)
 <div class="fixed top-4 right-4 z-50 space-y-3">
     @foreach (Alert::getMessages() as $type => $messages)
         @foreach ($messages as $message)
@@ -209,7 +181,6 @@
         @endforeach
     @endforeach
 </div>
-@endif
 
 <footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-zinc-950 border-t border-zinc-800 items-center justify-center text-xs text-zinc-400 z-40">
     <span>&copy; Reviactyl 2025 | Build {{ config('reviactyl.build') }}</span>

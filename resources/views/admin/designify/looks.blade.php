@@ -1,11 +1,11 @@
-@extends('layouts.reviactyl', ['sideEditor' => true])
+@extends('layouts.designify', ['sideEditor' => true])
 
 @section('title')
     Look & Feel
 @endsection
 
 @section('content')
-<form action="{{ route('admin.reviactyl.looks') }}" method="POST" class="h-full flex flex-col">
+<form action="{{ route('admin.designify.looks') }}" method="POST" class="h-full flex flex-col">
     <div class="mb-8">
         <h1 class="text-2xl font-bold text-white mb-2">Look & Feel</h1>
         <p class="text-zinc-400 text-sm">Change the look & feel of Reviactyl Theme.</p>

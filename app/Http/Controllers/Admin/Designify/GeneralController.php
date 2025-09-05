@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Reviactyl;
+namespace Pterodactyl\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Reviactyl\GeneralSettingsFormRequest;
+use Pterodactyl\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 
 class GeneralController extends Controller
@@ -24,7 +24,7 @@ class GeneralController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.reviactyl.index', [
+        return $this->view->make('admin.designify.general', [
             'logo' => $this->settings->get('reviactyl:logo', '/reviactyl/logo.png'),
             'customCopyright' => $this->settings->get('reviactyl:customCopyright', true) ? 'true' : 'false',
             'copyright' => $this->settings->get('reviactyl:copyright', 'Powered by [Reviactyl](https://revix.cc)'),
@@ -48,6 +48,6 @@ class GeneralController extends Controller
 
         $this->alert->success('General settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.reviactyl');
+        return redirect()->route('admin.designify.general');
     }
 }

@@ -4,7 +4,7 @@
 </a>
 </p>
 
-# Reviactyl Theme for Pterodactyl (Reviactyl)
+# Reviactyl - Free Theme For Pterodactyl
 > [!WARNING]
 > Reviactyl is still being developed. Issues are taken as feedback.
 

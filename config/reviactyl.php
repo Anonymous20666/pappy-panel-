@@ -14,4 +14,5 @@ return [
 
     'version' => '2.1',
     'build' => 'Y25R2C1RP',
+    'activationKey' => '0',
 ];

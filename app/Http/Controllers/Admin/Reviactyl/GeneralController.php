@@ -27,7 +27,7 @@ class GeneralController extends Controller
         return $this->view->make('admin.reviactyl.index', [
             'logo' => $this->settings->get('reviactyl:logo', '/reviactyl/logo.png'),
             'customCopyright' => $this->settings->get('reviactyl:customCopyright', true) ? 'true' : 'false',
-            'copyright' => $this->settings->get('reviactyl:copyright', 'Powered by [Reviactyl](https://reviactyl.cc)'),
+            'copyright' => $this->settings->get('reviactyl:copyright', 'Powered by [Reviactyl](https://revix.cc)'),
             'isUnderMaintenance' => $this->settings->get('reviactyl:isUnderMaintenance', false) ? 'true' : 'false',
             'maintenance' => $this->settings->get('reviactyl:maintenance', 'We are currently under maintenance. Kindly check back later!'),
         ]);

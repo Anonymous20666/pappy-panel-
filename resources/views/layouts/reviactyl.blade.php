@@ -25,7 +25,7 @@
     </a>
     
     <div class="flex items-center space-x-2 md:space-x-6">
-        <a href="https://reviactyl.cc/discord" target="_blank" 
+        <a href="https://revix.cc/discord" target="_blank" 
            class="flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 rounded-lg text-indigo-300 hover:text-indigo-200 transition-all duration-200">
             <i class="fa-brands fa-discord text-sm md:text-lg"></i>
             <span class="font-medium text-sm md:text-base hidden sm:inline">Discord</span>
@@ -84,7 +84,7 @@
         </div>
         
         <div class="flex flex-col space-y-2 px-2">
-            <a href="https://docs.reviactyl.cc" 
+            <a href="https://docs.revix.cc" 
                class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300 transition-all duration-200">
                 <i class="fa-solid fa-book"></i>
                 <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">

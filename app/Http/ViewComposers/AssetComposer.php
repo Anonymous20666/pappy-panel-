@@ -125,7 +125,7 @@ class AssetComposer
         $this->reviactylDefaults = [
             'logo' => '/reviactyl/logo.png',
             'customCopyright' => true,
-            'copyright' => 'Powered by [Reviactyl](https://reviactyl.cc)',
+            'copyright' => 'Powered by [Reviactyl](https://revix.cc)',
             'isUnderMaintenance' => false,
             'maintenance' => 'We are currently under maintenance. Kindly check back later!',
             'colorPrimary' => '#EF5C29',

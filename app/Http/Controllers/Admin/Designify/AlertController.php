@@ -26,7 +26,7 @@ class AlertController extends Controller
     {
         return $this->view->make('admin.designify.alerts', [
             'alertType' => $this->settings->get('reviactyl:alertType', 'info'),
-            'alertMessage' => $this->settings->get('reviactyl:alertMessage', '**Welcome to Reviactyl!** You can modify Theme Look & Feel at [Reviactyl Editor](/admin/reviactyl) at the administration area.'),
+            'alertMessage' => $this->settings->get('reviactyl:alertMessage', '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.'),
         ]);
     }
 

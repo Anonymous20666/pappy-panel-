@@ -26,7 +26,7 @@ class SiteController extends Controller
     {
         return $this->view->make('admin.designify.site', [
             'site_color' => $this->settings->get('reviactyl:site_color', '#EF5C29'),
-            'site_title' => $this->settings->get('reviactyl:site_title', 'Reviactyl Theme'),
+            'site_title' => $this->settings->get('reviactyl:site_title', 'Reviactyl'),
             'site_description' => $this->settings->get('reviactyl:site_description', 'Our official control panel made better with Reviactyl.'),
             'site_image' => $this->settings->get('reviactyl:site_image', '/reviactyl/logo.png'),
             'site_favicon' => $this->settings->get('reviactyl:site_favicon', '/reviactyl/icon.png'),

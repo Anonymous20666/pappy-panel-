@@ -49,7 +49,7 @@
                 />
     </div>
     </div>
-    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-4xl rounded-xl sm:border border-zinc-700 bg-zinc-950/60 pt-2 mt-6 px-4 mb-2">
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[612px] rounded-xl sm:border border-zinc-700 bg-zinc-950/60 pt-2 mt-6 px-4 mb-2">
         <div class="flex items-center justify-between pb-2">
             <div class="hidden sm:block text-sm text-zinc-400">
                 <i class="fas fa-info-circle mr-1"></i>

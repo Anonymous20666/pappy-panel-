@@ -8,7 +8,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="/reviactyl/icon.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/themes/reviactyl/vendor/tailwindcss/dist/index.global.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 </head>

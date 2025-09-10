@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://revix.cc/">
-<img height="313" alt="image" src="https://github.com/user-attachments/assets/d21579b9-8b64-4e01-95bf-975a718bcf49" />
+<img height="313" alt="image" src="https://github.com/user-attachments/assets/6a8a5238-9d72-4c4e-bad3-f3fa95ade35a" />
 </a>
 </p>
 

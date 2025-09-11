@@ -7,11 +7,12 @@ return [
     |--------------------------------------------------------------------------
     | Application Version
     |--------------------------------------------------------------------------
-    | This value is set when creating a Pterodactyl release. You should not
+    | This value is set when creating a Reviactyl release. You should not
     | change this value if you are not maintaining your own internal versions.
     */
 
-    'version' => '1.11.11',
+    'version' => 'develop',
+    'build' => 'Y25R2C1RP',
 
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Pterodactyl'),
+    'name' => env('APP_NAME', 'Reviactyl'),
 
     /*
     |--------------------------------------------------------------------------

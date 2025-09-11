@@ -62,7 +62,7 @@ class SoftwareVersionService
      */
     public function isLatestPanel(): bool
     {
-        if (config('app.version') === 'develop') {
+        if (config('app.version') === 'canary') {
             return true;
         }
 

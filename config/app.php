@@ -11,8 +11,8 @@ return [
     | change this value if you are not maintaining your own internal versions.
     */
 
-    'version' => 'develop',
-    'build' => 'Y25R2C1RP',
+    'version' => 'canary',
+    'build' => '00000000',
 
     /*
     |--------------------------------------------------------------------------

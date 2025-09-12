@@ -1,0 +1,81 @@
+[
+  {
+    "_comment": "To create your own navigation links, kindly head over to https://docs.revix.cc/developers/admin-navigation/"
+  },
+  {
+    "header": "BASIC ADMINISTRATION"
+  },
+  {
+    "route": "admin.index",
+    "icon": "fa fa-home",
+    "label": "Overview"
+  },
+  {
+    "route": "admin.settings",
+    "icon": "fa fa-wrench",
+    "label": "Settings",
+    "prefix": "admin.settings"
+  },
+  {
+    "route": "admin.api.index",
+    "icon": "fa fa-gamepad",
+    "label": "Application API",
+    "prefix": "admin.api"
+  },
+  {
+    "header": "REVIACTYL"
+  },
+  {
+    "route": "admin.designify",
+    "icon": "fa fa-paint-brush",
+    "label": "Designify"
+  },
+  {
+    "header": "MANAGEMENT"
+  },
+  {
+    "route": "admin.databases",
+    "icon": "fa fa-database",
+    "label": "Databases",
+    "prefix": "admin.databases"
+  },
+  {
+    "route": "admin.locations",
+    "icon": "fa fa-globe",
+    "label": "Locations",
+    "prefix": "admin.locations"
+  },
+  {
+    "route": "admin.nodes",
+    "icon": "fa fa-sitemap",
+    "label": "Nodes",
+    "prefix": "admin.nodes"
+  },
+  {
+    "route": "admin.servers",
+    "icon": "fa fa-server",
+    "label": "Servers",
+    "prefix": "admin.servers"
+  },
+  {
+    "route": "admin.users",
+    "icon": "fa fa-users",
+    "label": "Users",
+    "prefix": "admin.users"
+  },
+  {
+    "header": "SERVICE MANAGEMENT"
+  },
+  {
+    "route": "admin.mounts",
+    "icon": "fa fa-magic",
+    "label": "Mounts",
+    "prefix": "admin.mounts"
+  },
+  {
+    "route": "admin.nests",
+    "icon": "fa fa-th-large",
+    "label": "Nests",
+    "prefix": "admin.nests"
+  }
+]

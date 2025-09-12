@@ -1,57 +1,68 @@
-@extends('layouts.admin')
+@extends('layouts.admin', ['newLayout' => true])
 
 @section('title')
     Application API
 @endsection
 
 @section('content-header')
-    <h1>Application API<small>Control access credentials for managing this Panel via the API.</small></h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ route('admin.index') }}">Admin</a></li>
-        <li class="active">Application API</li>
-    </ol>
+    <div class="flex flex-col gap-1">
+        <h1 class="text-2xl font-semibold text-zinc-100">
+            Application API
+        </h1>
+        <p class="text-sm text-zinc-400">
+            Control access credentials for managing this Panel via the API.
+        </p>
+    </div>
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Credentials List</h3>
-                    <div class="box-tools">
-                        <a href="{{ route('admin.api.new') }}" class="btn btn-sm btn-primary">Create New</a>
-                    </div>
-                </div>
-                <div class="box-body table-responsive no-padding">
-                    <table class="table table-hover">
+    <div class="w-full">
+        <div class="rounded-2xl border border-zinc-700 bg-zinc-900 shadow-sm">
+            <div class="flex items-center justify-between border-b border-zinc-700 px-4 py-3">
+                <h3 class="text-lg font-medium text-zinc-200">Credentials List</h3>
+                <a href="{{ route('admin.api.new') }}"
+                   class="px-4 py-2 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-sm font-medium shadow-sm cursor-pointer">
+                    Create New
+                </a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead class="bg-zinc-800">
                         <tr>
-                            <th>Key</th>
-                            <th>Memo</th>
-                            <th>Last Used</th>
-                            <th>Created</th>
-                            <th></th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-zinc-300">Key</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-zinc-300">Description</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-zinc-300">Last Used</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-zinc-300">Created</th>
+                            <th class="px-4 py-2"></th>
                         </tr>
+                    </thead>
+                    <tbody class="divide-y divide-zinc-700">
                         @foreach($keys as $key)
-                            <tr>
-                                <td><code>{{ $key->identifier }}{{ decrypt($key->token) }}</code></td>
-                                <td>{{ $key->memo }}</td>
-                                <td>
+                            <tr class="hover:bg-zinc-800/50">
+                                <td class="px-4 py-2 font-mono text-sm text-zinc-300 blur-xs hover:blur-none transition duration-300">
+                                    {{ $key->identifier }}{{ decrypt($key->token) }}
+                                </td>
+                                <td class="px-4 py-2 text-sm text-zinc-400">{{ $key->memo }}</td>
+                                <td class="px-4 py-2 text-sm text-zinc-400">
                                     @if(!is_null($key->last_used_at))
                                         @datetimeHuman($key->last_used_at)
                                     @else
                                         &mdash;
                                     @endif
                                 </td>
-                                <td>@datetimeHuman($key->created_at)</td>
-                                <td>
-                                    <a href="#" data-action="revoke-key" data-attr="{{ $key->identifier }}">
-                                        <i class="fa fa-trash-o text-danger"></i>
+                                <td class="px-4 py-2 text-sm text-zinc-400">@datetimeHuman($key->created_at)</td>
+                                <td class="px-4 py-2 text-right">
+                                    <a href="#"
+                                       data-action="revoke-key"
+                                       data-attr="{{ $key->identifier }}"
+                                       class="text-red-500 hover:text-red-400">
+                                        <i class="fa-solid fa-trash fa-fw"></i>
                                     </a>
                                 </td>
                             </tr>
                         @endforeach
-                    </table>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -72,7 +83,7 @@
                     allowOutsideClick: true,
                     closeOnConfirm: false,
                     confirmButtonText: 'Revoke',
-                    confirmButtonColor: '#d9534f',
+                    confirmButtonColor: '#ef4444',
                     showLoaderOnConfirm: true
                 }, function () {
                     $.ajax({
@@ -87,7 +98,7 @@
                             title: '',
                             text: 'API Key has been revoked.'
                         });
-                        self.parent().parent().slideUp();
+                        self.closest('tr').remove();
                     }).fail(function (jqXHR) {
                         console.error(jqXHR);
                         swal({

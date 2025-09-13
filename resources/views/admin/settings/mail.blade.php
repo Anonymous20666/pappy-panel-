@@ -100,7 +100,6 @@
 
 @section('footer-scripts')
     @parent
-
     <script>
         function saveSettings() {
             return $.ajax({
@@ -153,7 +152,6 @@
         }
 
         function showErrorDialog(jqXHR, verb) {
-            console.error(jqXHR);
             var errorText = '';
             if (!jqXHR.responseJSON) {
                 errorText = jqXHR.responseText;
@@ -166,7 +164,6 @@
                     }
                 });
             }
-
             swal({
                 title: 'Whoops!',
                 text: 'An error occurred while attempting to ' + verb + ' mail settings: ' + errorText,

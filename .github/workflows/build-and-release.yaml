@@ -3,7 +3,7 @@ name: Docker Build and Release Workflow
 on:
   push:
     branches:
-      - main
+      - develop
   release:
     types:
       - published
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build-dev:
-    name: Build Canary (Dev)
+    name: Build Canary (Dev Release)
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, 'Update version to')
     steps:

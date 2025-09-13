@@ -60,7 +60,7 @@ jobs:
 
       - name: Commit and push to release branch
         run: |
-          git config user.name "pyrodactyl-ci"
+          git config user.name "reviactyl-ci"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -B release
           git add config/app.php

@@ -27,19 +27,40 @@ jobs:
       - name: Build
         run: yarn build:production
 
-      - name: Create release branch and bump version
+      - name: Create release branch and bump version + build
         env:
           REF: ${{ github.ref }}
         run: |
-          BRANCH=release/"${REF:10}"
+          REF_TAG=${GITHUB_REF#refs/tags/}      
+          VERSION=${REF_TAG#v}               
+
+          IFS='.-' read -r MAJOR MINOR PATCH TYPE <<< "$VERSION"
+
+          MAJOR=$(printf "%02d" "$MAJOR")
+          MINOR=$(printf "%02d" "$MINOR")
+          PATCH=$(printf "%02d" "$PATCH")
+
+          # Map prerelease type to number
+          case "$TYPE" in
+            alpha) TYPE_NUM=01 ;;
+            beta)  TYPE_NUM=02 ;;
+            rc)    TYPE_NUM=03 ;;
+            *)     TYPE_NUM=00 ;;  # stable
+          esac
+
+          # Build number
+          BUILD="${MAJOR}${MINOR}${PATCH}${TYPE_NUM}"
+
+          sed -i "s/'version' => '.*'/'version' => '${VERSION}'/" config/app.php
+          sed -i "s/'build' => '.*'/'build' => '${BUILD}'/" config/app.php
+
+          BRANCH="release/${REF_TAG}"
           git config --local user.email 'github-actions[bot]@users.noreply.github.com'
           git config --local user.name 'Reviactyl CI'
           git checkout -b "$BRANCH"
-          git push -u origin "$BRANCH"
-          sed -i "s/    'version' => 'canary',/    'version' => '${REF:11}',/" config/app.php
           git add config/app.php
-          git commit -m 'ci(release): bump version'
-          git push
+          git commit -m "ci(release): bump version to ${VERSION} and build to ${BUILD}"
+          git push -u origin "$BRANCH"
 
       - name: Create release archive
         run: |
@@ -47,14 +68,12 @@ jobs:
           tar -czf panel.tar.gz * .editorconfig .env.example .eslintignore .eslintrc.js .gitignore .prettierrc.json
 
       - name: Extract changelog
-        env:
-          REF: ${{ github.ref }}
         run: |
-          sed -n "/^## ${REF:10}/,/^## /{/^## /b;p}" CHANGELOG.md > ./RELEASE_CHANGELOG
+          sed -n "/^## ${REF_TAG}/,/^## /{/^## /b;p}" CHANGELOG.md > ./RELEASE_CHANGELOG
 
       - name: Create checksum and add to changelog
         run: |
-          SUM=`sha256sum panel.tar.gz`
+          SUM=$(sha256sum panel.tar.gz)
           echo -e "\n#### SHA256 Checksum\n\n\`\`\`\n$SUM\n\`\`\`\n" >> ./RELEASE_CHANGELOG
           echo "$SUM" > checksum.txt
 

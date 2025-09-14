@@ -8,21 +8,34 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="/reviactyl/icon.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
-    <script src="/themes/reviactyl/vendor/tailwindcss/dist/index.global.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+
+        @include('layouts.scripts')
+
+        @section('scripts')
+            {!! Theme::css('vendor/select2/select2.min.css?t={cache-version}') !!}
+            {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
+            {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
+            {!! Theme::js('vendor/tailwindcss/tailwind.min.js?t={cache-version}') !!}
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+            <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+            <![endif]-->
+        @show
 </head>
 <body id="app" class="bg-zinc-950 text-zinc-100 h-screen overflow-hidden">
 <nav class="fixed top-0 left-0 right-0 h-20 flex items-center justify-between bg-zinc-900/50 backdrop-blur-md border-b border-zinc-800 p-3 md:p-4 z-50">
     <a href="{{ route('index') }}" class="flex items-center space-x-2 md:space-x-3 group">
         <div class="flex flex-col">
             <span class="font-bold text-lg md:text-xl bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">Designify</span>
-            <span class="text-xs text-zinc-400 -mt-1 hidden md:block">Release v{{ config('reviactyl.version') }}</span>
+            <span class="text-xs text-zinc-400 -mt-1 hidden md:block">Release v{{ config('app.version') }}</span>
         </div>
     </a>
     
     <div class="flex items-center space-x-2 md:space-x-6">
-        <a href="https://revix.cc/discord" target="_blank" 
+        <a href="https://reviactyl.dev/discord" target="_blank" 
            class="flex items-center space-x-1 md:space-x-2 px-2 md:px-4 py-1.5 md:py-2 bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 rounded-lg text-indigo-300 hover:text-indigo-200 transition-all duration-200">
             <i class="fa-brands fa-discord text-sm md:text-lg"></i>
             <span class="font-medium text-sm md:text-base hidden sm:inline">Discord</span>
@@ -81,7 +94,7 @@
         </div>
         
         <div class="flex flex-col space-y-2 px-2">
-            <a href="https://docs.revix.cc" 
+            <a href="https://docs.reviactyl.dev" 
                class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-zinc-800/50 border border-zinc-700 text-zinc-400 hover:bg-zinc-700/50 hover:text-zinc-300 transition-all duration-200">
                 <i class="fa-solid fa-book"></i>
                 <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
@@ -149,7 +162,7 @@
                             <img src="/reviactyl/designify.png" class="h-10" alt="logo" />
                             <h1 class="text-white text-3xl font-semibold">Designify</h1>
                         </div>
-                        <p class="text-gray-400 text-sm mb-8">v{{ config('reviactyl.version') }}</p>
+                        <p class="text-gray-400 text-sm mb-8">v{{ config('app.version') }}</p>
                     </div>
                 </div>
             </div>
@@ -183,7 +196,7 @@
 </div>
 
 <footer class="fixed bottom-0 left-0 right-0 h-6 flex bg-zinc-950 border-t border-zinc-800 items-center justify-center text-xs text-zinc-400 z-40">
-    <span>&copy; Reviactyl 2025 | Build {{ config('reviactyl.build') }}</span>
+    <span>&copy; Reviactyl 2025 | Build {{ config('app.build') }}</span>
 </footer>
 
 <script src="https://unpkg.com/lucide@latest"></script>

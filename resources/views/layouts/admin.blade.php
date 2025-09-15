@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>{{ config('app.name', 'Pterodactyl') }} - @yield('title')</title>
+        <title>{{ config('app.name', 'Reviactyl') }} - @yield('title')</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <meta name="_token" content="{{ csrf_token() }}">
 
@@ -25,6 +25,7 @@
             {!! Theme::css('vendor/adminlte/colors/skin-blue.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
             {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
+            {!! Theme::css('css/reviactyl.css?t={cache-version}') !!}
             {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -39,7 +40,7 @@
         <div class="wrapper">
             <header class="main-header">
                 <a href="{{ route('index') }}" class="logo">
-                    <span>{{ config('app.name', 'Pterodactyl') }}</span>
+                    <span>{{ config('app.name', 'Reviactyl') }}</span>
                 </a>
                 <nav class="navbar navbar-static-top">
                     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -69,7 +70,7 @@
             <aside class="main-sidebar">
                 <section class="sidebar">
                     <ul class="sidebar-menu">
-                        <li class="header">BASIC ADMINISTRATION</li>
+                        <li class="header">Administration</li>
                         <li class="{{ Route::currentRouteName() !== 'admin.index' ?: 'active' }}">
                             <a href="{{ route('admin.index') }}">
                                 <i class="fa fa-home"></i> <span>Overview</span>
@@ -85,13 +86,13 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
-                        <li class="header">REVIACTYL</li>
+                        <li class="header">Reviactyl</li>
                         <li class="{{ Route::currentRouteName() !== 'admin.designify' ?: 'active' }}">
                             <a href="{{ route('admin.designify') }}">
                                 <i class="fa fa-paint-brush"></i> <span>Designify</span>
                             </a>
                         </li>
-                        <li class="header">MANAGEMENT</li>
+                        <li class="header">Management</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                             <a href="{{ route('admin.databases') }}">
                                 <i class="fa fa-database"></i> <span>Databases</span>
@@ -117,7 +118,7 @@
                                 <i class="fa fa-users"></i> <span>Users</span>
                             </a>
                         </li>
-                        <li class="header">SERVICE MANAGEMENT</li>
+                        <li class="header">Service Management</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
                             <a href="{{ route('admin.mounts') }}">
                                 <i class="fa fa-magic"></i> <span>Mounts</span>
@@ -165,7 +166,7 @@
                     <strong><i class="fa fa-fw {{ $appIsGit ? 'fa-git-square' : 'fa-code-fork' }}"></i></strong> {{ $appVersion }}<br />
                     <strong><i class="fa fa-fw fa-clock-o"></i></strong> {{ round(microtime(true) - LARAVEL_START, 3) }}s
                 </div>
-                Copyright &copy; 2015 - {{ date('Y') }} <a href="https://pterodactyl.io/">Pterodactyl Software</a>.
+                Copyright &copy; {{ date('Y') }} <a href="https://reviactyl.dev/">Reviactyl</a>.
             </footer>
         </div>
         @section('footer-scripts')

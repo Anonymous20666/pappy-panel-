@@ -18,7 +18,11 @@ i18n.use(I18NextMultiloadBackendAdapter)
         backend: {
             backend: I18NextHttpBackend,
             backendOption: {
-                loadPath: '/locales/locale.json?locale={{lng}}&namespace={{ns}}',
+                loadPath: (lngs: string[], namespaces: string[]) => {
+                    const lng = lngs[0];
+                    const ns = namespaces[0];
+                    return `/locales/locale.json?locale=${lng}&namespace=${encodeURIComponent(ns)}`;
+                },
                 queryStringParams: { hash },
                 allowMultiLoading: true,
             } as BackendOptions,

@@ -74,5 +74,31 @@ return [
             'allowed-ips-content' => 'Leave blank to allow any IP address to use this API key, otherwise provide each IP address on a new line.',
             'button' => 'Create',
         ],
+        'modal' => [
+            'your-api-key' => 'Your API Key',
+            'message' => 'The API key you have requested is shown below. Please store this in a safe location, it will not be shown again.',
+            'close' => 'Close',
+        ],
+    ],
+    'ssh' => [
+        'title' => 'SSH Keys',
+        'add-key' => 'Add SSH Key',
+        'not-exist' => 'No SSH Keys exist for this account.',
+        'added-on' => 'Added on',
+        'create' => [
+            'key-name' => 'SSH Key Name',
+            'public-key' => 'Public Key',
+            'public-key-content' => 'Enter your public SSH key.',
+            'save' => 'Save',
+        ],
+        'delete' => [
+            'delete-ssh-key' => 'Delete SSH Key',
+            'delete-key' => 'Delete Key',
+            'info' => 'Removing the SSH key will invalidate its usage across the Panel.',
+        ],
+    ],
+    'activity' => [
+        'title' => 'Account Activity Log',
+        'clear-filters' => 'Clear Filters',
     ],
 ];

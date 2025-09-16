@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { XIcon } from "@heroicons/react/solid";
+import { useTranslation } from "react-i18next";
 
 const paletteKeys = ["Theme1", "Theme2", "Theme3", "Theme4", "Theme5", "Theme6", "Theme7"] as const;
 
@@ -94,6 +95,7 @@ const clearTheme = () => {
 };
 
 const ThemeSelector = () => {
+  const { t } = useTranslation('dashboard/account');
   const [selected, setSelected] = useState<"default" | PaletteKey>("default");
   const [themes, setThemes] = useState<Record<PaletteKey, ThemeData> | null>(null);
 
@@ -139,7 +141,7 @@ const ThemeSelector = () => {
           className={`w-10 h-10 flex items-center justify-center rounded-full border text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
             selected === "default" ? "ring-2 ring-reviactyl" : ""
           }`}
-          title="System Default"
+          title={t('theme-selector.default')}
         >
           <XIcon className="h-8 w-8 text-danger/50" />
         </button>

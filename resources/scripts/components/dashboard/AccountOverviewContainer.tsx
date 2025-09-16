@@ -19,6 +19,7 @@ import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
 import ThemeSelector from '@/components/ui/ThemeEngine';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
+import { useTranslation } from 'react-i18next';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -37,6 +38,7 @@ const Container = styled.div`
 `;
 
 export default () => {
+    const { t } = useTranslation('dashboard/account');
     const { state } = useLocation<undefined | { twoFactorRedirect?: boolean }>();
     const nameFirst = useStoreState(state => state.user.data?.name_first);
     const nameLast = useStoreState(state => state.user.data?.name_last);
@@ -53,10 +55,10 @@ export default () => {
     };
 
     return (
-        <ContentBlock title={'Account Overview'}>
+        <ContentBlock title={t('overview.account-overview')}>
             {state?.twoFactorRedirect && (
-                <MessageBox title={'2-Factor Required'} type={'error'}>
-                    Your account must have two-factor authentication enabled in order to continue.
+                <MessageBox title={t('overview.2fa-required')} type={'error'}>
+                    {t('overview.2fa-alert')}
                 </MessageBox>
             )}
 
@@ -71,7 +73,7 @@ export default () => {
                             </Title>
                             <div className={"flex items-center gap-x-1"}>
                             <span className="text-sm text-gray-400">
-                                {rootAdmin ? 'Administrator' : name + ' User'}
+                                {rootAdmin ? t('overview.administrator') : name + ' ' + t('overview.user')}
                             </span>
                 {rootAdmin && (
                   // eslint-disable-next-line react/jsx-no-target-blank
@@ -82,25 +84,25 @@ export default () => {
                 </div>
                             <div className="mt-1">
                             <button className="flex items-center space-x-1" onClick={onTriggerLogout}>
-                                <span className="text-danger/80">Logout</span> <LogoutIcon className="w-5 h-5 text-danger/80" />
+                                <span className="text-danger/80">{t('overview.logout')}</span> <LogoutIcon className="w-5 h-5 text-danger/80" />
                             </button>
                             </div>
                         </div>
                 </Card>
-                <TitledGreyBox title={'Update Email Address'} showFlashes={'account:email'}>
+                <TitledGreyBox title={t('overview.update-email')} showFlashes={'account:email'}>
                     <UpdateEmailAddressForm />
                 </TitledGreyBox>
                 {themeSelector ?
-                <TitledGreyBox title={'Theme Selector'}>
+                <TitledGreyBox title={t('overview.theme-selector')}>
                     <ThemeSelector />
                 </TitledGreyBox>
                 : ''}
                 </div>
                 <div className={'flex flex-col gap-4'}>
-                <TitledGreyBox title={'Update Password'} showFlashes={'account:password'}>
+                <TitledGreyBox title={t('overview.update-password')} showFlashes={'account:password'}>
                     <UpdatePasswordForm />
                 </TitledGreyBox>
-                <TitledGreyBox title={'Two-Step Verification'}>
+                <TitledGreyBox title={t('overview.2fa-verification')}>
                     <ConfigureTwoFactorForm />
                 </TitledGreyBox>
                 </div>

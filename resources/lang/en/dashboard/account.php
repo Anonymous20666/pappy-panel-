@@ -62,6 +62,7 @@ return [
     'api' => [
         'title' => 'Account API',
         'create-key' => 'Create API Key',
+        'content-title' => 'API Keys',
         'delete' => 'Delete API Key',
         'info' => 'All requests using the key will be invalidated.',
         'not-exist' => 'No API keys exist for this account.',

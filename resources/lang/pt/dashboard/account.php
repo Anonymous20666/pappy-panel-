@@ -62,6 +62,7 @@ return [
     'api' => [
         'title' => 'API da Conta',
         'create-key' => 'Criar Chave de API',
+        'content-title' => 'API Keys',
         'delete' => 'Excluir Chave de API',
         'info' => 'Todas as requisições usando a chave serão invalidadas.',
         'not-exist' => 'Não existem chaves de API para esta conta.',

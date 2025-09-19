@@ -10,7 +10,7 @@ import Card from '@/components/ui/Card';
 import { ChipIcon, GlobeIcon, SaveIcon, ExclamationIcon } from '@heroicons/react/solid';
 import Title from '@/components/ui/Title';
 import { StatBlock } from '@/components/ui/StatBlock';
-import StatusIndicator from '@/components/ui/StatusIndicator';
+import { useTranslation } from 'react-i18next';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
@@ -19,6 +19,7 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 type Timer = ReturnType<typeof setInterval>;
 
 export default ({ server }: { server: Server; }) => {
+    const { t } = useTranslation('dashboard/index');
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
@@ -78,7 +79,31 @@ export default ({ server }: { server: Server; }) => {
           />
           <div className="flex items-center justify-between pb-5">
             <Title className="text-2xl">{server.name}</Title>
-            <StatusIndicator server={server} />
+            <span
+              className={`py-1 px-3 text-xs font-medium rounded-ui
+                        ${
+                          stats?.status === "offline"
+                            ? "bg-danger/20 text-danger border border-danger/30"
+                            : stats?.status === "running"
+                            ? "bg-success/20 text-success border border-success/30"
+                            : stats?.status === "starting"
+                            ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
+                            : stats?.status === "stopping"
+                            ? "bg-orange-500/20 text-orange-400 border border-orange-500/30"
+                            : ""
+                        }
+                    `}
+            >
+              {stats?.status === "offline"
+                ? t('server.offline')
+                : stats?.status === "running"
+                ? t('server.online')
+                : stats?.status === "starting"
+                ? t('server.starting')
+                : stats?.status === "stopping"
+                ? t('server.stopping')
+                : ""}
+            </span>
           </div>
           <div className={`${isSpecialState ? 'flex justify-center items-center min-h-[100px]' : 'grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4'} mt-4`}>
             {!stats || isSuspended ? (
@@ -87,8 +112,8 @@ export default ({ server }: { server: Server; }) => {
                   <StatBlock className="bg-danger/50 backdrop-blur-sm border border-danger/80">
                     <p>
                       {server.status === "suspended"
-                        ? "Suspended"
-                        : "Connection Error"}
+                        ? t('server.suspended')
+                        : t('server.connection-error')}
                     </p>
                   </StatBlock>
                 </React.Fragment>
@@ -101,12 +126,12 @@ export default ({ server }: { server: Server; }) => {
                     <p>
                       {" "}
                       {server.isTransferring
-                        ? "Transferring"
+                        ? t('server.transferring')
                         : server.status === "installing"
-                        ? "Installing"
+                        ? t('server.installing')
                         : server.status === "restoring_backup"
-                        ? "Restoring Backup"
-                        : "Unavailable"}
+                        ? t('server.restoring-backup')
+                        : t('server.unavailable')}
                     </p>
                   </StatBlock>
                 </React.Fragment>

@@ -20,6 +20,7 @@ import http from '@/api/http';
 import ThemeSelector from '@/components/ui/ThemeEngine';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -101,6 +102,9 @@ export default () => {
                 <div className={'flex flex-col gap-4'}>
                 <TitledGreyBox title={t('overview.update-password')} showFlashes={'account:password'}>
                     <UpdatePasswordForm />
+                </TitledGreyBox>
+                <TitledGreyBox title={t('overview.customization')}>
+                    <LanguageSwitcher />
                 </TitledGreyBox>
                 <TitledGreyBox title={t('overview.2fa-verification')}>
                     <ConfigureTwoFactorForm />

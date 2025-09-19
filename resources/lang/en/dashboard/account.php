@@ -12,6 +12,8 @@ return [
         'theme-selector' => 'Theme Selector',
         'update-password' => 'Update Password',
         '2fa-verification' => 'Two-Step Verification',
+        'customization' => 'Customization',
+        'language' => 'Panel Language',
     ],
     'email' => [
         'password-required' => 'You must provide your current account password.',

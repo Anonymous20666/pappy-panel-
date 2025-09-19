@@ -12,6 +12,8 @@ return [
         'theme-selector' => 'Seletor de Tema',
         'update-password' => 'Atualizar Senha',
         '2fa-verification' => 'Verificação em Duas Etapas',
+        'customization' => 'Customization',
+        'language' => 'Panel Language',
     ],
     'email' => [
         'password-required' => 'Você deve fornecer a senha atual da conta.',

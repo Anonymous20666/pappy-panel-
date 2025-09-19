@@ -7,6 +7,7 @@ use Illuminate\Translation\Translator;
 use Illuminate\Contracts\Translation\Loader;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\Requests\Base\LocaleRequest;
+use Illuminate\Support\Facades\File;
 
 class LocaleController extends Controller
 {
@@ -22,9 +23,26 @@ class LocaleController extends Controller
      */
     public function __invoke(LocaleRequest $request): JsonResponse
     {
-        $locale = $request->input('locale');
-        $namespace = $request->input('namespace');
-        $response[$locale][$namespace] = $this->i18n($this->loader->load($locale, $namespace));
+        $localeInput = $request->input('locale');
+        $namespaceInput = $request->input('namespace');
+
+        $locales = strpos($localeInput, '+') !== false
+            ? explode('+', $localeInput)
+            : [$localeInput];
+
+        $namespaces = strpos($namespaceInput, ',') !== false
+            ? explode(',', $namespaceInput)
+            : [$namespaceInput];
+
+        $response = [];
+
+        foreach ($locales as $locale) {
+            foreach ($namespaces as $namespace) {
+                $response[$locale][$namespace] = $this->i18n(
+                    $this->loader->load($locale, $namespace)
+                );
+            }
+        }
 
         return new JsonResponse($response, 200, [
             // Cache this in the browser for an hour, and allow the browser to use a stale
@@ -60,5 +78,16 @@ class LocaleController extends Controller
         }
 
         return $data;
+    }
+
+    public function list(): JsonResponse
+    {
+        $path = resource_path('lang');
+        $dirs = collect(File::directories($path))
+            ->map(fn($dir) => basename($dir))
+            ->filter(fn($dir) => !empty($dir))
+            ->values();
+
+        return response()->json($dirs);
     }
 }

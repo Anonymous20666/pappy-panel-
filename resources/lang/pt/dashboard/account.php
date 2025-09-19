@@ -12,8 +12,8 @@ return [
         'theme-selector' => 'Seletor de Tema',
         'update-password' => 'Atualizar Senha',
         '2fa-verification' => 'Verificação em Duas Etapas',
-        'customization' => 'Customization',
-        'language' => 'Panel Language',
+        'customization' => 'Personalização',
+        'language' => 'Idioma do Painel',
     ],
     'email' => [
         'password-required' => 'Você deve fornecer a senha atual da conta.',
@@ -64,7 +64,7 @@ return [
     'api' => [
         'title' => 'API da Conta',
         'create-key' => 'Criar Chave de API',
-        'content-title' => 'API Keys',
+        'content-title' => 'Chaves API',
         'delete' => 'Excluir Chave de API',
         'info' => 'Todas as requisições usando a chave serão invalidadas.',
         'not-exist' => 'Não existem chaves de API para esta conta.',

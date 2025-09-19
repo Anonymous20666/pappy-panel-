@@ -7,6 +7,12 @@
  * the top level.
  */
 return [
+    'entries' => [
+        'system-user' => 'System User',
+        'system' => 'System',
+        'using-api-key' => 'Using API Key',
+        'using-sftp' => 'Using SFTP',
+    ],
     'auth' => [
         'fail' => 'Failed log in',
         'success' => 'Logged in',

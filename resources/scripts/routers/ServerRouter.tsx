@@ -28,6 +28,7 @@ import { ApplicationStore } from '@/state';
 import Announcement from '@/components/ui/Announcement';
 import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
 import Maintenance from '@/components/ui/Maintenance';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     route: any;
@@ -59,12 +60,13 @@ const NavItem = ({ route }: Props) => {
 };
 
 const ServerNavigation = () => {
+    const { t } = useTranslation('server/index');
   return (
    <>
     {[
-        { label: 'Control', routes: routes.server.control },
-        { label: 'Management', routes: routes.server.management },
-        { label: 'Administration', routes: routes.server.administration },
+        { label: t('control'), routes: routes.server.control },
+        { label: t('management'), routes: routes.server.management },
+        { label: t('administration'), routes: routes.server.administration },
     ].map(({ label, routes }) => (
         <div key={label}>
             <span className="label">{label}</span>

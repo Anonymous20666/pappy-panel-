@@ -1,15 +1,17 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
-import { SideNavigation } from './SideNavigation';
-import { NavLink, Link } from 'react-router-dom';
+import { SideNavigation } from './sidebar/SideNavigation';
+import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/components/ui/Avatar';
-import { FingerPrintIcon, KeyIcon, LockClosedIcon, ServerIcon, UserCircleIcon } from '@heroicons/react/solid';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
+import { ServerIcon } from '@heroicons/react/solid';
 
 interface Props {
     isOpen?: boolean;
+    children?: React.ReactNode;
+    dashboard?: boolean;
 }
 
 const Container = styled.div<{ isOpen: boolean }>`
@@ -31,12 +33,11 @@ const Container = styled.div<{ isOpen: boolean }>`
   }
 `;
 
-const DashboardSidebar = ({ isOpen = false }: Props) => {
+const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     const nameFirst = useStoreState(state => state.user.data?.name_first);
     const nameLast = useStoreState(state => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-
     return (
         <Container isOpen={isOpen}>
         <div className="sticky w-fit text-white p-4 rounded-ui">
@@ -50,27 +51,20 @@ const DashboardSidebar = ({ isOpen = false }: Props) => {
             </div>
                 </Link>
         </div>
+            {dashboard && (
                <SideNavigation>
-                        <NavLink to="/" exact>
-                            <ServerIcon className={`w-5 mr-1`} /> Dashboard
-                        </NavLink>
+                  <NavLink to="/" exact>
+                    <ServerIcon className={`w-5 mr-1`} /> Dashboard
+                  </NavLink>
                </SideNavigation>
+            )}
+            {children && (
                <SideNavigation>
-                        <NavLink to="/account" exact>
-                            <UserCircleIcon className={`w-5 mr-1`} /> Account Overview
-                        </NavLink>
-                        <NavLink to="/account/api" exact>
-                            <LockClosedIcon className={`w-5 mr-1`} /> API Keys
-                        </NavLink>
-                        <NavLink to="/account/ssh" exact>
-                            <KeyIcon className={`w-5 mr-1`} /> SSH Keys
-                        </NavLink>
-                        <NavLink to="/account/activity" exact>
-                            <FingerPrintIcon className={`w-5 mr-1`} /> Activity
-                        </NavLink>
+                    {children}
                </SideNavigation>
+            )} 
         </Container>
     );
 };
 
-export default DashboardSidebar;
+export default Sidebar;

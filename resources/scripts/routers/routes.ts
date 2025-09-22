@@ -13,7 +13,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
-import { TerminalIcon, FolderIcon, FingerPrintIcon, DatabaseIcon, CalendarIcon, UserGroupIcon, ArchiveIcon, LightningBoltIcon, PlayIcon, CogIcon } from '@heroicons/react/solid'
+import { TerminalIcon, FolderIcon, FingerPrintIcon, DatabaseIcon, CalendarIcon, UserGroupIcon, ArchiveIcon, LightningBoltIcon, PlayIcon, CogIcon, UserCircleIcon, LockClosedIcon, KeyIcon } from '@heroicons/react/solid'
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -58,21 +58,25 @@ export default {
             path: '/',
             name: 'Account Overview',
             component: AccountOverviewContainer,
+            icon: UserCircleIcon,
             exact: true,
         },
         {
             path: '/api',
             name: 'API Keys',
+            icon: LockClosedIcon,
             component: AccountApiContainer,
         },
         {
             path: '/ssh',
             name: 'SSH Keys',
+            icon: KeyIcon,
             component: AccountSSHContainer,
         },
         {
             path: '/activity',
             name: 'Activity',
+            icon: FingerPrintIcon,
             component: ActivityLogContainer,
         },
     ],

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import TransitionRouter from '@/TransitionRouter';
@@ -13,12 +13,43 @@ import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import tw from 'twin.macro';
 import { ContentContainer } from '@/components/ui/ContentContainer';
 import { CSSTransition } from 'react-transition-group';
-import DashboardSidebar from '@/components/ui/sidebar/DashboardSidebar';
+import Sidebar from '@/components/ui/Sidebar';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
 import Announcement from '@/components/ui/Announcement';
 import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
 import Maintenance from '@/components/ui/Maintenance';
+
+interface Props {
+    route: any;
+}
+
+const NavItem = ({ route }: Props) => {
+    const to = (value: string) => {
+        return `/account/${value.replace(/^\/+/, '')}`;
+    };
+
+    return (
+            <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
+                <span className="flex items-center">
+                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name}
+                </span>
+            </NavLink>
+    );
+};
+
+const DashboardNavigation = () => {
+  return (
+    <>
+      {routes.account
+        .filter((route) => !!route.name)
+        .map((route) => (
+          <NavItem key={route.path} route={route} />
+        ))}
+    </>
+  );
+};
+
 
 export default () => {
     const location = useLocation();
@@ -50,7 +81,9 @@ export default () => {
                             />
                         )}
                     <CSSTransition timeout={150} classNames="fade">
-                        <DashboardSidebar isOpen={isSidebarOpen} />
+                        <Sidebar isOpen={isSidebarOpen} dashboard>
+                            <DashboardNavigation />
+                        </Sidebar>
                     </CSSTransition>
             <div className="w-full flex-1 overflow-y-auto">
             <TransitionRouter>

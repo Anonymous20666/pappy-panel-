@@ -17,7 +17,7 @@ import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
-import ServerSidebar from '@/components/ui/sidebar/ServerSidebar';
+import Sidebar from '@/components/ui/Sidebar';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import { LogoContainer } from '@/components/ui/LogoContainer';
 import tw from 'twin.macro';
@@ -167,9 +167,9 @@ export default () => {
                             />
                         )}
                     <CSSTransition timeout={150} classNames="fade">
-                        <ServerSidebar isOpen={isSidebarOpen}>
+                        <Sidebar isOpen={isSidebarOpen}>
                                 <ServerNavigation />
-                        </ServerSidebar>
+                        </Sidebar>
                     </CSSTransition>
                     <div className="w-full flex-1 overflow-y-auto">
                     <InstallListener />

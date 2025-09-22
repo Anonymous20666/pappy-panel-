@@ -35,6 +35,7 @@ interface Props {
 }
 
 const NavItem = ({ route }: Props) => {
+    const { t } = useTranslation('routes');
     const match = useRouteMatch<{ id: string }>();
 
     const nestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
@@ -52,7 +53,7 @@ const NavItem = ({ route }: Props) => {
             (!route.eggIds && !route.nestIds && !route.nestId && !route.eggId)) && (
             <NavLink id={route.name} to={to(route.path, true)} exact={route.exact}>
                 <span className="flex items-center">
-                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name}
+                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name ? t(route.name as string) : null}
                 </span>
             </NavLink>
         )

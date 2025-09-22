@@ -19,12 +19,14 @@ import { useStoreState } from 'easy-peasy';
 import Announcement from '@/components/ui/Announcement';
 import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
 import Maintenance from '@/components/ui/Maintenance';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     route: any;
 }
 
 const NavItem = ({ route }: Props) => {
+    const { t } = useTranslation('routes');
     const to = (value: string) => {
         return `/account/${value.replace(/^\/+/, '')}`;
     };
@@ -32,7 +34,7 @@ const NavItem = ({ route }: Props) => {
     return (
             <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
                 <span className="flex items-center">
-                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name}
+                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name ? t(route.name as string) : null}
                 </span>
             </NavLink>
     );

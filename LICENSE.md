@@ -1,5 +1,12 @@
-MIT License
+<p align="center">
+<a href="https://reviactyl.dev/">
+<img height="313" alt="image" src="https://github.com/user-attachments/assets/6a8a5238-9d72-4c4e-bad3-f3fa95ade35a" />
+</a>
+</p>
 
+# MIT License
+
+```Reviactyl™
 Copyright (c) 2025 Reviactyl™ and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

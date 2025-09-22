@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/components/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { ServerIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon, ServerIcon } from '@heroicons/react/solid';
 
 interface Props {
     isOpen?: boolean;
@@ -44,9 +44,17 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
                 <Link to="/account" className="flex items-center gap-3">
                     <Avatar className="w-10" /> 
             <div className="flex flex-col">
-                <span className="text-xs tracking-widest uppercase text-white/50">
-                   {rootAdmin ? 'Administrator' : name + ' User'}
-                </span>
+                <div className={"flex items-center gap-x-1"}>
+                  <span className="text-xs tracking-widest uppercase text-white/50">
+                    {rootAdmin ? 'Administrator' : name + ' User'}
+                  </span>
+                {rootAdmin && (
+                  // eslint-disable-next-line react/jsx-no-target-blank
+                  <a href={`/admin`} target={'_blank'} className="h-5 w-5 text-white/70">
+                    <ExternalLinkIcon />
+                  </a>
+                )}
+                </div>
                 <span className="text-sm font-semibold">{nameFirst} {nameLast}</span>
             </div>
                 </Link>

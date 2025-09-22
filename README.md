@@ -36,7 +36,7 @@ I would like to extend my sincere thanks to the following sponsors for helping f
 
 Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/PTERO_LICENSE.md))
 
-Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [AGPL v3](https://github.com/reviactyl/panel/blob/develop/LICENSE))
+Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
 
 ## Star History
 

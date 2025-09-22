@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://reviactyl.dev/">
-<img height="313" alt="image" src="https://github.com/user-attachments/assets/6a8a5238-9d72-4c4e-bad3-f3fa95ade35a" />
+<img width="1920" height="1080" alt="Reviactyl Dashboard" src="https://github.com/user-attachments/assets/329834c4-1146-41a5-8f24-efbfa8b8f0a4" />
 </a>
 </p>
 
@@ -12,15 +12,12 @@ UI to end users.
 
 Stop settling for less. Make game servers a first class citizen on your platform.
 
-<img width="1366" height="587" alt="image" src="https://github.com/user-attachments/assets/ca531462-96d1-4cb4-b926-e78e1c017257" />
-
 ## Features
 
 * ` 🌩️ ` **Customizable Options**: Reviactyl Offers various* options that lets you customize the panel to your liking.
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
-<img width="1366" height="621" alt="image" src="https://github.com/user-attachments/assets/45cb0085-26e8-4f1c-93f8-feecd4f7def0" />
 
 ## Sponsors
 

@@ -41,6 +41,6 @@ return [
         'new-label' => 'New Password',
         'min-length' => 'Passwords must be at least 8 characters in length.',
         'confirm-label' => 'Confirm New Password',
-        'button' => 'Reset Password',
+        'label' => 'Reset Password',
     ],
 ];

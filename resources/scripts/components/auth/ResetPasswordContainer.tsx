@@ -12,6 +12,7 @@ import Field from '@/components/elements/Field';
 import Input from '@/components/elements/Input';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
+import { useTranslation } from 'react-i18next';
 
 interface Values {
     password: string;
@@ -19,6 +20,7 @@ interface Values {
 }
 
 export default ({ match, location }: RouteComponentProps<{ token: string }>) => {
+    const { t } = useTranslation('auth');
     const [email, setEmail] = useState('');
 
     const { clearFlashes, addFlash } = useStoreActions((actions: Actions<ApplicationStore>) => actions.flashes);
@@ -52,34 +54,34 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             }}
             validationSchema={object().shape({
                 password: string()
-                    .required('A new password is required.')
-                    .min(8, 'Your new password should be at least 8 characters in length.'),
+                    .required(t('reset-password.new-required'))
+                    .min(8, t('reset-password.min-required')),
                 passwordConfirmation: string()
-                    .required('Your new password does not match.')
+                    .required(t('reset-password.no-match'))
                     // @ts-expect-error this is valid
-                    .oneOf([ref('password'), null], 'Your new password does not match.'),
+                    .oneOf([ref('password'), null], t('reset-password.no-match')),
             })}
         >
             {({ isSubmitting }) => (
-                <LoginFormContainer title={'Reset Password'} css={tw`w-full flex`}>
+                <LoginFormContainer title={t('reset-password.label')} css={tw`w-full flex`}>
                     <div>
-                        <label>Email</label>
+                        <label>{t('reset-password.email-label')}</label>
                         <Input value={email} disabled />
                     </div>
                     <div css={tw`mt-6`}>
                         <Field
-                            label={'New Password'}
+                            label={t('reset-password.new-label')}
                             name={'password'}
                             type={'password'}
-                            description={'Passwords must be at least 8 characters in length.'}
+                            description={t('reset-password.min-length')}
                         />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field label={'Confirm New Password'} name={'passwordConfirmation'} type={'password'} />
+                        <Field label={t('reset-password.confirm-label')} name={'passwordConfirmation'} type={'password'} />
                     </div>
                     <div css={tw`mt-6`}>
                         <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>
-                            Reset Password
+                            {t('reset-password.label')}
                         </Button>
                     </div>
                     <div css={tw`mt-3 text-center`}>
@@ -87,7 +89,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                             to={'/auth/login'}
                             css={tw`text-sm text-reviactyl/80 tracking-wide no-underline hover:text-reviactyl/50`}
                         >
-                            Return to Login
+                            {t('return')}
                         </Link>
                     </div>
                 </LoginFormContainer>

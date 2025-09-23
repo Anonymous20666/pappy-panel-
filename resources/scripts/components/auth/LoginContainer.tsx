@@ -12,6 +12,7 @@ import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
 import Label from '@/components/elements/Label';
 import { KeyIcon, UserIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 interface Values {
     username: string;
@@ -19,6 +20,7 @@ interface Values {
 }
 
 const LoginContainer = ({ history }: RouteComponentProps) => {
+    const { t } = useTranslation('auth');
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
     const [show, setShow] = useState(false);
@@ -72,17 +74,17 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             onSubmit={onSubmit}
             initialValues={{ username: '', password: '' }}
             validationSchema={object().shape({
-                username: string().required('A username or email must be provided.'),
-                password: string().required('Please enter your account password.'),
+                username: string().required(t('username-required')),
+                password: string().required(t('password-required')),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
-                <LoginFormContainer title={'Login to Continue'} css={tw`w-full flex`}>
-                    <Field icon={UserIcon} type={'text'} placeholder={'Username or Email'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
+                <LoginFormContainer title={t('login-title')} css={tw`w-full flex`}>
+                    <Field icon={UserIcon} type={'text'} placeholder={t('username-label')} label={t('username-label')} name={'username'} disabled={isSubmitting} />
                     <div css={tw`mt-3`}>
-                    <Label>Password</Label>
+                    <Label>{t('password-label')}</Label>
                     <div css={tw`relative`}>
-                        <Field icon={KeyIcon} type={show ? 'text' : 'password'} placeholder={'Password'} name={'password'} disabled={isSubmitting} />
+                        <Field icon={KeyIcon} type={show ? 'text' : 'password'} placeholder={t('password-label')} name={'password'} disabled={isSubmitting} />
                             <button type={'button'} css={tw`absolute border-l-2 top-[10px] right-[6px] py-2 p-1 border-gray-300 text-gray-300`} onClick={() => setShow(!show)}>
                                 {show 
                                 ? <EyeOffIcon className="h-5 w-5" />
@@ -92,7 +94,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                     </div>
                     <div css={tw`mt-6`}>
                         <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>
-                            Login
+                            {t('login-button')}
                         </Button>
                     </div>
                     {recaptchaEnabled && (
@@ -115,7 +117,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             to={'/auth/password'}
                             css={tw`text-sm text-reviactyl/80 tracking-wide no-underline hover:text-reviactyl/50`}
                         >
-                            Forgot password?
+                            {t('forgot-password.label')}
                         </Link>
                     </div>
                 </LoginFormContainer>

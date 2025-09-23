@@ -37,7 +37,7 @@ const LanguageSwitcher: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center mb-2">
       <p className="flex-1">{t('overview.language')}</p>
       <Select className="!pr-15 !w-auto" value={currentLang} onChange={handleChange}>
         {languages.map((lang) => (

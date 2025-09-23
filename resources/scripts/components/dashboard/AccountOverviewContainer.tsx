@@ -106,7 +106,6 @@ export default () => {
                 </TitledGreyBox>
                 <TitledGreyBox title={t('overview.customization')}>
                     <LanguageSwitcher />
-                    <br></br>
                     <InvertToggle />
                 </TitledGreyBox>
                 <TitledGreyBox title={t('overview.2fa-verification')}>

@@ -14,6 +14,9 @@ return [
         '2fa-verification' => 'Verificação em Duas Etapas',
         'customization' => 'Personalização',
         'language' => 'Idioma do Painel',
+        'smart-invert' => 'Smart Invert',
+        'on' => 'On',
+        'off' => 'Off',
     ],
     'email' => [
         'password-required' => 'Você deve fornecer a senha atual da conta.',

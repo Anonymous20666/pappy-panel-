@@ -21,6 +21,7 @@ import ThemeSelector from '@/components/ui/ThemeEngine';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { InvertToggle } from '@/components/ui/SmartInvert';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -105,6 +106,8 @@ export default () => {
                 </TitledGreyBox>
                 <TitledGreyBox title={t('overview.customization')}>
                     <LanguageSwitcher />
+                    <br></br>
+                    <InvertToggle />
                 </TitledGreyBox>
                 <TitledGreyBox title={t('overview.2fa-verification')}>
                     <ConfigureTwoFactorForm />

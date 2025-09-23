@@ -14,6 +14,9 @@ return [
         '2fa-verification' => 'Two-Step Verification',
         'customization' => 'Customization',
         'language' => 'Panel Language',
+        'smart-invert' => 'Smart Invert',
+        'on' => 'On',
+        'off' => 'Off',
     ],
     'email' => [
         'password-required' => 'You must provide your current account password.',

@@ -15,6 +15,7 @@ import tw from 'twin.macro';
 import Title from "@/components/ui/Title";
 import { StatBlock } from '@/components/ui/StatBlock';
 import { useStoreState } from 'easy-peasy';
+import Blur from "@/components/ui/Blur";
 
 type Stats = Record<"memory" | "cpu" | "disk", number>;
 
@@ -127,11 +128,11 @@ const TopServerDetails = () => {
               <GlobeIcon />
             </span>
             <CopyOnClick text={allocation}>
-              <span
-                className={`duration-300 text-sm text-gray-100`}
+              <Blur
+                className={`text-sm text-gray-100`}
               >
                 {allocation}
-              </span>
+              </Blur>
             </CopyOnClick>
           </StatBlock>
 

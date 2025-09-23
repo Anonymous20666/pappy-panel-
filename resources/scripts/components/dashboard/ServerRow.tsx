@@ -11,6 +11,7 @@ import { ChipIcon, GlobeIcon, SaveIcon, ExclamationIcon } from '@heroicons/react
 import Title from '@/components/ui/Title';
 import { StatBlock } from '@/components/ui/StatBlock';
 import { useTranslation } from 'react-i18next';
+import Blur from '@/components/ui/Blur';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.
@@ -144,8 +145,8 @@ export default ({ server }: { server: Server; }) => {
               <span className="w-4 sm:w-5 text-gray-300">
                 <GlobeIcon />
               </span>
-              <span
-                className={`duration-300 text-xs sm:text-sm text-gray-100`}
+              <Blur
+                className={`text-xs sm:text-sm text-gray-100`}
               >
                 {server.allocations
                   .filter((alloc) => alloc.isDefault)
@@ -156,7 +157,7 @@ export default ({ server }: { server: Server; }) => {
                       {allocation.alias || ip(allocation.ip)}:{allocation.port}
                     </React.Fragment>
                   ))}
-              </span>
+              </Blur>
             </StatBlock>
                 <StatBlock className="backdrop-blur-sm bg-gray-500/20 border border-gray-500/50">
                   <span className="w-4 sm:w-5 text-gray-300">

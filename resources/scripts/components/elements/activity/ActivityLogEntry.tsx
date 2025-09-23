@@ -12,6 +12,7 @@ import Avatar from '@/components/ui/Avatar';
 import useLocationHash from '@/plugins/useLocationHash';
 import { getObjectKeys, isObject } from '@/lib/objects';
 import { useTranslation } from 'react-i18next';
+import Blur from '@/components/ui/Blur';
 
 interface Props {
     activity: ActivityLog;
@@ -85,7 +86,7 @@ export default ({ activity, children }: Props) => {
                     <div className={'mt-1 flex items-center text-sm'}>
                         {activity.ip && (
                             <span>
-                                {activity.ip}
+                                <Blur>{activity.ip}</Blur>
                                 <span className={'text-gray-400'}>&nbsp;|&nbsp;</span>
                             </span>
                         )}

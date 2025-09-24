@@ -18,6 +18,7 @@ import { ChevronDoubleRightIcon } from '@heroicons/react/solid';
 
 import 'xterm/css/xterm.css';
 import styles from './style.module.css';
+import { useTranslation } from 'react-i18next';
 
 const theme = {
     background: 'transparent',
@@ -52,7 +53,8 @@ const terminalProps: ITerminalOptions = {
 };
 
 export default () => {
-    const TERMINAL_PRELUDE = '\u001b[1m\u001b[33mcontainer@pterodactyl~ \u001b[0m';
+    const { t } = useTranslation('server/console')
+    const TERMINAL_PRELUDE = '\u001b[1m\u001b[33mcontainer@reviactyl~ \u001b[0m';
     const ref = useRef<HTMLDivElement>(null);
     const terminal = useMemo(() => new Terminal({ ...terminalProps }), []);
     const fitAddon = new FitAddon();
@@ -206,7 +208,7 @@ export default () => {
                     <input
                         className={classNames('peer', styles.command_input)}
                         type={'text'}
-                        placeholder={'Type a command...'}
+                        placeholder={t('run-command')}
                         aria-label={'Console command input.'}
                         disabled={!instance || !connected}
                         onKeyDown={handleCommandKeyDown}

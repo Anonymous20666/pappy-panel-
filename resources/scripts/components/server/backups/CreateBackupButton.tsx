@@ -14,6 +14,7 @@ import getServerBackups from '@/api/swr/getServerBackups';
 import { ServerContext } from '@/state/server';
 import FormikSwitch from '@/components/elements/FormikSwitch';
 import Can from '@/components/elements/Can';
+import { useTranslation } from 'react-i18next';
 
 interface Values {
     name: string;
@@ -22,28 +23,24 @@ interface Values {
 }
 
 const ModalContent = ({ ...props }: RequiredModalProps) => {
+    const { t } = useTranslation('server/backups');
     const { isSubmitting } = useFormikContext<Values>();
 
     return (
         <Modal {...props} showSpinnerOverlay={isSubmitting}>
             <Form>
                 <FlashMessageRender byKey={'backups:create'} css={tw`mb-4`} />
-                <h2 css={tw`text-2xl mb-6`}>Create server backup</h2>
+                <h2 css={tw`text-2xl mb-6`}>{t('create-backup')}</h2>
                 <Field
                     name={'name'}
-                    label={'Backup name'}
-                    description={'If provided, the name that should be used to reference this backup.'}
+                    label={t('backup-name')}
+                    description={t('name-description')}
                 />
                 <div css={tw`mt-6`}>
                     <FormikFieldWrapper
                         name={'ignored'}
-                        label={'Ignored Files & Directories'}
-                        description={`
-                            Enter the files or folders to ignore while generating this backup. Leave blank to use
-                            the contents of the .pteroignore file in the root of the server directory if present.
-                            Wildcard matching of files and folders is supported in addition to negating a rule by
-                            prefixing the path with an exclamation point.
-                        `}
+                        label={t('ignored')}
+                        description={t('ignored-description')}
                     >
                         <FormikField as={Textarea} name={'ignored'} rows={6} />
                     </FormikFieldWrapper>
@@ -53,13 +50,13 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
                         <FormikSwitch
                             name={'isLocked'}
                             label={'Locked'}
-                            description={'Prevents this backup from being deleted until explicitly unlocked.'}
+                            description={t('locked-description')}
                         />
                     </div>
                 </Can>
                 <div css={tw`flex justify-end mt-6`}>
                     <Button type={'submit'} disabled={isSubmitting}>
-                        Start backup
+                        {t('start-backup')}
                     </Button>
                 </div>
             </Form>

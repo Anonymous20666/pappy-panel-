@@ -23,6 +23,7 @@ import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
 import Card from '@/components/ui/Card';
+import { useTranslation } from 'react-i18next';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -32,6 +33,7 @@ const sortFiles = (files: FileObject[]): FileObject[] => {
 };
 
 export default () => {
+    const { t } = useTranslation('server/files');
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const { hash } = useLocation();
     const { data: files, error, mutate } = useFileManagerSwr();
@@ -61,7 +63,7 @@ export default () => {
     }
 
     return (
-        <ServerContentBlock title={'File Manager'} showFlashKey={'files'}>
+        <ServerContentBlock title={t('title')} showFlashKey={'files'}>
             <ErrorBoundary>
                 <Card className={'flex flex-wrap-reverse md:flex-nowrap mb-1 mt-2 !rounded-b-none !px-2 !py-3'}>
                     <FileManagerBreadcrumbs
@@ -80,7 +82,7 @@ export default () => {
                             <NewDirectoryButton />
                             <UploadButton />
                             <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                <Button>New File</Button>
+                                <Button>{t('new-file')}</Button>
                             </NavLink>
                         </div>
                     </Can>
@@ -91,15 +93,14 @@ export default () => {
             ) : (
                 <Card className="!rounded-t-none !p-3">
                     {!files.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>This directory seems to be empty.</p>
+                        <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
                     ) : (
                         <CSSTransition classNames={'fade'} timeout={150} appear in>
                             <div>
                                 {files.length > 250 && (
                                     <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
                                         <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            This directory is too large to display in the browser, limiting the output
-                                            to the first 250 files.
+                                            {t('too-large')}
                                         </p>
                                     </div>
                                 )}

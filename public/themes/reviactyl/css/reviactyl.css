@@ -177,3 +177,53 @@ fieldset[disabled] .form-control {
 .btn {
     border-radius: 15px;
 }
+
+code {
+    background-color: var(--color-800);
+    color: var(--color-50);
+    border-radius: 15px;
+    padding-left: 4px;
+    padding-right: 4px;
+    line-height: 1.4;
+    font-size: 85%;
+    border: var(--color-600);
+    display: inline-block;
+}
+
+.callout code {
+    background-color: #515f6cbb;
+    color: #c3c3c3;
+    border: 1px solid rgba(0, 0, 0, .25);
+}
+
+.modal-body {
+    background: var(--color-900);
+}
+
+.modal-header {
+    border-bottom-color: 1px solid #1f2933;
+    background: var(--color-900);
+}
+
+.modal-footer {
+    border-top-color: 1px solid #1f2933;
+    background: var(--color-900);
+}
+
+.select2-container--default .select2-selection--single {
+    background-color: var(--color-800);
+}
+
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    border: 1px solid #606d7b;
+    border-radius: 15px;
+}
+
+.select2-container--default .select2-selection--multiple {
+    background-color: var(--color-800);
+}
+
+.select2-container--default .select2-selection--multiple {
+    border: 1px solid #606d7b;
+    border-radius: 15px;
+}

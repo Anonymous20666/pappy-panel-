@@ -27,7 +27,7 @@
             </div>
             <div class="box-body">
                 @if ($version->isLatestPanel())
-                    You are running Pterodactyl Panel version <code>{{ config('app.version') }}</code>. Your panel is up-to-date!
+                    You are running Reviactyl Panel version <code>{{ config('app.version') }}</code>. Your panel is up-to-date!
                 @else
                     Your panel is <strong>not up-to-date!</strong> The latest version is <a href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}" target="_blank"><code>{{ $version->getPanel() }}</code></a> and you are currently running version <code>{{ config('app.version') }}</code>.
                 @endif
@@ -50,4 +50,34 @@
         <a href="{{ $version->getDonations() }}"><button class="btn btn-success" style="width:100%;"><i class="fa fa-fw fa-money"></i> Support the Project</button></a>
     </div>
 </div>
+
+<div class="row" style="margin-top: 40px;">
+  <div class="col-sm-6">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">Any Feedback?</h3>
+      </div>
+      <div class="box-body">
+        <p class="box-text">
+          If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.
+        </p>
+        <a href="https://github.com/reviactyl/panel/issues" class="btn btn-primary">Share Your Feedback</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="box box-danger">
+      <div class="box-header with-border">
+        <h3 class="box-title">Support Us</h3>
+      </div>
+      <div class="box-body">
+        <p class="box-text">
+          Help keep Reviactyl growing! Whether it’s donations, spreading the word, or contributing code, your support makes a real difference and keeps our project thriving.
+        </p>
+        <a href="{{ $version->getDonations() }}" class="btn btn-danger">Get Involved</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection

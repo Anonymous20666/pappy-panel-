@@ -15,8 +15,10 @@ import { Button } from '@/components/elements/button/index';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import Card from '@/components/ui/Card';
 import { ClockIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 export default () => {
+    const { t } = useTranslation('server/schedules');
     const match = useRouteMatch();
     const history = useHistory();
 
@@ -40,7 +42,7 @@ export default () => {
     }, []);
 
     return (
-        <ServerContentBlock title={'Schedules'}>
+        <ServerContentBlock title={t('title')}>
             <FlashMessageRender byKey={'schedules'} css={tw`mb-4`} />
             {!schedules.length && loading ? (
                 <Spinner size={'large'} centered />
@@ -50,7 +52,7 @@ export default () => {
                         <Card>
                         <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
                             <ClockIcon className="w-5 h-5 mr-1" />
-                            There are no schedules configured for this server.
+                            {t('no-schedules')}
                         </p>
                         </Card>
                     ) : (
@@ -73,7 +75,7 @@ export default () => {
                         <div css={tw`mt-2 flex justify-end`}>
                             <EditScheduleModal visible={visible} onModalDismissed={() => setVisible(false)} />
                             <Button type={'button'} onClick={() => setVisible(true)}>
-                                Create schedule
+                                {t('create-schedule')}
                             </Button>
                         </div>
                     </Can>

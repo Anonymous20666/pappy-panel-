@@ -13,8 +13,10 @@ import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import tw from 'twin.macro';
 import Card from '@/components/ui/Card';
 import { UsersIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 export default () => {
+    const { t } = useTranslation('server/users');
     const [loading, setLoading] = useState(true);
 
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -50,7 +52,7 @@ export default () => {
     }
 
     return (
-        <ServerContentBlock title={'Users'}>
+        <ServerContentBlock title={t('title')}>
             <FlashMessageRender byKey={'users'} css={tw`mb-4`} />
             {!subusers.length ? (
                 <Card>

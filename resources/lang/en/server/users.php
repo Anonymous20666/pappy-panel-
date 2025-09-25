@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'Users',
     'permissions' => [
         'websocket_*' => 'Allows access to the websocket for this server.',
         'control_console' => 'Allows the user to send data to the server console.',

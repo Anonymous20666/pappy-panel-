@@ -24,16 +24,13 @@ Stop settling for less. Make game servers a first class citizen on your platform
 I would like to extend my sincere thanks to the following sponsors for helping fund Reviactyl's development.
 [Interested in becoming a sponsor?](https://github.com/sponsors/bijju089)
 
-| Company                                                                           | About                                                                                                                                                                                                                                           |
-|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Servoid Hosting**](https://servoid.pro/)                         | The first and only trusted Indian Game server Hosting company to offer servers at affordable rate.                                                                                                 |
-
+No Sponsors Yet ;(
 
 ## License
 
 Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/PTERO_LICENSE.md))
 
-Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
+Reviactyl™, Copyright © 2025 Reviactyl and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
 
 ## Star History
 

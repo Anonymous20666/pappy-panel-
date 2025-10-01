@@ -18,7 +18,7 @@ The following versions of Reviactyl are receiving active support and maintenance
 
 ## Reporting a Vulnerability
 
-Please reach out directly to any project team member on Discord when reporting a security vulnerability, or you can email `maintainers@reviactyl.dev`.
+Please reach out directly to any project team member on Discord when reporting a security vulnerability, or you can email `contact@reviactyl.dev`.
 
 Vulnerability fixes from Pterodactyl panel will be shipped with Reviactyl.
 

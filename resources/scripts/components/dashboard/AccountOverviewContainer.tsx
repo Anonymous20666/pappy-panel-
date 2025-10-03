@@ -42,8 +42,8 @@ const Container = styled.div`
 export default () => {
     const { t } = useTranslation('dashboard/account');
     const { state } = useLocation<undefined | { twoFactorRedirect?: boolean }>();
-    const nameFirst = useStoreState(state => state.user.data?.name_first);
-    const nameLast = useStoreState(state => state.user.data?.name_last);
+    const nameFirst = useStoreState((state) => state.user.data?.name_first);
+    const nameLast = useStoreState((state) => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -66,51 +66,54 @@ export default () => {
 
             <Container css={[tw`grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4`]}>
                 <div className={'flex flex-col gap-4'}>
-                <Card className="overflow-hidden">
-                    <SpinnerOverlay visible={isLoggingOut} />
-                        <div className="flex flex-col items-center py-8">
-                            <Gravatar className="w-24 h-24 mb-3 shadow-lg" />
-                            <Title className="mb-1 text-2xl">
+                    <Card className='overflow-hidden'>
+                        <SpinnerOverlay visible={isLoggingOut} />
+                        <div className='flex flex-col items-center py-8'>
+                            <Gravatar className='w-24 h-24 mb-3 shadow-lg' />
+                            <Title className='mb-1 text-2xl'>
                                 {nameFirst} {nameLast}
                             </Title>
-                            <div className={"flex items-center gap-x-1"}>
-                            <span className="text-sm text-gray-400">
-                                {rootAdmin ? t('overview.administrator') : name + ' ' + t('overview.user')}
-                            </span>
-                {rootAdmin && (
-                  // eslint-disable-next-line react/jsx-no-target-blank
-                  <a href={`/admin`} target={'_blank'} className="h-5 w-5">
-                    <ExternalLinkIcon />
-                  </a>
-                )}
-                </div>
-                            <div className="mt-1">
-                            <button className="flex items-center space-x-1" onClick={onTriggerLogout}>
-                                <span className="text-danger/80">{t('overview.logout')}</span> <LogoutIcon className="w-5 h-5 text-danger/80" />
-                            </button>
+                            <div className={'flex items-center gap-x-1'}>
+                                <span className='text-sm text-gray-400'>
+                                    {rootAdmin ? t('overview.administrator') : name + ' ' + t('overview.user')}
+                                </span>
+                                {rootAdmin && (
+                                    // eslint-disable-next-line react/jsx-no-target-blank
+                                    <a href={`/admin`} target={'_blank'} className='h-5 w-5'>
+                                        <ExternalLinkIcon />
+                                    </a>
+                                )}
+                            </div>
+                            <div className='mt-1'>
+                                <button className='flex items-center space-x-1' onClick={onTriggerLogout}>
+                                    <span className='text-danger/80'>{t('overview.logout')}</span>{' '}
+                                    <LogoutIcon className='w-5 h-5 text-danger/80' />
+                                </button>
                             </div>
                         </div>
-                </Card>
-                <TitledGreyBox title={t('overview.update-email')} showFlashes={'account:email'}>
-                    <UpdateEmailAddressForm />
-                </TitledGreyBox>
-                {themeSelector ?
-                <TitledGreyBox title={t('overview.theme-selector')}>
-                    <ThemeSelector />
-                </TitledGreyBox>
-                : ''}
+                    </Card>
+                    <TitledGreyBox title={t('overview.update-email')} showFlashes={'account:email'}>
+                        <UpdateEmailAddressForm />
+                    </TitledGreyBox>
+                    {themeSelector ? (
+                        <TitledGreyBox title={t('overview.theme-selector')}>
+                            <ThemeSelector />
+                        </TitledGreyBox>
+                    ) : (
+                        ''
+                    )}
                 </div>
                 <div className={'flex flex-col gap-4'}>
-                <TitledGreyBox title={t('overview.update-password')} showFlashes={'account:password'}>
-                    <UpdatePasswordForm />
-                </TitledGreyBox>
-                <TitledGreyBox title={t('overview.customization')}>
-                    <LanguageSwitcher />
-                    <InvertToggle />
-                </TitledGreyBox>
-                <TitledGreyBox title={t('overview.2fa-verification')}>
-                    <ConfigureTwoFactorForm />
-                </TitledGreyBox>
+                    <TitledGreyBox title={t('overview.update-password')} showFlashes={'account:password'}>
+                        <UpdatePasswordForm />
+                    </TitledGreyBox>
+                    <TitledGreyBox title={t('overview.customization')}>
+                        <LanguageSwitcher />
+                        <InvertToggle />
+                    </TitledGreyBox>
+                    <TitledGreyBox title={t('overview.2fa-verification')}>
+                        <ConfigureTwoFactorForm />
+                    </TitledGreyBox>
                 </div>
             </Container>
         </ContentBlock>

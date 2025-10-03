@@ -80,17 +80,32 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
                 <LoginFormContainer title={t('login-title')} css={tw`w-full flex`}>
-                    <Field icon={UserIcon} type={'text'} placeholder={t('username-label')} label={t('username-label')} name={'username'} disabled={isSubmitting} />
+                    <Field
+                        icon={UserIcon}
+                        type={'text'}
+                        placeholder={t('username-label')}
+                        label={t('username-label')}
+                        name={'username'}
+                        disabled={isSubmitting}
+                    />
                     <div css={tw`mt-3`}>
-                    <Label>{t('password-label')}</Label>
-                    <div css={tw`relative`}>
-                        <Field icon={KeyIcon} type={show ? 'text' : 'password'} placeholder={t('password-label')} name={'password'} disabled={isSubmitting} />
-                            <button type={'button'} css={tw`absolute border-l-2 top-[10px] right-[6px] py-2 p-1 border-gray-300 text-gray-300`} onClick={() => setShow(!show)}>
-                                {show 
-                                ? <EyeOffIcon className="h-5 w-5" />
-                                : <EyeIcon className="h-5 w-5" />}
+                        <Label>{t('password-label')}</Label>
+                        <div css={tw`relative`}>
+                            <Field
+                                icon={KeyIcon}
+                                type={show ? 'text' : 'password'}
+                                placeholder={t('password-label')}
+                                name={'password'}
+                                disabled={isSubmitting}
+                            />
+                            <button
+                                type={'button'}
+                                css={tw`absolute border-l-2 top-[10px] right-[6px] py-2 p-1 border-gray-300 text-gray-300`}
+                                onClick={() => setShow(!show)}
+                            >
+                                {show ? <EyeOffIcon className='h-5 w-5' /> : <EyeIcon className='h-5 w-5' />}
                             </button>
-                    </div>
+                        </div>
                     </div>
                     <div css={tw`mt-6`}>
                         <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>

@@ -30,7 +30,7 @@ i18n.use(I18NextMultiloadBackendAdapter)
                 },
                 queryStringParams: { hash },
                 allowMultiLoading: true,
-                multiSeparator: ",",
+                multiSeparator: ',',
             } as BackendOptions,
         } as Record<string, any>,
         interpolation: {

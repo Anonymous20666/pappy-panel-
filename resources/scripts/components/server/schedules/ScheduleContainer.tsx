@@ -50,10 +50,10 @@ export default () => {
                 <>
                     {schedules.length === 0 ? (
                         <Card>
-                        <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
-                            <ClockIcon className="w-5 h-5 mr-1" />
-                            {t('no-schedules')}
-                        </p>
+                            <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                                <ClockIcon className='w-5 h-5 mr-1' />
+                                {t('no-schedules')}
+                            </p>
                         </Card>
                     ) : (
                         schedules.map((schedule) => (

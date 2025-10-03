@@ -89,7 +89,9 @@ const StartupContainer = () => {
             <div css={tw`md:flex`}>
                 <TitledGreyBox title={t('startup-command')} css={tw`flex-1`}>
                     <div css={tw`px-1 py-2`}>
-                        <p css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-2 px-4`}>{data.invocation}</p>
+                        <p css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-2 px-4`}>
+                            {data.invocation}
+                        </p>
                     </div>
                 </TitledGreyBox>
                 <TitledGreyBox title={t('docker-image')} css={tw`flex-1 lg:flex-none lg:w-1/3 mt-8 md:mt-0 md:ml-10`}>
@@ -108,18 +110,12 @@ const StartupContainer = () => {
                                     ))}
                                 </Select>
                             </InputSpinner>
-                            <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                {t('docker-info')}
-                            </p>
+                            <p css={tw`text-xs text-neutral-300 mt-2`}>{t('docker-info')}</p>
                         </>
                     ) : (
                         <>
                             <Input disabled readOnly value={variables.dockerImage} />
-                            {isCustomImage && (
-                                <p css={tw`text-xs text-neutral-300 mt-2`}>
-                                    {t('manually-set-docker')}
-                                </p>
-                            )}
+                            {isCustomImage && <p css={tw`text-xs text-neutral-300 mt-2`}>{t('manually-set-docker')}</p>}
                         </>
                     )}
                 </TitledGreyBox>

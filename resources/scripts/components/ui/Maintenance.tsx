@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import PageContentBlock from '@/components/elements/PageContentBlock';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
@@ -31,22 +31,22 @@ export default () => {
         });
     };
     return (
-        <PageContentBlock className="flex flex-col h-full" title={'Under Maintenance'} showFlashKey={'dashboard'}>
-         <Container>
-          <CardContainer>
-            <LogoContainer>
-             <img src={logo} alt="reviactyl" css={tw`h-[3rem]`} />
-            </LogoContainer>
-            <Card>
-                <SpinnerOverlay visible={isLoggingOut} />
-                <Title className="text-3xl text-center pb-3">Under Maintenance</Title>
-                <p className="text-center">{maintenance}</p>
-            </Card>
-            <button className="flex items-center mx-auto mt-2" onClick={onTriggerLogout}>
-                <span className="text-danger/80">Logout</span> <LogoutIcon className="w-5 h-5 text-danger/80" />
-            </button>
-          </CardContainer>
-         </Container>
+        <PageContentBlock className='flex flex-col h-full' title={'Under Maintenance'} showFlashKey={'dashboard'}>
+            <Container>
+                <CardContainer>
+                    <LogoContainer>
+                        <img src={logo} alt='reviactyl' css={tw`h-[3rem]`} />
+                    </LogoContainer>
+                    <Card>
+                        <SpinnerOverlay visible={isLoggingOut} />
+                        <Title className='text-3xl text-center pb-3'>Under Maintenance</Title>
+                        <p className='text-center'>{maintenance}</p>
+                    </Card>
+                    <button className='flex items-center mx-auto mt-2' onClick={onTriggerLogout}>
+                        <span className='text-danger/80'>Logout</span> <LogoutIcon className='w-5 h-5 text-danger/80' />
+                    </button>
+                </CardContainer>
+            </Container>
         </PageContentBlock>
     );
 };

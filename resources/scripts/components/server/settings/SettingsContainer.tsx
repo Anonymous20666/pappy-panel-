@@ -46,14 +46,14 @@ export default () => {
                             <div css={tw`mt-6 flex items-center`}>
                                 <div css={tw`flex-1`}>
                                     <div css={tw`border-l-4 border-cyan-500 p-3`}>
-                                        <p css={tw`text-xs text-neutral-200`}>
-                                            {t('sftp.password')}
-                                        </p>
+                                        <p css={tw`text-xs text-neutral-200`}>{t('sftp.password')}</p>
                                     </div>
                                 </div>
                                 <div css={tw`ml-4`}>
                                     <a href={`sftp://${username}.${id}@${ip(sftp.ip)}:${sftp.port}`}>
-                                        <Button.Text variant={Button.Variants.Secondary}>{t('sftp.button')}</Button.Text>
+                                        <Button.Text variant={Button.Variants.Secondary}>
+                                            {t('sftp.button')}
+                                        </Button.Text>
                                     </a>
                                 </div>
                             </div>
@@ -62,12 +62,16 @@ export default () => {
                     <TitledGreyBox title={t('info.title')} css={tw`mb-6 md:mb-10`}>
                         <div css={tw`flex items-center justify-between text-sm`}>
                             <p>{t('info.node')}</p>
-                            <code css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-1 px-2`}>{node}</code>
+                            <code css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-1 px-2`}>
+                                {node}
+                            </code>
                         </div>
                         <CopyOnClick text={uuid}>
                             <div css={tw`flex items-center justify-between mt-2 text-sm`}>
                                 <p>{t('info.server')}</p>
-                                <code css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-1 px-2`}>{uuid}</code>
+                                <code css={tw`font-mono bg-gray-800 rounded-ui border border-gray-600 py-1 px-2`}>
+                                    {uuid}
+                                </code>
                             </div>
                         </CopyOnClick>
                     </TitledGreyBox>

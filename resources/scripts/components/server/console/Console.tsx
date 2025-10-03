@@ -77,12 +77,11 @@ export default () => {
         z-index: 10;
     }`;
 
-    const handleConsoleOutput = (line: string, prelude = false) =>
-    {
-        terminal.writeln((prelude ? TERMINAL_PRELUDE : '') +
-            line
-                .replace('[Pterodactyl Daemon]:', DAEMON_PRELUDE)
-                .replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m'
+    const handleConsoleOutput = (line: string, prelude = false) => {
+        terminal.writeln(
+            (prelude ? TERMINAL_PRELUDE : '') +
+                line.replace('[Pterodactyl Daemon]:', DAEMON_PRELUDE).replace(/(?:\r\n|\r|\n)$/im, '') +
+                '\u001b[0m'
         );
     };
 

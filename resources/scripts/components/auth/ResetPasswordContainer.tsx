@@ -53,9 +53,7 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                 passwordConfirmation: '',
             }}
             validationSchema={object().shape({
-                password: string()
-                    .required(t('reset-password.new-required'))
-                    .min(8, t('reset-password.min-required')),
+                password: string().required(t('reset-password.new-required')).min(8, t('reset-password.min-required')),
                 passwordConfirmation: string()
                     .required(t('reset-password.no-match'))
                     // @ts-expect-error this is valid
@@ -77,7 +75,11 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
                         />
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field label={t('reset-password.confirm-label')} name={'passwordConfirmation'} type={'password'} />
+                        <Field
+                            label={t('reset-password.confirm-label')}
+                            name={'passwordConfirmation'}
+                            type={'password'}
+                        />
                     </div>
                     <div css={tw`mt-6`}>
                         <Button size={'xlarge'} type={'submit'} disabled={isSubmitting} isLoading={isSubmitting}>

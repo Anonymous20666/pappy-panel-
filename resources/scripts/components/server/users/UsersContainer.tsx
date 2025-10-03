@@ -56,7 +56,9 @@ export default () => {
             <FlashMessageRender byKey={'users'} css={tw`mb-4`} />
             {!subusers.length ? (
                 <Card>
-                <p css={tw`flex justify-center text-center text-sm text-gray-400`}><UsersIcon className="w-5 h-5 mr-1" /> It looks like you don&apos;t have any subusers.</p>
+                    <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                        <UsersIcon className='w-5 h-5 mr-1' /> It looks like you don&apos;t have any subusers.
+                    </p>
                 </Card>
             ) : (
                 subusers.map((subuser) => <UserRow key={subuser.uuid} subuser={subuser} />)

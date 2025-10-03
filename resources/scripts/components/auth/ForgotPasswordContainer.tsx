@@ -69,9 +69,7 @@ export default () => {
             onSubmit={handleSubmission}
             initialValues={{ email: '' }}
             validationSchema={object().shape({
-                email: string()
-                    .email(t('email-required'))
-                    .required(t('email-required')),
+                email: string().email(t('email-required')).required(t('email-required')),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (

@@ -11,7 +11,6 @@ import { useFlashKey } from '@/plugins/useFlash';
 import { createSSHKey, useSSHKeys } from '@/api/account/ssh-keys';
 import { useTranslation } from 'react-i18next';
 
-
 interface Values {
     name: string;
     publicKey: string;

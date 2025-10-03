@@ -30,9 +30,9 @@ const ServerConsoleContainer = () => {
                 </Alert>
             )}
             <div>
-                    <Spinner.Suspense>
-                        <ConsoleBlock />
-                    </Spinner.Suspense>
+                <Spinner.Suspense>
+                    <ConsoleBlock />
+                </Spinner.Suspense>
             </div>
             <div className={'mt-2'}>
                 <Spinner.Suspense>

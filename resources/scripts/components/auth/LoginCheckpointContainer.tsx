@@ -36,11 +36,7 @@ const LoginCheckpointContainer = () => {
                     icon={DotsHorizontalIcon}
                     name={isMissingDevice ? 'recoveryCode' : 'code'}
                     title={isMissingDevice ? t('checkpoint.recovery-code') : t('checkpoint.auth-code')}
-                    description={
-                        isMissingDevice
-                            ? t('checkpoint.is-missing')
-                            : t('checkpoint.is-not-missing')
-                    }
+                    description={isMissingDevice ? t('checkpoint.is-missing') : t('checkpoint.is-not-missing')}
                     type={'text'}
                     autoComplete={'one-time-code'}
                     autoFocus

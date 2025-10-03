@@ -36,9 +36,7 @@ export default () => {
                 <ContentBox title={t('ssh.title')} css={tw`flex-1 overflow-hidden mt-8 md:mt-0 md:ml-8`}>
                     <SpinnerOverlay visible={!data && isValidating} />
                     {!data || !data.length ? (
-                        <p css={tw`text-center text-sm`}>
-                            {!data ? 'Loading...' : t('ssh.not-exist')}
-                        </p>
+                        <p css={tw`text-center text-sm`}>{!data ? 'Loading...' : t('ssh.not-exist')}</p>
                     ) : (
                         data.map((key, index) => (
                             <GreyRowBox

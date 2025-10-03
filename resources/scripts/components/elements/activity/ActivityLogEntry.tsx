@@ -56,7 +56,7 @@ export default ({ activity, children }: Props) => {
             <div className={'col-span-10 sm:col-span-9 flex'}>
                 <div className={'flex-1 px-4 sm:px-0'}>
                     <div className={'flex items-center text-gray-50'}>
-                        <Tooltip placement={'top'} content={actor?.email || t('entries.system-user') as string}>
+                        <Tooltip placement={'top'} content={actor?.email || (t('entries.system-user') as string)}>
                             <span>{actor?.username || t('entries.system')}</span>
                         </Tooltip>
                         <span className={'text-gray-400'}>&nbsp;&mdash;&nbsp;</span>

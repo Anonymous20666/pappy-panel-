@@ -13,7 +13,21 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
-import { TerminalIcon, FolderIcon, FingerPrintIcon, DatabaseIcon, CalendarIcon, UserGroupIcon, ArchiveIcon, LightningBoltIcon, PlayIcon, CogIcon, UserCircleIcon, LockClosedIcon, KeyIcon } from '@heroicons/react/solid'
+import {
+    TerminalIcon,
+    FolderIcon,
+    FingerPrintIcon,
+    DatabaseIcon,
+    CalendarIcon,
+    UserGroupIcon,
+    ArchiveIcon,
+    LightningBoltIcon,
+    PlayIcon,
+    CogIcon,
+    UserCircleIcon,
+    LockClosedIcon,
+    KeyIcon,
+} from '@heroicons/react/solid';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -82,93 +96,93 @@ export default {
     ],
     server: {
         control: [
-        {
-            path: '/',
-            permission: null,
-            name: 'server.console',
-            component: ServerConsole,
-            icon: TerminalIcon,
-            exact: true,
-        },
-        {
-            path: '/files',
-            permission: 'file.*',
-            name: 'server.files',
-            component: FileManagerContainer,
-            icon: FolderIcon,
-        },
-        {
-            path: '/files/:action(edit|new)',
-            permission: 'file.*',
-            name: undefined,
-            component: FileEditContainer,
-        },
-        {
-            path: '/startup',
-            permission: 'startup.*',
-            name: 'server.startup',
-            component: StartupContainer,
-            icon: PlayIcon,
-        },
-        {
-            path: '/network',
-            permission: 'allocation.*',
-            name: 'server.network',
-            component: NetworkContainer,
-            icon: LightningBoltIcon,
-        },
+            {
+                path: '/',
+                permission: null,
+                name: 'server.console',
+                component: ServerConsole,
+                icon: TerminalIcon,
+                exact: true,
+            },
+            {
+                path: '/files',
+                permission: 'file.*',
+                name: 'server.files',
+                component: FileManagerContainer,
+                icon: FolderIcon,
+            },
+            {
+                path: '/files/:action(edit|new)',
+                permission: 'file.*',
+                name: undefined,
+                component: FileEditContainer,
+            },
+            {
+                path: '/startup',
+                permission: 'startup.*',
+                name: 'server.startup',
+                component: StartupContainer,
+                icon: PlayIcon,
+            },
+            {
+                path: '/network',
+                permission: 'allocation.*',
+                name: 'server.network',
+                component: NetworkContainer,
+                icon: LightningBoltIcon,
+            },
         ],
         management: [
-        {
-            path: '/databases',
-            permission: 'database.*',
-            name: 'server.databases',
-            component: DatabasesContainer,
-            icon: DatabaseIcon,
-        },
-        {
-            path: '/schedules',
-            permission: 'schedule.*',
-            name: 'server.schedules',
-            component: ScheduleContainer,
-            icon: CalendarIcon,
-        },
-        {
-            path: '/schedules/:id',
-            permission: 'schedule.*',
-            name: undefined,
-            component: ScheduleEditContainer,
-        },
-        {
-            path: '/backups',
-            permission: 'backup.*',
-            name: 'server.backups',
-            component: BackupContainer,
-            icon: ArchiveIcon,
-        },
+            {
+                path: '/databases',
+                permission: 'database.*',
+                name: 'server.databases',
+                component: DatabasesContainer,
+                icon: DatabaseIcon,
+            },
+            {
+                path: '/schedules',
+                permission: 'schedule.*',
+                name: 'server.schedules',
+                component: ScheduleContainer,
+                icon: CalendarIcon,
+            },
+            {
+                path: '/schedules/:id',
+                permission: 'schedule.*',
+                name: undefined,
+                component: ScheduleEditContainer,
+            },
+            {
+                path: '/backups',
+                permission: 'backup.*',
+                name: 'server.backups',
+                component: BackupContainer,
+                icon: ArchiveIcon,
+            },
         ],
         administration: [
-        {
-            path: '/users',
-            permission: 'user.*',
-            name: 'server.users',
-            component: UsersContainer,
-            icon: UserGroupIcon,
-        },
-        {
-            path: '/settings',
-            permission: ['settings.*', 'file.sftp'],
-            name: 'server.settings',
-            component: SettingsContainer,
-            icon: CogIcon,
-        },
-        {
-            path: '/activity',
-            permission: 'activity.*',
-            name: 'server.activity',
-            component: ServerActivityLogContainer,
-            icon: FingerPrintIcon,
-        },
+            {
+                path: '/users',
+                permission: 'user.*',
+                name: 'server.users',
+                component: UsersContainer,
+                icon: UserGroupIcon,
+            },
+            {
+                path: '/settings',
+                permission: ['settings.*', 'file.sftp'],
+                name: 'server.settings',
+                component: SettingsContainer,
+                icon: CogIcon,
+            },
+            {
+                path: '/activity',
+                permission: 'activity.*',
+                name: 'server.activity',
+                component: ServerActivityLogContainer,
+                icon: FingerPrintIcon,
+            },
         ],
     },
 } as Routes;

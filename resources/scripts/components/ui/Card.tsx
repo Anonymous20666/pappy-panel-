@@ -13,9 +13,5 @@ const CardDefault = styled.div`
 `;
 
 export default ({ className, children }: CardProps) => (
-    <CardDefault
-        className={classNames('p-5', className)}
-    >
-        {children}
-    </CardDefault>
+    <CardDefault className={classNames('p-5', className)}>{children}</CardDefault>
 );

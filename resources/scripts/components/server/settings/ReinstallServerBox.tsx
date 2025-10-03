@@ -51,9 +51,7 @@ export default () => {
             </Dialog.Confirm>
             <p css={tw`text-sm`}>
                 {t('reinstall.info-1')}&nbsp;
-                <strong css={tw`font-medium`}>
-                    {t('reinstall.info-2')}
-                </strong>
+                <strong css={tw`font-medium`}>{t('reinstall.info-2')}</strong>
             </p>
             <div css={tw`mt-6 text-right`}>
                 <Button.Danger variant={Button.Variants.Secondary} onClick={() => setModalVisible(true)}>

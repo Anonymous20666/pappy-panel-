@@ -24,13 +24,9 @@ export default () => {
     const schema = Yup.object().shape({
         current: Yup.string().min(1).required(t('password.current-required')),
         password: Yup.string().min(8).required(),
-        confirmPassword: Yup.string().test(
-           'password',
-           t('password.not-matching'),
-        function (value) {
+        confirmPassword: Yup.string().test('password', t('password.not-matching'), function (value) {
             return value === this.parent.password;
-        }
-       ),
+        }),
     });
 
     if (!user) {

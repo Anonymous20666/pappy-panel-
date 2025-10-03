@@ -14,8 +14,8 @@ const ContentBlock: React.FC<Props> = ({ title, description, children, ...props 
 
     return (
         <PageContentBlock title={`${title} | ${name}`} {...props}>
-            <Title className="text-4xl mb-2">{title}</Title>
-            <p className="text-xs text-gray-500">{description}</p>
+            <Title className='text-4xl mb-2'>{title}</Title>
+            <p className='text-xs text-gray-500'>{description}</p>
             {children}
         </PageContentBlock>
     );

@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default ({ backup, className }: Props) => {
-    const { t } = useTranslation('server/backups')
+    const { t } = useTranslation('server/backups');
     const { mutate } = getServerBackups();
 
     useWebsocketEvent(`${SocketEvent.BACKUP_COMPLETED}:${backup.uuid}` as SocketEvent, (data) => {

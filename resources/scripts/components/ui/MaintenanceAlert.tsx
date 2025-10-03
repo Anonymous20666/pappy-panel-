@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { ExclamationIcon} from '@heroicons/react/solid';
+import { ExclamationIcon } from '@heroicons/react/solid';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 
@@ -17,18 +17,21 @@ const MaintenanceAlert = () => {
     const isUnderMaintenance = useStoreState((state: ApplicationStore) => state.reviactyl.data!.isUnderMaintenance);
     return (
         <>
-        {isUnderMaintenance ?
-        <Container>
-            <AlertContainer className={`bg-yellow-500/10 border-yellow-500`}>
-                <div>
-                <ExclamationIcon className="h-5 w-5 font-bold !text-yellow-500" />
-                </div>
-                <div>
-                <b>Maintenance Mode!</b> Your clients will be unable to access Reviactyl panel until you disable Maintenance mode.
-                </div>
-            </AlertContainer>
-        </Container>
-        : ''}
+            {isUnderMaintenance ? (
+                <Container>
+                    <AlertContainer className={`bg-yellow-500/10 border-yellow-500`}>
+                        <div>
+                            <ExclamationIcon className='h-5 w-5 font-bold !text-yellow-500' />
+                        </div>
+                        <div>
+                            <b>Maintenance Mode!</b> Your clients will be unable to access Reviactyl panel until you
+                            disable Maintenance mode.
+                        </div>
+                    </AlertContainer>
+                </Container>
+            ) : (
+                ''
+            )}
         </>
     );
 };

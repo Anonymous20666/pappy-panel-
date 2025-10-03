@@ -4,7 +4,7 @@ import { Button } from '@/components/elements/button/index';
 import { useTranslation } from 'react-i18next';
 
 export default ({ className }: { className?: string }) => {
-    const { t } = useTranslation('server/files')
+    const { t } = useTranslation('server/files');
     const [visible, setVisible] = useState(false);
 
     return (

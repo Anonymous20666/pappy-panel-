@@ -46,9 +46,7 @@ const BackupContainer = () => {
                         // create additional ones for the server.
                         !backupLimit ? null : (
                             <p css={tw`text-center text-sm text-neutral-300`}>
-                                {page > 1
-                                    ? t('out-of-backups')
-                                    : t('no-backups')}
+                                {page > 1 ? t('out-of-backups') : t('no-backups')}
                             </p>
                         )
                     ) : (
@@ -60,10 +58,10 @@ const BackupContainer = () => {
             </Pagination>
             {backupLimit === 0 && (
                 <Card>
-                <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
-                    <ArchiveIcon className="w-5 h-5 mr-1" />
-                    {t('cannot-create')}
-                </p>
+                    <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                        <ArchiveIcon className='w-5 h-5 mr-1' />
+                        {t('cannot-create')}
+                    </p>
                 </Card>
             )}
             <Can action={'backup.create'}>

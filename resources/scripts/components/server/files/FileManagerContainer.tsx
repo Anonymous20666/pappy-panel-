@@ -91,7 +91,7 @@ export default () => {
             {!files ? (
                 <Spinner size={'large'} centered />
             ) : (
-                <Card className="!rounded-t-none !p-3">
+                <Card className='!rounded-t-none !p-3'>
                     {!files.length ? (
                         <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
                     ) : (
@@ -99,9 +99,7 @@ export default () => {
                             <div>
                                 {files.length > 250 && (
                                     <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
-                                        <p css={tw`text-yellow-900 text-sm text-center`}>
-                                            {t('too-large')}
-                                        </p>
+                                        <p css={tw`text-yellow-900 text-sm text-center`}>{t('too-large')}</p>
                                     </div>
                                 )}
                                 {sortFiles(files.slice(0, 250)).map((file) => (

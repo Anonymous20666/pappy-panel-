@@ -8,7 +8,7 @@ const isAlarmState = (current: number, limit: number): boolean => limit > 0 && c
 
 type Timer = ReturnType<typeof setInterval>;
 
-export default ({ server }: { server: Server; }) => {
+export default ({ server }: { server: Server }) => {
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
@@ -43,32 +43,32 @@ export default ({ server }: { server: Server; }) => {
         alarms.disk = server.limits.disk === 0 ? false : isAlarmState(stats.diskUsageInBytes, server.limits.disk);
     }
     return (
-    <>
+        <>
             <span
-              className={`py-1 px-3 text-xs font-medium rounded-ui
+                className={`py-1 px-3 text-xs font-medium rounded-ui
                         ${
-                          stats?.status === "offline"
-                            ? "bg-danger/20 text-danger border border-danger/30"
-                            : stats?.status === "running"
-                            ? "bg-success/20 text-success border border-success/30"
-                            : stats?.status === "starting"
-                            ? "bg-amber-500/20 text-amber-400 border border-amber-500/30"
-                            : stats?.status === "stopping"
-                            ? "bg-orange-500/20 text-orange-400 border border-orange-500/30"
-                            : ""
+                            stats?.status === 'offline'
+                                ? 'bg-danger/20 text-danger border border-danger/30'
+                                : stats?.status === 'running'
+                                ? 'bg-success/20 text-success border border-success/30'
+                                : stats?.status === 'starting'
+                                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                                : stats?.status === 'stopping'
+                                ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
+                                : ''
                         }
                     `}
             >
-              {stats?.status === "offline"
-                ? "Offline"
-                : stats?.status === "running"
-                ? "Online"
-                : stats?.status === "starting"
-                ? "Starting"
-                : stats?.status === "stopping"
-                ? "Stopping"
-                : ""}
+                {stats?.status === 'offline'
+                    ? 'Offline'
+                    : stats?.status === 'running'
+                    ? 'Online'
+                    : stats?.status === 'starting'
+                    ? 'Starting'
+                    : stats?.status === 'stopping'
+                    ? 'Stopping'
+                    : ''}
             </span>
-    </>
+        </>
     );
 };

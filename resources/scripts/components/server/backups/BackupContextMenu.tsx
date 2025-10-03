@@ -124,7 +124,7 @@ export default ({ backup }: Props) => {
             <Dialog.Confirm
                 open={modal === 'unlock'}
                 onClose={() => setModal('')}
-                title={t("unlock-backup", { name: backup.name })}
+                title={t('unlock-backup', { name: backup.name })}
                 onConfirmed={onLockToggle}
             >
                 {t('unlock-message')}
@@ -133,12 +133,10 @@ export default ({ backup }: Props) => {
                 open={modal === 'restore'}
                 onClose={() => setModal('')}
                 confirm={'Restore'}
-                title={t("restore-backup", { name: backup.name })}
+                title={t('restore-backup', { name: backup.name })}
                 onConfirmed={() => doRestorationAction()}
             >
-                <p>
-                    {t('restore-message')}
-                </p>
+                <p>{t('restore-message')}</p>
                 <p css={tw`mt-4 -mb-2 bg-gray-700 p-3 rounded`}>
                     <label htmlFor={'restore_truncate'} css={tw`text-base flex items-center cursor-pointer`}>
                         <Input
@@ -154,7 +152,7 @@ export default ({ backup }: Props) => {
                 </p>
             </Dialog.Confirm>
             <Dialog.Confirm
-                title={t("delete-backup", { name: backup.name })}
+                title={t('delete-backup', { name: backup.name })}
                 confirm={'Continue'}
                 open={modal === 'delete'}
                 onClose={() => setModal('')}

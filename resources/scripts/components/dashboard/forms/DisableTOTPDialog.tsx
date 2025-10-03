@@ -19,8 +19,8 @@ const DisableTOTPDialog = () => {
     const updateUserData = useStoreActions((actions) => actions.user.updateUserData);
 
     useEffect(() => {
-        setProps((state) => ({ 
-            ...state, 
+        setProps((state) => ({
+            ...state,
             preventExternalClose: submitting,
             title: t('2fa.disable.title'),
             description: t('2fa.disable.description'),

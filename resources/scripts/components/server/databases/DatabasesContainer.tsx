@@ -58,12 +58,10 @@ export default () => {
                             ))
                         ) : (
                             <Card>
-                            <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
-                                <DatabaseIcon className="w-5 h-5 mr-1" />
-                                {databaseLimit > 0
-                                    ? t('out-of-databases')
-                                    : t('no-databases')}
-                            </p>
+                                <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                                    <DatabaseIcon className='w-5 h-5 mr-1' />
+                                    {databaseLimit > 0 ? t('out-of-databases') : t('no-databases')}
+                                </p>
                             </Card>
                         )}
                         <Can action={'database.create'}>

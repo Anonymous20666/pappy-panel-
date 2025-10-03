@@ -68,9 +68,7 @@ const AllocationRow = ({ allocation }: Props) => {
                 <div className={'mr-4 flex-1 md:w-40'}>
                     {allocation.alias ? (
                         <CopyOnClick text={allocation.alias}>
-                            <Code>
-                                {allocation.alias}
-                            </Code>
+                            <Code>{allocation.alias}</Code>
                         </CopyOnClick>
                     ) : (
                         <CopyOnClick text={ip(allocation.ip)}>

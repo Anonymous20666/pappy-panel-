@@ -21,11 +21,7 @@ const gradientClasses: Record<NonNullable<TitleProps['scheme']>, string> = {
 export const Title = ({ className, children, scheme = 'gray' }: TitleProps) => {
     const colorClass = gradientClasses[scheme];
 
-    return (
-        <Gradient className={classNames(colorClass, className)}>
-            {children}
-        </Gradient>
-    );
+    return <Gradient className={classNames(colorClass, className)}>{children}</Gradient>;
 };
 
 export default Title;

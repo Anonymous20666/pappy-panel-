@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
@@ -32,26 +32,25 @@ const NavItem = ({ route }: Props) => {
     };
 
     return (
-            <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
-                <span className="flex items-center">
-                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name ? t(route.name as string) : null}
-                </span>
-            </NavLink>
+        <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
+            <span className='flex items-center'>
+                {route.icon && <route.icon className={`w-5 mr-1`} />} {route.name ? t(route.name as string) : null}
+            </span>
+        </NavLink>
     );
 };
 
 const DashboardNavigation = () => {
-  return (
-    <>
-      {routes.account
-        .filter((route) => !!route.name)
-        .map((route) => (
-          <NavItem key={route.path} route={route} />
-        ))}
-    </>
-  );
+    return (
+        <>
+            {routes.account
+                .filter((route) => !!route.name)
+                .map((route) => (
+                    <NavItem key={route.path} route={route} />
+                ))}
+        </>
+    );
 };
-
 
 export default () => {
     const location = useLocation();
@@ -60,57 +59,65 @@ export default () => {
     const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     return (
-    <>
-    {isUnderMaintenance && !rootAdmin ? (
-        <Maintenance />
-    ) : (
-        <RouterContainer>
-            <Navbar>
-                        <div className="lg:hidden">
-                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-ui">
-                               {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" /> }
-                             </button>
+        <>
+            {isUnderMaintenance && !rootAdmin ? (
+                <Maintenance />
+            ) : (
+                <RouterContainer>
+                    <Navbar>
+                        <div className='lg:hidden'>
+                            <button
+                                onClick={() => setSidebarOpen(!isSidebarOpen)}
+                                className='text-gray-500 bg-gray-700 p-2 rounded-ui'
+                            >
+                                {isSidebarOpen ? <XIcon className='w-6 h-6' /> : <MenuIcon className='w-6 h-6' />}
+                            </button>
                         </div>
                         <LogoContainer>
-                            <img src={logo} alt="reviactyl" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
+                            <img
+                                src={logo}
+                                alt='reviactyl'
+                                onClick={() => (window.location.href = '/')}
+                                css={tw`h-[3rem] mt-5 cursor-pointer`}
+                            />
                         </LogoContainer>
-            </Navbar>
-            <ContentContainer>
-                    {isSidebarOpen && (
-                           <div 
-                            onClick={() => setSidebarOpen(false)}
-                            className="fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden"
+                    </Navbar>
+                    <ContentContainer>
+                        {isSidebarOpen && (
+                            <div
+                                onClick={() => setSidebarOpen(false)}
+                                className='fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden'
                             />
                         )}
-                    <CSSTransition timeout={150} classNames="fade">
-                        <Sidebar isOpen={isSidebarOpen} dashboard>
-                            <DashboardNavigation />
-                        </Sidebar>
-                    </CSSTransition>
-            <div className="w-full flex-1 overflow-y-auto">
-            <TransitionRouter>
-                <React.Suspense fallback={<Spinner centered />}>
-                    <Switch location={location}>
-                        <Route path={'/'} exact>
-                            <Announcement />
-                            <MaintenanceAlert />
-                            <DashboardContainer />
-                        </Route>
-                        {routes.account.map(({ path, component: Component }) => (
-                            <Route key={path} path={`/account/${path}`.replace('//', '/')} exact>
-                                <Component />
-                            </Route>
-                        ))}
-                        <Route path={'*'}>
-                            <NotFound />
-                        </Route>
-                    </Switch>
-                </React.Suspense>
-            </TransitionRouter>
-            </div>
-            </ContentContainer>
-        </RouterContainer>
-    )}
-    </>
+                        <CSSTransition timeout={150} classNames='fade'>
+                            <Sidebar isOpen={isSidebarOpen} dashboard>
+                                <DashboardNavigation />
+                            </Sidebar>
+                        </CSSTransition>
+                        <div className='w-full flex-1 overflow-y-auto'>
+                            <TransitionRouter>
+                                <React.Suspense fallback={<Spinner centered />}>
+                                    <Switch location={location}>
+                                        <Route path={'/'} exact>
+                                            <Announcement />
+                                            <MaintenanceAlert />
+                                            <DashboardContainer />
+                                        </Route>
+                                        {routes.account.map(({ path, component: Component }) => (
+                                            <Route key={path} path={`/account/${path}`.replace('//', '/')} exact>
+                                                <Component />
+                                            </Route>
+                                        ))}
+                                        <Route path={'*'}>
+                                            <NotFound />
+                                        </Route>
+                                    </Switch>
+                                </React.Suspense>
+                            </TransitionRouter>
+                        </div>
+                    </ContentContainer>
+                </RouterContainer>
+            )}
+        </>
     );
 };

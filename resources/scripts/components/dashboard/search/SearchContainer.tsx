@@ -31,7 +31,7 @@ export default () => {
                 type="button"
                 aria-label="Search"
                 onClick={() => setVisible(true)}
-                className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-400 bg-gray-600 rounded-ui shadow-sm transition-all hover:scale-[1.02] active:scale-100"
+                className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-400 bg-gray-700 rounded-ui shadow-sm transition-all hover:scale-[1.02] active:scale-100 border border-gray-600"
             >
                 <SearchIcon className="w-5 h-5 text-gray-400" />
                 <div className="hidden md:block w-full text-left">
@@ -39,10 +39,10 @@ export default () => {
                 </div>
 
                 <div className="hidden md:flex items-center gap-1 text-xs text-gray-400 ml-auto">
-                    <kbd className={`px-1 py-0.5 border rounded bg-gray-600 border-gray-300 text-gray-300 ${isMac ? 'text-sm font-medium' : ''}`}>
+                    <kbd className={`px-1 py-0.5 rounded bg-gray-800 text-gray-300 ${isMac ? 'text-sm font-medium' : ''}`}>
                         {isMac ? '⌘' : 'Ctrl'}
                     </kbd>
-                    <kbd className="px-1 py-0.5 border rounded bg-gray-600 border-gray-300 text-gray-300">K</kbd>
+                    <kbd className="px-1 py-0.5 rounded bg-gray-800 text-gray-300">K</kbd>
                 </div>
             </button>
         </>

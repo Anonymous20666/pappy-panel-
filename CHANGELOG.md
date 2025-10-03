@@ -3,9 +3,29 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v2.0.1
+
+### Added
+
+* Customizable Terminal, Daemon Prelude from per-Node Settings
+* Artisan Command to Check for Updates (`p:update:check`)
+* Hindi (`hi`) translation
+
+### Changed
+
+* Use Reviactyl Repo for Upgrade Command (`p:upgrade`)
+* Use proper color shade for Search Bar
+* Re-style few parts of Admin dashboard
+
+### Fixed
+
+* Admin dashboard url not opening in sidebar
+* Broken parts of admin dashboard
+
 ## v2.0.0
 
 ### Added
+
 * ThemeEngine for switching between multiple color palettes
 * Panel-wide translation system
 * Portuguese (Brazil) translation by @d-belli
@@ -25,6 +45,7 @@ This project follows [Semantic Versioning](http://semver.org) guidelines.
 * Nest and Egg limitation for Navigation
 
 ### Changed
+
 * Updated UI Design for Administration & Dashboard
 * Use Gravatar instead of Boring Avatars
 * Updated ServerRow with more accessible Card

@@ -41,8 +41,10 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     return (
         <Container isOpen={isOpen}>
             <div className='sticky w-fit text-white p-4 rounded-ui'>
-                <Link to='/account' className='flex items-center gap-3'>
-                    <Avatar className='w-10' />
+                <div className='flex items-center gap-3'>
+                    <Link to='/account'>
+                        <Avatar className='w-10' />
+                    </Link>
                     <div className='flex flex-col'>
                         <div className={'flex items-center gap-x-1'}>
                             <span className='text-xs tracking-widest uppercase text-white/50'>
@@ -55,11 +57,13 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
                                 </a>
                             )}
                         </div>
-                        <span className='text-sm font-semibold'>
-                            {nameFirst} {nameLast}
-                        </span>
+                        <Link to='/account'>
+                            <span className='text-sm font-semibold'>
+                                {nameFirst} {nameLast}
+                            </span>
+                        </Link>
                     </div>
-                </Link>
+                </div>
             </div>
             {dashboard && (
                 <SideNavigation>

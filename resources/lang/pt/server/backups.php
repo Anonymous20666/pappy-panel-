@@ -5,7 +5,7 @@ return [
     'out-of-backups' => 'Parece que não temos mais backups para mostrar, tente voltar uma página.',
     'no-backups' => 'Parece que não há backups armazenados atualmente para este servidor.',
     'cannot-create' => 'Não é possível criar backups para este servidor.',
-    'created' => 'Criado',
+    'created-count' => '{{count}} de {{limit}} backups foram criados para este servidor.',
     'unlock-backup' => 'Desbloquear "{{name}}"',
     'unlock-message' => 'Este backup não estará mais protegido contra exclusões automáticas ou acidentais.',
     'restore-backup' => 'Restaurar "{{name}}"',

@@ -19,7 +19,7 @@ return [
     'lock' => 'Bloquear',
     'delete' => 'Excluir',
     'failed' => 'Falhou',
-    'created' => 'Created',
+    'created' => 'Criado ',
     'create-backup' => 'Criar backup do servidor',
     'backup-name' => 'Nome do backup',
     'name-description' => 'Se fornecido, será o nome usado como referência para este backup.',

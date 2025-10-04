@@ -35,7 +35,7 @@ export default () => {
             <p css={tw`text-sm`}>{isEnabled ? t('2fa.enabled') : t('2fa.disabled')}</p>
             <div css={tw`mt-6`}>
                 {isEnabled ? (
-                    <Button.Danger onClick={() => setVisible('disable')}>{t('2fa.disable')}</Button.Danger>
+                    <Button.Danger onClick={() => setVisible('disable')}>{t('2fa.disable-btn')}</Button.Danger>
                 ) : (
                     <Button onClick={() => setVisible('enable')}>{t('2fa.enable')}</Button>
                 )}

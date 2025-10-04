@@ -5,7 +5,7 @@ return [
     'out-of-backups' => 'Looks like we\'ve run out of backups to show you, try going back a page.',
     'no-backups' => 'It looks like there are no backups currently stored for this server.',
     'cannot-create' => 'Backups cannot be created for this server.',
-    'created' => '{{count}} of {{limit}} backups have been created for this server.',
+    'created-count' => '{{count}} of {{limit}} backups have been created for this server.',
     'unlock-backup' => 'Unlock \"{{name}}\"',
     'unlock-message' => 'This backup will no longer be protected from automated or accidental deletions.',
     'restore-backup' => 'Restore \"{{name}}\"',

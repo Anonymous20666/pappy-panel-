@@ -17,6 +17,7 @@ import '@/assets/tailwind.css';
 import Spinner from '@/components/elements/Spinner';
 import { ThemeLoader } from '@/components/ui/ThemeEngine';
 import { Invert } from '@/components/ui/SmartInvert';
+import { LocaleLoader } from '@/components/ui/LanguageSwitcher';
 
 const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
@@ -71,8 +72,9 @@ const App = () => {
     return (
         <Invert>
             <GlobalStylesheet />
-            <ThemeLoader />
             <StoreProvider store={store}>
+                <ThemeLoader />
+                <LocaleLoader />
                 <ProgressBar />
                 <div css={tw`mx-auto w-auto`}>
                     <Router history={history}>

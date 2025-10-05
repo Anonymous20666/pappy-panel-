@@ -72,4 +72,21 @@ class AccountController extends ClientApiController
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }
+
+    public function updateLanguage(Request $request): JsonResponse
+    {
+        $request->validate([
+            "language" => ["required", "string", "max:5"],
+        ]);
+
+        $user = $request->user();
+        $user->language = $request->input("language");
+        $user->save();
+
+        Activity::event("user:account.language-changed")
+            ->property(["new" => $user->language])
+            ->log();
+
+        return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    }
 }

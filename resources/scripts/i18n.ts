@@ -14,10 +14,6 @@ i18n.use(I18NextMultiloadBackendAdapter)
     .use(LanguageDetector)
     .init({
         debug: process.env.DEBUG === 'true',
-        detection: {
-            caches: ['localStorage'],
-            order: ['localStorage'],
-        },
         fallbackLng: 'en',
         keySeparator: '.',
         backend: {

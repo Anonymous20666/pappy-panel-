@@ -16,6 +16,7 @@ import Title from '@/components/ui/Title';
 import { StatBlock } from '@/components/ui/StatBlock';
 import { useStoreState } from 'easy-peasy';
 import Blur from '@/components/ui/Blur';
+import { useTranslation } from 'react-i18next';
 
 type Stats = Record<'memory' | 'cpu' | 'disk', number>;
 
@@ -43,6 +44,8 @@ const TopServerDetails = () => {
         cpu: 0,
         disk: 0,
     });
+    
+    const { t } = useTranslation('server/index');
 
     const [showStats, setShowStats] = useState(false);
     const name = ServerContext.useStoreState((state) => state.server.data?.name);
@@ -116,7 +119,7 @@ const TopServerDetails = () => {
                     className='w-full py-2 bg-gray-700 border border-gray-600 text-gray-100 rounded-ui'
                     onClick={() => setShowStats((prev) => !prev)}
                 >
-                    {showStats ? 'Hide Stats ' : 'Show Stats'}
+                    {showStats ? t('hide-stats') : t('show-stats')}
                 </button>
             </div>
             <StatContainer className={`${showStats ? '' : 'hidden'} flex`}>

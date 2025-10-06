@@ -53,6 +53,7 @@ const ModalContent = ({ ...props }: RequiredModalProps) => {
 };
 
 export default () => {
+    const { t } = useTranslation('server/backups');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const [visible, setVisible] = useState(false);
@@ -94,7 +95,7 @@ export default () => {
                 </Formik>
             )}
             <Button css={tw`w-full sm:w-auto`} onClick={() => setVisible(true)}>
-                Create backup
+                {t('create-backup')}
             </Button>
         </>
     );

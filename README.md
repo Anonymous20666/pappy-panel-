@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://reviactyl.dev/">
-<img width="1920" height="1080" alt="Reviactyl Dashboard" src="https://github.com/user-attachments/assets/329834c4-1146-41a5-8f24-efbfa8b8f0a4" />
+<img width="1280" height="640" alt="Reviactyl Banner" src="https://github.com/user-attachments/assets/a02869d0-f5d3-4391-8f45-cada52aa6916" />
 </a>
 </p>
 

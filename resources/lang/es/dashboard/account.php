@@ -40,7 +40,7 @@ return [
         'enabled' => 'Two-step verification is currently enabled on your account.',
         'disabled' => 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.',
         'button' => 'Configure 2-Factor Authentication',
-        'disable-btn' => 'Desactivar dos pasos',
+        'disable-btn' => 'Disable Two-Step',
         'enable' => 'Enable Two-Step',
         'setup' => [
             'scan' => 'Scan the QR code above using the two-step authentication app of your choice. Then, enter the 6-digit code generated into the field below.',

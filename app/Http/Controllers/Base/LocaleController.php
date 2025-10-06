@@ -8,9 +8,11 @@ use Illuminate\Contracts\Translation\Loader;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\Requests\Base\LocaleRequest;
 use Illuminate\Support\Facades\File;
+use Pterodactyl\Traits\Helpers\AvailableLanguages;
 
 class LocaleController extends Controller
 {
+    use AvailableLanguages;
     protected Loader $loader;
 
     public function __construct(Translator $translator)
@@ -82,12 +84,8 @@ class LocaleController extends Controller
 
     public function list(): JsonResponse
     {
-        $path = resource_path('lang');
-        $dirs = collect(File::directories($path))
-            ->map(fn($dir) => basename($dir))
-            ->filter(fn($dir) => !empty($dir))
-            ->values();
+        $lang = $this->getAvailableLanguages(true);
 
-        return response()->json($dirs);
+        return response()->json($lang);
     }
 }

@@ -6,27 +6,18 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 import { ApplicationStore } from '@/state';
 
-const getLanguageLabel = (code: string) => {
-    try {
-        const displayNames = new Intl.DisplayNames([i18n.language], { type: 'language' });
-        return displayNames.of(code) || code.toUpperCase();
-    } catch {
-        return code.toUpperCase();
-    }
-};
-
 const LanguageSwitcher: React.FC = () => {
     const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: ApplicationStore) => state.user.data);
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
-    const [languages, setLanguages] = useState<string[]>([]);
+    const [languages, setLanguages] = useState<Record<string, string>>({});
     const [currentLang, setCurrentLang] = useState(user?.language || i18n.language);
 
     useEffect(() => {
         fetch('/locales/list.json')
             .then((res) => res.json())
             .then((langs) => setLanguages(langs))
-            .catch(() => setLanguages(['en']));
+            .catch(() => setLanguages({ en: 'English' }));
 
         const onLangChanged = (lng: string) => setCurrentLang(lng);
         i18n.on('languageChanged', onLangChanged);
@@ -52,9 +43,9 @@ const LanguageSwitcher: React.FC = () => {
         <div className='flex justify-between items-center mb-2'>
             <p className='flex-1'>{t('overview.language')}</p>
             <Select className='!pr-15 !w-auto' value={currentLang} onChange={handleChange}>
-                {languages.map((lang) => (
-                    <option key={lang} value={lang}>
-                        {getLanguageLabel(lang)}
+                {Object.entries(languages).map(([code, label]) => (
+                    <option key={code} value={code}>
+                        {label}
                     </option>
                 ))}
             </Select>

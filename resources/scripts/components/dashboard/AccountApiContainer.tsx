@@ -62,7 +62,7 @@ export default () => {
                         {t('api.info')} (<Code>{deleteIdentifier}</Code>)
                     </Dialog.Confirm>
                     {keys.length === 0 ? (
-                        <p css={tw`text-center text-sm`}>{loading ? t('api.loading') : t('api.not-exist')}</p>
+                        <p css={tw`text-center text-sm`}>{loading ? t('overview.loading') : t('api.not-exist')}</p>
                     ) : (
                         keys.map((key, index) => (
                             <GreyRowBox

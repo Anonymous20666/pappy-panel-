@@ -73,6 +73,7 @@ return [
         'not-exist' => 'No API keys exist for this account.',
         'last-used' => 'Last used',
         'never-used' => 'Never',
+        'loading' => 'Loading...'
         'create' => [
             'description-label' => 'Description',
             'description-content' => 'A description of this API key.',

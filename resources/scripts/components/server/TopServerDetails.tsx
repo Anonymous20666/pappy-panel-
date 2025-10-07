@@ -123,7 +123,7 @@ const TopServerDetails = () => {
                 </button>
             </div>
             <StatContainer className={`${showStats ? '' : 'hidden'} flex`}>
-                <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
+                <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <GlobeIcon />
                     </span>
@@ -132,7 +132,7 @@ const TopServerDetails = () => {
                     </CopyOnClick>
                 </StatBlock>
 
-                <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
+                <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <ChipIcon />
                     </span>
@@ -145,7 +145,7 @@ const TopServerDetails = () => {
                     </span>
                 </StatBlock>
 
-                <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
+                <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <FontAwesomeIcon icon={faMemory} />
                     </span>
@@ -158,7 +158,7 @@ const TopServerDetails = () => {
                     </span>
                 </StatBlock>
 
-                <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
+                <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <SaveIcon />
                     </span>
@@ -167,7 +167,7 @@ const TopServerDetails = () => {
                     </span>
                 </StatBlock>
 
-                <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
+                <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <HashtagIcon />
                     </span>

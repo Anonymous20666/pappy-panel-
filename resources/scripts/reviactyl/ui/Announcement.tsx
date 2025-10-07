@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import Md2React from '@/components/ui/Md2React';
+import Md2React from '@/reviactyl/ui/Md2React';
 import { BellIcon, CheckIcon, ExclamationIcon, InboxInIcon, InformationCircleIcon } from '@heroicons/react/solid';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';

@@ -22,7 +22,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath } from '@/helpers';
 import style from './style.module.css';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 import { useTranslation } from 'react-i18next';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {

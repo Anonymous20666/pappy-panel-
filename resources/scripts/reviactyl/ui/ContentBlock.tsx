@@ -2,7 +2,7 @@ import PageContentBlock, { PageContentBlockProps } from '@/components/elements/P
 import React from 'react';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
-import Title from '@/components/ui/Title';
+import Title from '@/reviactyl/ui/Title';
 
 interface Props extends PageContentBlockProps {
     title: string;

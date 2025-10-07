@@ -6,19 +6,19 @@ import TransitionRouter from '@/TransitionRouter';
 import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
 import routes from '@/routers/routes';
-import { RouterContainer } from '@/components/ui/RouterContainer';
-import Navbar from '@/components/ui/Navbar';
-import { LogoContainer } from '@/components/ui/LogoContainer';
+import { RouterContainer } from '@/reviactyl/ui/RouterContainer';
+import Navbar from '@/reviactyl/ui/Navbar';
+import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import tw from 'twin.macro';
-import { ContentContainer } from '@/components/ui/ContentContainer';
+import { ContentContainer } from '@/reviactyl/ui/ContentContainer';
 import { CSSTransition } from 'react-transition-group';
-import Sidebar from '@/components/ui/Sidebar';
+import Sidebar from '@/reviactyl/ui/Sidebar';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
-import Announcement from '@/components/ui/Announcement';
-import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
-import Maintenance from '@/components/ui/Maintenance';
+import Announcement from '@/reviactyl/ui/Announcement';
+import MaintenanceAlert from '@/reviactyl/ui/MaintenanceAlert';
+import Maintenance from '@/reviactyl/ui/Maintenance';
 import { useTranslation } from 'react-i18next';
 
 interface Props {

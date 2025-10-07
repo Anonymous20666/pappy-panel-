@@ -6,12 +6,12 @@ import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResourceUsage';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
 import Spinner from '@/components/elements/Spinner';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 import { ChipIcon, GlobeIcon, SaveIcon, ExclamationIcon } from '@heroicons/react/solid';
-import Title from '@/components/ui/Title';
-import { StatBlock } from '@/components/ui/StatBlock';
+import Title from '@/reviactyl/ui/Title';
+import { StatBlock } from '@/reviactyl/ui/StatBlock';
 import { useTranslation } from 'react-i18next';
-import Blur from '@/components/ui/Blur';
+import Blur from '@/reviactyl/ui/Blur';
 
 // Determines if the current value is in an alarm threshold so we can show it in red rather
 // than the more faded default style.

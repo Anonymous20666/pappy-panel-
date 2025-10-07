@@ -9,13 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMemory } from '@fortawesome/free-solid-svg-icons';
 import Can from '@/components/elements/Can';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
-import Title from '@/components/ui/Title';
-import { StatBlock } from '@/components/ui/StatBlock';
+import Title from '@/reviactyl/ui/Title';
+import { StatBlock } from '@/reviactyl/ui/StatBlock';
 import { useStoreState } from 'easy-peasy';
-import Blur from '@/components/ui/Blur';
+import Blur from '@/reviactyl/ui/Blur';
 import { useTranslation } from 'react-i18next';
 
 type Stats = Record<'memory' | 'cpu' | 'disk', number>;

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import { SideNavigation } from './sidebar/SideNavigation';
 import { Link, NavLink } from 'react-router-dom';
-import Avatar from '@/components/ui/Avatar';
+import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { ExternalLinkIcon, ServerIcon } from '@heroicons/react/solid';

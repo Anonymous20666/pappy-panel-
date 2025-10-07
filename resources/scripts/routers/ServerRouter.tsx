@@ -1,7 +1,7 @@
 import TransferListener from '@/components/server/TransferListener';
 import React, { useEffect, useState } from 'react';
 import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
-import Navbar from '@/components/ui/Navbar';
+import Navbar from '@/reviactyl/ui//Navbar';
 import TransitionRouter from '@/TransitionRouter';
 import WebsocketHandler from '@/components/server/WebsocketHandler';
 import { ServerContext } from '@/state/server';
@@ -17,17 +17,17 @@ import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
-import Sidebar from '@/components/ui/Sidebar';
+import Sidebar from '@/reviactyl/ui/Sidebar';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
-import { LogoContainer } from '@/components/ui/LogoContainer';
+import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import tw from 'twin.macro';
-import { RouterContainer } from '@/components/ui/RouterContainer';
-import { ContentContainer } from '@/components/ui/ContentContainer';
+import { RouterContainer } from '@/reviactyl/ui/RouterContainer';
+import { ContentContainer } from '@/reviactyl/ui/ContentContainer';
 import TopServerDetails from '@/components/server/TopServerDetails';
 import { ApplicationStore } from '@/state';
-import Announcement from '@/components/ui/Announcement';
-import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
-import Maintenance from '@/components/ui/Maintenance';
+import Announcement from '@/reviactyl/ui/Announcement';
+import MaintenanceAlert from '@/reviactyl/ui/MaintenanceAlert';
+import Maintenance from '@/reviactyl/ui/Maintenance';
 import { useTranslation } from 'react-i18next';
 
 interface Props {

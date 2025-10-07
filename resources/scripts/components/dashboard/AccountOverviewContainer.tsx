@@ -8,20 +8,20 @@ import { breakpoint } from '@/theme';
 import styled from 'styled-components/macro';
 import MessageBox from '@/components/MessageBox';
 import { useLocation } from 'react-router-dom';
-import ContentBlock from '@/components/ui/ContentBlock';
-import Card from '@/components/ui/Card';
-import Gravatar from '@/components/ui/Avatar';
+import ContentBlock from '@/reviactyl/ui/ContentBlock';
+import Card from '@/reviactyl/ui/Card';
+import Gravatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import TitledGreyBox from '../elements/TitledGreyBox';
-import Title from '@/components/ui/Title';
+import Title from '@/reviactyl/ui/Title';
 import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import http from '@/api/http';
-import ThemeSelector from '@/components/ui/ThemeEngine';
+import ThemeSelector from '@/reviactyl/ui/ThemeEngine';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
-import { InvertToggle } from '@/components/ui/SmartInvert';
+import LanguageSwitcher from '@/reviactyl/ui/LanguageSwitcher';
+import { InvertToggle } from '@/reviactyl/ui/SmartInvert';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};

@@ -7,10 +7,10 @@ return [
     'no-servers' => 'Não há servidores associados à sua conta.',
     'no-other-servers' => 'Não há outros servidores para exibir.',
     'search' => [
-        'label' => 'Find Servers...',
-        'string-min' => 'Please enter at least three characters to begin searching.',
-        'form-label' => 'Search term',
-        'form-description' => 'Enter a server name, uuid, or allocation to begin searching.',
+        'label' => 'Procurar servidores...',
+        'string-min' => 'Por favor, insira pelo menos três caracteres para começar a pesquisa.',
+        'form-label' => 'Termo de pesquisa',
+        'form-description' => 'Insira um nome de servidor, uuid, ou alocação para começar a pesquisa.',
     ],
     'server' => [
         'online' => 'Online',

@@ -17,6 +17,7 @@ return [
         'smart-invert' => 'Smart Invert',
         'on' => 'On',
         'off' => 'Off',
+        'loading' => 'Loading...'
     ],
     'email' => [
         'password-required' => 'Você deve fornecer a senha atual da conta.',

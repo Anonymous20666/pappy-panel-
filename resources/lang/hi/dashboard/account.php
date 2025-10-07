@@ -17,6 +17,7 @@ return [
         'smart-invert' => 'स्मार्ट इनवर्ट',
         'on' => 'चालू',
         'off' => 'बंद',
+        'loading' => 'Loading...'
     ],
     'email' => [
         'password-required' => 'आपको अपना वर्तमान खाता पासवर्ड प्रदान करना होगा।',

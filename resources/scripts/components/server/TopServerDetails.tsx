@@ -44,7 +44,7 @@ const TopServerDetails = () => {
         cpu: 0,
         disk: 0,
     });
-    
+
     const { t } = useTranslation('server/index');
 
     const [showStats, setShowStats] = useState(false);

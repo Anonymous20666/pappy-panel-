@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Schedules',
-    'no-schedules' => 'There are no schedules configured for this server.',
-    'create-schedule' => 'Create Schedule',
+    'title' => 'Harmonogramy',
+    'no-schedules' => 'Brak skonfigurowanych harmonogramów dla tego serwera.',
+    'create-schedule' => 'Utwórz harmonogram',
 ];

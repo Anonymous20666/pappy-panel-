@@ -28,7 +28,7 @@ const Limit = ({ limit, children }: { limit: string | null; children: React.Reac
 );
 
 const Container = styled.div`
-    ${tw`relative z-10 pt-4`};
+    ${tw`relative z-10 pt-4 pl-2`};
 `;
 
 const UtilContainer = styled.div`
@@ -97,7 +97,7 @@ const TopServerDetails = () => {
 
     return (
         <Container>
-            <Card className={`!p-4 !px-8`}>
+            <Card className={`!p-4 !px-8 max-w-6xl mx-auto w-full`}>
                 <UtilContainer>
                     <div className={'flex items-center gap-x-3'}>
                         <Title className='text-3xl'>{name}</Title>

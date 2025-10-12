@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'title' => 'Dashboard',
-    'other-servers' => 'Showing others\' servers',
-    'your-servers' => 'Showing your servers',
-    'no-servers' => 'There are no servers associated with your account.',
-    'no-other-servers' => 'There are no other servers to display.',
+    'title' => '仪表板',
+    'other-servers' => '显示其他人的服务器',
+    'your-servers' => '展示你的服务器',
+    'no-servers' => '您的账户没有关联的服务器。',
+    'no-other-servers' => '没有其他服务器可显示。',
     'search' => [
         'label' => 'Find Servers...',
         'string-min' => 'Please enter at least three characters to begin searching.',

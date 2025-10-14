@@ -1,24 +1,24 @@
 <?php
 
 return [
-    'username-required' => 'A username or email must be provided.',
-    'password-required' => 'Please enter your account password.',
-    'email-required' => 'A valid email address must be provided to continue.',
+    'username-required' => 'Необходимо указать имя пользователя или адрес электронной почты.',
+    'password-required' => 'Введите пароль вашей учетной записи.',
+    'email-required' => 'Для продолжения необходимо указать действительный адрес электронной почты.',
 
-    'login-title' => 'Login to Continue',
+    'login-title' => 'Войдите, чтобы продолжить',
 
-    'username-label' => 'Username or Email',
-    'password-label' => 'Password',
+    'username-label' => 'Имя пользователя или адрес электронной почты',
+    'password-label' => 'Пароль',
 
-    'login-button' => 'Login',
-    'return' => 'Return to Login',
+    'login-button' => 'Авторизоваться',
+    'return' => 'Вернуться к входу',
 
     'forgot-password' => [
-        'title' => 'Request Password Reset',
-        'label' => 'Forgot Password?',
-        'email-label' => 'Email',
-        'email-content' => 'Enter your account email address to receive instructions on resetting your password.',
-        'send-email' => 'Send Email',
+        'title' => 'Запросить сброс пароля',
+        'label' => 'Забыли пароль?',
+        'email-label' => 'Почта',
+        'email-content' => 'Введите адрес электронной почты вашей учетной записи, чтобы получить инструкции по сбросу пароля.',
+        'send-email' => 'Отправить электронное письмо',
     ],
 
     'checkpoint' => [

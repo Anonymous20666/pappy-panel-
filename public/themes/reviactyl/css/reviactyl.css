@@ -227,3 +227,7 @@ code {
     border: 1px solid #606d7b;
     border-radius: 15px;
 }
+
+.alert {
+    border-radius: 15px !important;
+}

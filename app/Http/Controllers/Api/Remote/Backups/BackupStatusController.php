@@ -34,7 +34,7 @@ class BackupStatusController extends Controller
         /** @var \Pterodactyl\Models\Node $node */
         $node = $request->attributes->get('node');
 
-        /** @var \Pterodactyl\Models\Backup $model */
+        /** @var Backup $model */
         $model = Backup::query()
             ->where('uuid', $backup)
             ->firstOrFail();
@@ -91,7 +91,7 @@ class BackupStatusController extends Controller
      */
     public function restore(Request $request, string $backup): JsonResponse
     {
-        /** @var \Pterodactyl\Models\Backup $model */
+        /** @var Backup $model */
         $model = Backup::query()->where('uuid', $backup)->firstOrFail();
 
         $model->server->update(['status' => null]);
@@ -109,7 +109,7 @@ class BackupStatusController extends Controller
      * the given backup.
      *
      * @throws \Exception
-     * @throws \Pterodactyl\Exceptions\DisplayException
+     * @throws DisplayException
      */
     protected function completeMultipartUpload(Backup $backup, S3Filesystem $adapter, bool $successful, ?array $parts): void
     {

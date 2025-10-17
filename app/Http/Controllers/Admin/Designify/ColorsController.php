@@ -7,15 +7,15 @@ use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Designify\ColorSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use Pterodactyl\Http\Requests\Admin\Designify\ColorSettingsFormRequest;
 
 class ColorsController extends Controller
 {
     public function __construct(
         private AlertsMessageBag $alert,
         private ViewFactory $view,
-        private SettingsRepositoryInterface $settings
+        private SettingsRepositoryInterface $settings,
     ) {
     }
 
@@ -160,9 +160,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:color800', $request->input('reviactyl:color800'));
         $this->settings->set('reviactyl:color900', $request->input('reviactyl:color900'));
 
-        $this->settings->set('reviactyl:theme1:name',     $request->input('reviactyl:theme1:name'));
-        $this->settings->set('reviactyl:theme1:colorPrimary',  $request->input('reviactyl:theme1:colorPrimary'));
-        $this->settings->set('reviactyl:theme1:color50',  $request->input('reviactyl:theme1:color50'));
+        $this->settings->set('reviactyl:theme1:name', $request->input('reviactyl:theme1:name'));
+        $this->settings->set('reviactyl:theme1:colorPrimary', $request->input('reviactyl:theme1:colorPrimary'));
+        $this->settings->set('reviactyl:theme1:color50', $request->input('reviactyl:theme1:color50'));
         $this->settings->set('reviactyl:theme1:color100', $request->input('reviactyl:theme1:color100'));
         $this->settings->set('reviactyl:theme1:color200', $request->input('reviactyl:theme1:color200'));
         $this->settings->set('reviactyl:theme1:color300', $request->input('reviactyl:theme1:color300'));
@@ -173,9 +173,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme1:color800', $request->input('reviactyl:theme1:color800'));
         $this->settings->set('reviactyl:theme1:color900', $request->input('reviactyl:theme1:color900'));
 
-        $this->settings->set('reviactyl:theme2:name',     $request->input('reviactyl:theme2:name'));
-        $this->settings->set('reviactyl:theme2:colorPrimary',  $request->input('reviactyl:theme2:colorPrimary'));
-        $this->settings->set('reviactyl:theme2:color50',  $request->input('reviactyl:theme2:color50'));
+        $this->settings->set('reviactyl:theme2:name', $request->input('reviactyl:theme2:name'));
+        $this->settings->set('reviactyl:theme2:colorPrimary', $request->input('reviactyl:theme2:colorPrimary'));
+        $this->settings->set('reviactyl:theme2:color50', $request->input('reviactyl:theme2:color50'));
         $this->settings->set('reviactyl:theme2:color100', $request->input('reviactyl:theme2:color100'));
         $this->settings->set('reviactyl:theme2:color200', $request->input('reviactyl:theme2:color200'));
         $this->settings->set('reviactyl:theme2:color300', $request->input('reviactyl:theme2:color300'));
@@ -186,9 +186,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme2:color800', $request->input('reviactyl:theme2:color800'));
         $this->settings->set('reviactyl:theme2:color900', $request->input('reviactyl:theme2:color900'));
 
-        $this->settings->set('reviactyl:theme3:name',     $request->input('reviactyl:theme3:name'));
-        $this->settings->set('reviactyl:theme3:colorPrimary',  $request->input('reviactyl:theme3:colorPrimary'));
-        $this->settings->set('reviactyl:theme3:color50',  $request->input('reviactyl:theme3:color50'));
+        $this->settings->set('reviactyl:theme3:name', $request->input('reviactyl:theme3:name'));
+        $this->settings->set('reviactyl:theme3:colorPrimary', $request->input('reviactyl:theme3:colorPrimary'));
+        $this->settings->set('reviactyl:theme3:color50', $request->input('reviactyl:theme3:color50'));
         $this->settings->set('reviactyl:theme3:color100', $request->input('reviactyl:theme3:color100'));
         $this->settings->set('reviactyl:theme3:color200', $request->input('reviactyl:theme3:color200'));
         $this->settings->set('reviactyl:theme3:color300', $request->input('reviactyl:theme3:color300'));
@@ -199,9 +199,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme3:color800', $request->input('reviactyl:theme3:color800'));
         $this->settings->set('reviactyl:theme3:color900', $request->input('reviactyl:theme3:color900'));
 
-        $this->settings->set('reviactyl:theme4:name',     $request->input('reviactyl:theme4:name'));
-        $this->settings->set('reviactyl:theme4:colorPrimary',  $request->input('reviactyl:theme4:colorPrimary'));
-        $this->settings->set('reviactyl:theme4:color50',  $request->input('reviactyl:theme4:color50'));
+        $this->settings->set('reviactyl:theme4:name', $request->input('reviactyl:theme4:name'));
+        $this->settings->set('reviactyl:theme4:colorPrimary', $request->input('reviactyl:theme4:colorPrimary'));
+        $this->settings->set('reviactyl:theme4:color50', $request->input('reviactyl:theme4:color50'));
         $this->settings->set('reviactyl:theme4:color100', $request->input('reviactyl:theme4:color100'));
         $this->settings->set('reviactyl:theme4:color200', $request->input('reviactyl:theme4:color200'));
         $this->settings->set('reviactyl:theme4:color300', $request->input('reviactyl:theme4:color300'));
@@ -212,9 +212,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme4:color800', $request->input('reviactyl:theme4:color800'));
         $this->settings->set('reviactyl:theme4:color900', $request->input('reviactyl:theme4:color900'));
 
-        $this->settings->set('reviactyl:theme5:name',     $request->input('reviactyl:theme5:name'));
-        $this->settings->set('reviactyl:theme5:colorPrimary',  $request->input('reviactyl:theme5:colorPrimary'));
-        $this->settings->set('reviactyl:theme5:color50',  $request->input('reviactyl:theme5:color50'));
+        $this->settings->set('reviactyl:theme5:name', $request->input('reviactyl:theme5:name'));
+        $this->settings->set('reviactyl:theme5:colorPrimary', $request->input('reviactyl:theme5:colorPrimary'));
+        $this->settings->set('reviactyl:theme5:color50', $request->input('reviactyl:theme5:color50'));
         $this->settings->set('reviactyl:theme5:color100', $request->input('reviactyl:theme5:color100'));
         $this->settings->set('reviactyl:theme5:color200', $request->input('reviactyl:theme5:color200'));
         $this->settings->set('reviactyl:theme5:color300', $request->input('reviactyl:theme5:color300'));
@@ -225,9 +225,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme5:color800', $request->input('reviactyl:theme5:color800'));
         $this->settings->set('reviactyl:theme5:color900', $request->input('reviactyl:theme5:color900'));
 
-        $this->settings->set('reviactyl:theme6:name',     $request->input('reviactyl:theme6:name'));
-        $this->settings->set('reviactyl:theme6:colorPrimary',  $request->input('reviactyl:theme6:colorPrimary'));
-        $this->settings->set('reviactyl:theme6:color50',  $request->input('reviactyl:theme6:color50'));
+        $this->settings->set('reviactyl:theme6:name', $request->input('reviactyl:theme6:name'));
+        $this->settings->set('reviactyl:theme6:colorPrimary', $request->input('reviactyl:theme6:colorPrimary'));
+        $this->settings->set('reviactyl:theme6:color50', $request->input('reviactyl:theme6:color50'));
         $this->settings->set('reviactyl:theme6:color100', $request->input('reviactyl:theme6:color100'));
         $this->settings->set('reviactyl:theme6:color200', $request->input('reviactyl:theme6:color200'));
         $this->settings->set('reviactyl:theme6:color300', $request->input('reviactyl:theme6:color300'));
@@ -238,9 +238,9 @@ class ColorsController extends Controller
         $this->settings->set('reviactyl:theme6:color800', $request->input('reviactyl:theme6:color800'));
         $this->settings->set('reviactyl:theme6:color900', $request->input('reviactyl:theme6:color900'));
 
-        $this->settings->set('reviactyl:theme7:name',     $request->input('reviactyl:theme7:name'));
-        $this->settings->set('reviactyl:theme7:colorPrimary',  $request->input('reviactyl:theme7:colorPrimary'));
-        $this->settings->set('reviactyl:theme7:color50',  $request->input('reviactyl:theme7:color50'));
+        $this->settings->set('reviactyl:theme7:name', $request->input('reviactyl:theme7:name'));
+        $this->settings->set('reviactyl:theme7:colorPrimary', $request->input('reviactyl:theme7:colorPrimary'));
+        $this->settings->set('reviactyl:theme7:color50', $request->input('reviactyl:theme7:color50'));
         $this->settings->set('reviactyl:theme7:color100', $request->input('reviactyl:theme7:color100'));
         $this->settings->set('reviactyl:theme7:color200', $request->input('reviactyl:theme7:color200'));
         $this->settings->set('reviactyl:theme7:color300', $request->input('reviactyl:theme7:color300'));

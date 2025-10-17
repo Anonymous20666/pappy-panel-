@@ -7,7 +7,6 @@ use Illuminate\Translation\Translator;
 use Illuminate\Contracts\Translation\Loader;
 use Pterodactyl\Http\Controllers\Controller;
 use Pterodactyl\Http\Requests\Base\LocaleRequest;
-use Illuminate\Support\Facades\File;
 use Pterodactyl\Traits\Helpers\AvailableLanguages;
 
 class LocaleController extends Controller

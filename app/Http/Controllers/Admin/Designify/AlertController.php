@@ -7,15 +7,15 @@ use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Designify\AlertSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use Pterodactyl\Http\Requests\Admin\Designify\AlertSettingsFormRequest;
 
 class AlertController extends Controller
 {
     public function __construct(
         private AlertsMessageBag $alert,
         private ViewFactory $view,
-        private SettingsRepositoryInterface $settings
+        private SettingsRepositoryInterface $settings,
     ) {
     }
 

@@ -21,8 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Carbon\CarbonImmutable $created_at
  * @property \Carbon\CarbonImmutable $updated_at
  * @property \Carbon\CarbonImmutable|null $deleted_at
- * @property \Pterodactyl\Models\Server $server
- * @property \Pterodactyl\Models\AuditLog[] $audits
+ * @property Server $server
+ * @property AuditLog[] $audits
  */
 class Backup extends Model
 {

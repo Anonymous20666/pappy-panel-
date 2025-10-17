@@ -7,15 +7,15 @@ use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use Pterodactyl\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
 
 class GeneralController extends Controller
 {
     public function __construct(
         private AlertsMessageBag $alert,
         private ViewFactory $view,
-        private SettingsRepositoryInterface $settings
+        private SettingsRepositoryInterface $settings,
     ) {
     }
 
@@ -37,7 +37,7 @@ class GeneralController extends Controller
      * Save the general settings.
      */
     public function store(GeneralSettingsFormRequest $request): RedirectResponse
-    {   
+    {
         $customCopyright = filter_var($request->input('reviactyl:customCopyright'), FILTER_VALIDATE_BOOLEAN);
         $isUnderMaintenance = filter_var($request->input('reviactyl:isUnderMaintenance'), FILTER_VALIDATE_BOOLEAN);
         $this->settings->set('reviactyl:logo', $request->input('reviactyl:logo'));

@@ -12,7 +12,8 @@ class DesignifyController extends Controller
     public function __construct(
         private AssetComposer $assetComposer,
         private AlertsMessageBag $alert,
-    ) {}
+    ) {
+    }
 
     /**
      * Reset Reviactyl theme settings to default.

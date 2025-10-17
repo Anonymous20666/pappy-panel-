@@ -31,6 +31,7 @@ class UpdateChecker extends Command
 
         if ($currentVersion === 'canary') {
             $this->info('You are using the development (canary) version. No update check available.');
+
             return Command::SUCCESS;
         }
 
@@ -38,6 +39,7 @@ class UpdateChecker extends Command
             $response = Http::get('https://reviactyl.dev/api/v2/get-version');
             if ($response->failed()) {
                 $this->error('Failed to check for updates.');
+
                 return Command::FAILURE;
             }
 
@@ -46,6 +48,7 @@ class UpdateChecker extends Command
 
             if (!$latestVersion) {
                 $this->error('Server sent invalid response. Reach out to Reviactyl support team.');
+
                 return Command::FAILURE;
             }
 
@@ -62,6 +65,7 @@ class UpdateChecker extends Command
             }
         } catch (\Exception $e) {
             $this->error('Error: ' . $e->getMessage());
+
             return Command::FAILURE;
         }
 

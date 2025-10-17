@@ -7,7 +7,7 @@ return [
     'no-servers' => '您的账户没有关联的服务器。',
     'no-other-servers' => '没有其他服务器可显示。',
     'search' => [
-        'label' => '查找服务器......',
+        'label' => '查找服务器……',
         'string-min' => '请输入至少三个字符以开始搜索。',
         'form-label' => '搜索项',
         'form-description' => '输入服务器名称、UUID 或分配项以开始搜索。',

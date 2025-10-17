@@ -103,10 +103,10 @@ return [
             'rename_other' => '重命名或移动了 :count 个文件',
         ],
         'allocation' => [
-            'create' => '已向服务器添加 :allocation。',
-            'notes' => '已将 :allocation 的备注从 “:old” 更新为 “:new”。',
-            'primary' => '将 :allocation 设置为服务器的主分配项。',
-            'delete' => '已删除 :allocation 分配项。',
+            'create' => '已向服务器添加 :allocation',
+            'notes' => '已将 :allocation 的备注从 “:old” 更新为 “:new”',
+            'primary' => '将 :allocation 设置为服务器的主分配项',
+            'delete' => '已删除 :allocation 分配项',
         ],
         'schedule' => [
             'create' => '创建了计划任务 :name',

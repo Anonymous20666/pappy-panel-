@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'control' => 'Control',
-    'management' => 'Management',
-    'administration' => 'Administration',
-    'start' => 'Start',
-    'stop' => 'Stop',
-    'restart' => 'Restart',
-    'kill' => 'Kill',
-    'kill-warning' => 'Forcibly stopping a server can lead to data corruption.',
-    'hide-stats' => 'Hide Stats',
-    'show-stats' => 'Show Stats',
+    'control' => '控制',
+    'management' => '管理',
+    'administration' => '管理',
+    'start' => '启动',
+    'stop' => '停止',
+    'restart' => '重启',
+    'kill' => '终止',
+    'kill-warning' => '强制停止服务器可能会导致数据损坏。',
+    'hide-stats' => '隐藏统计',
+    'show-stats' => '显示统计',
 ];

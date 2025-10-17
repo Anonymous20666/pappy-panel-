@@ -25,7 +25,7 @@ return [
         'title' => '设备安全检查',
         'recovery-code' => '恢复代码',
         'auth-code' => '验证码',
-        'is-missing' => '请输入您在为此账户设置双重身份验证时生成的恢复代码之一以继续。',
+        'is-missing' => '请输入您在为此账户设置2步身份验证时生成的恢复代码之一以继续。',
         'is-not-missing' => '请输入您的设备生成的双重认证令牌。',
         'button' => '继续',
         'lost-device' => '我遗失了我的设备',
@@ -47,12 +47,12 @@ return [
     'failed' => '未找到与这些凭证匹配的账户。',
 
     'two_factor' => [
-        'label' => '双重身份验证令牌',
+        'label' => '2步身份验证令牌',
         'label_help' => '此账户需要第二层身份验证才能继续。请输入您的设备生成的代码以完成此次登录。',
         'checkpoint_failed' => '双重认证令牌无效。',
     ],
 
     'throttle' => '登录尝试次数过多。请在 :seconds 秒后重试。',
     'password_requirements' => '密码长度必须至少为 8 个字符，且对此站点应是唯一的。',
-    '2fa_must_be_enabled' => '管理员要求您启用双重身份验证后才能使用此面板。',
+    '2fa_must_be_enabled' => '管理员要求您启用2步身份验证后才能使用此面板。',
 ];

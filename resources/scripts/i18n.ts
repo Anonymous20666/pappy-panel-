@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import I18NextHttpBackend, { BackendOptions } from 'i18next-http-backend';
 import I18NextMultiloadBackendAdapter from 'i18next-multiload-backend-adapter';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 // If we're using HMR use a unique hash per page reload so that we're always
 // doing cache busting. Otherwise just use the builder provided hash value in
@@ -10,17 +11,22 @@ const hash = module.hot ? Date.now().toString(16) : process.env.WEBPACK_BUILD_HA
 
 i18n.use(I18NextMultiloadBackendAdapter)
     .use(initReactI18next)
+    .use(LanguageDetector)
     .init({
         debug: process.env.DEBUG === 'true',
-        lng: 'en',
         fallbackLng: 'en',
         keySeparator: '.',
         backend: {
             backend: I18NextHttpBackend,
             backendOption: {
-                loadPath: '/locales/locale.json?locale={{lng}}&namespace={{ns}}',
+                loadPath: (lngs: string[], namespaces: string[]) => {
+                    const lng = lngs.join('+');
+                    const ns = namespaces.join(',');
+                    return `/locales/locale.json?locale=${encodeURIComponent(lng)}&namespace=${encodeURIComponent(ns)}`;
+                },
                 queryStringParams: { hash },
                 allowMultiLoading: true,
+                multiSeparator: ',',
             } as BackendOptions,
         } as Record<string, any>,
         interpolation: {

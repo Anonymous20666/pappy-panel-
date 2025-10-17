@@ -8,9 +8,11 @@ import ActivityLogMetaButton from '@/components/elements/activity/ActivityLogMet
 import { FolderOpenIcon, TerminalIcon } from '@heroicons/react/solid';
 import classNames from 'classnames';
 import style from './style.module.css';
-import Avatar from '@/components/Avatar';
+import Avatar from '@/reviactyl/ui/Avatar';
 import useLocationHash from '@/plugins/useLocationHash';
 import { getObjectKeys, isObject } from '@/lib/objects';
+import { useTranslation } from 'react-i18next';
+import Blur from '@/reviactyl/ui/Blur';
 
 interface Props {
     activity: ActivityLog;
@@ -39,6 +41,7 @@ function wrapProperties(value: unknown): any {
 }
 
 export default ({ activity, children }: Props) => {
+    const { t } = useTranslation('activity');
     const { pathTo } = useLocationHash();
     const actor = activity.relationships.actor;
     const properties = wrapProperties(activity.properties);
@@ -47,14 +50,14 @@ export default ({ activity, children }: Props) => {
         <div className={'grid grid-cols-10 py-4 border-b-2 border-gray-800 last:rounded-b last:border-0 group'}>
             <div className={'hidden sm:flex sm:col-span-1 items-center justify-center select-none'}>
                 <div className={'flex items-center w-10 h-10 rounded-full bg-gray-600 overflow-hidden'}>
-                    <Avatar name={actor?.uuid || 'system'} />
+                    <Avatar email={actor?.uuid || 'system'} />
                 </div>
             </div>
             <div className={'col-span-10 sm:col-span-9 flex'}>
                 <div className={'flex-1 px-4 sm:px-0'}>
                     <div className={'flex items-center text-gray-50'}>
-                        <Tooltip placement={'top'} content={actor?.email || 'System User'}>
-                            <span>{actor?.username || 'System'}</span>
+                        <Tooltip placement={'top'} content={actor?.email || (t('entries.system-user') as string)}>
+                            <span>{actor?.username || t('entries.system')}</span>
                         </Tooltip>
                         <span className={'text-gray-400'}>&nbsp;&mdash;&nbsp;</span>
                         <Link
@@ -65,12 +68,12 @@ export default ({ activity, children }: Props) => {
                         </Link>
                         <div className={classNames(style.icons, 'group-hover:text-gray-300')}>
                             {activity.isApi && (
-                                <Tooltip placement={'top'} content={'Using API Key'}>
+                                <Tooltip placement={'top'} content={t('entries.using-api-key') as string}>
                                     <TerminalIcon />
                                 </Tooltip>
                             )}
                             {activity.event.startsWith('server:sftp.') && (
-                                <Tooltip placement={'top'} content={'Using SFTP'}>
+                                <Tooltip placement={'top'} content={t('entries.using-sftp') as string}>
                                     <FolderOpenIcon />
                                 </Tooltip>
                             )}
@@ -83,7 +86,7 @@ export default ({ activity, children }: Props) => {
                     <div className={'mt-1 flex items-center text-sm'}>
                         {activity.ip && (
                             <span>
-                                {activity.ip}
+                                <Blur>{activity.ip}</Blur>
                                 <span className={'text-gray-400'}>&nbsp;|&nbsp;</span>
                             </span>
                         )}

@@ -89,7 +89,7 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <Fade in={render} timeout={150} appear={appear || true} unmountOnExit onExited={() => onDismissed()}>
             <ModalMask
-                className="bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out"
+                className='bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out'
                 onClick={(e) => e.stopPropagation()}
                 onContextMenu={(e) => e.stopPropagation()}
                 onMouseDown={(e) => {

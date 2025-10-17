@@ -14,12 +14,14 @@ import FlashMessageRender from '@/components/FlashMessageRender';
 import { Actions, useStoreActions } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import asDialog from '@/hoc/asDialog';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     onTokens: (tokens: string[]) => void;
 }
 
 const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
+    const { t } = useTranslation('dashboard/account');
     const [submitting, setSubmitting] = useState(false);
     const [value, setValue] = useState('');
     const [password, setPassword] = useState('');
@@ -74,8 +76,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                 </p>
             </CopyOnClick>
             <p id={'totp-code-description'} className={'mt-6'}>
-                Scan the QR code above using the two-step authentication app of your choice. Then, enter the 6-digit
-                code generated into the field below.
+                {t('2fa.setup.scan')}
             </p>
             <Input.Text
                 aria-labelledby={'totp-code-description'}
@@ -90,7 +91,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                 pattern={'\\d{6}'}
             />
             <label htmlFor={'totp-password'} className={'block mt-3'}>
-                Account Password
+                {t('2fa.setup.password')}
             </label>
             <Input.Text
                 variant={Input.Text.Variants.Loose}
@@ -103,11 +104,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                 <Button.Text onClick={close}>Cancel</Button.Text>
                 <Tooltip
                     disabled={password.length > 0 && value.length === 6}
-                    content={
-                        !token
-                            ? 'Waiting for QR code to load...'
-                            : 'You must enter the 6-digit code and your password to continue.'
-                    }
+                    content={!token ? (t('2fa.setup.waiting') as string) : (t('2fa.setup.enter') as string)}
                     delay={100}
                 >
                     <Button
@@ -115,7 +112,7 @@ const ConfigureTwoFactorForm = ({ onTokens }: Props) => {
                         type={'submit'}
                         form={'enable-totp-form'}
                     >
-                        Enable
+                        {t('2fa.setup.enable')}
                     </Button>
                 </Tooltip>
             </Dialog.Footer>

@@ -10,10 +10,12 @@ import getServerBackups, { Context as ServerBackupContext } from '@/api/swr/getS
 import { ServerContext } from '@/state/server';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import Pagination from '@/components/elements/Pagination';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 import { ArchiveIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 const BackupContainer = () => {
+    const { t } = useTranslation('server/backups');
     const { page, setPage } = useContext(ServerBackupContext);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { data: backups, error, isValidating } = getServerBackups();
@@ -35,7 +37,7 @@ const BackupContainer = () => {
     }
 
     return (
-        <ServerContentBlock title={'Backups'}>
+        <ServerContentBlock title={t('title')}>
             <FlashMessageRender byKey={'backups'} css={tw`mb-4`} />
             <Pagination data={backups} onPageSelect={setPage}>
                 {({ items }) =>
@@ -44,9 +46,7 @@ const BackupContainer = () => {
                         // create additional ones for the server.
                         !backupLimit ? null : (
                             <p css={tw`text-center text-sm text-neutral-300`}>
-                                {page > 1
-                                    ? "Looks like we've run out of backups to show you, try going back a page."
-                                    : 'It looks like there are no backups currently stored for this server.'}
+                                {page > 1 ? t('out-of-backups') : t('no-backups')}
                             </p>
                         )
                     ) : (
@@ -58,17 +58,17 @@ const BackupContainer = () => {
             </Pagination>
             {backupLimit === 0 && (
                 <Card>
-                <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
-                    <ArchiveIcon className="w-5 h-5 mr-1" />
-                    Backups cannot be created for this server.
-                </p>
+                    <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                        <ArchiveIcon className='w-5 h-5 mr-1' />
+                        {t('cannot-create')}
+                    </p>
                 </Card>
             )}
             <Can action={'backup.create'}>
                 <div css={tw`mt-6 sm:flex items-center justify-end`}>
                     {backupLimit > 0 && backups.backupCount > 0 && (
                         <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
-                            {backups.backupCount} of {backupLimit} backups have been created for this server.
+                            {t('created-count', { count: backups.backupCount, limit: backupLimit })}
                         </p>
                     )}
                     {backupLimit > 0 && backupLimit > backups.backupCount && (

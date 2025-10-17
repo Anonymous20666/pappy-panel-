@@ -8,21 +8,21 @@ import { httpErrorToHuman } from '@/api/http';
 import { ApplicationStore } from '@/state';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
+import { useTranslation } from 'react-i18next';
 
 interface Values {
     email: string;
     password: string;
 }
 
-const schema = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().required('You must provide your current account password.'),
-});
-
 export default () => {
+    const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: State<ApplicationStore>) => state.user.data);
     const updateEmail = useStoreActions((state: Actions<ApplicationStore>) => state.user.updateUserEmail);
-
+    const schema = Yup.object().shape({
+        email: Yup.string().email().required(),
+        password: Yup.string().required(t('email.password-required')),
+    });
     const { clearFlashes, addFlash } = useStoreActions((actions: Actions<ApplicationStore>) => actions.flashes);
 
     const submit = (values: Values, { resetForm, setSubmitting }: FormikHelpers<Values>) => {
@@ -33,7 +33,7 @@ export default () => {
                 addFlash({
                     type: 'success',
                     key: 'account:email',
-                    message: 'Your primary email has been updated.',
+                    message: t('email.updated'),
                 })
             )
             .catch((error) =>
@@ -62,11 +62,11 @@ export default () => {
                                 id={'confirm_password'}
                                 type={'password'}
                                 name={'password'}
-                                label={'Confirm Password'}
+                                label={t('email.confirm-password')}
                             />
                         </div>
                         <div css={tw`mt-6`}>
-                            <Button disabled={isSubmitting || !isValid}>Update Email</Button>
+                            <Button disabled={isSubmitting || !isValid}>{t('email.update')}</Button>
                         </div>
                     </Form>
                 </React.Fragment>

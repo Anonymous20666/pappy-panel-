@@ -12,10 +12,12 @@ import tw from 'twin.macro';
 import Fade from '@/components/elements/Fade';
 import ServerContentBlock from '@/components/elements/ServerContentBlock';
 import { useDeepMemoize } from '@/plugins/useDeepMemoize';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 import { DatabaseIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 export default () => {
+    const { t } = useTranslation('server/databases');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const databaseLimit = ServerContext.useStoreState((state) => state.server.data!.featureLimits.databases);
 
@@ -39,7 +41,7 @@ export default () => {
     }, []);
 
     return (
-        <ServerContentBlock title={'Databases'}>
+        <ServerContentBlock title={t('title')}>
             <FlashMessageRender byKey={'databases'} css={tw`mb-4`} />
             {!databases.length && loading ? (
                 <Spinner size={'large'} centered />
@@ -56,20 +58,17 @@ export default () => {
                             ))
                         ) : (
                             <Card>
-                            <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
-                                <DatabaseIcon className="w-5 h-5 mr-1" />
-                                {databaseLimit > 0
-                                    ? 'It looks like you have no databases.'
-                                    : 'Databases cannot be created for this server.'}
-                            </p>
+                                <p css={tw`flex justify-center text-center text-sm text-gray-400`}>
+                                    <DatabaseIcon className='w-5 h-5 mr-1' />
+                                    {databaseLimit > 0 ? t('out-of-databases') : t('no-databases')}
+                                </p>
                             </Card>
                         )}
                         <Can action={'database.create'}>
                             <div css={tw`mt-6 flex items-center justify-end`}>
                                 {databaseLimit > 0 && databases.length > 0 && (
                                     <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
-                                        {databases.length} of {databaseLimit} databases have been allocated to this
-                                        server.
+                                        {t('created', { count: databases.length, limit: databaseLimit })}
                                     </p>
                                 )}
                                 {databaseLimit > 0 && databaseLimit !== databases.length && (

@@ -3,7 +3,7 @@ import React from 'react';
 import { ServerContext } from '@/state/server';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
-import Title from '@/components/ui/Title';
+import Title from '@/reviactyl/ui/Title';
 
 interface Props extends PageContentBlockProps {
     title: string;
@@ -15,7 +15,7 @@ const ServerContentBlock: React.FC<Props> = ({ title, children, ...props }) => {
 
     return (
         <PageContentBlock title={`(${servername}) ${title} | ${name}`} {...props}>
-            <Title className="text-4xl mb-2">{title}</Title>
+            <Title className='text-4xl mb-2'>{title}</Title>
             {children}
         </PageContentBlock>
     );

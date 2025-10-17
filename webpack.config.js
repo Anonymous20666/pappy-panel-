@@ -26,6 +26,24 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.js$/,
+                include: [
+                    path.resolve(__dirname, "resources/scripts"),
+                    path.resolve(__dirname, "node_modules/i18next-browser-languagedetector"),
+                ],
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: [
+                            ["@babel/preset-env", { targets: "defaults" }]
+                        ],
+                        plugins: [
+                            "@babel/plugin-proposal-optional-chaining"
+                        ]
+                    },
+                },
+            },
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules|\.spec\.tsx?$/,
                 loader: 'babel-loader',
@@ -71,6 +89,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 enforce: 'pre',
+                exclude: /i18next-browser-languagedetector/,
                 loader: 'source-map-loader',
             }
         ],
@@ -117,7 +136,7 @@ module.exports = {
             analyzerHost: '0.0.0.0',
             analyzerPort: 8081,
         }) : null
-    ].filter(p => p),
+    ].filter(Boolean),
     optimization: {
         usedExports: true,
         sideEffects: false,
@@ -126,7 +145,6 @@ module.exports = {
         minimize: isProduction,
         minimizer: [
             new TerserPlugin({
-                cache: isProduction,
                 parallel: true,
                 extractComments: false,
                 terserOptions: {

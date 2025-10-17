@@ -1,13 +1,10 @@
 <p align="center">
-<a href="https://revix.cc/">
-<img height="313" alt="image" src="https://github.com/user-attachments/assets/6a8a5238-9d72-4c4e-bad3-f3fa95ade35a" />
+<a href="https://reviactyl.dev/">
+<img width="1280" height="640" alt="Reviactyl Banner" src="https://github.com/user-attachments/assets/a02869d0-f5d3-4391-8f45-cada52aa6916" />
 </a>
 </p>
 
-# Reviactyl - Free Theme For Pterodactyl
-> [!WARNING]
-> Reviactyl is still being developed. Issues are taken as feedback.
-
+# Reviactyl Panel
 
 **Pterodactyl**, a free, open-source game server management panel built with PHP, React, and Go. Designed with security
 in mind, Pterodactyl runs all game servers in isolated Docker containers while exposing a beautiful and intuitive
@@ -15,31 +12,25 @@ UI to end users.
 
 Stop settling for less. Make game servers a first class citizen on your platform.
 
-<img width="1366" height="587" alt="image" src="https://github.com/user-attachments/assets/ca531462-96d1-4cb4-b926-e78e1c017257" />
-
 ## Features
 
 * ` 🌩️ ` **Customizable Options**: Reviactyl Offers various* options that lets you customize the panel to your liking.
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
-<img width="1366" height="621" alt="image" src="https://github.com/user-attachments/assets/45cb0085-26e8-4f1c-93f8-feecd4f7def0" />
 
 ## Sponsors
 
 I would like to extend my sincere thanks to the following sponsors for helping fund Reviactyl's development.
-[Interested in becoming a sponsor?](https://www.patreon.com/cw/bijjuxd)
+[Interested in becoming a sponsor?](https://github.com/sponsors/bijju089)
 
-| Company                                                                           | About                                                                                                                                                                                                                                           |
-|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Servoid Hosting**](https://servoid.pro/)                         | The first and only trusted Indian Game server Hosting company to offer servers at affordable rate.                                                                                                 |
-
+No Sponsors Yet ;(
 
 ## License
 
 Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/PTERO_LICENSE.md))
 
-Reviactyl™, Copyright © 2025 RevixLabs and contributors. (Licensed under [AGPL v3](https://github.com/reviactyl/panel/blob/develop/LICENSE))
+Reviactyl™, Copyright © 2025 Reviactyl and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
 
 ## Star History
 

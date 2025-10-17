@@ -1,7 +1,7 @@
 import TransferListener from '@/components/server/TransferListener';
 import React, { useEffect, useState } from 'react';
 import { NavLink, Route, Switch, useRouteMatch } from 'react-router-dom';
-import Navbar from '@/components/ui/Navbar';
+import Navbar from '@/reviactyl/ui//Navbar';
 import TransitionRouter from '@/TransitionRouter';
 import WebsocketHandler from '@/components/server/WebsocketHandler';
 import { ServerContext } from '@/state/server';
@@ -17,23 +17,25 @@ import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
-import ServerSidebar from '@/components/ui/sidebar/ServerSidebar';
+import Sidebar from '@/reviactyl/ui/Sidebar';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
-import { LogoContainer } from '@/components/ui/LogoContainer';
+import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import tw from 'twin.macro';
-import { RouterContainer } from '@/components/ui/RouterContainer';
-import { ContentContainer } from '@/components/ui/ContentContainer';
+import { RouterContainer } from '@/reviactyl/ui/RouterContainer';
+import { ContentContainer } from '@/reviactyl/ui/ContentContainer';
 import TopServerDetails from '@/components/server/TopServerDetails';
 import { ApplicationStore } from '@/state';
-import Announcement from '@/components/ui/Announcement';
-import MaintenanceAlert from '@/components/ui/MaintenanceAlert';
-import Maintenance from '@/components/ui/Maintenance';
+import Announcement from '@/reviactyl/ui/Announcement';
+import MaintenanceAlert from '@/reviactyl/ui/MaintenanceAlert';
+import Maintenance from '@/reviactyl/ui/Maintenance';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     route: any;
 }
 
 const NavItem = ({ route }: Props) => {
+    const { t } = useTranslation('routes');
     const match = useRouteMatch<{ id: string }>();
 
     const nestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
@@ -50,8 +52,8 @@ const NavItem = ({ route }: Props) => {
             (route.eggId && route.eggId === eggId) ||
             (!route.eggIds && !route.nestIds && !route.nestId && !route.eggId)) && (
             <NavLink id={route.name} to={to(route.path, true)} exact={route.exact}>
-                <span className="flex items-center">
-                    {route.icon && <route.icon className={`w-5 mr-1`}/> } {route.name}
+                <span className='flex items-center'>
+                    {route.icon && <route.icon className={`w-4 mr-1`} />} {route.name ? t(route.name as string) : null}
                 </span>
             </NavLink>
         )
@@ -59,32 +61,33 @@ const NavItem = ({ route }: Props) => {
 };
 
 const ServerNavigation = () => {
-  return (
-   <>
-    {[
-        { label: 'Control', routes: routes.server.control },
-        { label: 'Management', routes: routes.server.management },
-        { label: 'Administration', routes: routes.server.administration },
-    ].map(({ label, routes }) => (
-        <div key={label}>
-            <span className="label">{label}</span>
-            {routes
-                .filter((route) => !!route.name)
-                .map((route) =>
-                    route.permission ? (
-                        <Can key={route.path} action={route.permission} matchAny>
-                            <NavItem route={route} />
-                        </Can>
-                    ) : (
-                        <React.Fragment key={route.path}>
-                            <NavItem route={route} />
-                        </React.Fragment>
-                    )
-                )}
-        </div>
-    ))}
-   </>
-  );
+    const { t } = useTranslation('server/index');
+    return (
+        <>
+            {[
+                { label: t('control'), routes: routes.server.control },
+                { label: t('management'), routes: routes.server.management },
+                { label: t('administration'), routes: routes.server.administration },
+            ].map(({ label, routes }) => (
+                <div key={label}>
+                    <span className='label'>{label}</span>
+                    {routes
+                        .filter((route) => !!route.name)
+                        .map((route) =>
+                            route.permission ? (
+                                <Can key={route.path} action={route.permission} matchAny>
+                                    <NavItem route={route} />
+                                </Can>
+                            ) : (
+                                <React.Fragment key={route.path}>
+                                    <NavItem route={route} />
+                                </React.Fragment>
+                            )
+                        )}
+                </div>
+            ))}
+        </>
+    );
 };
 
 export default () => {
@@ -105,7 +108,7 @@ export default () => {
 
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
-    
+
     const to = (value: string, url = false) => {
         if (value === '/') {
             return url ? match.url : match.path;
@@ -135,109 +138,167 @@ export default () => {
 
     return (
         <React.Fragment key={'server-router'}>
-        {isUnderMaintenance && !rootAdmin ? (
-            <Maintenance />
-        ) : (
-            <RouterContainer>
-            {!uuid || !id ? (
-                error ? (
-                    <ServerError message={error} />
-                ) : (
-                    <Spinner size={'large'} centered />
-                )
+            {isUnderMaintenance && !rootAdmin ? (
+                <Maintenance />
             ) : (
-                <>
-                <Navbar>
-                        <div className="lg:hidden">
-                             <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="text-gray-500 bg-gray-700 p-2 rounded-ui">
-                               {isSidebarOpen ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" /> }
-                             </button>
-                        </div>
-                        <LogoContainer>
-                            <img src={logo} alt="reviactyl" onClick={() => window.location.href = '/'} css={tw`h-[3rem] mt-5 cursor-pointer`} />
-                        </LogoContainer>
-                </Navbar>
-                <ContentContainer>
-                    {isSidebarOpen && (
-                           <div 
-                            onClick={() => setSidebarOpen(false)}
-                            className="fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden"
-                            />
-                        )}
-                    <CSSTransition timeout={150} classNames="fade">
-                        <ServerSidebar isOpen={isSidebarOpen}>
-                                <ServerNavigation />
-                        </ServerSidebar>
-                    </CSSTransition>
-                    <div className="w-full flex-1 overflow-y-auto">
-                    <InstallListener />
-                    <TransferListener />
-                    <WebsocketHandler />
-                    {inConflictState && (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
-                        <ConflictStateRenderer />
+                <RouterContainer>
+                    {!uuid || !id ? (
+                        error ? (
+                            <ServerError message={error} />
+                        ) : (
+                            <Spinner size={'large'} centered />
+                        )
                     ) : (
-                        <ErrorBoundary>
-                            <TopServerDetails />
-                            <Announcement />
-                            <MaintenanceAlert />
-                            <TransitionRouter>
-                                <Switch location={location}>
-                                    {routes.server.control.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
-                                        return (
-                                            ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
-                                            (eggIds && eggIds.includes(serverEggId ?? 0)) ||
-                                            (nestId && serverNestId === nestId) ||
-                                            (eggId && serverEggId === eggId) ||
-                                            (!eggIds && !nestIds && !nestId && !eggId)) && (
-                                            <PermissionRoute key={path} permission={permission} path={to(path)} exact>
-                                                <Spinner.Suspense>
-                                                    <Component />
-                                                </Spinner.Suspense>
-                                            </PermissionRoute>
-                                        )
-                                    );
-                                    })}
-                                    {routes.server.management.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
-                                        return (
-                                            ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
-                                            (eggIds && eggIds.includes(serverEggId ?? 0)) ||
-                                            (nestId && serverNestId === nestId) ||
-                                            (eggId && serverEggId === eggId) ||
-                                            (!eggIds && !nestIds && !nestId && !eggId)) && (
-                                            <PermissionRoute key={path} permission={permission} path={to(path)} exact>
-                                                <Spinner.Suspense>
-                                                    <Component />
-                                                </Spinner.Suspense>
-                                            </PermissionRoute>
-                                        )
-                                    );
-                                    })}
-                                    {routes.server.administration.map(({ path, permission, component: Component, nestIds, eggIds, nestId, eggId }) => {
-                                        return (
-                                            ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
-                                            (eggIds && eggIds.includes(serverEggId ?? 0)) ||
-                                            (nestId && serverNestId === nestId) ||
-                                            (eggId && serverEggId === eggId) ||
-                                            (!eggIds && !nestIds && !nestId && !eggId)) && (
-                                            <PermissionRoute key={path} permission={permission} path={to(path)} exact>
-                                                <Spinner.Suspense>
-                                                    <Component />
-                                                </Spinner.Suspense>
-                                            </PermissionRoute>
-                                        )
-                                    );
-                                    })}
-                                <Route path={'*'} component={NotFound} />
-                                </Switch>
-                            </TransitionRouter>
-                        </ErrorBoundary>
+                        <>
+                            <Navbar>
+                                <div className='lg:hidden'>
+                                    <button
+                                        onClick={() => setSidebarOpen(!isSidebarOpen)}
+                                        className='text-gray-500 bg-gray-700 p-2 rounded-ui'
+                                    >
+                                        {isSidebarOpen ? (
+                                            <XIcon className='w-6 h-6' />
+                                        ) : (
+                                            <MenuIcon className='w-6 h-6' />
+                                        )}
+                                    </button>
+                                </div>
+                                <LogoContainer>
+                                    <img
+                                        src={logo}
+                                        alt='reviactyl'
+                                        onClick={() => (window.location.href = '/')}
+                                        css={tw`h-[3rem] mt-5 cursor-pointer`}
+                                    />
+                                </LogoContainer>
+                            </Navbar>
+                            <ContentContainer>
+                                {isSidebarOpen && (
+                                    <div
+                                        onClick={() => setSidebarOpen(false)}
+                                        className='fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden'
+                                    />
+                                )}
+                                <CSSTransition timeout={150} classNames='fade'>
+                                    <Sidebar isOpen={isSidebarOpen}>
+                                        <ServerNavigation />
+                                    </Sidebar>
+                                </CSSTransition>
+                                <div className='w-full flex-1 overflow-y-auto'>
+                                    <InstallListener />
+                                    <TransferListener />
+                                    <WebsocketHandler />
+                                    {inConflictState &&
+                                    (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
+                                        <ConflictStateRenderer />
+                                    ) : (
+                                        <ErrorBoundary>
+                                            <TopServerDetails />
+                                            <Announcement />
+                                            <MaintenanceAlert />
+                                            <TransitionRouter>
+                                                <Switch location={location}>
+                                                    {routes.server.control.map(
+                                                        ({
+                                                            path,
+                                                            permission,
+                                                            component: Component,
+                                                            nestIds,
+                                                            eggIds,
+                                                            nestId,
+                                                            eggId,
+                                                        }) => {
+                                                            return (
+                                                                ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
+                                                                    (eggIds && eggIds.includes(serverEggId ?? 0)) ||
+                                                                    (nestId && serverNestId === nestId) ||
+                                                                    (eggId && serverEggId === eggId) ||
+                                                                    (!eggIds && !nestIds && !nestId && !eggId)) && (
+                                                                    <PermissionRoute
+                                                                        key={path}
+                                                                        permission={permission}
+                                                                        path={to(path)}
+                                                                        exact
+                                                                    >
+                                                                        <Spinner.Suspense>
+                                                                            <Component />
+                                                                        </Spinner.Suspense>
+                                                                    </PermissionRoute>
+                                                                )
+                                                            );
+                                                        }
+                                                    )}
+                                                    {routes.server.management.map(
+                                                        ({
+                                                            path,
+                                                            permission,
+                                                            component: Component,
+                                                            nestIds,
+                                                            eggIds,
+                                                            nestId,
+                                                            eggId,
+                                                        }) => {
+                                                            return (
+                                                                ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
+                                                                    (eggIds && eggIds.includes(serverEggId ?? 0)) ||
+                                                                    (nestId && serverNestId === nestId) ||
+                                                                    (eggId && serverEggId === eggId) ||
+                                                                    (!eggIds && !nestIds && !nestId && !eggId)) && (
+                                                                    <PermissionRoute
+                                                                        key={path}
+                                                                        permission={permission}
+                                                                        path={to(path)}
+                                                                        exact
+                                                                    >
+                                                                        <Spinner.Suspense>
+                                                                            <Component />
+                                                                        </Spinner.Suspense>
+                                                                    </PermissionRoute>
+                                                                )
+                                                            );
+                                                        }
+                                                    )}
+                                                    {routes.server.administration.map(
+                                                        ({
+                                                            path,
+                                                            permission,
+                                                            component: Component,
+                                                            nestIds,
+                                                            eggIds,
+                                                            nestId,
+                                                            eggId,
+                                                        }) => {
+                                                            return (
+                                                                ((nestIds && nestIds.includes(serverNestId ?? 0)) ||
+                                                                    (eggIds && eggIds.includes(serverEggId ?? 0)) ||
+                                                                    (nestId && serverNestId === nestId) ||
+                                                                    (eggId && serverEggId === eggId) ||
+                                                                    (!eggIds && !nestIds && !nestId && !eggId)) && (
+                                                                    <PermissionRoute
+                                                                        key={path}
+                                                                        permission={permission}
+                                                                        path={to(path)}
+                                                                        exact
+                                                                    >
+                                                                        <Spinner.Suspense>
+                                                                            <Component />
+                                                                        </Spinner.Suspense>
+                                                                    </PermissionRoute>
+                                                                )
+                                                            );
+                                                        }
+                                                    )}
+                                                    <Route path={'*'} component={NotFound} />
+                                                </Switch>
+                                            </TransitionRouter>
+                                        </ErrorBoundary>
+                                    )}
+                                </div>
+                            </ContentContainer>
+                        </>
                     )}
-                    </div>
-                </ContentContainer>
-                </>
+                </RouterContainer>
             )}
-        </RouterContainer>
-        )}
         </React.Fragment>
     );
 };

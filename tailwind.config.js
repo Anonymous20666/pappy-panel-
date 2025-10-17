@@ -28,6 +28,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 header: ['"IBM Plex Sans"', '"Roboto"', 'system-ui', 'sans-serif'],
+                sans: ["var(--font-family)"], 
             },
             colors: {
                 black: '#131a20',

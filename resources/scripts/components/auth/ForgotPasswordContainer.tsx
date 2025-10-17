@@ -13,12 +13,14 @@ import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
 import { AtSymbolIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 interface Values {
     email: string;
 }
 
 export default () => {
+    const { t } = useTranslation('auth');
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
 
@@ -67,25 +69,21 @@ export default () => {
             onSubmit={handleSubmission}
             initialValues={{ email: '' }}
             validationSchema={object().shape({
-                email: string()
-                    .email('A valid email address must be provided to continue.')
-                    .required('A valid email address must be provided to continue.'),
+                email: string().email(t('email-required')).required(t('email-required')),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (
-                <LoginFormContainer title={'Request Password Reset'} css={tw`w-full flex`}>
+                <LoginFormContainer title={t('forgot-password.title')} css={tw`w-full flex`}>
                     <Field
                         icon={AtSymbolIcon}
-                        label={'Email'}
-                        description={
-                            'Enter your account email address to receive instructions on resetting your password.'
-                        }
+                        label={t('forgot-password.email-label')}
+                        description={t('forgot-password.email-content')}
                         name={'email'}
                         type={'email'}
                     />
                     <div css={tw`mt-6`}>
                         <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>
-                            Send Email
+                            {t('forgot-password.send-email')}
                         </Button>
                     </div>
                     {recaptchaEnabled && (
@@ -108,7 +106,7 @@ export default () => {
                             to={'/auth/login'}
                             css={tw`text-sm text-reviactyl/80 tracking-wide no-underline hover:text-reviactyl/50`}
                         >
-                            Return to Login
+                            {t('return')}
                         </Link>
                     </div>
                 </LoginFormContainer>

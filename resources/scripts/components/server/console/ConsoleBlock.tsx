@@ -8,11 +8,11 @@ const Container = styled.div`
 `;
 
 const ConsoleBlock = () => {
-  return (
-    <Container>
-    <Console />
-    </Container>
-  );
+    return (
+        <Container>
+            <Console />
+        </Container>
+    );
 };
 
-export default ConsoleBlock
+export default ConsoleBlock;

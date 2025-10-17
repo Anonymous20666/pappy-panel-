@@ -8,7 +8,7 @@ import { useHistory, useLocation, useParams } from 'react-router';
 import FileNameModal from '@/components/server/files/FileNameModal';
 import Can from '@/components/elements/Can';
 import FlashMessageRender from '@/components/FlashMessageRender';
-import ContentBlock from '@/components/ui/ContentBlock';
+import ContentBlock from '@/reviactyl/ui/ContentBlock';
 import { ServerError } from '@/components/elements/ScreenBlock';
 import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
@@ -20,7 +20,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { encodePathSegments, hashToPath } from '@/helpers';
 import { dirname } from 'path';
 import CodemirrorEditor from '@/components/elements/CodemirrorEditor';
-import Card from '@/components/ui/Card';
+import Card from '@/reviactyl/ui/Card';
 
 export default () => {
     const [error, setError] = useState('');
@@ -93,17 +93,22 @@ export default () => {
                 </Card>
             </ErrorBoundary>
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
-             <Card className="!rounded-none mb-1">
-                <div css={tw`mb-4 p-4 rounded-ui border border-gray-600`}>
-                    <p css={tw`text-neutral-300 text-sm`}>
-                        You&apos;re editing a <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>.pteroignore</code>{' '}
-                        file. Any files or directories listed in here will be excluded from backups. Wildcards are
-                        supported by using an asterisk (<code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>*</code>).
-                        You can negate a prior rule by prepending an exclamation point (
-                        <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>!</code>).
-                    </p>
-                </div>
-             </Card>
+                <Card className='!rounded-none mb-1'>
+                    <div css={tw`mb-4 p-4 rounded-ui border border-gray-600`}>
+                        <p css={tw`text-neutral-300 text-sm`}>
+                            You&apos;re editing a{' '}
+                            <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>
+                                .pteroignore
+                            </code>{' '}
+                            file. Any files or directories listed in here will be excluded from backups. Wildcards are
+                            supported by using an asterisk (
+                            <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>*</code>
+                            ). You can negate a prior rule by prepending an exclamation point (
+                            <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>!</code>
+                            ).
+                        </p>
+                    </div>
+                </Card>
             )}
             <FileNameModal
                 visible={modalVisible}

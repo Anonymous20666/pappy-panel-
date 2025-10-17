@@ -83,10 +83,10 @@ const NewDirectoryDialog: React.FC<Props> = ({ visible, onDismissed }) => {
                                 </Code>
                             </p>
                             <div css={tw`flex justify-end gap-2 mt-6`}>
-                                <Button.Text type="button" onClick={onDismissed}>
+                                <Button.Text type='button' onClick={onDismissed}>
                                     Cancel
                                 </Button.Text>
-                                <Button type="button" onClick={submitForm}>
+                                <Button type='button' onClick={submitForm}>
                                     Create
                                 </Button>
                             </div>

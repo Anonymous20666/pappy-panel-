@@ -15,7 +15,9 @@ import AuthenticatedRoute from '@/components/elements/AuthenticatedRoute';
 import { ServerContext } from '@/state/server';
 import '@/assets/tailwind.css';
 import Spinner from '@/components/elements/Spinner';
-import { ThemeLoader } from '@/components/ui/ThemeEngine';
+import { ThemeLoader } from '@/reviactyl/ui/ThemeEngine';
+import { Invert } from '@/reviactyl/ui/SmartInvert';
+import { LocaleLoader } from '@/reviactyl/ui/LanguageSwitcher';
 
 const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
@@ -68,10 +70,11 @@ const App = () => {
     }
 
     return (
-        <>
+        <Invert>
             <GlobalStylesheet />
-            <ThemeLoader />
             <StoreProvider store={store}>
+                <ThemeLoader />
+                <LocaleLoader />
                 <ProgressBar />
                 <div css={tw`mx-auto w-auto`}>
                     <Router history={history}>
@@ -100,7 +103,7 @@ const App = () => {
                     </Router>
                 </div>
             </StoreProvider>
-        </>
+        </Invert>
     );
 };
 

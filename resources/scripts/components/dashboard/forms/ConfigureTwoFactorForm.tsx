@@ -7,8 +7,10 @@ import SetupTOTPDialog from '@/components/dashboard/forms/SetupTOTPDialog';
 import RecoveryTokensDialog from '@/components/dashboard/forms/RecoveryTokensDialog';
 import DisableTOTPDialog from '@/components/dashboard/forms/DisableTOTPDialog';
 import { useFlashKey } from '@/plugins/useFlash';
+import { useTranslation } from 'react-i18next';
 
 export default () => {
+    const { t } = useTranslation('dashboard/account');
     const [tokens, setTokens] = useState<string[]>([]);
     const [visible, setVisible] = useState<'enable' | 'disable' | null>(null);
     const isEnabled = useStoreState((state: ApplicationStore) => state.user.data!.useTotp);
@@ -30,16 +32,12 @@ export default () => {
             <SetupTOTPDialog open={visible === 'enable'} onClose={() => setVisible(null)} onTokens={onTokens} />
             <RecoveryTokensDialog tokens={tokens} open={tokens.length > 0} onClose={() => setTokens([])} />
             <DisableTOTPDialog open={visible === 'disable'} onClose={() => setVisible(null)} />
-            <p css={tw`text-sm`}>
-                {isEnabled
-                    ? 'Two-step verification is currently enabled on your account.'
-                    : 'You do not currently have two-step verification enabled on your account. Click the button below to begin configuring it.'}
-            </p>
+            <p css={tw`text-sm`}>{isEnabled ? t('2fa.enabled') : t('2fa.disabled')}</p>
             <div css={tw`mt-6`}>
                 {isEnabled ? (
-                    <Button.Danger onClick={() => setVisible('disable')}>Disable Two-Step</Button.Danger>
+                    <Button.Danger onClick={() => setVisible('disable')}>{t('2fa.disable-btn')}</Button.Danger>
                 ) : (
-                    <Button onClick={() => setVisible('enable')}>Enable Two-Step</Button>
+                    <Button onClick={() => setVisible('enable')}>{t('2fa.enable')}</Button>
                 )}
             </div>
         </div>

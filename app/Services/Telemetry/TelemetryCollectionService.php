@@ -41,7 +41,7 @@ class TelemetryCollectionService
             return;
         }
 
-        Http::post('https://telemetry.pterodactyl.io', $data);
+        Http::post('https://telemetry.reviactyl.dev', $data);
     }
 
     /**

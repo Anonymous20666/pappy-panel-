@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'account-overview' => 'Account Overview',
-        '2fa-required' => '需要双重认证',
+        '2fa-required' => '需要2步验证',
         '2fa-alert' => '您的账户必须启用双重认证才能继续。',
         'administrator' => '管理员',
         'user' => '用户',
@@ -17,7 +17,7 @@ return [
         'smart-invert' => '智能反色',
         'on' => '开启',
         'off' => '关闭',
-        'loading' => '加载中......'
+        'loading' => '加载中……'
     ],
     'email' => [
         'password-required' => '您必须提供当前的账户密码。',
@@ -40,13 +40,13 @@ return [
     '2fa' => [
         'enabled' => '您的账户目前已启用两步验证。',
         'disabled' => '您的账户目前未启用两步验证。请点击下方按钮开始配置。',
-        'button' => '配置两步验证',
+        'button' => '配置2步验证',
         'disable-btn' => '禁用两步验证',
         'enable' => '启用两步验证',
         'setup' => [
             'scan' => '使用您选择的两步认证应用程序扫描上方的二维码。然后，将生成的 6 位代码输入到下方字段中。',
             'password' => '账户密码',
-            'waiting' => '正在等待二维码加载...',
+            'waiting' => '正在等待二维码加载……',
             'enter' => '请输入 6 位验证码和您的密码以继续。',
             'enable' => '启用',
         ],

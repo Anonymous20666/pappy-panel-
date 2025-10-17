@@ -8,7 +8,7 @@ return [
     'created-count' => '已为此服务器创建了 {{count}} 个备份，共可创建 {{limit}} 个。',
     'unlock-backup' => '解锁 \"{{name}}\"',
     'unlock-message' => '此备份将不再受到自动或意外删除的保护。',
-    'restore-backup' => '恢复 \"{{name}}\',
+    'restore-backup' => '恢复 \"{{name}}\"',
     'restore-message' => '您的服务器已停止。您将无法控制电源状态、访问文件管理器或创建其他备份，直到恢复完成。',
     'delete-all' => '删除所有文件前恢复备份。',
     'delete-backup' => '删除 \"{{name}}\"',

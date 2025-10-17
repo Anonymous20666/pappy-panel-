@@ -31,12 +31,12 @@
                             <th>Created</th>
                             <th></th>
                         </tr>
-                        @foreach($keys as $key)
+                        @foreach ($keys as $key)
                             <tr>
                                 <td><code>{{ $key->identifier }}{{ decrypt($key->token) }}</code></td>
                                 <td>{{ $key->memo }}</td>
                                 <td>
-                                    @if(!is_null($key->last_used_at))
+                                    @if (!is_null($key->last_used_at))
                                         @datetimeHuman($key->last_used_at)
                                     @else
                                         &mdash;
@@ -61,7 +61,7 @@
     @parent
     <script>
         $(document).ready(function() {
-            $('[data-action="revoke-key"]').click(function (event) {
+            $('[data-action="revoke-key"]').click(function(event) {
                 var self = $(this);
                 event.preventDefault();
                 swal({
@@ -74,21 +74,21 @@
                     confirmButtonText: 'Revoke',
                     confirmButtonColor: '#d9534f',
                     showLoaderOnConfirm: true
-                }, function () {
+                }, function() {
                     $.ajax({
                         method: 'DELETE',
                         url: '/admin/api/revoke/' + self.data('attr'),
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
-                    }).done(function () {
+                    }).done(function() {
                         swal({
                             type: 'success',
                             title: '',
                             text: 'API Key has been revoked.'
                         });
                         self.parent().parent().slideUp();
-                    }).fail(function (jqXHR) {
+                    }).fail(function(jqXHR) {
                         console.error(jqXHR);
                         swal({
                             type: 'error',

@@ -38,20 +38,24 @@
                         @foreach ($mounts as $mount)
                             <tr>
                                 <td class="col-sm-1 middle"><code>{{ $mount->id }}</code></td>
-                                <td class="middle"><a href="{{ route('admin.mounts.view', $mount->id) }}">{{ $mount->name }}</a></td>
+                                <td class="middle"><a
+                                        href="{{ route('admin.mounts.view', $mount->id) }}">{{ $mount->name }}</a></td>
                                 <td class="middle"><code>{{ $mount->source }}</code></td>
                                 <td class="col-sm-2 middle"><code>{{ $mount->target }}</code></td>
 
-                                @if (! in_array($mount->id, $server->mounts->pluck('id')->toArray()))
+                                @if (!in_array($mount->id, $server->mounts->pluck('id')->toArray()))
                                     <td class="col-sm-2 middle">
                                         <span class="label label-primary">Unmounted</span>
                                     </td>
 
                                     <td class="col-sm-1 middle">
-                                        <form action="{{ route('admin.servers.view.mounts.store', [ 'server' => $server->id ]) }}" method="POST">
+                                        <form
+                                            action="{{ route('admin.servers.view.mounts.store', ['server' => $server->id]) }}"
+                                            method="POST">
                                             {!! csrf_field() !!}
                                             <input type="hidden" value="{{ $mount->id }}" name="mount_id" />
-                                            <button type="submit" class="btn btn-xs btn-success"><i class="fa fa-plus"></i></button>
+                                            <button type="submit" class="btn btn-xs btn-success"><i
+                                                    class="fa fa-plus"></i></button>
                                         </form>
                                     </td>
                                 @else
@@ -60,11 +64,14 @@
                                     </td>
 
                                     <td class="col-sm-1 middle">
-                                        <form action="{{ route('admin.servers.view.mounts.delete', [ 'server' => $server->id, 'mount' => $mount->id ]) }}" method="POST">
+                                        <form
+                                            action="{{ route('admin.servers.view.mounts.delete', ['server' => $server->id, 'mount' => $mount->id]) }}"
+                                            method="POST">
                                             @method('DELETE')
                                             {!! csrf_field() !!}
 
-                                            <button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></button>
+                                            <button type="submit" class="btn btn-xs btn-danger"><i
+                                                    class="fa fa-times"></i></button>
                                         </form>
                                     </td>
                                 @endif

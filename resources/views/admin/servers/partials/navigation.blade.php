@@ -7,9 +7,8 @@
         <div class="nav-tabs-custom nav-tabs-floating">
             <ul class="nav nav-tabs">
                 <li class="{{ $router->currentRouteNamed('admin.servers.view') ? 'active' : '' }}">
-                    <a href="{{ route('admin.servers.view', $server->id) }}">About</a>
-                </li>
-                @if ($server->isInstalled())
+                    <a href="{{ route('admin.servers.view', $server->id) }}">About</a></li>
+                @if($server->isInstalled())
                     <li class="{{ $router->currentRouteNamed('admin.servers.view.details') ? 'active' : '' }}">
                         <a href="{{ route('admin.servers.view.details', $server->id) }}">Details</a>
                     </li>

@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('title')
@@ -21,7 +20,8 @@
                     <h3 class="box-title">Mount List</h3>
 
                     <div class="box-tools">
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newMountModal">Create New</button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#newMountModal">Create
+                            New</button>
                     </div>
                 </div>
 
@@ -79,7 +79,8 @@
                             <div class="col-md-12">
                                 <label for="pDescription" class="form-label">Description</label>
                                 <textarea id="pDescription" name="description" class="form-control" rows="4"></textarea>
-                                <p class="text-muted small">A longer description for this mount, must be less than 191 characters.</p>
+                                <p class="text-muted small">A longer description for this mount, must be less than 191
+                                    characters.</p>
                             </div>
 
                             <div class="col-md-6">
@@ -117,7 +118,8 @@
 
                                 <div>
                                     <div class="radio radio-success radio-inline">
-                                        <input type="radio" id="pUserMountableFalse" name="user_mountable" value="0" checked>
+                                        <input type="radio" id="pUserMountableFalse" name="user_mountable" value="0"
+                                            checked>
                                         <label for="pUserMountableFalse">False</label>
                                     </div>
 
@@ -134,7 +136,8 @@
 
                     <div class="modal-footer">
                         {!! csrf_field() !!}
-                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default btn-sm pull-left"
+                            data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-success btn-sm">Create</button>
                     </div>
                 </form>

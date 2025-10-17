@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('title')
@@ -26,12 +25,14 @@
                     <div class="box-body">
                         <div class="form-group">
                             <label for="PUniqueID" class="form-label">Unique ID</label>
-                            <input type="text" id="PUniqueID" class="form-control" value="{{ $mount->uuid }}" disabled />
+                            <input type="text" id="PUniqueID" class="form-control" value="{{ $mount->uuid }}"
+                                disabled />
                         </div>
 
                         <div class="form-group">
                             <label for="pName" class="form-label">Name</label>
-                            <input type="text" id="pName" name="name" class="form-control" value="{{ $mount->name }}" />
+                            <input type="text" id="pName" name="name" class="form-control"
+                                value="{{ $mount->name }}" />
                         </div>
 
                         <div class="form-group">
@@ -42,12 +43,14 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="pSource" class="form-label">Source</label>
-                                <input type="text" id="pSource" name="source" class="form-control" value="{{ $mount->source }}" />
+                                <input type="text" id="pSource" name="source" class="form-control"
+                                    value="{{ $mount->source }}" />
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="pTarget" class="form-label">Target</label>
-                                <input type="text" id="pTarget" name="target" class="form-control" value="{{ $mount->target }}" />
+                                <input type="text" id="pTarget" name="target" class="form-control"
+                                    value="{{ $mount->target }}" />
                             </div>
                         </div>
 
@@ -57,12 +60,14 @@
 
                                 <div>
                                     <div class="radio radio-success radio-inline">
-                                        <input type="radio" id="pReadOnlyFalse" name="read_only" value="0" @if(!$mount->read_only) checked @endif>
+                                        <input type="radio" id="pReadOnlyFalse" name="read_only" value="0"
+                                            @if (!$mount->read_only) checked @endif>
                                         <label for="pReadOnlyFalse">False</label>
                                     </div>
 
                                     <div class="radio radio-warning radio-inline">
-                                        <input type="radio" id="pReadOnly" name="read_only" value="1" @if($mount->read_only) checked @endif>
+                                        <input type="radio" id="pReadOnly" name="read_only" value="1"
+                                            @if ($mount->read_only) checked @endif>
                                         <label for="pReadOnly">True</label>
                                     </div>
                                 </div>
@@ -73,12 +78,14 @@
 
                                 <div>
                                     <div class="radio radio-success radio-inline">
-                                        <input type="radio" id="pUserMountableFalse" name="user_mountable" value="0" @if(!$mount->user_mountable) checked @endif>
+                                        <input type="radio" id="pUserMountableFalse" name="user_mountable" value="0"
+                                            @if (!$mount->user_mountable) checked @endif>
                                         <label for="pUserMountableFalse">False</label>
                                     </div>
 
                                     <div class="radio radio-warning radio-inline">
-                                        <input type="radio" id="pUserMountable" name="user_mountable" value="1" @if($mount->user_mountable) checked @endif>
+                                        <input type="radio" id="pUserMountable" name="user_mountable" value="1"
+                                            @if ($mount->user_mountable) checked @endif>
                                         <label for="pUserMountable">True</label>
                                     </div>
                                 </div>
@@ -91,7 +98,8 @@
                         {!! method_field('PATCH') !!}
 
                         <button name="action" value="edit" class="btn btn-sm btn-primary pull-right">Save</button>
-                        <button name="action" value="delete" class="btn btn-sm btn-danger pull-left muted muted-hover"><i class="fa fa-trash-o"></i></button>
+                        <button name="action" value="delete" class="btn btn-sm btn-danger pull-left muted muted-hover"><i
+                                class="fa fa-trash-o"></i></button>
                     </div>
                 </form>
             </div>
@@ -103,7 +111,8 @@
                     <h3 class="box-title">Eggs</h3>
 
                     <div class="box-tools">
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addEggsModal">Add Eggs</button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addEggsModal">Add
+                            Eggs</button>
                     </div>
                 </div>
 
@@ -118,9 +127,11 @@
                         @foreach ($mount->eggs as $egg)
                             <tr>
                                 <td class="col-sm-2 middle"><code>{{ $egg->id }}</code></td>
-                                <td class="middle"><a href="{{ route('admin.nests.egg.view', $egg->id) }}">{{ $egg->name }}</a></td>
+                                <td class="middle"><a
+                                        href="{{ route('admin.nests.egg.view', $egg->id) }}">{{ $egg->name }}</a></td>
                                 <td class="col-sm-1 middle">
-                                    <button data-action="detach-egg" data-id="{{ $egg->id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                    <button data-action="detach-egg" data-id="{{ $egg->id }}"
+                                        class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -133,7 +144,8 @@
                     <h3 class="box-title">Nodes</h3>
 
                     <div class="box-tools">
-                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addNodesModal">Add Nodes</button>
+                        <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addNodesModal">Add
+                            Nodes</button>
                     </div>
                 </div>
 
@@ -149,10 +161,12 @@
                         @foreach ($mount->nodes as $node)
                             <tr>
                                 <td class="col-sm-2 middle"><code>{{ $node->id }}</code></td>
-                                <td class="middle"><a href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></td>
+                                <td class="middle"><a
+                                        href="{{ route('admin.nodes.view', $node->id) }}">{{ $node->name }}</a></td>
                                 <td class="middle"><code>{{ $node->fqdn }}</code></td>
                                 <td class="col-sm-1 middle">
-                                    <button data-action="detach-node" data-id="{{ $node->id }}" class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
+                                    <button data-action="detach-node" data-id="{{ $node->id }}"
+                                        class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -182,11 +196,9 @@
                                     @foreach ($nests as $nest)
                                         <optgroup label="{{ $nest->name }}">
                                             @foreach ($nest->eggs as $egg)
-
-                                                @if (! in_array($egg->id, $mount->eggs->pluck('id')->toArray()))
+                                                @if (!in_array($egg->id, $mount->eggs->pluck('id')->toArray()))
                                                     <option value="{{ $egg->id }}">{{ $egg->name }}</option>
                                                 @endif
-
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -198,7 +210,8 @@
                     <div class="modal-footer">
                         {!! csrf_field() !!}
 
-                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default btn-sm pull-left"
+                            data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary btn-sm">Add</button>
                     </div>
                 </form>
@@ -226,11 +239,9 @@
                                     @foreach ($locations as $location)
                                         <optgroup label="{{ $location->long }} ({{ $location->short }})">
                                             @foreach ($location->nodes as $node)
-
-                                                @if (! in_array($node->id, $mount->nodes->pluck('id')->toArray()))
+                                                @if (!in_array($node->id, $mount->nodes->pluck('id')->toArray()))
                                                     <option value="{{ $node->id }}">{{ $node->name }}</option>
                                                 @endif
-
                                             @endforeach
                                         </optgroup>
                                     @endforeach
@@ -242,7 +253,8 @@
                     <div class="modal-footer">
                         {!! csrf_field() !!}
 
-                        <button type="button" class="btn btn-default btn-sm pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-default btn-sm pull-left"
+                            data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary btn-sm">Add</button>
                     </div>
                 </form>
@@ -264,7 +276,7 @@
                 placeholder: 'Select nodes..',
             });
 
-            $('button[data-action="detach-egg"]').click(function (event) {
+            $('button[data-action="detach-egg"]').click(function(event) {
                 event.preventDefault();
 
                 const element = $(this);
@@ -273,11 +285,16 @@
                 $.ajax({
                     method: 'DELETE',
                     url: '/admin/mounts/' + {{ $mount->id }} + '/eggs/' + eggId,
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
-                }).done(function () {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                }).done(function() {
                     element.parent().parent().addClass('warning').delay(100).fadeOut();
-                    swal({ type: 'success', title: 'Egg detached.' });
-                }).fail(function (jqXHR) {
+                    swal({
+                        type: 'success',
+                        title: 'Egg detached.'
+                    });
+                }).fail(function(jqXHR) {
                     console.error(jqXHR);
                     swal({
                         title: 'Whoops!',
@@ -287,7 +304,7 @@
                 });
             });
 
-            $('button[data-action="detach-node"]').click(function (event) {
+            $('button[data-action="detach-node"]').click(function(event) {
                 event.preventDefault();
 
                 const element = $(this);
@@ -296,11 +313,16 @@
                 $.ajax({
                     method: 'DELETE',
                     url: '/admin/mounts/' + {{ $mount->id }} + '/nodes/' + nodeId,
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') },
-                }).done(function () {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                }).done(function() {
                     element.parent().parent().addClass('warning').delay(100).fadeOut();
-                    swal({ type: 'success', title: 'Node detached.' });
-                }).fail(function (jqXHR) {
+                    swal({
+                        type: 'success',
+                        title: 'Node detached.'
+                    });
+                }).fail(function(jqXHR) {
                     console.error(jqXHR);
                     swal({
                         title: 'Whoops!',

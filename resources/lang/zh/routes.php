@@ -1,22 +1,25 @@
 <?php
 
 return [
+    'index' => [
+        'dashboard' => 'Dashboard',
+    ],
     'account' => [
-        'overview' => 'Account Overview',
-        'api' => 'API Keys',
-        'ssh' => 'SSH Keys',
-        'activity' => 'Activity',
+        'overview' => '账户概览',
+        'api' => 'API 密钥',
+        'ssh' => 'SSH 密钥',
+        'activity' => '活动日志',
     ],
     'server' => [
-        'console' => 'Console',
-        'files' => 'Files',
-        'startup' => 'Startup',
-        'network' => 'Network',
-        'databases' => 'Databases',
-        'schedules' => 'Schedules',
-        'backups' => 'Backups',
-        'users' => 'Users',
-        'settings' => 'Settings',
-        'activity' => 'Activity',
+        'console' => '控制台',
+        'files' => '文件管理',
+        'startup' => '启动',
+        'network' => '网络',
+        'databases' => '数据库',
+        'schedules' => '定时任务',
+        'backups' => '备份',
+        'users' => '用户',
+        'settings' => '设置',
+        'activity' => '活动日志',
     ],
 ];

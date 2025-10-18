@@ -7,6 +7,7 @@ import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { ExternalLinkIcon, ServerIcon } from '@heroicons/react/solid';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     isOpen?: boolean;
@@ -34,6 +35,7 @@ const Container = styled.div<{ isOpen: boolean }>`
 `;
 
 const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
+    const { t } = useTranslation('routes');
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
@@ -68,7 +70,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
             {dashboard && (
                 <SideNavigation>
                     <NavLink to='/' exact>
-                        <ServerIcon className={`w-5 mr-1`} /> Dashboard
+                        <ServerIcon className={`w-5 mr-1`} /> {t('index.dashboard')}
                     </NavLink>
                 </SideNavigation>
             )}

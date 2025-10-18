@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'index' => [
+        'dashboard' => 'Dashboard',
+    ],
     'account' => [
         'overview' => 'खाता अवलोकन',
         'api' => 'API कुंजियाँ',

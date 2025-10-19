@@ -34,7 +34,7 @@ const NavItem = ({ route }: Props) => {
     return (
         <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
             <span className='flex items-center'>
-                {route.icon && <route.icon className={`w-4 mr-1`} />} {route.name ? t(route.name as string) : null}
+                {route.icon && <route.icon className={`w-5 mr-1`} />} {route.name ? t(route.name as string) : null}
             </span>
         </NavLink>
     );

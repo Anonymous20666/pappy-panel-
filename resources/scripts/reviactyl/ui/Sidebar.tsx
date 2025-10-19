@@ -6,8 +6,9 @@ import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { ExternalLinkIcon, ServerIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
+import { RiSquares2X2 } from '@revicons/react/solid';
 
 interface Props {
     isOpen?: boolean;
@@ -86,7 +87,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
                     <SideNavigation>
                         <NavLink className='mt-2' to='/' exact>
                             <span className='flex items-center'>
-                                <ServerIcon className='w-5 mr-1' /> {t('index.dashboard')}
+                                <RiSquares2X2 className='w-5 mr-1' /> {t('index.dashboard')}
                             </span>
                         </NavLink>
                     </SideNavigation>

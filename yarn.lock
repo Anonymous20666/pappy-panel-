@@ -1511,6 +1511,11 @@
     "@preact/signals-core" "^1.2.2"
     use-sync-external-store "^1.2.0"
 
+"@revicons/react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@revicons/react/-/react-1.0.0.tgz#7357bbe62ffd10eb9b8bae6c7c649ff5e9904931"
+  integrity sha512-1psBgTp+hQbKY2g9Hrb8Xx6zARI+vHtpaxYR6G6KxJorX2fkd0KquxNJyvzTbf0NmAkS/oYuRrSO5PH78mO8YQ==
+
 "@sinclair/typebox@^0.23.3":
   version "0.23.5"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.23.5.tgz#93f7b9f4e3285a7a9ade7557d9a8d36809cbc47d"
@@ -6199,11 +6204,6 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
-
-lucide-react@^0.545.0:
-  version "0.545.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.545.0.tgz#82affd1b581d358356578dd033e11dd17e6493a0"
-  integrity sha512-7r1/yUuflQDSt4f1bpn5ZAocyIxcTyVyBBChSVtBKn5M+392cPmI5YJMWOJKk/HUWGm5wg83chlAZtCcGbEZtw==
 
 lz-string@^1.4.4:
   version "1.4.4"

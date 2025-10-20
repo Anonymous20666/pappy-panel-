@@ -557,10 +557,6 @@ a {
     color: #9aa5b1;
 }
 
-.nav-tabs-custom>.nav-tabs>li.active>a, .nav-tabs-custom>.nav-tabs>li.active:hover>a {
-    color: #9aa5b1;
-}
-
 .input-group .input-group-addon {
     border-color: #606d7b;
     background-color: #515f6cbb;

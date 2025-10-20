@@ -283,3 +283,8 @@ a > i {
 .content-header>h1 {
     font-size: 30px;
 }
+
+.nav-tabs-custom>.nav-tabs>li.active>a, .nav-tabs-custom>.nav-tabs>li.active:hover>a {
+    color: var(--color-primary);
+    font-weight: 600;
+}

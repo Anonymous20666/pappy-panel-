@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Dashboard
+    @lang('admin/index.title')
 @endsection
 
 @section('content-header')
@@ -22,17 +22,13 @@
                 box-danger @endif
         ">
                 <div class="box-header with-border">
-                    <h3 class="box-title">System Information</h3>
+                    <h3 class="box-title">@if ($version->isLatestPanel()) @lang('admin/index.uptodate-header') @else @lang('admin/index.notuptodate-header') @endif</h3>
                 </div>
                 <div class="box-body">
                     @if ($version->isLatestPanel())
-                        You are running Reviactyl Panel version <code>{{ config('app.version') }}</code>. Your panel is
-                        up-to-date!
+                        {!! __('admin/index.uptodate-body', ['version' => config('app.version')]) !!}
                     @else
-                        Your panel is <strong>not up-to-date!</strong> The latest version is <a
-                            href="https://github.com/Pterodactyl/Panel/releases/v{{ $version->getPanel() }}"
-                            target="_blank"><code>{{ $version->getPanel() }}</code></a> and you are currently running
-                        version <code>{{ config('app.version') }}</code>.
+                        {!! __('admin/index.notuptodate-body', ['version' => config('app.version'), 'latest' => $version->getPanel()]) !!}
                     @endif
                 </div>
             </div>
@@ -41,20 +37,20 @@
     <div class="row">
         <div class="col-xs-6 col-sm-3 text-center">
             <a href="{{ $version->getDiscord() }}"><button class="btn btn-warning" style="width:100%;"><i
-                        class="fa fa-fw fa-support"></i> Get Help <small>(via Discord)</small></button></a>
+                        class="fa fa-fw fa-support"></i> @lang('admin/index.help-btn') <small>(via Discord)</small></button></a>
         </div>
         <div class="col-xs-6 col-sm-3 text-center">
-            <a href="https://reviactyl.dev/"><button class="btn btn-primary" style="width:100%;"><i
-                        class="fa fa-fw fa-link"></i> Documentation</button></a>
+            <a href="https://reviactyl.dev/docs"><button class="btn btn-primary" style="width:100%;"><i
+                        class="fa fa-fw fa-link"></i> @lang('admin/index.docs-btn')</button></a>
         </div>
         <div class="clearfix visible-xs-block">&nbsp;</div>
         <div class="col-xs-6 col-sm-3 text-center">
             <a href="https://github.com/reviactyl/panel"><button class="btn btn-primary" style="width:100%;"><i
-                        class="fa fa-fw fa-support"></i> Github</button></a>
+                        class="fa fa-fw fa-github"></i> Github</button></a>
         </div>
         <div class="col-xs-6 col-sm-3 text-center">
             <a href="{{ $version->getDonations() }}"><button class="btn btn-success" style="width:100%;"><i
-                        class="fa fa-fw fa-money"></i> Support the Project</button></a>
+                        class="fa fa-fw fa-money"></i> @lang('admin/index.sponsor-btn')</button></a>
         </div>
     </div>
 
@@ -62,28 +58,26 @@
         <div class="col-sm-6">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Any Feedback?</h3>
+                    <h3 class="box-title">@lang('admin/index.feedback-header')</h3>
                 </div>
                 <div class="box-body">
                     <p class="box-text">
-                        If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your
-                        feedback helps us improve and create even more awesome tools for you.
+                        @lang('admin/index.feedback-body')
                     </p>
-                    <a href="https://github.com/reviactyl/panel/issues" class="btn btn-primary">Share Your Feedback</a>
+                    <a href="https://github.com/reviactyl/panel/issues" class="btn btn-primary"><i class="fa fa-fw fa-github"></i> @lang('admin/index.feedback-btn')</a>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="box box-danger">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Support Us</h3>
+                    <h3 class="box-title">@lang('admin/index.sponsor-header')</h3>
                 </div>
                 <div class="box-body">
                     <p class="box-text">
-                        Help keep Reviactyl growing! Whether it’s donations, spreading the word, or contributing code, your
-                        support makes a real difference and keeps our project thriving.
+                        @lang('admin/index.sponsor-body')
                     </p>
-                    <a href="{{ $version->getDonations() }}" class="btn btn-danger">Get Involved</a>
+                    <a href="{{ $version->getDonations() }}" class="btn btn-danger"><i class="fa fa-fw fa-money"></i> @lang('admin/index.sponsor-btn')</a>
                 </div>
             </div>
         </div>

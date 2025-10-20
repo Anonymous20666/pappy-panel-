@@ -2,7 +2,7 @@
 
 return [
     'index' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Painel',
     ],
     'account' => [
         'overview' => 'Visão Geral da Conta',

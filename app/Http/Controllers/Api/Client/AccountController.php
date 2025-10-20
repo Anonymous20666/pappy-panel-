@@ -80,12 +80,15 @@ class AccountController extends ClientApiController
         ]);
 
         $user = $request->user();
+        $original = $user->language;
         $user->language = $request->input('language');
         $user->save();
 
+        if ($original !== $user->language) {
         Activity::event('user:account.language-changed')
-            ->property(['new' => $user->language])
+            ->property(['old' => $original, 'new' => $user->language])
             ->log();
+        }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);
     }

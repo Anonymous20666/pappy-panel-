@@ -76,20 +76,20 @@
         <aside class="main-sidebar">
             <section class="sidebar">
                 <ul class="sidebar-menu">
-                    <li class="header">Administration</li>
+                    <li class="header">@lang('admin/navigation.administration.title')</li>
                     <li class="{{ Route::currentRouteName() !== 'admin.index' ?: 'active' }}">
                         <a href="{{ route('admin.index') }}">
-                            <i class="RiHomeModern"></i> <span>Overview</span>
+                            <i class="RiHomeModern"></i> <span>@lang('admin/navigation.administration.dashboard')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.settings') ?: 'active' }}">
                         <a href="{{ route('admin.settings') }}">
-                            <i class="RiWrench"></i> <span>Settings</span>
+                            <i class="RiWrench"></i> <span>@lang('admin/navigation.administration.settings')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.api') ?: 'active' }}">
                         <a href="{{ route('admin.api.index') }}">
-                            <i class="RiCube"></i> <span>Application API</span>
+                            <i class="RiCube"></i> <span>@lang('admin/navigation.administration.api')</span>
                         </a>
                     </li>
                     <li class="header">Reviactyl</li>
@@ -98,41 +98,41 @@
                             <i class="RiPaintBrush"></i> <span>Designify</span>
                         </a>
                     </li>
-                    <li class="header">Management</li>
+                    <li class="header">@lang('admin/navigation.management.title')</li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                         <a href="{{ route('admin.databases') }}">
-                            <i class="RiCircleStack"></i> <span>Databases</span>
+                            <i class="RiCircleStack"></i> <span>@lang('admin/navigation.management.databases')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.locations') ?: 'active' }}">
                         <a href="{{ route('admin.locations') }}">
-                            <i class="RiGlobeAlt"></i> <span>Locations</span>
+                            <i class="RiGlobeAlt"></i> <span>@lang('admin/navigation.management.locations')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.nodes') ?: 'active' }}">
                         <a href="{{ route('admin.nodes') }}">
-                            <i class="RiRectangleGroup"></i> <span>Nodes</span>
+                            <i class="RiRectangleGroup"></i> <span>@lang('admin/navigation.management.nodes')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
                         <a href="{{ route('admin.servers') }}">
-                            <i class="RiServer"></i> <span>Servers</span>
+                            <i class="RiServer"></i> <span>@lang('admin/navigation.management.servers')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
                         <a href="{{ route('admin.users') }}">
-                            <i class="RiUsers"></i> <span>Users</span>
+                            <i class="RiUsers"></i> <span>@lang('admin/navigation.management.users')</span>
                         </a>
                     </li>
-                    <li class="header">Service Management</li>
+                    <li class="header">@lang('admin/navigation.service.title')</li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
                         <a href="{{ route('admin.mounts') }}">
-                            <i class="RiViewColumns"></i> <span>Mounts</span>
+                            <i class="RiViewColumns"></i> <span>@lang('admin/navigation.service.mounts')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.nests') ?: 'active' }}">
                         <a href="{{ route('admin.nests') }}">
-                            <i class="RiLifebuoy"></i> <span>Nests</span>
+                            <i class="RiLifebuoy"></i> <span>@lang('admin/navigation.service.nests')</span>
                         </a>
                     </li>
                 </ul>

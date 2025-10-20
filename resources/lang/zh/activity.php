@@ -30,6 +30,7 @@ return [
         'account' => [
             'email-changed' => '邮箱已从 :old 更改为 :new',
             'password-changed' => '密码已更改',
+            'language-changed' => 'Changed language from :old to :new',
         ],
         'api-key' => [
             'create' => '创建了新的 API 密钥 :identifier',

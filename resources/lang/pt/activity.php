@@ -30,7 +30,7 @@ return [
         'account' => [
             'email-changed' => 'E-mail alterado de :old para :new',
             'password-changed' => 'Senha alterada',
-            'language-changed' => 'Changed language from :old to :new',
+            'language-changed' => 'Alterou o idioma de :old para :new',
         ],
         'api-key' => [
             'create' => 'Criada nova chave de API :identifier',

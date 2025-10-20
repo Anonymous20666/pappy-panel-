@@ -11,3 +11,5 @@ files:
     translation: /resources/lang/%two_letters_code%/dashboard/%original_file_name%
   - source: /resources/lang/en/server
     translation: /resources/lang/%two_letters_code%/server/%original_file_name%
+  - source: /resources/lang/en/admin/navigation.php
+    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%

@@ -2,6 +2,6 @@
 
 return [
     'title' => 'Rede',
-    'created' => 'Você está utilizando atualmente {{count}} de {{limit}} allocations permitidas para este servidor.',
-    'create' => 'Criar Allocation',
+    'created' => 'Você está utilizando atualmente {{count}} de {{limit}} alocações permitidas para este servidor.',
+    'create' => 'Criar Alocação',
 ];

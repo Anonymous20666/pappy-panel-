@@ -41,7 +41,7 @@ return [
         'enabled' => 'A verificação em duas etapas está atualmente ativada na sua conta.',
         'disabled' => 'Você não possui a verificação em duas etapas ativada na sua conta. Clique no botão abaixo para configurá-la.',
         'button' => 'Configurar Autenticação de Dois Fatores',
-        'disable-btn' => 'Desativar Two-Step',
+        'disable-btn' => 'Desativar Autenticação em Dois Fatores',
         'enable' => 'Ativar Verificação em Duas Etapas',
         'setup' => [
             'scan' => 'Escaneie o QR Code acima usando o aplicativo de autenticação de sua preferência. Em seguida, insira o código de 6 dígitos gerado no campo abaixo.',

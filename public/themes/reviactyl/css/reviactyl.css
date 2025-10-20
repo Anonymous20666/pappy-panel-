@@ -14,6 +14,10 @@
   --color-950: #09090b;
 }
 
+body {
+    font-family: "Inter", sans-serif !important;
+}
+
 .content-wrapper {
     background-color: var(--color-950);
 }
@@ -254,4 +258,28 @@ code {
 
 a > i {
     margin-left: 5px;
+}
+
+.btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.btn-group>.btn:last-child:not(:first-child):not(.dropdown-toggle) {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.font-thin       { font-weight: 100; }
+.font-extralight { font-weight: 200; }
+.font-light      { font-weight: 300; }
+.font-normal     { font-weight: 400; }
+.font-medium     { font-weight: 500; }
+.font-semibold   { font-weight: 600; }
+.font-bold       { font-weight: 700; }
+.font-extrabold  { font-weight: 800; }
+.font-black      { font-weight: 900; }
+
+.content-header>h1 {
+    font-size: 30px;
 }

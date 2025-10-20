@@ -36,7 +36,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label">Require 2-Factor Authentication</label>
                                 <div>
-                                    <div class="btn-group" data-toggle="buttons">
+                                    <div class="btn-group btn-group-sm" data-toggle="buttons">
                                         @php
                                             $level = old(
                                                 'pterodactyl:auth:2fa_required',

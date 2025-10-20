@@ -243,3 +243,15 @@ code {
 .table-hover>tbody>tr:hover {
     background-color: var(--color-800);
 }
+
+.w-5 {
+    width: 1.25rem;
+}
+
+.h-5 {
+    height: 1.25rem;
+}
+
+a > i {
+    margin-left: 5px;
+}

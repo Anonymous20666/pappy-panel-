@@ -25,6 +25,7 @@
         {!! Theme::css('vendor/adminlte/admin.min.css?t={cache-version}') !!}
         {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
         {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
+        {!! Theme::css('vendor/revicons/revicons.min.css?t={cache-version}') !!}
         {!! Theme::css('css/reviactyl.css?t={cache-version}') !!}
         {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -78,60 +79,60 @@
                     <li class="header">Administration</li>
                     <li class="{{ Route::currentRouteName() !== 'admin.index' ?: 'active' }}">
                         <a href="{{ route('admin.index') }}">
-                            <i class="fa fa-home"></i> <span>Overview</span>
+                            <i class="RiHomeModern"></i> <span>Overview</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.settings') ?: 'active' }}">
                         <a href="{{ route('admin.settings') }}">
-                            <i class="fa fa-wrench"></i> <span>Settings</span>
+                            <i class="RiWrench"></i> <span>Settings</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.api') ?: 'active' }}">
                         <a href="{{ route('admin.api.index') }}">
-                            <i class="fa fa-gamepad"></i> <span>Application API</span>
+                            <i class="RiCube"></i> <span>Application API</span>
                         </a>
                     </li>
                     <li class="header">Reviactyl</li>
                     <li class="{{ Route::currentRouteName() !== 'admin.designify' ?: 'active' }}">
                         <a href="{{ route('admin.designify') }}">
-                            <i class="fa fa-paint-brush"></i> <span>Designify</span>
+                            <i class="RiPaintBrush"></i> <span>Designify</span>
                         </a>
                     </li>
                     <li class="header">Management</li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                         <a href="{{ route('admin.databases') }}">
-                            <i class="fa fa-database"></i> <span>Databases</span>
+                            <i class="RiCircleStack"></i> <span>Databases</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.locations') ?: 'active' }}">
                         <a href="{{ route('admin.locations') }}">
-                            <i class="fa fa-globe"></i> <span>Locations</span>
+                            <i class="RiGlobeAlt"></i> <span>Locations</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.nodes') ?: 'active' }}">
                         <a href="{{ route('admin.nodes') }}">
-                            <i class="fa fa-sitemap"></i> <span>Nodes</span>
+                            <i class="RiRectangleGroup"></i> <span>Nodes</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
                         <a href="{{ route('admin.servers') }}">
-                            <i class="fa fa-server"></i> <span>Servers</span>
+                            <i class="RiServer"></i> <span>Servers</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.users') ?: 'active' }}">
                         <a href="{{ route('admin.users') }}">
-                            <i class="fa fa-users"></i> <span>Users</span>
+                            <i class="RiUsers"></i> <span>Users</span>
                         </a>
                     </li>
                     <li class="header">Service Management</li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.mounts') ?: 'active' }}">
                         <a href="{{ route('admin.mounts') }}">
-                            <i class="fa fa-magic"></i> <span>Mounts</span>
+                            <i class="RiViewColumns"></i> <span>Mounts</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.nests') ?: 'active' }}">
                         <a href="{{ route('admin.nests') }}">
-                            <i class="fa fa-th-large"></i> <span>Nests</span>
+                            <i class="RiLifebuoy"></i> <span>Nests</span>
                         </a>
                     </li>
                 </ul>

@@ -23,12 +23,12 @@
                         <form action="{{ route('admin.users') }}" method="GET">
                             <div class="input-group input-group-sm">
                                 <input type="text" name="filter[email]" class="form-control pull-right"
-                                    value="{{ request()->input('filter.email') }}" placeholder="Search">
+                                    value="{{ request()->input('filter.email') }}" style="border-radius:15px 0px 0px 15px;" placeholder="Search">
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                                     <a href="{{ route('admin.users.new') }}"><button type="button"
                                             class="btn btn-sm btn-primary"
-                                            style="border-radius: 0 3px 3px 0;margin-left:-1px;">Create New</button></a>
+                                            style="border-radius: 0 15px 15px 0;margin-left:-1px;">Create New</button></a>
                                 </div>
                             </div>
                         </form>

@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'title' => 'Dashboard',
-    'uptodate-header' => 'Your Panel is up to date',
-    'uptodate-body' => 'You are currently using <code>:version</code>. Your panel is up-to-date!',
-    'notuptodate-header' => 'Your Panel is not up to date',
-    'notuptodate-body' => '<code>:latest</code> is now available! Read our documentation to update your Panel.',
-    'feedback-header' => 'Any Feedback?',
-    'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',
-    'feedback-btn' => 'Create Issue',
-    'sponsor-header' => 'Support Reviactyl',
-    'sponsor-body' => 'Thank you for using Reviactyl Panel, this could only be achieved through the support of you, our contributors, and the rest of our supporters! We appreciate any and all support from anybody.',
-    'sponsor-btn' => 'Sponsor Project',
+    'title' => 'Painel',
+    'uptodate-header' => 'Seu painel está atualizado',
+    'uptodate-body' => 'Você está usando <code>:version</code>. Seu painel está atualizado!',
+    'notuptodate-header' => 'Seu painel não está atualizado',
+    'notuptodate-body' => '<code>:latest</code> já está disponível! Leia nossa documentação para atualizar seu Painel.',
+    'feedback-header' => 'Algum feedback?',
+    'feedback-body' => 'Se você está gostando dos recursos e da facilidade de uso do Reviactyl, conte para a gente! Seu feedback nos ajuda a melhorar e criar ferramentas ainda mais incríveis para você.',
+    'feedback-btn' => 'Criar problema',
+    'sponsor-header' => 'Suporte Reviactyl',
+    'sponsor-body' => 'Obrigado por usar o Reviactyl Panel. Isso só foi possível graças ao apoio de vocês, dos nossos colaboradores e dos demais apoiadores! Agradecemos todo e qualquer apoio.',
+    'sponsor-btn' => 'Projeto Patrocinador',
 
-    'help-btn' => 'Get Help',
-    'docs-btn' => 'Documentation',
+    'help-btn' => 'Obter ajuda',
+    'docs-btn' => 'Documentação',
 ];

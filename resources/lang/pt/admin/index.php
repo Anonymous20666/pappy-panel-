@@ -8,10 +8,10 @@ return [
     'notuptodate-body' => '<code>:latest</code> já está disponível! Leia nossa documentação para atualizar seu Painel.',
     'feedback-header' => 'Algum feedback?',
     'feedback-body' => 'Se você está gostando dos recursos e da facilidade de uso do Reviactyl, conte para a gente! Seu feedback nos ajuda a melhorar e criar ferramentas ainda mais incríveis para você.',
-    'feedback-btn' => 'Criar problema',
+    'feedback-btn' => 'Criar Issue',
     'sponsor-header' => 'Suporte Reviactyl',
     'sponsor-body' => 'Obrigado por usar o Reviactyl Panel. Isso só foi possível graças ao apoio de vocês, dos nossos colaboradores e dos demais apoiadores! Agradecemos todo e qualquer apoio.',
-    'sponsor-btn' => 'Projeto Patrocinador',
+    'sponsor-btn' => 'Virar patrocinador',
 
     'help-btn' => 'Obter ajuda',
     'docs-btn' => 'Documentação',

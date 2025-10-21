@@ -25,7 +25,7 @@
         {!! Theme::css('vendor/adminlte/admin.min.css?t={cache-version}') !!}
         {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
         {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
-        {!! Theme::css('vendor/revicons/revicons.min.css?t={cache-version}') !!}
+        {!! Theme::css('vendor/revicons/solid.min.css?t={cache-version}') !!}
         {!! Theme::css('css/reviactyl.css?t={cache-version}') !!}
         {!! Theme::css('css/pterodactyl.css?t={cache-version}') !!}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

@@ -22,49 +22,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
-                <div class="text-center">
-                    <a href="https://discord.gg/ZrRsNKK94R">
-                        <button
-                            class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded shadow">
-                            <i class="fa-brands fa-discord"></i>
-                            Get Help <small class="text-xs">(via Discord)</small>
-                        </button>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a href="https://docs.revix.cc/">
-                        <button
-                            class="w-full px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded shadow">
-                            <i class="fa-solid fa-book"></i>
-                            Documentation
-                        </button>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a href="https://github.com/revixlabs/reviactyl">
-                        <button
-                            class="w-full px-4 py-2 bg-zinc-600 hover:bg-zinc-700 text-white font-medium rounded shadow">
-                            <i class="fa-brands fa-github"></i>
-                            GitHub
-                        </button>
-                    </a>
-                </div>
-
-                <div class="text-center">
-                    <a href="https://revix.cc/donate">
-                        <button
-                            class="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded shadow">
-                            <i class="fa-solid fa-heart"></i>
-                            Support the Project
-                        </button>
-                    </a>
-                </div>
-            </div>
         </section>
-
     </div>
 @endsection

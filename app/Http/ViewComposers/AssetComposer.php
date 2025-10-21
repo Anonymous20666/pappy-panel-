@@ -125,7 +125,7 @@ class AssetComposer
         $this->reviactylDefaults = [
             'logo' => '/reviactyl/logo.png',
             'customCopyright' => true,
-            'copyright' => 'Powered by [Reviactyl](https://revix.cc)',
+            'copyright' => 'Powered by [Reviactyl](https://reviactyl.dev/)',
             'isUnderMaintenance' => false,
             'maintenance' => 'We are currently under maintenance. Kindly check back later!',
             'colorPrimary' => '#3b82f6',
@@ -155,7 +155,7 @@ class AssetComposer
             'allocationBlur' => true,
             'alertType' => 'info',
             'alertMessage' => '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.',
-            'site_color' => '#EF5C29',
+            'site_color' => '#3b82f6',
             'site_title' => 'Reviactyl',
             'site_description' => 'Our official control panel made better with Reviactyl.',
             'site_image' => '/reviactyl/logo.png',

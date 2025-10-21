@@ -81,7 +81,7 @@
                     <li class="header">@lang('admin/navigation.administration.title')</li>
                     <li class="{{ Route::currentRouteName() !== 'admin.index' ?: 'active' }}">
                         <a href="{{ route('admin.index') }}">
-                            <i class="RiHomeModern"></i> <span>@lang('admin/navigation.administration.dashboard')</span>
+                            <i class="RiHome"></i> <span>@lang('admin/navigation.administration.dashboard')</span>
                         </a>
                     </li>
                     <li class="{{ !starts_with(Route::currentRouteName(), 'admin.settings') ?: 'active' }}">

@@ -337,3 +337,39 @@ input:checked + .slider {
 input:checked + .slider:before {
     transform: translateX(24px);
 }
+
+.box-body {
+    padding: 18px;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Inter', sans-serif;
+}
+
+hr {
+    border-top: 1px solid var(--color-800);
+}
+
+.alert-danger {
+    color: #ffffff !important;
+    background: none !important;
+    border: 1px solid #841d1d;
+}
+
+.alert-info {
+    color: #ffffff !important;
+    background: none !important;
+    border: 1px solid #1055a5;
+}
+
+.alert-success {
+    color: #ffffff !important;
+    background: none !important;
+    border: 1px solid #2b5f33;
+}
+
+.alert-warning {
+    color: #ffffff !important;
+    background: none !important;
+    border: 1px solid #b45b05;
+}

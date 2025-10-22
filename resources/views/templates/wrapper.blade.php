@@ -12,7 +12,7 @@
         <meta name="robots" content="noindex">
         <meta name="title" content="{{ $reviactylConfiguration['site_title'] }}" />
         <meta name="description" content="{{ $reviactylConfiguration['site_description'] }}" />
-        <link rel="icon" type="image/x-icon" href="{{ $reviactylConfiguration['site_favicon'] }}">
+        <link rel="icon" type="image/x-icon" href="{{ $siteConfiguration['icon'] }}">
         @if ($siteConfiguration['pwa'])
         <link rel="manifest" href="{{ url('manifest.json') }}">
         <link rel="apple-touch-icon" href="{{ asset('favicons/android-icon-192x192.png') }}">

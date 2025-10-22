@@ -20,7 +20,8 @@ const CardContainer = styled.div`
 `;
 
 export default () => {
-    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
+    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const maintenance = useStoreState((state) => state.reviactyl.data!.maintenance);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const onTriggerLogout = () => {
@@ -35,7 +36,7 @@ export default () => {
             <Container>
                 <CardContainer>
                     <LogoContainer>
-                        <img src={logo} alt='reviactyl' css={tw`h-[3rem]`} />
+                        <img src={logo} alt={name} css={tw`h-[3rem]`} />
                     </LogoContainer>
                     <Card>
                         <SpinnerOverlay visible={isLoggingOut} />

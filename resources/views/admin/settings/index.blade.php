@@ -29,8 +29,6 @@
                                 <div>
                                     <input type="text" class="form-control" name="app:name"
                                         value="{{ old('app:name', config('app.name')) }}" />
-                                    <p class="text-muted"><small>This is the name that is used throughout the panel and in
-                                            emails sent to clients.</small></p>
                                 </div>
                             </div>
                             <div class="form-group col-md-3">
@@ -59,10 +57,10 @@
                                 </label>
                                 </div>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label class="control-label">2FA Requirement</label>
                                 <div>
-                                    <div class="btn-group btn-group-xl" data-toggle="buttons">
+                                    <div class="btn-group btn-group-sm" data-toggle="buttons">
                                         @php
                                             $level = old(
                                                 'pterodactyl:auth:2fa_required',
@@ -83,12 +81,9 @@
                                                 value="2" @if ($level == 2) checked @endif> All Users
                                         </label>
                                     </div>
-                                    <p class="text-muted"><small>If enabled, any account falling into the selected grouping
-                                            will be required to have 2-Factor authentication enabled to use the
-                                            Panel.</small></p>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label class="control-label">Progressive Web App</label>
                                 <div>
                                     <select class="form-control" name="app:pwa">
@@ -96,7 +91,15 @@
                                         <option value="false" @if (old('app:pwa', config('app.pwa')) == '0') selected @endif>Disabled
                                         </option>
                                     </select>
-                                    <p class="text-muted small">If enabled, users will be able to install your panel as PWA.</p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Avatar Provider</label>
+                                <div>
+                                    <select class="form-control" name="app:avatar">
+                                        <option value="gravatar">Gravatar</option>
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

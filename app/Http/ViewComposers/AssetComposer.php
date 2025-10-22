@@ -176,6 +176,7 @@ class AssetComposer
             'locale' => config('app.locale') ?? 'en',
             'pwa' => config('app.pwa', false),
             'debug' => config('app.debug', false),
+            'avatar' => config('app.avatar') ?? 'gravatar',
             'recaptcha' => [
                 'enabled' => config('recaptcha.enabled', false),
                 'siteKey' => config('recaptcha.website_key') ?? '',

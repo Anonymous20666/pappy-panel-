@@ -2,22 +2,22 @@
 
 return [
     'administration' => [
-        'title' => 'Administration',
-        'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'api' => 'Application API',
+        'title' => 'Administración',
+        'dashboard' => 'Panel de control',
+        'settings' => 'Ajustes',
+        'api' => 'API de la aplicación',
     ],
     'management' => [
-        'title' => 'Management',
-        'databases' => 'Databases',
-        'locations' => 'Locations',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'users' => 'Users',
+        'title' => 'Gestión',
+        'databases' => 'Bases de datos',
+        'locations' => 'Ubicaciones',
+        'nodes' => 'Nodos',
+        'servers' => 'Servidores',
+        'users' => 'Usuarios',
     ],
     'service' => [
-        'title' => 'Service Management',
-        'mounts' => 'Mounts',
-        'nests' => 'Nests',
+        'title' => 'Gestión de servicios',
+        'mounts' => 'Monturas',
+        'nests' => 'Nidos',
     ],
 ];

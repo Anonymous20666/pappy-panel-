@@ -63,17 +63,14 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label">Default Language</label>
+                                <label class="control-label">Progressive Web App</label>
                                 <div>
-                                    <select name="app:locale" class="form-control">
-                                        @foreach ($languages as $key => $value)
-                                            <option value="{{ $key }}"
-                                                @if (config('app.locale') === $key) selected @endif>{{ $value }}
-                                            </option>
-                                        @endforeach
+                                    <select class="form-control" name="app:pwa">
+                                        <option value="true">Enabled</option>
+                                        <option value="false" @if (old('app:pwa', config('app.pwa')) == '0') selected @endif>Disabled
+                                        </option>
                                     </select>
-                                    <p class="text-muted"><small>The default language to use when rendering UI
-                                            components.</small></p>
+                                    <p class="text-muted small">If enabled, users will be able to install your panel as PWA.</p>
                                 </div>
                             </div>
                         </div>

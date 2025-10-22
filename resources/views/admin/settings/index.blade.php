@@ -24,13 +24,40 @@
                 <form action="{{ route('admin.settings') }}" method="POST">
                     <div class="box-body">
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label class="control-label">App Name<sup class="required">*</sup></label>
                                 <div>
                                     <input type="text" class="form-control" name="app:name"
                                         value="{{ old('app:name', config('app.name')) }}" />
                                     <p class="text-muted"><small>This is the name that is used throughout the panel and in
                                             emails sent to clients.</small></p>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">App Logo<sup class="required">*</sup></label>
+                                <div>
+                                    <input type="text" class="form-control" name="app:logo"
+                                        value="{{ old('app:logo', config('app.logo')) }}" />
+                                </div>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">App Favicon<sup class="required">*</sup></label>
+                                <div>
+                                    <input type="text" class="form-control" name="app:icon"
+                                        value="{{ old('app:icon', config('app.icon')) }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Debug</label>
+                                <div>
+                                    <select class="form-control" name="app:debug">
+                                        <option value="true">Enabled</option>
+                                        <option value="false" @if (old('app:debug', config('app.debug')) == '0') selected @endif>Disabled
+                                        </option>
+                                    </select>
+                                    <p class="text-muted small">Not recommended for production.</p>
                                 </div>
                             </div>
                             <div class="form-group col-md-4">

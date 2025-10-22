@@ -28,6 +28,30 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Logo
+    |--------------------------------------------------------------------------
+    |
+    | This value is the logo of your application. This value is used when the
+    | framework needs to place the application's logo in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'logo' => env('APP_LOGO', '/reviactyl/logo.png'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Icon
+    |--------------------------------------------------------------------------
+    |
+    | This value is the icon of your application. This value is used when the
+    | framework needs to place the application's icon in a notification or
+    | any other location as required by the application or its packages.
+    */
+
+    'icon' => env('APP_ICON', '/favicons/favicon.ico'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |

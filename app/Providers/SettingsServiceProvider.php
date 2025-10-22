@@ -18,7 +18,10 @@ class SettingsServiceProvider extends ServiceProvider
      */
     protected array $keys = [
         'app:name',
+        'app:logo',
+        'app:icon',
         'app:locale',
+        'app:debug',
         'app:pwa',
         'recaptcha:enabled',
         'recaptcha:secret_key',

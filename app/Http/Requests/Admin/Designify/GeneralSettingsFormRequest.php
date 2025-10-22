@@ -12,7 +12,6 @@ class GeneralSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'reviactyl:logo' => 'required|string',
             'reviactyl:customCopyright' => 'required|in:true,false',
             'reviactyl:copyright' => 'required|string',
             'reviactyl:isUnderMaintenance' => 'required|in:true,false',

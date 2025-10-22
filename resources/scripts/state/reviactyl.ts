@@ -1,7 +1,6 @@
 import { action, Action } from 'easy-peasy';
 
 export interface ReviactylSettings {
-    logo: string;
     customCopyright: boolean;
     copyright: string;
     isUnderMaintenance: boolean;

@@ -55,7 +55,8 @@ const DashboardNavigation = () => {
 export default () => {
     const location = useLocation();
     const [isSidebarOpen, setSidebarOpen] = useState(false);
-    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
+    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     return (
@@ -76,7 +77,7 @@ export default () => {
                         <LogoContainer>
                             <img
                                 src={logo}
-                                alt='reviactyl'
+                                alt={name}
                                 onClick={() => (window.location.href = '/')}
                                 css={tw`h-[3rem] mt-5 cursor-pointer`}
                             />

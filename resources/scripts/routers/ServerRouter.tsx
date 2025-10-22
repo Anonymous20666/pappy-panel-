@@ -104,7 +104,8 @@ export default () => {
     const inConflictState = ServerContext.useStoreState((state) => state.server.inConflictState);
     const getServer = ServerContext.useStoreActions((actions) => actions.server.getServer);
     const clearServerState = ServerContext.useStoreActions((actions) => actions.clearServerState);
-    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
+    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
 
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
@@ -166,7 +167,7 @@ export default () => {
                                 <LogoContainer>
                                     <img
                                         src={logo}
-                                        alt='reviactyl'
+                                        alt={name}
                                         onClick={() => (window.location.href = '/')}
                                         css={tw`h-[3rem] mt-5 cursor-pointer`}
                                     />

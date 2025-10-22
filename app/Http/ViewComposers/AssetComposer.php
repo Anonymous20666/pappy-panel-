@@ -123,7 +123,6 @@ class AssetComposer
         private SettingsRepositoryInterface $settings,
     ) {
         $this->reviactylDefaults = [
-            'logo' => '/reviactyl/logo.png',
             'customCopyright' => true,
             'copyright' => 'Powered by [Reviactyl](https://reviactyl.dev/)',
             'isUnderMaintenance' => false,

@@ -23,14 +23,15 @@ const CardContainer = styled.div`
 `;
 
 export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => {
-    const logo = useStoreState((state: ApplicationStore) => state.reviactyl.data!.logo);
+    const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
+    const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     return (
         <Container>
             <FlashMessageRender css={tw`mb-2 px-1`} />
             <Form {...props} ref={ref}>
                 <CardContainer>
                     <LogoContainer>
-                        <img src={logo} alt='reviactyl' css={tw`h-[3rem]`} />
+                        <img src={logo} alt={name} css={tw`h-[3rem]`} />
                     </LogoContainer>
                     <Card>
                         {title && <Title className='text-3xl text-center pb-3'>{title}</Title>}

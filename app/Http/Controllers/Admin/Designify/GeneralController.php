@@ -25,7 +25,6 @@ class GeneralController extends Controller
     public function index(): View
     {
         return $this->view->make('admin.designify.general', [
-            'logo' => $this->settings->get('reviactyl:logo', '/reviactyl/logo.png'),
             'customCopyright' => $this->settings->get('reviactyl:customCopyright', true) ? 'true' : 'false',
             'copyright' => $this->settings->get('reviactyl:copyright', 'Powered by [Reviactyl](https://revix.cc)'),
             'isUnderMaintenance' => $this->settings->get('reviactyl:isUnderMaintenance', false) ? 'true' : 'false',
@@ -40,7 +39,6 @@ class GeneralController extends Controller
     {
         $customCopyright = filter_var($request->input('reviactyl:customCopyright'), FILTER_VALIDATE_BOOLEAN);
         $isUnderMaintenance = filter_var($request->input('reviactyl:isUnderMaintenance'), FILTER_VALIDATE_BOOLEAN);
-        $this->settings->set('reviactyl:logo', $request->input('reviactyl:logo'));
         $this->settings->set('reviactyl:customCopyright', $customCopyright);
         $this->settings->set('reviactyl:copyright', $request->input('reviactyl:copyright'));
         $this->settings->set('reviactyl:isUnderMaintenance', $isUnderMaintenance);

@@ -19,13 +19,13 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Panel Settings</h3>
+                    <h3 class="box-title">General Settings</h3>
                 </div>
                 <form action="{{ route('admin.settings') }}" method="POST">
                     <div class="box-body">
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label class="control-label">Company Name</label>
+                                <label class="control-label">App Name<sup class="required">*</sup></label>
                                 <div>
                                     <input type="text" class="form-control" name="app:name"
                                         value="{{ old('app:name', config('app.name')) }}" />
@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label">Require 2-Factor Authentication</label>
+                                <label class="control-label">2FA Requirement</label>
                                 <div>
                                     <div class="btn-group btn-group-sm" data-toggle="buttons">
                                         @php

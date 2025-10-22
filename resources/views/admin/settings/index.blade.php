@@ -49,21 +49,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label">Debug</label>
+                            <div class="form-group col-md-2">
+                                <label class="control-label">Debug Mode</label>
                                 <div>
-                                    <select class="form-control" name="app:debug">
-                                        <option value="true">Enabled</option>
-                                        <option value="false" @if (old('app:debug', config('app.debug')) == '0') selected @endif>Disabled
-                                        </option>
-                                    </select>
-                                    <p class="text-muted small">Not recommended for production.</p>
+                                <label class="toggle-switch">
+                                    <input type="hidden" name="app:debug" value="false">
+                                    <input type="checkbox" name="app:debug" value="true" @checked(old('app:debug', config('app.debug')) == true)>
+                                    <span class="slider"></span>
+                                </label>
                                 </div>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-6">
                                 <label class="control-label">2FA Requirement</label>
                                 <div>
-                                    <div class="btn-group btn-group-sm" data-toggle="buttons">
+                                    <div class="btn-group btn-group-xl" data-toggle="buttons">
                                         @php
                                             $level = old(
                                                 'pterodactyl:auth:2fa_required',

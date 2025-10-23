@@ -17,7 +17,7 @@ class StatsTransformer extends BaseClientTransformer
      */
     public function transform(array $data): array
     {
-        return [
+        $response = [
             'current_state' => Arr::get($data, 'state', 'stopped'),
             'is_suspended' => Arr::get($data, 'is_suspended', false),
             'resources' => [
@@ -29,5 +29,19 @@ class StatsTransformer extends BaseClientTransformer
                 'uptime' => Arr::get($data, 'utilization.uptime', 0),
             ],
         ];
+
+        // Optionally include players if present in the data (from controller augmentation)
+        if (isset($data['players']) && is_array($data['players'])) {
+            $online = Arr::get($data, 'players.online');
+            $max = Arr::get($data, 'players.max');
+            if (is_int($online) && is_int($max)) {
+                $response['players'] = [
+                    'online' => $online,
+                    'max' => $max,
+                ];
+            }
+        }
+
+        return $response;
     }
 }

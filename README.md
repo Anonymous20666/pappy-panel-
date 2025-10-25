@@ -17,6 +17,7 @@ Stop settling for less. Make game servers a first class citizen on your platform
 * ` 🌩️ ` **Customizable Options**: Reviactyl Offers various* options that lets you customize the panel to your liking.
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
+* ` 🌍 ` **Multilingual**: Reviactyl is fully translatable and can be localized to your native language.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
 
 ## Sponsors

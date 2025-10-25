@@ -9,9 +9,9 @@ return [
     'feedback-header' => '¿Algún comentario?',
     'feedback-body' => 'Si has disfrutado de las funciones y la facilidad de uso que ofrece Reviactyl, ¡cuéntanoslo! Tus comentarios nos ayudan a mejorar y a crear herramientas aún más increíbles para ti.',
     'feedback-btn' => 'Crear incidencia',
-    'sponsor-header' => 'Apoye a Reviactyl',
+    'sponsor-header' => 'Apoya a Reviactyl',
     'sponsor-body' => 'Gracias por utilizar Reviactyl Panel, ¡esto solo ha sido posible gracias a vuestro apoyo, el de nuestros colaboradores, y del resto de nuestros seguidores! Agradecemos cualquier tipo de apoyo.',
-    'sponsor-btn' => 'Proyecto patrocinador',
+    'sponsor-btn' => 'Patrocinar proyecto',
 
     'help-btn' => 'Obtener ayuda',
     'docs-btn' => 'Documentación',

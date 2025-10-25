@@ -2,7 +2,7 @@
 
 return [
     'index' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => '仪表板',
     ],
     'account' => [
         'overview' => '账户概览',

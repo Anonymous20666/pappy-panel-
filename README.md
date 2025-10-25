@@ -23,7 +23,7 @@ Stop settling for less. Make game servers a first class citizen on your platform
 ## Sponsors
 
 I would like to extend my sincere thanks to the following sponsors for helping fund Reviactyl's development.
-[Interested in becoming a sponsor?](https://github.com/sponsors/bijju089)
+[Interested in becoming a sponsor?](https://github.com/sponsors/reviactyl)
 
 No Sponsors Yet ;(
 

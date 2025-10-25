@@ -11,6 +11,8 @@ export interface ServerStats {
     networkRxInBytes: number;
     networkTxInBytes: number;
     uptime: number;
+    playersOnline: number | null;
+    playersMax: number | null;
 }
 
 export default (server: string): Promise<ServerStats> => {
@@ -26,6 +28,9 @@ export default (server: string): Promise<ServerStats> => {
                     networkRxInBytes: attributes.resources.network_rx_bytes,
                     networkTxInBytes: attributes.resources.network_tx_bytes,
                     uptime: attributes.resources.uptime,
+                    playersOnline:
+                        typeof attributes.players?.online === 'number' ? attributes.players.online : null,
+                    playersMax: typeof attributes.players?.max === 'number' ? attributes.players.max : null,
                 })
             )
             .catch(reject);

@@ -2,22 +2,22 @@
 
 return [
     'administration' => [
-        'title' => 'Administration',
-        'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'api' => 'Application API',
+        'title' => '管理',
+        'dashboard' => '仪表板',
+        'settings' => '设置',
+        'api' => '应用 API',
     ],
     'management' => [
-        'title' => 'Management',
-        'databases' => 'Databases',
-        'locations' => 'Locations',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'users' => 'Users',
+        'title' => '管理',
+        'databases' => '数据库',
+        'locations' => '区域',
+        'nodes' => '节点',
+        'servers' => '服务器',
+        'users' => '用户',
     ],
     'service' => [
-        'title' => 'Service Management',
-        'mounts' => 'Mounts',
-        'nests' => 'Nests',
+        'title' => '服务管理',
+        'mounts' => '挂载',
+        'nests' => '预设',
     ],
 ];

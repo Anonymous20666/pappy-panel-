@@ -614,13 +614,3 @@ a:hover {
 .small-box .icon {
     color: #cad1d8;
 }
-
-.bg-gray {
-    background-color: #33404d !important;
-}
-
-pre {
-    color: #cad1d8;
-    background-color: #515f6cbb;
-    border-color: #1f2933;
-}

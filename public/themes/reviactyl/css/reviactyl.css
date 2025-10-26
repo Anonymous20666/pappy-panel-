@@ -395,3 +395,14 @@ hr {
     background: none !important;
     border: 1px solid #b45b05;
 }
+
+.bg-gray {
+    background-color: var(--color-900) !important;
+}
+
+pre {
+    color: #cad1d8;
+    background-color: var(--color-800);
+    border-color: var(--color-700);
+    border-radius: 15px;
+}

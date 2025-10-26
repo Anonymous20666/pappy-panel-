@@ -57,7 +57,7 @@
                     </p>
                 </div>
                 <div class="box-footer">
-                    <button type="button" id="configTokenBtn" class="btn btn-sm btn-default" style="width:100%;">Generate
+                    <button type="button" id="configTokenBtn" class="btn btn-sm btn-primary" style="width:100%;">Generate
                         Token</button>
                 </div>
             </div>

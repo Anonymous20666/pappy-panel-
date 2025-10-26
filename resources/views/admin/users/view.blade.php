@@ -114,6 +114,53 @@
             </div>
         </form>
         <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Servers</h3>
+                </div>
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Server Name</th>
+                                <th>UUID</th>
+                                <th>Node</th>
+                                <th>Allocation</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            @foreach ($user->servers as $server)
+                                <tr data-server="{{ $server->uuidShort }}">
+                                    <td><a href="{{ route('admin.servers.view', $server->id) }}">{{ $server->name }}</a>
+                                    </td>
+                                    <td><code title="{{ $server->uuid }}">{{ $server->uuid }}</code></td>
+                                    <td><a
+                                            href="{{ route('admin.nodes.view', $server->node->id) }}">{{ $server->node->name }}</a>
+                                    </td>
+                                    <td>
+                                        <code>{{ $server->allocation->alias }}:{{ $server->allocation->port }}</code>
+                                    </td>
+                                    <td class="text-center">
+                                        @if ($server->isSuspended())
+                                            <span class="label bg-maroon">Suspended</span>
+                                        @elseif(!$server->isInstalled())
+                                            <span class="label label-warning">Installing</span>
+                                        @else
+                                            <span class="label label-success">Active</span>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <a class="btn btn-xs btn-default" href="/server/{{ $server->uuidShort }}"><i
+                                                class="fa fa-wrench"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Delete User</h3>

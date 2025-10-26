@@ -222,6 +222,10 @@ code {
     border: 1px solid rgba(0, 0, 0, .25);
 }
 
+.modal-content {
+    border-radius: 20px;
+}
+
 .modal-body {
     background: var(--color-900);
 }
@@ -229,11 +233,15 @@ code {
 .modal-header {
     border-bottom-color: 1px solid #1f2933;
     background: var(--color-900);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .modal-footer {
     border-top-color: 1px solid #1f2933;
     background: var(--color-900);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .select2-container--default .select2-selection--single {
@@ -405,4 +413,49 @@ pre {
     background-color: var(--color-800);
     border-color: var(--color-700);
     border-radius: 15px;
+}
+
+.border-box {
+    border-radius: 15px;
+    border: 1px solid var(--color-800);
+    padding: 12px;
+}
+
+.input-group .input-group-addon {
+    background-color: var(--color-800);
+    border-color: var(--color-700);
+    border-radius: 0 15px 15px 0;
+}
+
+.sweet-alert {
+    background-color: var(--color-900);
+    border-radius: 15px;
+}
+
+.sweet-alert .sa-icon.sa-success::before, .sweet-alert .sa-icon.sa-success::after {
+    background-color: var(--color-900);
+}
+
+.sweet-alert .sa-icon.sa-success .sa-fix {
+    background-color: var(--color-900);
+}
+
+.sweet-alert button {
+    border-radius: 15px;
+}
+
+.sweet-overlay {
+    backdrop-filter: blur(8px);
+}
+
+.modal {
+    backdrop-filter: blur(8px);
+}
+
+.modal-header {
+    border-bottom-color: var(--color-800);
+}
+
+.modal-footer {
+    border-top-color: var(--color-800);
 }

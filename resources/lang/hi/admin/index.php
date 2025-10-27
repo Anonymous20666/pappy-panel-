@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'title' => 'Dashboard',
-    'uptodate-header' => 'Your Panel is up to date',
-    'uptodate-body' => 'You are currently using <code>:version</code>. Your panel is up-to-date!',
-    'notuptodate-header' => 'Your Panel is not up to date',
-    'notuptodate-body' => '<code>:latest</code> is now available! Read our documentation to update your Panel.',
-    'feedback-header' => 'Any Feedback?',
-    'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',
-    'feedback-btn' => 'Create Issue',
-    'sponsor-header' => 'Support Reviactyl',
-    'sponsor-body' => 'Thank you for using Reviactyl Panel, this could only be achieved through the support of you, our contributors, and the rest of our supporters! We appreciate any and all support from anybody.',
-    'sponsor-btn' => 'Sponsor Project',
+    'title' => 'डैशबोर्ड',
+    'uptodate-header' => 'आपका पैनल अद्यतित है',
+    'uptodate-body' => 'आप वर्तमान में <code>:version</code> का उपयोग कर रहे हैं। आपका पैनल अद्यतित है!',
+    'notuptodate-header' => 'आपका पैनल अद्यतित नहीं है',
+    'notuptodate-body' => '<code>:latest</code> अब उपलब्ध है! अपना पैनल अपडेट करने के लिए हमारा दस्तावेज़ पढ़ें।',
+    'feedback-header' => 'कोई प्रतिपुष्टि?',
+    'feedback-body' => 'अगर आपको Reviactyl की सुविधाएँ और उपयोग में आसानी पसंद आई है, तो हमें ज़रूर बताएँ! आपकी प्रतिक्रिया हमें आपके लिए और भी बेहतर टूल बनाने और बेहतर बनाने में मदद करेगी।',
+    'feedback-btn' => 'Issue बनाएँ',
+    'sponsor-header' => 'Reviactyl का समर्थन करें',
+    'sponsor-body' => 'Reviactyl पैनल का उपयोग करने के लिए धन्यवाद, यह आपके, हमारे योगदानकर्ताओं और हमारे बाकी समर्थकों के सहयोग से ही संभव हो पाया है! हम किसी भी व्यक्ति के सहयोग की सराहना करते हैं।',
+    'sponsor-btn' => 'प्रायोजक परियोजना',
 
-    'help-btn' => 'Get Help',
-    'docs-btn' => 'Documentation',
+    'help-btn' => 'मदद लें',
+    'docs-btn' => 'प्रलेखन',
 ];

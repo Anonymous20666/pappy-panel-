@@ -30,7 +30,7 @@ return [
         'account' => [
             'email-changed' => 'ईमेल :old से :new में बदला गया',
             'password-changed' => 'पासवर्ड बदल दिया गया',
-            'language-changed' => 'Changed language from :old to :new',
+            'language-changed' => 'भाषा को :old से :new में बदला गया',
         ],
         'api-key' => [
             'create' => 'नई API कुंजी :identifier बनाई गई',

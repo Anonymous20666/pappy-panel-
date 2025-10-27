@@ -2,22 +2,22 @@
 
 return [
     'administration' => [
-        'title' => 'Administration',
-        'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'api' => 'Application API',
+        'title' => 'प्रशासन',
+        'dashboard' => 'डैशबोर्ड',
+        'settings' => 'सेटिंग्स',
+        'api' => 'एप्लिकेशन API',
     ],
     'management' => [
-        'title' => 'Management',
-        'databases' => 'Databases',
-        'locations' => 'Locations',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'users' => 'Users',
+        'title' => 'प्रबंध',
+        'databases' => 'डेटाबेस',
+        'locations' => 'स्थानों',
+        'nodes' => 'नोड्स',
+        'servers' => 'सर्वर',
+        'users' => 'उपयोगकर्ताओं',
     ],
     'service' => [
-        'title' => 'Service Management',
-        'mounts' => 'Mounts',
-        'nests' => 'Nests',
+        'title' => 'सेवा प्रबंधन',
+        'mounts' => 'माउंट',
+        'nests' => 'घोंसले',
     ],
 ];

@@ -67,6 +67,28 @@ jobs:
           rm -rf node_modules tests CODE_OF_CONDUCT.md CONTRIBUTING.md flake.lock flake.nix phpunit.xml shell.nix
           tar -czf panel.tar.gz * .editorconfig .env.example .eslintignore .eslintrc.js .gitignore .prettierrc.json
 
+      - name: Fetch all tags
+        run: git fetch --tags
+
+      - name: Find previous stable tag
+        id: prev_tag
+        run: |
+          PREV_TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | grep -vE '(alpha|beta|rc)' | sed -n '2p')
+          echo "Found Previous Tag: $PREV_TAG"
+          echo "tag=$PREV_TAG" >> $GITHUB_OUTPUT
+      - name: Create upgrade.zip (changed files only)
+        if: steps.prev_tag.outputs.tag != ''
+        run: |
+          mkdir upgrade
+          git diff --name-only ${{ steps.prev_tag.outputs.tag }} HEAD | while read file; do
+            if [ -f "$file" ]; then
+              mkdir -p "upgrade/$(dirname "$file")"
+              cp "$file" "upgrade/$file"
+            fi
+          done
+          cd upgrade
+          zip -r ../upgrade.zip .
+          
       - name: Extract changelog
         run: |
           sed -n "/^## ${REF_TAG}/,/^## /{/^## /b;p}" CHANGELOG.md > ./RELEASE_CHANGELOG
@@ -88,4 +110,5 @@ jobs:
           body_path: ./RELEASE_CHANGELOG
           files: |
             panel.tar.gz
+            upgrade.zip
             checksum.txt

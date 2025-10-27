@@ -2,7 +2,7 @@
 
 return [
     'index' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'डैशबोर्ड',
     ],
     'account' => [
         'overview' => 'खाता अवलोकन',

@@ -95,7 +95,9 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 {status === 'offline' || players.online === null || players.max === null ? (
                     <span className={'text-gray-400'}>Unknown</span>
                 ) : (
-                    <>{players.online} / {players.max}</>
+                    <>
+                        {players.online} / {players.max}
+                    </>
                 )}
             </StatBlock>
             <StatBlock icon={faCloudDownloadAlt} title={'Network (Inbound)'}>

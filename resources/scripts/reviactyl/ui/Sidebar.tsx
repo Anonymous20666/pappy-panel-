@@ -18,10 +18,7 @@ interface Props {
 const Container = styled.div<{ isOpen: boolean }>`
     ${tw`w-[225px] self-start m-2 border border-gray-600 rounded-ui bg-gray-700 text-white flex flex-col z-40 transition-transform duration-300 ease-in-out`};
 
-    ${({ isOpen }) =>
-         (isOpen 
-            ? tw`fixed top-16 left-0 translate-x-0` 
-            : tw`-translate-x-full hidden`)}
+    ${({ isOpen }) => (isOpen ? tw`fixed top-16 left-0 translate-x-0` : tw`-translate-x-full hidden`)}
 
     height: calc(100dvh - 64px);
     overflow-y: auto;

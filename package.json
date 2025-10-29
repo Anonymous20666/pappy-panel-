@@ -28,7 +28,7 @@
         "easy-peasy": "^4.0.1",
         "events": "^3.0.0",
         "formik": "^2.2.6",
-        "framer-motion": "^12.23.24",
+        "framer-motion": "^6.3.10",
         "i18next": "^21.8.9",
         "i18next-browser-languagedetector": "^8.2.0",
         "i18next-http-backend": "^1.4.1",

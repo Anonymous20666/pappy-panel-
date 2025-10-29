@@ -96,11 +96,14 @@ jobs:
       - name: Create checksum and add to changelog
         run: |
           SUM=$(sha256sum panel.tar.gz)
-          UPGRADE_SUM=$(sha256sum upgrade.zip)
           echo -e "\n#### SHA256 Checksum\n\n\`\`\`\n$SUM\n\`\`\`\n" >> ./RELEASE_CHANGELOG
-          echo -e "\nUpgrade Archive (upgrade.zip):\n\`\`\`\n$UPGRADE_SUM\n\`\`\`" >> ./RELEASE_CHANGELOG
-          echo "upgrade.zip: $UPGRADE_SUM" >> checksum.txt
-          echo "$SUM" > checksum.txt
+          echo -e "panel.tar.gz:\n\`\`\`\n$SUM\n\`\`\`" >> ./RELEASE_CHANGELOG
+          echo "panel.tar.gz: $PANEL_SUM" > checksum.txt
+          if [ -f upgrade.zip ]; then
+             UPGRADE_SUM=$(sha256sum upgrade.zip)
+             echo -e "upgrade.zip:\n\`\`\`\n$UPGRADE_SUM\n\`\`\`" >> ./RELEASE_CHANGELOG
+             echo "upgrade.zip: $UPGRADE_SUM" >> checksum.txt
+          fi
 
       - name: Create release
         id: create_release

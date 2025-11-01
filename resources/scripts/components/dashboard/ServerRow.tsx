@@ -160,17 +160,6 @@ export default ({ server }: { server: Server }) => {
                                             ))}
                                     </Blur>
                                 </StatBlock>
-                                {typeof stats.playersOnline === 'number' && typeof stats.playersMax === 'number' ? (
-                                    <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
-                                        <span className='w-4 sm:w-5 text-gray-300'>
-                                            <GlobeIcon />
-                                        </span>
-                                        <p className={'text-gray-100'}>
-                                            {stats.playersOnline} / {stats.playersMax}
-                                        </p>
-                                        <span className='text-xs sm:text-sm text-gray-300'>players</span>
-                                    </StatBlock>
-                                ) : null}
                                 <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
                                     <span className='w-4 sm:w-5 text-gray-300'>
                                         <ChipIcon />

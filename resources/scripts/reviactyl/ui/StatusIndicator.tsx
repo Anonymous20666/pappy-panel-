@@ -12,7 +12,6 @@ export default ({ server }: { server: Server }) => {
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
     const [stats, setStats] = useState<ServerStats | null>(null);
-    const [players, setPlayers] = useState<{ online: number | null; max: number | null }>({ online: null, max: null });
 
     const getStats = () =>
         getServerResourceUsage(server.uuid)
@@ -42,7 +41,6 @@ export default ({ server }: { server: Server }) => {
         alarms.cpu = server.limits.cpu === 0 ? false : stats.cpuUsagePercent >= server.limits.cpu * 0.9;
         alarms.memory = isAlarmState(stats.memoryUsageInBytes, server.limits.memory);
         alarms.disk = server.limits.disk === 0 ? false : isAlarmState(stats.diskUsageInBytes, server.limits.disk);
-        setPlayers({ online: stats.playersOnline, max: stats.playersMax });
     }
     return (
         <>
@@ -71,11 +69,6 @@ export default ({ server }: { server: Server }) => {
                     ? 'Stopping'
                     : ''}
             </span>
-            {players.online !== null && players.max !== null && (
-                <span className={'ml-2 text-xs text-gray-300'}>
-                    {players.online} / {players.max}
-                </span>
-            )}
         </>
     );
 };

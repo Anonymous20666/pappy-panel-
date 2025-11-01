@@ -9,14 +9,13 @@ use Pterodactyl\Transformers\Api\Client\StatsTransformer;
 use Pterodactyl\Repositories\Wings\DaemonServerRepository;
 use Pterodactyl\Http\Controllers\Api\Client\ClientApiController;
 use Pterodactyl\Http\Requests\Api\Client\Servers\GetServerRequest;
-use Pterodactyl\Services\Servers\MinecraftStatusService;
 
 class ResourceUtilizationController extends ClientApiController
 {
     /**
      * ResourceUtilizationController constructor.
      */
-    public function __construct(private Repository $cache, private DaemonServerRepository $repository, private MinecraftStatusService $minecraftStatus)
+    public function __construct(private Repository $cache, private DaemonServerRepository $repository)
     {
         parent::__construct();
     }
@@ -32,24 +31,7 @@ class ResourceUtilizationController extends ClientApiController
     {
         $key = "resources:$server->uuid";
         $stats = $this->cache->remember($key, Carbon::now()->addSeconds(20), function () use ($server) {
-            $details = $this->repository->setServer($server)->getDetails();
-
-            // Attempt to include Minecraft players online if reachable.
-            // Use the default allocation's alias (or IP) and port.
-            $allocation = $server->allocation;
-            if ($allocation) {
-                $host = $allocation->alias; // alias accessor returns alias or ip
-                $port = $allocation->port;
-                $players = $this->minecraftStatus->getPlayersCount($host, $port, 0.8);
-                if ($players) {
-                    $details['players'] = [
-                        'online' => $players[0],
-                        'max' => $players[1],
-                    ];
-                }
-            }
-
-            return $details;
+            return $this->repository->setServer($server)->getDetails();
         });
 
         return $this->fractal->item($stats)

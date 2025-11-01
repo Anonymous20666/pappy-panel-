@@ -26,7 +26,7 @@ $style = [
     /* Masthead ----------------------- */
 
     'email-masthead' => 'padding: 25px 0; text-align: center;',
-    'email-masthead_name' => 'font-size: 16px; font-weight: bold; color: #fff; text-decoration: none;',
+    'email-masthead_logo' => 'height:3rem;',
 
     'email-body' => 'width: 100%; margin: 0; padding: 0; border-top: 1px solid ' . $reviactylConfiguration['color700'] . '; border-bottom: 1px solid ' . $reviactylConfiguration['color700'] . '; background-color: ' . $reviactylConfiguration['color800'] . ';',
     'email-body_inner' => 'width: auto; max-width: 570px; margin: 0 auto; padding: 0;',
@@ -70,9 +70,9 @@ $style = [
                     <!-- Logo -->
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
-                            <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}"
+                            <a style="{{ $fontFamily }}"
                                 href="{{ url('/') }}" target="_blank">
-                                {{ config('app.name') }}
+                               <img style="{{ $style['email-masthead_logo'] }}" src="{{ config('app.url') . $siteConfiguration['logo'] }}" />
                             </a>
                         </td>
                     </tr>

@@ -1,12 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import Motion from './Motion';
+import tw from 'twin.macro';
+import styled from 'styled-components/macro';
 
 interface CardProps {
     className?: string;
     children: React.ReactChild | React.ReactFragment | React.ReactPortal;
 }
 
+const CardDefault = styled.div`
+    ${tw`rounded-ui bg-gray-700 border border-gray-600`}
+`;
+
 export default ({ className, children }: CardProps) => (
-    <Motion className={classNames('p-5 rounded-ui bg-gray-700 border border-gray-600', className)}>{children}</Motion>
+    <CardDefault className={classNames('p-5', className)}>{children}</CardDefault>
 );

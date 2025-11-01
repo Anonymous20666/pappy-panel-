@@ -17,8 +17,8 @@ return [
     'rename' => [
         'title' => '更改服务器详情',
         'name' => '服务器名称',
-        'description' => '服务器名称',
-        'button' => '服务器名称',
+        'description' => '服务器描述',
+        'button' => '保存',
     ],
     'reinstall' => [
         'title' => '重新安装服务器',

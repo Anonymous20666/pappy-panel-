@@ -45,6 +45,6 @@ return [
         'creation-title' => 'Automatic Allocation Creation',
         'starting-label' => 'Starting Port',
         'ending-label' => 'Ending Port',
-        'save-btn' => 'Save',
+        'save-btn' => '保存',
     ],
 ];

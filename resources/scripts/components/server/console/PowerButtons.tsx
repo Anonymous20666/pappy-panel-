@@ -51,13 +51,13 @@ export default ({ className }: PowerButtonProps) => {
                 {t('kill-warning')}
             </Dialog.Confirm>
             <Can action={'control.start'}>
-                <Button
+                <Button.Success
                     className={'flex-1'}
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
                 >
                     {t('start')}
-                </Button>
+                </Button.Success>
             </Can>
             <Can action={'control.restart'}>
                 <Button.Text className={'flex-1'} disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>

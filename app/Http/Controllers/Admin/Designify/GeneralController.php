@@ -5,46 +5,47 @@ namespace Pterodactyl\Http\Controllers\Admin\Designify;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Pterodactyl\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
 
 class GeneralController extends Controller
 {
+    /**
+     * GeneralController constructor.
+     */
     public function __construct(
         private AlertsMessageBag $alert,
-        private ViewFactory $view,
+        private ConfigRepository $config,
+        private Kernel $kernel,
         private SettingsRepositoryInterface $settings,
+        private ViewFactory $view,
     ) {
     }
 
     /**
-     * Show the general settings form.
+     * Render Designify settings UI.
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.general', [
-            'customCopyright' => $this->settings->get('reviactyl:customCopyright', true) ? 'true' : 'false',
-            'copyright' => $this->settings->get('reviactyl:copyright', 'Powered by [Reviactyl](https://revix.cc)'),
-            'isUnderMaintenance' => $this->settings->get('reviactyl:isUnderMaintenance', false) ? 'true' : 'false',
-            'maintenance' => $this->settings->get('reviactyl:maintenance', 'We are currently under maintenance. Kindly check back later!'),
-        ]);
+        return $this->view->make('admin.designify.general');
     }
 
     /**
-     * Save the general settings.
+     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
      */
-    public function store(GeneralSettingsFormRequest $request): RedirectResponse
+    public function update(GeneralSettingsFormRequest $request): RedirectResponse
     {
-        $customCopyright = filter_var($request->input('reviactyl:customCopyright'), FILTER_VALIDATE_BOOLEAN);
-        $isUnderMaintenance = filter_var($request->input('reviactyl:isUnderMaintenance'), FILTER_VALIDATE_BOOLEAN);
-        $this->settings->set('reviactyl:customCopyright', $customCopyright);
-        $this->settings->set('reviactyl:copyright', $request->input('reviactyl:copyright'));
-        $this->settings->set('reviactyl:isUnderMaintenance', $isUnderMaintenance);
-        $this->settings->set('reviactyl:maintenance', $request->input('reviactyl:maintenance'));
+        foreach ($request->normalize() as $key => $value) {
+            $this->settings->set('settings::' . $key, $value);
+        }
 
-        $this->alert->success('General settings have been updated successfully.')->flash();
+        $this->kernel->call('queue:restart');
+        $this->alert->success('General settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
 
         return redirect()->route('admin.designify.general');
     }

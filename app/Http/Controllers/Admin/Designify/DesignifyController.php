@@ -5,12 +5,12 @@ namespace Pterodactyl\Http\Controllers\Admin\Designify;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\ViewComposers\AssetComposer;
+use Pterodactyl\Http\ViewComposers\DesignifyComposer;
 
 class DesignifyController extends Controller
 {
     public function __construct(
-        private AssetComposer $assetComposer,
+        private DesignifyComposer $designifyComposer,
         private AlertsMessageBag $alert,
     ) {
     }
@@ -20,7 +20,7 @@ class DesignifyController extends Controller
      */
     public function resetToDefaults(): RedirectResponse
     {
-        $this->assetComposer->resetReviactylDefaults();
+        $this->designifyComposer->resetReviactylDefaults();
 
         $this->alert->success('All settings have been reset to defaults.')->flash();
 

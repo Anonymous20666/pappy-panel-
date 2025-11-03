@@ -12,8 +12,8 @@ class AlertSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'reviactyl:alertType' => 'required|string',
-            'reviactyl:alertMessage' => 'required|string',
+            'designify:alertType' => 'required|string',
+            'designify:alertMessage' => 'required|string',
         ];
     }
 }

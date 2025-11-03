@@ -5,46 +5,47 @@ namespace Pterodactyl\Http\Controllers\Admin\Designify;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Pterodactyl\Http\Requests\Admin\Designify\SiteSettingsFormRequest;
 
 class SiteController extends Controller
 {
+    /**
+     * SiteController constructor.
+     */
     public function __construct(
         private AlertsMessageBag $alert,
-        private ViewFactory $view,
+        private ConfigRepository $config,
+        private Kernel $kernel,
         private SettingsRepositoryInterface $settings,
+        private ViewFactory $view,
     ) {
     }
 
     /**
-     * Show the site settings form.
+     * Render Designify settings UI.
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.site', [
-            'site_color' => $this->settings->get('reviactyl:site_color', '#EF5C29'),
-            'site_title' => $this->settings->get('reviactyl:site_title', 'Reviactyl'),
-            'site_description' => $this->settings->get('reviactyl:site_description', 'Our official control panel made better with Reviactyl.'),
-            'site_image' => $this->settings->get('reviactyl:site_image', '/reviactyl/logo.png'),
-            'site_favicon' => $this->settings->get('reviactyl:site_favicon', '/reviactyl/icon.png'),
-        ]);
+        return $this->view->make('admin.designify.site');
     }
 
     /**
-     * Save the site settings.
+     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
      */
-    public function store(SiteSettingsFormRequest $request): RedirectResponse
+    public function update(SiteSettingsFormRequest $request): RedirectResponse
     {
-        $this->settings->set('reviactyl:site_color', $request->input('reviactyl:site_color'));
-        $this->settings->set('reviactyl:site_title', $request->input('reviactyl:site_title'));
-        $this->settings->set('reviactyl:site_description', $request->input('reviactyl:site_description'));
-        $this->settings->set('reviactyl:site_image', $request->input('reviactyl:site_image'));
-        $this->settings->set('reviactyl:site_favicon', $request->input('reviactyl:site_favicon'));
+        foreach ($request->normalize() as $key => $value) {
+            $this->settings->set('settings::' . $key, $value);
+        }
 
-        $this->alert->success('Site settings have been updated successfully.')->flash();
+        $this->kernel->call('queue:restart');
+        $this->alert->success('Site settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
 
         return redirect()->route('admin.designify.site');
     }

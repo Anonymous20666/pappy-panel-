@@ -12,11 +12,11 @@ class SiteSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'reviactyl:site_color' => 'required|string',
-            'reviactyl:site_title' => 'required|string',
-            'reviactyl:site_description' => 'required|string',
-            'reviactyl:site_image' => 'required|string',
-            'reviactyl:site_favicon' => 'required|string',
+            'designify:site_color' => 'required|string',
+            'designify:site_title' => 'required|string',
+            'designify:site_description' => 'required|string',
+            'designify:site_image' => 'required|string',
+            'designify:site_favicon' => 'required|string',
         ];
     }
 }

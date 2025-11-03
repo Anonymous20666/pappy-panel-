@@ -15,40 +15,40 @@
                 <h3 class="text-lg font-bold text-zinc-200 mb-1">Basic Colors</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="space-y-2">
-                        <label for="reviactyl:colorPrimary" class="block text-sm font-medium text-zinc-300">Primary</label>
+                        <label class="block text-sm font-medium text-zinc-300">Primary</label>
                         <div class="flex items-center space-x-2">
                             <input type="color"
                                 class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                name="reviactyl:colorPrimary" id="reviactyl:colorPrimary"
-                                value="{{ old('reviactyl:colorPrimary', $colorPrimary) }}" />
+                                name="designify:colorPrimary"
+                                value="{{ old('designify:colorPrimary', config('designify.colorPrimary')) }}" />
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label for="reviactyl:colorSuccess" class="block text-sm font-medium text-zinc-300">Success</label>
+                        <label for="designify:colorSuccess" class="block text-sm font-medium text-zinc-300">Success</label>
                         <div class="flex items-center space-x-2">
                             <input type="color"
                                 class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                name="reviactyl:colorSuccess" id="reviactyl:colorSuccess"
-                                value="{{ old('reviactyl:colorSuccess', $colorSuccess) }}" />
+                                name="designify:colorSuccess" id="designify:colorSuccess"
+                                value="{{ old('designify:colorSuccess', config('designify.colorSuccess')) }}" />
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label for="reviactyl:colorDanger" class="block text-sm font-medium text-zinc-300">Danger</label>
+                        <label for="designify:colorDanger" class="block text-sm font-medium text-zinc-300">Danger</label>
                         <div class="flex items-center space-x-2">
                             <input type="color"
                                 class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                name="reviactyl:colorDanger" id="reviactyl:colorDanger"
-                                value="{{ old('reviactyl:colorDanger', $colorDanger) }}" />
+                                name="designify:colorDanger" id="designify:colorDanger"
+                                value="{{ old('designify:colorDanger', config('designify.colorDanger')) }}" />
                         </div>
                     </div>
                     <div class="space-y-2">
-                        <label for="reviactyl:colorSecondary"
+                        <label for="designify:colorSecondary"
                             class="block text-sm font-medium text-zinc-300">Secondary</label>
                         <div class="flex items-center space-x-2">
                             <input type="color"
                                 class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                name="reviactyl:colorSecondary" id="reviactyl:colorSecondary"
-                                value="{{ old('reviactyl:colorSecondary', $colorSecondary) }}" />
+                                name="designify:colorSecondary" id="designify:colorSecondary"
+                                value="{{ old('designify:colorSecondary', config('designify.colorSecondary')) }}" />
                         </div>
                     </div>
                 </div>
@@ -58,13 +58,13 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         @foreach ([50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as $shade)
                             <div class="space-y-2">
-                                <label for="reviactyl:color{{ $shade }}"
-                                    class="block text-sm font-medium text-zinc-300">Gray {{ $shade }}</label>
+                                <label for="designify:color{{ $shade }}"
+                                    class="block text-sm font-medium text-zinc-300">Color {{ $shade }}</label>
                                 <div class="flex items-center space-x-2">
                                     <input type="color"
                                         class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                        name="reviactyl:color{{ $shade }}" id="reviactyl:color{{ $shade }}"
-                                        value="{{ old('reviactyl:color' . $shade, ${'color' . $shade}) }}" />
+                                        name="designify:color{{ $shade }}" id="designify:color{{ $shade }}"
+                                        value="{{ old('designify:color' . $shade, config('designify.color'. $shade)) }}" />
                                 </div>
                             </div>
                         @endforeach
@@ -80,41 +80,41 @@
                         <h3 class="text-lg font-bold text-zinc-200 mb-1">Theme{{ $theme }} Settings</h3>
                         <div class="space-y-3 mb-3">
                             <label class="block text-sm font-medium text-zinc-300"
-                                for="reviactyl:theme{{ $theme }}:name">
-                                Theme{{ $theme }} Name
+                                for="designify:theme{{ $theme }}:name">
+                                Name
                             </label>
-                            <input type="text" id="reviactyl:theme{{ $theme }}:name"
-                                name="reviactyl:theme{{ $theme }}:name"
-                                value="{{ old("reviactyl:theme{$theme}:name", ${$themeVar}['name'] ?? '') }}"
+                            <input type="text" id="designify:theme{{ $theme }}:name"
+                                name="designify:theme{{ $theme }}:name"
+                                value="{{ old('designify:theme' . $theme . ':name', config('designify.theme' . $theme . '.name')) }}"
                                 class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                                 placeholder="Theme{{ $theme }} Display name" />
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="space-y-2">
                                 <label class="block text-sm font-medium text-zinc-300"
-                                    for="reviactyl:theme{{ $theme }}:colorPrimary">
-                                    Theme{{ $theme }} Primary
+                                    for="designify:theme{{ $theme }}:colorPrimary">
+                                    Primary
                                 </label>
                                 <div class="flex items-center space-x-2">
-                                    <input type="color" id="reviactyl:theme{{ $theme }}:colorPrimary"
-                                        name="reviactyl:theme{{ $theme }}:colorPrimary"
-                                        value="{{ old("reviactyl:theme{$theme}:colorPrimary", ${$themeVar}['colorPrimary'] ?? '') }}"
+                                    <input type="color" id="designify:theme{{ $theme }}:colorPrimary"
+                                        name="designify:theme{{ $theme }}:colorPrimary"
+                                        value="{{ old('designify:theme' . $theme . ':colorPrimary', config('designify.theme' . $theme . '.colorPrimary')) }}"
                                         class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer" />
                                 </div>
                             </div>
 
                             @foreach ([50, 100, 200, 300, 400, 500, 600, 700, 800, 900] as $shade)
                                 <div class="space-y-2">
-                                    <label for="reviactyl:theme{{ $theme }}:color{{ $shade }}"
+                                    <label for="designify:theme{{ $theme }}:color{{ $shade }}"
                                         class="block text-sm font-medium text-zinc-300">
-                                        Theme{{ $theme }} {{ $shade }}
+                                        Color {{ $shade }}
                                     </label>
                                     <div class="flex items-center space-x-2">
                                         <input type="color"
                                             class="h-10 w-16 rounded border border-zinc-600 bg-zinc-700 cursor-pointer"
-                                            name="reviactyl:theme{{ $theme }}:color{{ $shade }}"
-                                            id="reviactyl:theme{{ $theme }}:color{{ $shade }}"
-                                            value="{{ old("reviactyl:theme{$theme}:color{$shade}", ${$themeVar}['color' . $shade] ?? '') }}" />
+                                            name="designify:theme{{ $theme }}:color{{ $shade }}"
+                                            id="designify:theme{{ $theme }}:color{{ $shade }}"
+                                            value="{{ old('designify:theme' . $theme . ':color' . $shade, config('designify.theme' . $theme . '.color' . $shade)) }}" />
                                     </div>
                                 </div>
                             @endforeach

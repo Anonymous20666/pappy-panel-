@@ -12,10 +12,10 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'reviactyl:themeSelector' => 'required|in:true,false',
-            'reviactyl:background' => 'required|string',
-            'reviactyl:allocationBlur' => 'required|in:true,false',
-            'reviactyl:radius' => 'required|string',
+            'designify:themeSelector' => 'required|in:true,false',
+            'designify:background' => 'required|string',
+            'designify:allocationBlur' => 'required|in:true,false',
+            'designify:radius' => 'required|string',
         ];
     }
 }

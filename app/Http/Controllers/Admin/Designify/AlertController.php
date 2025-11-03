@@ -5,40 +5,47 @@ namespace Pterodactyl\Http\Controllers\Admin\Designify;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
 use Pterodactyl\Http\Requests\Admin\Designify\AlertSettingsFormRequest;
 
 class AlertController extends Controller
 {
+    /**
+     * AlertController constructor.
+     */
     public function __construct(
         private AlertsMessageBag $alert,
-        private ViewFactory $view,
+        private ConfigRepository $config,
+        private Kernel $kernel,
         private SettingsRepositoryInterface $settings,
+        private ViewFactory $view,
     ) {
     }
 
     /**
-     * Show the alert settings form.
+     * Render Designify settings UI.
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.alerts', [
-            'alertType' => $this->settings->get('reviactyl:alertType', 'info'),
-            'alertMessage' => $this->settings->get('reviactyl:alertMessage', '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.'),
-        ]);
+        return $this->view->make('admin.designify.alerts');
     }
 
     /**
-     * Save the alert settings.
+     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
      */
-    public function store(AlertSettingsFormRequest $request): RedirectResponse
+    public function update(AlertSettingsFormRequest $request): RedirectResponse
     {
-        $this->settings->set('reviactyl:alertType', $request->input('reviactyl:alertType'));
-        $this->settings->set('reviactyl:alertMessage', $request->input('reviactyl:alertMessage'));
+        foreach ($request->normalize() as $key => $value) {
+            $this->settings->set('settings::' . $key, $value);
+        }
 
-        $this->alert->success('Alert settings have been updated successfully.')->flash();
+        $this->kernel->call('queue:restart');
+        $this->alert->success('Alert settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
 
         return redirect()->route('admin.designify.alerts');
     }

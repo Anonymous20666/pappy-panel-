@@ -12,17 +12,17 @@
         </div>
         <div class="flex-1 space-y-6 pb-[80px]">
             <div class="space-y-3">
-                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:themeSelector">
+                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:themeSelector">
                     Theme Selector
                 </label>
-                <select name="reviactyl:themeSelector" id="reviactyl:themeSelector"
+                <select name="designify:themeSelector" id="designify:themeSelector"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                     <option value="true"
-                        {{ old('reviactyl:themeSelector', $themeSelector) === 'true' ? 'selected' : '' }}>
+                        {{ old('designify:themeSelector', config('designify.themeSelector')) === 'true' ? 'selected' : '' }}>
                         Enabled
                     </option>
                     <option value="false"
-                        {{ old('reviactyl:themeSelector', $themeSelector) === 'false' ? 'selected' : '' }}>
+                        {{ old('designify:themeSelector', config('designify.themeSelector')) === 'false' ? 'selected' : '' }}>
                         Disabled
                     </option>
                 </select>
@@ -31,39 +31,39 @@
             <div class="grid grid-cols-2 gap-4">
                 <p class="block text-xl font-medium text-zinc-700 dark:text-zinc-300">Border Settings</p><br>
                 <div class="flex flex-col">
-                    <label class="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:radius">
+                    <label class="mb-1 block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:radius">
                         Border Radius
                     </label>
-                    <input type="text" name="reviactyl:radius" id="reviactyl:radius"
-                        value="{{ old('reviactyl:radius', $radius) }}"
+                    <input type="text" name="designify:radius" id="designify:radius"
+                        value="{{ old('designify:radius', config('designify.radius')) }}"
                         class="px-3 py-2 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" />
                 </div>
             </div>
             <div class="border-t border-zinc-700"></div>
             <div class="space-y-3">
-                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:allocationBlur">
+                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:allocationBlur">
                     Allocation Blur
                 </label>
-                <select name="reviactyl:allocationBlur" id="reviactyl:allocationBlur"
+                <select name="designify:allocationBlur" id="designify:allocationBlur"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                     <option value="true"
-                        {{ old('reviactyl:allocationBlur', $allocationBlur) === 'true' ? 'selected' : '' }}>
+                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === 'true' ? 'selected' : '' }}>
                         Enabled
                     </option>
                     <option value="false"
-                        {{ old('reviactyl:allocationBlur', $allocationBlur) === 'false' ? 'selected' : '' }}>
+                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === 'false' ? 'selected' : '' }}>
                         Disabled
                     </option>
                 </select>
             </div>
             <div class="border-t border-zinc-700"></div>
             <div class="space-y-3">
-                <label for="reviactyl:background" class="block text-sm font-medium text-zinc-300">
+                <label for="designify:background" class="block text-sm font-medium text-zinc-300">
                     Panel Background
                 </label>
                 <div class="relative">
-                    <input type="text" id="reviactyl:background" name="reviactyl:background"
-                        value="{{ old('reviactyl:background', $background) }}"
+                    <input type="text" id="designify:background" name="designify:background"
+                        value="{{ old('designify:background', config('designify.background')) }}"
                         class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter background url or 'none' to disable" />
                     <div class="absolute inset-y-0 right-0 flex items-center pr-3">

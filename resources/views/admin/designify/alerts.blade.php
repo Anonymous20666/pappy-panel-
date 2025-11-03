@@ -12,33 +12,33 @@
         </div>
         <div class="flex-1 space-y-6">
             <div class="space-y-3">
-                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="reviactyl:alertType">
+                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:alertType">
                     Alert Type
                 </label>
-                <select name="reviactyl:alertType" id="reviactyl:alertType"
+                <select name="designify:alertType" id="designify:alertType"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
-                    <option value="info" {{ old('reviactyl:alertType', $alertType) === 'info' ? 'selected' : '' }}>
+                    <option value="info" {{ old('designify:alertType', config('designify.alertType')) === 'info' ? 'selected' : '' }}>
                         Info
                     </option>
                     <option value="announcement"
-                        {{ old('reviactyl:alertType', $alertType) === 'announcement' ? 'selected' : '' }}>
+                        {{ old('designify:alertType', config('designify.alertType')) === 'announcement' ? 'selected' : '' }}>
                         Announcement
                     </option>
-                    <option value="success" {{ old('reviactyl:alertType', $alertType) === 'success' ? 'selected' : '' }}>
+                    <option value="success" {{ old('designify:alertType', config('designify.alertType')) === 'success' ? 'selected' : '' }}>
                         Success
                     </option>
-                    <option value="warning" {{ old('reviactyl:alertType', $alertType) === 'warning' ? 'selected' : '' }}>
+                    <option value="warning" {{ old('designify:alertType', config('designify.alertType')) === 'warning' ? 'selected' : '' }}>
                         Warning
                     </option>
-                    <option value="danger" {{ old('reviactyl:alertType', $alertType) === 'danger' ? 'selected' : '' }}>
+                    <option value="danger" {{ old('designify:alertType', config('designify.alertType')) === 'danger' ? 'selected' : '' }}>
                         Danger
                     </option>
-                    <option value="disabled" {{ old('reviactyl:alertType', $alertType) === 'disabled' ? 'selected' : '' }}>
+                    <option value="disabled" {{ old('designify:alertType', config('designify.alertType')) === 'disabled' ? 'selected' : '' }}>
                         Disabled
                     </option>
                 </select>
-                <input type="text" id="reviactyl:alertMessage" name="reviactyl:alertMessage"
-                    value="{{ old('reviactyl:alertMessage', $alertMessage) }}"
+                <input type="text" id="designify:alertMessage" name="designify:alertMessage"
+                    value="{{ old('designify:alertMessage', config('designify.alertMessage')) }}"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     placeholder="**bold** [link](https://reviactyl.dev)" />
             </div>

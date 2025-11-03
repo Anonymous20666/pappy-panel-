@@ -240,19 +240,19 @@ Route::group(['prefix' => 'designify'], function () {
     Route::view('/', 'admin.designify.index')->name('admin.designify');
 
     Route::get('/general', [Admin\Designify\GeneralController::class, 'index'])->name('admin.designify.general');
-    Route::post('/general', [Admin\Designify\GeneralController::class, 'store']);
+    Route::patch('/general', [Admin\Designify\GeneralController::class, 'update']);
 
     Route::post('/reset', [Admin\Designify\DesignifyController::class, 'resetToDefaults'])->name('admin.designify.reset');
 
     Route::get('/colors', [Admin\Designify\ColorsController::class, 'index'])->name('admin.designify.colors');
-    Route::post('/colors', [Admin\Designify\ColorsController::class, 'store']);
+    Route::patch('/colors', [Admin\Designify\ColorsController::class, 'update']);
 
     Route::get('/looks', [Admin\Designify\LookNFeelController::class, 'index'])->name('admin.designify.looks');
-    Route::post('/looks', [Admin\Designify\LookNFeelController::class, 'store']);
+    Route::patch('/looks', [Admin\Designify\LookNFeelController::class, 'update']);
 
     Route::get('/alerts', [Admin\Designify\AlertController::class, 'index'])->name('admin.designify.alerts');
-    Route::post('/alerts', [Admin\Designify\AlertController::class, 'store']);
+    Route::patch('/alerts', [Admin\Designify\AlertController::class, 'update']);
 
     Route::get('/site', [Admin\Designify\SiteController::class, 'index'])->name('admin.designify.site');
-    Route::post('/site', [Admin\Designify\SiteController::class, 'store']);
+    Route::patch('/site', [Admin\Designify\SiteController::class, 'update']);
 });

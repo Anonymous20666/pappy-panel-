@@ -12,10 +12,10 @@ class GeneralSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'reviactyl:customCopyright' => 'required|in:true,false',
-            'reviactyl:copyright' => 'required|string',
-            'reviactyl:isUnderMaintenance' => 'required|in:true,false',
-            'reviactyl:maintenance' => 'required|string',
+            'designify:customCopyright' => 'required|in:true,false',
+            'designify:copyright' => 'required|string',
+            'designify:isUnderMaintenance' => 'required|in:true,false',
+            'designify:maintenance' => 'required|string',
         ];
     }
 }

@@ -6,7 +6,7 @@
                 </div>
                 <div class="flex items-center space-x-3">
                     {!! csrf_field() !!}
-                    <button type="submit"
+                    <button type="submit" name="_method" value="PATCH"
                         class="px-6 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900 flex items-center space-x-2">
                         <i class="fa-solid fa-floppy-disk"></i>
                         <span class="hidden sm:block">Save changes</span>

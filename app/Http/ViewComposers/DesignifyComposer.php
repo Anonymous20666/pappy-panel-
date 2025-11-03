@@ -168,17 +168,4 @@ class DesignifyComposer
     {
         $view->with('reviactylConfiguration', $this->reviactylDefaults);
     }
-
-    public function resetReviactylDefaults(): void
-    {
-        foreach ($this->reviactylDefaults as $key => $value) {
-            if (preg_match('/^theme[1-7]$/', $key) && is_array($value)) {
-                foreach ($value as $subkey => $subvalue) {
-                    $this->settings->set("settings::designify:{$key}:{$subkey}", $subvalue);
-                }
-            } else {
-                $this->settings->set("settings::designify:{$key}", $value);
-            }
-        }
-    }
 }

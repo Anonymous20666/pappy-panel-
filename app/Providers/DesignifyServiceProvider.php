@@ -3,6 +3,7 @@
 namespace Pterodactyl\Providers;
 
 use Psr\Log\LoggerInterface as Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Encryption\Encrypter;
@@ -170,6 +171,19 @@ class DesignifyServiceProvider extends ServiceProvider
             }
 
             $config->set(str_replace(':', '.', $key), $value);
+        }
+    }
+
+    public function resetToDefaults(SettingsRepositoryInterface $settings, Log $log): void
+    {
+        try {
+            DB::table('settings')
+                ->where('key', 'like', 'settings::designify:%')
+                ->delete();
+
+            $log->info('All Designify settings have been reset to defaults.');
+        } catch (QueryException $exception) {
+            $log->error('Failed to reset Designify settings: ' . $exception->getMessage());
         }
     }
 

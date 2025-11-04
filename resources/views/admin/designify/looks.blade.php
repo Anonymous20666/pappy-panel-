@@ -47,6 +47,26 @@
                     </option>
                 </select>
             </div>
+            <div class="space-y-3">
+                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:fontFamily">
+                    Font Family
+                </label>
+                <select name="designify:fontFamily" id="designify:fontFamily"
+                    class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                    <option value="Poppins"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Poppins' ? 'selected' : '' }}>
+                        Poppins
+                    </option>
+                    <option value="Inter"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Inter' ? 'selected' : '' }}>
+                        Inter
+                    </option>
+                    <option value="Roboto"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Roboto' ? 'selected' : '' }}>
+                        Roboto
+                    </option>
+                </select>
+            </div>
             <div class="border-t border-zinc-700"></div>
             <div class="grid grid-cols-2 gap-4">
                 <p class="block text-xl font-medium text-zinc-700 dark:text-zinc-300">Border Settings</p><br>

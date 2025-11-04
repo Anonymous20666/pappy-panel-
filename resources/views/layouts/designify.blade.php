@@ -7,7 +7,7 @@
     <title>Designify Editor - @yield('title')</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/reviactyl/icon.png">
+    <link rel="shortcut icon" href="/reviactyl/designify.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
 
 

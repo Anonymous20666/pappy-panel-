@@ -27,6 +27,7 @@ return [
     'background' => 'none',
     'radius' => '15px',
     'allocationBlur' => true,
+    'fontFamily' => 'Poppins',
 
     'customCopyright' => true,
     'copyright' => 'Powered by [Reviactyl](https://reviactyl.dev/)',

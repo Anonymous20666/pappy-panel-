@@ -154,6 +154,7 @@ class DesignifyComposer
             'background' => config('designify.background') ?? 'none',
             'radius' => config('designify.radius') ?? '15px',
             'allocationBlur' => config('designify.allocationBlur', true),
+            'fontFamily' => config('designify.fontFamily') ?? 'Poppins',
             'alertType' => config('designify.alertType') ?? 'info',
             'alertMessage' => config('designify.alertMessage') ?? '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.',
             'site_color' => config('designify.site_color') ?? '#3b82f6',

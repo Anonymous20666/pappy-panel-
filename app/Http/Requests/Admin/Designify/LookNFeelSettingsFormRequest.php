@@ -16,6 +16,7 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
             'designify:background' => 'required|string',
             'designify:allocationBlur' => 'required|in:true,false',
             'designify:radius' => 'required|string',
+            'designify:fontFamily' => 'required|string',
         ];
     }
 }

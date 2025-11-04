@@ -41,6 +41,7 @@ class DesignifyServiceProvider extends ServiceProvider
         "designify:background",
         "designify:radius",
         "designify:allocationBlur",
+        "designify:fontFamily",
         "designify:alertType",
         "designify:alertMessage",
         "designify:site_color",

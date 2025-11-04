@@ -4,9 +4,7 @@ import { SocketEvent, SocketRequest } from '@/components/server/events';
 import useWebsocketEvent from '@/plugins/useWebsocketEvent';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import CopyOnClick from '@/components/elements/CopyOnClick';
-import { GlobeIcon, ChipIcon, HashtagIcon, SaveIcon, ExternalLinkIcon } from '@heroicons/react/solid';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMemory } from '@fortawesome/free-solid-svg-icons';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Can from '@/components/elements/Can';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
 import Card from '@/reviactyl/ui/Card';
@@ -17,6 +15,7 @@ import { StatBlock } from '@/reviactyl/ui/StatBlock';
 import { useStoreState } from 'easy-peasy';
 import Blur from '@/reviactyl/ui/Blur';
 import { useTranslation } from 'react-i18next';
+import { FaFloppyDisk, FaGlobe, FaHashtag, FaMemory, FaMicrochip } from 'react-icons/fa6';
 
 type Stats = Record<'memory' | 'cpu' | 'disk', number>;
 
@@ -125,7 +124,7 @@ const TopServerDetails = () => {
             <StatContainer className={`${showStats ? '' : 'hidden'} flex`}>
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
-                        <GlobeIcon />
+                        <FaGlobe />
                     </span>
                     <CopyOnClick text={allocation}>
                         <Blur className={`text-sm text-gray-100`}>{allocation}</Blur>
@@ -134,7 +133,7 @@ const TopServerDetails = () => {
 
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
-                        <ChipIcon />
+                        <FaMicrochip />
                     </span>
                     <span className='text-sm text-gray-100'>
                         {status === 'offline' ? (
@@ -147,7 +146,7 @@ const TopServerDetails = () => {
 
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
-                        <FontAwesomeIcon icon={faMemory} />
+                        <FaMemory />
                     </span>
                     <span className='text-sm text-gray-100'>
                         {status === 'offline' ? (
@@ -160,7 +159,7 @@ const TopServerDetails = () => {
 
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
-                        <SaveIcon />
+                        <FaFloppyDisk />
                     </span>
                     <span className='text-sm text-gray-100'>
                         <Limit limit={textLimits.disk}>{bytesToString(stats.disk)}</Limit>
@@ -169,7 +168,7 @@ const TopServerDetails = () => {
 
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
-                        <HashtagIcon />
+                        <FaHashtag />
                     </span>
                     <CopyOnClick text={id}>
                         <span className='text-sm text-gray-100'>{id}</span>

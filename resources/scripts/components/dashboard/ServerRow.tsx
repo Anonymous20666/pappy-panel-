@@ -1,13 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMemory } from '@fortawesome/free-solid-svg-icons';
+import { FaExclamation, FaFloppyDisk, FaGlobe, FaMemory, FaMicrochip } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResourceUsage';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
 import Spinner from '@/components/elements/Spinner';
 import Card from '@/reviactyl/ui/Card';
-import { ChipIcon, GlobeIcon, SaveIcon, ExclamationIcon } from '@heroicons/react/solid';
 import Title from '@/reviactyl/ui/Title';
 import { StatBlock } from '@/reviactyl/ui/StatBlock';
 import { useTranslation } from 'react-i18next';
@@ -127,7 +125,7 @@ export default ({ server }: { server: Server }) => {
                                 <React.Fragment>
                                     <StatBlock className='backdrop-blur-sm bg-yellow-500/50 border border-yellow-500/70'>
                                         <span className='w-4 sm:w-5 text-yellow-500'>
-                                            <ExclamationIcon />
+                                            <FaExclamation />
                                         </span>
                                         <p>
                                             {' '}
@@ -148,7 +146,7 @@ export default ({ server }: { server: Server }) => {
                             <React.Fragment>
                                 <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
                                     <span className='w-4 sm:w-5 text-gray-300'>
-                                        <GlobeIcon />
+                                        <FaGlobe />
                                     </span>
                                     <Blur className={`text-xs sm:text-sm text-gray-100`}>
                                         {server.allocations
@@ -162,7 +160,7 @@ export default ({ server }: { server: Server }) => {
                                 </StatBlock>
                                 <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
                                     <span className='w-4 sm:w-5 text-gray-300'>
-                                        <ChipIcon />
+                                        <FaMicrochip />
                                     </span>
                                     <p className={alarms.cpu ? 'text-danger-50' : ''}>
                                         {stats.cpuUsagePercent.toFixed(2)}%
@@ -171,7 +169,7 @@ export default ({ server }: { server: Server }) => {
                                 </StatBlock>
                                 <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
                                     <span className='w-4 sm:w-5 text-gray-300'>
-                                        <FontAwesomeIcon icon={faMemory} />
+                                        <FaMemory />
                                     </span>
                                     <p className={alarms.memory ? 'text-danger-50' : ''}>
                                         {bytesToString(stats.memoryUsageInBytes)}
@@ -180,7 +178,7 @@ export default ({ server }: { server: Server }) => {
                                 </StatBlock>
                                 <StatBlock className='backdrop-blur-sm bg-gray-500/20 border border-gray-500/50'>
                                     <span className='w-4 sm:w-5 text-gray-300'>
-                                        <SaveIcon />
+                                        <FaFloppyDisk />
                                     </span>
                                     <p className={alarms.disk ? 'text-danger-50' : ''}>
                                         {bytesToString(stats.diskUsageInBytes)}

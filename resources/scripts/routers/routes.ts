@@ -13,21 +13,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
-import {
-    RiArchiveBox,
-    RiBolt,
-    RiCalendar,
-    RiCog,
-    RiCommandLine,
-    RiFingerPrint,
-    RiFolder,
-    RiKey,
-    RiLockClosed,
-    RiPlay,
-    RiCircleStack,
-    RiUser,
-    RiUsers,
-} from '@revicons/react/solid';
+import { FaBoltLightning, FaBoxArchive, FaCalendar, FaDatabase, FaEye, FaFolder, FaGear, FaKey, FaLock, FaPlay, FaTerminal, FaUser, FaUsers } from 'react-icons/fa6';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -72,25 +58,25 @@ export default {
             path: '/',
             name: 'account.overview',
             component: AccountOverviewContainer,
-            icon: RiUser,
+            icon: FaUser,
             exact: true,
         },
         {
             path: '/api',
             name: 'account.api',
-            icon: RiLockClosed,
+            icon: FaLock,
             component: AccountApiContainer,
         },
         {
             path: '/ssh',
             name: 'account.ssh',
-            icon: RiKey,
+            icon: FaKey,
             component: AccountSSHContainer,
         },
         {
             path: '/activity',
             name: 'account.activity',
-            icon: RiFingerPrint,
+            icon: FaEye,
             component: ActivityLogContainer,
         },
     ],
@@ -101,7 +87,7 @@ export default {
                 permission: null,
                 name: 'server.console',
                 component: ServerConsole,
-                icon: RiCommandLine,
+                icon: FaTerminal,
                 exact: true,
             },
             {
@@ -109,7 +95,7 @@ export default {
                 permission: 'file.*',
                 name: 'server.files',
                 component: FileManagerContainer,
-                icon: RiFolder,
+                icon: FaFolder,
             },
             {
                 path: '/files/:action(edit|new)',
@@ -122,14 +108,14 @@ export default {
                 permission: 'startup.*',
                 name: 'server.startup',
                 component: StartupContainer,
-                icon: RiPlay,
+                icon: FaPlay,
             },
             {
                 path: '/network',
                 permission: 'allocation.*',
                 name: 'server.network',
                 component: NetworkContainer,
-                icon: RiBolt,
+                icon: FaBoltLightning,
             },
         ],
         management: [
@@ -138,14 +124,14 @@ export default {
                 permission: 'database.*',
                 name: 'server.databases',
                 component: DatabasesContainer,
-                icon: RiCircleStack,
+                icon: FaDatabase,
             },
             {
                 path: '/schedules',
                 permission: 'schedule.*',
                 name: 'server.schedules',
                 component: ScheduleContainer,
-                icon: RiCalendar,
+                icon: FaCalendar,
             },
             {
                 path: '/schedules/:id',
@@ -158,7 +144,7 @@ export default {
                 permission: 'backup.*',
                 name: 'server.backups',
                 component: BackupContainer,
-                icon: RiArchiveBox,
+                icon: FaBoxArchive,
             },
         ],
         administration: [
@@ -167,21 +153,21 @@ export default {
                 permission: 'user.*',
                 name: 'server.users',
                 component: UsersContainer,
-                icon: RiUsers,
+                icon: FaUsers,
             },
             {
                 path: '/settings',
                 permission: ['settings.*', 'file.sftp'],
                 name: 'server.settings',
                 component: SettingsContainer,
-                icon: RiCog,
+                icon: FaGear,
             },
             {
                 path: '/activity',
                 permission: 'activity.*',
                 name: 'server.activity',
                 component: ServerActivityLogContainer,
-                icon: RiFingerPrint,
+                icon: FaEye,
             },
         ],
     },

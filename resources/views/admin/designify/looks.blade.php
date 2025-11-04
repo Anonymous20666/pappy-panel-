@@ -13,6 +13,26 @@
         <div class="flex-1 space-y-6 pb-[80px]">
             <div class="space-y-3">
                 <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:themeSelector">
+                    Reviactyl Styles <span class="bg-blue-800 rounded-xl px-2">Soon</span>
+                </label>
+                <div class="inline-flex gap-2">
+                    <a class="bg-zinc-800/50 border border-blue-700 rounded-xl p-1">
+                        <div class="relative">
+                            <img class="h-15 rounded-xl" src="/styles/default/layout.svg" />
+                            <span class="absolute bottom-1 left-1/2 -translate-x-1/2 bg-zinc-900/80 text-white text-xs px-2 py-0.5 rounded-md">
+                                Default
+                            </span>
+                        </div>
+                    </a>
+                    <a class="bg-zinc-800/50 border border-zinc-700 rounded-xl p-1">
+                        <div class="relative">
+                            <img class="h-15 rounded-xl blur-sm" src="/styles/default/layout.svg" />
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <label class="block text-sm font-medium text-zinc-700 dark:text-zinc-300" for="designify:themeSelector">
                     Theme Selector
                 </label>
                 <select name="designify:themeSelector" id="designify:themeSelector"

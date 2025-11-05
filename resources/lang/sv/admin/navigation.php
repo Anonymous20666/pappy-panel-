@@ -3,21 +3,21 @@
 return [
     'administration' => [
         'title' => 'Administration',
-        'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'api' => 'Application API',
+        'dashboard' => 'Instrumentpanel',
+        'settings' => 'Inställningar',
+        'api' => 'Applikations-API',
     ],
     'management' => [
-        'title' => 'Management',
-        'databases' => 'Databases',
-        'locations' => 'Locations',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'users' => 'Users',
+        'title' => 'Hantering',
+        'databases' => 'Databaser',
+        'locations' => 'Platser',
+        'nodes' => 'Noder',
+        'servers' => 'Servrar',
+        'users' => 'Användare',
     ],
     'service' => [
-        'title' => 'Service Management',
-        'mounts' => 'Mounts',
-        'nests' => 'Nests',
+        'title' => 'Servicehantering',
+        'mounts' => 'Monteringar',
+        'nests' => 'Burar',
     ],
 ];

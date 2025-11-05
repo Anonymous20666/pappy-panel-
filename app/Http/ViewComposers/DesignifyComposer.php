@@ -150,7 +150,7 @@ class DesignifyComposer
             'theme5' => $this->Theme5,
             'theme6' => $this->Theme6,
             'theme7' => $this->Theme7,
-            'themeSelector' => config('designify.themeSelector', true),
+            'themeSelector' => config('designify.themeSelector', false),
             'background' => config('designify.background') ?? 'none',
             'radius' => config('designify.radius') ?? '15px',
             'allocationBlur' => config('designify.allocationBlur', true),

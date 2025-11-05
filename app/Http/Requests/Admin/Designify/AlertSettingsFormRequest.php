@@ -16,4 +16,12 @@ class AlertSettingsFormRequest extends AdminFormRequest
             'designify:alertMessage' => 'required|string',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'designify:alertType' => 'Alert Type',
+            'designify:alertMessage' => 'Alert Message',
+        ];
+    }
 }

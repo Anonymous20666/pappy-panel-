@@ -18,4 +18,14 @@ class GeneralSettingsFormRequest extends AdminFormRequest
             'designify:maintenance' => 'required|string',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'designify:customCopyright' => 'Custom Copyright',
+            'designify:copyright' => 'Copyright Text',
+            'designify:isUnderMaintenance' => 'Maintenance',
+            'designify:maintenance' => 'Maintenance Message',
+        ];
+    }
 }

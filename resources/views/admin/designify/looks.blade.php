@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('admin.designify.looks') }}" method="POST" class="h-full flex flex-col">
+    <form id="designifyEditor" action="" method="POST" class="h-full flex flex-col">
+        @csrf
+        @method('PATCH')
         <div class="mb-8">
             <h1 class="text-2xl font-bold text-white mb-2">Look & Feel</h1>
             <p class="text-zinc-400 text-sm">Change the look & feel of Reviactyl Theme.</p>
@@ -38,11 +40,11 @@
                 <select name="designify:themeSelector" id="designify:themeSelector"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                     <option value="true"
-                        {{ old('designify:themeSelector', config('designify.themeSelector')) === 'true' ? 'selected' : '' }}>
+                        {{ old('designify:themeSelector', config('designify.themeSelector')) === true ? 'selected' : '' }}>
                         Enabled
                     </option>
                     <option value="false"
-                        {{ old('designify:themeSelector', config('designify.themeSelector')) === 'false' ? 'selected' : '' }}>
+                        {{ old('designify:themeSelector', config('designify.themeSelector')) === false ? 'selected' : '' }}>
                         Disabled
                     </option>
                 </select>
@@ -87,11 +89,11 @@
                 <select name="designify:allocationBlur" id="designify:allocationBlur"
                     class="w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
                     <option value="true"
-                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === 'true' ? 'selected' : '' }}>
+                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === true ? 'selected' : '' }}>
                         Enabled
                     </option>
                     <option value="false"
-                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === 'false' ? 'selected' : '' }}>
+                        {{ old('designify:allocationBlur', config('designify.allocationBlur')) === false ? 'selected' : '' }}>
                         Disabled
                     </option>
                 </select>
@@ -115,7 +117,5 @@
                 </p>
             </div>
         </div>
-
-        @include('partials/admin.designify.save')
     </form>
 @endsection

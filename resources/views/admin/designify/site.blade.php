@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-    <form action="{{ route('admin.designify.site') }}" method="POST" class="h-full flex flex-col">
+    <form id="designifyEditor" action="" method="POST" class="h-full flex flex-col">
+        @csrf
+        @method('PATCH')
         <div class="mb-8">
             <h1 class="text-2xl font-bold text-white mb-2">Site settings</h1>
             <p class="text-zinc-400 text-sm">Change the meta content of your panel.</p>
@@ -66,7 +68,6 @@
                 </div>
             </div>
         </div>
-     @include('partials/admin.designify.save')
     </form>
 @endsection
 @section('sidecontent')

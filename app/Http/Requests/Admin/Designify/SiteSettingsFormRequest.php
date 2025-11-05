@@ -19,4 +19,15 @@ class SiteSettingsFormRequest extends AdminFormRequest
             'designify:site_favicon' => 'required|string',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'designify:site_color' => 'Site Color',
+            'designify:site_title' => 'Site Title',
+            'designify:site_description' => 'Site Description',
+            'designify:site_image' => 'Site Banner',
+            'designify:site_favicon' => 'Site Favicon',
+        ];
+    }
 }

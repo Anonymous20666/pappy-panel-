@@ -19,4 +19,15 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
             'designify:fontFamily' => 'required|string',
         ];
     }
+
+    public function attributes(): array
+    {
+        return [
+            'designify:themeSelector' => 'Theme Selector',
+            'designify:background' => 'Panel Background',
+            'designify:allocationBlur' => 'Allocation Blur',
+            'designify:radius' => 'Border Radius',
+            'designify:fontFamily' => 'Font Family',
+        ];
+    }
 }

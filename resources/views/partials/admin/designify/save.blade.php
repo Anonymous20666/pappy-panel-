@@ -1,16 +1,7 @@
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[612px] rounded-xl sm:border border-zinc-700 bg-zinc-950/60 pt-2 mt-6 px-4 mb-2 backdrop-blur-xl">
-            <div class="flex items-center justify-between pb-2">
-                <div class="hidden sm:block text-sm text-zinc-400">
-                    <i class="fas fa-info-circle mr-1"></i>
-                    Changes will be applied immediately after saving
-                </div>
-                <div class="flex items-center space-x-3">
-                    {!! csrf_field() !!}
-                    <button type="submit" name="_method" value="PATCH"
-                        class="px-6 py-2.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-zinc-900 flex items-center space-x-2">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        <span class="hidden sm:block">Save changes</span>
-                    </button>
-                </div>
-            </div>
-        </div>
+<button form="designifyEditor" type="submit" value="PATCH"
+    class="group relative flex items-center justify-center h-10 w-10 md:h-12 md:w-12 rounded-lg md:rounded-xl bg-green-800/50 border border-green-700 text-green-400 hover:bg-green-700/50 hover:text-green-300 transition-all duration-200">
+    <i class="fa-solid fa-floppy-disk"></i>
+    <div class="absolute left-full ml-2 px-2 py-1 bg-zinc-800 text-white text-sm rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap z-50 pointer-events-none hidden md:block">
+        Save Changes
+    </div>
+</button>

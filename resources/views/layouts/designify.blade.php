@@ -101,6 +101,7 @@
             </div>
 
             <div class="flex flex-col space-y-2 px-2">
+                @include('partials/admin.designify.save')
                 <form action="{{ route('admin.designify.reset') }}" method="POST"
                     onsubmit="return confirm('Are you sure you want to reset Reviactyl settings to default?');">
                     @csrf
@@ -141,7 +142,7 @@
                 <div
                     class="hidden sm:block w-auto bg-zinc-900/30 backdrop-blur-md border-l border-zinc-800 p-4 flex items-start justify-end">
                     <div class="bg-white rounded-lg shadow-2xl resize-left overflow-hidden"
-                        style="width: 375px; height: calc(100vh - 140px); min-width: 280px; max-width: 800px;">
+                        style="width: 800px; height: calc(100vh - 140px);">
                         <iframe src="/" class="w-full h-full border-0" title="Preview"></iframe>
                     </div>
                 </div>

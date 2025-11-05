@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'title' => 'Dashboard',
-    'uptodate-header' => 'Your Panel is up to date',
-    'uptodate-body' => 'You are currently using <code>:version</code>. Your panel is up-to-date!',
-    'notuptodate-header' => 'Your Panel is not up to date',
-    'notuptodate-body' => '<code>:latest</code> is now available! Read our documentation to update your Panel.',
-    'feedback-header' => 'Any Feedback?',
-    'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',
-    'feedback-btn' => 'Create Issue',
-    'sponsor-header' => 'Support Reviactyl',
-    'sponsor-body' => 'Thank you for using Reviactyl Panel, this could only be achieved through the support of you, our contributors, and the rest of our supporters! We appreciate any and all support from anybody.',
-    'sponsor-btn' => 'Sponsor Project',
+    'title' => 'Instrumentpanel',
+    'uptodate-header' => 'Din panel är uppdaterad',
+    'uptodate-body' => 'Du använder för närvarande <code>:version</code>. Din panel är uppdaterad!',
+    'notuptodate-header' => 'Din panel är inte uppdaterad',
+    'notuptodate-body' => '<code>:latest</code> är nu tillgänglig! Läs vår dokumentation för att uppdatera din panel.',
+    'feedback-header' => 'Någon feedback?',
+    'feedback-body' => 'Om du har uppskattat funktionerna och användarvänligheten som Reviactyl erbjuder, låt oss veta! Din feedback hjälper oss att förbättra och skapa ännu bättre verktyg för dig.',
+    'feedback-btn' => 'Skapa ärende',
+    'sponsor-header' => 'Stöd Reviactyl',
+    'sponsor-body' => 'Tack för att du använder Reviactyl Panel. Detta har endast varit möjligt tack vare stödet från dig, våra bidragsgivare och alla andra som stöttar oss! Vi uppskattar allt stöd.',
+    'sponsor-btn' => 'Sponsra projekt',
 
-    'help-btn' => 'Get Help',
-    'docs-btn' => 'Documentation',
+    'help-btn' => 'Få hjälp',
+    'docs-btn' => 'Dokumentation',
 ];

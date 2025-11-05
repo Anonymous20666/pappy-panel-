@@ -33,7 +33,7 @@ return [
     ],
     'advanced' => [
         'title' => 'Avancerade Inställningar',
-        'status-label' => 'Status',
+        'status-label' => 'Stata',
         'enabled' => 'Aktiverad',
         'disabled' => 'Inaktiverad',
         'key-label' => 'Webbplatsnyckel',

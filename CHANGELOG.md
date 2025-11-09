@@ -3,6 +3,39 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v2.1.0
+
+### Added
+* New Translations for Admin Panel
+* Logo, Favicon, Debug Option in Admin > General Settings
+* Chinese Simplified (`zh`) translation
+* Spanish (`es`) translation
+* Mail Template Customization
+* New button variants
+* Font Family Configuration
+* Configurable Layouts (!WIP)
+* Progressive Web App (PWA Desktop, Mobile App)
+
+### Changed
+
+* Updated Designify Editor to use proper settings system
+* Use proper settings variable for Buttons
+* Use `revicons`, `react-icons` package for icons
+* Security Improvements
+* Update primary colour from `orange` to `blue`
+* Update Reviactyl assets
+* UI Refinements on Admin & Client Dashboard
+
+### Fixed
+
+* Sidebar elements appear broken
+* Admin Styles appear broken
+
+### BREAKING CHANGES
+
+* Updated Designify Structure
+* Updated Sidebar Structure
+
 ## v2.0.2
 
 ### Added

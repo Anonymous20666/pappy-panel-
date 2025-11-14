@@ -7,6 +7,7 @@ import tw from 'twin.macro';
 import Button from '@/components/elements/Button';
 import NotFoundSvg from '@/assets/images/not_found.svg';
 import ServerErrorSvg from '@/assets/images/server_error.svg';
+import Card from '@/reviactyl/ui/Card';
 
 interface BaseProps {
     title: string;
@@ -43,8 +44,8 @@ const ActionButton = styled(Button)`
 const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProps) => (
     <PageContentBlock>
         <div css={tw`flex justify-center`}>
-            <div
-                css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 bg-neutral-100 rounded-lg shadow-lg text-center relative`}
+            <Card
+                css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 relative`}
             >
                 {(typeof onBack === 'function' || typeof onRetry === 'function') && (
                     <div css={tw`absolute left-0 top-0 ml-4 mt-4`}>
@@ -56,10 +57,12 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                         </ActionButton>
                     </div>
                 )}
-                <img src={image} css={tw`w-2/3 h-auto select-none mx-auto`} />
-                <h2 css={tw`mt-10 text-neutral-900 font-bold text-4xl`}>{title}</h2>
-                <p css={tw`text-sm text-neutral-700 mt-2`}>{message}</p>
-            </div>
+                <div className="grid grid-rows-2 gap-x-4 items-center grid-cols-[auto,1fr]">
+                    <img src={image} className="w-20 h-20 row-span-2 select-none" />
+                    <h2 className="text-gray-200 font-bold text-3xl">{title}</h2>
+                    <p className="text-sm text-gray-100">{message}</p>
+                </div>
+            </Card>
         </div>
     </PageContentBlock>
 );

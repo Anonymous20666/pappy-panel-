@@ -30,7 +30,7 @@ return [
         'account' => [
             'email-changed' => 'Ändrade e-post från :old till :new',
             'password-changed' => 'Ändrade lösenord',
-            'language-changed' => 'Ändrade e-post från :old till :new',
+            'language-changed' => 'Ändrade e-post från :gammal till :ny',
         ],
         'api-key' => [
             'create' => 'Skapade ny API-nyckel :identifier',

@@ -2,7 +2,7 @@
 
 return [
     'index' => [
-        'dashboard' => 'Dashboard',
+        'dashboard' => 'Instrumentpanel',
     ],
     'account' => [
         'overview' => 'Kontoinformation',

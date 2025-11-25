@@ -2,7 +2,7 @@
 
 return [
     'administration' => [
-        'title' => 'Administrator',
+        'title' => 'Administration',
         'dashboard' => 'Instrumentpanel',
         'settings' => 'Inställningar',
         'api' => 'Applikations-API',

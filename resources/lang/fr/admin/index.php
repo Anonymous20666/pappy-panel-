@@ -2,17 +2,17 @@
 
 return [
     'title' => 'Dashboard',
-    'uptodate-header' => 'Tout est à jour',
-    'uptodate-body' => 'Vous utilisez la version <code>:version</code>. Tout est à jour!',
-    'notuptodate-header' => 'Le panel n\'est pas à jour!',
-    'notuptodate-body' => '<code>:latest</code> est maintenant disponible! Allez lire notre documentation pour mettre à jour le panel.',
-    'feedback-header' => 'Un avis?',
-    'feedback-body' => 'Si vous appréciez les fonctionnalités et la facilité d\'utilisation de Reviactyl, faites-le-nous savoir ! Vos commentaires nous aident à améliorer et à créer des outils encore plus performants pour vous.',
-    'feedback-btn' => 'Faire un retour',
+    'uptodate-header' => 'Your Panel is up to date',
+    'uptodate-body' => 'You are currently using <code>:version</code>. Your panel is up-to-date!',
+    'notuptodate-header' => 'Your Panel is not up to date',
+    'notuptodate-body' => '<code>:latest</code> is now available! Read our documentation to update your Panel.',
+    'feedback-header' => 'Any Feedback?',
+    'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',
+    'feedback-btn' => 'Create Issue',
     'sponsor-header' => 'Support Reviactyl',
-    'sponsor-body' => 'Merci d\'utiliser Reviactyl Panel. Cela n\'aurait pas été possible sans le soutien de nos contributeurs et de tous ceux qui nous soutiennent ! Nous apprécions tout soutien, quel qu\'il soit.',
-    'sponsor-btn' => 'Projet sponsor',
+    'sponsor-body' => 'Thank you for using Reviactyl Panel, this could only be achieved through the support of you, our contributors, and the rest of our supporters! We appreciate any and all support from anybody.',
+    'sponsor-btn' => 'Sponsor Project',
 
-    'help-btn' => 'Obtenez de l\'aide',
+    'help-btn' => 'Get Help',
     'docs-btn' => 'Documentation',
 ];

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Application API
+    @lang('admin/api.title')
 @endsection
 
 @section('content-header')
@@ -19,7 +19,7 @@
             <div class="col-sm-8 col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Select Permissions</h3>
+                        <h3 class="box-title">@lang('admin/api.permissions')</h3>
                     </div>
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover">
@@ -29,17 +29,17 @@
                                     <td class="col-sm-3 radio radio-primary text-center">
                                         <input type="radio" id="r_{{ $resource }}" name="r_{{ $resource }}"
                                             value="{{ $permissions['r'] }}">
-                                        <label for="r_{{ $resource }}">Read</label>
+                                        <label for="r_{{ $resource }}">@lang('admin/api.read-only')</label>
                                     </td>
                                     <td class="col-sm-3 radio radio-primary text-center">
                                         <input type="radio" id="rw_{{ $resource }}" name="r_{{ $resource }}"
                                             value="{{ $permissions['rw'] }}">
-                                        <label for="rw_{{ $resource }}">Read &amp; Write</label>
+                                        <label for="rw_{{ $resource }}">@lang('admin/api.read-write')</label>
                                     </td>
                                     <td class="col-sm-3 radio text-center">
                                         <input type="radio" id="n_{{ $resource }}" name="r_{{ $resource }}"
                                             value="{{ $permissions['n'] }}" checked>
-                                        <label for="n_{{ $resource }}">None</label>
+                                        <label for="n_{{ $resource }}">@lang('admin/api.none')</label>
                                     </td>
                                 </tr>
                             @endforeach
@@ -51,17 +51,15 @@
                 <div class="box box-primary">
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="control-label" for="memoField">Description <span
+                            <label class="control-label" for="memoField">@lang('admin/api.description') <span
                                     class="field-required"></span></label>
                             <input id="memoField" type="text" name="memo" class="form-control">
                         </div>
-                        <p class="text-muted">Once you have assigned permissions and created this set of credentials you
-                            will be unable to come back and edit it. If you need to make changes down the road you will need
-                            to create a new set of credentials.</p>
+                        <p class="text-muted">@lang('admin/api.info')</p>
                     </div>
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-success btn-sm pull-right">Create Credentials</button>
+                        <button type="submit" class="btn btn-success btn-sm pull-right">@lang('admin/api.new-btn')</button>
                     </div>
                 </div>
             </div>

@@ -17,3 +17,5 @@ files:
     translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
   - source: /resources/lang/en/admin/settings.php
     translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
+  - source: /resources/lang/en/admin/api.php
+    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%

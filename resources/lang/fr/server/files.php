@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'title' => 'File Manager',
-    'new-file' => 'New File',
-    'empty' => 'This directory seems to be empty.',
-    'too-large' => 'This directory is too large to display in the browser, limiting the output to the first 250 files.',
-    'move' => 'Move',
-    'archive' => 'Archive',
-    'delete' => 'Delete',
-    'create-directory' => 'Create Directory',
+    'title' => 'Gestionnaire de fichier',
+    'new-file' => 'Nouveau fichier',
+    'empty' => 'Ce répértoire semble vide.',
+    'too-large' => 'Ce répertoire est trop volumineux pour être affiché dans le navigateur, ce qui limite l\'affichage aux 250 premiers fichiers.',
+    'move' => 'Déplacer',
+    'archive' => 'Archiver',
+    'delete' => 'Supprimer',
+    'create-directory' => 'Créer un dossier',
 ];

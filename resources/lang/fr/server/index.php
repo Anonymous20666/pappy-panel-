@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'control' => 'Control',
-    'management' => 'Management',
+    'control' => 'Contrôler',
+    'management' => 'Gestion',
     'administration' => 'Administration',
-    'start' => 'Start',
-    'stop' => 'Stop',
-    'restart' => 'Restart',
-    'kill' => 'Kill',
-    'kill-warning' => 'Forcibly stopping a server can lead to data corruption.',
-    'hide-stats' => 'Hide Stats',
-    'show-stats' => 'Show Stats',
+    'start' => 'Démarrer',
+    'stop' => 'Arrêter',
+    'restart' => 'Redémarrer',
+    'kill' => 'Tuer',
+    'kill-warning' => 'L\'arrêt forcé d\'un serveur peut entraîner une corruption des données.',
+    'hide-stats' => 'Masquer les statistiques',
+    'show-stats' => 'Afficher les statistiques',
 ];

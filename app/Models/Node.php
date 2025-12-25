@@ -82,7 +82,7 @@ class Node extends Model
     protected $fillable = [
         'public', 'name', 'location_id',
         'containerText', 'daemonText',
-        'fqdn', 'scheme', 'behind_proxy',
+        'description', 'fqdn', 'scheme', 'behind_proxy',
         'memory', 'memory_overallocate', 'disk',
         'disk_overallocate', 'upload_size', 'daemonBase',
         'daemonSFTP', 'daemonListen',

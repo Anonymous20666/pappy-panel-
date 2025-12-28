@@ -2,6 +2,10 @@
 
 return [
     'title' => '仪表板',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',
     'no-servers' => '您的账户没有关联的服务器。',
@@ -22,5 +26,17 @@ return [
         'transferring' => '传输中',
         'installing' => '安装中',
         'unavailable' => '不可用',
+    ],
+    'status-card' => [
+        'title' => 'Server Status',
+        'description' => 'Check server status',
+    ],
+    'support-card' => [
+        'title' => 'Need Help?',
+        'description' => 'Contact our support',
+    ],
+    'billing-card' => [
+        'title' => 'Billing & Invoices',
+        'description' => 'Manage your payments',
     ],
 ];

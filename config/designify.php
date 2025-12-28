@@ -38,6 +38,10 @@ return [
     'alertType' => 'info',
     'alertMessage' => '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.',
 
+    'statusCardLink' => '',
+    'supportCardLink' => '',
+    'billingCardLink' => '',
+
     'theme1' => [
         'name' => 'Petrascia',
         'colorPrimary' => '#3b82f6',

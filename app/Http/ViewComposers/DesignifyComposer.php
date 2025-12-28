@@ -162,6 +162,9 @@ class DesignifyComposer
             'site_description' => config('designify.site_description') ?? 'Our official control panel made better with Reviactyl.',
             'site_image' => config('designify.site_image') ?? '/reviactyl/logo.png',
             'site_favicon' => config('designify.site_favicon') ?? '/reviactyl/icon.png',
+            'statusCardLink' => config('designify.statusCardLink') ?? '',
+            'supportCardLink' => config('designify.supportCardLink') ?? '',
+            'billingCardLink' => config('designify.billingCardLink') ?? '',
         ];
     }
 

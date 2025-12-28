@@ -2,6 +2,10 @@
 
 return [
     'title' => 'Dashboard',
+    'welcome' => [
+        'title' => 'Selamat datang kembali',
+        'subtitle' => 'Di sini Anda dapat melihat semua server yang dapat diakses.',
+    ],
     'other-servers' => 'Menampilkan server orang lain',
     'your-servers' => 'Menampilkan server Anda',
     'no-servers' => 'Tidak ada server yang terkait dengan akun Anda.',
@@ -22,5 +26,17 @@ return [
         'transferring' => 'Mentransfer',
         'installing' => 'Menginstal',
         'unavailable' => 'Tidak Tersedia',
+    ],
+    'status-card' => [
+        'title' => 'Status Server',
+        'description' => 'Cek status server',
+    ],
+    'support-card' => [
+        'title' => 'Butuh Bantuan?',
+        'description' => 'Hubungi support kami',
+    ],
+    'billing-card' => [
+        'title' => 'Tagihan & Invoice',
+        'description' => 'Kelola pembayaran Anda',
     ],
 ];

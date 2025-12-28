@@ -2,6 +2,10 @@
 
 return [
     'title' => 'Dashboard',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Autres serveurs',
     'your-servers' => 'Vos serveurs',
     'no-servers' => 'Il n\'y a aucun serveur associé à votre compte.',
@@ -22,5 +26,17 @@ return [
         'transferring' => 'Transfer en cours',
         'installing' => 'Installation en cours',
         'unavailable' => 'Indisponible',
+    ],
+    'status-card' => [
+        'title' => 'Server Status',
+        'description' => 'Check server status',
+    ],
+    'support-card' => [
+        'title' => 'Need Help?',
+        'description' => 'Contact our support',
+    ],
+    'billing-card' => [
+        'title' => 'Billing & Invoices',
+        'description' => 'Manage your payments',
     ],
 ];

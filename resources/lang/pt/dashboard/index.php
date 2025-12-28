@@ -2,6 +2,10 @@
 
 return [
     'title' => 'Painel',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Mostrando servidores de outros',
     'your-servers' => 'Mostrando seus servidores',
     'no-servers' => 'Não há servidores associados à sua conta.',
@@ -22,5 +26,17 @@ return [
         'transferring' => 'Transferindo',
         'installing' => 'Instalando',
         'unavailable' => 'Indisponível',
+    ],
+    'status-card' => [
+        'title' => 'Server Status',
+        'description' => 'Check server status',
+    ],
+    'support-card' => [
+        'title' => 'Need Help?',
+        'description' => 'Contact our support',
+    ],
+    'billing-card' => [
+        'title' => 'Billing & Invoices',
+        'description' => 'Manage your payments',
     ],
 ];

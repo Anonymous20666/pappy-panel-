@@ -2,6 +2,10 @@
 
 return [
     'title' => 'डैशबोर्ड',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'अन्य सर्वरों को दिखा रहे हैं',
     'your-servers' => 'आपके सर्वरों को दिखा रहे हैं',
     'no-servers' => 'आपके खाते से जुड़े कोई सर्वर नहीं हैं।',
@@ -22,5 +26,17 @@ return [
         'transferring' => 'स्थानांतरित कर रहा है',
         'installing' => 'इंस्टॉल कर रहा है',
         'unavailable' => 'अप्राप्य',
+    ],
+    'status-card' => [
+        'title' => 'Server Status',
+        'description' => 'Check server status',
+    ],
+    'support-card' => [
+        'title' => 'Need Help?',
+        'description' => 'Contact our support',
+    ],
+    'billing-card' => [
+        'title' => 'Billing & Invoices',
+        'description' => 'Manage your payments',
     ],
 ];

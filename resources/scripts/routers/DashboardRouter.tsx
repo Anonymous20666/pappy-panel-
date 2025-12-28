@@ -18,6 +18,7 @@ import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
 import Announcement from '@/reviactyl/ui/Announcement';
 import MaintenanceAlert from '@/reviactyl/ui/MaintenanceAlert';
+import QuickLinks from '@/reviactyl/ui/QuickLinks';
 import Maintenance from '@/reviactyl/ui/Maintenance';
 import { useTranslation } from 'react-i18next';
 
@@ -102,6 +103,7 @@ export default () => {
                                         <Route path={'/'} exact>
                                             <Announcement />
                                             <MaintenanceAlert />
+                                            <QuickLinks />
                                             <DashboardContainer />
                                         </Route>
                                         {routes.account.map(({ path, component: Component }) => (

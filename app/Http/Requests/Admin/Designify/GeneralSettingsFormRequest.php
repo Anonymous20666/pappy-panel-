@@ -16,6 +16,9 @@ class GeneralSettingsFormRequest extends AdminFormRequest
             'designify:copyright' => 'required|string',
             'designify:isUnderMaintenance' => 'required|in:true,false',
             'designify:maintenance' => 'required|string',
+            'designify:statusCardLink' => 'nullable|string|max:255',
+            'designify:supportCardLink' => 'nullable|string|max:255',
+            'designify:billingCardLink' => 'nullable|string|max:255',
         ];
     }
 

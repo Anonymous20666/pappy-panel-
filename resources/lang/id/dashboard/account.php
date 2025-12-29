@@ -7,7 +7,6 @@ return [
         '2fa-alert' => 'Akun Anda harus mengaktifkan otentikasi dua faktor untuk melanjutkan.',
         'administrator' => 'Administrator',
         'user' => 'Pengguna',
-        'logout' => 'Keluar',
         'update-email' => 'Perbarui Alamat Email',
         'theme-selector' => 'Pemilih Tema',
         'update-password' => 'Perbarui Kata Sandi',

@@ -7,7 +7,6 @@ return [
         '2fa-alert' => 'Sua conta deve ter a autenticação de dois fatores ativada para continuar.',
         'administrator' => 'Administrador',
         'user' => 'Usuário',
-        'logout' => 'Sair',
         'update-email' => 'Atualizar Endereço de E-mail',
         'theme-selector' => 'Seletor de Tema',
         'update-password' => 'Atualizar Senha',

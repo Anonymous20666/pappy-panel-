@@ -7,7 +7,6 @@ return [
         '2fa-alert' => '您的账户必须启用双重认证才能继续。',
         'administrator' => '管理员',
         'user' => '用户',
-        'logout' => '退出登录',
         'update-email' => '更新电子邮件地址',
         'theme-selector' => '主题选择器',
         'update-password' => '更新密码',

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
+import NavbarLanguageSwitcher from '@/reviactyl/ui/NavbarLanguageSwitcher';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 
@@ -27,7 +28,8 @@ export default ({ children }: NavbarProps) => {
         <Container className={`${blurred ? 'backdrop-blur-lg shadow' : ''}`}>
             <div className='w-full mt-1 flex items-center justify-between h-full px-4 sm:px-6 md:px-8'>
                 <div className='flex items-center gap-4'>{children}</div>
-                <div className='flex grow-0 shrink-0 md:basis-56 order-last justify-end'>
+                <div className='flex grow-0 shrink-0 items-center gap-3 order-last justify-end'>
+                    <NavbarLanguageSwitcher />
                     <SearchContainer />
                 </div>
             </div>

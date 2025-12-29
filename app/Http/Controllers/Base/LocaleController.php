@@ -83,8 +83,22 @@ class LocaleController extends Controller
 
     public function list(): JsonResponse
     {
-        $lang = $this->getAvailableLanguages(true);
-
-        return response()->json($lang);
+        $languages = $this->getAvailableLanguages(true);
+        
+        // Include flag codes from translation files
+        $result = [];
+        foreach ($languages as $code => $name) {
+            $flag = trans("dashboard/index.flag", [], $code);
+            // If no flag translation exists, fallback to empty
+            if ($flag === "dashboard/index.flag") {
+                $flag = '';
+            }
+            $result[$code] = [
+                'name' => $name,
+                'flag' => $flag,
+            ];
+        }
+        
+        return response()->json($result);
     }
 }

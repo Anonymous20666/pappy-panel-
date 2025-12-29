@@ -7,7 +7,6 @@ return [
         '2fa-alert' => 'Your account must have two-factor authentication enabled in order to continue.',
         'administrator' => 'Administrator',
         'user' => 'User',
-        'logout' => 'Logout',
         'update-email' => 'Update Email Address',
         'theme-selector' => 'Theme Selector',
         'update-password' => 'Update Password',

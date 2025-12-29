@@ -3,6 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Dashboard',
+        'logout' => 'Logout',
     ],
     'account' => [
         'overview' => 'Account Overview',

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'flag' => 'es',
     'title' => 'Panel de control',
     'other-servers' => 'Mostrando servidores de otros',
     'your-servers' => 'Mostrando tus servidores',

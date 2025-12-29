@@ -3,6 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Dashboard',
+        'logout' => 'Keluar',
     ],
     'account' => [
         'overview' => 'Ringkasan Akun',

@@ -3,6 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'डैशबोर्ड',
+        'logout' => 'लॉग आउट',
     ],
     'account' => [
         'overview' => 'खाता अवलोकन',

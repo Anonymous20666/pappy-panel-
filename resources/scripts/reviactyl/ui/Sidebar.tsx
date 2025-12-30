@@ -82,6 +82,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const sidebarLogout = useStoreState((state) => state.reviactyl.data?.sidebarLogout);
 
     const onLogout = () => {
         setIsLoggingOut(true);
@@ -133,12 +134,14 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
                 {children && <SideNavigation>{children}</SideNavigation>}
             </SidebarContent>
 
-            <SidebarFooter>
-                <LogoutButton onClick={onLogout}>
-                    <LogoutIcon className='w-4 h-4' />
-                    {t('index.logout')}
-                </LogoutButton>
-            </SidebarFooter>
+            {sidebarLogout && (
+                <SidebarFooter>
+                    <LogoutButton onClick={onLogout}>
+                        <LogoutIcon className='w-4 h-4' />
+                        {t('index.logout')}
+                    </LogoutButton>
+                </SidebarFooter>
+            )}
         </Container>
     );
 };

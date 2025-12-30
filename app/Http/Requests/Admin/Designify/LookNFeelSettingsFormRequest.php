@@ -13,6 +13,7 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
     {
         return [
             'designify:themeSelector' => 'required|in:true,false',
+            'designify:sidebarLogout' => 'required|in:true,false',
             'designify:background' => 'required|string',
             'designify:allocationBlur' => 'required|in:true,false',
             'designify:radius' => 'required|string',
@@ -24,6 +25,7 @@ class LookNFeelSettingsFormRequest extends AdminFormRequest
     {
         return [
             'designify:themeSelector' => 'Theme Selector',
+            'designify:sidebarLogout' => 'Sidebar Logout Button',
             'designify:background' => 'Panel Background',
             'designify:allocationBlur' => 'Allocation Blur',
             'designify:radius' => 'Border Radius',

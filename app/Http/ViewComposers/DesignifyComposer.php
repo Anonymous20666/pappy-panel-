@@ -151,6 +151,7 @@ class DesignifyComposer
             'theme6' => $this->Theme6,
             'theme7' => $this->Theme7,
             'themeSelector' => config('designify.themeSelector', false),
+            'sidebarLogout' => config('designify.sidebarLogout', false),
             'background' => config('designify.background') ?? 'none',
             'radius' => config('designify.radius') ?? '15px',
             'allocationBlur' => config('designify.allocationBlur', true),

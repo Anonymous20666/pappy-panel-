@@ -24,6 +24,7 @@ return [
     'color900' => '#07070C',
 
     'themeSelector' => true,
+    'sidebarLogout' => false,
     'background' => 'none',
     'radius' => '15px',
     'allocationBlur' => true,

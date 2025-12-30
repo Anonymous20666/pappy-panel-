@@ -6,6 +6,7 @@ return [
         '2fa-required' => '2-Faktor Diperlukan',
         '2fa-alert' => 'Akun Anda harus mengaktifkan otentikasi dua faktor untuk melanjutkan.',
         'administrator' => 'Administrator',
+        'logout' => 'Keluar',
         'user' => 'Pengguna',
         'update-email' => 'Perbarui Alamat Email',
         'theme-selector' => 'Pemilih Tema',

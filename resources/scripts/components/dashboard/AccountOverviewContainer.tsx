@@ -84,6 +84,12 @@ export default () => {
                                     </a>
                                 )}
                             </div>
+                            <div className='mt-1'>
+                                <button className='flex items-center space-x-1' onClick={onTriggerLogout}>
+                                    <span className='text-danger/80'>{t('overview.logout')}</span>{' '}
+                                    <LogoutIcon className='w-5 h-5 text-danger/80' />
+                                </button>
+                            </div>
                         </div>
                     </Card>
                     <TitledGreyBox title={t('overview.update-email')} showFlashes={'account:email'}>

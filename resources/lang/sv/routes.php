@@ -3,6 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Instrumentpanel',
+        'logout' => 'Logout',
     ],
     'account' => [
         'overview' => 'Kontoinformation',

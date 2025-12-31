@@ -7,7 +7,6 @@ return [
         '2fa-alert' => 'Votre compte doit disposer de l\'authentification à deux facteurs pour pouvoir continuer.',
         'administrator' => 'Administrateur',
         'user' => 'Utilisateur',
-        'logout' => 'Déconnexion',
         'update-email' => 'Mettre à jour l\'adresse mail',
         'theme-selector' => 'Séléction du Thême',
         'update-password' => 'Mettre à jour le mot de passe',

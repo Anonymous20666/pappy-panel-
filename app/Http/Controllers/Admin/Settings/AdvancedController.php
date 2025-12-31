@@ -33,8 +33,8 @@ class AdvancedController extends Controller
     {
         $showRecaptchaWarning = false;
         if (
-            $this->config->get('recaptcha._shipped_secret_key') === $this->config->get('recaptcha.secret_key')
-            || $this->config->get('recaptcha._shipped_website_key') === $this->config->get('recaptcha.website_key')
+            $this->config->get('captcha.recaptcha._shipped_secret_key') === $this->config->get('captcha.recaptcha.secret_key')
+            || $this->config->get('captcha.recaptcha._shipped_website_key') === $this->config->get('captcha.recaptcha.website_key')
         ) {
             $showRecaptchaWarning = true;
         }

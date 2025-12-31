@@ -3,6 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Dashboard',
+        'logout' => 'Déconnexion',
     ],
     'account' => [
         'overview' => 'Aperçu du compte',

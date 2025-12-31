@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'flag' => 'fr',
     'title' => 'Dashboard',
     'other-servers' => 'Autres serveurs',
     'your-servers' => 'Vos serveurs',

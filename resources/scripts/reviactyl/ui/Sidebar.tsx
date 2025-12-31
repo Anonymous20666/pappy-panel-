@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 import tw from 'twin.macro';
 import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { ExternalLinkIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 import { FaHouse } from 'react-icons/fa6';
+import http from '@/api/http';
+import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Props {
     isOpen?: boolean;
@@ -43,6 +45,18 @@ const SidebarContent = styled.div`
     ${tw`flex flex-col flex-1 overflow-y-auto`}
 `;
 
+const SidebarFooter = styled.div`
+    ${tw`sticky bottom-0 z-10 bg-gray-700 p-3 border-t border-gray-600`}
+`;
+
+const LogoutButton = styled.button`
+    ${tw`flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium text-red-400 bg-red-500/10 border border-red-500/30 rounded-ui transition-all duration-300`};
+
+    &:hover {
+        ${tw`text-red-300 bg-red-500/20 border-red-500/50`};
+    }
+`;
+
 export const SideNavigation = styled.div`
     ${tw`flex flex-col gap-1 pb-4 -mt-1`};
 
@@ -67,9 +81,20 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     const nameLast = useStoreState((state) => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const sidebarLogout = useStoreState((state) => state.reviactyl.data?.sidebarLogout);
+
+    const onLogout = () => {
+        setIsLoggingOut(true);
+        http.post('/auth/logout').finally(() => {
+            // @ts-expect-error this is valid
+            window.location = '/';
+        });
+    };
 
     return (
         <Container isOpen={isOpen}>
+            <SpinnerOverlay visible={isLoggingOut} />
             <ProfileHeader>
                 <div className='flex items-center gap-3'>
                     <Link to='/account'>
@@ -108,8 +133,18 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
                 )}
                 {children && <SideNavigation>{children}</SideNavigation>}
             </SidebarContent>
+
+            {sidebarLogout && (
+                <SidebarFooter>
+                    <LogoutButton onClick={onLogout}>
+                        <LogoutIcon className='w-4 h-4' />
+                        {t('index.logout')}
+                    </LogoutButton>
+                </SidebarFooter>
+            )}
         </Container>
     );
 };
 
 export default Sidebar;
+

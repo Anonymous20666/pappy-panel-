@@ -6,6 +6,7 @@ export interface ReviactylSettings {
     isUnderMaintenance: boolean;
     maintenance: string;
     themeSelector: boolean;
+    sidebarLogout: boolean;
     allocationBlur: boolean;
     alertType: string;
     alertMessage: string;

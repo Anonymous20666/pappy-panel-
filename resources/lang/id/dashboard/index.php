@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'flag' => 'id',
     'title' => 'Dashboard',
     'welcome' => [
         'title' => 'Selamat datang kembali',

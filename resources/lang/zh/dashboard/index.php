@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'flag' => 'cn',
     'title' => '仪表板',
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',

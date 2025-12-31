@@ -7,7 +7,6 @@ return [
         '2fa-alert' => 'Ditt konto behöver ha Två stegs verifikation på till att funka.',
         'administrator' => 'Administrator',
         'user' => 'Användare',
-        'logout' => 'Utloggat',
         'update-email' => 'Uppdatera E-post adress',
         'theme-selector' => 'Temaväljare',
         'update-password' => 'Uppdatera lösenord',

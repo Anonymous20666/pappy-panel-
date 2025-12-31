@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'flag' => 'us',
+    'flag' => 'se',
     'title' => 'Dashboard',
     'welcome' => [
         'title' => 'Welcome back',

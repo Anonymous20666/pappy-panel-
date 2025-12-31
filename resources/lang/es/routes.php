@@ -3,7 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Panel de control',
-        'logout' => 'Logout',
+        'logout' => 'Cerrar sesión',
     ],
     'account' => [
         'overview' => 'Resumen de la cuenta',

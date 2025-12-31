@@ -3,7 +3,7 @@
 return [
     'index' => [
         'dashboard' => 'Painel',
-        'logout' => 'Logout',
+        'logout' => 'Sair',
     ],
     'account' => [
         'overview' => 'Visão Geral da Conta',

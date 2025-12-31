@@ -3,7 +3,7 @@
 return [
     'index' => [
         'dashboard' => '仪表板',
-        'logout' => 'Logout',
+        'logout' => '登出',
     ],
     'account' => [
         'overview' => '账户概览',

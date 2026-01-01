@@ -24,4 +24,20 @@ return [
         'installing' => '安装中',
         'unavailable' => '不可用',
     ],
+    'welcome' => [
+        'title' => '欢迎回来',
+        'subtitle' => '在这里您可以查看您有权访问的所有服务器。',
+    ],
+    'status-card' => [
+        'title' => '服务器状态',
+        'description' => '检查服务器状态',
+    ],
+    'support-card' => [
+        'title' => '需要帮助？',
+        'description' => '联系我们的客服',
+    ],
+    'billing-card' => [
+        'title' => '账单与发票',
+        'description' => '管理您的付款',
+    ],
 ];

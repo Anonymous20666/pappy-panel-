@@ -24,4 +24,20 @@ return [
         'installing' => 'Instalando',
         'unavailable' => 'No disponible',
     ],
+    'welcome' => [
+        'title' => 'Bienvenido de nuevo',
+        'subtitle' => 'Aquí puedes ver todos los servidores a los que tienes acceso.',
+    ],
+    'status-card' => [
+        'title' => 'Estado del servidor',
+        'description' => 'Verificar estado del servidor',
+    ],
+    'support-card' => [
+        'title' => '¿Necesitas ayuda?',
+        'description' => 'Contacta nuestro soporte',
+    ],
+    'billing-card' => [
+        'title' => 'Facturación & Facturas',
+        'description' => 'Gestiona tus pagos',
+    ],
 ];

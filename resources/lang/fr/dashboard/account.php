@@ -6,6 +6,7 @@ return [
         '2fa-required' => 'F2A Requis',
         '2fa-alert' => 'Votre compte doit disposer de l\'authentification à deux facteurs pour pouvoir continuer.',
         'administrator' => 'Administrateur',
+        'logout' => 'Se déconnecter',
         'user' => 'Utilisateur',
         'update-email' => 'Mettre à jour l\'adresse mail',
         'theme-selector' => 'Séléction du Thême',

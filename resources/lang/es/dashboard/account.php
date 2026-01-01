@@ -6,6 +6,7 @@ return [
         '2fa-required' => 'Se requieren 2-Factores',
         '2fa-alert' => 'Tu cuenta debe tener habilitada la autenticación de doble factor para continuar.',
         'administrator' => 'Administrador',
+        'logout' => 'Cerrar sesión',
         'user' => 'Usuario',
         'update-email' => 'Actualizar dirección de correo electrónico',
         'theme-selector' => 'Selector de tema',

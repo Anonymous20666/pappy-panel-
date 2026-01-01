@@ -37,7 +37,7 @@ return [
         'description' => 'Contact our support',
     ],
     'billing-card' => [
-        'title' => 'Billing & Invoices',
+        'title' => 'Pagamentos e Faturas',
         'description' => 'Gerenciar seus pagamentos',
     ],
 ];

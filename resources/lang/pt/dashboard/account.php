@@ -6,6 +6,7 @@ return [
         '2fa-required' => 'Autenticação de Dois Fatores Obrigatória',
         '2fa-alert' => 'Sua conta deve ter a autenticação de dois fatores ativada para continuar.',
         'administrator' => 'Administrador',
+        'logout' => 'Sair',
         'user' => 'Usuário',
         'update-email' => 'Atualizar Endereço de E-mail',
         'theme-selector' => 'Seletor de Tema',

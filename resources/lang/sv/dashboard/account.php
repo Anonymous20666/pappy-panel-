@@ -6,6 +6,7 @@ return [
         '2fa-required' => '2 Steg verifikation',
         '2fa-alert' => 'Ditt konto behöver ha Två stegs verifikation på till att funka.',
         'administrator' => 'Administrator',
+        'logout' => 'Logga ut',
         'user' => 'Användare',
         'update-email' => 'Uppdatera E-post adress',
         'theme-selector' => 'Temaväljare',

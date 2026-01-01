@@ -4,8 +4,8 @@ return [
     'flag' => 'cn',
     'title' => '仪表板',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => '欢迎回来',
+        'subtitle' => '在这里您可以看到所有您有权访问的服务器。',
     ],
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',
@@ -29,15 +29,15 @@ return [
         'unavailable' => '不可用',
     ],
     'status-card' => [
-        'title' => 'Server Status',
-        'description' => 'Check server status',
+        'title' => '服务器状态',
+        'description' => '检查服务器状态',
     ],
     'support-card' => [
-        'title' => 'Need Help?',
-        'description' => 'Contact our support',
+        'title' => '需要帮助？',
+        'description' => '联系我们的支持',
     ],
     'billing-card' => [
-        'title' => 'Billing & Invoices',
-        'description' => 'Manage your payments',
+        'title' => '计费与发票',
+        'description' => '管理您的付款',
     ],
 ];

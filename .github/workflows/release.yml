@@ -10,7 +10,7 @@ jobs:
     name: Release
     runs-on: ubuntu-24.04
     permissions:
-      contents: write # write is required to create releases and push.
+      contents: write
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
@@ -31,8 +31,8 @@ jobs:
         env:
           REF: ${{ github.ref }}
         run: |
-          REF_TAG=${GITHUB_REF#refs/tags/}      
-          VERSION=${REF_TAG#v}               
+          REF_TAG=${GITHUB_REF#refs/tags/}
+          VERSION=${REF_TAG#v}
 
           IFS='.-' read -r MAJOR MINOR PATCH TYPE <<< "$VERSION"
 
@@ -40,15 +40,13 @@ jobs:
           MINOR=$(printf "%02d" "$MINOR")
           PATCH=$(printf "%02d" "$PATCH")
 
-          # Map prerelease type to number
           case "$TYPE" in
             alpha) TYPE_NUM=01 ;;
             beta)  TYPE_NUM=02 ;;
             rc)    TYPE_NUM=03 ;;
-            *)     TYPE_NUM=00 ;;  # stable
+            *)     TYPE_NUM=00 ;;
           esac
 
-          # Build number
           BUILD="${MAJOR}${MINOR}${PATCH}${TYPE_NUM}"
 
           sed -i "s/'version' => '.*'/'version' => '${VERSION}'/" config/app.php
@@ -74,10 +72,10 @@ jobs:
         id: prev_tag
         run: |
           PREV_TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | grep -vE '(alpha|beta|rc)' | sed -n '2p')
-          echo "Found Previous Tag: $PREV_TAG"
           echo "tag=$PREV_TAG" >> $GITHUB_OUTPUT
+
       - name: Create upgrade.zip (changed files only)
-        if: steps.prev_tag.outputs.tag != ''
+        if: steps.prev_tag.outputs.tag != '' && !contains(github.ref, 'alpha') && !contains(github.ref, 'beta') && !contains(github.ref, 'rc')
         run: |
           mkdir upgrade
           git diff --name-only ${{ steps.prev_tag.outputs.tag }} HEAD | while read file; do
@@ -88,25 +86,32 @@ jobs:
           done
           cd upgrade
           zip -r ../upgrade.zip .
-          
+
       - name: Extract changelog
+        env:
+          REF_TAG: ${{ github.ref_name }}
         run: |
           sed -n "/^## ${REF_TAG}/,/^## /{/^## /b;p}" CHANGELOG.md > ./RELEASE_CHANGELOG
 
       - name: Create checksum and add to changelog
         run: |
-          SUM=$(sha256sum panel.tar.gz)
-          echo -e "\n#### SHA256 Checksum\n\n\`\`\`\n$SUM\n\`\`\`\n" >> ./RELEASE_CHANGELOG
-          echo -e "panel.tar.gz:\n\`\`\`\n$SUM\n\`\`\`" >> ./RELEASE_CHANGELOG
-          echo "panel.tar.gz: $PANEL_SUM" > checksum.txt
+          PANEL_SUM=$(sha256sum panel.tar.gz)
+
           if [ -f upgrade.zip ]; then
-             UPGRADE_SUM=$(sha256sum upgrade.zip)
-             echo -e "upgrade.zip:\n\`\`\`\n$UPGRADE_SUM\n\`\`\`" >> ./RELEASE_CHANGELOG
-             echo "upgrade.zip: $UPGRADE_SUM" >> checksum.txt
+            UPGRADE_SUM=$(sha256sum upgrade.zip)
+
+            echo -e "\n#### SHA256 Checksum\n\n\`\`\`\n$PANEL_SUM\n$UPGRADE_SUM\n\`\`\`\n" >> ./RELEASE_CHANGELOG
+
+            {
+              echo "$PANEL_SUM"
+              echo "$UPGRADE_SUM"
+            } > checksum.txt
+          else
+            echo -e "\n#### SHA256 Checksum\n\n\`\`\`\n$PANEL_SUM\n\`\`\`\n" >> ./RELEASE_CHANGELOG
+            echo "$PANEL_SUM" > checksum.txt
           fi
 
       - name: Create release
-        id: create_release
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

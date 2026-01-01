@@ -38,6 +38,6 @@ return [
     ],
     'billing-card' => [
         'title' => 'Billing & Invoices',
-        'description' => 'Manage your payments',
+        'description' => 'Gerenciar seus pagamentos',
     ],
 ];

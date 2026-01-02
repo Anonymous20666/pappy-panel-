@@ -25,13 +25,26 @@ const DropdownButton = styled.button`
 `;
 
 const DropdownMenu = styled.div<{ isOpen: boolean }>`
-    ${tw`absolute right-0 top-full mt-1 bg-gray-800 border border-gray-600 rounded-ui shadow-lg z-50 overflow-hidden min-w-[160px]`};
+    ${tw`absolute right-0 top-full mt-1 border border-gray-600 rounded-ui shadow-lg z-50 overflow-hidden min-w-[200px]`};
     display: ${props => props.isOpen ? 'block' : 'none'};
 `;
 
 const MenuItem = styled.button<{ isActive?: boolean }>`
-    ${tw`flex items-center gap-2 w-full px-3 py-2 text-left text-sm transition-colors`};
-    ${props => props.isActive ? tw`bg-cyan-600 text-white` : tw`text-gray-300 hover:bg-gray-700`};
+    ${tw`flex items-center gap-2 w-full px-3 py-2 text-left text-sm transition-colors hover:text-reviactyl`};
+
+    ${props =>
+        props.isActive
+            ? `
+                color: rgb(var(--color-primary) / 10);
+                background-color: rgb(var(--color-primary) / 0.2);
+              `
+            : `
+                background-color: transparent;
+
+                &:hover {
+                    background-color: rgb(var(--color-primary) / 0.2);
+                }
+              `}
 `;
 
 const FlagIcon = styled.span`
@@ -95,7 +108,7 @@ const NavbarLanguageSwitcher: React.FC = () => {
                     <FlagIcon className={`fi fi-${currentLanguage.flag}`} />
                 )}
             </DropdownButton>
-            <DropdownMenu isOpen={isOpen}>
+            <DropdownMenu className="bg-gray-800/90 backdrop-blur-md" isOpen={isOpen}>
                 {Object.entries(languages).map(([code, info]) => (
                     <MenuItem
                         key={code}

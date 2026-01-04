@@ -74,7 +74,7 @@
                                 <select name="location_id" class="form-control">
                                     @foreach ($locations as $location)
                                         <option value="{{ $location->id }}"
-                                            {{ old('location_id', $node->location_id) === $location->id ? 'selected' : '' }}>
+                                            {{ (((int) old('location_id', $node->location_id)) === $location->id) ? 'selected' : '' }}>
                                             {{ $location->long }} ({{ $location->short }})</option>
                                     @endforeach
                                 </select>

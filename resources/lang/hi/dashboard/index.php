@@ -28,16 +28,20 @@ return [
         'installing' => 'इंस्टॉल कर रहा है',
         'unavailable' => 'अप्राप्य',
     ],
+    'welcome' => [
+        'title' => 'वापस स्वागत है',
+        'subtitle' => 'यहां आप उन सभी सर्वरों को देख सकते हैं जिन तक आपकी पहुंच है।',
+    ],
     'status-card' => [
-        'title' => 'Server Status',
-        'description' => 'Check server status',
+        'title' => 'सर्वर स्थिति',
+        'description' => 'सर्वर स्थिति जांचें',
     ],
     'support-card' => [
-        'title' => 'Need Help?',
-        'description' => 'Contact our support',
+        'title' => 'मदद चाहिए?',
+        'description' => 'हमारी सहायता से संपर्क करें',
     ],
     'billing-card' => [
-        'title' => 'Billing & Invoices',
-        'description' => 'Manage your payments',
+        'title' => 'बिलिंग और चालान',
+        'description' => 'अपने भुगतान प्रबंधित करें',
     ],
 ];

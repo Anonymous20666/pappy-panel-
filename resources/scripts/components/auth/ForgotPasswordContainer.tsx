@@ -11,6 +11,7 @@ import { object, string } from 'yup';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
+import Turnstile from '@/components/elements/Turnstile';
 import useFlash from '@/plugins/useFlash';
 import { AtSymbolIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +26,7 @@ export default () => {
     const [token, setToken] = useState('');
 
     const { clearFlashes, addFlash } = useFlash();
-    const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
+    const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
 
     useEffect(() => {
         clearFlashes();
@@ -34,20 +35,23 @@ export default () => {
     const handleSubmission = ({ email }: Values, { setSubmitting, resetForm }: FormikHelpers<Values>) => {
         clearFlashes();
 
-        // If there is no token in the state yet, request the token and then abort this submit request
-        // since it will be re-submitted when the recaptcha data is returned by the component.
-        if (recaptchaEnabled && !token) {
+        // If using reCAPTCHA and no token yet, execute captcha
+        if (provider === 'recaptcha' && !token) {
             ref.current!.execute().catch((error) => {
                 console.error(error);
-
                 setSubmitting(false);
                 addFlash({ type: 'error', title: 'Error', message: httpErrorToHuman(error) });
             });
-
             return;
         }
 
-        requestPasswordResetEmail(email, token)
+        // For Turnstile, the token is set automatically by the widget
+        if (provider === 'turnstile' && !token) {
+            setSubmitting(false);
+            return;
+        }
+
+        requestPasswordResetEmail(email, token, provider)
             .then((response) => {
                 resetForm();
                 addFlash({ type: 'success', title: 'Success', message: response });
@@ -86,11 +90,11 @@ export default () => {
                             {t('forgot-password.send-email')}
                         </Button>
                     </div>
-                    {recaptchaEnabled && (
+                    {provider === 'recaptcha' && (
                         <Reaptcha
                             ref={ref}
                             size={'invisible'}
-                            sitekey={siteKey || '_invalid_key'}
+                            sitekey={recaptcha.siteKey || '_invalid_key'}
                             onVerify={(response) => {
                                 setToken(response);
                                 submitForm();
@@ -100,6 +104,15 @@ export default () => {
                                 setToken('');
                             }}
                         />
+                    )}
+                    {provider === 'turnstile' && (
+                        <div css={tw`mt-4 flex justify-center`}>
+                            <Turnstile
+                                siteKey={turnstile.siteKey}
+                                onVerify={(response) => setToken(response)}
+                                onExpire={() => setToken('')}
+                            />
+                        </div>
                     )}
                     <div css={tw`mt-3 text-center`}>
                         <Link

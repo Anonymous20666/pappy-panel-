@@ -18,6 +18,8 @@ Stop settling for less. Make game servers a first class citizen on your platform
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🌍 ` **Multilingual**: Reviactyl is fully translatable and can be localized to your native language.
+* ` 🧩 ` **Compatible with Blueprint Addons**: Reviactyl is fully compatible with Blueprint addons. (Requires [Blueprint for Reviactyl](https://github.com/reviactyl/blueprint) )
+* ` 🔌 ` **Compatible with Standalone Addons**: Reviactyl is fully compatible with pterodactyl-native addons.
 * ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
 
 ## Sponsors
@@ -34,6 +36,23 @@ I would like to extend my sincere thanks to the following sponsors for helping f
 Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/PTERO_LICENSE.md))
 
 Reviactyl™, Copyright © 2025 Reviactyl and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
+
+## Contributors
+
+Contributors help the development of Reviactyl panel. To start contributing you have to [fork this repository](https://github.com/reviactyl/panel/fork) and [open a pull request](https://github.com/reviactyl/panel/compare).
+
+<a href="https://github.com/reviactyl/panel/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=reviactyl/panel" />
+</a>
+
+## Stargazers
+
+<a href="https://github.com/reviactyl/panel/stargazers/">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="http://reporoster.com/stars/reviactyl/panel">
+    <img alt="stargazer-widget" src="http://reporoster.com/stars/dark/reviactyl/panel">
+  </picture>
+</a>
 
 ## Star History
 

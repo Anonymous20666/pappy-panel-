@@ -2,7 +2,7 @@
 
 return [
     'overview' => [
-        'account-overview' => 'Account Overview',
+        'account-overview' => '账户概览',
         '2fa-required' => '需要2步验证',
         '2fa-alert' => '您的账户必须启用双重认证才能继续。',
         'administrator' => '管理员',

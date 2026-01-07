@@ -28,16 +28,20 @@ return [
         'installing' => 'Installerar',
         'unavailable' => 'Otillgänglig',
     ],
+    'welcome' => [
+        'title' => 'Välkommen tillbaka',
+        'subtitle' => 'Här kan du se alla servrar du har tillgång till.',
+    ],
     'status-card' => [
-        'title' => 'Server Status',
-        'description' => 'Check server status',
+        'title' => 'Serverstatus',
+        'description' => 'Kontrollera serverstatus',
     ],
     'support-card' => [
-        'title' => 'Need Help?',
-        'description' => 'Contact our support',
+        'title' => 'Behöver du hjälp?',
+        'description' => 'Kontakta vår support',
     ],
     'billing-card' => [
-        'title' => 'Billing & Invoices',
-        'description' => 'Manage your payments',
+        'title' => 'Fakturering & Fakturor',
+        'description' => 'Hantera dina betalningar',
     ],
 ];

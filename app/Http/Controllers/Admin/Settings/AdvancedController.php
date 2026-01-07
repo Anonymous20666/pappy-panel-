@@ -6,7 +6,6 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\View\Factory as ViewFactory;
 use Pterodactyl\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
@@ -22,7 +21,6 @@ class AdvancedController extends Controller
         private ConfigRepository $config,
         private Kernel $kernel,
         private SettingsRepositoryInterface $settings,
-        private ViewFactory $view,
     ) {
     }
 
@@ -33,13 +31,13 @@ class AdvancedController extends Controller
     {
         $showRecaptchaWarning = false;
         if (
-            $this->config->get('recaptcha._shipped_secret_key') === $this->config->get('recaptcha.secret_key')
-            || $this->config->get('recaptcha._shipped_website_key') === $this->config->get('recaptcha.website_key')
+            $this->config->get('captcha.recaptcha._shipped_secret_key') === $this->config->get('captcha.recaptcha.secret_key')
+            || $this->config->get('captcha.recaptcha._shipped_website_key') === $this->config->get('captcha.recaptcha.website_key')
         ) {
             $showRecaptchaWarning = true;
         }
 
-        return $this->view->make('admin.settings.advanced', [
+        return view('admin.settings.advanced', [
             'showRecaptchaWarning' => $showRecaptchaWarning,
         ]);
     }

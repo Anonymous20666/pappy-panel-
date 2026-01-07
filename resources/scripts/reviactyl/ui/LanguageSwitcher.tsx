@@ -6,18 +6,23 @@ import { useStoreActions, useStoreState } from 'easy-peasy';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 import { ApplicationStore } from '@/state';
 
+interface LanguageInfo {
+    name: string;
+    flag: string;
+}
+
 const LanguageSwitcher: React.FC = () => {
     const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: ApplicationStore) => state.user.data);
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
-    const [languages, setLanguages] = useState<Record<string, string>>({});
+    const [languages, setLanguages] = useState<Record<string, LanguageInfo>>({});
     const [currentLang, setCurrentLang] = useState(user?.language || i18n.language);
 
     useEffect(() => {
         fetch('/locales/list.json')
             .then((res) => res.json())
             .then((langs) => setLanguages(langs))
-            .catch(() => setLanguages({ en: 'English' }));
+            .catch(() => setLanguages({ en: { name: 'English', flag: 'us' } }));
 
         const onLangChanged = (lng: string) => setCurrentLang(lng);
         i18n.on('languageChanged', onLangChanged);
@@ -43,9 +48,9 @@ const LanguageSwitcher: React.FC = () => {
         <div className='flex justify-between items-center mb-2'>
             <p className='flex-1'>{t('overview.language')}</p>
             <Select className='!pr-15 !w-auto' value={currentLang} onChange={handleChange}>
-                {Object.entries(languages).map(([code, label]) => (
+                {Object.entries(languages).map(([code, info]) => (
                     <option key={code} value={code}>
-                        {label}
+                        {info.name}
                     </option>
                 ))}
             </Select>

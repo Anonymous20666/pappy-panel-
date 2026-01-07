@@ -24,6 +24,7 @@ return [
     'color900' => '#07070C',
 
     'themeSelector' => true,
+    'sidebarLogout' => false,
     'background' => 'none',
     'radius' => '15px',
     'allocationBlur' => true,
@@ -37,6 +38,10 @@ return [
 
     'alertType' => 'info',
     'alertMessage' => '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.',
+
+    'statusCardLink' => '',
+    'supportCardLink' => '',
+    'billingCardLink' => '',
 
     'theme1' => [
         'name' => 'Petrascia',

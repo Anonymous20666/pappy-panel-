@@ -55,24 +55,26 @@ export default () => {
 
     return (
         <PageContentBlock className='pr-2' title={t('title')} showFlashKey={'dashboard'}>
-            <div className='grid lg:grid-cols-2 gap-2 py-4'>
+            <div className='flex items-center justify-between py-4'>
                 <div>
+                    {/* TODO: Needs to be updated.
+                    1] Show different subtitle based on $showOnlyAdmin
+                    2] It somehow looks odd and doesn't match reviactyl v2 design.
+                    <h1 className='text-xl font-semibold text-gray-100'>{t('welcome.title')}</h1>
+                    <p className='text-sm text-gray-400'>{t('welcome.subtitle')}</p>
+                    */}
                     <Title className='text-4xl'>{t('title')}</Title>
                 </div>
                 {rootAdmin && (
-                    <div className='flex lg:justify-end justify-center'>
-                        <div className='mb-2 pt-4'>
-                            <div className='flex lg:justify-end sm:justify-center items-center space-x-2'>
-                                <p className='uppercase text-xs text-gray-400'>
-                                    {showOnlyAdmin ? t('other-servers') : t('your-servers')}
-                                </p>
-                                <Switch
-                                    name={'show_all_servers'}
-                                    defaultChecked={showOnlyAdmin}
-                                    onChange={() => setShowOnlyAdmin((s) => !s)}
-                                />
-                            </div>
-                        </div>
+                    <div className='flex items-center space-x-2'>
+                        <p className='uppercase text-xs text-gray-400'>
+                            {showOnlyAdmin ? t('other-servers') : t('your-servers')}
+                        </p>
+                        <Switch
+                            name={'show_all_servers'}
+                            defaultChecked={showOnlyAdmin}
+                            onChange={() => setShowOnlyAdmin((s) => !s)}
+                        />
                     </div>
                 )}
             </div>

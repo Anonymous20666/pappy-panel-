@@ -1,7 +1,12 @@
 <?php
 
 return [
+    'flag' => 'us',
     'title' => 'Dashboard',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Showing others\' servers',
     'your-servers' => 'Showing your servers',
     'no-servers' => 'There are no servers associated with your account.',
@@ -22,5 +27,17 @@ return [
         'transferring' => 'Transferring',
         'installing' => 'Installing',
         'unavailable' => 'Unavailable',
+    ],
+    'status-card' => [
+        'title' => 'Server Status',
+        'description' => 'Check server status',
+    ],
+    'support-card' => [
+        'title' => 'Need Help?',
+        'description' => 'Contact our support',
+    ],
+    'billing-card' => [
+        'title' => 'Billing & Invoices',
+        'description' => 'Manage your payments',
     ],
 ];

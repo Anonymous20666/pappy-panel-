@@ -151,6 +151,7 @@ class DesignifyComposer
             'theme6' => $this->Theme6,
             'theme7' => $this->Theme7,
             'themeSelector' => config('designify.themeSelector', false),
+            'sidebarLogout' => config('designify.sidebarLogout', false),
             'background' => config('designify.background') ?? 'none',
             'radius' => config('designify.radius') ?? '15px',
             'allocationBlur' => config('designify.allocationBlur', true),
@@ -162,6 +163,9 @@ class DesignifyComposer
             'site_description' => config('designify.site_description') ?? 'Our official control panel made better with Reviactyl.',
             'site_image' => config('designify.site_image') ?? '/reviactyl/logo.png',
             'site_favicon' => config('designify.site_favicon') ?? '/reviactyl/icon.png',
+            'statusCardLink' => config('designify.statusCardLink') ?? '',
+            'supportCardLink' => config('designify.supportCardLink') ?? '',
+            'billingCardLink' => config('designify.billingCardLink') ?? '',
         ];
     }
 

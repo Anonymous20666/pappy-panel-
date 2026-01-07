@@ -9,6 +9,7 @@ import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
+import Turnstile from '@/components/elements/Turnstile';
 import useFlash from '@/plugins/useFlash';
 import Label from '@/components/elements/Label';
 import { KeyIcon, UserIcon, EyeIcon, EyeOffIcon } from '@heroicons/react/solid';
@@ -26,7 +27,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const [show, setShow] = useState(false);
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
-    const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
+    const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
 
     useEffect(() => {
         clearFlashes();
@@ -35,20 +36,23 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
 
-        // If there is no token in the state yet, request the token and then abort this submit request
-        // since it will be re-submitted when the recaptcha data is returned by the component.
-        if (recaptchaEnabled && !token) {
+        // If using reCAPTCHA and no token yet, execute captcha
+        if (provider === 'recaptcha' && !token) {
             ref.current!.execute().catch((error) => {
                 console.error(error);
-
                 setSubmitting(false);
                 clearAndAddHttpError({ error });
             });
-
             return;
         }
 
-        login({ ...values, recaptchaData: token })
+        // For Turnstile, the token is set automatically by the widget
+        if (provider === 'turnstile' && !token) {
+            setSubmitting(false);
+            return;
+        }
+
+        login({ ...values, captchaToken: token, captchaProvider: provider })
             .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
@@ -112,11 +116,11 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             {t('login-button')}
                         </Button>
                     </div>
-                    {recaptchaEnabled && (
+                    {provider === 'recaptcha' && (
                         <Reaptcha
                             ref={ref}
                             size={'invisible'}
-                            sitekey={siteKey || '_invalid_key'}
+                            sitekey={recaptcha.siteKey || '_invalid_key'}
                             onVerify={(response) => {
                                 setToken(response);
                                 submitForm();
@@ -126,6 +130,15 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                                 setToken('');
                             }}
                         />
+                    )}
+                    {provider === 'turnstile' && (
+                        <div css={tw`mt-4 flex justify-center`}>
+                            <Turnstile
+                                siteKey={turnstile.siteKey}
+                                onVerify={(response) => setToken(response)}
+                                onExpire={() => setToken('')}
+                            />
+                        </div>
                     )}
                     <div css={tw`mt-3 text-center`}>
                         <Link

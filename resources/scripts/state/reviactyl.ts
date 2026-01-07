@@ -6,9 +6,13 @@ export interface ReviactylSettings {
     isUnderMaintenance: boolean;
     maintenance: string;
     themeSelector: boolean;
+    sidebarLogout: boolean;
     allocationBlur: boolean;
     alertType: string;
     alertMessage: string;
+    statusCardLink: string;
+    supportCardLink: string;
+    billingCardLink: string;
 }
 
 export interface ReviactylSettingsStore {

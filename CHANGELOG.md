@@ -3,6 +3,20 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v2.1.2
+
+### Added
+* New Translations for Admin panel
+* Logo, Favicon, Debug Option in Admin > General Settings
+* Indonesian (`id`) translation by @wylayy
+* French (`fr`) translation by @MartinLavalais
+* Added missing translations by translation team on crowdin
+
+### Fixed
+
+* Schedule timezone issue
+* Broken dialog structure
+
 ## v2.1.0
 
 ### Added

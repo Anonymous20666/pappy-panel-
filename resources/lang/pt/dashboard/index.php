@@ -28,16 +28,20 @@ return [
         'installing' => 'Instalando',
         'unavailable' => 'Indisponível',
     ],
+    'welcome' => [
+        'title' => 'Bem-vindo de volta',
+        'subtitle' => 'Aqui você pode ver todos os servidores aos quais tem acesso.',
+    ],
     'status-card' => [
-        'title' => 'Server Status',
-        'description' => 'Check server status',
+        'title' => 'Status do Servidor',
+        'description' => 'Verificar status do servidor',
     ],
     'support-card' => [
-        'title' => 'Need Help?',
-        'description' => 'Contact our support',
+        'title' => 'Precisa de Ajuda?',
+        'description' => 'Entre em contato com nosso suporte',
     ],
     'billing-card' => [
-        'title' => 'Pagamentos e Faturas',
-        'description' => 'Gerenciar seus pagamentos',
+        'title' => 'Cobrança & Faturas',
+        'description' => 'Gerencie seus pagamentos',
     ],
 ];

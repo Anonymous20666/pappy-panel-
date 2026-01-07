@@ -3,6 +3,10 @@
 return [
     'flag' => 'cn',
     'title' => '仪表板',
+    'welcome' => [
+        'title' => '欢迎回来',
+        'subtitle' => '在这里您可以看到所有您有权访问的服务器。',
+    ],
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',
     'no-servers' => '您的账户没有关联的服务器。',

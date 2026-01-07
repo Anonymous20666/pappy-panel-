@@ -3,6 +3,10 @@
 return [
     'flag' => 'es',
     'title' => 'Panel de control',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Mostrando servidores de otros',
     'your-servers' => 'Mostrando tus servidores',
     'no-servers' => 'No hay servidores asociados a tu cuenta.',

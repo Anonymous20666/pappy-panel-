@@ -3,6 +3,10 @@
 return [
     'flag' => 'se',
     'title' => 'Dashboard',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Visar andras servrar',
     'your-servers' => 'Visar dina servrar',
     'no-servers' => 'Det finns inga servrar kopplade till ditt konto',

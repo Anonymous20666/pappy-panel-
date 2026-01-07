@@ -3,6 +3,10 @@
 return [
     'flag' => 'fr',
     'title' => 'Dashboard',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'Autres serveurs',
     'your-servers' => 'Vos serveurs',
     'no-servers' => 'Il n\'y a aucun serveur associé à votre compte.',

@@ -3,6 +3,10 @@
 return [
     'flag' => 'in',
     'title' => 'डैशबोर्ड',
+    'welcome' => [
+        'title' => 'Welcome back',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
     'other-servers' => 'अन्य सर्वरों को दिखा रहे हैं',
     'your-servers' => 'आपके सर्वरों को दिखा रहे हैं',
     'no-servers' => 'आपके खाते से जुड़े कोई सर्वर नहीं हैं।',

@@ -18,7 +18,7 @@ module.exports = {
         path: path.join(__dirname, '/public/assets'),
         filename: isProduction ? 'bundle.[chunkhash:8].js' : 'bundle.[fullhash:8].js',
         chunkFilename: isProduction ? '[name].[chunkhash:8].js' : '[name].[fullhash:8].js',
-        publicPath: (process.env.WEBPACK_PUBLIC_PATH || '/assets/'),
+        publicPath: process.env.WEBPACK_PUBLIC_PATH || '/assets/',
         crossOriginLoading: 'anonymous',
     },
     module: {
@@ -92,7 +92,7 @@ module.exports = {
                 enforce: 'pre',
                 exclude: /i18next-browser-languagedetector/,
                 loader: 'source-map-loader',
-            }
+            },
         ],
     },
     stats: {
@@ -120,7 +120,13 @@ module.exports = {
             DEBUG: process.env.NODE_ENV !== 'production',
             WEBPACK_BUILD_HASH: Date.now().toString(16),
         }),
-        new WebpackAssetsManifest({ output: 'manifest.json', writeToDisk: true, publicPath: true, integrity: true, integrityHashes: ['sha384'] }),
+        new WebpackAssetsManifest({
+            output: 'manifest.json',
+            writeToDisk: true,
+            publicPath: true,
+            integrity: true,
+            integrityHashes: ['sha384'],
+        }),
     ],
     optimization: {
         usedExports: true,
@@ -148,13 +154,21 @@ module.exports = {
     devServer: {
         compress: true,
         port: 5173,
+        server: {
+            type: 'https',
+            options: process.env.USE_LOCAL_CERTS
+                ? {
+                      ca: path.join(__dirname, '../../docker/certificates/root_ca.pem'),
+                      cert: path.join(__dirname, '../../docker/certificates/reviactyl.test.pem'),
+                      key: path.join(__dirname, '../../docker/certificates/reviactyl.test-key.pem'),
+                  }
+                : undefined,
+        },
         static: {
             directory: path.join(__dirname, '/public'),
             publicPath: process.env.WEBPACK_PUBLIC_PATH || '/assets/',
         },
-        allowedHosts: [
-            '.pterodactyl.test',
-        ],
+        allowedHosts: ['.reviactyl.test'],
         headers: {
             'Access-Control-Allow-Origin': '*',
         },

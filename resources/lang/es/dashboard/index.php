@@ -4,8 +4,8 @@ return [
     'flag' => 'es',
     'title' => 'Panel de control',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => 'Bienvenido de nuevo',
+        'subtitle' => 'Aquí puedes ver todos los servidores a los que tienes acceso.',
     ],
     'other-servers' => 'Mostrando servidores de otros',
     'your-servers' => 'Mostrando tus servidores',
@@ -27,10 +27,6 @@ return [
         'transferring' => 'Transfiriendo',
         'installing' => 'Instalando',
         'unavailable' => 'No disponible',
-    ],
-    'welcome' => [
-        'title' => 'Bienvenido de nuevo',
-        'subtitle' => 'Aquí puedes ver todos los servidores a los que tienes acceso.',
     ],
     'status-card' => [
         'title' => 'Estado del servidor',

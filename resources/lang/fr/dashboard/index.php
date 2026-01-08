@@ -4,8 +4,8 @@ return [
     'flag' => 'fr',
     'title' => 'Dashboard',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => 'Bon retour',
+        'subtitle' => 'Ici vous pouvez voir tous les serveurs auxquels vous avez accès.',
     ],
     'other-servers' => 'Autres serveurs',
     'your-servers' => 'Vos serveurs',
@@ -27,10 +27,6 @@ return [
         'transferring' => 'Transfer en cours',
         'installing' => 'Installation en cours',
         'unavailable' => 'Indisponible',
-    ],
-    'welcome' => [
-        'title' => 'Bon retour',
-        'subtitle' => 'Ici vous pouvez voir tous les serveurs auxquels vous avez accès.',
     ],
     'status-card' => [
         'title' => 'État du serveur',

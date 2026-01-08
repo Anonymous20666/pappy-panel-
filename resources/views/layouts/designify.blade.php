@@ -194,7 +194,7 @@
                     class="w-72 border px-4 py-3 rounded-xl shadow-lg backdrop-blur-md animate-fade-in-up {{ $alertClass }}">
                     <div class="flex items-start space-x-2">
                         <i class="{{ $iconClass }} mt-1 text-sm"></i>
-                        <div class="text-sm">{!! $message !!}</div>
+                        <div class="text-sm">{{ $message }}</div>
                     </div>
                 </div>
             @endforeach

@@ -5,7 +5,7 @@ return [
     'title' => '仪表板',
     'welcome' => [
         'title' => '欢迎回来',
-        'subtitle' => '在这里您可以看到所有您有权访问的服务器。',
+        'subtitle' => '在这里您可以查看您有权访问的所有服务器。',
     ],
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',
@@ -27,10 +27,6 @@ return [
         'transferring' => '传输中',
         'installing' => '安装中',
         'unavailable' => '不可用',
-    ],
-    'welcome' => [
-        'title' => '欢迎回来',
-        'subtitle' => '在这里您可以查看您有权访问的所有服务器。',
     ],
     'status-card' => [
         'title' => '服务器状态',

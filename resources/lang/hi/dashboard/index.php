@@ -4,8 +4,8 @@ return [
     'flag' => 'in',
     'title' => 'डैशबोर्ड',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => 'वापस स्वागत है',
+        'subtitle' => 'यहां आप उन सभी सर्वरों को देख सकते हैं जिन तक आपकी पहुंच है।',
     ],
     'other-servers' => 'अन्य सर्वरों को दिखा रहे हैं',
     'your-servers' => 'आपके सर्वरों को दिखा रहे हैं',
@@ -27,10 +27,6 @@ return [
         'transferring' => 'स्थानांतरित कर रहा है',
         'installing' => 'इंस्टॉल कर रहा है',
         'unavailable' => 'अप्राप्य',
-    ],
-    'welcome' => [
-        'title' => 'वापस स्वागत है',
-        'subtitle' => 'यहां आप उन सभी सर्वरों को देख सकते हैं जिन तक आपकी पहुंच है।',
     ],
     'status-card' => [
         'title' => 'सर्वर स्थिति',

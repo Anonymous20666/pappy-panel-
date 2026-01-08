@@ -4,8 +4,8 @@ return [
     'flag' => 'br',
     'title' => 'Painel',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => 'Bem-vindo de volta',
+        'subtitle' => 'Aqui você pode ver todos os servidores aos quais tem acesso.',
     ],
     'other-servers' => 'Mostrando servidores de outros',
     'your-servers' => 'Mostrando seus servidores',
@@ -27,10 +27,6 @@ return [
         'transferring' => 'Transferindo',
         'installing' => 'Instalando',
         'unavailable' => 'Indisponível',
-    ],
-    'welcome' => [
-        'title' => 'Bem-vindo de volta',
-        'subtitle' => 'Aqui você pode ver todos os servidores aos quais tem acesso.',
     ],
     'status-card' => [
         'title' => 'Status do Servidor',

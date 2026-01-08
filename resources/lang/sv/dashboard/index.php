@@ -4,8 +4,8 @@ return [
     'flag' => 'se',
     'title' => 'Dashboard',
     'welcome' => [
-        'title' => 'Welcome back',
-        'subtitle' => 'Here you can see all the servers you have access to.',
+        'title' => 'Välkommen tillbaka',
+        'subtitle' => 'Här kan du se alla servrar du har tillgång till.',
     ],
     'other-servers' => 'Visar andras servrar',
     'your-servers' => 'Visar dina servrar',
@@ -27,10 +27,6 @@ return [
         'transferring' => 'Överföring',
         'installing' => 'Installerar',
         'unavailable' => 'Otillgänglig',
-    ],
-    'welcome' => [
-        'title' => 'Välkommen tillbaka',
-        'subtitle' => 'Här kan du se alla servrar du har tillgång till.',
     ],
     'status-card' => [
         'title' => 'Serverstatus',

@@ -1,21 +1,3 @@
 files:
-  - source: /resources/lang/en/translation.php
-    translation: /resources/lang/%two_letters_code%/%original_file_name%
-  - source: /resources/lang/en/routes.php
-    translation: /resources/lang/%two_letters_code%/%original_file_name%
-  - source: /resources/lang/en/auth.php
-    translation: /resources/lang/%two_letters_code%/%original_file_name%
-  - source: /resources/lang/en/activity.php
-    translation: /resources/lang/%two_letters_code%/%original_file_name%
-  - source: /resources/lang/en/dashboard
-    translation: /resources/lang/%two_letters_code%/dashboard/%original_file_name%
-  - source: /resources/lang/en/server
-    translation: /resources/lang/%two_letters_code%/server/%original_file_name%
-  - source: /resources/lang/en/admin/navigation.php
-    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
-  - source: /resources/lang/en/admin/index.php
-    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
-  - source: /resources/lang/en/admin/settings.php
-    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
-  - source: /resources/lang/en/admin/api.php
-    translation: /resources/lang/%two_letters_code%/admin/%original_file_name%
+  - source: /resources/lang/en/**/*.php
+    translation: /resources/lang/%two_letters_code%/**/%original_file_name%

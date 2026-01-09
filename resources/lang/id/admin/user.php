@@ -2,10 +2,11 @@
 
 return [
     'exceptions' => [
-        'user_has_servers' => 'Tidak dapat menghapus pengguna dengan server aktif yang terhubung ke akun mereka. Harap hapus server mereka sebelum melanjutkan.',
+        'delete_self' => 'You cannot delete your own account.',
+        'user_has_servers' => 'Cannot delete a user with active servers attached to their account. Please delete their servers before continuing.',
     ],
     'notices' => [
-        'account_created' => 'Akun telah berhasil dibuat.',
-        'account_updated' => 'Akun telah berhasil diperbarui.',
+        'account_created' => 'Account has been created successfully.',
+        'account_updated' => 'Account has been successfully updated.',
     ],
 ];

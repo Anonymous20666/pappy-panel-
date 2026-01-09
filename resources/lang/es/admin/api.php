@@ -1,21 +1,21 @@
 <?php
 
 return [
-    'title' => 'Application API',
-    'list-title' => 'Credentials List',
-    'key' => 'Key',
-    'memo' => 'Memo',
-    'last-used' => 'Last Used',
-    'created' => 'Created On',
+    'title' => 'API de la Aplicación',
+    'list-title' => 'Lista de Credenciales',
+    'key' => 'Clave',
+    'memo' => 'Nota',
+    'last-used' => 'Último uso',
+    'created' => 'Creado el',
 
-    'permissions' => 'Select Permissions',
-    'read-only' => 'Read',
-    'read-write' => 'Read &amp; Write',
-    'none' => 'none',
+    'permissions' => 'Seleccionar permisos',
+    'read-only' => 'Lectura',
+    'read-write' => 'Lectura y &amp; Escritura',
+    'none' => 'ninguno',
 
-    'description' => 'Description',
-    'info' => 'Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.',
+    'description' => 'Descripción',
+    'info' => 'Una vez que hayas asignado permisos y creado este conjunto de credenciales, no podrás volver para editarlo. Si necesitas hacer cambios más adelante, tendrás que crear un nuevo conjunto de credenciales.',
 
-    'create-btn' => 'Create New',
-    'new-btn' => 'Create Credentials',
+    'create-btn' => 'Crear nuevo',
+    'new-btn' => 'Crear credenciales',
 ];

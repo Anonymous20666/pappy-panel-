@@ -2,7 +2,7 @@
 
 return [
     'exceptions' => [
-        'delete_self' => 'You cannot delete your own account.',
+        'delete_self' => 'Anda tidak dapat menghapus akun Anda sendiri.',
         'user_has_servers' => 'Tidak dapat menghapus pengguna dengan server aktif yang terhubung ke akun mereka. Harap hapus server mereka sebelum melanjutkan.',
     ],
     'notices' => [

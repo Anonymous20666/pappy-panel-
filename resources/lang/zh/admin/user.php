@@ -2,7 +2,7 @@
 
 return [
     'exceptions' => [
-        'delete_self' => 'You cannot delete your own account.',
+        'delete_self' => '您无法删除自己的账户。',
         'user_has_servers' => '无法删除拥有活动服务器的用户。请先删除其服务器后再继续。',
     ],
     'notices' => [

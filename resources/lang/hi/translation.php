@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'lang' => 'Hindi',
+    'lang' => 'हिन्दी',
 ];

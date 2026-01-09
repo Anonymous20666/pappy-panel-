@@ -1,21 +1,21 @@
 <?php
 
 return [
-    'title' => 'Application API',
-    'list-title' => 'Credentials List',
-    'key' => 'Key',
-    'memo' => 'Memo',
-    'last-used' => 'Last Used',
-    'created' => 'Created On',
+    'title' => 'Applikations-API',
+    'list-title' => 'Lista över autentiseringsuppgifter',
+    'key' => 'Nyckel',
+    'memo' => 'Anteckning',
+    'last-used' => 'Senast använd',
+    'created' => 'Skapad den',
 
-    'permissions' => 'Select Permissions',
-    'read-only' => 'Read',
-    'read-write' => 'Read &amp; Write',
-    'none' => 'none',
+    'permissions' => 'Välj behörigheter',
+    'read-only' => 'Läs',
+    'read-write' => 'Läs &amp; skriv',
+    'none' => 'ingen',
 
-    'description' => 'Description',
-    'info' => 'Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.',
+    'description' => 'Beskrivning',
+    'info' => 'När du har tilldelat behörigheter och skapat denna uppsättning autentiseringsuppgifter kan du inte gå tillbaka och redigera den. Om du behöver göra ändringar senare måste du skapa en ny uppsättning autentiseringsuppgifter.',
 
-    'create-btn' => 'Create New',
-    'new-btn' => 'Create Credentials',
+    'create-btn' => 'Skapa ny',
+    'new-btn' => 'Skapa autentiseringsuppgifter',
 ];

@@ -1,21 +1,21 @@
 <?php
 
 return [
-    'title' => 'Application API',
-    'list-title' => 'Credentials List',
-    'key' => 'Key',
-    'memo' => 'Memo',
-    'last-used' => 'Last Used',
-    'created' => 'Created On',
+    'title' => 'एप्लिकेशन API',
+    'list-title' => 'क्रेडेंशियल्स सूची',
+    'key' => 'कुंजी',
+    'memo' => 'नोट',
+    'last-used' => 'अंतिम उपयोग',
+    'created' => 'निर्माण तिथि',
 
-    'permissions' => 'Select Permissions',
-    'read-only' => 'Read',
-    'read-write' => 'Read &amp; Write',
-    'none' => 'none',
+    'permissions' => 'अनुमतियाँ चुनें',
+    'read-only' => 'केवल पढ़ें',
+    'read-write' => 'पढ़ें और लिखें',
+    'none' => 'कोई नहीं',
 
-    'description' => 'Description',
-    'info' => 'Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.',
+    'description' => 'विवरण',
+    'info' => 'एक बार जब आप अनुमतियाँ असाइन कर देते हैं और इस क्रेडेंशियल्स सेट को बना लेते हैं, तो आप इसे वापस आकर संपादित नहीं कर पाएंगे। यदि भविष्य में बदलाव करने की आवश्यकता हो, तो आपको नया क्रेडेंशियल्स सेट बनाना होगा।',
 
-    'create-btn' => 'Create New',
-    'new-btn' => 'Create Credentials',
+    'create-btn' => 'नया बनाएँ',
+    'new-btn' => 'क्रेडेंशियल्स बनाएँ',
 ];

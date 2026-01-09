@@ -2,7 +2,7 @@
 
 return [
     'exceptions' => [
-        'delete_self' => 'You cannot delete your own account.',
+        'delete_self' => 'No puedes eliminar tu propia cuenta.',
         'user_has_servers' => 'No se puede eliminar un usuario con servidores activos vinculados a su cuenta. Por favor elimina sus servidores antes de continuar.',
     ],
     'notices' => [

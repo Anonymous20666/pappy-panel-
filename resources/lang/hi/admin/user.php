@@ -2,7 +2,7 @@
 
 return [
     'exceptions' => [
-        'delete_self' => 'You cannot delete your own account.',
+        'delete_self' => 'आप अपना स्वयं का खाता नहीं हटा सकते।',
         'user_has_servers' => 'सक्रिय सर्वर वाले उपयोगकर्ता को हटाया नहीं जा सकता। कृपया जारी रखने से पहले उनके सर्वर हटाएं।',
     ],
     'notices' => [

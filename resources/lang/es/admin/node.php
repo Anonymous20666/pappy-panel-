@@ -2,15 +2,15 @@
 
 return [
     'validation' => [
-        'fqdn_not_resolvable' => 'El FQDN o dirección IP proporcionada no resuelve a una dirección IP válida.',
-        'fqdn_required_for_ssl' => 'Se requiere un nombre de dominio completamente cualificado que resuelva a una dirección IP pública para usar SSL en este nodo.',
+        'fqdn_not_resolvable' => 'The FQDN or IP address provided does not resolve to a valid IP address.',
+        'fqdn_required_for_ssl' => 'A fully qualified domain name that resolves to a public IP address is required in order to use SSL for this node.',
     ],
     'notices' => [
-        'allocations_added' => 'Las asignaciones se han añadido exitosamente a este nodo.',
-        'node_deleted' => 'El nodo ha sido eliminado exitosamente del panel.',
-        'location_required' => 'Debes tener al menos una ubicación configurada antes de poder añadir un nodo a este panel.',
-        'node_created' => 'Nuevo nodo creado exitosamente. Puedes configurar automáticamente el daemon en esta máquina visitando la pestaña \'Configuración\'. <strong>Antes de poder añadir cualquier servidor, primero debes asignar al menos una dirección IP y puerto.</strong>',
-        'node_updated' => 'La información del nodo ha sido actualizada. Si se cambiaron configuraciones del daemon, necesitarás reiniciarlo para que los cambios surtan efecto.',
-        'unallocated_deleted' => 'Se eliminaron todos los puertos no asignados para <code>:ip</code>.',
+        'allocations_added' => 'Allocations have successfully been added to this node.',
+        'node_deleted' => 'Node has been successfully removed from the panel.',
+        'location_required' => 'You must have at least one location configured before you can add a node to this panel.',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. <strong>Before you can add any servers you must first allocate at least one IP address and port.</strong>',
+        'node_updated' => 'Node information has been updated. If any daemon settings were changed you will need to reboot it for those changes to take effect.',
+        'unallocated_deleted' => 'Deleted all un-allocated ports for <code>:ip</code>.',
     ],
 ];

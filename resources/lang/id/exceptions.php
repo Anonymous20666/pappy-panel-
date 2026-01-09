@@ -1,59 +1,59 @@
 <?php
 
 return [
-    'daemon_connection_failed' => 'Terjadi pengecualian saat mencoba berkomunikasi dengan daemon yang menghasilkan kode respons HTTP/:code. Pengecualian ini telah dicatat.',
+    'daemon_connection_failed' => 'There was an exception while attempting to communicate with the daemon resulting in a HTTP/:code response code. This exception has been logged.',
     'node' => [
-        'servers_attached' => 'Sebuah node tidak boleh memiliki server yang terhubung dengannya agar dapat dihapus.',
-        'daemon_off_config_updated' => 'Konfigurasi daemon <strong>telah diperbarui</strong>, namun terjadi kesalahan saat mencoba memperbarui file konfigurasi secara otomatis di Daemon. Anda perlu memperbarui file konfigurasi (config.yml) secara manual agar daemon menerapkan perubahan ini.',
+        'servers_attached' => 'A node must have no servers linked to it in order to be deleted.',
+        'daemon_off_config_updated' => 'The daemon configuration <strong>has been updated</strong>, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
-        'server_using' => 'Sebuah server sedang menggunakan alokasi ini. Alokasi hanya dapat dihapus jika tidak ada server yang sedang menggunakannya.',
-        'too_many_ports' => 'Menambahkan lebih dari 1000 port dalam satu rentang sekaligus tidak didukung.',
-        'invalid_mapping' => 'Pemetaan yang diberikan untuk :port tidak valid dan tidak dapat diproses.',
-        'cidr_out_of_range' => 'Notasi CIDR hanya mengizinkan mask antara /25 dan /32.',
-        'port_out_of_range' => 'Port dalam alokasi harus lebih besar dari 1024 dan kurang dari atau sama dengan 65535.',
+        'server_using' => 'A server is currently assigned to this allocation. An allocation can only be deleted if no server is currently assigned.',
+        'too_many_ports' => 'Adding more than 1000 ports in a single range at once is not supported.',
+        'invalid_mapping' => 'The mapping provided for :port was invalid and could not be processed.',
+        'cidr_out_of_range' => 'CIDR notation only allows masks between /25 and /32.',
+        'port_out_of_range' => 'Ports in an allocation must be greater than 1024 and less than or equal to 65535.',
     ],
     'nest' => [
-        'delete_has_servers' => 'Nest dengan server aktif yang terhubung tidak dapat dihapus dari Panel.',
+        'delete_has_servers' => 'A Nest with active servers attached to it cannot be deleted from the Panel.',
         'egg' => [
-            'delete_has_servers' => 'Egg dengan server aktif yang terhubung tidak dapat dihapus dari Panel.',
-            'invalid_copy_id' => 'Egg yang dipilih untuk menyalin skrip tidak ada, atau sedang menyalin skrip itu sendiri.',
-            'must_be_child' => 'Direktif "Salin Pengaturan Dari" untuk Egg ini harus merupakan opsi anak untuk Nest yang dipilih.',
-            'has_children' => 'Egg ini adalah induk dari satu atau lebih Egg lainnya. Silakan hapus Egg tersebut sebelum menghapus Egg ini.',
+            'delete_has_servers' => 'An Egg with active servers attached to it cannot be deleted from the Panel.',
+            'invalid_copy_id' => 'The Egg selected for copying a script from either does not exist, or is copying a script itself.',
+            'must_be_child' => 'The "Copy Settings From" directive for this Egg must be a child option for the selected Nest.',
+            'has_children' => 'This Egg is a parent to one or more other Eggs. Please delete those Eggs before deleting this Egg.',
         ],
         'variables' => [
-            'env_not_unique' => 'Variabel lingkungan :name harus unik untuk Egg ini.',
-            'reserved_name' => 'Variabel lingkungan :name dilindungi dan tidak dapat ditetapkan ke variabel.',
-            'bad_validation_rule' => 'Aturan validasi ":rule" bukan aturan yang valid untuk aplikasi ini.',
+            'env_not_unique' => 'The environment variable :name must be unique to this Egg.',
+            'reserved_name' => 'The environment variable :name is protected and cannot be assigned to a variable.',
+            'bad_validation_rule' => 'The validation rule ":rule" is not a valid rule for this application.',
         ],
         'importer' => [
-            'json_error' => 'Terjadi kesalahan saat mencoba mem-parsing file JSON: :error.',
-            'file_error' => 'File JSON yang diberikan tidak valid.',
-            'invalid_json_provided' => 'File JSON yang diberikan tidak dalam format yang dapat dikenali.',
+            'json_error' => 'There was an error while attempting to parse the JSON file: :error.',
+            'file_error' => 'The JSON file provided was not valid.',
+            'invalid_json_provided' => 'The JSON file provided is not in a format that can be recognized.',
         ],
     ],
     'subusers' => [
-        'editing_self' => 'Mengedit akun subpengguna Anda sendiri tidak diizinkan.',
-        'user_is_owner' => 'Anda tidak dapat menambahkan pemilik server sebagai subpengguna untuk server ini.',
-        'subuser_exists' => 'Pengguna dengan alamat email tersebut sudah ditetapkan sebagai subpengguna untuk server ini.',
+        'editing_self' => 'Editing your own subuser account is not permitted.',
+        'user_is_owner' => 'You cannot add the server owner as a subuser for this server.',
+        'subuser_exists' => 'A user with that email address is already assigned as a subuser for this server.',
     ],
     'databases' => [
-        'delete_has_databases' => 'Tidak dapat menghapus server host database yang memiliki database aktif yang terhubung dengannya.',
+        'delete_has_databases' => 'Cannot delete a database host server that has active databases linked to it.',
     ],
     'tasks' => [
-        'chain_interval_too_long' => 'Waktu interval maksimum untuk tugas berantai adalah 15 menit.',
+        'chain_interval_too_long' => 'The maximum interval time for a chained task is 15 minutes.',
     ],
     'locations' => [
-        'has_nodes' => 'Tidak dapat menghapus lokasi yang memiliki node aktif yang terhubung dengannya.',
+        'has_nodes' => 'Cannot delete a location that has active nodes attached to it.',
     ],
     'users' => [
-        'node_revocation_failed' => 'Gagal mencabut kunci pada <a href=":link">Node #:node</a>. :error',
+        'node_revocation_failed' => 'Failed to revoke keys on <a href=":link">Node #:node</a>. :error',
     ],
     'deployment' => [
-        'no_viable_nodes' => 'Tidak ditemukan node yang memenuhi persyaratan yang ditentukan untuk penyebaran otomatis.',
-        'no_viable_allocations' => 'Tidak ditemukan alokasi yang memenuhi persyaratan untuk penyebaran otomatis.',
+        'no_viable_nodes' => 'No nodes satisfying the requirements specified for automatic deployment could be found.',
+        'no_viable_allocations' => 'No allocations satisfying the requirements for automatic deployment were found.',
     ],
     'api' => [
-        'resource_not_found' => 'Sumber daya yang diminta tidak ada di server ini.',
+        'resource_not_found' => 'The requested resource does not exist on this server.',
     ],
 ];

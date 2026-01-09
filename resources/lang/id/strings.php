@@ -91,5 +91,5 @@ return [
     'enable' => 'Aktifkan',
     'disable' => 'Nonaktifkan',
     'save' => 'Simpan',
-    'copyright' => '&copy; 2015 - :year Pterodactyl Software',
+    'copyright' => '&copy; :year Reviactyl™ Software',
 ];

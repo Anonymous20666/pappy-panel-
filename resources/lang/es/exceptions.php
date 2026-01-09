@@ -1,59 +1,59 @@
 <?php
 
 return [
-    'daemon_connection_failed' => 'There was an exception while attempting to communicate with the daemon resulting in a HTTP/:code response code. This exception has been logged.',
+    'daemon_connection_failed' => 'Hubo una excepción al intentar comunicarse con el daemon resultando en un código de respuesta HTTP/:code. Esta excepción ha sido registrada.',
     'node' => [
-        'servers_attached' => 'A node must have no servers linked to it in order to be deleted.',
-        'daemon_off_config_updated' => 'The daemon configuration <strong>has been updated</strong>, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
+        'servers_attached' => 'Un nodo no debe tener servidores vinculados para poder ser eliminado.',
+        'daemon_off_config_updated' => 'La configuración del daemon <strong>ha sido actualizada</strong>, sin embargo hubo un error al intentar actualizar automáticamente el archivo de configuración en el Daemon. Necesitarás actualizar manualmente el archivo de configuración (config.yml) para que el daemon aplique estos cambios.',
     ],
     'allocations' => [
-        'server_using' => 'A server is currently assigned to this allocation. An allocation can only be deleted if no server is currently assigned.',
-        'too_many_ports' => 'Adding more than 1000 ports in a single range at once is not supported.',
-        'invalid_mapping' => 'The mapping provided for :port was invalid and could not be processed.',
-        'cidr_out_of_range' => 'CIDR notation only allows masks between /25 and /32.',
-        'port_out_of_range' => 'Ports in an allocation must be greater than 1024 and less than or equal to 65535.',
+        'server_using' => 'Un servidor está actualmente asignado a esta asignación. Una asignación solo puede ser eliminada si no hay ningún servidor asignado actualmente.',
+        'too_many_ports' => 'No se admite agregar más de 1000 puertos en un solo rango a la vez.',
+        'invalid_mapping' => 'El mapeo proporcionado para :port era inválido y no pudo ser procesado.',
+        'cidr_out_of_range' => 'La notación CIDR solo permite máscaras entre /25 y /32.',
+        'port_out_of_range' => 'Los puertos en una asignación deben ser mayores que 1024 y menores o iguales a 65535.',
     ],
     'nest' => [
-        'delete_has_servers' => 'A Nest with active servers attached to it cannot be deleted from the Panel.',
+        'delete_has_servers' => 'Un Nido con servidores activos adjuntos no puede ser eliminado del Panel.',
         'egg' => [
-            'delete_has_servers' => 'An Egg with active servers attached to it cannot be deleted from the Panel.',
-            'invalid_copy_id' => 'The Egg selected for copying a script from either does not exist, or is copying a script itself.',
-            'must_be_child' => 'The "Copy Settings From" directive for this Egg must be a child option for the selected Nest.',
-            'has_children' => 'This Egg is a parent to one or more other Eggs. Please delete those Eggs before deleting this Egg.',
+            'delete_has_servers' => 'Un Egg con servidores activos adjuntos no puede ser eliminado del Panel.',
+            'invalid_copy_id' => 'El Egg seleccionado para copiar un script no existe, o está copiando un script en sí mismo.',
+            'must_be_child' => 'La directiva "Copiar Configuración De" para este Egg debe ser una opción hija del Nido seleccionado.',
+            'has_children' => 'Este Egg es padre de uno o más Eggs. Por favor elimina esos Eggs antes de eliminar este Egg.',
         ],
         'variables' => [
-            'env_not_unique' => 'The environment variable :name must be unique to this Egg.',
-            'reserved_name' => 'The environment variable :name is protected and cannot be assigned to a variable.',
-            'bad_validation_rule' => 'The validation rule ":rule" is not a valid rule for this application.',
+            'env_not_unique' => 'La variable de entorno :name debe ser única para este Egg.',
+            'reserved_name' => 'La variable de entorno :name está protegida y no puede ser asignada a una variable.',
+            'bad_validation_rule' => 'La regla de validación ":rule" no es una regla válida para esta aplicación.',
         ],
         'importer' => [
-            'json_error' => 'There was an error while attempting to parse the JSON file: :error.',
-            'file_error' => 'The JSON file provided was not valid.',
-            'invalid_json_provided' => 'The JSON file provided is not in a format that can be recognized.',
+            'json_error' => 'Hubo un error al intentar analizar el archivo JSON: :error.',
+            'file_error' => 'El archivo JSON proporcionado no era válido.',
+            'invalid_json_provided' => 'El archivo JSON proporcionado no está en un formato que pueda ser reconocido.',
         ],
     ],
     'subusers' => [
-        'editing_self' => 'Editing your own subuser account is not permitted.',
-        'user_is_owner' => 'You cannot add the server owner as a subuser for this server.',
-        'subuser_exists' => 'A user with that email address is already assigned as a subuser for this server.',
+        'editing_self' => 'No está permitido editar tu propia cuenta de subusuario.',
+        'user_is_owner' => 'No puedes añadir al propietario del servidor como subusuario para este servidor.',
+        'subuser_exists' => 'Un usuario con esa dirección de correo ya está asignado como subusuario para este servidor.',
     ],
     'databases' => [
-        'delete_has_databases' => 'Cannot delete a database host server that has active databases linked to it.',
+        'delete_has_databases' => 'No se puede eliminar un servidor host de base de datos que tiene bases de datos activas vinculadas.',
     ],
     'tasks' => [
-        'chain_interval_too_long' => 'The maximum interval time for a chained task is 15 minutes.',
+        'chain_interval_too_long' => 'El tiempo máximo de intervalo para una tarea encadenada es de 15 minutos.',
     ],
     'locations' => [
-        'has_nodes' => 'Cannot delete a location that has active nodes attached to it.',
+        'has_nodes' => 'No se puede eliminar una ubicación que tiene nodos activos adjuntos.',
     ],
     'users' => [
-        'node_revocation_failed' => 'Failed to revoke keys on <a href=":link">Node #:node</a>. :error',
+        'node_revocation_failed' => 'Error al revocar claves en <a href=":link">Nodo #:node</a>. :error',
     ],
     'deployment' => [
-        'no_viable_nodes' => 'No nodes satisfying the requirements specified for automatic deployment could be found.',
-        'no_viable_allocations' => 'No allocations satisfying the requirements for automatic deployment were found.',
+        'no_viable_nodes' => 'No se encontraron nodos que satisfagan los requisitos especificados para el despliegue automático.',
+        'no_viable_allocations' => 'No se encontraron asignaciones que satisfagan los requisitos para el despliegue automático.',
     ],
     'api' => [
-        'resource_not_found' => 'The requested resource does not exist on this server.',
+        'resource_not_found' => 'El recurso solicitado no existe en este servidor.',
     ],
 ];

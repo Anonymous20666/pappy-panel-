@@ -2,25 +2,25 @@
 
 return [
     'notices' => [
-        'created' => 'A new nest, :name, has been successfully created.',
-        'deleted' => 'Successfully deleted the requested nest from the Panel.',
-        'updated' => 'Successfully updated the nest configuration options.',
+        'created' => 'Ett nytt näste, :name, har skapats framgångsrikt.',
+        'deleted' => 'Det begärda nästet har tagits bort från panelen.',
+        'updated' => 'Nästets konfigurationsalternativ har uppdaterats framgångsrikt.',
     ],
     'eggs' => [
         'notices' => [
-            'imported' => 'Successfully imported this Egg and its associated variables.',
-            'updated_via_import' => 'This Egg has been updated using the file provided.',
-            'deleted' => 'Successfully deleted the requested egg from the Panel.',
-            'updated' => 'Egg configuration has been updated successfully.',
-            'script_updated' => 'Egg install script has been updated and will run whenever servers are installed.',
-            'egg_created' => 'A new egg was laid successfully. You will need to restart any running daemons to apply this new egg.',
+            'imported' => 'Detta Egg och dess associerade variabler har importerats framgångsrikt.',
+            'updated_via_import' => 'Detta Egg har uppdaterats med den tillhandahållna filen.',
+            'deleted' => 'Det begärda ägget har tagits bort från panelen.',
+            'updated' => 'Egg-konfigurationen har uppdaterats framgångsrikt.',
+            'script_updated' => 'Egg-installationsskriptet har uppdaterats och kommer att köras när servrar installeras.',
+            'egg_created' => 'Ett nytt ägg skapades framgångsrikt. Du behöver starta om alla körande daemoner för att tillämpa detta nya ägg.',
         ],
     ],
     'variables' => [
         'notices' => [
-            'variable_deleted' => 'The variable ":variable" has been deleted and will no longer be available to servers once rebuilt.',
-            'variable_updated' => 'The variable ":variable" has been updated. You will need to rebuild any servers using this variable in order to apply changes.',
-            'variable_created' => 'New variable has successfully been created and assigned to this egg.',
+            'variable_deleted' => 'Variabeln ":variable" har tagits bort och kommer inte längre att vara tillgänglig för servrar efter återuppbyggnad.',
+            'variable_updated' => 'Variabeln ":variable" har uppdaterats. Du behöver återuppbygga alla servrar som använder denna variabel för att tillämpa ändringar.',
+            'variable_created' => 'Ny variabel har skapats framgångsrikt och tilldelats detta ägg.',
         ],
     ],
 ];

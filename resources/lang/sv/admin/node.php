@@ -2,15 +2,15 @@
 
 return [
     'validation' => [
-        'fqdn_not_resolvable' => 'The FQDN or IP address provided does not resolve to a valid IP address.',
-        'fqdn_required_for_ssl' => 'A fully qualified domain name that resolves to a public IP address is required in order to use SSL for this node.',
+        'fqdn_not_resolvable' => 'Det angivna FQDN eller IP-adressen löser inte till en giltig IP-adress.',
+        'fqdn_required_for_ssl' => 'Ett fullständigt kvalificerat domännamn som löser till en offentlig IP-adress krävs för att använda SSL för denna nod.',
     ],
     'notices' => [
-        'allocations_added' => 'Allocations have successfully been added to this node.',
-        'node_deleted' => 'Node has been successfully removed from the panel.',
-        'location_required' => 'You must have at least one location configured before you can add a node to this panel.',
-        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. <strong>Before you can add any servers you must first allocate at least one IP address and port.</strong>',
-        'node_updated' => 'Node information has been updated. If any daemon settings were changed you will need to reboot it for those changes to take effect.',
-        'unallocated_deleted' => 'Deleted all un-allocated ports for <code>:ip</code>.',
+        'allocations_added' => 'Allokeringar har lagts till framgångsrikt på denna nod.',
+        'node_deleted' => 'Noden har tagits bort framgångsrikt från panelen.',
+        'location_required' => 'Du måste ha minst en plats konfigurerad innan du kan lägga till en nod i denna panel.',
+        'node_created' => 'Ny nod skapad framgångsrikt. Du kan automatiskt konfigurera daemonen på denna maskin genom att besöka fliken \'Konfiguration\'. <strong>Innan du kan lägga till några servrar måste du först allokera minst en IP-adress och port.</strong>',
+        'node_updated' => 'Nodinformationen har uppdaterats. Om några daemoninställningar ändrades behöver du starta om den för att dessa ändringar ska träda i kraft.',
+        'unallocated_deleted' => 'Alla icke-allokerade portar för <code>:ip</code> har tagits bort.',
     ],
 ];

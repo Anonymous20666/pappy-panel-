@@ -2,15 +2,15 @@
 
 return [
     'validation' => [
-        'fqdn_not_resolvable' => 'The FQDN or IP address provided does not resolve to a valid IP address.',
-        'fqdn_required_for_ssl' => 'A fully qualified domain name that resolves to a public IP address is required in order to use SSL for this node.',
+        'fqdn_not_resolvable' => 'FQDN atau alamat IP yang diberikan tidak dapat diselesaikan ke alamat IP yang valid.',
+        'fqdn_required_for_ssl' => 'Nama domain yang sepenuhnya memenuhi syarat (FQDN) yang merujuk ke alamat IP publik diperlukan untuk menggunakan SSL pada node ini.',
     ],
     'notices' => [
-        'allocations_added' => 'Allocations have successfully been added to this node.',
-        'node_deleted' => 'Node has been successfully removed from the panel.',
-        'location_required' => 'You must have at least one location configured before you can add a node to this panel.',
-        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. <strong>Before you can add any servers you must first allocate at least one IP address and port.</strong>',
-        'node_updated' => 'Node information has been updated. If any daemon settings were changed you will need to reboot it for those changes to take effect.',
-        'unallocated_deleted' => 'Deleted all un-allocated ports for <code>:ip</code>.',
+        'allocations_added' => 'Alokasi telah berhasil ditambahkan ke node ini.',
+        'node_deleted' => 'Node telah berhasil dihapus dari panel.',
+        'location_required' => 'Anda harus memiliki setidaknya satu lokasi yang dikonfigurasi sebelum Anda dapat menambahkan node ke panel ini.',
+        'node_created' => 'Berhasil membuat node baru. Anda dapat secara otomatis mengonfigurasi daemon pada mesin ini dengan mengunjungi tab \'Konfigurasi\'. <strong>Sebelum Anda dapat menambahkan server apa pun, Anda harus terlebih dahulu mengalokasikan setidaknya satu alamat IP dan port.</strong>',
+        'node_updated' => 'Informasi node telah diperbarui. Jika pengaturan daemon diubah, Anda perlu me-rebootnya agar perubahan tersebut berlaku.',
+        'unallocated_deleted' => 'Menghapus semua port yang tidak dialokasikan untuk <code>:ip</code>.',
     ],
 ];

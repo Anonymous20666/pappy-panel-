@@ -2,15 +2,15 @@
 
 return [
     'validation' => [
-        'fqdn_not_resolvable' => 'The FQDN or IP address provided does not resolve to a valid IP address.',
-        'fqdn_required_for_ssl' => 'A fully qualified domain name that resolves to a public IP address is required in order to use SSL for this node.',
+        'fqdn_not_resolvable' => 'प्रदान किया गया FQDN या IP पता एक वैध IP पते को हल नहीं करता है।',
+        'fqdn_required_for_ssl' => 'इस नोड के लिए SSL का उपयोग करने के लिए एक सार्वजनिक IP पते को हल करने वाला पूर्ण योग्य डोमेन नाम आवश्यक है।',
     ],
     'notices' => [
-        'allocations_added' => 'Allocations have successfully been added to this node.',
-        'node_deleted' => 'Node has been successfully removed from the panel.',
-        'location_required' => 'You must have at least one location configured before you can add a node to this panel.',
-        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. <strong>Before you can add any servers you must first allocate at least one IP address and port.</strong>',
-        'node_updated' => 'Node information has been updated. If any daemon settings were changed you will need to reboot it for those changes to take effect.',
-        'unallocated_deleted' => 'Deleted all un-allocated ports for <code>:ip</code>.',
+        'allocations_added' => 'इस नोड में आवंटन सफलतापूर्वक जोड़े गए हैं।',
+        'node_deleted' => 'नोड को पैनल से सफलतापूर्वक हटा दिया गया है।',
+        'location_required' => 'इस पैनल में नोड जोड़ने से पहले आपके पास कम से कम एक स्थान कॉन्फ़िगर होना चाहिए।',
+        'node_created' => 'नया नोड सफलतापूर्वक बनाया गया। आप \'कॉन्फ़िगरेशन\' टैब पर जाकर इस मशीन पर डेमन को स्वचालित रूप से कॉन्फ़िगर कर सकते हैं। <strong>कोई भी सर्वर जोड़ने से पहले आपको पहले कम से कम एक IP पता और पोर्ट आवंटित करना होगा।</strong>',
+        'node_updated' => 'नोड जानकारी अपडेट कर दी गई है। यदि कोई डेमन सेटिंग्स बदली गई हैं तो उन परिवर्तनों को प्रभावी करने के लिए आपको इसे रीबूट करना होगा।',
+        'unallocated_deleted' => '<code>:ip</code> के लिए सभी गैर-आवंटित पोर्ट हटा दिए गए।',
     ],
 ];

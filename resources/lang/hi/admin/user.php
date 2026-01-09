@@ -3,10 +3,10 @@
 return [
     'exceptions' => [
         'delete_self' => 'You cannot delete your own account.',
-        'user_has_servers' => 'Cannot delete a user with active servers attached to their account. Please delete their servers before continuing.',
+        'user_has_servers' => 'सक्रिय सर्वर वाले उपयोगकर्ता को हटाया नहीं जा सकता। कृपया जारी रखने से पहले उनके सर्वर हटाएं।',
     ],
     'notices' => [
-        'account_created' => 'Account has been created successfully.',
-        'account_updated' => 'Account has been successfully updated.',
+        'account_created' => 'खाता सफलतापूर्वक बनाया गया है।',
+        'account_updated' => 'खाता सफलतापूर्वक अपडेट किया गया है।',
     ],
 ];

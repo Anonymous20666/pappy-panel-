@@ -91,5 +91,5 @@ return [
     'enable' => '启用',
     'disable' => '禁用',
     'save' => '保存',
-    'copyright' => '&copy; :year Reviactyl™ Software',
+    'copyright' => '&copy; :year Reviactyl™ 软件',
 ];

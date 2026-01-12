@@ -8,6 +8,7 @@ use Znck\Eloquent\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Pterodactyl\Exceptions\Http\Server\ServerStateConflictException;
@@ -43,29 +44,29 @@ use Pterodactyl\Exceptions\Http\Server\ServerStateConflictException;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $installed_at
- * @property \Illuminate\Database\Eloquent\Collection|ActivityLog[] $activity
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\ActivityLog[] $activity
  * @property int|null $activity_count
  * @property Allocation|null $allocation
- * @property \Illuminate\Database\Eloquent\Collection|Allocation[] $allocations
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Allocation[] $allocations
  * @property int|null $allocations_count
- * @property \Illuminate\Database\Eloquent\Collection|Backup[] $backups
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Backup[] $backups
  * @property int|null $backups_count
- * @property \Illuminate\Database\Eloquent\Collection|Database[] $databases
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Database[] $databases
  * @property int|null $databases_count
  * @property Egg|null $egg
- * @property \Illuminate\Database\Eloquent\Collection|Mount[] $mounts
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Mount[] $mounts
  * @property int|null $mounts_count
  * @property Nest $nest
  * @property Node $node
  * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property int|null $notifications_count
- * @property \Illuminate\Database\Eloquent\Collection|Schedule[] $schedules
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Schedule[] $schedules
  * @property int|null $schedules_count
- * @property \Illuminate\Database\Eloquent\Collection|Subuser[] $subusers
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Subuser[] $subusers
  * @property int|null $subusers_count
  * @property ServerTransfer|null $transfer
  * @property User $user
- * @property \Illuminate\Database\Eloquent\Collection|EggVariable[] $variables
+ * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\EggVariable[] $variables
  * @property int|null $variables_count
  *
  * @method static \Database\Factories\ServerFactory factory(...$parameters)
@@ -104,6 +105,8 @@ use Pterodactyl\Exceptions\Http\Server\ServerStateConflictException;
  */
 class Server extends Model
 {
+    /** @use HasFactory<\Database\Factories\ServerFactory> */
+    use HasFactory;
     use BelongsToThrough;
     use Notifiable;
 
@@ -163,7 +166,7 @@ class Server extends Model
         'egg_id' => 'required|exists:eggs,id',
         'startup' => 'required|string',
         'skip_scripts' => 'sometimes|boolean',
-        'image' => ['required', 'string', 'max:191', 'regex:/^[\w\.\/\-:@ ]*$/'],
+        'image' => ['required', 'string', 'max:191', 'regex:/^~?[\w\.\/\-:@ ]*$/'],
         'database_limit' => 'present|nullable|integer|min:0',
         'allocation_limit' => 'sometimes|nullable|integer|min:0',
         'backup_limit' => 'present|nullable|integer|min:0',

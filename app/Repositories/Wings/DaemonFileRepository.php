@@ -11,6 +11,10 @@ use GuzzleHttp\Exception\TransferException;
 use Pterodactyl\Exceptions\Http\Server\FileSizeTooLargeException;
 use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
 
+/**
+ * @method \Pterodactyl\Repositories\Wings\DaemonFileRepository setNode(\Pterodactyl\Models\Node $node)
+ * @method \Pterodactyl\Repositories\Wings\DaemonFileRepository setServer(\Pterodactyl\Models\Server $server)
+ */
 class DaemonFileRepository extends DaemonRepository
 {
     /**

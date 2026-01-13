@@ -27,7 +27,6 @@ class UpdateChecker extends Command
     public function handle()
     {
         $currentVersion = config('app.version');
-        $currentBuild = config('app.build');
 
         if ($currentVersion === 'canary') {
             $this->info('You are using the development (canary) version. No update check available.');
@@ -52,7 +51,7 @@ class UpdateChecker extends Command
                 return Command::FAILURE;
             }
 
-            $this->line("Current version: <comment>{$currentVersion} ({$currentBuild})</comment>");
+            $this->line("Current version: <comment>{$currentVersion}</comment>");
             $this->line("Latest version: <comment>{$latestVersion}</comment>");
 
             if ($latestVersion === $currentVersion) {

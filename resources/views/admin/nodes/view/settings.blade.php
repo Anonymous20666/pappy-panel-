@@ -55,7 +55,7 @@
                             <label for="pcontainerText" class="control-label">Terminal Prelude Text</label>
                             <div>
                                 <input type="text" autocomplete="off" id="pcontainerText" name="containerText"
-                                    class="form-control" value="{{ old('containerText') }}" />
+                                    class="form-control" value="{{ old('containerText', $node->containerText) }}" />
                                 <p class="text-muted"><small>Change the "<code>container@reviactyl~</code>" text.</small>
                                 </p>
                             </div>
@@ -64,7 +64,7 @@
                             <label for="pdaemonText" class="control-label">Daemon Prelude Text</label>
                             <div>
                                 <input type="text" autocomplete="off" id="pdaemonText" name="daemonText"
-                                    class="form-control" value="{{ old('daemonText') }}" />
+                                    class="form-control" value="{{ old('daemonText', $node->daemonText) }}" />
                                 <p class="text-muted"><small>Change the "<code>[Reviactyl Daemon]:</code>" text.</small></p>
                             </div>
                         </div>

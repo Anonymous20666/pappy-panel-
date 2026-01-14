@@ -84,8 +84,19 @@ module.exports = {
                 },
             },
             {
-                test: /\.svg$/,
-                loader: 'svg-url-loader',
+                test: /\.svg$/i,
+                oneOf: [ 
+                    {
+                        issuer: /\.[jt]sx?$/,
+                        use: ['@svgr/webpack']
+                    },
+                    {
+                        type: 'asset/resource',
+                        generator: {
+                            filename: 'assets/[hash][ext]'
+                        }
+                    }
+                ]
             },
             {
                 test: /\.js$/,

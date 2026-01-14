@@ -78,6 +78,7 @@
         "@babel/preset-typescript": "^7.12.1",
         "@babel/runtime": "^7.12.1",
         "@fontsource-variable/ibm-plex-sans": "^5.2.8",
+        "@svgr/webpack": "^8.1.0",
         "@testing-library/dom": "^8.14.0",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/react": "12.1.5",

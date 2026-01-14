@@ -3,6 +3,36 @@ This file is a running track of new features and fixes to each version of the pa
 
 This project follows [Semantic Versioning](http://semver.org) guidelines.
 
+## v2.2.0
+### Added
+* Turnstile integration by @wylayy
+* Quick Card in Dashboard by @wylayy
+* Language switcher in Navbar by @wylayy
+* Logout button in sidebar by @wylayy
+* Added missing translations by translation team on crowdin
+
+### Fixed
+* Fixes CVE-2025-68954, CVE-2025-69197, CVE-2025-69198.
+* Fixes a self-XSS issue when entering random data into boxes while creating a new database host.
+* Fixes missing `HttpForbiddenException` import in the backup status controller.
+* Fixes issue where scheduled tasks would execute every minute regardless of their configured cron syntax.
+* Pressing `Ctrl+Z` to undo while editing a file no longer deletes the initial file content.
+* Fixed incorrect error message being returned when attempting to delete your own account as an admin.
+* Fixes node description not being settable via the API.
+* Fixes 0-bytes files returning an error when attempting to upload.
+* Fixes nodes displaying the first available location even when that field was not edited and the node has a different value set.
+* Fixes allocation notes not being reset when a server is deleted.
+* Fixes Issue with `daemonText` and `containerText` not showing old values.
+
+### Changed
+* Minimum NodeJS version updated to 22 for building.
+* Updated all JS and PHP dependencies to their latest versions (where feasible).
+* The endpoint for disabling 2FA on an account using the client API changed from `DELETE /api/client/account/two-factor` to `POST /api/client/account/two-factor/disable`
+* `^C` in an egg's stop configuration no longer rewrites itself into the default stop configuration.
+* Upload size on nodes is no longer restricted to a max of 1024MB, any positive integer value can be used.
+* Administrators are now listed first when viewing a list of all users on the system.
+* Websocket no longer endlessly polls when connection issues are encountered, or when Wings disconnects the user for a reason that should not be re-attempted.
+
 ## v2.1.2
 ### Added
 * New Translations for Admin panel

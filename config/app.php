@@ -244,6 +244,7 @@ return [
         App\Providers\BladeServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\HashidsServiceProvider::class,
+        App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,

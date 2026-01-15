@@ -1,18 +1,18 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Pterodactyl\Models\User;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Pterodactyl\Events\Auth\ProvidedAuthenticationToken;
-use Pterodactyl\Http\Requests\Auth\LoginCheckpointRequest;
+use App\Events\Auth\ProvidedAuthenticationToken;
+use App\Http\Requests\Auth\LoginCheckpointRequest;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 
 class LoginCheckpointController extends AbstractLoginController

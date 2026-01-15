@@ -56,14 +56,14 @@
             "app/helpers.php"
         ],
         "psr-4": {
-            "Pterodactyl\\": "app/",
+            "App\\": "app/",
             "Database\\Factories\\": "database/Factories/",
             "Database\\Seeders\\": "database/Seeders/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pterodactyl\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/"
         }
     },
     "scripts": {

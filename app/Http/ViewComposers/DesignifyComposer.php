@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
+use App\Contracts\Repository\SettingsRepositoryInterface;
 
 class DesignifyComposer
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Base;
+namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 
 class PwaManifestController extends Controller
 {

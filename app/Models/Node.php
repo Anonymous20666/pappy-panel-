@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace App\Models;
 
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
@@ -36,9 +36,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property Location $location
- * @property \Pterodactyl\Models\Mount[]|\Illuminate\Database\Eloquent\Collection $mounts
- * @property \Pterodactyl\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
- * @property \Pterodactyl\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations
+ * @property \App\Models\Mount[]|\Illuminate\Database\Eloquent\Collection $mounts
+ * @property \App\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
+ * @property \App\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations
  */
 class Node extends Model
 {
@@ -198,7 +198,7 @@ class Node extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Pterodactyl\Models\Mount, \Pterodactyl\Models\MountNode, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\App\Models\Mount, \App\Models\MountNode, $this>
      */
     public function mounts(): HasManyThrough
     {
@@ -208,7 +208,7 @@ class Node extends Model
     /**
      * Gets the location associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Location, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Location, $this>
      */
     public function location(): BelongsTo
     {
@@ -218,7 +218,7 @@ class Node extends Model
     /**
      * Gets the servers associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
      */
     public function servers(): HasMany
     {
@@ -228,7 +228,7 @@ class Node extends Model
     /**
      * Gets the allocations associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Allocation, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Allocation, $this>
      */
     public function allocations(): HasMany
     {

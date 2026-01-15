@@ -237,16 +237,16 @@ return [
         /*
          * Application Service Providers...
          */
-        Pterodactyl\Providers\ActivityLogServiceProvider::class,
-        Pterodactyl\Providers\AppServiceProvider::class,
-        Pterodactyl\Providers\AuthServiceProvider::class,
-        Pterodactyl\Providers\BackupsServiceProvider::class,
-        Pterodactyl\Providers\BladeServiceProvider::class,
-        Pterodactyl\Providers\EventServiceProvider::class,
-        Pterodactyl\Providers\HashidsServiceProvider::class,
-        Pterodactyl\Providers\RouteServiceProvider::class,
-        Pterodactyl\Providers\RepositoryServiceProvider::class,
-        Pterodactyl\Providers\ViewComposerServiceProvider::class,
+        App\Providers\ActivityLogServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        App\Providers\BackupsServiceProvider::class,
+        App\Providers\BladeServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\HashidsServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
         /*
          * Additional Dependencies
@@ -269,11 +269,11 @@ return [
         'Alert' => Prologue\Alerts\Facades\Alert::class,
         'Carbon' => Carbon\Carbon::class,
         'JavaScript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
-        'Theme' => Pterodactyl\Extensions\Facades\Theme::class,
+        'Theme' => App\Extensions\Facades\Theme::class,
 
         // Custom Facades
-        'Activity' => Pterodactyl\Facades\Activity::class,
-        'LogBatch' => Pterodactyl\Facades\LogBatch::class,
-        'LogTarget' => Pterodactyl\Facades\LogTarget::class,
+        'Activity' => App\Facades\Activity::class,
+        'LogBatch' => App\Facades\LogBatch::class,
+        'LogTarget' => App\Facades\LogTarget::class,
     ])->toArray(),
 ];

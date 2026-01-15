@@ -1,17 +1,17 @@
 <?php
 
-namespace Pterodactyl\Services\Databases;
+namespace App\Services\Databases;
 
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Database;
-use Pterodactyl\Helpers\Utilities;
+use App\Models\Server;
+use App\Models\Database;
+use App\Helpers\Utilities;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Encryption\Encrypter;
-use Pterodactyl\Extensions\DynamicDatabaseConnection;
-use Pterodactyl\Repositories\Eloquent\DatabaseRepository;
-use Pterodactyl\Exceptions\Repository\DuplicateDatabaseNameException;
-use Pterodactyl\Exceptions\Service\Database\TooManyDatabasesException;
-use Pterodactyl\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
+use App\Extensions\DynamicDatabaseConnection;
+use App\Repositories\Eloquent\DatabaseRepository;
+use App\Exceptions\Repository\DuplicateDatabaseNameException;
+use App\Exceptions\Service\Database\TooManyDatabasesException;
+use App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
 
 class DatabaseManagementService
 {
@@ -19,7 +19,7 @@ class DatabaseManagementService
      * The regex used to validate that the database name passed through to the function is
      * in the expected format.
      *
-     * @see \Pterodactyl\Services\Databases\DatabaseManagementService::generateUniqueDatabaseName()
+     * @see \App\Services\Databases\DatabaseManagementService::generateUniqueDatabaseName()
      */
     private const MATCH_NAME_REGEX = '/^(s[\d]+_)(.*)$/';
 

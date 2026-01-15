@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Http\ViewComposers;
+namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use Pterodactyl\Services\Helpers\AssetHashService;
+use App\Services\Helpers\AssetHashService;
 
 class AssetComposer
 {

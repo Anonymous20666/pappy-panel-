@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Services\Eggs;
+namespace App\Services\Eggs;
 
 use Ramsey\Uuid\Uuid;
-use Pterodactyl\Models\Egg;
-use Pterodactyl\Contracts\Repository\EggRepositoryInterface;
+use App\Models\Egg;
+use App\Contracts\Repository\EggRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Pterodactyl\Exceptions\Service\Egg\NoParentConfigurationFoundException;
+use App\Exceptions\Service\Egg\NoParentConfigurationFoundException;
 
 // When a mommy and a daddy pterodactyl really like each other...
 class EggCreationService
@@ -21,7 +21,7 @@ class EggCreationService
     /**
      * Create a new service option and assign it to the given service.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \App\Exceptions\Model\DataValidationException
      * @throws NoParentConfigurationFoundException
      */
     public function handle(array $data): Egg

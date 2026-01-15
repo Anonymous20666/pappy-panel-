@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Http\Middleware;
+namespace App\Http\Middleware;
 
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 

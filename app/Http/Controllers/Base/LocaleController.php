@@ -1,13 +1,13 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Base;
+namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Translation\Translator;
 use Illuminate\Contracts\Translation\Loader;
-use Pterodactyl\Http\Controllers\Controller;
-use Pterodactyl\Http\Requests\Base\LocaleRequest;
-use Pterodactyl\Traits\Helpers\AvailableLanguages;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Base\LocaleRequest;
+use App\Traits\Helpers\AvailableLanguages;
 
 class LocaleController extends Controller
 {

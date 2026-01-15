@@ -1,23 +1,23 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Api\Client\Servers;
+namespace App\Http\Controllers\Api\Client\Servers;
 
-use Pterodactyl\Models\Task;
+use App\Models\Task;
 use Illuminate\Http\Response;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Schedule;
+use App\Models\Server;
+use App\Models\Schedule;
 use Illuminate\Http\JsonResponse;
-use Pterodactyl\Facades\Activity;
-use Pterodactyl\Models\Permission;
+use App\Facades\Activity;
+use App\Models\Permission;
 use Illuminate\Database\ConnectionInterface;
-use Pterodactyl\Repositories\Eloquent\TaskRepository;
-use Pterodactyl\Exceptions\Http\HttpForbiddenException;
-use Pterodactyl\Transformers\Api\Client\TaskTransformer;
-use Pterodactyl\Http\Requests\Api\Client\ClientApiRequest;
-use Pterodactyl\Http\Controllers\Api\Client\ClientApiController;
-use Pterodactyl\Exceptions\Service\ServiceLimitExceededException;
+use App\Repositories\Eloquent\TaskRepository;
+use App\Exceptions\Http\HttpForbiddenException;
+use App\Transformers\Api\Client\TaskTransformer;
+use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Exceptions\Service\ServiceLimitExceededException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Pterodactyl\Http\Requests\Api\Client\Servers\Schedules\StoreTaskRequest;
+use App\Http\Requests\Api\Client\Servers\Schedules\StoreTaskRequest;
 
 class ScheduleTaskController extends ClientApiController
 {
@@ -34,7 +34,7 @@ class ScheduleTaskController extends ClientApiController
     /**
      * Create a new task for a given schedule and store it in the database.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     * @throws \App\Exceptions\Model\DataValidationException
      * @throws ServiceLimitExceededException
      */
     public function store(StoreTaskRequest $request, Server $server, Schedule $schedule): array
@@ -95,8 +95,8 @@ class ScheduleTaskController extends ClientApiController
     /**
      * Updates a given task for a server.
      *
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws \App\Exceptions\Repository\RecordNotFoundException
      */
     public function update(StoreTaskRequest $request, Server $server, Schedule $schedule, Task $task): array
     {

@@ -1,16 +1,16 @@
 <?php
 
-namespace Pterodactyl\Http\Controllers\Admin\Designify;
+namespace App\Http\Controllers\Admin\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\View\Factory as ViewFactory;
-use Pterodactyl\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Pterodactyl\Contracts\Repository\SettingsRepositoryInterface;
-use Pterodactyl\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
+use App\Contracts\Repository\SettingsRepositoryInterface;
+use App\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
 
 class GeneralController extends Controller
 {
@@ -35,8 +35,8 @@ class GeneralController extends Controller
     }
 
     /**
-     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
-     * @throws \Pterodactyl\Exceptions\Repository\RecordNotFoundException
+     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws \App\Exceptions\Repository\RecordNotFoundException
      */
     public function update(GeneralSettingsFormRequest $request): RedirectResponse
     {

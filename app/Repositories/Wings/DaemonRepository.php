@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Repositories\Wings;
+namespace App\Repositories\Wings;
 
 use GuzzleHttp\Client;
-use Pterodactyl\Models\Node;
+use App\Models\Node;
 use Webmozart\Assert\Assert;
-use Pterodactyl\Models\Server;
+use App\Models\Server;
 use Illuminate\Contracts\Foundation\Application;
 
 abstract class DaemonRepository

@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Services\Helpers;
+namespace App\Services\Helpers;
 
 use GuzzleHttp\Client;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
-use Pterodactyl\Exceptions\Service\Helper\CdnVersionFetchingException;
+use App\Exceptions\Service\Helper\CdnVersionFetchingException;
 
 class SoftwareVersionService
 {

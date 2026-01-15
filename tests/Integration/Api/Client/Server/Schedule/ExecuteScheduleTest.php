@@ -1,14 +1,14 @@
 <?php
 
-namespace Pterodactyl\Tests\Integration\Api\Client\Server\Schedule;
+namespace App\Tests\Integration\Api\Client\Server\Schedule;
 
-use Pterodactyl\Models\Task;
+use App\Models\Task;
 use Illuminate\Http\Response;
-use Pterodactyl\Models\Schedule;
-use Pterodactyl\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Bus;
-use Pterodactyl\Jobs\Schedule\RunTaskJob;
-use Pterodactyl\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use App\Jobs\Schedule\RunTaskJob;
+use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ExecuteScheduleTest extends ClientApiIntegrationTestCase
 {

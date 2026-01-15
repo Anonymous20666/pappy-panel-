@@ -1,15 +1,15 @@
 <?php
 
-namespace Pterodactyl\Tests\Integration\Services\Deployment;
+namespace App\Tests\Integration\Services\Deployment;
 
-use Pterodactyl\Models\Node;
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\Database;
-use Pterodactyl\Models\Location;
+use App\Models\Node;
+use App\Models\Server;
+use App\Models\Database;
+use App\Models\Location;
 use Illuminate\Support\Collection;
-use Pterodactyl\Tests\Integration\IntegrationTestCase;
-use Pterodactyl\Services\Deployment\FindViableNodesService;
-use Pterodactyl\Exceptions\Service\Deployment\NoViableNodeException;
+use App\Tests\Integration\IntegrationTestCase;
+use App\Services\Deployment\FindViableNodesService;
+use App\Exceptions\Service\Deployment\NoViableNodeException;
 
 class FindViableNodesServiceTest extends IntegrationTestCase
 {
@@ -68,10 +68,10 @@ class FindViableNodesServiceTest extends IntegrationTestCase
 
     public function testExpectedNodeIsReturnedForLocation()
     {
-        /** @var \Pterodactyl\Models\Location[] $locations */
+        /** @var \App\Models\Location[] $locations */
         $locations = Location::factory()->times(2)->create();
 
-        /** @var \Pterodactyl\Models\Node[] $nodes */
+        /** @var \App\Models\Node[] $nodes */
         $nodes = [
             // This node should never be returned once we've completed the initial test which
             // runs without a location filter.

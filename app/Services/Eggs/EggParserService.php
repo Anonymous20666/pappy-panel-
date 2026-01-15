@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Services\Eggs;
+namespace App\Services\Eggs;
 
 use Illuminate\Support\Arr;
-use Pterodactyl\Models\Egg;
+use App\Models\Egg;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
-use Pterodactyl\Exceptions\Service\InvalidFileUploadException;
+use App\Exceptions\Service\InvalidFileUploadException;
 
 class EggParserService
 {

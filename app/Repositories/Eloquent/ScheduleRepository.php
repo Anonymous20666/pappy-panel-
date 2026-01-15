@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
-use Pterodactyl\Models\Schedule;
+use App\Models\Schedule;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Pterodactyl\Exceptions\Repository\RecordNotFoundException;
-use Pterodactyl\Contracts\Repository\ScheduleRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Contracts\Repository\ScheduleRepositoryInterface;
 
 class ScheduleRepository extends EloquentRepository implements ScheduleRepositoryInterface
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pterodactyl\Http\Requests\Admin\Designify;
+namespace App\Http\Requests\Admin\Designify;
 
-use Pterodactyl\Http\Requests\Admin\AdminFormRequest;
+use App\Http\Requests\Admin\AdminFormRequest;
 
 class LookNFeelSettingsFormRequest extends AdminFormRequest
 {

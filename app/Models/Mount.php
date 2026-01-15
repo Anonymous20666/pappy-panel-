@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace App\Models;
 
 use Illuminate\Validation\Rules\NotIn;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $target
  * @property bool $read_only
  * @property bool $user_mountable
- * @property \Pterodactyl\Models\Egg[]|\Illuminate\Database\Eloquent\Collection $eggs
- * @property \Pterodactyl\Models\Node[]|\Illuminate\Database\Eloquent\Collection $nodes
- * @property \Pterodactyl\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
+ * @property \App\Models\Egg[]|\Illuminate\Database\Eloquent\Collection $eggs
+ * @property \App\Models\Node[]|\Illuminate\Database\Eloquent\Collection $nodes
+ * @property \App\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
  */
 class Mount extends Model
 {
@@ -95,7 +95,7 @@ class Mount extends Model
     /**
      * Returns all eggs that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Pterodactyl\Models\Egg, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Egg, $this>
      */
     public function eggs(): BelongsToMany
     {
@@ -105,7 +105,7 @@ class Mount extends Model
     /**
      * Returns all nodes that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Pterodactyl\Models\Node, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Node, $this>
      */
     public function nodes(): BelongsToMany
     {
@@ -115,7 +115,7 @@ class Mount extends Model
     /**
      * Returns all servers that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Server, $this>
      */
     public function servers(): BelongsToMany
     {

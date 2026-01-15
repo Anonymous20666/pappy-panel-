@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,8 +42,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $inherit_file_denylist
  * @property array|null $inherit_features
  * @property Nest $nest
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\Server[] $servers
- * @property \Illuminate\Database\Eloquent\Collection|\Pterodactyl\Models\EggVariable[] $variables
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Server[] $servers
+ * @property \Illuminate\Database\Eloquent\Collection|\App\Models\EggVariable[] $variables
  * @property Egg|null $scriptFrom
  * @property Egg|null $configFrom
  */
@@ -267,7 +267,7 @@ class Egg extends Model
     /**
      * Gets nest associated with an egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Nest, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Nest, $this>
      */
     public function nest(): BelongsTo
     {
@@ -277,7 +277,7 @@ class Egg extends Model
     /**
      * Gets all servers associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
      */
     public function servers(): HasMany
     {
@@ -287,7 +287,7 @@ class Egg extends Model
     /**
      * Gets all variables associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\Pterodactyl\Models\EggVariable, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\EggVariable, $this>
      */
     public function variables(): HasMany
     {

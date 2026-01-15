@@ -1,10 +1,10 @@
 <?php
 
-namespace Pterodactyl\Services\Allocations;
+namespace App\Services\Allocations;
 
-use Pterodactyl\Models\Allocation;
-use Pterodactyl\Contracts\Repository\AllocationRepositoryInterface;
-use Pterodactyl\Exceptions\Service\Allocation\ServerUsingAllocationException;
+use App\Models\Allocation;
+use App\Contracts\Repository\AllocationRepositoryInterface;
+use App\Exceptions\Service\Allocation\ServerUsingAllocationException;
 
 class AllocationDeletionService
 {

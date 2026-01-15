@@ -1,16 +1,16 @@
 <?php
 
-namespace Pterodactyl\Services\Nodes;
+namespace App\Services\Nodes;
 
 use Illuminate\Support\Str;
-use Pterodactyl\Models\Node;
+use App\Models\Node;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Encryption\Encrypter;
-use Pterodactyl\Repositories\Eloquent\NodeRepository;
-use Pterodactyl\Repositories\Wings\DaemonConfigurationRepository;
-use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
-use Pterodactyl\Exceptions\Service\Node\ConfigurationNotPersistedException;
+use App\Repositories\Eloquent\NodeRepository;
+use App\Repositories\Wings\DaemonConfigurationRepository;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Service\Node\ConfigurationNotPersistedException;
 
 class NodeUpdateService
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Services\Helpers;
+namespace App\Services\Helpers;
 
 use Illuminate\Support\Arr;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Contracts\Filesystem\Filesystem;
-use Pterodactyl\Exceptions\ManifestDoesNotExistException;
+use App\Exceptions\ManifestDoesNotExistException;
 
 class AssetHashService
 {

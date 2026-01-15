@@ -1,15 +1,15 @@
 <?php
 
-namespace Pterodactyl\Tests\Integration\Services\Databases;
+namespace App\Tests\Integration\Services\Databases;
 
 use Mockery\MockInterface;
-use Pterodactyl\Models\Node;
-use Pterodactyl\Models\Database;
-use Pterodactyl\Models\DatabaseHost;
-use Pterodactyl\Tests\Integration\IntegrationTestCase;
-use Pterodactyl\Services\Databases\DatabaseManagementService;
-use Pterodactyl\Services\Databases\DeployServerDatabaseService;
-use Pterodactyl\Exceptions\Service\Database\NoSuitableDatabaseHostException;
+use App\Models\Node;
+use App\Models\Database;
+use App\Models\DatabaseHost;
+use App\Tests\Integration\IntegrationTestCase;
+use App\Services\Databases\DatabaseManagementService;
+use App\Services\Databases\DeployServerDatabaseService;
+use App\Exceptions\Service\Database\NoSuitableDatabaseHostException;
 
 class DeployServerDatabaseServiceTest extends IntegrationTestCase
 {

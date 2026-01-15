@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -71,7 +71,7 @@ class ServerTransfer extends Model
     /**
      * Gets the server associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
      */
     public function server(): BelongsTo
     {
@@ -81,7 +81,7 @@ class ServerTransfer extends Model
     /**
      * Gets the source node associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\Pterodactyl\Models\Node, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Node, $this>
      */
     public function oldNode(): HasOne
     {
@@ -91,7 +91,7 @@ class ServerTransfer extends Model
     /**
      * Gets the target node associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\Pterodactyl\Models\Node, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Node, $this>
      */
     public function newNode(): HasOne
     {

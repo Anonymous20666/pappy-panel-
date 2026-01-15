@@ -1,6 +1,6 @@
 <?php
 
-namespace Pterodactyl\Models;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,7 +23,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property \Carbon\CarbonImmutable $updated_at
  * @property \Carbon\CarbonImmutable|null $deleted_at
  * @property Server $server
- * @property \Pterodactyl\Models\AuditLog[] $audits
+ * @property \App\Models\AuditLog[] $audits
  */
 class Backup extends Model
 {
@@ -73,7 +73,7 @@ class Backup extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Pterodactyl\Models\Server, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
      */
     public function server(): BelongsTo
     {

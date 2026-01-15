@@ -1,12 +1,12 @@
 <?php
 
-namespace Pterodactyl\Tests\Integration\Api\Client\Server\Subuser;
+namespace App\Tests\Integration\Api\Client\Server\Subuser;
 
 use Mockery\MockInterface;
-use Pterodactyl\Models\User;
-use Pterodactyl\Models\Subuser;
-use Pterodactyl\Repositories\Wings\DaemonRevocationRepository;
-use Pterodactyl\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use App\Models\User;
+use App\Models\Subuser;
+use App\Repositories\Wings\DaemonRevocationRepository;
+use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class SubuserAuthorizationTest extends ClientApiIntegrationTestCase
 {

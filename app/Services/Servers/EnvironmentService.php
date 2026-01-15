@@ -1,9 +1,9 @@
 <?php
 
-namespace Pterodactyl\Services\Servers;
+namespace App\Services\Servers;
 
-use Pterodactyl\Models\Server;
-use Pterodactyl\Models\EggVariable;
+use App\Models\Server;
+use App\Models\EggVariable;
 
 class EnvironmentService
 {

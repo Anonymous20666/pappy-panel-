@@ -1,11 +1,11 @@
 <?php
 
-namespace Pterodactyl\Tests\Integration\Services\Users;
+namespace App\Tests\Integration\Services\Users;
 
-use Pterodactyl\Models\User;
-use Pterodactyl\Exceptions\DisplayException;
-use Pterodactyl\Services\Users\UserDeletionService;
-use Pterodactyl\Tests\Integration\IntegrationTestCase;
+use App\Models\User;
+use App\Exceptions\DisplayException;
+use App\Services\Users\UserDeletionService;
+use App\Tests\Integration\IntegrationTestCase;
 
 class UserDeletionServiceTest extends IntegrationTestCase
 {

@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <div class="checkbox checkbox-primary no-margin-bottom">
                                         <input id="pForceOutgoingIp" name="force_outgoing_ip" type="checkbox" value="1"
-                                            {{ \Pterodactyl\Helpers\Utilities::checked('force_outgoing_ip', 0) }} />
+                                            {{ \App\Helpers\Utilities::checked('force_outgoing_ip', 0) }} />
                                         <label for="pForceOutgoingIp" class="strong">Force Outgoing IP</label>
                                         <p class="text-muted small">
                                             Forces all outgoing network traffic to have its Source IP NATed to the IP of the

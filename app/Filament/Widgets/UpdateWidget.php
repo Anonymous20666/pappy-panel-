@@ -1,0 +1,72 @@
+<?php
+
+namespace App\Filament\Widgets;
+
+use App\Services\Helpers\SoftwareVersionService;
+use Filament\Actions\Action;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Widgets\Widget;
+
+class UpdateWidget extends Widget implements HasForms
+{
+    use InteractsWithForms;
+
+    protected static bool $isLazy = false;
+
+    protected string $view = 'filament.widgets.base-widget';
+
+    private SoftwareVersionService $softwareVersionService;
+
+    public function mount(SoftwareVersionService $softwareVersionService): void
+    {
+        $this->softwareVersionService = $softwareVersionService;
+    }
+
+    public function form(Schema $schema): Schema
+    {
+        $isLatest = $this->softwareVersionService->isLatestPanel();
+
+        return $schema->components([
+            $isLatest
+                ? Section::make(
+                    trans('admin/index.uptodate-header')
+                )
+                    ->icon('heroicon-o-check-circle')
+                    ->iconColor('success')
+                    ->schema([
+                        TextEntry::make('info')
+                            ->hiddenLabel()
+                            ->state(
+                                trans(
+                                    'admin/index.uptodate-body',
+                                    [
+                                        'version' => config('app.version'),
+                                    ]
+                                )
+                            ),
+                    ])
+
+                : Section::make(
+                    trans('admin/index.notuptodate-header')
+                )
+                    ->icon('heroicon-o-information-circle')
+                    ->iconColor('warning')
+                    ->schema([
+                        TextEntry::make('info')
+                            ->hiddenLabel()
+                            ->state(
+                                trans(
+                                    'admin/index.notuptodate-body',
+                                    [
+                                        'latest' => $this->softwareVersionService->getPanel(),
+                                    ]
+                                )
+                            ),
+                    ]),
+        ]);
+    }
+}

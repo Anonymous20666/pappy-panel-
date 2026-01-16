@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\LanguageMiddleware;
 use Filament\Http\Middleware\AuthenticateSession;
 use App\Filament\Pages\Dashboard;
 use Filament\Panel;
@@ -33,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 VerifyCsrfToken::class,
+                LanguageMiddleware::class,
             ])
             ->authMiddleware([
                 AdminAuthenticate::class,

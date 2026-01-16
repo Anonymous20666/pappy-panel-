@@ -14,4 +14,9 @@ class Dashboard extends BaseDashboard
     {
         return trans('admin/index.title');
     }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('admin/navigation.administration.dashboard');
+    }
 }

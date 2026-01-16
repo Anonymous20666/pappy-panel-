@@ -3,7 +3,7 @@
 return [
     'title' => 'Dashboard',
     'uptodate-header' => 'Tout est à jour',
-    'uptodate-body' => 'Vous utilisez la version <code>:version</code>. Tout est à jour!',
+    'uptodate-body' => 'Vous utilisez la version :version. Tout est à jour!',
     'notuptodate-header' => 'Le panel n\'est pas à jour!',
     'notuptodate-body' => '<code>:latest</code> est maintenant disponible! Allez lire notre documentation pour mettre à jour le panel.',
     'feedback-header' => 'Un avis?',

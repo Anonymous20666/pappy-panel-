@@ -3,9 +3,9 @@
 return [
     'title' => 'Dashboard',
     'uptodate-header' => 'Seu painel está atualizado',
-    'uptodate-body' => 'Você está usando <code>:version</code>. Seu painel está na última versão!',
+    'uptodate-body' => 'Você está usando :version. Seu painel está na última versão!',
     'notuptodate-header' => 'Seu painel não está atualizado',
-    'notuptodate-body' => '<code>:latest</code> já está disponível! Leia nossa documentação para atualizar seu Painel.',
+    'notuptodate-body' => ':latest já está disponível! Leia nossa documentação para atualizar seu Painel.',
     'feedback-header' => 'Está gostando do painel?',
     'feedback-body' => 'Se você está gostando dos recursos e da facilidade de uso do Reviactyl, conte para conosco! Seu feedback nos ajuda a melhorar e criar ferramentas ainda mais incríveis para você.',
     'feedback-btn' => 'Criar Issue',

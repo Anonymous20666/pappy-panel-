@@ -11,6 +11,7 @@ use App\Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Session\Middleware\StartSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -25,6 +26,13 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(config('app.favicon', '/favicons/favicon.ico'))
             ->colors([
                 'primary' => Color::Blue,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make(fn () => trans('admin/navigation.administration.title'))
+                    ->collapsible(false),
+                NavigationGroup::make(fn () => trans('admin/navigation.management.title'))
+                    ->collapsible(false),
+                NavigationGroup::make(fn () => trans('admin/navigation.service.title')),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

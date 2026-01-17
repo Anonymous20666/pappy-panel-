@@ -2,7 +2,8 @@
 # Build the assets that are needed for the frontend. This build stage is then discarded
 # since we won't need NodeJS anymore in the future. This Docker image ships a final production
 # level distribution of Reviactyl.
-FROM --platform=$TARGETOS/$TARGETARCH node:22-alpine
+# Use BUILDPLATFORM to run Node.js natively (avoids QEMU emulation issues)
+FROM --platform=$BUILDPLATFORM node:22-alpine
 WORKDIR /app
 COPY . ./
 RUN yarn install --frozen-lockfile \

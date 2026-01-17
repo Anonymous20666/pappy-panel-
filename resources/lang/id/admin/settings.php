@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'Pengaturan',
-        'general-title' => 'Pengaturan Umum',
+        'general-title' => 'General',
         'app-name' => 'Nama Aplikasi',
         'app-logo' => 'Logo Aplikasi',
         'app-icon' => 'Ikon Aplikasi',
@@ -17,8 +17,12 @@ return [
         'disabled' => 'Nonaktif',
         'save-btn' => 'Simpan',
     ],
+    'security' => [
+        'title' => 'Security',
+        'provider' => 'Captcha Provider',
+    ],
     'mail' => [
-        'title' => 'Pengaturan Email',
+        'title' => 'Mail',
         'email-title' => 'Pengaturan Email',
         'smtp-alert' => 'Antarmuka ini terbatas pada instance yang menggunakan SMTP sebagai driver email. Silakan gunakan perintah <code>php artisan p:environment:mail</code> untuk memperbarui pengaturan email Anda, atau atur <code>MAIL_DRIVER=smtp</code> di file environment Anda.',
         'host-label' => 'Host SMTP',
@@ -32,7 +36,7 @@ return [
         'save-btn' => 'Simpan',
     ],
     'advanced' => [
-        'title' => 'Pengaturan Lanjutan',
+        'title' => 'Advanced',
         'status-label' => 'Status',
         'enabled' => 'Aktif',
         'disabled' => 'Nonaktif',

@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'Configuración',
-        'general-title' => 'Configuración General',
+        'general-title' => 'General',
         'app-name' => 'Nombre de la App',
         'app-logo' => 'Logo de la App',
         'app-icon' => 'Favicon de la App',
@@ -17,8 +17,12 @@ return [
         'disabled' => 'Deshabilitado',
         'save-btn' => 'Guardar',
     ],
+    'security' => [
+        'title' => 'Security',
+        'provider' => 'Captcha Provider',
+    ],
     'mail' => [
-        'title' => 'Configuración de Correo',
+        'title' => 'Mail',
         'email-title' => 'Configuración de Email',
         'smtp-alert' => 'Esta interfaz está limitada a las instancias que usan SMTP como controlador de correo. Use el comando <code>php artisan p:environment:mail</code> para actualizar su configuración de correo, o configure <code>MAIL_DRIVER=smtp</code> en su archivo de entorno.',
         'host-label' => 'Host SMTP',
@@ -32,7 +36,7 @@ return [
         'save-btn' => 'Guardar',
     ],
     'advanced' => [
-        'title' => 'Configuración Avanzada',
+        'title' => 'Advanced',
         'status-label' => 'Estado',
         'enabled' => 'Habilitado',
         'disabled' => 'Deshabilitado',

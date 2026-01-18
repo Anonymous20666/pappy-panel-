@@ -7,11 +7,17 @@ return [
     'memo' => 'नोट',
     'last-used' => 'अंतिम उपयोग',
     'created' => 'निर्माण तिथि',
+    'never-used' => 'Never Used',
+
+    'revoke' => 'Revoke',
+    'revoke-title' => 'Revoke API Key',
+    'revoke-warning' => 'Once this API key is revoked any applications currently using it will stop working.',
+    'revoked' => 'API Key has been revoked.',
 
     'permissions' => 'अनुमतियाँ चुनें',
     'read-only' => 'केवल पढ़ें',
-    'read-write' => 'पढ़ें और लिखें',
-    'none' => 'कोई नहीं',
+    'read-write' => 'Read & Write',
+    'none' => 'None',
 
     'description' => 'विवरण',
     'info' => 'एक बार जब आप अनुमतियाँ असाइन कर देते हैं और इस क्रेडेंशियल्स सेट को बना लेते हैं, तो आप इसे वापस आकर संपादित नहीं कर पाएंगे। यदि भविष्य में बदलाव करने की आवश्यकता हो, तो आपको नया क्रेडेंशियल्स सेट बनाना होगा।',

@@ -22,6 +22,7 @@ import { LocaleLoader } from '@/reviactyl/ui/LanguageSwitcher';
 const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
+const PublicServerStatus = lazy(() => import(/* webpackChunkName: "public-status" */ '@/components/public/PublicServerStatus'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -91,6 +92,11 @@ const App = () => {
                                     </ServerContext.Provider>
                                 </Spinner.Suspense>
                             </AuthenticatedRoute>
+                            <Route path={'/status/:id'}>
+                                <Spinner.Suspense>
+                                    <PublicServerStatus />
+                                </Spinner.Suspense>
+                            </Route>
                             <AuthenticatedRoute path={'/'}>
                                 <Spinner.Suspense>
                                     <DashboardRouter />

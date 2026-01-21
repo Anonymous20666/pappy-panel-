@@ -19,5 +19,8 @@ Route::get('/locales/list.json', [Base\LocaleController::class, 'list'])
 Route::get('/manifest.json', [Base\PwaManifestController::class, 'index'])
     ->withoutMiddleware(['auth', RequireTwoFactorAuthentication::class]);
 
+Route::get('/status/{server}', [Base\IndexController::class, 'index'])
+    ->withoutMiddleware(['auth', 'auth.session', RequireTwoFactorAuthentication::class]);
+
 Route::get('/{react}', [Base\IndexController::class, 'index'])
     ->where('react', '^(?!(\/)?(api|auth|admin|daemon)).+');

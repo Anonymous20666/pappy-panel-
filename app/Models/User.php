@@ -114,6 +114,14 @@ class User extends Model implements
     protected $table = 'users';
 
     /**
+     * Use the ID as the route key name instead of the random UUID.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'id';
+    }
+
+    /**
      * A list of mass-assignable variables.
      */
     protected $fillable = [

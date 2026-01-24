@@ -16,7 +16,7 @@ return [
         'files' => '文件管理',
         'startup' => '启动',
         'network' => '网络',
-        'metrics' => 'Metrics',
+        'metrics' => '指标',
         'databases' => '数据库',
         'schedules' => '定时任务',
         'backups' => '备份',

@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => '设置',
-        'general-title' => 'General',
+        'general-title' => '常规',
         'app-name' => '应用名称',
         'app-logo' => '应用标志',
         'app-icon' => '应用图标',
@@ -18,11 +18,11 @@ return [
         'save-btn' => '保存',
     ],
     'security' => [
-        'title' => 'Security',
-        'provider' => 'Captcha Provider',
+        'title' => '安全',
+        'provider' => '验证提供方',
     ],
     'mail' => [
-        'title' => 'Mail',
+        'title' => '邮件',
         'email-title' => '电子邮件设置',
         'smtp-alert' => '此界面仅限于使用 SMTP 作为邮件驱动程序的实例。请使用 <code>php artisan p:environment:mail</code> 命令更新您的电子邮件设置，或在环境文件中设置 <code>MAIL_DRIVER=smtp</code>。',
         'host-label' => 'SMTP 主机',
@@ -36,7 +36,7 @@ return [
         'save-btn' => '保存',
     ],
     'advanced' => [
-        'title' => 'Advanced',
+        'title' => '高级',
         'status-label' => '状态',
         'enabled' => '已启用',
         'disabled' => '已禁用',

@@ -3,9 +3,9 @@
 return [
     'title' => 'Panel de control',
     'uptodate-header' => 'Tu panel está actualizado',
-    'uptodate-body' => 'You are currently using :version. Your panel is up-to-date!',
+    'uptodate-body' => 'Actualmente estás utilizando :version. ¡Tu panel está actualizado!',
     'notuptodate-header' => 'Tu panel no está actualizado',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
+    'notuptodate-body' => '¡Ya disponible una :latest actualización! Lea nuestra documentación para actualizar su Panel.',
     'feedback-header' => '¿Algún comentario?',
     'feedback-body' => 'Si has disfrutado de las funciones y la facilidad de uso que ofrece Reviactyl, ¡cuéntanoslo! Tus comentarios nos ayudan a mejorar y a crear herramientas aún más increíbles para ti.',
     'feedback-btn' => 'Crear incidencia',

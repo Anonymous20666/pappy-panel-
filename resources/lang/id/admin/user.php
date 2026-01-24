@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'User',
+    'title' => 'Pengguna',
     'exceptions' => [
         'delete_self' => 'Anda tidak dapat menghapus akun Anda sendiri.',
         'user_has_servers' => 'Tidak dapat menghapus pengguna dengan server aktif yang terhubung ke akun mereka. Harap hapus server mereka sebelum melanjutkan.',
@@ -11,18 +11,18 @@ return [
         'account_updated' => 'Akun telah berhasil diperbarui.',
     ],
     'details' => [
-        'account_details' => 'Account Details',
-        'external_id' => 'External ID',
+        'account_details' => 'Detail Akun',
+        'external_id' => 'ID Eksternal',
         'username' => 'Username',
-        'email' => 'Email Address',
-        'first_name' => 'First Name',
-        'last_name' => 'Last Name',
-        'language' => 'Language',
-        'password' => 'Password',
-        'password_confirmation' => 'Confirm Password',
-        'root_admin' => 'Root Administrator',
-        'root_admin_desc' => 'This user will have full access to all servers and settings on the system.',
-        'privileges' => 'Privileges',
-        'admin_status' => 'Admin Status',
+        'email' => 'Alamat Email',
+        'first_name' => 'Nama Depan',
+        'last_name' => 'Nama Belakang',
+        'language' => 'Bahasa',
+        'password' => 'Kata Sandi',
+        'password_confirmation' => 'Konfirmasi Kata Sandi',
+        'root_admin' => 'Administrator',
+        'root_admin_desc' => 'Pengguna ini akan memiliki akses penuh ke semua server dan pengaturan pada sistem.',
+        'privileges' => 'Hak Akses',
+        'admin_status' => 'Status Admin',
     ],
 ];

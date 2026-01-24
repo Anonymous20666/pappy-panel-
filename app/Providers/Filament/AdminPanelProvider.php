@@ -5,12 +5,19 @@ namespace App\Providers\Filament;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\LanguageMiddleware;
 use Filament\Http\Middleware\AuthenticateSession;
 use App\Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationGroup;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -25,6 +32,14 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Blue,
             ])
+            ->breadcrumbs(false)
+            ->navigationGroups([
+                NavigationGroup::make(fn () => trans('admin/navigation.administration.title'))
+                    ->collapsible(false),
+                NavigationGroup::make(fn () => trans('admin/navigation.management.title'))
+                    ->collapsible(false),
+                NavigationGroup::make(fn () => trans('admin/navigation.service.title')),
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
@@ -33,6 +48,12 @@ class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 VerifyCsrfToken::class,
+                AddQueuedCookiesToResponse::class,
+                ShareErrorsFromSession::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+                LanguageMiddleware::class,
             ])
             ->authMiddleware([
                 AdminAuthenticate::class,

@@ -74,6 +74,12 @@ export default () => {
                                 </code>
                             </div>
                         </CopyOnClick>
+                        <div css={tw`mt-6`}>
+                            <Label>Public Status Page</Label>
+                            <CopyOnClick text={`${window.location.origin}/status/${uuid}`}>
+                                <Input type={'text'} value={`${window.location.origin}/status/${uuid}`} readOnly />
+                            </CopyOnClick>
+                        </div>
                     </TitledGreyBox>
                 </div>
                 <div css={tw`w-full mt-6 md:flex-1 md:mt-0`}>
@@ -87,6 +93,6 @@ export default () => {
                     </Can>
                 </div>
             </div>
-        </ServerContentBlock>
+        </ServerContentBlock >
     );
 };

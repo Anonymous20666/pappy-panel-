@@ -3,9 +3,9 @@
 return [
     'title' => '仪表板',
     'uptodate-header' => '您的面板已是最新版本',
-    'uptodate-body' => 'You are currently using :version. Your panel is up-to-date!',
+    'uptodate-body' => '您当前使用的是:version。您的面板已是最新版本！',
     'notuptodate-header' => '你的面板不是最新版本',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
+    'notuptodate-body' => '最新版本 :latest 已发布！请阅读我们的文档以更新你的面板。',
     'feedback-header' => '有什么反馈吗？',
     'feedback-body' => '如果你喜欢 Reviactyl 提供的功能和易用性，请告诉我们！你的反馈能帮助我们改进，并为你打造更多更棒的工具。',
     'feedback-btn' => '创建问题',

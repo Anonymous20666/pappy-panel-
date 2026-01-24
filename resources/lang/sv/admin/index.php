@@ -3,9 +3,9 @@
 return [
     'title' => 'Instrumentpanel',
     'uptodate-header' => 'Din panel är uppdaterad',
-    'uptodate-body' => 'You are currently using :version. Your panel is up-to-date!',
+    'uptodate-body' => 'Du använder för närvarande :version. Din panel är uppdaterad!',
     'notuptodate-header' => 'Din panel är inte uppdaterad',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
+    'notuptodate-body' => ':latest är nu tillgänglig! Läs vår dokumentation för att uppdatera din panel.',
     'feedback-header' => 'Någon feedback?',
     'feedback-body' => 'Om du har uppskattat funktionerna och användarvänligheten som Reviactyl erbjuder, låt oss veta! Din feedback hjälper oss att förbättra och skapa ännu bättre verktyg för dig.',
     'feedback-btn' => 'Skapa ärende',

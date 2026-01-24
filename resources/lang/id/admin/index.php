@@ -3,9 +3,9 @@
 return [
     'title' => 'Dashboard',
     'uptodate-header' => 'Panel Anda sudah terbaru',
-    'uptodate-body' => 'You are currently using :version. Your panel is up-to-date!',
+    'uptodate-body' => 'Anda saat ini menggunakan :version. Panel Anda sudah yang terbaru!',
     'notuptodate-header' => 'Panel Anda belum terbaru',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
+    'notuptodate-body' => ':latest sekarang tersedia! Baca dokumentasi kami untuk memperbarui Panel Anda.',
     'feedback-header' => 'Ada Masukan?',
     'feedback-body' => 'Jika Anda menikmati fitur dan kemudahan penggunaan yang dibawa oleh Reviactyl, beri tahu kami! Masukan Anda membantu kami meningkatkan dan membuat alat yang lebih hebat lagi untuk Anda.',
     'feedback-btn' => 'Buat Isu',

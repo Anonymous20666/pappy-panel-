@@ -9,15 +9,13 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Widgets\Widget;
+use App\Filament\Widgets\BaseWidget;
 
-class UpdateWidget extends Widget implements HasForms
+class UpdateWidget extends BaseWidget
 {
-    use InteractsWithForms;
+    protected int|string|array $columnSpan = 2;
 
-    protected static bool $isLazy = false;
-
-    protected string $view = 'filament.widgets.base-widget';
+    protected static ?int $sort = 1;
 
     private SoftwareVersionService $softwareVersionService;
 

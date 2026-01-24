@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'सेटिंग्स',
-        'general-title' => 'सामान्य सेटिंग्स',
+        'general-title' => 'General',
         'app-name' => 'ऐप का नाम',
         'app-logo' => 'ऐप लोगो',
         'app-icon' => 'ऐप फ़ेविकॉन',
@@ -17,8 +17,12 @@ return [
         'disabled' => 'अक्षम',
         'save-btn' => 'सहेजें',
     ],
+    'security' => [
+        'title' => 'Security',
+        'provider' => 'Captcha Provider',
+    ],
     'mail' => [
-        'title' => 'मेल सेटिंग्स',
+        'title' => 'Mail',
         'email-title' => 'ईमेल सेटिंग्स',
         'smtp-alert' => 'यह इंटरफ़ेस केवल उन इंस्टेंस के लिए उपलब्ध है जो SMTP को मेल ड्राइवर के रूप में उपयोग करते हैं। कृपया अपनी ईमेल सेटिंग्स अपडेट करने के लिए <code>php artisan p:environment:mail</code> कमांड का उपयोग करें, या अपनी एनवायरनमेंट फ़ाइल में <code>MAIL_DRIVER=smtp</code> सेट करें।',
         'host-label' => 'SMTP होस्ट',
@@ -32,7 +36,7 @@ return [
         'save-btn' => 'सहेजें',
     ],
     'advanced' => [
-        'title' => 'उन्नत सेटिंग्स',
+        'title' => 'Advanced',
         'status-label' => 'स्थिति',
         'enabled' => 'सक्रिय',
         'disabled' => 'अक्षम',

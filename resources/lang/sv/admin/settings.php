@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'Inställningar',
-        'general-title' => 'Allmänna Inställningar',
+        'general-title' => 'General',
         'app-name' => 'Appnamn',
         'app-logo' => 'Appens Logotyp',
         'app-icon' => 'Appens Favicon',
@@ -17,8 +17,12 @@ return [
         'disabled' => 'Inaktiverad',
         'save-btn' => 'Spara',
     ],
+    'security' => [
+        'title' => 'Security',
+        'provider' => 'Captcha Provider',
+    ],
     'mail' => [
-        'title' => 'Mailinställningar',
+        'title' => 'Mail',
         'email-title' => 'E-postinställningar',
         'smtp-alert' => 'Detta gränssnitt är begränsat till instanser som använder SMTP som maildrivrutin. Använd kommandot <code>php artisan p:environment:mail</code> för att uppdatera dina e-postinställningar, eller ställ in <code>MAIL_DRIVER=smtp</code> i din miljöfil.',
         'host-label' => 'SMTP-värd',
@@ -32,7 +36,7 @@ return [
         'save-btn' => 'Spara',
     ],
     'advanced' => [
-        'title' => 'Avancerade Inställningar',
+        'title' => 'Advanced',
         'status-label' => 'Status',
         'enabled' => 'Aktiverad',
         'disabled' => 'Inaktiverad',

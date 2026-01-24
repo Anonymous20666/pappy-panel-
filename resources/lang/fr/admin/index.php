@@ -5,7 +5,7 @@ return [
     'uptodate-header' => 'Tout est à jour',
     'uptodate-body' => 'Vous utilisez la version :version. Tout est à jour!',
     'notuptodate-header' => 'Le panel n\'est pas à jour!',
-    'notuptodate-body' => '<code>:latest</code> est maintenant disponible! Allez lire notre documentation pour mettre à jour le panel.',
+    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
     'feedback-header' => 'Un avis?',
     'feedback-body' => 'Si vous appréciez les fonctionnalités et la facilité d\'utilisation de Reviactyl, faites-le-nous savoir ! Vos commentaires nous aident à améliorer et à créer des outils encore plus performants pour vous.',
     'feedback-btn' => 'Faire un retour',

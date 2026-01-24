@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'Paramètres',
-        'general-title' => 'Paramètres Généraux',
+        'general-title' => 'General',
         'app-name' => 'Nom de l\'application',
         'app-logo' => 'Logo de l\'application',
         'app-icon' => 'Icône de l\'application',
@@ -17,8 +17,12 @@ return [
         'disabled' => 'Désactivé',
         'save-btn' => 'Sauvegarder',
     ],
+    'security' => [
+        'title' => 'Security',
+        'provider' => 'Captcha Provider',
+    ],
     'mail' => [
-        'title' => 'Paramètres de messagerie',
+        'title' => 'Mail',
         'email-title' => 'Paramètres des emails',
         'smtp-alert' => 'Cette interface est limitée aux instances utilisant SMTP comme pilote de messagerie. Veuillez utiliser la commande <code>php artisan p:environment:mail</code> pour mettre à jour vos paramètres de messagerie, ou définir <code>MAIL_DRIVER=smtp</code> dans votre fichier d\'environnement.',
         'host-label' => 'Fournisseur SMTP',
@@ -32,7 +36,7 @@ return [
         'save-btn' => 'Sauvegarder',
     ],
     'advanced' => [
-        'title' => 'Paramètres avancés',
+        'title' => 'Advanced',
         'status-label' => 'Statut',
         'enabled' => 'Activé',
         'disabled' => 'Désactivé',

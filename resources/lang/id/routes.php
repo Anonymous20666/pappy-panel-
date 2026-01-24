@@ -16,6 +16,7 @@ return [
         'files' => 'File',
         'startup' => 'Startup',
         'network' => 'Jaringan',
+        'metrics' => 'Metrics',
         'databases' => 'Database',
         'schedules' => 'Jadwal',
         'backups' => 'Backup',

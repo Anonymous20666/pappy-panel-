@@ -56,4 +56,7 @@ return [
     'api' => [
         'resource_not_found' => '请求的资源在此服务器上不存在。',
     ],
+    'social' => [
+        'unlink_only_login' => 'You cannot unlink your only login method without setting a password first.',
+    ],
 ];

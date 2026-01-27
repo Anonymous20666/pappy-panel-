@@ -13,6 +13,14 @@ return [
     'login-button' => 'Connexion',
     'return' => 'Retourner à la connexion',
 
+    'social' => [
+        'or' => 'OR',
+        'google' => 'Google',
+        'discord' => 'Discord',
+        'github' => 'GitHub',
+        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+    ],
+
     'forgot-password' => [
         'title' => 'Demander une réinitialisation de mot de passe',
         'label' => 'Mot de passe oublié?',

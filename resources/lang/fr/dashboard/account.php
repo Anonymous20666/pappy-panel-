@@ -17,7 +17,29 @@ return [
         'smart-invert' => 'Thême négatif',
         'on' => 'Désactivé',
         'off' => 'Activé',
-        'loading' => 'Chargement...'
+        'loading' => 'Chargement...',
+        'social' => [
+            'title' => 'Social Logins',
+            'date_format' => 'MMM do, yyyy',
+            'unlink' => [
+                'title' => 'Unlink Account',
+                'confirm' => 'Are you sure you want to unlink your :provider account? You will no longer be able to use it to log in.',
+                'button' => 'Unlink',
+            ],
+            'status' => [
+                'connected' => 'Connected (Updated: :date)',
+                'not-connected' => 'Not Connected',
+            ],
+            'actions' => [
+                'link' => 'Link',
+                'unlink' => 'Unlink',
+            ],
+            'messages' => [
+                'load-failed' => 'Failed to load social logins.',
+                'unlinked' => 'Account unlinked successfully.',
+                'unlink-failed' => 'Failed to unlink account.',
+            ],
+        ],
     ],
     'email' => [
         'password-required' => 'Vous devez fournir le mot de passe de votre compte actuel. Mettre à jour l\'adresse mail.',

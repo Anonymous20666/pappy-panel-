@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'home' => 'Home',
     'administration' => [
         'title' => '管理',
         'dashboard' => '仪表板',

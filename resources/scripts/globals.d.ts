@@ -13,7 +13,6 @@ interface Window {
         use_totp: boolean;
     };
     SiteConfiguration?: Record<string, any>;
-    ReviactylConfiguration?: Record<string, any>;
     SocialLoginConfiguration?: {
         google: boolean;
         discord: boolean;

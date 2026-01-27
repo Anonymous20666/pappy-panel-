@@ -13,6 +13,14 @@ return [
     'login-button' => '登录',
     'return' => '返回登录',
 
+    'social' => [
+        'or' => 'OR',
+        'google' => 'Google',
+        'discord' => 'Discord',
+        'github' => 'GitHub',
+        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+    ],
+
     'forgot-password' => [
         'title' => '请求重置密码',
         'label' => '忘记密码？',

@@ -56,4 +56,7 @@ return [
     'api' => [
         'resource_not_found' => 'Sumber daya yang diminta tidak ada di server ini.',
     ],
+    'social' => [
+        'unlink_only_login' => 'You cannot unlink your only login method without setting a password first.',
+    ],
 ];

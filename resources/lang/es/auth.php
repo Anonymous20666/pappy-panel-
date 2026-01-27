@@ -13,6 +13,14 @@ return [
     'login-button' => 'Iniciar sesión',
     'return' => 'Volver al inicio de sesión',
 
+    'social' => [
+        'or' => 'OR',
+        'google' => 'Google',
+        'discord' => 'Discord',
+        'github' => 'GitHub',
+        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+    ],
+
     'forgot-password' => [
         'title' => 'Solicitar restablecimiento de contraseña',
         'label' => '¿Olvidaste tu contraseña?',

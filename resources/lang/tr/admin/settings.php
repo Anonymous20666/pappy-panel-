@@ -51,4 +51,13 @@ return [
         'ending-label' => 'Bitiş Portu',
         'save-btn' => 'Kaydet',
     ],
+    'social' => [
+        'title' => 'Social Login',
+        'subtitle' => 'Configure social login providers.',
+        'enabled' => 'Enabled',
+        'client-id' => 'Client ID',
+        'client-secret' => 'Client Secret',
+        'save-btn' => 'Save Settings',
+        'success' => 'Social login settings have been updated successfully.',
+    ],
 ];

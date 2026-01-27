@@ -64,6 +64,21 @@ SOFTWARE.
                 window.ReviactylConfiguration = {!! json_encode($reviactylConfiguration) !!};
             </script>
         @endif
+        <script>
+            window.SessionFlashes = {
+                error: "{{ session('error') }}",
+                success: "{{ session('success') }}",
+                info: "{{ session('info') }}",
+                warning: "{{ session('warning') }}",
+            };
+        </script>
+        <script>
+            window.SocialLoginConfiguration = {!! json_encode([
+                'google' => config('pterodactyl.auth.google_enabled'),
+                'discord' => config('pterodactyl.auth.discord_enabled'),
+                'github' => config('pterodactyl.auth.github_enabled'),
+            ]) !!};
+        </script>
     @show
     @php
         function reviactyl($hex)

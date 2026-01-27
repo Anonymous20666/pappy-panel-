@@ -26,11 +26,32 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const [token, setToken] = useState('');
     const [show, setShow] = useState(false);
 
-    const { clearFlashes, clearAndAddHttpError } = useFlash();
+    const { clearFlashes, clearAndAddHttpError, addFlash } = useFlash();
     const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
+
+    const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
 
     useEffect(() => {
         clearFlashes();
+
+        // @ts-expect-error this is valid
+        const sessionFlashes = window.SessionFlashes;
+        if (sessionFlashes) {
+            if (sessionFlashes.error) {
+                addFlash({ type: 'error', title: 'Error', message: sessionFlashes.error });
+            }
+            if (sessionFlashes.success) {
+                addFlash({ type: 'success', title: 'Success', message: sessionFlashes.success });
+            }
+            if (sessionFlashes.info) {
+                addFlash({ type: 'info', title: 'Info', message: sessionFlashes.info });
+            }
+            if (sessionFlashes.warning) {
+                addFlash({ type: 'warning', title: 'Warning', message: sessionFlashes.warning });
+            }
+            // @ts-expect-error this is valid
+            window.SessionFlashes = undefined;
+        }
     }, []);
 
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
@@ -115,6 +136,38 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         <Button css={tw`w-full !py-3`} type={'submit'} disabled={isSubmitting}>
                             {t('login-button')}
                         </Button>
+                    </div>
+
+                    <div css={tw`mt-4 grid grid-cols-1 gap-2`}>
+                        <div css={tw`relative flex py-2 items-center`}>
+                            <div css={tw`flex-grow border-t border-gray-600`}></div>
+                            <span css={tw`flex-shrink mx-4 text-gray-400 text-xs`}>{t('social.or')}</span>
+                            <div css={tw`flex-grow border-t border-gray-600`}></div>
+                        </div>
+                        {socialSettings.google && (
+                            <a
+                                href={'/auth/login/google'}
+                                css={tw`w-full text-center p-2 rounded bg-red-600 text-gray-50 hover:bg-red-700 transition-colors duration-150 font-bold text-sm`}
+                            >
+                                {t('social.google')}
+                            </a>
+                        )}
+                        {socialSettings.discord && (
+                            <a
+                                href={'/auth/login/discord'}
+                                css={tw`w-full text-center p-2 rounded bg-indigo-600 text-gray-50 hover:bg-indigo-700 transition-colors duration-150 font-bold text-sm`}
+                            >
+                                {t('social.discord')}
+                            </a>
+                        )}
+                        {socialSettings.github && (
+                            <a
+                                href={'/auth/login/github'}
+                                css={tw`w-full text-center p-2 rounded bg-gray-700 text-gray-50 hover:bg-gray-800 transition-colors duration-150 font-bold text-sm`}
+                            >
+                                {t('social.github')}
+                            </a>
+                        )}
                     </div>
                     {provider === 'recaptcha' && (
                         <Reaptcha

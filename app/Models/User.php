@@ -97,6 +97,11 @@ class User extends Model implements
     public const USER_LEVEL_USER = 0;
     public const USER_LEVEL_ADMIN = 1;
 
+    public function socialLogins(): HasMany
+    {
+        return $this->hasMany(SocialLogin::class);
+    }
+
     /**
      * The resource name for this model when it is transformed into an
      * API representation using fractal.

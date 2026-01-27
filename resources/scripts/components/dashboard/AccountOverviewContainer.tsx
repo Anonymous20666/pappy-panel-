@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import UpdatePasswordForm from '@/components/dashboard/forms/UpdatePasswordForm';
 import UpdateEmailAddressForm from '@/components/dashboard/forms/UpdateEmailAddressForm';
 import ConfigureTwoFactorForm from '@/components/dashboard/forms/ConfigureTwoFactorForm';
@@ -22,6 +22,10 @@ import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from '@/reviactyl/ui/LanguageSwitcher';
 import { InvertToggle } from '@/reviactyl/ui/SmartInvert';
+import useFlash from '@/plugins/useFlash';
+import FlashMessageRender from '@/components/FlashMessageRender';
+
+import SocialLoginsContainer from '@/components/dashboard/forms/SocialLoginsContainer';
 
 const Container = styled.div`
     ${tw`flex flex-wrap`};
@@ -48,6 +52,31 @@ export default () => {
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const themeSelector = useStoreState((state) => state.reviactyl.data!.themeSelector);
+    const { addFlash, clearFlashes } = useFlash();
+    
+    useEffect(() => {
+        clearFlashes();
+
+        // @ts-expect-error this is valid
+        const sessionFlashes = window.SessionFlashes;
+        if (sessionFlashes) {
+            if (sessionFlashes.error) {
+                addFlash({ type: 'error', title: 'Error', message: sessionFlashes.error });
+            }
+            if (sessionFlashes.success) {
+                addFlash({ type: 'success', title: 'Success', message: sessionFlashes.success });
+            }
+            if (sessionFlashes.info) {
+                addFlash({ type: 'info', title: 'Info', message: sessionFlashes.info });
+            }
+            if (sessionFlashes.warning) {
+                addFlash({ type: 'warning', title: 'Warning', message: sessionFlashes.warning });
+            }
+            // @ts-expect-error this is valid
+            window.SessionFlashes = undefined;
+        }
+    }, []);
+
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
@@ -58,6 +87,7 @@ export default () => {
 
     return (
         <ContentBlock title={t('overview.account-overview')}>
+            <FlashMessageRender css={tw`mb-4`} />
             {state?.twoFactorRedirect && (
                 <MessageBox title={t('overview.2fa-required')} type={'error'}>
                     {t('overview.2fa-alert')}
@@ -104,6 +134,7 @@ export default () => {
                     )}
                 </div>
                 <div className={'flex flex-col gap-4'}>
+                    <SocialLoginsContainer />
                     <TitledGreyBox title={t('overview.update-password')} showFlashes={'account:password'}>
                         <UpdatePasswordForm />
                     </TitledGreyBox>

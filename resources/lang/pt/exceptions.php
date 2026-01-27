@@ -56,4 +56,7 @@ return [
     'api' => [
         'resource_not_found' => 'O recurso solicitado não existe neste servidor.',
     ],
+    'social' => [
+        'unlink_only_login' => 'You cannot unlink your only login method without setting a password first.',
+    ],
 ];

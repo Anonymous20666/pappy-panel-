@@ -36,6 +36,15 @@ class SettingsServiceProvider extends ServiceProvider
         'pterodactyl:client_features:allocations:enabled',
         'pterodactyl:client_features:allocations:range_start',
         'pterodactyl:client_features:allocations:range_end',
+        'pterodactyl:auth:google_enabled',
+        'pterodactyl:auth:google_client_id',
+        'pterodactyl:auth:google_client_secret',
+        'pterodactyl:auth:discord_enabled',
+        'pterodactyl:auth:discord_client_id',
+        'pterodactyl:auth:discord_client_secret',
+        'pterodactyl:auth:github_enabled',
+        'pterodactyl:auth:github_client_id',
+        'pterodactyl:auth:github_client_secret',
     ];
 
     /**
@@ -58,6 +67,9 @@ class SettingsServiceProvider extends ServiceProvider
      */
     protected static array $encrypted = [
         'mail:mailers:smtp:password',
+        'pterodactyl:auth:google_client_secret',
+        'pterodactyl:auth:discord_client_secret',
+        'pterodactyl:auth:github_client_secret',
     ];
 
     /**

@@ -34,6 +34,9 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
 
     Route::get('/activity', Client\ActivityLogController::class)->name('api:client.account.activity');
 
+    Route::get('/social-logins', [Client\SocialLoginController::class, 'index'])->name('api:client.account.social-logins');
+    Route::delete('/social-logins/{provider}', [Client\SocialLoginController::class, 'delete'])->name('api:client.account.social-logins.delete');
+
     Route::get('/api-keys', [Client\ApiKeyController::class, 'index']);
     Route::post('/api-keys', [Client\ApiKeyController::class, 'store']);
     Route::delete('/api-keys/{identifier}', [Client\ApiKeyController::class, 'delete']);

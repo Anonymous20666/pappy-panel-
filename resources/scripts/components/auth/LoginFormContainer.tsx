@@ -27,9 +27,9 @@ export default forwardRef<HTMLFormElement, Props>(({ title, ...props }, ref) => 
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     return (
         <Container>
-            <FlashMessageRender css={tw`mb-2 px-1`} />
             <Form {...props} ref={ref}>
                 <CardContainer>
+                    <FlashMessageRender css={tw`mb-2`} />
                     <LogoContainer>
                         <img src={logo} alt={name} css={tw`h-[3rem]`} />
                     </LogoContainer>

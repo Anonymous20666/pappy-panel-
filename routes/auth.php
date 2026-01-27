@@ -18,6 +18,14 @@ Route::get('/login', [Auth\LoginController::class, 'index'])->name('auth.login')
 Route::get('/password', [Auth\LoginController::class, 'index'])->name('auth.forgot-password');
 Route::get('/password/reset/{token}', [Auth\LoginController::class, 'index'])->name('auth.reset');
 
+// Social Login Routes
+Route::get('/login/{provider}', [Auth\SocialLoginController::class, 'redirect'])
+    ->withoutMiddleware('guest')
+    ->name('auth.social.redirect');
+Route::get('/login/{provider}/callback', [Auth\SocialLoginController::class, 'callback'])
+    ->withoutMiddleware('guest')
+    ->name('auth.social.callback');
+
 // Apply a throttle to authentication action endpoints, in addition to the
 // recaptcha endpoints to slow down manual attack spammers even more. 🤷‍
 //

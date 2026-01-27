@@ -39,7 +39,6 @@ export default () => {
     const [loading, setLoading] = useState(true);
     const [unlinkProvider, setUnlinkProvider] = useState<string | null>(null);
 
-    // @ts-ignore
     const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
     const enabledProviders = Object.keys(socialSettings).filter(k => socialSettings[k as keyof typeof socialSettings]);
 

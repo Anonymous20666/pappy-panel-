@@ -5,7 +5,8 @@
 </p>
 
 # Reviactyl Panel
-[![Crowdin](https://badges.crowdin.net/reviactyl/localized.svg)](https://crowdin.com/project/reviactyl) ![GitHub Release](https://img.shields.io/github/v/release/reviactyl/panel)
+[![Crowdin](https://badges.crowdin.net/reviactyl/localized.svg)](https://crowdin.com/project/reviactyl) ![GitHub Release](https://img.shields.io/github/v/release/reviactyl/panel) ![CalVer Badge](https://img.shields.io/badge/calver-YY.MM.MICRO-22bfda)
+
 
 **Reviactyl**, a new, modern, fast panel based on pterodactyl. Compatible with both Blueprint & Pterodactyl-native Addons.
 

@@ -13,6 +13,14 @@ return [
     'login-button' => 'Giriş Yap',
     'return' => 'Giriş Ekranına Dön',
 
+    'social' => [
+        'or' => 'OR',
+        'google' => 'Google',
+        'discord' => 'Discord',
+        'github' => 'GitHub',
+        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+    ],
+
     'forgot-password' => [
         'title' => 'Parola Sıfırlama İsteği',
         'label' => 'Parolamı Unuttum?',

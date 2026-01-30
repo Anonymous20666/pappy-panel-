@@ -56,4 +56,7 @@ return [
     'api' => [
         'resource_not_found' => 'İstenen kaynak bu sunucuda mevcut değil.',
     ],
+    'social' => [
+        'unlink_only_login' => 'You cannot unlink your only login method without setting a password first.',
+    ],
 ];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Network',
-    'created' => 'You are currently using {{count}} of {{limit}} allowed allocations for this server.',
-    'create' => 'Create Allocation',
+    'title' => 'ನೆಟ್‌ವರ್ಕ್',
+    'created' => 'ಈ ಸರ್ವರ್‌ಗಾಗಿ ಅನುಮತಿಸಲಾದ {{limit}} ಅಲೊಕೆಷನ್‌ಗಳಲ್ಲಿ ನೀವು ಪ್ರಸ್ತುತ {{count}} ಅನ್ನು ಬಳಸುತ್ತಿದ್ದೀರಿ.',
+    'create' => 'ಅಲೊಕೆಷನ್ ರಚಿಸಿ',
 ];

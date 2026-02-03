@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'title' => 'File Manager',
-    'new-file' => 'New File',
-    'empty' => 'This directory seems to be empty.',
-    'too-large' => 'This directory is too large to display in the browser, limiting the output to the first 250 files.',
-    'move' => 'Move',
-    'archive' => 'Archive',
-    'delete' => 'Delete',
-    'create-directory' => 'Create Directory',
+    'title' => 'ಫೈಲ್ ಮ್ಯಾನೇಜರ್',
+    'new-file' => 'ಹೊಸ ಫೈಲ್',
+    'empty' => 'ಈ ಡೈರೆಕ್ಟರಿ ಖಾಲಿಯಾಗಿರುವಂತೆ ಕಾಣುತ್ತದೆ.',
+    'too-large' => 'ಈ ಡೈರೆಕ್ಟರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೋರಿಸಲು ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ; ಔಟ್‌ಪುಟ್ ಅನ್ನು ಮೊದಲ 250 ಫೈಲ್‌ಗಳಿಗೆ ಮಿತಿಗೊಳಿಸಲಾಗಿದೆ.',
+    'move' => 'ಸರಿಸಿ',
+    'archive' => 'ಆರ್ಕೈವ್',
+    'delete' => 'ಅಳಿಸಿ',
+    'create-directory' => 'ಡೈರೆಕ್ಟರಿ ರಚಿಸಿ',
 ];

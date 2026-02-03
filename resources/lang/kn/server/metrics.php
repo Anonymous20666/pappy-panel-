@@ -1,30 +1,30 @@
 <?php
 
 return [
-    'title' => 'Historical Metrics',
-    'error' => 'Unable to load historical stats.',
+    'title' => 'ಐತಿಹಾಸಿಕ ಮೆಟ್ರಿಕ್‌ಗಳು',
+    'error' => 'ಐತಿಹಾಸಿಕ ಅಂಕಿಅಂಶಗಳನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ.',
     'time_range' => [
-        'last_24_hours' => 'Last 24 Hours',
-        'last_3_days' => 'Last 3 Days',
-        'last_7_days' => 'Last 7 Days',
+        'last_24_hours' => 'ಕಳೆದ 24 ಗಂಟೆಗಳು',
+        'last_3_days' => 'ಕಳೆದ 3 ದಿನಗಳು',
+        'last_7_days' => 'ಕಳೆದ 7 ದಿನಗಳು',
     ],
     'charts' => [
         'cpu' => [
-            'title' => 'CPU History',
-            'label' => 'CPU Usage (%)',
+            'title' => 'CPU ಇತಿಹಾಸ',
+            'label' => 'CPU ಬಳಕೆ (%)',
         ],
         'memory' => [
-            'title' => 'Memory History',
-            'label' => 'Memory Usage (MB)',
+            'title' => 'ಮೆಮೊರಿ ಇತಿಹಾಸ',
+            'label' => 'ಮೆಮೊರಿ ಬಳಕೆ (MB)',
         ],
         'disk' => [
-            'title' => 'Disk History',
-            'label' => 'Disk Usage (MB)',
+            'title' => 'ಡಿಸ್ಕ್ ಇತಿಹಾಸ',
+            'label' => 'ಡಿಸ್ಕ್ ಬಳಕೆ (MB)',
         ],
         'network' => [
-            'title' => 'Network History',
-            'rx_label' => 'Network RX (MB)',
-            'tx_label' => 'Network TX (MB)',
+            'title' => 'ನೆಟ್‌ವರ್ಕ್ ಇತಿಹಾಸ',
+            'rx_label' => 'ನೆಟ್‌ವರ್ಕ್ RX (MB)',
+            'tx_label' => 'ನೆಟ್‌ವರ್ಕ್ TX (MB)',
         ],
     ],
 ];

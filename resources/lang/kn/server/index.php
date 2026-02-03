@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'control' => 'Control',
-    'management' => 'Management',
-    'administration' => 'Administration',
-    'start' => 'Start',
-    'stop' => 'Stop',
-    'restart' => 'Restart',
-    'kill' => 'Kill',
-    'kill-warning' => 'Forcibly stopping a server can lead to data corruption.',
-    'hide-stats' => 'Hide Stats',
-    'show-stats' => 'Show Stats',
+    'control' => 'ನಿಯಂತ್ರಣ',
+    'management' => 'ನಿರ್ವಹಣೆ',
+    'administration' => 'ಆಡಳಿತ',
+    'start' => 'ಪ್ರಾರಂಭಿಸಿ',
+    'stop' => 'ನಿಲ್ಲಿಸಿ',
+    'restart' => 'ಮರುಪ್ರಾರಂಭಿಸಿ',
+    'kill' => 'ಬಲವಂತವಾಗಿ ನಿಲ್ಲಿಸಿ',
+    'kill-warning' => 'ಸರ್ವರ್ ಅನ್ನು ಬಲವಂತವಾಗಿ ನಿಲ್ಲಿಸುವುದರಿಂದ ಡೇಟಾ ಹಾನಿಯಾಗುವ ಸಾಧ್ಯತೆ ಇದೆ.',
+    'hide-stats' => 'ಅಂಕಿಅಂಶಗಳನ್ನು ಮರೆಮಾಡಿ',
+    'show-stats' => 'ಅಂಕಿಅಂಶಗಳನ್ನು ತೋರಿಸಿ',
 ];

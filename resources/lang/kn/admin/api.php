@@ -1,27 +1,27 @@
 <?php
 
 return [
-    'title' => 'Application API',
-    'list-title' => 'Credentials List',
-    'key' => 'Key',
-    'memo' => 'Memo',
-    'last-used' => 'Last Used',
-    'created' => 'Created On',
-    'never-used' => 'Never Used',
+    'title' => 'ಅಪ್ಲಿಕೇಶನ್ API',
+    'list-title' => 'ಕ್ರೆಡೆನ್ಶಿಯಲ್‌ಗಳ ಪಟ್ಟಿ',
+    'key' => 'ಕೀ',
+    'memo' => 'ಮೆಮೊ',
+    'last-used' => 'ಕೊನೆಯದಾಗಿ ಬಳಸಿದ್ದು',
+    'created' => 'ಸೃಷ್ಟಿಸಿದ ದಿನಾಂಕ',
+    'never-used' => 'ಎಂದಿಗೂ ಬಳಸಿಲ್ಲ',
 
-    'revoke' => 'Revoke',
-    'revoke-title' => 'Revoke API Key',
-    'revoke-warning' => 'Once this API key is revoked any applications currently using it will stop working.',
-    'revoked' => 'API Key has been revoked.',
+    'revoke' => 'ರದ್ದುಮಾಡಿ',
+    'revoke-title' => 'API ಕೀ ರದ್ದುಮಾಡಿ',
+    'revoke-warning' => 'ಈ API ಕೀ ರದ್ದು ಮಾಡಿದ ನಂತರ, ಅದನ್ನು ಪ್ರಸ್ತುತ ಬಳಸುತ್ತಿರುವ ಎಲ್ಲಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಕೆಲಸ ನಿಲ್ಲಿಸುತ್ತವೆ.',
+    'revoked' => 'API ಕೀ ರದ್ದುಮಾಡಲಾಗಿದೆ.',
 
-    'permissions' => 'Select Permissions',
-    'read-only' => 'Read',
-    'read-write' => 'Read & Write',
-    'none' => 'None',
+    'permissions' => 'ಅನುಮತಿಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ',
+    'read-only' => 'ಓದಲು ಮಾತ್ರ',
+    'read-write' => 'ಓದು ಮತ್ತು ಬರವಣಿಗೆ',
+    'none' => 'ಯಾವುದೂ ಇಲ್ಲ',
 
-    'description' => 'Description',
-    'info' => 'Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.',
+    'description' => 'ವಿವರಣೆ',
+    'info' => 'ನೀವು ಅನುಮತಿಗಳನ್ನು ನಿಯೋಜಿಸಿ ಈ ಕ್ರೆಡೆನ್ಶಿಯಲ್‌ಗಳ ಸೆಟ್ ಅನ್ನು ಸೃಷ್ಟಿಸಿದ ನಂತರ, ಅದನ್ನು ಮರುಸಂಪಾದಿಸಲು ಸಾಧ್ಯವಾಗುವುದಿಲ್ಲ. ಮುಂದಿನ ದಿನಗಳಲ್ಲಿ ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಲು ನೀವು ಹೊಸ ಕ್ರೆಡೆನ್ಶಿಯಲ್‌ಗಳ ಸೆಟ್ ಅನ್ನು ಸೃಷ್ಟಿಸಬೇಕು.',
 
-    'create-btn' => 'Create New',
-    'new-btn' => 'Create Credentials',
+    'create-btn' => 'ಹೊಸದು ರಚಿಸಿ',
+    'new-btn' => 'ಕ್ರೆಡೆನ್ಶಿಯಲ್‌ಗಳನ್ನು ರಚಿಸಿ',
 ];

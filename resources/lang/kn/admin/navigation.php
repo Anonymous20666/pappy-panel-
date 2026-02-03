@@ -1,24 +1,24 @@
 <?php
 
 return [
-    'home' => 'Home',
+    'home' => 'ಮುಖಪುಟ',
     'administration' => [
-        'title' => 'Administration',
-        'dashboard' => 'Dashboard',
-        'settings' => 'Settings',
-        'api' => 'Application API',
+        'title' => 'ಆಡಳಿತ',
+        'dashboard' => 'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
+        'settings' => 'ಸೆಟ್ಟಿಂಗ್‌ಗಳು',
+        'api' => 'ಅಪ್ಲಿಕೇಶನ್ API',
     ],
     'management' => [
-        'title' => 'Management',
-        'databases' => 'Databases',
-        'locations' => 'Locations',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'users' => 'Users',
+        'title' => 'ನಿರ್ವಹಣೆ',
+        'databases' => 'ಡೇಟಾಬೇಸ್‌ಗಳು',
+        'locations' => 'ಸ್ಥಳಗಳು',
+        'nodes' => 'ನೋಡ್‌ಗಳು',
+        'servers' => 'ಸರ್ವರ್‌ಗಳು',
+        'users' => 'ಬಳಕೆದಾರರು',
     ],
     'service' => [
-        'title' => 'Service Management',
-        'mounts' => 'Mounts',
-        'nests' => 'Nests',
+        'title' => 'ಸೇವಾ ನಿರ್ವಹಣೆ',
+        'mounts' => 'ಮೌಂಟ್‌ಗಳು',
+        'nests' => 'ನೆಸ್ಟ್‌ಗಳು',
     ],
 ];

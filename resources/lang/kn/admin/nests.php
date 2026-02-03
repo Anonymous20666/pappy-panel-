@@ -2,25 +2,25 @@
 
 return [
     'notices' => [
-        'created' => 'A new nest, :name, has been successfully created.',
-        'deleted' => 'Successfully deleted the requested nest from the Panel.',
-        'updated' => 'Successfully updated the nest configuration options.',
+        'created' => 'ಹೊಸ ನೆಸ್ಟ್ :name ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.',
+        'deleted' => 'ಕೋರಿರುವ ನೆಸ್ಟ್ ಅನ್ನು ಪ್ಯಾನೆಲ್‌ನಿಂದ ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ.',
+        'updated' => 'ನೆಸ್ಟ್ ಸಂರಚನಾ ಆಯ್ಕೆಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ.',
     ],
     'eggs' => [
         'notices' => [
-            'imported' => 'Successfully imported this Egg and its associated variables.',
-            'updated_via_import' => 'This Egg has been updated using the file provided.',
-            'deleted' => 'Successfully deleted the requested egg from the Panel.',
-            'updated' => 'Egg configuration has been updated successfully.',
-            'script_updated' => 'Egg install script has been updated and will run whenever servers are installed.',
-            'egg_created' => 'A new egg was laid successfully. You will need to restart any running daemons to apply this new egg.',
+            'imported' => 'ಈ ಎಗ್ ಮತ್ತು ಅದರ ಸಂಬಂಧಿತ ವೇರಿಯಬಲ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಆಮದು ಮಾಡಲಾಗಿದೆ.',
+            'updated_via_import' => 'ನೀಡಲಾದ ಫೈಲ್ ಬಳಸಿ ಈ ಎಗ್ ಅನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ.',
+            'deleted' => 'ಕೋರಿರುವ ಎಗ್ ಅನ್ನು ಪ್ಯಾನೆಲ್‌ನಿಂದ ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ.',
+            'updated' => 'ಎಗ್ ಸಂರಚನೆಯನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನವೀಕರಿಸಲಾಗಿದೆ.',
+            'script_updated' => 'ಎಗ್ ಇನ್‌ಸ್ಟಾಲ್ ಸ್ಕ್ರಿಪ್ಟ್ ನವೀಕರಿಸಲಾಗಿದೆ ಮತ್ತು ಸರ್ವರ್‌ಗಳನ್ನು ಸ್ಥಾಪಿಸುವಾಗಲೆಲ್ಲಾ ಇದು ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ.',
+            'egg_created' => 'ಹೊಸ ಎಗ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ. ಈ ಹೊಸ ಎಗ್ ಅನ್ನು ಅನ್ವಯಿಸಲು ಪ್ರಸ್ತುತ ಚಾಲನೆಯಲ್ಲಿರುವ ಯಾವುದೇ ಡೀಮನ್‌ಗಳನ್ನು ಮರುಪ್ರಾರಂಭಿಸಬೇಕು.',
         ],
     ],
     'variables' => [
         'notices' => [
-            'variable_deleted' => 'The variable ":variable" has been deleted and will no longer be available to servers once rebuilt.',
-            'variable_updated' => 'The variable ":variable" has been updated. You will need to rebuild any servers using this variable in order to apply changes.',
-            'variable_created' => 'New variable has successfully been created and assigned to this egg.',
+            'variable_deleted' => '":variable" ವೇರಿಯಬಲ್ ಅನ್ನು ಅಳಿಸಲಾಗಿದೆ ಮತ್ತು ಮರುನಿರ್ಮಾಣದ ನಂತರ ಇದು ಸರ್ವರ್‌ಗಳಿಗೆ ಲಭ್ಯವಿರುವುದಿಲ್ಲ.',
+            'variable_updated' => '":variable" ವೇರಿಯಬಲ್ ಅನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ. ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲು ಈ ವೇರಿಯಬಲ್ ಬಳಸುತ್ತಿರುವ ಯಾವುದೇ ಸರ್ವರ್‌ಗಳನ್ನು ಮರುನಿರ್ಮಿಸಬೇಕು.',
+            'variable_created' => 'ಹೊಸ ವೇರಿಯಬಲ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಿ ಈ ಎಗ್‌ಗೆ ನಿಯೋಜಿಸಲಾಗಿದೆ.',
         ],
     ],
 ];

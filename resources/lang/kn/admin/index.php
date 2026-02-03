@@ -1,18 +1,18 @@
 <?php
 
 return [
-    'title' => 'Dashboard',
-    'uptodate-header' => 'Your Panel is up to date',
-    'uptodate-body' => 'You are currently using :version. Your panel is up-to-date!',
-    'notuptodate-header' => 'Your Panel is not up to date',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
-    'feedback-header' => 'Any Feedback?',
-    'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',
-    'feedback-btn' => 'Create Issue',
-    'sponsor-header' => 'Support Reviactyl',
-    'sponsor-body' => 'Thank you for using Reviactyl Panel, this could only be achieved through the support of you, our contributors, and the rest of our supporters! We appreciate any and all support from anybody.',
-    'sponsor-btn' => 'Sponsor Project',
+    'title' => 'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
+    'uptodate-header' => 'ನಿಮ್ಮ ಪ್ಯಾನೆಲ್ ನವೀಕೃತವಾಗಿದೆ',
+    'uptodate-body' => 'ನೀವು ಪ್ರಸ್ತುತ :version ಅನ್ನು ಬಳಸುತ್ತಿದ್ದೀರಿ. ನಿಮ್ಮ ಪ್ಯಾನೆಲ್ ಸಂಪೂರ್ಣವಾಗಿ ನವೀಕೃತವಾಗಿದೆ!',
+    'notuptodate-header' => 'ನಿಮ್ಮ ಪ್ಯಾನೆಲ್ ನವೀಕೃತವಾಗಿಲ್ಲ',
+    'notuptodate-body' => ':latest ಈಗ ಲಭ್ಯವಿದೆ! ನಿಮ್ಮ ಪ್ಯಾನೆಲ್ ಅನ್ನು ನವೀಕರಿಸಲು ನಮ್ಮ ಡಾಕ್ಯುಮೆಂಟೇಶನ್ ಓದಿ.',
+    'feedback-header' => 'ಯಾವುದೇ ಪ್ರತಿಕ್ರಿಯೆಯಿದೆಯೇ?',
+    'feedback-body' => 'Reviactyl ನೀಡುವ ವೈಶಿಷ್ಟ್ಯಗಳು ಮತ್ತು ಬಳಕೆಯ ಸುಲಭತೆಯನ್ನು ನೀವು ಆನಂದಿಸುತ್ತಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಮಗೆ ತಿಳಿಸಿ! ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ ನಮಗೆ ಇನ್ನಷ್ಟು ಉತ್ತಮ ಮತ್ತು ಶಕ್ತಿಶಾಲಿ ಸಾಧನಗಳನ್ನು ನಿರ್ಮಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.',
+    'feedback-btn' => 'ಇಶ್ಯೂ ರಚಿಸಿ',
+    'sponsor-header' => 'Reviactyl ಗೆ ಬೆಂಬಲ ನೀಡಿ',
+    'sponsor-body' => 'Reviactyl ಪ್ಯಾನೆಲ್ ಅನ್ನು ಬಳಸಿದ್ದಕ್ಕಾಗಿ ಧನ್ಯವಾದಗಳು. ಇದು ನಿಮ್ಮಂತಹ ಬಳಕೆದಾರರು, ನಮ್ಮ ಕೊಡುಗೆದಾರರು ಮತ್ತು ಬೆಂಬಲಿಗರ ಸಹಕಾರದಿಂದ ಮಾತ್ರ ಸಾಧ್ಯವಾಗಿದೆ! ಯಾರಿಂದಲಾದರೂ ದೊರಕುವ ಯಾವುದೇ ಬೆಂಬಲವನ್ನು ನಾವು ಹೃತ್ಪೂರ್ವಕವಾಗಿ ಸ್ವಾಗತಿಸುತ್ತೇವೆ.',
+    'sponsor-btn' => 'ಪ್ರಾಜೆಕ್ಟ್‌ಗೆ ಸ್ಪಾನ್ಸರ್ ಮಾಡಿ',
 
-    'help-btn' => 'Get Help',
-    'docs-btn' => 'Documentation',
+    'help-btn' => 'ಸಹಾಯ ಪಡೆಯಿರಿ',
+    'docs-btn' => 'ಡಾಕ್ಯುಮೆಂಟೇಶನ್',
 ];

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Startup',
+    'title' => 'Start',
     'startup-command' => 'Startbefehl',
     'docker-image' => 'Docker-Image',
     'docker-info' => 'Dies ist eine erweiterte Funktion, mit der Sie ein Docker-Image auswählen können, das beim Ausführen dieser Serverinstanz verwendet werden soll.',

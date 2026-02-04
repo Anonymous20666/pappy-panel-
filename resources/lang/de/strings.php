@@ -72,7 +72,7 @@ return [
     'relation' => 'Beziehung',
     'owner' => 'Besitzer',
     'admin' => 'Admin',
-    'subuser' => 'Subuser',
+    'subuser' => 'Unterbenutzer',
     'captcha_invalid' => 'Das angegebene Captcha ist ungültig.',
     'tasks' => 'Aufgaben',
     'seconds' => 'Sekunden',

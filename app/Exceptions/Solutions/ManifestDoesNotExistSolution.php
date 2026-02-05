@@ -19,7 +19,7 @@ class ManifestDoesNotExistSolution implements Solution
     public function getDocumentationLinks(): array
     {
         return [
-            'Docs' => 'https://github.com/pterodactyl/panel/blob/develop/package.json',
+            'Docs' => 'https://reviactyl.dev/docs/panel/tutorial/troubleshooting#manifest-does-not-exist-exception',
         ];
     }
 }

@@ -109,7 +109,7 @@ class AssetHashService
 
         $manifest = static::$manifest;
         if ($manifest === null) {
-            throw new ManifestDoesNotExistException();
+            throw new ManifestDoesNotExistException('Manifest file does not exist.');
         }
 
         return $manifest;

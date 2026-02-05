@@ -54,7 +54,7 @@ return [
     ],
 
     'errors' => [
-        'cannot_delete' => 'Cannot delete a database host with associated databases.',
+        'cannot_delete' => 'Sie können keinen Datenbank Host mit erstellten Datenbanken löschen.',
     ],
 
 ];

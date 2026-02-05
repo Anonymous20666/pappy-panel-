@@ -1,6 +1,34 @@
 <?php
 
 return [
+    
+    'label' => 'Nest',
+    'plural_label' => 'Nests',
+
+    'sections' => [
+        'configuration' => 'Nest Configuration',
+    ],
+
+    'fields' => [
+        'name' => 'Name',
+        'author' => 'Author',
+        'description' => 'Description',
+    ],
+
+    'helpers' => [
+        'name' => 'A unique name used to identify this nest.',
+        'author' => 'The author of this nest. Must be a valid email.',
+        'description' => 'A description of this nest.',
+    ],
+
+    'columns' => [
+        'id' => 'ID',
+        'name' => 'Name',
+        'author' => 'Author',
+        'eggs' => 'Eggs',
+        'servers' => 'Servers',
+    ],
+    
     'notices' => [
         'created' => 'ಹೊಸ ನೆಸ್ಟ್ :name ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.',
         'deleted' => 'ಕೋರಿರುವ ನೆಸ್ಟ್ ಅನ್ನು ಪ್ಯಾನೆಲ್‌ನಿಂದ ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ.',

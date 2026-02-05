@@ -35,12 +35,12 @@ class DatabaseHostResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return trans('admin/databases.title');
+        return trans('admin/databases.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return trans('admin/navigation.management.databases');
+        return trans('admin/databases.plural-label');
     }
 
     public static function getSlug(?Panel $panel = null): string

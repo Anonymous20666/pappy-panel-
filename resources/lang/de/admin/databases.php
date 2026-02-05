@@ -2,7 +2,8 @@
 
 return [
 
-    'title' => 'Databases',
+    'label' => 'Database',
+    'plural-label' => 'Databases',
 
     'none' => 'None',
 

@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'User',
+    'title' => 'Benutzer',
     'exceptions' => [
         'delete_self' => 'Sie können Ihr eigenes Konto nicht löschen.',
         'user_has_servers' => 'Ein Benutzer mit aktiven Servern, die mit seinem Konto verknüpft sind, kann nicht gelöscht werden. Bitte löschen Sie dessen Server, bevor Sie fortfahren.',
@@ -12,17 +12,17 @@ return [
     ],
     'details' => [
         'account_details' => 'Account Details',
-        'external_id' => 'External ID',
-        'username' => 'Username',
-        'email' => 'Email Address',
-        'first_name' => 'First Name',
-        'last_name' => 'Last Name',
-        'language' => 'Language',
-        'password' => 'Password',
-        'password_confirmation' => 'Confirm Password',
+        'external_id' => 'Externe ID',
+        'username' => 'Benutzername',
+        'email' => 'E-Mail Adresse',
+        'first_name' => 'Vorname',
+        'last_name' => 'Nachname',
+        'language' => 'Sprache',
+        'password' => 'Passwort',
+        'password_confirmation' => 'Passwort bestätigen',
         'root_admin' => 'Root Administrator',
-        'root_admin_desc' => 'This user will have full access to all servers and settings on the system.',
-        'privileges' => 'Privileges',
+        'root_admin_desc' => 'Dieser Benutzer wird Vollzugriff auf alle Systeme und Einstellungen auf dem System bekommen.',
+        'privileges' => 'Berechtigungen',
         'admin_status' => 'Admin Status',
     ],
 ];

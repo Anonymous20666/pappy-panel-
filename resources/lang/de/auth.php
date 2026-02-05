@@ -14,11 +14,11 @@ return [
     'return' => 'Zurück zur Anmeldung',
 
     'social' => [
-        'or' => 'OR',
+        'or' => 'ODER',
         'google' => 'Google',
         'discord' => 'Discord',
         'github' => 'GitHub',
-        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+        'not_linked' => 'Dieser Account wurde mit keinem :provider Account verknüpft. Bitte melden Sie sich zuerst mit E-Mail und Passwort an, und verknüpfen Sie dann Ihren :provider Account auf der Account Einstellungsseite.',
     ],
 
     'forgot-password' => [

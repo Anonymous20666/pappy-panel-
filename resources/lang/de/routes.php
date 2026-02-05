@@ -14,9 +14,9 @@ return [
     'server' => [
         'console' => 'Konsole',
         'files' => 'Dateien',
-        'startup' => 'Startup',
+        'startup' => 'Start',
         'network' => 'Netzwerk',
-        'metrics' => 'Metrics',
+        'metrics' => 'Metriken',
         'databases' => 'Datenbanken',
         'schedules' => 'Zeitpläne',
         'backups' => 'Backups',

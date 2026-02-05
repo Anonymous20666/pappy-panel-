@@ -52,12 +52,12 @@ return [
         'save-btn' => 'Speichern',
     ],
     'social' => [
-        'title' => 'Social Login',
-        'subtitle' => 'Configure social login providers.',
+        'title' => 'Login durch ein anderes Konto',
+        'subtitle' => 'Login Anbieter Einstellen.',
         'enabled' => 'Eingeschaltet',
         'client-id' => 'Ausgeschaltet',
         'client-secret' => 'Client-Geheimnis',
         'save-btn' => 'Einstellungen Speichern',
-        'success' => 'Social login settings have been updated successfully.',
+        'success' => 'Login Anbieter Einstellungen wurden erfolgreich aktualisiert.',
     ],
 ];

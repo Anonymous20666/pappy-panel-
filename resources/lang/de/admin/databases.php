@@ -2,39 +2,39 @@
 
 return [
 
-    'label' => 'Database',
-    'plural-label' => 'Databases',
+    'label' => 'Datenbank',
+    'plural-label' => 'Datenbanken',
 
-    'none' => 'None',
+    'none' => 'Keine',
 
     'sections' => [
         'host_details' => [
             'title' => 'Host Details',
-            'description' => 'Configure the database host connection settings.',
+            'description' => 'Datenbank in den Host Einstellungen konfigurieren.',
         ],
 
         'authentication' => [
-            'title' => 'Authentication',
+            'title' => 'Authentifikation',
         ],
 
         'linked_node' => [
-            'title' => 'Linked Node',
+            'title' => 'Verknüpfte Node',
         ],
     ],
 
     'placeholders' => [
-        'name' => 'Production MySQL',
+        'name' => 'Produktions MySQL',
         'host' => '127.0.0.1',
         'username' => 'reviactyl',
     ],
 
     'helpers' => [
-        'host' => 'The hostname or IP address of the database server.',
-        'linked_node' => 'Optional. Link this host to a specific node.',
+        'host' => 'Der Hostname oder die IP-Adresse des Datenbankservers.',
+        'linked_node' => 'Optional. Verknüpft diesen Host mit einer Node.',
     ],
 
     'fields' => [
-        'linked_node' => 'Linked Node',
+        'linked_node' => 'Verknüpfte Node',
     ],
 
     'columns' => [
@@ -42,15 +42,15 @@ return [
         'name' => 'Name',
         'host' => 'Host',
         'port' => 'Port',
-        'username' => 'Username',
-        'linked_node' => 'Linked Node',
-        'databases' => 'Databases',
-        'created' => 'Created',
+        'username' => 'Benutzername',
+        'linked_node' => 'Verknüpfte Node',
+        'databases' => 'Datenbanken',
+        'created' => 'Erstellt',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'Bearbeiten',
+        'delete' => 'Löschen',
     ],
 
     'errors' => [

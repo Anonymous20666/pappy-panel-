@@ -21,6 +21,7 @@ use Filament\Notifications\Notification;
 use Illuminate\Contracts\Console\Kernel;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Filament\Schemas\Components\Actions;
 
@@ -35,6 +36,37 @@ class Settings extends Page implements HasSchemas
     protected string $view = 'filament.pages.settings';
 
     public ?array $data = [];
+
+    protected array $settingKeys = [
+        'app:name',
+        'app:logo',
+        'app:icon',
+        'app:locale',
+        'pterodactyl:auth:2fa_required',
+        'app:debug',
+        'app:pwa',
+
+        'mail:mailers:smtp:host',
+        'mail:mailers:smtp:port',
+        'mail:mailers:smtp:encryption',
+        'mail:mailers:smtp:username',
+        'mail:mailers:smtp:password',
+        'mail:from:address',
+        'mail:from:name',
+
+        'captcha:provider',
+        'captcha:recaptcha:secret_key',
+        'captcha:recaptcha:website_key',
+        'captcha:turnstile:secret_key',
+        'captcha:turnstile:site_key',
+
+        'pterodactyl:guzzle:timeout',
+        'pterodactyl:guzzle:connect_timeout',
+
+        'pterodactyl:client_features:allocations:enabled',
+        'pterodactyl:client_features:allocations:range_start',
+        'pterodactyl:client_features:allocations:range_end',
+    ];
 
     public function getHeading(): string
     {
@@ -54,45 +86,36 @@ class Settings extends Page implements HasSchemas
     public function mount(): void
     {
         $settings = app(SettingsRepositoryInterface::class);
+        $config = app(ConfigRepository::class);
         $encrypter = app(Encrypter::class);
-        $password = $settings->get('settings::mail:mailers:smtp:password');
-        try {
-            if (!empty($password)) {
-                $password = $encrypter->decrypt($password);
+
+        $formData = [];
+
+        foreach ($this->settingKeys as $key) {
+
+            $value = $settings->get('settings::'.$key);
+
+            if ($value === null) {
+                $value = $config->get(str_replace(':','.', $key));
             }
-        } catch (DecryptException) {
+
+            if ($key === 'mail:mailers:smtp:password' && !empty($value)) {
+                try {
+                    $value = $encrypter->decrypt($value);
+                } catch (\Throwable) {}
+            }
+
+            if ($value === 'true') $value = true;
+            if ($value === 'false') $value = false;
+
+            if ($key === 'pterodactyl:auth:2fa_required') {
+                $value = (int) $value;
+            }
+
+            $formData[$key] = $value;
         }
 
-        $this->form->fill([
-            'app:name' => $settings->get('settings::app:name'),
-            'app:logo' => $settings->get('settings::app:logo'),
-            'app:icon' => $settings->get('settings::app:icon'),
-            'app:locale' => $settings->get('settings::app:locale'),
-            'pterodactyl:auth:2fa_required' => (int) $settings->get('settings::pterodactyl:auth:2fa_required'),
-            'app:debug' => $settings->get('settings::app:debug') === 'true',
-            'app:pwa' => $settings->get('settings::app:pwa') === 'true',
-
-            'mail:mailers:smtp:host' => $settings->get('settings::mail:mailers:smtp:host'),
-            'mail:mailers:smtp:port' => $settings->get('settings::mail:mailers:smtp:port'),
-            'mail:mailers:smtp:encryption' => $settings->get('settings::mail:mailers:smtp:encryption'),
-            'mail:mailers:smtp:username' => $settings->get('settings::mail:mailers:smtp:username'),
-            'mail:from:address' => $settings->get('settings::mail:from:address'),
-            'mail:from:name' => $settings->get('settings::mail:from:name'),
-            'mail:mailers:smtp:password' => $password,
-            'captcha:provider' => $settings->get('settings::captcha:provider'),
-            'captcha:recaptcha:secret_key' => $settings->get('settings::captcha:recaptcha:secret_key'),
-            'captcha:recaptcha:website_key' => $settings->get('settings::captcha:recaptcha:website_key'),
-            'captcha:turnstile:secret_key' => $settings->get('settings::captcha:turnstile:secret_key'),
-            'captcha:turnstile:site_key' => $settings->get('settings::captcha:turnstile:site_key'),
-            'pterodactyl:guzzle:timeout' => $settings->get('settings::pterodactyl:guzzle:timeout'),
-            'pterodactyl:guzzle:connect_timeout' => $settings->get('settings::pterodactyl:guzzle:connect_timeout'),
-            'pterodactyl:client_features:allocations:enabled' =>
-                $settings->get('settings::pterodactyl:client_features:allocations:enabled') === 'true',
-            'pterodactyl:client_features:allocations:range_start' =>
-                $settings->get('settings::pterodactyl:client_features:allocations:range_start'),
-            'pterodactyl:client_features:allocations:range_end' =>
-                $settings->get('settings::pterodactyl:client_features:allocations:range_end'),
-        ]);
+        $this->form->fill($formData);
     }
 
     protected function getFormSchema(): array
@@ -238,10 +261,12 @@ class Settings extends Page implements HasSchemas
                 ->schema([
                     TextInput::make('mail:mailers:smtp:host')
                         ->label(trans('admin/settings.mail.host-label'))
+                        ->required()
                         ->columnSpan(2),
 
                     TextInput::make('mail:mailers:smtp:port')
                         ->label(trans('admin/settings.mail.port-label'))
+                        ->required()
                         ->numeric()
                         ->minValue(1)
                         ->maxValue(65535)
@@ -277,10 +302,12 @@ class Settings extends Page implements HasSchemas
                     TextInput::make('mail:from:address')
                         ->label(trans('admin/settings.mail.from-label'))
                         ->email()
+                        ->required()
                         ->columnSpan(2),
 
                     TextInput::make('mail:from:name')
                         ->label(trans('admin/settings.mail.from-name-label'))
+                        ->required()
                         ->columnSpan(2),
                 ]),
 
@@ -379,6 +406,8 @@ class Settings extends Page implements HasSchemas
             ->title('Settings saved')
             ->success()
             ->send();
+
+        $this->dispatch('$refresh');
     }
 
     public function testMail(): void

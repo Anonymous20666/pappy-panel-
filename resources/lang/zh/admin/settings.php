@@ -35,6 +35,13 @@ return [
         'test-btn' => '测试',
         'save-btn' => '保存',
     ],
+    'oauth' => [
+        'title' => 'OAuth',
+        'enabled' => 'Enabled',
+        'disabled' => 'Disabled',
+        'id-label' => 'Client ID',
+        'secret-label' => 'Client Secret',
+    ],
     'advanced' => [
         'title' => '高级',
         'status-label' => '状态',

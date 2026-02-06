@@ -145,28 +145,28 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             <div css={tw`flex-grow border-t border-gray-600`}></div>
                         </div>
                         {socialSettings.google && (
-                            <a
-                                href={'/auth/login/google'}
-                                css={tw`w-full text-center p-2 rounded bg-red-600 text-gray-50 hover:bg-red-700 transition-colors duration-150 font-bold text-sm`}
+                            <Button
+                                onClick={() => (window.location.href = '/auth/login/google')}
+                                css={tw`w-full !py-3 !bg-green-600`}
                             >
                                 {t('social.google')}
-                            </a>
+                            </Button>
                         )}
                         {socialSettings.discord && (
-                            <a
-                                href={'/auth/login/discord'}
-                                css={tw`w-full text-center p-2 rounded bg-indigo-600 text-gray-50 hover:bg-indigo-700 transition-colors duration-150 font-bold text-sm`}
+                            <Button
+                                onClick={() => (window.location.href = '/auth/login/discord')}
+                                css={tw`w-full !py-3 !bg-indigo-600`}
                             >
                                 {t('social.discord')}
-                            </a>
+                            </Button>
                         )}
                         {socialSettings.github && (
-                            <a
-                                href={'/auth/login/github'}
-                                css={tw`w-full text-center p-2 rounded bg-gray-700 text-gray-50 hover:bg-gray-800 transition-colors duration-150 font-bold text-sm`}
+                            <Button
+                                onClick={() => (window.location.href = '/auth/login/github')}
+                                css={tw` !py-3 !bg-white !text-black`}
                             >
                                 {t('social.github')}
-                            </a>
+                            </Button>
                         )}
                     </div>
                     {provider === 'recaptcha' && (

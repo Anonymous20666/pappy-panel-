@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import getSocialLogins, { SocialLogin } from '@/api/account/getSocialLogins';
 import unlinkSocialLogin from '@/api/account/unlinkSocialLogin';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
-import { Button } from '@/components/elements/button/index';
+import { Button } from '@/components/elements/button';
 import tw from 'twin.macro';
 import { format } from 'date-fns';
 import { FaGoogle, FaDiscord, FaGithub, FaLink, FaUnlink, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
@@ -30,7 +30,7 @@ const Container = styled.div`
 `;
 
 const Item = styled.div`
-    ${tw`flex items-center justify-between p-4 bg-neutral-700 rounded border border-neutral-600`}
+    ${tw`flex items-center justify-between p-4 rounded-ui border border-gray-600`}
 `;
 
 export default () => {

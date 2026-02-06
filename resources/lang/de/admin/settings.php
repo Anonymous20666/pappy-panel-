@@ -35,6 +35,13 @@ return [
         'test-btn' => 'Test',
         'save-btn' => 'Speichern',
     ],
+    'oauth' => [
+        'title' => 'OAuth',
+        'enabled' => 'Enabled',
+        'disabled' => 'Disabled',
+        'id-label' => 'Client ID',
+        'secret-label' => 'Client Secret',
+    ],
     'advanced' => [
         'title' => 'Erweitert',
         'status-label' => 'Status',

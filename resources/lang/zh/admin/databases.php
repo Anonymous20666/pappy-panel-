@@ -2,23 +2,23 @@
 
 return [
 
-    'label' => 'Database',
-    'plural-label' => 'Databases',
+    'label' => '数据库',
+    'plural-label' => '数据库',
 
-    'none' => 'None',
+    'none' => '无',
 
     'sections' => [
         'host_details' => [
-            'title' => 'Host Details',
-            'description' => 'Configure the database host connection settings.',
+            'title' => '主机信息',
+            'description' => '配置数据库主机连接设置。',
         ],
 
         'authentication' => [
-            'title' => 'Authentication',
+            'title' => '身份验证',
         ],
 
         'linked_node' => [
-            'title' => 'Linked Node',
+            'title' => '关联节点',
         ],
     ],
 

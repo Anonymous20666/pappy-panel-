@@ -35,6 +35,13 @@ return [
         'test-btn' => 'ಪರೀಕ್ಷೆ',
         'save-btn' => 'ಉಳಿಸಿ',
     ],
+    'oauth' => [
+        'title' => 'OAuth',
+        'enabled' => 'Enabled',
+        'disabled' => 'Disabled',
+        'id-label' => 'Client ID',
+        'secret-label' => 'Client Secret',
+    ],
     'advanced' => [
         'title' => 'ಸುಧಾರಿತ',
         'status-label' => 'ಸ್ಥಿತಿ',

@@ -6,34 +6,34 @@ return [
     'plural_label' => 'Mounts',
 
     'sections' => [
-        'configuration' => 'Mount Configuration',
+        'configuration' => 'Mount Konfiguration',
     ],
 
     'fields' => [
         'name' => 'Name',
-        'description' => 'Description',
-        'source' => 'Source Path',
-        'target' => 'Target Path',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'description' => 'Beschreibung',
+        'source' => 'Quell-Pfad',
+        'target' => 'Ziel-Pfad',
+        'read_only' => 'Nur Lesen',
+        'user_mountable' => 'Benutzer Mountbar',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to separate this mount from another.',
-        'description' => 'A longer, human-readable description of this mount.',
-        'source' => 'The file path on the host machine to mount to containers.',
-        'target' => 'The path inside the container to mount this as.',
-        'read_only' => 'If set, the mount will be read-only inside the container.',
-        'user_mountable' => 'If set, users will be able to mount this to their servers.',
+        'name' => 'Ein eindeutiger Name muss verwendet werden, um diesen Mount von anderen zu halten.',
+        'description' => 'Eine längere, Menschen lesbare Beschreibung dieses Mounts.',
+        'source' => 'Der Datei-Pfad auf der Host-Maschine zu den Containern.',
+        'target' => 'Der Pfad auf dem Container.',
+        'read_only' => 'Falls gesetzt, wird dieser Mount nur lesbar im Container sein.',
+        'user_mountable' => 'Falls gesetzt, wird dieser Mount von Benutzern verwendet werden können.',
     ],
 
     'columns' => [
         'id' => 'ID',
         'name' => 'Name',
-        'source' => 'Source',
-        'target' => 'Target',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'source' => 'Quelle',
+        'target' => 'Ziel',
+        'read_only' => 'Nur Lesbar',
+        'user_mountable' => 'Benutzer Mountbar',
     ],
 
 ];

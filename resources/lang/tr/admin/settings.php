@@ -35,6 +35,13 @@ return [
         'test-btn' => 'Test Et',
         'save-btn' => 'Kaydet',
     ],
+    'oauth' => [
+        'title' => 'OAuth',
+        'enabled' => 'Enabled',
+        'disabled' => 'Disabled',
+        'id-label' => 'Client ID',
+        'secret-label' => 'Client Secret',
+    ],
     'advanced' => [
         'title' => 'Gelişmiş',
         'status-label' => 'Durum',

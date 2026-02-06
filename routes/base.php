@@ -23,4 +23,4 @@ Route::get('/status/{server}', [Base\IndexController::class, 'index'])
     ->withoutMiddleware(['auth', 'auth.session', RequireTwoFactorAuthentication::class]);
 
 Route::get('/{react}', [Base\IndexController::class, 'index'])
-    ->where('react', '^(?!(\/)?(api|auth|admin|daemon)).+');
+    ->where('react', '^(?!(\/)?(api|auth|admin|panel|daemon)).+');

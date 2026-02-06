@@ -1,4 +1,11 @@
 <?php
+/*
+| Developer Notes:
+| This Admin Panel is depreciated. We've switched over to FilamentPHP.
+| Old Admin Panel have moved over to "/panel" route and exists for legacy compatibility.
+| Any Addition of features will not be added here.
+|
+*/
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin;
@@ -12,7 +19,7 @@ Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 | Location Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/api
+| Endpoint: /panel/api
 |
 */
 Route::group(['prefix' => 'api'], function () {
@@ -29,7 +36,7 @@ Route::group(['prefix' => 'api'], function () {
 | Location Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/locations
+| Endpoint: /panel/locations
 |
 */
 Route::group(['prefix' => 'locations'], function () {
@@ -45,7 +52,7 @@ Route::group(['prefix' => 'locations'], function () {
 | Database Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/databases
+| Endpoint: /panel/databases
 |
 */
 Route::group(['prefix' => 'databases'], function () {
@@ -62,7 +69,7 @@ Route::group(['prefix' => 'databases'], function () {
 | Settings Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/settings
+| Endpoint: /panel/settings
 |
 */
 Route::group(['prefix' => 'settings'], function () {
@@ -84,7 +91,7 @@ Route::group(['prefix' => 'settings'], function () {
 | User Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/users
+| Endpoint: /panel/users
 |
 */
 Route::group(['prefix' => 'users'], function () {
@@ -104,7 +111,7 @@ Route::group(['prefix' => 'users'], function () {
 | Server Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/servers
+| Endpoint: /panel/servers
 |
 */
 Route::group(['prefix' => 'servers'], function () {
@@ -147,7 +154,7 @@ Route::group(['prefix' => 'servers'], function () {
 | Node Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/nodes
+| Endpoint: /panel/nodes
 |
 */
 Route::group(['prefix' => 'nodes'], function () {
@@ -178,7 +185,7 @@ Route::group(['prefix' => 'nodes'], function () {
 | Mount Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/mounts
+| Endpoint: /panel/mounts
 |
 */
 Route::group(['prefix' => 'mounts'], function () {
@@ -200,7 +207,7 @@ Route::group(['prefix' => 'mounts'], function () {
 | Nest Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/nests
+| Endpoint: /panel/nests
 |
 */
 Route::group(['prefix' => 'nests'], function () {
@@ -235,7 +242,7 @@ Route::group(['prefix' => 'nests'], function () {
 | Reviactyl Controller Routes
 |--------------------------------------------------------------------------
 |
-| Endpoint: /admin/designify
+| Endpoint: /panel/designify
 |
 */
 Route::group(['prefix' => 'designify'], function () {

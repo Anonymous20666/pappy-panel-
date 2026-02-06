@@ -23,38 +23,38 @@ return [
     ],
 
     'placeholders' => [
-        'name' => 'Production MySQL',
+        'name' => '生产环境 MySQL',
         'host' => '127.0.0.1',
         'username' => 'reviactyl',
     ],
 
     'helpers' => [
-        'host' => 'The hostname or IP address of the database server.',
-        'linked_node' => 'Optional. Link this host to a specific node.',
+        'host' => '数据库服务器的主机名或 IP 地址。',
+        'linked_node' => '可选。将此主机关联到指定节点。',
     ],
 
     'fields' => [
-        'linked_node' => 'Linked Node',
+        'linked_node' => '关联节点',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
-        'host' => 'Host',
-        'port' => 'Port',
-        'username' => 'Username',
-        'linked_node' => 'Linked Node',
-        'databases' => 'Databases',
-        'created' => 'Created',
+        'name' => '名称',
+        'host' => '主机',
+        'port' => '端口',
+        'username' => '用户名',
+        'linked_node' => '关联节点',
+        'databases' => '数据库',
+        'created' => '创建时间',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => '编辑',
+        'delete' => '删除',
     ],
 
     'errors' => [
-        'cannot_delete' => 'Cannot delete a database host with associated databases.',
+        'cannot_delete' => '无法删除仍有关联数据库的数据库主机。',
     ],
 
 ];

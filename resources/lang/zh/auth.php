@@ -14,11 +14,11 @@ return [
     'return' => '返回登录',
 
     'social' => [
-        'or' => 'OR',
+        'or' => '或',
         'google' => 'Google',
         'discord' => 'Discord',
-        'github' => 'GitHub',
-        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+        'github' => 'Github',
+        'not_linked' => '此账户尚未关联任何 :provider 账户。请先使用邮箱和密码登录，然后在账户设置页面中关联你的 :provider 账户。',
     ],
 
     'forgot-password' => [

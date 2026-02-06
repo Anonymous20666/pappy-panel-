@@ -19,25 +19,26 @@ return [
         'off' => '关闭',
         'loading' => '加载中……',
         'social' => [
-            'title' => 'Social Logins',
+            'title' => '社交登录',
             'date_format' => 'MMM do, yyyy',
             'unlink' => [
-                'title' => 'Unlink Account',
-                'confirm' => 'Are you sure you want to unlink your :provider account? You will no longer be able to use it to log in.',
-                'button' => 'Unlink',
+                'title' => '解除账户关联',
+                'confirm' => '确定要解除关联你的 :provider 账户吗？
+解除后将无法再使用该账户登录。',
+                'button' => '解除关联',
             ],
             'status' => [
-                'connected' => 'Connected (Updated: :date)',
-                'not-connected' => 'Not Connected',
+                'connected' => '已连接（更新于：:date）',
+                'not-connected' => '未连接',
             ],
             'actions' => [
-                'link' => 'Link',
-                'unlink' => 'Unlink',
+                'link' => '关联',
+                'unlink' => '解除关联',
             ],
             'messages' => [
-                'load-failed' => 'Failed to load social logins.',
-                'unlinked' => 'Account unlinked successfully.',
-                'unlink-failed' => 'Failed to unlink account.',
+                'load-failed' => '加载社交登录失败。',
+                'unlinked' => '账户已成功解除关联。',
+                'unlink-failed' => '解除账户关联失败。',
             ],
         ],
     ],

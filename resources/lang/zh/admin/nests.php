@@ -2,31 +2,31 @@
 
 return [
     
-    'label' => 'Nest',
-    'plural_label' => 'Nests',
+    'label' => '预设',
+    'plural_label' => '预设',
 
     'sections' => [
-        'configuration' => 'Nest Configuration',
+        'configuration' => '预设配置',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'author' => 'Author',
-        'description' => 'Description',
+        'name' => '名称',
+        'author' => '作者',
+        'description' => '描述',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to identify this nest.',
-        'author' => 'The author of this nest. Must be a valid email.',
-        'description' => 'A description of this nest.',
+        'name' => '用于标识该预设的唯一名称。',
+        'author' => '该预设的作者，必须是有效的电子邮箱地址。',
+        'description' => '该预设的描述。',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
-        'author' => 'Author',
-        'eggs' => 'Eggs',
-        'servers' => 'Servers',
+        'name' => '名称',
+        'author' => '作者',
+        'eggs' => '预设',
+        'servers' => '服务器',
     ],
     
     'notices' => [

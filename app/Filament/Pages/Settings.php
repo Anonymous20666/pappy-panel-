@@ -60,6 +60,18 @@ class Settings extends Page implements HasSchemas
         'captcha:turnstile:secret_key',
         'captcha:turnstile:site_key',
 
+        'pterodactyl:auth:google_enabled',
+        'pterodactyl:auth:google_client_id',
+        'pterodactyl:auth:google_client_secret',
+
+        'pterodactyl:auth:discord_enabled',
+        'pterodactyl:auth:discord_client_id',
+        'pterodactyl:auth:discord_client_secret',
+
+        'pterodactyl:auth:github_enabled',
+        'pterodactyl:auth:github_client_id',
+        'pterodactyl:auth:github_client_secret',
+
         'pterodactyl:guzzle:timeout',
         'pterodactyl:guzzle:connect_timeout',
 
@@ -133,6 +145,11 @@ class Settings extends Page implements HasSchemas
                         ->label(trans('admin/settings.security.title'))
                         ->icon('tabler-shield')
                         ->schema($this->securitySettings()),
+
+                    Tab::make('oauth')
+                        ->label(trans('admin/settings.oauth.title'))
+                        ->icon('tabler-navigation')
+                        ->schema($this->oauthSettings()),
 
                     Tab::make('mail')
                         ->label(trans('admin/settings.mail.title'))
@@ -249,6 +266,119 @@ class Settings extends Page implements HasSchemas
                         ->label('Turnstile Secret Key')
                         ->columnSpan(1)
                         ->visible(fn ($get) => $get('captcha:provider') === 'turnstile'),
+                ]),
+        ];
+    }
+
+    private function oauthSettings(): array
+    {
+        return [
+            Section::make("Google")
+                ->columns(3)
+                ->icon('tabler-brand-google')
+                ->collapsible()
+                ->collapsed()
+                ->schema([
+                    Toggle::make("pterodactyl:auth:google_enabled")
+                        ->label(trans('admin/settings.oauth.enabled'))
+                        ->onIcon('tabler-check')
+                        ->offIcon('tabler-x')
+                        ->onColor('success')
+                        ->offColor('danger')
+                        ->inline(false)
+                        ->live(),
+
+                    TextInput::make("pterodactyl:auth:google_client_id")
+                        ->label(trans('admin/settings.oauth.id-label'))
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                        ),
+
+                    TextInput::make("pterodactyl:auth:google_client_secret")
+                        ->label(trans('admin/settings.oauth.secret-label'))
+                        ->password()
+                        ->revealable()
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                        ),
+                ]),
+
+            Section::make("Discord")
+                ->columns(3)
+                ->icon('tabler-brand-discord')
+                ->collapsible()
+                ->collapsed()
+                ->schema([
+                    Toggle::make("pterodactyl:auth:discord_enabled")
+                        ->label(trans('admin/settings.oauth.enabled'))
+                        ->onIcon('tabler-check')
+                        ->offIcon('tabler-x')
+                        ->onColor('success')
+                        ->offColor('danger')
+                        ->inline(false)
+                        ->live(),
+
+                    TextInput::make("pterodactyl:auth:discord_client_id")
+                        ->label(trans('admin/settings.oauth.id-label'))
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                        ),
+
+                    TextInput::make("pterodactyl:auth:discord_client_secret")
+                        ->label(trans('admin/settings.oauth.secret-label'))
+                        ->password()
+                        ->revealable()
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                        ),
+                ]),
+
+            Section::make("Github")
+                ->columns(3)
+                ->icon('tabler-brand-github')
+                ->collapsible()
+                ->collapsed()
+                ->schema([
+                    Toggle::make("pterodactyl:auth:github_enabled")
+                        ->label(trans('admin/settings.oauth.enabled'))
+                        ->onIcon('tabler-check')
+                        ->offIcon('tabler-x')
+                        ->onColor('success')
+                        ->offColor('danger')
+                        ->inline(false)
+                        ->live(),
+
+                    TextInput::make("pterodactyl:auth:github_client_id")
+                        ->label(trans('admin/settings.oauth.id-label'))
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                        ),
+
+                    TextInput::make("pterodactyl:auth:github_client_secret")
+                        ->label(trans('admin/settings.oauth.secret-label'))
+                        ->password()
+                        ->revealable()
+                        ->required(
+                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                        )
+                        ->visible(
+                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                        ),
                 ]),
         ];
     }

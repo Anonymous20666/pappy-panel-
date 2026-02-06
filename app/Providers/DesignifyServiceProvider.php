@@ -6,8 +6,6 @@ use Psr\Log\LoggerInterface as Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 
@@ -142,7 +140,7 @@ class DesignifyServiceProvider extends ServiceProvider
     /**
      * Boot the service provider.
      */
-    public function boot(ConfigRepository $config, Encrypter $encrypter, Log $log, SettingsRepositoryInterface $settings): void
+    public function boot(ConfigRepository $config, Log $log, SettingsRepositoryInterface $settings): void
     {
         try {
             $values = $settings->all()->mapWithKeys(function ($setting) {
@@ -190,10 +188,5 @@ class DesignifyServiceProvider extends ServiceProvider
         } catch (QueryException $exception) {
             $log->error('Failed to reset Designify settings: ' . $exception->getMessage());
         }
-    }
-
-    public static function getEncryptedKeys(): array
-    {
-        return self::$encrypted;
     }
 }

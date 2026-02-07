@@ -57,6 +57,6 @@ return [
         'resource_not_found' => 'O recurso solicitado não existe neste servidor.',
     ],
     'social' => [
-        'unlink_only_login' => 'You cannot unlink your only login method without setting a password first.',
+        'unlink_only_login' => 'Não é possível desvincular seu único método de login sem definir uma senha primeiro.',
     ],
 ];

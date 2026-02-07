@@ -45,7 +45,7 @@ return [
         'username' => 'Username',
         'linked_node' => 'Linked Node',
         'databases' => 'Databases',
-        'created' => 'Created',
+        'created' => 'Criar',
     ],
 
     'actions' => [

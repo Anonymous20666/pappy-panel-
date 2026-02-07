@@ -3,18 +3,18 @@
 return [
 
     'label' => 'Mount',
-    'plural_label' => 'Mounts',
+    'plural_label' => 'Bağlama Noktaları',
 
     'sections' => [
-        'configuration' => 'Mount Configuration',
+        'configuration' => '',
     ],
 
     'fields' => [
-        'name' => 'Name',
+        'name' => 'İsim',
         'description' => 'Description',
         'source' => 'Source Path',
         'target' => 'Target Path',
-        'read_only' => 'Read Only',
+        'read_only' => 'Salt Okunur',
         'user_mountable' => 'User Mountable',
     ],
 
@@ -28,11 +28,11 @@ return [
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
+        'id' => 'KİMLİK',
+        'name' => 'İsim',
         'source' => 'Source',
         'target' => 'Target',
-        'read_only' => 'Read Only',
+        'read_only' => 'Salt Okunur',
         'user_mountable' => 'User Mountable',
     ],
 

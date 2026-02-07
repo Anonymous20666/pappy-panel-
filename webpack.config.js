@@ -2,6 +2,7 @@ const path = require('node:path');
 const webpack = require('webpack');
 const { WebpackAssetsManifest } = require('webpack-assets-manifest');
 const TerserPlugin = require('terser-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -13,7 +14,7 @@ module.exports = {
     performance: {
         hints: false,
     },
-    entry: ['react-hot-loader/patch', './resources/scripts/index.tsx'],
+    entry: './resources/scripts/index.tsx',
     output: {
         path: path.join(__dirname, '/public/assets'),
         filename: isProduction ? 'bundle.[chunkhash:8].js' : 'bundle.[fullhash:8].js',
@@ -45,6 +46,11 @@ module.exports = {
                 test: /\.tsx?$/,
                 exclude: /node_modules|\.spec\.tsx?$/,
                 loader: 'babel-loader',
+                options: !isProduction
+                    ? {
+                          plugins: ['react-refresh/babel'],
+                      }
+                    : {},
             },
             {
                 test: /\.mjs$/,
@@ -138,7 +144,8 @@ module.exports = {
             integrity: true,
             integrityHashes: ['sha384'],
         }),
-    ],
+        !isProduction && new ReactRefreshWebpackPlugin(),
+    ].filter(Boolean),
     optimization: {
         usedExports: true,
         sideEffects: false,

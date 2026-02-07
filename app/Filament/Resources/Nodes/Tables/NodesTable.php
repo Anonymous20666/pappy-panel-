@@ -1,0 +1,107 @@
+<?php
+
+namespace App\Filament\Resources\Nodes\Tables;
+
+use Filament\Actions;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+
+class NodesTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('id')
+                    ->label(trans('admin/nodes.table.id'))
+                    ->sortable()
+                    ->searchable(),
+
+                TextColumn::make('name')
+                    ->label(trans('admin/nodes.table.name'))
+                    ->searchable()
+                    ->sortable()
+                    ->weight('medium'),
+
+                TextColumn::make('location.short')
+                    ->label(trans('admin/nodes.table.location'))
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('fqdn')
+                    ->label(trans('admin/nodes.table.fqdn'))
+                    ->searchable()
+                    ->sortable()
+                    ->limit(40)
+                    ->toggleable(),
+
+                IconColumn::make('public')
+                    ->label(trans('admin/nodes.table.public'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
+
+                IconColumn::make('behind_proxy')
+                    ->label(trans('admin/nodes.table.behind_proxy'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                IconColumn::make('maintenance_mode')
+                    ->label(trans('admin/nodes.table.maintenance_mode'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
+
+                TextColumn::make('memory')
+                    ->label(trans('admin/nodes.table.memory'))
+                    ->numeric()
+                    ->sortable()
+                    ->suffix(' MiB')
+                    ->toggleable(),
+
+                TextColumn::make('disk')
+                    ->label(trans('admin/nodes.table.disk'))
+                    ->numeric()
+                    ->sortable()
+                    ->suffix(' MiB')
+                    ->toggleable(),
+
+                TextColumn::make('created_at')
+                    ->label(trans('admin/nodes.table.created'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                    
+                TextColumn::make('updated_at')
+                    ->label(trans('admin/nodes.table.updated'))
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('servers_count')
+                    ->label(trans('admin/nodes.table.servers'))
+                    ->counts('servers')
+                    ->sortable(),
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Actions\EditAction::make()
+                    ->label(trans('admin/nodes.actions.edit')),
+                Actions\DeleteAction::make()
+                    ->label(trans('admin/nodes.actions.delete')),
+            ])
+            /*->recordActions([
+                EditAction::make()
+                    ->label(trans('admin/nodes.actions.edit')),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label(trans('admin/nodes.actions.delete')),
+                ]),
+            ])*/;
+    }
+}

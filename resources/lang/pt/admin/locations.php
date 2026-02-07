@@ -39,7 +39,7 @@ return [
     ],
 
     'messages' => [
-        'cannot_delete_with_nodes' => 'Cannot delete a location with associated nodes.',
+        'cannot_delete_with_nodes' => 'Não é possível excluir um local com nodes associados.',
     ],
 
 ];

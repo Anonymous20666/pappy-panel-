@@ -24,6 +24,7 @@ import LanguageSwitcher from '@/reviactyl/ui/LanguageSwitcher';
 import { InvertToggle } from '@/reviactyl/ui/SmartInvert';
 import useFlash from '@/plugins/useFlash';
 import FlashMessageRender from '@/components/FlashMessageRender';
+import FileEditorSwitcher from '@/reviactyl/ui/FileEditorSwitcher';
 
 import SocialLoginsContainer from '@/components/dashboard/forms/SocialLoginsContainer';
 
@@ -141,6 +142,7 @@ export default () => {
                     <TitledGreyBox title={t('overview.customization')}>
                         <LanguageSwitcher />
                         <InvertToggle />
+                        <FileEditorSwitcher />
                     </TitledGreyBox>
                     <TitledGreyBox title={t('overview.2fa-verification')}>
                         <ConfigureTwoFactorForm />

@@ -2,8 +2,8 @@
 
 return [
 
-    'label' => 'Location',
-    'plural-label' => 'Locations',
+    'label' => 'Konum',
+    'plural-label' => 'Konumlar',
 
     'section' => [
         'title' => 'Location Details',
@@ -25,17 +25,17 @@ return [
     ],
 
     'table' => [
-        'id' => 'ID',
+        'id' => 'KİMLİK',
         'short' => 'Short Code',
-        'long' => 'Description',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'created' => 'Created',
+        'long' => 'Açıklama',
+        'nodes' => 'Düğümler',
+        'servers' => 'Sunucular',
+        'created' => 'Oluşturuldu',
     ],
 
     'actions' => [
         'edit' => 'Edit',
-        'delete' => 'Delete',
+        'delete' => 'Sil',
     ],
 
     'messages' => [

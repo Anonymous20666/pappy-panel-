@@ -8,6 +8,7 @@ export interface UserData {
     name_last: string;
     email: string;
     language: string;
+    fileEditor: string;
     rootAdmin: boolean;
     useTotp: boolean;
     createdAt: Date;

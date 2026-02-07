@@ -7,16 +7,16 @@ return [
     'memo' => 'Observação',
     'last-used' => 'Último uso',
     'created' => 'Criado em',
-    'never-used' => 'Never Used',
+    'never-used' => 'Nunca Usado',
 
-    'revoke' => 'Revoke',
-    'revoke-title' => 'Revoke API Key',
-    'revoke-warning' => 'Once this API key is revoked any applications currently using it will stop working.',
-    'revoked' => 'API Key has been revoked.',
+    'revoke' => 'Revogar',
+    'revoke-title' => 'Revogar Chave de API',
+    'revoke-warning' => 'Assim que essa chave de API for revogada, todos os aplicativos que a utilizam atualmente deixarão de funcionar.',
+    'revoked' => 'A chave da API foi revogada.',
 
     'permissions' => 'Selecionar permissões',
     'read-only' => 'Leitura',
-    'read-write' => 'Read & Write',
+    'read-write' => 'Ler & Escrever',
     'none' => 'None',
 
     'description' => 'Descrição',

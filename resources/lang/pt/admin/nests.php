@@ -6,27 +6,27 @@ return [
     'plural_label' => 'Nests',
 
     'sections' => [
-        'configuration' => 'Nest Configuration',
+        'configuration' => 'Configurações do Nest',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'author' => 'Author',
-        'description' => 'Description',
+        'name' => 'Nome',
+        'author' => 'Autor',
+        'description' => 'Descrição',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to identify this nest.',
-        'author' => 'The author of this nest. Must be a valid email.',
-        'description' => 'A description of this nest.',
+        'name' => 'Um nome único usado para identificar este Nest.',
+        'author' => 'O autor deste Nest. Deve ser um e-mail válido.',
+        'description' => 'Descrição deste Nest.',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
-        'author' => 'Author',
+        'name' => 'Nome',
+        'author' => 'Autor',
         'eggs' => 'Eggs',
-        'servers' => 'Servers',
+        'servers' => 'Servidores',
     ],
     
     'notices' => [

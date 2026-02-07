@@ -12,7 +12,7 @@ class UpdateUsersTable extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->char('fileEditor', 5)->default('cm'); // cm = CodeMirror
+            $table->char('editor', 5)->default('cm'); // cm = CodeMirror
         });
     }
 
@@ -22,7 +22,7 @@ class UpdateUsersTable extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('fileEditor');
+            $table->dropColumn('editor');
         });
     }
 }

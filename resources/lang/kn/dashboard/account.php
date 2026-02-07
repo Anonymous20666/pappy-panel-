@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'ಎರಡು-ಹಂತದ ಪರಿಶೀಲನೆ',
         'customization' => 'ಅನುಗುಣಗೊಳಿಸುವಿಕೆ',
         'language' => 'ಪ್ಯಾನೆಲ್ ಭಾಷೆ',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'ಸ್ಮಾರ್ಟ್ ಇನ್‌ವರ್ಟ್',
         'on' => 'ಆನ್',
         'off' => 'ಆಫ್',

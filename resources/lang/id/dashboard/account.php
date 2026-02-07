@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Verifikasi Dua Langkah',
         'customization' => 'Kustomisasi',
         'language' => 'Bahasa Panel',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Pembalikan Cerdas',
         'on' => 'Nyala',
         'off' => 'Mati',

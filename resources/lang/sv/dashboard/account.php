@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Två Stegs verifikation',
         'customization' => 'Anpassning',
         'language' => 'Panel språk',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Smart Invert',
         'on' => 'På',
         'off' => 'Av',

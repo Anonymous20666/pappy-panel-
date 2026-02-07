@@ -38,7 +38,7 @@ return [
             'messages' => [
                 'load-failed' => 'Failed to load social logins.',
                 'unlinked' => 'Account unlinked successfully.',
-                'unlink-failed' => 'Failed to unlink account.',
+                'unlink-failed' => 'Falha ao desvincular a conta.',
             ],
         ],
     ],

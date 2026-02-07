@@ -37,10 +37,10 @@ return [
     ],
     'oauth' => [
         'title' => 'OAuth',
-        'enabled' => 'Enabled',
-        'disabled' => 'Disabled',
+        'enabled' => 'Eingeschaltet',
+        'disabled' => 'Ausgeschaltet',
         'id-label' => 'Client ID',
-        'secret-label' => 'Client Secret',
+        'secret-label' => 'Client Geheimnis',
     ],
     'advanced' => [
         'title' => 'Erweitert',

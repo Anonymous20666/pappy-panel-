@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Verificação em Duas Etapas',
         'customization' => 'Personalização',
         'language' => 'Idioma do Painel',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Smart Invert',
         'on' => 'On',
         'off' => 'Off',

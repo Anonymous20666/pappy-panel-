@@ -14,6 +14,7 @@ use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Middleware\VerifyCaptcha;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\EditorMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use App\Http\Middleware\Activity\TrackAPIKey;
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
             VerifyCsrfToken::class,
             SubstituteBindings::class,
             LanguageMiddleware::class,
+            EditorMiddleware::class,
         ],
         'api' => [
             EnsureStatefulRequests::class,

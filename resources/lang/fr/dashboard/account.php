@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Vérification F2A',
         'customization' => 'Personnalisation',
         'language' => 'Language du Panel',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Thême négatif',
         'on' => 'Désactivé',
         'off' => 'Activé',

@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'दो-चरणीय सत्यापन',
         'customization' => 'अनुकूलन',
         'language' => 'पैनल भाषा',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'स्मार्ट इनवर्ट',
         'on' => 'चालू',
         'off' => 'बंद',

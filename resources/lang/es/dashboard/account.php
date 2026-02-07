@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Verificación de doble factor',
         'customization' => 'Personalización',
         'language' => 'Idioma del panel',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Inversión inteligente',
         'on' => 'Activado',
         'off' => 'Desactivado',

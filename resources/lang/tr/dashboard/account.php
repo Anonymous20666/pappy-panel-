@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'İki Adımlı Doğrulama',
         'customization' => 'Özelleştirme',
         'language' => 'Panel Dili',
+        'editor' => 'Preferred File Editor',
         'smart-invert' => 'Akıllı Ters Çevirme',
         'on' => 'Açık',
         'off' => 'Kapalı',

@@ -1,5 +1,4 @@
 import React, { lazy } from 'react';
-import { hot } from 'react-hot-loader/root';
 import { Route, Router, Switch } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
 import { store } from '@/state';
@@ -37,6 +36,7 @@ interface ExtendedWindow extends Window {
         root_admin: boolean;
         use_totp: boolean;
         language: string;
+        editor: string;
         updated_at: string;
         created_at: string;
         /* eslint-enable camelcase */
@@ -58,6 +58,7 @@ const App = () => {
             rootAdmin: PterodactylUser.root_admin,
             useTotp: PterodactylUser.use_totp,
             createdAt: new Date(PterodactylUser.created_at),
+            fileEditor: PterodactylUser.editor,
             updatedAt: new Date(PterodactylUser.updated_at),
         });
     }
@@ -113,4 +114,4 @@ const App = () => {
     );
 };
 
-export default hot(App);
+export default App;

@@ -14,6 +14,7 @@ return [
         '2fa-verification' => 'Zwei-Schritt-Verifizierung',
         'customization' => 'Anpassung',
         'language' => 'Panel-Sprache',
+        'editor' => 'Bevorzugter Dateieditor',
         'smart-invert' => 'Schlaues Invertieren',
         'on' => 'An',
         'off' => 'Aus',

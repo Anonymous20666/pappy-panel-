@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'User',
+    'title' => 'Usuário',
     'exceptions' => [
         'delete_self' => 'Você não pode excluir sua própria conta.',
         'user_has_servers' => 'Não é possível excluir um usuário com servidores ativos vinculados à sua conta. Por favor, exclua os servidores antes de continuar.',
@@ -11,18 +11,18 @@ return [
         'account_updated' => 'A conta foi atualizada com sucesso.',
     ],
     'details' => [
-        'account_details' => 'Account Details',
-        'external_id' => 'External ID',
-        'username' => 'Username',
-        'email' => 'Email Address',
-        'first_name' => 'First Name',
-        'last_name' => 'Last Name',
-        'language' => 'Language',
-        'password' => 'Password',
-        'password_confirmation' => 'Confirm Password',
-        'root_admin' => 'Root Administrator',
-        'root_admin_desc' => 'This user will have full access to all servers and settings on the system.',
-        'privileges' => 'Privileges',
-        'admin_status' => 'Admin Status',
+        'account_details' => 'Detalhes da Conta',
+        'external_id' => 'ID externo',
+        'username' => 'Nome de Usuário',
+        'email' => 'Endereço de E-mail',
+        'first_name' => 'Primeiro Nome',
+        'last_name' => 'Ultimo Nome',
+        'language' => 'Linguagem',
+        'password' => 'Senha',
+        'password_confirmation' => 'Confirmar Senha',
+        'root_admin' => 'Administrador Root',
+        'root_admin_desc' => 'Este usuário terá acesso total a todos os servidores e configurações do sistema.',
+        'privileges' => 'Privilégios',
+        'admin_status' => 'Status do administrador',
     ],
 ];

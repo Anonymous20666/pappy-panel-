@@ -96,7 +96,13 @@ class EditServer extends EditRecord
                 ->label(trans('admin/servers.actions.delete'))
                 ->color('danger')
                 ->requiresConfirmation()
-                ->action(fn () => app(ServerDeletionService::class)->handle($this->record))
+                ->action(function (Action $action) {
+                    try {
+                        app(ServerDeletionService::class)->handle($this->record);
+                    } catch (\Throwable $e) {
+                        $action->failure();
+                    }
+                })
                 ->successNotificationTitle(trans('admin/servers.alerts.server_deleted'))
                 ->failureNotificationTitle(trans('admin/servers.alerts.server_delete_failed'))
                 ->successRedirectUrl($this->getResource()::getUrl('index')),

@@ -33,12 +33,22 @@ class ServersRelationManager extends RelationManager
                     ->weight('medium'),
                 TextColumn::make('user')
                     ->label(trans('admin/servers.table.owner'))
-                    ->searchable()
+                    ->html()
+                    // This is hacky as hell but it allows us to display the user's name alongside their Gravatar in a single column.
                     ->formatStateUsing(function ($state) {
-                        Log::debug('Formatting owner email for server relation manager', ['state' => $state]);
-                        return $state ? $state->name_first . ' ' . $state->name_last : trans('admin/servers.table.no_owner');
+                        $email = strtolower(trim($state->email ?? ''));
+                        $hash = md5($email);
+                        $avatar = "https://www.gravatar.com/avatar/{$hash}?s=64&d=mp";
+                        $name = $state->name_first . ' ' . $state->name_last;
+
+                        return "
+                            <div style='display:flex;align-items:center;gap:8px'>
+                                <img src='{$avatar}' width='28' height='28' style='border-radius:50%'>
+                                <span>{$name}</span>
+                            </div>
+                        ";
                     })
-                    ->icon('heroicon-o-user') // TODO: Consider putting the user's Gravatar here
+                    ->searchable()
                     ->sortable(),
                 TextColumn::make('allocation')
                     ->label(trans('admin/servers.table.allocation'))

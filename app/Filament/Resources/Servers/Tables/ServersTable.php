@@ -9,7 +9,10 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\Layout\Split;
+use Filament\Tables\Columns\Layout\Stack;
 
 class ServersTable
 {
@@ -30,9 +33,22 @@ class ServersTable
 
                 TextColumn::make('user')
                     ->label(trans('admin/servers.table.owner'))
+                    ->html()
+                    // This is hacky as hell but it allows us to display the user's name alongside their Gravatar in a single column.
+                    ->formatStateUsing(function (Server $record) {
+                        $email = strtolower(trim($record->user->email ?? ''));
+                        $hash = md5($email);
+                        $avatar = "https://www.gravatar.com/avatar/{$hash}?s=64&d=mp";
+                        $name = $record->user->name_first . ' ' . $record->user->name_last;
+
+                        return "
+                            <div style='display:flex;align-items:center;gap:8px'>
+                                <img src='{$avatar}' width='28' height='28' style='border-radius:50%'>
+                                <span>{$name}</span>
+                            </div>
+                        ";
+                    })
                     ->searchable()
-                    ->formatStateUsing(fn (Server $record) => $record->user->name_first . ' ' . $record->user->name_last)
-                    ->icon('heroicon-o-user') // TODO: Consider putting the user's Gravatar here
                     ->sortable(),
 
                 TextColumn::make('node.name')

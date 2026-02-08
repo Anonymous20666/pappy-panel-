@@ -171,9 +171,19 @@ return [
         'toggle_install_status' => 'Toggle Install Status',
         'suspend' => 'Suspend',
         'unsuspend' => 'Unsuspend',
+        'suspended' => 'Suspended',
+        'unsuspended' => 'Unsuspended',
         'reinstall' => 'Reinstall',
         'delete' => 'Delete',
         'delete_forcibly' => 'Forcibly Delete',
         'view' => 'View',
+    ],
+
+    'alerts' => [
+        'install_toggled' => 'Server install status has been toggled.',
+        'server_suspended' => 'Server has been :action.',
+        'server_reinstalled' => 'Server reinstall has been initiated.',
+        'server_deleted' => 'Server has been deleted.',
+        'server_delete_failed' => 'Failed to delete server.',
     ],
 ];

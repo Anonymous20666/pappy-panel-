@@ -83,7 +83,7 @@ class EditServer extends EditRecord
                 ->color(fn () => $this->record->isSuspended() ? 'success' : 'warning')
                 ->requiresConfirmation()
                 ->action(fn () => app(ServerRepository::class)->suspend($this->record->id))
-                ->successNotificationTitle(trans('admin/servers.alerts.server_suspended')),
+                ->successNotificationTitle(trans('admin/servers.alerts.server_suspended', ['action' => $this->record->isSuspended() ? trans('admin/servers.actions.unsuspended') : trans('admin/servers.actions.suspended')])),
 
             Action::make('reinstall')
                 ->label(trans('admin/servers.actions.reinstall'))

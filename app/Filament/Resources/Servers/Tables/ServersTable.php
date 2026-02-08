@@ -28,7 +28,7 @@ class ServersTable
                     ->sortable()
                     ->weight('medium'),
 
-                TextColumn::make('user.email')
+                TextColumn::make('user')
                     ->label(trans('admin/servers.table.owner'))
                     ->searchable()
                     ->formatStateUsing(fn (Server $record) => $record->user->name_first . ' ' . $record->user->name_last)
@@ -47,6 +47,7 @@ class ServersTable
 
                 TextColumn::make('status')
                     ->label(trans('admin/servers.table.status'))
+                    ->placeholder(trans('admin/servers.table.no_status'))
                     ->badge()
                     ->sortable(),
 

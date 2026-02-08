@@ -7,6 +7,8 @@ use App\Filament\Resources\Nodes\Pages\EditNode;
 use App\Filament\Resources\Nodes\Pages\ListNodes;
 use App\Filament\Resources\Nodes\Schemas\NodeForm;
 use App\Filament\Resources\Nodes\Tables\NodesTable;
+use App\Filament\Resources\Nodes\RelationManagers\ServersRelationManager;
+use App\Filament\Resources\Nodes\RelationManagers\AllocationsRelationManager;
 use App\Models\Node;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -58,7 +60,8 @@ class NodeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            AllocationsRelationManager::class,
+            ServersRelationManager::class,
         ];
     }
 

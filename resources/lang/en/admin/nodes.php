@@ -145,4 +145,39 @@ return [
         'deleted' => 'Node has been successfully deleted.',
         'cannot_delete_with_servers' => 'Cannot delete a node with active servers.',
     ],
+
+    'allocations' => [
+        'table' => [
+            'ip' => 'IP',
+            'port' => 'Port',
+            'alias' => 'Alias',
+            'server' => 'Server',
+            'notes' => 'Notes',
+            'created' => 'Created',
+            'unassigned' => 'Unassigned',
+        ],
+        'fields' => [
+            'allocation_ip' => [
+                'label' => 'IP Address',
+                'helper' => 'Supports single IP or CIDR (e.g. 192.0.2.1 or 192.0.2.0/24).',
+            ],
+            'allocation_ports' => [
+                'label' => 'Ports',
+                'helper' => 'Enter ports or ranges (e.g. 25565, 25566, 25570-25580).',
+            ],
+            'allocation_alias' => [
+                'label' => 'IP Alias',
+                'helper' => 'Optional alias to display instead of the IP.',
+            ],
+        ],
+        'actions' => [
+            'add' => 'Add Allocation',
+            'delete' => 'Delete',
+        ],
+        'messages' => [
+            'created' => 'Allocations added.',
+            'deleted' => 'Allocation deleted.',
+            'failed' => 'Allocation action failed.',
+        ],
+    ],
 ];

@@ -158,6 +158,7 @@ return [
         'created' => 'Created',
         'updated' => 'Updated',
         'installed' => 'Installed',
+        'no_status' => 'No Status',
     ],
 
     'messages' => [

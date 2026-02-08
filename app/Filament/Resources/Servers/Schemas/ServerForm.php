@@ -371,7 +371,7 @@ class ServerForm
                             ->required()
                             ->numeric()
                             ->minValue(0)
-                            ->suffix(trans('admin/servers.fields.cpu.suffix'))
+                            ->suffix('%')
                             ->helperText(trans('admin/servers.fields.cpu.helper')),
 
                         TextInput::make('threads')

@@ -113,6 +113,10 @@ return [
             'label' => 'CPU',
             'helper' => 'CPU limit in percent. 100% means one full core, 200% means two full cores, etc.',
         ],
+        'enter_size_in_gib' => [
+            'label' => 'Enter size in GiB',
+            'helper' => 'You can enter sizes in GiB by using the "GiB" suffix (e.g. 10GiB = 10240MiB).',
+        ],
         'threads' => [
             'label' => 'CPU Threads',
             'helper' => 'Optional thread pinning. Example: 0-1,3.',

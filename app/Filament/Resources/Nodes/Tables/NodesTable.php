@@ -23,7 +23,7 @@ class NodesTable
                     ->state(function (Node $record): bool {
                         return Cache::remember(
                             'nodes.health.' . $record->id,
-                            now()->addSeconds(30),
+                            now()->addSeconds(5), // No need to check health more than once every 5 seconds
                             function () use ($record): bool {
                                 try {
                                     // TODO: Consider if the CLIENT's Health should be used here because of CORS Errors otherwise being hard to debug
@@ -55,14 +55,15 @@ class NodesTable
                 TextColumn::make('id')
                     ->label(trans('admin/nodes.table.id'))
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('fqdn')
                     ->label(trans('admin/nodes.table.fqdn'))
                     ->searchable()
                     ->sortable()
                     ->limit(40)
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 IconColumn::make('behind_proxy')
                     ->label(trans('admin/nodes.table.behind_proxy'))

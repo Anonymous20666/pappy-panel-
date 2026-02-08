@@ -2,38 +2,38 @@
 
 return [
 
-    'label' => 'Mount',
-    'plural_label' => 'Mounts',
+    'label' => 'Montagem',
+    'plural_label' => 'Montagens',
 
     'sections' => [
-        'configuration' => 'Mount Configuration',
+        'configuration' => 'Configuração de montagem',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'description' => 'Description',
-        'source' => 'Source Path',
-        'target' => 'Target Path',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'name' => 'Nome',
+        'description' => 'Descrição',
+        'source' => 'Caminho de origem',
+        'target' => 'Caminho de destino',
+        'read_only' => 'Apenas Leitura',
+        'user_mountable' => 'Montável pelo usuário',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to separate this mount from another.',
-        'description' => 'A longer, human-readable description of this mount.',
-        'source' => 'The file path on the host machine to mount to containers.',
-        'target' => 'The path inside the container to mount this as.',
-        'read_only' => 'If set, the mount will be read-only inside the container.',
-        'user_mountable' => 'If set, users will be able to mount this to their servers.',
+        'name' => 'Um nome único usado para diferenciar esta montaria de outras.',
+        'description' => 'Uma descrição mais longa e em linguagem acessível a humanos deste troféu.',
+        'source' => 'O caminho do arquivo na máquina host a ser montado nos contêineres.',
+        'target' => 'O caminho dentro do contêiner para montar isso.',
+        'read_only' => 'Se configurado, o ponto de montagem será somente leitura dentro do contêiner.',
+        'user_mountable' => 'Se configurado, os usuários poderão montar isso em seus servidores.',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
-        'source' => 'Source',
-        'target' => 'Target',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'name' => 'Nome',
+        'source' => 'Fonte',
+        'target' => 'Destino',
+        'read_only' => 'Apenas Leitura',
+        'user_mountable' => 'Montável pelo usuário',
     ],
 
 ];

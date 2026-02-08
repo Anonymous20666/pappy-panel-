@@ -2,40 +2,40 @@
 
 return [
 
-    'label' => 'Location',
-    'plural-label' => 'Locations',
+    'label' => 'Local',
+    'plural-label' => 'Locais',
 
     'section' => [
-        'title' => 'Location Details',
-        'description' => 'Define a location that nodes can be assigned to.',
+        'title' => 'Detalhes do Local',
+        'description' => 'Defina um local ao qual os nodes podem ser atribuídos.',
     ],
 
     'fields' => [
         'short' => [
-            'label' => 'Short Code',
+            'label' => 'Código curto',
             'placeholder' => 'us.nyc.1',
-            'helper' => 'A short identifier for this location.',
+            'helper' => 'Um identificador curto para este local.',
         ],
 
         'long' => [
-            'label' => 'Description',
+            'label' => 'Descrição',
             'placeholder' => 'New York City, NY, USA',
-            'helper' => 'A longer description of this location.',
+            'helper' => 'Uma descrição mais detalhada deste local',
         ],
     ],
 
     'table' => [
         'id' => 'ID',
-        'short' => 'Short Code',
-        'long' => 'Description',
+        'short' => 'Código curto',
+        'long' => 'Descrição',
         'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'created' => 'Created',
+        'servers' => 'Servidores',
+        'created' => 'Criar',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'Editar',
+        'delete' => 'Apagar',
     ],
 
     'messages' => [

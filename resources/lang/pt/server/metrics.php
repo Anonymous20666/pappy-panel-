@@ -24,7 +24,7 @@ return [
         'network' => [
             'title' => 'Network History',
             'rx_label' => 'Network RX (MB)',
-            'tx_label' => 'Network TX (MB)',
+            'tx_label' => 'Saída (MB)',
         ],
     ],
 ];

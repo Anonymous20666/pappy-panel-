@@ -3,7 +3,7 @@
 return [
     'overview' => [
         'title' => 'Configurações',
-        'general-title' => 'General',
+        'general-title' => 'Geral',
         'app-name' => 'Nome da Empresa',
         'app-logo' => 'Logo da Empresa',
         'app-icon' => 'Favicon',
@@ -18,11 +18,11 @@ return [
         'save-btn' => 'Salvar',
     ],
     'security' => [
-        'title' => 'Security',
-        'provider' => 'Captcha Provider',
+        'title' => 'Segurança',
+        'provider' => 'Provedor de Captcha',
     ],
     'mail' => [
-        'title' => 'Mail',
+        'title' => 'E-mail',
         'email-title' => 'Configurações de e-mail',
         'smtp-alert' => 'Esta interface é limitada a instâncias que usam SMTP como driver de e-mail. Use o comando <code>php artisan p:environment:mail</code> para atualizar suas configurações de e-mail ou defina <code>MAIL_DRIVER=smtp</code> no seu .env.',
         'host-label' => 'Host SMTP',
@@ -37,13 +37,13 @@ return [
     ],
     'oauth' => [
         'title' => 'OAuth',
-        'enabled' => 'Enabled',
-        'disabled' => 'Disabled',
+        'enabled' => 'Habilitado',
+        'disabled' => 'Desabilitado',
         'id-label' => 'Client ID',
         'secret-label' => 'Client Secret',
     ],
     'advanced' => [
-        'title' => 'Advanced',
+        'title' => 'Avançado',
         'status-label' => 'Status',
         'enabled' => 'Habilitado',
         'disabled' => 'Desabilitado',
@@ -59,12 +59,12 @@ return [
         'save-btn' => 'Salvar',
     ],
     'social' => [
-        'title' => 'Social Login',
-        'subtitle' => 'Configure social login providers.',
-        'enabled' => 'Enabled',
+        'title' => 'Login Social',
+        'subtitle' => 'Configure os provedores de login social.',
+        'enabled' => 'Habilitado',
         'client-id' => 'Client ID',
         'client-secret' => 'Client Secret',
-        'save-btn' => 'Save Settings',
-        'success' => 'Social login settings have been updated successfully.',
+        'save-btn' => 'Salvar Configurações',
+        'success' => 'As configurações de login social foram atualizadas com sucesso.',
     ],
 ];

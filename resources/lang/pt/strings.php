@@ -64,7 +64,7 @@ return [
     'yes' => 'Sim',
     'no' => 'Não',
     'delete' => 'Excluir',
-    '2fa' => '2FA',
+    '2fa' => 'Duas Etapas',
     'logout' => 'Sair',
     'admin_cp' => 'Painel de controle do administrador',
     'optional' => 'Opcional',

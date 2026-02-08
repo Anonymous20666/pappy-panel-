@@ -2,10 +2,10 @@
 
 return [
 
-    'label' => 'Database',
-    'plural-label' => 'Databases',
+    'label' => 'Veritabanı',
+    'plural-label' => 'Veritabanları',
 
-    'none' => 'None',
+    'none' => 'Yok',
 
     'sections' => [
         'host_details' => [
@@ -38,19 +38,19 @@ return [
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
+        'id' => 'KİMLİK',
+        'name' => 'İsim',
         'host' => 'Host',
         'port' => 'Port',
-        'username' => 'Username',
+        'username' => 'Kullanıcı Adı',
         'linked_node' => 'Linked Node',
-        'databases' => 'Databases',
-        'created' => 'Created',
+        'databases' => 'Veritabanları',
+        'created' => 'Oluşturuldu',
     ],
 
     'actions' => [
         'edit' => 'Edit',
-        'delete' => 'Delete',
+        'delete' => 'Sil',
     ],
 
     'errors' => [

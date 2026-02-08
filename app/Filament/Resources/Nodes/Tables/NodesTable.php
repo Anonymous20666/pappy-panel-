@@ -2,32 +2,60 @@
 
 namespace App\Filament\Resources\Nodes\Tables;
 
+use App\Models\Node;
+use App\Repositories\Wings\DaemonConfigurationRepository;
 use Filament\Actions;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Cache;
 
 class NodesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
-            ->columns([
-                TextColumn::make('id')
-                    ->label(trans('admin/nodes.table.id'))
-                    ->sortable()
-                    ->searchable(),
-
+        ->columns([
+                IconColumn::make('health')
+                    ->label('Health')
+                    ->trueIcon('heroicon-s-heart')
+                    ->falseIcon('heroicon-o-heart')
+                    ->state(function (Node $record): bool {
+                        return Cache::remember(
+                            'nodes.health.' . $record->id,
+                            now()->addSeconds(30),
+                            function () use ($record): bool {
+                                try {
+                                    // TODO: Consider if the CLIENT's Health should be used here because of CORS Errors otherwise being hard to debug
+                                    app(DaemonConfigurationRepository::class)
+                                        ->setNode($record)
+                                        ->getSystemInformation(2);
+                
+                                    return true;
+                                } catch (\Throwable) {
+                                    return false;
+                                }
+                            }
+                        );
+                    })
+                    ->boolean()
+                    ->sortable(),
+                    
                 TextColumn::make('name')
                     ->label(trans('admin/nodes.table.name'))
                     ->searchable()
                     ->sortable()
                     ->weight('medium'),
-
+                    
                 TextColumn::make('location.short')
                     ->label(trans('admin/nodes.table.location'))
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('id')
+                    ->label(trans('admin/nodes.table.id'))
+                    ->sortable()
+                    ->searchable(),
 
                 TextColumn::make('fqdn')
                     ->label(trans('admin/nodes.table.fqdn'))
@@ -36,23 +64,11 @@ class NodesTable
                     ->limit(40)
                     ->toggleable(),
 
-                IconColumn::make('public')
-                    ->label(trans('admin/nodes.table.public'))
-                    ->boolean()
-                    ->sortable()
-                    ->toggleable(),
-
                 IconColumn::make('behind_proxy')
                     ->label(trans('admin/nodes.table.behind_proxy'))
                     ->boolean()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-
-                IconColumn::make('maintenance_mode')
-                    ->label(trans('admin/nodes.table.maintenance_mode'))
-                    ->boolean()
-                    ->sortable()
-                    ->toggleable(),
 
                 TextColumn::make('memory')
                     ->label(trans('admin/nodes.table.memory'))
@@ -79,10 +95,23 @@ class NodesTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                
                 TextColumn::make('servers_count')
                     ->label(trans('admin/nodes.table.servers'))
                     ->counts('servers')
                     ->sortable(),
+
+                IconColumn::make('maintenance_mode')
+                    ->label(trans('admin/nodes.table.maintenance_mode'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
+
+                IconColumn::make('public')
+                    ->label(trans('admin/nodes.table.public'))
+                    ->boolean()
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 //

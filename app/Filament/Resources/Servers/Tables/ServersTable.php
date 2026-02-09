@@ -38,7 +38,7 @@ class ServersTable
                     ->formatStateUsing(function (Server $record) {
                         $email = strtolower(trim($record->user->email ?? ''));
                         $hash = md5($email);
-                        $avatar = "https://www.gravatar.com/avatar/{$hash}?s=64&d=mp";
+                        $avatar = $record->user->getFilamentAvatarUrl();
                         $name = $record->user->name_first . ' ' . $record->user->name_last;
 
                         return "

@@ -20,6 +20,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use App\Notifications\SendPasswordReset as ResetPasswordNotification;
+use Filament\Models\Contracts\HasAvatar;
 
 /**
  * App\Models\User.
@@ -81,6 +82,7 @@ use App\Notifications\SendPasswordReset as ResetPasswordNotification;
  */
 class User extends Model implements
     AuthenticatableContract,
+    HasAvatar,
     AuthorizableContract,
     CanResetPasswordContract
 {
@@ -301,5 +303,18 @@ class User extends Model implements
                 $builder->where('servers.owner_id', $this->id)->orWhere('subusers.user_id', $this->id);
             })
             ->groupBy('servers.id');
+    }
+    
+    public function getGravatarUrlAttribute(): string
+    {
+        $email = strtolower(trim($this->email));
+        $hash = md5($email);
+
+        return "https://www.gravatar.com/avatar/{$hash}?s=200";
+    }
+    
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->gravatar_url;
     }
 }

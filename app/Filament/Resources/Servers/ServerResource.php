@@ -20,8 +20,8 @@ class ServerResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
-    protected static string|BackedEnum|null $navigationIcon = 'tabler-server-2';
-    protected static string|BackedEnum|null $activeNavigationIcon = 'tabler-server-2-filled';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-server-stack';
+    protected static string|BackedEnum|null $activeNavigationIcon = 'heroicon-s-server-stack';
 
     protected static ?string $recordTitleAttribute = 'name';
 

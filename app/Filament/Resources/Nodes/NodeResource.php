@@ -70,7 +70,7 @@ class NodeResource extends Resource
         return [
             'index' => ListNodes::route('/'),
             'create' => CreateNode::route('/create'),
-            'edit' => EditNode::route('/{record}/edit'),
+         //   'edit' => EditNode::route('/{record}/edit'), todo; check on this. causing issue.
         ];
     }
 }

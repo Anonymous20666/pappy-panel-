@@ -26,46 +26,46 @@ class AllocationRelationManager extends RelationManager
             ->recordTitleAttribute('id')
             ->columns([
                 TextColumn::make('ip')
-                    ->label(trans('admin/nodes.allocations.table.ip'))
+                    ->label(trans('admin/node.allocations.table.ip'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('port')
-                    ->label(trans('admin/nodes.allocations.table.port'))
+                    ->label(trans('admin/node.allocations.table.port'))
                     ->sortable(),
 
                 TextColumn::make('ip_alias')
-                    ->label(trans('admin/nodes.allocations.table.alias'))
+                    ->label(trans('admin/node.allocations.table.alias'))
                     ->toggleable(),
 
                 TextColumn::make('server.name')
-                    ->label(trans('admin/nodes.allocations.table.server'))
-                    ->formatStateUsing(fn ($state) => $state ?: trans('admin/nodes.allocations.table.unassigned')),
+                    ->label(trans('admin/node.allocations.table.server'))
+                    ->formatStateUsing(fn ($state) => $state ?: trans('admin/node.allocations.table.unassigned')),
 
                 TextColumn::make('notes')
-                    ->label(trans('admin/nodes.allocations.table.notes'))
+                    ->label(trans('admin/node.allocations.table.notes'))
                     ->toggleable(),
 
                 TextColumn::make('created_at')
-                    ->label(trans('admin/nodes.allocations.table.created'))
+                    ->label(trans('admin/node.allocations.table.created'))
                     ->dateTime()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->headerActions([
                 Action::make('addAllocation')
-                    ->label(trans('admin/nodes.allocations.actions.add'))
+                    ->label(trans('admin/node.allocations.actions.add'))
                     ->icon('heroicon-o-plus')
                     ->form([
                         TextInput::make('allocation_ip')
-                            ->label(trans('admin/nodes.allocations.fields.allocation_ip.label'))
-                            ->helperText(trans('admin/nodes.allocations.fields.allocation_ip.helper'))
+                            ->label(trans('admin/node.allocations.fields.allocation_ip.label'))
+                            ->helperText(trans('admin/node.allocations.fields.allocation_ip.helper'))
                             ->required(),
                         TextInput::make('allocation_alias')
-                            ->label(trans('admin/nodes.allocations.fields.allocation_alias.label'))
-                            ->helperText(trans('admin/nodes.allocations.fields.allocation_alias.helper')),
+                            ->label(trans('admin/node.allocations.fields.allocation_alias.label'))
+                            ->helperText(trans('admin/node.allocations.fields.allocation_alias.helper')),
                         TagsInput::make('allocation_ports')
-                            ->label(trans('admin/nodes.allocations.fields.allocation_ports.label'))
-                            ->helperText(trans('admin/nodes.allocations.fields.allocation_ports.helper'))
+                            ->label(trans('admin/node.allocations.fields.allocation_ports.label'))
+                            ->helperText(trans('admin/node.allocations.fields.allocation_ports.helper'))
                             ->required(),
                     ])
                     ->action(function (array $data) {
@@ -73,12 +73,12 @@ class AllocationRelationManager extends RelationManager
                             app(AssignmentService::class)->handle($this->getOwnerRecord(), $data);
 
                             Notification::make()
-                                ->title(trans('admin/nodes.allocations.messages.created'))
+                                ->title(trans('admin/node.allocations.messages.created'))
                                 ->success()
                                 ->send();
                         } catch (\Throwable $e) {
                             Notification::make()
-                                ->title(trans('admin/nodes.allocations.messages.failed'))
+                                ->title(trans('admin/node.allocations.messages.failed'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();
@@ -87,7 +87,7 @@ class AllocationRelationManager extends RelationManager
             ])
             ->actions([
                 Action::make('delete')
-                    ->label(trans('admin/nodes.allocations.actions.delete'))
+                    ->label(trans('admin/node.allocations.actions.delete'))
                     ->icon('heroicon-o-trash')
                     ->color('danger')
                     ->requiresConfirmation()
@@ -97,12 +97,12 @@ class AllocationRelationManager extends RelationManager
                             app(AllocationDeletionService::class)->handle($record);
 
                             Notification::make()
-                                ->title(trans('admin/nodes.allocations.messages.deleted'))
+                                ->title(trans('admin/node.allocations.messages.deleted'))
                                 ->success()
                                 ->send();
                         } catch (\Throwable $e) {
                             Notification::make()
-                                ->title(trans('admin/nodes.allocations.messages.failed'))
+                                ->title(trans('admin/node.allocations.messages.failed'))
                                 ->body($e->getMessage())
                                 ->danger()
                                 ->send();

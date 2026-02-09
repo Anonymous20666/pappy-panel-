@@ -21,146 +21,146 @@ class NodeForm
     {
         return $schema
             ->components([
-                Section::make(trans('admin/nodes.sections.identity.title'))
-                    ->description(trans('admin/nodes.sections.identity.description'))
+                Section::make(trans('admin/node.sections.identity.title'))
+                    ->description(trans('admin/node.sections.identity.description'))
                     ->schema([
                         TextInput::make('name')
-                            ->label(trans('admin/nodes.fields.name.label'))
+                            ->label(trans('admin/node.fields.name.label'))
                             ->required()
                             ->maxLength(100)
-                            ->placeholder(trans('admin/nodes.fields.name.placeholder'))
-                            ->helperText(trans('admin/nodes.fields.name.helper'))
+                            ->placeholder(trans('admin/node.fields.name.placeholder'))
+                            ->helperText(trans('admin/node.fields.name.helper'))
                             ->columnSpanFull(),
 
                         Textarea::make('description')
-                            ->label(trans('admin/nodes.fields.description.label'))
-                            ->placeholder(trans('admin/nodes.fields.description.placeholder'))
-                            ->helperText(trans('admin/nodes.fields.description.helper'))
+                            ->label(trans('admin/node.fields.description.label'))
+                            ->placeholder(trans('admin/node.fields.description.placeholder'))
+                            ->helperText(trans('admin/node.fields.description.helper'))
                             ->columnSpanFull(),
 
                         Select::make('location_id')
-                            ->label(trans('admin/nodes.fields.location.label'))
+                            ->label(trans('admin/node.fields.location.label'))
                             ->relationship('location', 'short')
                             ->required()
                             ->searchable()
                             ->preload()
-                            ->helperText(trans('admin/nodes.fields.location.helper'))
+                            ->helperText(trans('admin/node.fields.location.helper'))
                             ->columnSpanFull(),
 
                         Toggle::make('public')
-                            ->label(trans('admin/nodes.fields.public.label'))
+                            ->label(trans('admin/node.fields.public.label'))
                             ->default(true)
-                            ->helperText(trans('admin/nodes.fields.public.helper')),
+                            ->helperText(trans('admin/node.fields.public.helper')),
 
                         Toggle::make('maintenance_mode')
-                            ->label(trans('admin/nodes.fields.maintenance_mode.label'))
+                            ->label(trans('admin/node.fields.maintenance_mode.label'))
                             ->default(false)
-                            ->helperText(trans('admin/nodes.fields.maintenance_mode.helper')),
+                            ->helperText(trans('admin/node.fields.maintenance_mode.helper')),
                     ])
                     ->columns(2),
 
-                Section::make(trans('admin/nodes.sections.resources.title'))
-                    ->description(trans('admin/nodes.sections.resources.description'))
+                Section::make(trans('admin/node.sections.resources.title'))
+                    ->description(trans('admin/node.sections.resources.description'))
                     ->schema([
                         TextInput::make('memory')
-                            ->label(trans('admin/nodes.fields.memory.label'))
+                            ->label(trans('admin/node.fields.memory.label'))
                             ->required()
                             ->numeric()
                             ->minValue(1)
                             ->suffix('MiB')
-                            ->helperText(trans('admin/nodes.fields.memory.helper')),
+                            ->helperText(trans('admin/node.fields.memory.helper')),
 
                         TextInput::make('memory_overallocate')
-                            ->label(trans('admin/nodes.fields.memory_overallocate.label'))
+                            ->label(trans('admin/node.fields.memory_overallocate.label'))
                             ->required()
                             ->numeric()
                             ->default(0)
                             ->suffix('%')
-                            ->helperText(trans('admin/nodes.fields.memory_overallocate.helper')),
+                            ->helperText(trans('admin/node.fields.memory_overallocate.helper')),
 
                         TextInput::make('disk')
-                            ->label(trans('admin/nodes.fields.disk.label'))
+                            ->label(trans('admin/node.fields.disk.label'))
                             ->required()
                             ->numeric()
                             ->minValue(1)
                             ->suffix('MiB')
-                            ->helperText(trans('admin/nodes.fields.disk.helper')),
+                            ->helperText(trans('admin/node.fields.disk.helper')),
 
                         TextInput::make('disk_overallocate')
-                            ->label(trans('admin/nodes.fields.disk_overallocate.label'))
+                            ->label(trans('admin/node.fields.disk_overallocate.label'))
                             ->required()
                             ->numeric()
                             ->default(0)
                             ->suffix('%')
-                            ->helperText(trans('admin/nodes.fields.disk_overallocate.helper')),
+                            ->helperText(trans('admin/node.fields.disk_overallocate.helper')),
 
                         TextInput::make('upload_size')
-                            ->label(trans('admin/nodes.fields.upload_size.label'))
+                            ->label(trans('admin/node.fields.upload_size.label'))
                             ->required()
                             ->numeric()
                             ->minValue(1)
                             ->default(100)
                             ->suffix('MiB')
-                            ->helperText(trans('admin/nodes.fields.upload_size.helper')),
+                            ->helperText(trans('admin/node.fields.upload_size.helper')),
                     ])
                     ->columns(2),
                 
-                Section::make(trans('admin/nodes.sections.daemon.title'))
-                    ->description(trans('admin/nodes.sections.daemon.description'))
+                Section::make(trans('admin/node.sections.daemon.title'))
+                    ->description(trans('admin/node.sections.daemon.description'))
                     ->schema([
                         TextInput::make('daemonBase')
-                            ->label(trans('admin/nodes.fields.daemon_base.label'))
+                            ->label(trans('admin/node.fields.daemon_base.label'))
                             ->required()
                             ->maxLength(255)
                             ->default('/var/lib/pterodactyl/volumes')
-                            ->placeholder(trans('admin/nodes.fields.daemon_base.placeholder'))
-                            ->helperText(trans('admin/nodes.fields.daemon_base.helper')),
+                            ->placeholder(trans('admin/node.fields.daemon_base.placeholder'))
+                            ->helperText(trans('admin/node.fields.daemon_base.helper')),
 
                         TextInput::make('daemonListen')
-                            ->label(trans('admin/nodes.fields.daemon_listen.label'))
+                            ->label(trans('admin/node.fields.daemon_listen.label'))
                             ->required()
                             ->numeric()
                             ->minValue(1)
                             ->maxValue(65535)
                             ->default(8080)
-                            ->helperText(trans('admin/nodes.fields.daemon_listen.helper')),
+                            ->helperText(trans('admin/node.fields.daemon_listen.helper')),
 
                         TextInput::make('daemonSFTP')
-                            ->label(trans('admin/nodes.fields.daemon_sftp.label'))
+                            ->label(trans('admin/node.fields.daemon_sftp.label'))
                             ->required()
                             ->numeric()
                             ->minValue(1)
                             ->maxValue(65535)
                             ->default(2022)
-                            ->helperText(trans('admin/nodes.fields.daemon_sftp.helper')),
+                            ->helperText(trans('admin/node.fields.daemon_sftp.helper')),
 
                         TextInput::make('containerText')
-                            ->label(trans('admin/nodes.fields.container_text.label'))
+                            ->label(trans('admin/node.fields.container_text.label'))
                             ->maxLength(50)
                             ->default('container@reviactyl~')
-                            ->helperText(trans('admin/nodes.fields.container_text.helper')),
+                            ->helperText(trans('admin/node.fields.container_text.helper')),
 
                         TextInput::make('daemonText')
-                            ->label(trans('admin/nodes.fields.daemon_text.label'))
+                            ->label(trans('admin/node.fields.daemon_text.label'))
                             ->maxLength(50)
                             ->default('[Reviactyl Daemon]:')
-                            ->helperText(trans('admin/nodes.fields.daemon_text.helper')),
+                            ->helperText(trans('admin/node.fields.daemon_text.helper')),
                     ])
                     ->columns(2),
 
-                Section::make(trans('admin/nodes.sections.connection.title'))
-                    ->description(trans('admin/nodes.sections.connection.description'))
+                Section::make(trans('admin/node.sections.connection.title'))
+                    ->description(trans('admin/node.sections.connection.description'))
                     ->schema([
                         TextInput::make('fqdn')
-                            ->label(trans('admin/nodes.fields.fqdn.label'))
+                            ->label(trans('admin/node.fields.fqdn.label'))
                             ->required()
                             ->maxLength(255)
-                            ->placeholder(trans('admin/nodes.fields.fqdn.placeholder'))
-                            ->helperText(trans('admin/nodes.fields.fqdn.helper'))
+                            ->placeholder(trans('admin/node.fields.fqdn.placeholder'))
+                            ->helperText(trans('admin/node.fields.fqdn.helper'))
                             ->columnSpanFull(),
 
                         Toggle::make('scheme')
-                            ->label(trans('admin/nodes.fields.ssl.label'))
+                            ->label(trans('admin/node.fields.ssl.label'))
                             ->default(true)
                             ->disabled(fn () => request()->secure())
                             ->dehydrated(true)
@@ -182,13 +182,13 @@ class NodeForm
                             })
                             ->dehydrateStateUsing(fn ($state) => $state ? 'https' : 'http')
                             ->helperText(fn () => request()->secure() 
-                                ? trans('admin/nodes.fields.ssl.helper_forced')
-                                : trans('admin/nodes.fields.ssl.helper')),
+                                ? trans('admin/node.fields.ssl.helper_forced')
+                                : trans('admin/node.fields.ssl.helper')),
 
                         Toggle::make('behind_proxy')
-                            ->label(trans('admin/nodes.fields.behind_proxy.label'))
+                            ->label(trans('admin/node.fields.behind_proxy.label'))
                             ->default(false)
-                            ->helperText(trans('admin/nodes.fields.behind_proxy.helper')),
+                            ->helperText(trans('admin/node.fields.behind_proxy.helper')),
                     ])
                     ->columns(2),
 

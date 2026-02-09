@@ -16,7 +16,7 @@ class EditNode extends EditRecord
             DeleteAction::make()
                 ->before(function () {
                     if ($this->record->servers()->count() > 0) {
-                        throw new \Exception(trans('admin/nodes.messages.cannot_delete_with_servers'));
+                        throw new \Exception(trans('admin/node.messages.cannot_delete_with_servers'));
                     }
                 }),
         ];

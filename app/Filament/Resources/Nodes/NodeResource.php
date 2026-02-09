@@ -39,12 +39,12 @@ class NodeResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return trans('admin/nodes.label');
+        return trans('admin/node.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return trans('admin/nodes.plural-label');
+        return trans('admin/node.plural-label');
     }
 
     public static function form(Schema $schema): Schema

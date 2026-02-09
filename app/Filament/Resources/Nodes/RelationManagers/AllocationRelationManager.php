@@ -16,7 +16,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TagsInput;
 
-class AllocationsRelationManager extends RelationManager
+class AllocationRelationManager extends RelationManager
 {
     protected static string $relationship = 'allocations';
 

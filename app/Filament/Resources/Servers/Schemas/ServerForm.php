@@ -24,23 +24,23 @@ class ServerForm
         return $schema
             ->components([
                 Toggle::make('advanced_mode')
-                    ->label(trans('admin/servers.fields.advanced_mode.label'))
+                    ->label(trans('admin/server.fields.advanced_mode.label'))
                     ->default(false)
                     ->live()
-                    ->helperText(trans('admin/servers.fields.advanced_mode.helper'))
+                    ->helperText(trans('admin/server.fields.advanced_mode.helper'))
                     ->columnSpanFull(),
-                Section::make(trans('admin/servers.sections.identity.title'))
-                    ->description(trans('admin/servers.sections.identity.description'))
+                Section::make(trans('admin/server.sections.identity.title'))
+                    ->description(trans('admin/server.sections.identity.description'))
                     ->schema([
                         TextInput::make('name')
-                            ->label(trans('admin/servers.fields.name.label'))
+                            ->label(trans('admin/server.fields.name.label'))
                             ->required()
                             ->maxLength(191)
-                            ->placeholder(trans('admin/servers.fields.name.placeholder'))
-                            ->helperText(trans('admin/servers.fields.name.helper')),
+                            ->placeholder(trans('admin/server.fields.name.placeholder'))
+                            ->helperText(trans('admin/server.fields.name.helper')),
 
                         Select::make('owner_id')
-                            ->label(trans('admin/servers.fields.owner.label'))
+                            ->label(trans('admin/server.fields.owner.label'))
                             ->relationship('user', 'email')
                             ->searchable()
                             ->preload()
@@ -48,36 +48,36 @@ class ServerForm
                             ->getOptionLabelFromRecordUsing(
                                 fn (User $record) => sprintf('%s (%s)', $record->username, $record->email)
                             )
-                            ->helperText(trans('admin/servers.fields.owner.helper')),
+                            ->helperText(trans('admin/server.fields.owner.helper')),
 
                         Textarea::make('description')
-                            ->label(trans('admin/servers.fields.description.label'))
-                            ->placeholder(trans('admin/servers.fields.description.placeholder'))
-                            ->helperText(trans('admin/servers.fields.description.helper'))
+                            ->label(trans('admin/server.fields.description.label'))
+                            ->placeholder(trans('admin/server.fields.description.placeholder'))
+                            ->helperText(trans('admin/server.fields.description.helper'))
                             ->columnSpanFull(),
                         TextInput::make('external_id')
-                            ->label(trans('admin/servers.fields.external_id.label'))
-                            ->helperText(trans('admin/servers.fields.external_id.helper'))
+                            ->label(trans('admin/server.fields.external_id.label'))
+                            ->helperText(trans('admin/server.fields.external_id.helper'))
                             ->maxLength(191)
                             ->columnSpanFull()
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
                     ]),
 
-                Section::make(trans('admin/servers.sections.allocation.title'))
-                    ->description(trans('admin/servers.sections.allocation.description'))
+                Section::make(trans('admin/server.sections.allocation.title'))
+                    ->description(trans('admin/server.sections.allocation.description'))
                     ->schema([
                         Select::make('node_id')
-                            ->label(trans('admin/servers.fields.node.label'))
+                            ->label(trans('admin/server.fields.node.label'))
                             ->relationship('node', 'name')
                             ->required()
                             ->searchable()
                             ->preload()
                             ->reactive()
-                            ->helperText(trans('admin/servers.fields.node.helper'))
+                            ->helperText(trans('admin/server.fields.node.helper'))
                             ->disabled(fn (?Server $record) => $record !== null),
 
                         Select::make('allocation_id')
-                            ->label(trans('admin/servers.fields.allocation.label'))
+                            ->label(trans('admin/server.fields.allocation.label'))
                             ->required()
                             ->searchable()
                             ->options(function (Get $get, ?Server $record) {
@@ -104,11 +104,11 @@ class ServerForm
                                     ->all();
                             })
                             ->disabled(fn (Get $get, ?Server $record) => blank($get('node_id')) && $record === null)
-                            ->helperText(trans('admin/servers.fields.allocation.helper')),
+                            ->helperText(trans('admin/server.fields.allocation.helper')),
 
                         Select::make('allocation_additional')
-                            ->label(trans('admin/servers.fields.additional_allocations.label'))
-                            ->helperText(trans('admin/servers.fields.additional_allocations.helper'))
+                            ->label(trans('admin/server.fields.additional_allocations.label'))
+                            ->helperText(trans('admin/server.fields.additional_allocations.helper'))
                             ->multiple()
                             ->searchable()
                             ->options(function (Get $get, ?Server $record) {
@@ -146,20 +146,20 @@ class ServerForm
                             ->disabled(fn (Get $get, ?Server $record) => blank($get('node_id')) && $record === null),
                     ]),
 
-                Section::make(trans('admin/servers.sections.startup.title'))
-                    ->description(trans('admin/servers.sections.startup.description'))
+                Section::make(trans('admin/server.sections.startup.title'))
+                    ->description(trans('admin/server.sections.startup.description'))
                     ->schema([
                         Select::make('nest_id')
-                            ->label(trans('admin/servers.fields.nest.label'))
+                            ->label(trans('admin/server.fields.nest.label'))
                             ->relationship('nest', 'name')
                             ->required()
                             ->searchable()
                             ->preload()
                             ->reactive()
-                            ->helperText(trans('admin/servers.fields.nest.helper')),
+                            ->helperText(trans('admin/server.fields.nest.helper')),
 
                         Select::make('egg_id')
-                            ->label(trans('admin/servers.fields.egg.label'))
+                            ->label(trans('admin/server.fields.egg.label'))
                             ->required()
                             ->searchable()
                             ->options(fn (Get $get) =>
@@ -203,33 +203,33 @@ class ServerForm
                                     ->mapWithKeys(fn ($variable) => [$variable->env_variable => $variable->default_value])
                                     ->toArray());
                             })
-                            ->helperText(trans('admin/servers.fields.egg.helper')),
+                            ->helperText(trans('admin/server.fields.egg.helper')),
 
                         Textarea::make('startup')
-                            ->label(trans('admin/servers.fields.startup.label'))
+                            ->label(trans('admin/server.fields.startup.label'))
                             ->required()
                             ->columnSpanFull()
-                            ->helperText(trans('admin/servers.fields.startup.helper'))
+                            ->helperText(trans('admin/server.fields.startup.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
                         Toggle::make('use_custom_image')
-                            ->label(trans('admin/servers.fields.use_custom_image.label'))
+                            ->label(trans('admin/server.fields.use_custom_image.label'))
                             ->default(false)
                             ->live()
-                            ->helperText(trans('admin/servers.fields.use_custom_image.helper'))
+                            ->helperText(trans('admin/server.fields.use_custom_image.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
 
                         // Image
                         TextInput::make('image')
-                            ->label(trans('admin/servers.fields.image.label'))
+                            ->label(trans('admin/server.fields.image.label'))
                             ->required()
-                            ->helperText(trans('admin/servers.fields.image.helper'))
-                            ->placeholder(trans('admin/servers.fields.image.placeholder'))
+                            ->helperText(trans('admin/server.fields.image.helper'))
+                            ->placeholder(trans('admin/server.fields.image.placeholder'))
                             ->visible(fn (Get $get) => $get('use_custom_image') === true),
 
                         Select::make('image')
-                            ->label(trans('admin/servers.fields.image.label'))
+                            ->label(trans('admin/server.fields.image.label'))
                             ->required()
                             ->options(function (Get $get, ?Server $record) {
                                 $eggId = $get('egg_id') ?? $record?->egg_id;
@@ -237,14 +237,14 @@ class ServerForm
 
                                 if (!$eggId) {
                                     return $currentImage
-                                        ? [$currentImage => trans('admin/servers.fields.image.custom')]
+                                        ? [$currentImage => trans('admin/server.fields.image.custom')]
                                         : [];
                                 }
 
                                 $egg = Egg::query()->find($eggId);
                                 if (!$egg) {
                                     return $currentImage
-                                        ? [$currentImage => trans('admin/servers.fields.image.custom')]
+                                        ? [$currentImage => trans('admin/server.fields.image.custom')]
                                         : [];
                                 }
 
@@ -262,12 +262,12 @@ class ServerForm
                                 }
 
                                 if ($currentImage && !array_key_exists($currentImage, $options)) {
-                                    $options = [$currentImage => trans('admin/servers.fields.image.custom')] + $options;
+                                    $options = [$currentImage => trans('admin/server.fields.image.custom')] + $options;
                                 }
 
                                 return $options;
                             })
-                            ->helperText(trans('admin/servers.fields.image.helper'))
+                            ->helperText(trans('admin/server.fields.image.helper'))
                             ->visible(fn (Get $get) => $get('use_custom_image') === false)
                             /*
                             Consideration:
@@ -309,34 +309,34 @@ class ServerForm
                             ->columnSpan(fn (Get $get) => $get('advanced_mode') === false ? 2 : 1),
 
                         Toggle::make('skip_scripts')
-                            ->label(trans('admin/servers.fields.skip_scripts.label'))
+                            ->label(trans('admin/server.fields.skip_scripts.label'))
                             ->default(false)
-                            ->helperText(trans('admin/servers.fields.skip_scripts.helper'))
+                            ->helperText(trans('admin/server.fields.skip_scripts.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
                         Toggle::make('start_on_completion')
-                            ->label(trans('admin/servers.fields.start_on_completion.label'))
+                            ->label(trans('admin/server.fields.start_on_completion.label'))
                             ->default(true)
-                            ->helperText(trans('admin/servers.fields.start_on_completion.helper'))
+                            ->helperText(trans('admin/server.fields.start_on_completion.helper'))
                             ->columnSpan(fn (Get $get) => $get('advanced_mode') === false ? 2 : 1),
                     ])
                     ->columns(2),
 
-                Section::make(trans('admin/servers.sections.resources.title'))
-                    ->description(trans('admin/servers.sections.resources.description'))
+                Section::make(trans('admin/server.sections.resources.title'))
+                    ->description(trans('admin/server.sections.resources.description'))
                     ->schema([
                         TextInput::make('memory')
-                            ->label(trans('admin/servers.fields.memory.label'))
+                            ->label(trans('admin/server.fields.memory.label'))
                             ->required()
                             ->numeric()
                             ->minValue(0)
                             ->suffix(fn (Get $get) => $get('enter_size_in_gib') ? 'GiB' : 'MiB')
                             // Make sure this saves as MiB in the database regardless of how it's entered
                             ->dehydrateStateUsing(fn ($state, Get $get) => $get('enter_size_in_gib') ? (int)round((float)$state * 1024) : (int)$state)
-                            ->helperText(trans('admin/servers.fields.memory.helper')),
+                            ->helperText(trans('admin/server.fields.memory.helper')),
 
                         TextInput::make('swap')
-                            ->label(trans('admin/servers.fields.swap.label'))
+                            ->label(trans('admin/server.fields.swap.label'))
                             ->required()
                             ->numeric()
                             ->minValue(-1)
@@ -344,52 +344,52 @@ class ServerForm
                             ->suffix(fn (Get $get) => $get('enter_size_in_gib') ? 'GiB' : 'MiB')
                             // Make sure this saves as MiB in the database regardless of how it's entered
                             ->dehydrateStateUsing(fn ($state, Get $get) => $get('enter_size_in_gib') && $state != -1 ? (int)round((float)$state * 1024) : (int)$state)
-                            ->helperText(trans('admin/servers.fields.swap.helper')),
+                            ->helperText(trans('admin/server.fields.swap.helper')),
 
                         TextInput::make('disk')
-                            ->label(trans('admin/servers.fields.disk.label'))
+                            ->label(trans('admin/server.fields.disk.label'))
                             ->required()
                             ->numeric()
                             ->minValue(0)
                             ->suffix(fn (Get $get) => $get('enter_size_in_gib') ? 'GiB' : 'MiB')
                             // Make sure this saves as MiB in the database regardless of how it's entered
                             ->dehydrateStateUsing(fn ($state, Get $get) => $get('enter_size_in_gib') && $state != -1 ? (int)round((float)$state * 1024) : (int)$state)
-                            ->helperText(trans('admin/servers.fields.disk.helper')),
+                            ->helperText(trans('admin/server.fields.disk.helper')),
 
                         TextInput::make('io')
-                            ->label(trans('admin/servers.fields.io.label'))
+                            ->label(trans('admin/server.fields.io.label'))
                             ->required()
                             ->numeric()
                             ->minValue(10)
                             ->maxValue(1000)
                             ->default(500)
-                            ->helperText(trans('admin/servers.fields.io.helper'))
+                            ->helperText(trans('admin/server.fields.io.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
                         TextInput::make('cpu')
-                            ->label(trans('admin/servers.fields.cpu.label'))
+                            ->label(trans('admin/server.fields.cpu.label'))
                             ->required()
                             ->numeric()
                             ->minValue(0)
                             ->suffix('%')
-                            ->helperText(trans('admin/servers.fields.cpu.helper')),
+                            ->helperText(trans('admin/server.fields.cpu.helper')),
 
                         TextInput::make('threads')
-                            ->label(trans('admin/servers.fields.threads.label'))
-                            ->helperText(trans('admin/servers.fields.threads.helper'))
+                            ->label(trans('admin/server.fields.threads.label'))
+                            ->helperText(trans('admin/server.fields.threads.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
                         Toggle::make('oom_disabled')
-                            ->label(trans('admin/servers.fields.oom_disabled.label'))
+                            ->label(trans('admin/server.fields.oom_disabled.label'))
                             ->default(true)
-                            ->helperText(trans('admin/servers.fields.oom_disabled.helper'))
+                            ->helperText(trans('admin/server.fields.oom_disabled.helper'))
                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
                         Toggle::make('enter_size_in_gib')
-                            ->label(trans('admin/servers.fields.enter_size_in_gib.label'))
+                            ->label(trans('admin/server.fields.enter_size_in_gib.label'))
                             ->default(false)
                             ->live()
-                            ->helperText(trans('admin/servers.fields.enter_size_in_gib.helper'))
+                            ->helperText(trans('admin/server.fields.enter_size_in_gib.helper'))
                             ->afterStateUpdated(function (Set $set, Get $get) {
                                 $memory = $get('memory');
                                 $swap = $get('swap');
@@ -411,40 +411,40 @@ class ServerForm
                     ->columns(2)
                     ->columnSpan(2),
 
-                Section::make(trans('admin/servers.sections.feature_limits.title'))
-                    ->description(trans('admin/servers.sections.feature_limits.description'))
+                Section::make(trans('admin/server.sections.feature_limits.title'))
+                    ->description(trans('admin/server.sections.feature_limits.description'))
                     ->schema([
                         TextInput::make('database_limit')
-                            ->label(trans('admin/servers.fields.database_limit.label'))
+                            ->label(trans('admin/server.fields.database_limit.label'))
                             ->numeric()
                             ->minValue(0)
                             ->default(0)
-                            ->helperText(trans('admin/servers.fields.database_limit.helper')),
+                            ->helperText(trans('admin/server.fields.database_limit.helper')),
 
                         TextInput::make('allocation_limit')
-                            ->label(trans('admin/servers.fields.allocation_limit.label'))
+                            ->label(trans('admin/server.fields.allocation_limit.label'))
                             ->numeric()
                             ->minValue(0)
                             ->default(0)
-                            ->helperText(trans('admin/servers.fields.allocation_limit.helper')),
+                            ->helperText(trans('admin/server.fields.allocation_limit.helper')),
 
                         TextInput::make('backup_limit')
-                            ->label(trans('admin/servers.fields.backup_limit.label'))
+                            ->label(trans('admin/server.fields.backup_limit.label'))
                             ->numeric()
                             ->minValue(0)
                             ->default(0)
-                            ->helperText(trans('admin/servers.fields.backup_limit.helper')),
+                            ->helperText(trans('admin/server.fields.backup_limit.helper')),
                     ])
                     ->columns(2),
 
-                Section::make(trans('admin/servers.sections.environment.title'))
-                    ->description(trans('admin/servers.sections.environment.description'))
+                Section::make(trans('admin/server.sections.environment.title'))
+                    ->description(trans('admin/server.sections.environment.description'))
                     ->schema([
                         KeyValue::make('environment')
-                            ->keyLabel(trans('admin/servers.fields.environment.key'))
-                            ->valueLabel(trans('admin/servers.fields.environment.value'))
+                            ->keyLabel(trans('admin/server.fields.environment.key'))
+                            ->valueLabel(trans('admin/server.fields.environment.value'))
                             ->default([])
-                            ->helperText(trans('admin/servers.fields.environment.helper'))
+                            ->helperText(trans('admin/server.fields.environment.helper'))
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),

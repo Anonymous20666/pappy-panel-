@@ -27,12 +27,12 @@ class ServersRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->label(trans('admin/servers.table.name'))
+                    ->label(trans('admin/server.table.name'))
                     ->searchable()
                     ->sortable()
                     ->weight('medium'),
                 TextColumn::make('user')
-                    ->label(trans('admin/servers.table.owner'))
+                    ->label(trans('admin/server.table.owner'))
                     ->html()
                     // This is hacky as hell but it allows us to display the user's name alongside their Gravatar in a single column.
                     ->formatStateUsing(function ($state) {
@@ -51,18 +51,18 @@ class ServersRelationManager extends RelationManager
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('allocation')
-                    ->label(trans('admin/servers.table.allocation'))
+                    ->label(trans('admin/server.table.allocation'))
                     ->formatStateUsing(fn ($state) => $state?->toString()), // I don't image any server would be without an allocation, unless somebody manually tampered with the database
                 TextColumn::make('status')
-                    ->label(trans('admin/servers.table.status'))
-                    ->placeholder(trans('admin/servers.table.no_status'))
+                    ->label(trans('admin/server.table.status'))
+                    ->placeholder(trans('admin/server.table.no_status'))
                     ->badge()
                     ->sortable(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()
-                        ->label(trans('admin/servers.actions.delete'))
+                        ->label(trans('admin/server.actions.delete'))
                         ->icon('heroicon-o-trash')
                         ->requiresConfirmation()
                         ->action(function (Collection $records) {

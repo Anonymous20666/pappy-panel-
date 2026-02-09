@@ -37,12 +37,12 @@ class ServerResource extends Resource
 
     public static function getModelLabel(): string
     {
-        return trans('admin/servers.label');
+        return trans('admin/server.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return trans('admin/servers.plural-label');
+        return trans('admin/server.plural-label');
     }
 
     public static function form(Schema $schema): Schema

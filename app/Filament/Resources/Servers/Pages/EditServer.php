@@ -62,38 +62,38 @@ class EditServer extends EditRecord
     {
         return [
             Action::make('switch_install_status')
-                ->label(trans('admin/servers.actions.toggle_install_status'))
+                ->label(trans('admin/server.actions.toggle_install_status'))
                 ->color('primary')
                 ->action(function () {
                     /** @var Server $server */
                     $server = $this->record;
 
                     if ($server->status === Server::STATUS_INSTALL_FAILED) {
-                        throw new DisplayException(trans('admin/servers.exceptions.marked_as_failed'));
+                        throw new DisplayException(trans('admin/server.exceptions.marked_as_failed'));
                     }
 
                     app(ServerRepository::class)->update($server->id, [
                         'status' => $server->isInstalled() ? Server::STATUS_INSTALLING : null,
                     ], true, true);
                 })
-                ->successNotificationTitle(trans('admin/servers.alerts.install_toggled')),
+                ->successNotificationTitle(trans('admin/server.alerts.install_toggled')),
 
             Action::make('suspend')
-                ->label(fn () => $this->record->isSuspended() ? trans('admin/servers.actions.unsuspend') : trans('admin/servers.actions.suspend'))
+                ->label(fn () => $this->record->isSuspended() ? trans('admin/server.actions.unsuspend') : trans('admin/server.actions.suspend'))
                 ->color(fn () => $this->record->isSuspended() ? 'success' : 'warning')
                 ->requiresConfirmation()
                 ->action(fn () => app(ServerRepository::class)->suspend($this->record->id))
-                ->successNotificationTitle(trans('admin/servers.alerts.server_suspended', ['action' => $this->record->isSuspended() ? trans('admin/servers.actions.unsuspended') : trans('admin/servers.actions.suspended')])),
+                ->successNotificationTitle(trans('admin/server.alerts.server_suspended', ['action' => $this->record->isSuspended() ? trans('admin/server.actions.unsuspended') : trans('admin/server.actions.suspended')])),
 
             Action::make('reinstall')
-                ->label(trans('admin/servers.actions.reinstall'))
+                ->label(trans('admin/server.actions.reinstall'))
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(fn () => app(ReinstallServerService::class)->handle($this->record))
-                ->successNotificationTitle(trans('admin/servers.alerts.server_reinstalled')),
+                ->successNotificationTitle(trans('admin/server.alerts.server_reinstalled')),
 
             Action::make('delete')
-                ->label(trans('admin/servers.actions.delete'))
+                ->label(trans('admin/server.actions.delete'))
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(function (Action $action) {
@@ -103,20 +103,20 @@ class EditServer extends EditRecord
                         $action->failure();
                     }
                 })
-                ->successNotificationTitle(trans('admin/servers.alerts.server_deleted'))
-                ->failureNotificationTitle(trans('admin/servers.alerts.server_delete_failed'))
+                ->successNotificationTitle(trans('admin/server.alerts.server_deleted'))
+                ->failureNotificationTitle(trans('admin/server.alerts.server_delete_failed'))
                 ->successRedirectUrl($this->getResource()::getUrl('index')),
 
             Action::make('delete_forcibly')
-                ->label(trans('admin/servers.actions.delete_forcibly'))
+                ->label(trans('admin/server.actions.delete_forcibly'))
                 ->color('danger')
                 ->requiresConfirmation()
                 ->action(fn () => app(ServerDeletionService::class)->withForce()->handle($this->record))
-                ->successNotificationTitle(trans('admin/servers.alerts.server_deleted'))
+                ->successNotificationTitle(trans('admin/server.alerts.server_deleted'))
                 ->successRedirectUrl($this->getResource()::getUrl('index')),
 
             Action::make('view')
-                ->label(trans('admin/servers.actions.view'))
+                ->label(trans('admin/server.actions.view'))
                 ->url(fn () => config('app.url') . '/server/' . $this->record->uuid)
                 ->openUrlInNewTab(),
         ];

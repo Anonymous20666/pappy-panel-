@@ -13,6 +13,14 @@
 @endsection
 
 @section('content')
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger">
+                    <b>Depreciation Warning!</b><br />
+                    You are currently viewing the legacy panel. This control panel should only be used when something on the new admin panel isn't working.
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-xs-12">
             <div

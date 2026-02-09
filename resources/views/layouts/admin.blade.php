@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title') - {{ config('app.name', 'Reviactyl') }}</title>
+    <title>@yield('title') - Control Panel</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="_token" content="{{ csrf_token() }}">
 
@@ -44,7 +44,7 @@
     <div class="wrapper">
         <header class="main-header">
             <a href="{{ route('index') }}" class="logo">
-                <span>{{ config('app.name', 'Reviactyl') }}</span>
+                <span>Control Panel</span>
             </a>
             <nav class="navbar navbar-static-top">
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">

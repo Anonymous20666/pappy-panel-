@@ -12,11 +12,6 @@ class AdvancedSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'captcha:provider' => 'required|in:none,recaptcha,turnstile',
-            'captcha:recaptcha:secret_key' => 'nullable|string|max:191',
-            'captcha:recaptcha:website_key' => 'nullable|string|max:191',
-            'captcha:turnstile:secret_key' => 'nullable|string|max:191',
-            'captcha:turnstile:site_key' => 'nullable|string|max:191',
             'pterodactyl:guzzle:timeout' => 'required|integer|between:1,60',
             'pterodactyl:guzzle:connect_timeout' => 'required|integer|between:1,60',
             'pterodactyl:client_features:allocations:enabled' => 'required|in:true,false',

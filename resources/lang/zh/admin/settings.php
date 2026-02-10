@@ -12,6 +12,7 @@ return [
         'not-required' => '不要求',
         'admin-only' => '仅管理员',
         'all-users' => '所有用户',
+        'default-language' => 'Default Language',
         'provider' => '头像提供者',
         'enabled' => '已启用',
         'disabled' => '已禁用',
@@ -37,10 +38,10 @@ return [
     ],
     'oauth' => [
         'title' => 'OAuth',
-        'enabled' => 'Enabled',
-        'disabled' => 'Disabled',
-        'id-label' => 'Client ID',
-        'secret-label' => 'Client Secret',
+        'enabled' => '已启用',
+        'disabled' => '已禁用',
+        'id-label' => '客户端 ID',
+        'secret-label' => '客户端密钥',
     ],
     'advanced' => [
         'title' => '高级',

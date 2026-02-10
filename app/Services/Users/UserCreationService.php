@@ -51,7 +51,17 @@ class UserCreationService
         }
 
         $this->connection->commit();
-        $user->notify(new AccountCreated($user, $token ?? null));
+
+        try {
+            $user->notify(new AccountCreated($user, $token ?? null));
+        } catch (\Exception $exception) {
+            \Log::error($exception);
+
+            // If this was a verification/setup email (token present), we should not move forward.
+            if (!empty($token)) {
+                throw $exception;
+            }
+        }
 
         return $user;
     }

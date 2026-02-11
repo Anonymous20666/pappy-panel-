@@ -2,7 +2,7 @@
 
 return [
     'label' => 'Server',
-    'plural-label' => 'Servers',
+    'plural-label' => 'Server',
 
     'sections' => [
         'identity' => [

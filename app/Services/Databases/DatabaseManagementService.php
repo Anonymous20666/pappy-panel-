@@ -36,6 +36,7 @@ class DatabaseManagementService
         protected DynamicDatabaseConnection $dynamic,
         protected Encrypter $encrypter,
         protected DatabaseRepository $repository,
+        protected \App\Services\Activity\ActivityLogService $logService,
     ) {
     }
 
@@ -87,18 +88,18 @@ class DatabaseManagementService
             throw new \InvalidArgumentException('The database name passed to DatabaseManagementService::handle MUST be prefixed with "s{server_id}_".');
         }
 
+        $plainPassword = Utilities::randomStringWithSpecialCharacters(24);
+
         $data = array_merge($data, [
             'server_id' => $server->id,
             'username' => sprintf('u%d_%s', $server->id, str_random(10)),
-            'password' => $this->encrypter->encrypt(
-                Utilities::randomStringWithSpecialCharacters(24)
-            ),
+            'password' => $this->encrypter->encrypt($plainPassword),
         ]);
 
         $database = null;
 
         try {
-            return $this->connection->transaction(function () use ($data, &$database) {
+            return $this->connection->transaction(function () use ($data, &$database, $plainPassword) {
                 $database = $this->createModel($data);
 
                 $this->dynamic->set('dynamic', $data['database_host_id']);
@@ -107,11 +108,13 @@ class DatabaseManagementService
                 $this->repository->createUser(
                     $database->username,
                     $database->remote,
-                    $this->encrypter->decrypt($database->password),
+                    $plainPassword,
                     $database->max_connections
                 );
                 $this->repository->assignUserToDatabase($database->database, $database->username, $database->remote);
                 $this->repository->flush();
+
+                $this->logService->clone()->subject($database)->event('server:database-create')->log();
 
                 return $database;
             });
@@ -147,6 +150,8 @@ class DatabaseManagementService
         $this->repository->dropDatabase($database->database);
         $this->repository->dropUser($database->username, $database->remote);
         $this->repository->flush();
+
+        $this->logService->clone()->subject($database)->event('server:database-delete')->log();
 
         return $database->delete();
     }

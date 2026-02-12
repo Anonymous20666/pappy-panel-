@@ -15,4 +15,7 @@ return [
 
     'help-btn' => 'Get Help',
     'docs-btn' => 'Documentation',
+    'metrics-header' => 'User Activity Metrics',
+    'most-active-country' => 'Most Active Country',
+    'activity-description' => 'Based on recent login activity.',
 ];

@@ -14,6 +14,10 @@
 @endsection
 
 @section('content')
+    @php
+        $settings = app(\App\Contracts\Repository\SettingsRepositoryInterface::class);
+        $globalLocale = $settings->get('settings::app:locale', config('app.locale', 'en'));
+    @endphp
     @yield('settings::nav')
     <div class="row">
         <div class="col-xs-12">
@@ -43,6 +47,19 @@
                                 <div>
                                     <input type="text" class="form-control" name="app:icon"
                                         value="{{ old('app:icon', config('app.icon')) }}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">@lang('admin/settings.overview.default-language')</label>
+                                <div>
+                                    <select name="app:locale" class="form-control">
+                                        @foreach($languages as $key => $value)
+                                            <option value="{{ $key }}" @if($globalLocale === $key) selected @endif>{{ $value }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="text-muted"><small>The default language to use when rendering the Panel for users who have not selected a custom language.</small></p>
                                 </div>
                             </div>
                         </div>

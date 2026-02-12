@@ -1,12 +1,13 @@
 <?php
 
 return [
-    'home' => 'Home',
+    'home' => 'Instrumentpanel',
     'administration' => [
         'title' => 'Administration',
         'dashboard' => 'Instrumentpanel',
         'settings' => 'Inställningar',
         'api' => 'Applikations-API',
+        'activity_log' => 'Activity Log',
     ],
     'management' => [
         'title' => 'Hantering',

@@ -51,6 +51,18 @@ return [
         'confirm-label' => 'Neues Passwort bestätigen',
         'label' => 'Passwort zurücksetzen',
     ],
+
+    'register' => [
+        'no-match' => 'Dein Passwort stimmt nicht überein.',
+        'namefirst-label' => 'Vorname',
+        'namelast-label' => 'Nachname',
+        'email-label' => 'E-Mail',
+        'username-label' => 'Benutzername',
+        'password-label' => 'Passwort',
+        'min-length' => 'Passwort muss mindestens 8 Zeichen lang sein.',
+        'confirm-label' => 'Passwort bestätigen',
+        'label' => 'Registrieren',
+    ],
     
     'failed' => 'Diese Kombination aus Zugangsdaten wurde nicht in unserer Datenbank gefunden.',
 

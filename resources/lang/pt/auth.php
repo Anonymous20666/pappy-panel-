@@ -51,6 +51,18 @@ return [
         'confirm-label' => 'Confirmar Nova Senha',
         'label' => 'Redefinir Senha',
     ],
+
+    'register' => [
+        'no-match' => 'Sua senha está incorreta.',
+        'namefirst-label' => 'Nome',
+        'namelast-label' => 'Sobrenome',
+        'email-label' => 'E-mail',
+        'username-label' => 'Usuário',
+        'password-label' => 'Senha',
+        'min-length' => 'As senhas devem ter pelo menos 8 caracteres.',
+        'confirm-label' => 'Confirmar Senha',
+        'label' => 'Registrar',
+    ],
     
     'failed' => 'Nenhuma conta correspondente a essas credenciais foi encontrada.',
 

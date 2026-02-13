@@ -167,7 +167,7 @@ return [
     'messages' => [
         'created' => 'Server has been successfully created.',
         'updated' => 'Server has been successfully updated.',
-        'deleted' => 'Server has been successfully deleted.',
+        'deleted' => 'Le serveur a été supprimé avec succès.',
     ],
 
     'actions' => [

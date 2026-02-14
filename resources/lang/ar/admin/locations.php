@@ -2,44 +2,44 @@
 
 return [
 
-    'label' => 'Location',
-    'plural-label' => 'Locations',
+    'label' => 'الموقع',
+    'plural-label' => 'المواقع',
 
     'section' => [
-        'title' => 'Location Details',
-        'description' => 'Define a location that nodes can be assigned to.',
+        'title' => 'تفاصيل الموقع',
+        'description' => 'حدد موقعا يمكن تعيين العقد إليه.',
     ],
 
     'fields' => [
         'short' => [
-            'label' => 'Short Code',
+            'label' => 'رمز قصير',
             'placeholder' => 'us.nyc.1',
-            'helper' => 'A short identifier for this location.',
+            'helper' => 'معرف قصير لهذا الموقع.',
         ],
 
         'long' => [
-            'label' => 'Description',
-            'placeholder' => 'New York City, NY, USA',
-            'helper' => 'A longer description of this location.',
+            'label' => 'الوصف',
+            'placeholder' => 'مدينة نيويورك، نيويورك، الولايات المتحدة الأمريكية',
+            'helper' => 'وصف أطول لهذا الموقع.',
         ],
     ],
 
     'table' => [
-        'id' => 'ID',
-        'short' => 'Short Code',
-        'long' => 'Description',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'created' => 'Created',
+        'id' => 'المعرف',
+        'short' => 'رمز قصير',
+        'long' => 'الوصف',
+        'nodes' => 'العقد',
+        'servers' => 'الخوادم',
+        'created' => 'تاريخ الإنشاء',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
     ],
 
     'messages' => [
-        'cannot_delete_with_nodes' => 'Cannot delete a location with associated nodes.',
+        'cannot_delete_with_nodes' => 'لا يمكن حذف الموقع إذا كان مرتبطا بعقد.',
     ],
 
 ];

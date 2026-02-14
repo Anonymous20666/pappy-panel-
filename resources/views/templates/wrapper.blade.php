@@ -126,6 +126,9 @@ SOFTWARE.
     @yield('assets')
 
     @include('layouts.scripts')
+    
+    @viteReactRefresh
+    @vite('resources/scripts/index.tsx')
 </head>
 
 <body class="{{ $css['body'] ?? 'bg-neutral-50' }}" style="{{ $css['style'] ?? '' }}">
@@ -133,9 +136,6 @@ SOFTWARE.
         @yield('above-container')
         @yield('container')
         @yield('below-container')
-    @show
-    @section('scripts')
-        {!! $asset->js('main.js') !!}
     @show
 </body>
 

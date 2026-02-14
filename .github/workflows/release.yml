@@ -17,7 +17,7 @@ jobs:
           cache: yarn
       - run: yarn install --frozen-lockfile
       - run: yarn tsc
-      - run: yarn build:production
+      - run: yarn build
       - name: create release branch and bump version
         env:
           VERSION: ${{ github.ref_name }}

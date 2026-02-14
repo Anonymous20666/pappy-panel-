@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - "develop"
-      - "2.0-develop"
 
 jobs:
   ui:
@@ -30,4 +29,4 @@ jobs:
         run: yarn install --frozen-lockfile
       - run: yarn tsc
       - run: yarn lint
-      - run: yarn build:production
+      - run: yarn build

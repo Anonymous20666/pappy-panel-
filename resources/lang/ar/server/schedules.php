@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'Schedules',
-    'no-schedules' => 'There are no schedules configured for this server.',
-    'create-schedule' => 'Create Schedule',
+    'title' => 'الجداول الزمنية',
+    'no-schedules' => 'لا توجد جداول زمنية معدة لهذا الخادم.',
+    'create-schedule' => 'إنشاء جدول زمني',
 ];

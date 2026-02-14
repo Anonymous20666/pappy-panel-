@@ -8,8 +8,8 @@ return [
         'settings' => 'Configurações',
         'api' => 'API de aplicação',
         'activity_log' => 'Logs',
-        'user_activity_metrics' => 'User Activity Metrics',
-        'no_data' => 'No data available.',
+        'user_activity_metrics' => 'Métricas de atividade do usuário',
+        'no_data' => 'Não há dados disponíveis.',
     ],
     'management' => [
         'title' => 'Gerenciamento',

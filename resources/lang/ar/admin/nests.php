@@ -2,53 +2,53 @@
 
 return [
     
-    'label' => 'Nest',
-    'plural_label' => 'Nests',
+    'label' => 'العش',
+    'plural_label' => 'الأعشاش',
 
     'sections' => [
-        'configuration' => 'Nest Configuration',
+        'configuration' => 'إعدادات البيئة',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'author' => 'Author',
-        'description' => 'Description',
+        'name' => 'الاسم',
+        'author' => 'المؤلف',
+        'description' => 'الوصف',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to identify this nest.',
-        'author' => 'The author of this nest. Must be a valid email.',
-        'description' => 'A description of this nest.',
+        'name' => 'اسم فريد يستخدم لتعريف هذه البيئة.',
+        'author' => 'مؤلف هذه البيئة يجب أن يكون بريدا إلكترونيا صالحا.',
+        'description' => 'وصف هذه البيئة.',
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
-        'author' => 'Author',
-        'eggs' => 'Eggs',
-        'servers' => 'Servers',
+        'id' => 'المعرف',
+        'name' => 'الاسم',
+        'author' => 'المؤلف',
+        'eggs' => 'القوالب',
+        'servers' => 'الخوادم',
     ],
     
     'notices' => [
-        'created' => 'A new nest, :name, has been successfully created.',
-        'deleted' => 'Successfully deleted the requested nest from the Panel.',
-        'updated' => 'Successfully updated the nest configuration options.',
+        'created' => 'تم إنشاء بيئة جديدة باسم :name بنجاح.',
+        'deleted' => 'تم حذف البيئة المطلوبة من اللوحة بنجاح.',
+        'updated' => 'تم تحديث إعدادات البيئة بنجاح.',
     ],
     'eggs' => [
         'notices' => [
-            'imported' => 'Successfully imported this Egg and its associated variables.',
-            'updated_via_import' => 'This Egg has been updated using the file provided.',
-            'deleted' => 'Successfully deleted the requested egg from the Panel.',
-            'updated' => 'Egg configuration has been updated successfully.',
-            'script_updated' => 'Egg install script has been updated and will run whenever servers are installed.',
-            'egg_created' => 'A new egg was laid successfully. You will need to restart any running daemons to apply this new egg.',
+            'imported' => 'تم استيراد هذا القالب والمتغيرات المرتبطة به بنجاح.',
+            'updated_via_import' => 'تم تحديث هذا القالب باستخدام الملف المرفق.',
+            'deleted' => 'تم حذف القالب المطلوب من اللوحة بنجاح.',
+            'updated' => 'تم تحديث إعدادات القالب بنجاح.',
+            'script_updated' => 'تم تحديث سكربت تثبيت القالب وسيتم تشغيله عند تثبيت أي خادم جديد.',
+            'egg_created' => 'تم إنشاء قالب جديد بنجاح. ستحتاج إلى إعادة تشغيل أي خدمات (daemons) تعمل حاليا لتطبيق هذا القالب الجديد.',
         ],
     ],
     'variables' => [
         'notices' => [
-            'variable_deleted' => 'The variable ":variable" has been deleted and will no longer be available to servers once rebuilt.',
-            'variable_updated' => 'The variable ":variable" has been updated. You will need to rebuild any servers using this variable in order to apply changes.',
-            'variable_created' => 'New variable has successfully been created and assigned to this egg.',
+            'variable_deleted' => 'تم حذف المتغير ":variable" ولن يكون متاحا للخوادم بعد إعادة بنائها.',
+            'variable_updated' => 'تم تحديث المتغير ":variable". ستحتاج إلى إعادة بناء أي خوادم تستخدم هذا المتغير لتطبيق التغييرات.',
+            'variable_created' => 'تم إنشاء متغير جديد وتعيينه لهذا القالب بنجاح.',
         ],
     ],
 ];

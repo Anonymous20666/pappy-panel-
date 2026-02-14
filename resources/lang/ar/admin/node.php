@@ -1,25 +1,25 @@
 <?php
 
 return [
-    'label' => 'Node',
-    'plural-label' => 'Nodes',
+    'label' => 'العقد',
+    'plural-label' => 'العقود',
 
     'sections' => [
         'identity' => [
-            'title' => 'Identity',
-            'description' => 'Basic node information.',
+            'title' => 'الهوية',
+            'description' => 'معلومات العقدة الأساسية تفاصيل الاتصال.',
         ],
         'connection' => [
-            'title' => 'Connection Details',
-            'description' => 'Configure how to connect to this node.',
+            'title' => 'تفاصيل الاتصال',
+            'description' => 'إعداد طريقة الاتصال بهذه العقدة.',
         ],
         'resources' => [
-            'title' => 'Resource Allocation',
-            'description' => 'Define memory and disk limits for this node.',
+            'title' => 'تخصيص الموارد',
+            'description' => 'تحديد حدود الذاكرة ومساحة التخزين لهذه العقدة.',
         ],
         'daemon' => [
-            'title' => 'Daemon Configuration',
-            'description' => 'Configure daemon-specific settings.',
+            'title' => 'إعدادات الخدمة Daemon',
+            'description' => 'ضبط الإعدادات الخاصة بالخدمة (daemon-specific).',
         ],
     ],
 
@@ -28,31 +28,31 @@ return [
             'label' => 'UUID',
         ],
         'public' => [
-            'label' => 'Public',
-            'helper' => 'By setting a node to private you will be denying the ability to auto-deploy to this node. ',
+            'label' => 'عام',
+            'helper' => 'عند تعيين العقدة كخاصة، سيتم منع النشر التلقائي عليها ',
         ],
         'name' => [
-            'label' => 'Name',
-            'placeholder' => 'Node Name',
-            'helper' => 'A descriptive name for this node.',
+            'label' => 'الاسم',
+            'placeholder' => 'اسم العقدة',
+            'helper' => 'اسم وصفي لهذه العقدة.',
         ],
         'description' => [
-            'label' => 'Description',
-            'placeholder' => 'Node description',
-            'helper' => 'Optional description for this node.',
+            'label' => 'وصف',
+            'placeholder' => 'وصف العقدة',
+            'helper' => 'وصف اختياري لهذه العقدة.',
         ],
         'location' => [
-            'label' => 'Location',
-            'helper' => 'The location this node is assigned to.',
+            'label' => 'الموقع',
+            'helper' => 'الموقع الذي تم تعيين هذه العقدة إليه.',
         ],
         'fqdn' => [
             'label' => 'FQDN',
             'placeholder' => 'node.example.com',
-            'helper' => 'Fully qualified domain name or IP address.',
+            'helper' => 'اسم نطاق كامل أو عنوان IP.',
         ],
         'ssl' => [
-            'label' => 'Uses SSL',
-            'helper' => 'Whether the daemon on this node is configured to use SSL for secure communication.',
+            'label' => 'يستخدم SSL',
+            'helper' => 'ما إذا كانت الخدمة على هذه العقدة مهيأة لاستخدام SSL للاتصال الآمن.',
             'helper_forced' => 'This panel is running on HTTPS, so SSL is forced for this node.',
         ],
         'behind_proxy' => [

@@ -1,7 +1,7 @@
 import http from '@/api/http';
-import { ServerCategory } from '@/api/server/types';
+import type { ServerCategory } from '@/api/server/types';
 
-export { ServerCategory };
+export type { ServerCategory };
 
 export default (): Promise<ServerCategory[]> => {
     return new Promise((resolve, reject) => {

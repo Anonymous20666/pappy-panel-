@@ -133,6 +133,7 @@ return [
     ],
 
     'actions' => [
+        'create' => 'Create',
         'edit' => '编辑',
         'delete' => '删除',
         'view' => '查看',
@@ -146,6 +147,7 @@ return [
     ],
 
     'allocations' => [
+        'label' => 'Allocations',
         'table' => [
             'ip' => 'IP',
             'port' => '端口',

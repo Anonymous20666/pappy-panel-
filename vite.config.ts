@@ -28,6 +28,7 @@ export default defineConfig({
                   'process.platform': null,
                   'process.version': null,
                   'process.versions': null,
+                  global: 'globalThis',
               }
             : undefined,
 
@@ -51,6 +52,21 @@ export default defineConfig({
                 'server',
                 'features',
             ),
+        },
+    },
+
+    server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        origin: 'https://reviactyl.test',
+        hmr: {
+            host: 'reviactyl.test',
+            protocol: 'wss',
+            clientPort: 443,
+        },
+        watch: {
+            usePolling: true,
         },
     },
 

@@ -3,8 +3,8 @@
 return [
     'title' => 'Dashboard',
     'uptodate-header' => 'لوحة التحكم لديك محدثة',
-    'uptodate-body' => 'أنت تستخدم حاليا الإصدار :version. لوحتك محدثة',
-    'notuptodate-header' => 'Your Panel is not up to date',
+    'uptodate-body' => 'أنت تستخدم حاليا الإصدار :version. لوحتك محدثة!',
+    'notuptodate-header' => 'لوحة التحكم لديك غير محدثة',
     'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
     'feedback-header' => 'Any Feedback?',
     'feedback-body' => 'If you’ve been enjoying the features and ease of use that Reviactyl brings, let us know! Your feedback helps us improve and create even more awesome tools for you.',

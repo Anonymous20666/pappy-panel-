@@ -6,13 +6,14 @@ import Input from '@/components/elements/Input';
 import isEqual from 'react-fast-compare';
 
 interface Props {
-    isEditable: boolean;
+    isEditable?: boolean;
     title: string;
     permissions: string[];
     className?: string;
+    children?: React.ReactNode;
 }
 
-const PermissionTitleBox: React.FC<Props> = memo(({ isEditable, title, permissions, className, children }) => {
+function PermissionTitleBox({ isEditable, title, permissions, className, children }: Props) {
     const [{ value }, , { setValue }] = useField<string[]>('permissions');
 
     const onCheckboxClicked = useCallback(
@@ -45,6 +46,8 @@ const PermissionTitleBox: React.FC<Props> = memo(({ isEditable, title, permissio
             {children}
         </TitledGreyBox>
     );
-}, isEqual);
+}
 
-export default PermissionTitleBox;
+const MemoizedPermissionTitleBox = memo(PermissionTitleBox, isEqual);
+
+export default MemoizedPermissionTitleBox;

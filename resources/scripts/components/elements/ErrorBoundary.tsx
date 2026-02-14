@@ -9,7 +9,7 @@ interface State {
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 class ErrorBoundary extends React.Component<{}, State> {
-    state: State = {
+    override state: State = {
         hasError: false,
     };
 
@@ -17,11 +17,11 @@ class ErrorBoundary extends React.Component<{}, State> {
         return { hasError: true };
     }
 
-    componentDidCatch(error: Error) {
+    override componentDidCatch(error: Error) {
         console.error(error);
     }
 
-    render() {
+    override render() {
         return this.state.hasError ? (
             <div css={tw`flex items-center justify-center w-full my-4`}>
                 <div css={tw`flex items-center bg-gray-800 border border-gray-600 rounded-ui p-3 text-red-500`}>

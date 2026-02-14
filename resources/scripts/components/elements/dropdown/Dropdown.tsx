@@ -18,7 +18,7 @@ type TypedChild = (React.ReactChild | React.ReactFragment | React.ReactPortal) &
     type?: JSX.Element;
 };
 
-const Dropdown = forwardRef<typeof Menu, Props>(({ as, children }, ref) => {
+const Dropdown = forwardRef<HTMLDivElement, Props>(({ as, children }, ref) => {
     const [Button, items] = useMemo(() => {
         const list = React.Children.toArray(children) as unknown as TypedChild[];
 
@@ -51,10 +51,16 @@ const Dropdown = forwardRef<typeof Menu, Props>(({ as, children }, ref) => {
     );
 });
 
+type DropdownComponent = typeof Dropdown & {
+    Button: typeof DropdownButton;
+    Item: typeof DropdownItem;
+    Gap: typeof DropdownGap;
+};
+
 const _Dropdown = Object.assign(Dropdown, {
     Button: DropdownButton,
     Item: DropdownItem,
     Gap: DropdownGap,
-});
+}) as DropdownComponent;
 
 export { _Dropdown as default };

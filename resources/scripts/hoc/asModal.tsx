@@ -47,7 +47,7 @@ function asModal<P extends {}>(
             /**
              * @this {React.PureComponent<P & AsModalProps, State>}
              */
-            componentDidUpdate(prevProps: Readonly<P & AsModalProps>, prevState: Readonly<State>) {
+            override componentDidUpdate(prevProps: Readonly<P & AsModalProps>, prevState: Readonly<State>) {
                 if (prevProps.visible && !this.props.visible) {
                     this.setState({ visible: false, propOverrides: {} });
                 } else if (!prevProps.visible && this.props.visible) {
@@ -68,7 +68,7 @@ function asModal<P extends {}>(
             /**
              * @this {React.PureComponent<P & AsModalProps, State>}
              */
-            render() {
+            override render() {
                 if (!this.state.render) return null;
 
                 return (

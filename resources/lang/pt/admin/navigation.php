@@ -8,7 +8,7 @@ return [
         'settings' => 'Configurações',
         'api' => 'API de aplicação',
         'activity_log' => 'Logs',
-        'user_activity_metrics' => 'User Activity Metrics',
+        'user_activity_metrics' => 'Métricas de atividade do usuário',
         'no_data' => 'No data available.',
     ],
     'management' => [

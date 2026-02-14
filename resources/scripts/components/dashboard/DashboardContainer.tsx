@@ -55,8 +55,8 @@ export default () => {
 
     return (
         <PageContentBlock className='pr-2' title={t('title')} showFlashKey={'dashboard'}>
-            <div className='flex items-center justify-between py-4'>
-                <div>
+            <div className='flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between'>
+                <div className='min-w-0'>
                     {/* TODO: Needs to be updated.
                     1] Show different subtitle based on $showOnlyAdmin
                     2] It somehow looks odd and doesn't match reviactyl v2 design.
@@ -66,8 +66,8 @@ export default () => {
                     <Title className='text-4xl'>{t('title')}</Title>
                 </div>
                 {rootAdmin && (
-                    <div className='flex items-center space-x-2'>
-                        <p className='uppercase text-xs text-gray-400'>
+                    <div className='flex flex-shrink-0 items-center gap-2'>
+                        <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
                             {showOnlyAdmin ? t('other-servers') : t('your-servers')}
                         </p>
                         <Switch

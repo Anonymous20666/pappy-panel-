@@ -7,7 +7,9 @@ return [
         'dashboard' => 'Painel',
         'settings' => 'Configurações',
         'api' => 'API de aplicação',
-        'activity_log' => 'Activity Log',
+        'activity_log' => 'Logs',
+        'user_activity_metrics' => 'User Activity Metrics',
+        'no_data' => 'No data available.',
     ],
     'management' => [
         'title' => 'Gerenciamento',

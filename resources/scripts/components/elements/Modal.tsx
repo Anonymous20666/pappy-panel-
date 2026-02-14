@@ -18,19 +18,36 @@ export interface ModalProps extends RequiredModalProps {
     closeOnEscape?: boolean;
     closeOnBackground?: boolean;
     showSpinnerOverlay?: boolean;
+    size?: 'sm' | 'md' | 'lg';
+    noScroll?: boolean;
 }
 
 export const ModalMask = styled.div`
     ${tw`fixed z-50 overflow-auto flex w-full inset-0`};
 `;
 
-const ModalContainer = styled.div<{ alignTop?: boolean }>`
+const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg' }>`
     max-width: 95%;
     max-height: calc(100vh - 8rem);
-    ${breakpoint('md')`max-width: 75%`};
-    ${breakpoint('lg')`max-width: 50%`};
+    
+    ${(props) =>
+        props.size === 'sm'
+            ? css`
+                  ${breakpoint('md')`max-width: 50%`};
+                  ${breakpoint('lg')`max-width: 35%`};
+              `
+            : props.size === 'lg'
+                ? css`
+                  ${breakpoint('md')`max-width: 90%`};
+                  ${breakpoint('lg')`max-width: 80%`};
+              `
+                : css`
+                  ${breakpoint('md')`max-width: 75%`};
+                  ${breakpoint('lg')`max-width: 50%`};
+              `};
 
     ${tw`relative flex flex-col w-full m-auto`};
+    
     ${(props) =>
         props.alignTop &&
         css`
@@ -63,6 +80,8 @@ const Modal: React.FC<ModalProps> = ({
     closeOnBackground = true,
     closeOnEscape = true,
     onDismissed,
+    size = 'md',
+    noScroll = false,
     children,
 }) => {
     const [render, setRender] = useState(visible);
@@ -101,7 +120,7 @@ const Modal: React.FC<ModalProps> = ({
                     }
                 }}
             >
-                <ModalContainer alignTop={top}>
+                <ModalContainer alignTop={top} size={size}>
                     {isDismissable && (
                         <div className={'close-icon'} onClick={() => setRender(false)}>
                             <svg
@@ -130,7 +149,10 @@ const Modal: React.FC<ModalProps> = ({
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-gray-700 border border-gray-600 p-3 sm:p-4 md:p-6 rounded-ui shadow-md overflow-y-scroll transition-all duration-150`}
+                        css={[
+                            tw`bg-gray-700 border border-gray-600 p-3 sm:p-4 md:p-6 rounded-ui shadow-md transition-all duration-150`,
+                            noScroll ? tw`overflow-visible` : tw`overflow-y-scroll`,
+                        ]}
                     >
                         {children}
                     </div>

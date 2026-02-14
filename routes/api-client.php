@@ -19,6 +19,7 @@ use App\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
 */
 Route::get('/', [Client\ClientController::class, 'index'])->name('api:client.index');
 Route::get('/permissions', [Client\ClientController::class, 'permissions']);
+Route::get('/eggs', [Client\ClientController::class, 'eggs'])->name('api:client.eggs');
 
 Route::prefix('/account')->middleware(AccountSubject::class)->group(function () {
     Route::prefix('/')->withoutMiddleware(RequireTwoFactorAuthentication::class)->group(function () {
@@ -46,6 +47,15 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
         Route::get('/', [Client\SSHKeyController::class, 'index']);
         Route::post('/', [Client\SSHKeyController::class, 'store']);
         Route::post('/remove', [Client\SSHKeyController::class, 'delete']);
+    });
+
+    Route::group(['prefix' => '/categories'], function () {
+        Route::get('/', [Client\CategoryController::class, 'index'])->name('api:client.account.categories');
+        Route::post('/', [Client\CategoryController::class, 'store']);
+        Route::get('/{uuid}', [Client\CategoryController::class, 'show']);
+        Route::put('/{uuid}', [Client\CategoryController::class, 'update']);
+        Route::post('/reorder', [Client\CategoryController::class, 'reorder']);
+        Route::delete('/{uuid}', [Client\CategoryController::class, 'delete']);
     });
 });
 
@@ -153,5 +163,6 @@ Route::group([
         Route::post('/rename', [Client\Servers\SettingsController::class, 'rename']);
         Route::post('/reinstall', [Client\Servers\SettingsController::class, 'reinstall']);
         Route::put('/docker-image', [Client\Servers\SettingsController::class, 'dockerImage']);
+        Route::put('/category', [Client\Servers\SettingsController::class, 'setCategory'])->name('api:client:server.settings.category');
     });
 });

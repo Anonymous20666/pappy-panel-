@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Client;
 
+use App\Models\Egg;
 use App\Models\Server;
 use App\Models\Permission;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -37,6 +38,16 @@ class ClientController extends ClientApiController
             'name',
             'description',
             'external_id',
+            AllowedFilter::callback('category_uuid', function ($query, $value) {
+                if (is_null($value) || $value === 'null') {
+                    $query->whereNull('category_id');
+                } else {
+                    $query->whereHas('category', function ($q) use ($value) {
+                        $q->where('uuid', $value);
+                    });
+                }
+            }),
+            'egg_id',
             AllowedFilter::custom('*', new MultiFieldServerFilter()),
         ]);
 
@@ -76,6 +87,31 @@ class ClientController extends ClientApiController
             'attributes' => [
                 'permissions' => Permission::permissions(),
             ],
+        ];
+    }
+
+    /**
+     * Returns eggs for the dashboard egg filter. With default scope, returns eggs from
+     * the user's accessible servers. With ?type=admin (root_admin only), returns eggs
+     * from "other" servers (servers the admin can see but is not owner/subuser of).
+     */
+    public function eggs(GetServersRequest $request): array
+    {
+        $user = $request->user();
+        $type = $request->input('type');
+
+        if ($type === 'admin' && $user->root_admin) {
+            $serverIds = Server::whereNotIn('id', $user->accessibleServers()->pluck('id')->all())->pluck('id')->all();
+        } else {
+            $serverIds = $user->accessibleServers()->pluck('id')->all();
+        }
+
+        $eggIds = Server::whereIn('id', $serverIds)->distinct()->pluck('egg_id');
+        $eggs = Egg::whereIn('id', $eggIds)->orderBy('name')->get(['id', 'name']);
+
+        return [
+            'object' => 'list',
+            'data' => $eggs->map(fn (Egg $egg) => ['id' => $egg->id, 'name' => $egg->name])->values()->all(),
         ];
     }
 }

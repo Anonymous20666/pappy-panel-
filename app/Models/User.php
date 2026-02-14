@@ -9,11 +9,13 @@ use Illuminate\Validation\Rules\In;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Builder;
+use App\Contracts\Models\Identifiable;
 use App\Models\Traits\HasAccessTokens;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use App\Traits\Helpers\AvailableLanguages;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
+use App\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -80,11 +82,13 @@ use Filament\Models\Contracts\HasAvatar;
  *
  * @mixin \Eloquent
  */
+#[Attributes\Identifiable('user')]
 class User extends Model implements
     AuthenticatableContract,
     HasAvatar,
     AuthorizableContract,
-    CanResetPasswordContract
+    CanResetPasswordContract,
+    Identifiable
 {
     use Authenticatable;
     use Authorizable;
@@ -95,6 +99,7 @@ class User extends Model implements
     use Notifiable;
     /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+    use HasRealtimeIdentifier;
 
     public const USER_LEVEL_USER = 0;
     public const USER_LEVEL_ADMIN = 1;
@@ -212,7 +217,9 @@ class User extends Model implements
      */
     public function toVueObject(): array
     {
-        return Collection::make($this->toArray())->except(['id', 'external_id'])->toArray();
+        return Collection::make($this->toArray())->except(['id', 'external_id'])
+            ->merge(['identifier' => $this->identifier])
+            ->toArray();
     }
 
     /**

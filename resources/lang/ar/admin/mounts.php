@@ -2,38 +2,38 @@
 
 return [
 
-    'label' => 'Mount',
-    'plural_label' => 'Mounts',
+    'label' => 'التوصيل',
+    'plural_label' => 'التوصيلات',
 
     'sections' => [
-        'configuration' => 'Mount Configuration',
+        'configuration' => 'إعدادات التوصيل',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'description' => 'Description',
-        'source' => 'Source Path',
-        'target' => 'Target Path',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'name' => 'الاسم',
+        'description' => 'الوصف',
+        'source' => 'مسار المصدر',
+        'target' => 'مسار الهدف',
+        'read_only' => 'للقراءة فقط',
+        'user_mountable' => 'قابل للتوصيل من قبل المستخدم',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to separate this mount from another.',
-        'description' => 'A longer, human-readable description of this mount.',
-        'source' => 'The file path on the host machine to mount to containers.',
-        'target' => 'The path inside the container to mount this as.',
-        'read_only' => 'If set, the mount will be read-only inside the container.',
-        'user_mountable' => 'If set, users will be able to mount this to their servers.',
+        'name' => 'اسم فريد يستخدم لتمييز هذا التوصيل عن الآخر.',
+        'description' => 'وصف أطول وقابل للقراءة لهذا التوصيل.',
+        'source' => 'مسار الملفات على الجهاز المضيف لتوصيله بالحاويات.',
+        'target' => 'المسار داخل الحاوية لتوصيل هذا التوصيل إليه.',
+        'read_only' => 'إذا تم التفعيل سيكون هذا التوصيل للقراءة فقط داخل الحاوية.',
+        'user_mountable' => 'إذا تم التفعيل، سيتمكن المستخدمون من توصيل هذا بمخدماتهم.',
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
-        'source' => 'Source',
-        'target' => 'Target',
-        'read_only' => 'Read Only',
-        'user_mountable' => 'User Mountable',
+        'id' => 'المعرف',
+        'name' => 'الاسم',
+        'source' => 'المصدر',
+        'target' => 'الهدف',
+        'read_only' => 'للقراءة فقط',
+        'user_mountable' => 'قابل للتوصيل من قبل المستخدم',
     ],
 
 ];

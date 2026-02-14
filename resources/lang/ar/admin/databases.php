@@ -2,55 +2,55 @@
 
 return [
 
-    'label' => 'Database',
-    'plural-label' => 'Databases',
+    'label' => 'قاعدة بيانات',
+    'plural-label' => 'قواعد بيانات',
 
-    'none' => 'None',
+    'none' => 'لا شيء',
 
     'sections' => [
         'host_details' => [
-            'title' => 'Host Details',
-            'description' => 'Configure the database host connection settings.',
+            'title' => 'تفاصيل الخادم',
+            'description' => 'ضبط إعدادات اتصال خادم قاعدة البيانات.',
         ],
 
         'authentication' => [
-            'title' => 'Authentication',
+            'title' => 'المصادقة',
         ],
 
         'linked_node' => [
-            'title' => 'Linked Node',
+            'title' => 'العقدة المرتبطة',
         ],
     ],
 
     'placeholders' => [
-        'name' => 'Production MySQL',
+        'name' => 'الإنتاجية قاعدة بيانات',
         'host' => '127.0.0.1',
-        'username' => 'reviactyl',
+        'username' => 'رفيا كتيل',
     ],
 
     'helpers' => [
-        'host' => 'The hostname or IP address of the database server.',
-        'linked_node' => 'Optional. Link this host to a specific node.',
+        'host' => 'اسم المضيف أو عنوان IP لخادم قاعدة البيانات.',
+        'linked_node' => 'اختياري. اربط هذا الخادم بعقدة محددة.',
     ],
 
     'fields' => [
-        'linked_node' => 'Linked Node',
+        'linked_node' => 'العقدة المرتبطة',
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
-        'host' => 'Host',
-        'port' => 'Port',
-        'username' => 'Username',
-        'linked_node' => 'Linked Node',
-        'databases' => 'Databases',
-        'created' => 'Created',
+        'id' => 'المعرف',
+        'name' => 'الاسم',
+        'host' => 'هوست',
+        'port' => 'بورت',
+        'username' => 'اسم المستخدم',
+        'linked_node' => 'العقدة المرتبطة',
+        'databases' => 'قواعد البيانات',
+        'created' => 'تاريخ الإنشاء',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'تعديل',
+        'delete' => 'حذف',
     ],
 
     'errors' => [

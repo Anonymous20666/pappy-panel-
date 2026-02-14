@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Server } from '@/api/server/getServer';
 import { ServerCategory } from '@/api/server/types';
 import ServerRow from '@/components/dashboard/ServerRow';

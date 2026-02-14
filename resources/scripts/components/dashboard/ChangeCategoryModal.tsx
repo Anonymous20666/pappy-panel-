@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from '@/components/elements/Modal';
 import { Form, Formik, Field } from 'formik';
 import { object, string } from 'yup';

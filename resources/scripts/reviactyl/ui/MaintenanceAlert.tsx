@@ -1,4 +1,3 @@
-import React from 'react';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { ExclamationIcon } from '@heroicons/react/solid';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { XIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 

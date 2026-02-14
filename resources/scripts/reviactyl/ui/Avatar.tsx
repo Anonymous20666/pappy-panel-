@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useStoreState } from 'easy-peasy';
 import Md5 from 'md5';
 

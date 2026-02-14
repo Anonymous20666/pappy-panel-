@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { Server } from '@/api/server/getServer';
 import getServers from '@/api/getServers';
 import Spinner from '@/components/elements/Spinner';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Formik, FormikHelpers } from 'formik';
 import { object, string } from 'yup';
 import Modal from '@/components/elements/Modal';

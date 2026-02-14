@@ -2,26 +2,26 @@
 
 return [
     'title' => 'مفتاح واجهة البرمجة',
-    'list-title' => 'Credentials List',
-    'key' => 'Key',
-    'memo' => 'Memo',
-    'last-used' => 'Last Used',
-    'created' => 'Created On',
-    'never-used' => 'Never Used',
+    'list-title' => 'قائمة بيانات الاعتماد',
+    'key' => 'المفتاح',
+    'memo' => 'ملاحظة',
+    'last-used' => 'أخر استخدام',
+    'created' => 'تاريخ الإنشاء',
+    'never-used' => 'لم يستخدم أبدا',
 
-    'revoke' => 'Revoke',
-    'revoke-title' => 'Revoke API Key',
-    'revoke-warning' => 'Once this API key is revoked any applications currently using it will stop working.',
-    'revoked' => 'API Key has been revoked.',
+    'revoke' => 'إلغاء',
+    'revoke-title' => 'إلغاء مفتاح واجهة البرمجة',
+    'revoke-warning' => 'مجرد إلغاء هذا المفتاح واجهة البرمجة أي تطبيقات تستخدمه حاليا ستتوقف عن العمل',
+    'revoked' => 'تم إلغاء مفتاح واجهة البرمجة',
 
-    'permissions' => 'Select Permissions',
-    'read-only' => 'Read',
-    'read-write' => 'Read & Write',
+    'permissions' => 'اختر الصلاحيات',
+    'read-only' => 'قراءة',
+    'read-write' => 'قراءة وكتابة',
     'none' => 'لا توجد أي صلاحيات',
 
     'description' => 'وصف',
-    'info' => 'Once you have assigned permissions and created this set of credentials you will be unable to come back and edit it. If you need to make changes down the road you will need to create a new set of credentials.',
+    'info' => 'بمجرد تعيين الصلاحيات وإنشاء مجموعة بيانات الاعتماد هذه لن تتمكن من العودة وتعديلها إذا احتجت لإجراء تغييرات في المستقبل فسيتعين عليك إنشاء مجموعة جديدة من بيانات الاعتماد',
 
-    'create-btn' => 'Create New',
-    'new-btn' => 'Create Credentials',
+    'create-btn' => 'إنشاء جديد',
+    'new-btn' => 'إنشاء بيانات اعتماد',
 ];

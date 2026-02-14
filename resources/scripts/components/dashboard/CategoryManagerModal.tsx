@@ -115,6 +115,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
 
         const newCategories = [...categories];
         const [reorderedItem] = newCategories.splice(result.source.index, 1);
+        if(!reorderedItem) return;
         newCategories.splice(result.destination.index, 0, reorderedItem);
 
         setCategories(newCategories);

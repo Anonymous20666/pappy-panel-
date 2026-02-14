@@ -112,7 +112,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
     // The permissions that can be modified by this user.
     const editablePermissions = useDeepCompareMemo(() => {
         const cleaned = Object.keys(permissions).map((key) =>
-            Object.keys(permissions[key]?.keys ?? {}).map(pkey => `${key}.${pkey}`),
+            Object.keys(permissions[key]?.keys ?? {}).map((pkey) => `${key}.${pkey}`)
         );
 
         const list: string[] = ([] as string[]).concat.apply([], Object.values(cleaned));
@@ -187,7 +187,8 @@ const EditSubuserModal = ({ subuser }: Props) => {
                     <div css={tw`p-4 bg-gray-600 rounded-lg border border-gray-500`}>
                         <h3 css={tw`text-white font-semibold mb-2`}>Role Presets</h3>
                         <p css={tw`text-gray-300 text-sm mb-4`}>
-                            Select a preset to automatically configure permissions for this user. You can still fine-tune individual permissions below.
+                            Select a preset to automatically configure permissions for this user. You can still
+                            fine-tune individual permissions below.
                         </p>
                         <PresetSelector editablePermissions={editablePermissions} />
                     </div>
@@ -219,7 +220,7 @@ const EditSubuserModal = ({ subuser }: Props) => {
                                 key={`permission_${key}`}
                                 title={key}
                                 isEditable={canEditUser}
-                                permissions={Object.keys(permissions[key]?.keys ?? {}).map(pkey => `${key}.${pkey}`)}
+                                permissions={Object.keys(permissions[key]?.keys ?? {}).map((pkey) => `${key}.${pkey}`)}
                                 css={index > 0 ? tw`mt-4` : undefined}
                             >
                                 <p css={tw`text-sm text-neutral-400 mb-4`}>{permissions[key]?.description}</p>

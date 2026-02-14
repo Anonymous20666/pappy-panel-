@@ -29,7 +29,7 @@ export const ModalMask = styled.div`
 const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg' }>`
     max-width: 95%;
     max-height: calc(100vh - 8rem);
-    
+
     ${(props) =>
         props.size === 'sm'
             ? css`
@@ -37,17 +37,17 @@ const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg
                   ${breakpoint('lg')`max-width: 35%`};
               `
             : props.size === 'lg'
-                ? css`
+            ? css`
                   ${breakpoint('md')`max-width: 90%`};
                   ${breakpoint('lg')`max-width: 80%`};
               `
-                : css`
+            : css`
                   ${breakpoint('md')`max-width: 75%`};
                   ${breakpoint('lg')`max-width: 50%`};
               `};
 
     ${tw`relative flex flex-col w-full m-auto`};
-    
+
     ${(props) =>
         props.alignTop &&
         css`

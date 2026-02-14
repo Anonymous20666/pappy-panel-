@@ -78,15 +78,15 @@ export const rawDataToServerObject = ({ attributes: data }: FractalResponseData)
     ),
     category:
         (data.relationships?.category as FractalResponseData | undefined)?.attributes &&
-            !Array.isArray(data.relationships?.category)
+        !Array.isArray(data.relationships?.category)
             ? {
-                uuid: (data.relationships!.category as FractalResponseData).attributes.uuid,
-                name: (data.relationships!.category as FractalResponseData).attributes.name,
-                description: (data.relationships!.category as FractalResponseData).attributes.description,
-                color: (data.relationships!.category as FractalResponseData).attributes.color,
-                createdAt: new Date((data.relationships!.category as FractalResponseData).attributes.created_at),
-                updatedAt: new Date((data.relationships!.category as FractalResponseData).attributes.updated_at),
-            }
+                  uuid: (data.relationships!.category as FractalResponseData).attributes.uuid,
+                  name: (data.relationships!.category as FractalResponseData).attributes.name,
+                  description: (data.relationships!.category as FractalResponseData).attributes.description,
+                  color: (data.relationships!.category as FractalResponseData).attributes.color,
+                  createdAt: new Date((data.relationships!.category as FractalResponseData).attributes.created_at),
+                  updatedAt: new Date((data.relationships!.category as FractalResponseData).attributes.updated_at),
+              }
             : null,
     nestId: data.nest_id,
     eggId: data.egg_id,

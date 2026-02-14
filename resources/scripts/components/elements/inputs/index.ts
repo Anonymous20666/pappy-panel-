@@ -13,4 +13,3 @@ const Input: InputComponent = {
 
 export { Input };
 export { default as styles } from './styles.module.css';
-

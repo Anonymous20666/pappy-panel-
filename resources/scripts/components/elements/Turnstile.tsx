@@ -75,9 +75,7 @@ const Turnstile: React.FC<TurnstileProps> = ({ siteKey, onVerify, onExpire, onEr
         }
 
         // Check if script is already being loaded
-        const existingScript = document.querySelector(
-            'script[src*="challenges.cloudflare.com/turnstile"]'
-        );
+        const existingScript = document.querySelector('script[src*="challenges.cloudflare.com/turnstile"]');
         if (existingScript) {
             // Wait for existing script to load
             const checkInterval = setInterval(() => {

@@ -92,6 +92,6 @@ export default () => {
                     </Can>
                 </div>
             </div>
-        </ServerContentBlock >
+        </ServerContentBlock>
     );
 };

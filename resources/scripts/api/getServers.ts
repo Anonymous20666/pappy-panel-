@@ -13,7 +13,7 @@ export default ({ query, eggId, ...params }: QueryParams): Promise<PaginatedResu
     return new Promise((resolve, reject) => {
         http.get('/api/client', {
             params: {
-                'include': 'category',
+                include: 'category',
                 'filter[*]': query,
                 ...(eggId !== undefined && eggId !== null ? { 'filter[egg_id]': eggId } : {}),
                 ...params,

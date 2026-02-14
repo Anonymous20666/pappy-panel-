@@ -21,7 +21,7 @@ const CardLink = styled.a`
 
 const IconWrapper = styled.div<{ $color?: string }>`
     ${tw`p-2 rounded-ui flex items-center justify-center`}
-    
+
     svg {
         color: ${({ $color }) => $color || 'var(--color-primary)'};
         fill: currentColor;
@@ -82,13 +82,13 @@ const QuickLinks = () => {
         <Container>
             <CardsGrid>
                 {cards.map((card, index) => (
-                    <CardLink key={index} href={card.link} target="_blank" rel="noopener noreferrer">
+                    <CardLink key={index} href={card.link} target='_blank' rel='noopener noreferrer'>
                         <div>
-                            <h3 className="font-semibold text-gray-100">{t(card.titleKey)}</h3>
-                            <p className="text-sm text-gray-400">{t(card.descriptionKey)}</p>
+                            <h3 className='font-semibold text-gray-100'>{t(card.titleKey)}</h3>
+                            <p className='text-sm text-gray-400'>{t(card.descriptionKey)}</p>
                         </div>
                         <IconWrapper $color={card.iconColor}>
-                            <card.icon className="h-6 w-6" />
+                            <card.icon className='h-6 w-6' />
                         </IconWrapper>
                     </CardLink>
                 ))}

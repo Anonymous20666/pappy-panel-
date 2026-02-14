@@ -16,7 +16,6 @@ export const isImageFile = (file: FileObject): boolean => {
         'image/x-icon',
         'image/vnd.microsoft.icon',
     ];
-    
+
     return imageMimeTypes.includes(file.mimetype.toLowerCase());
 };
-

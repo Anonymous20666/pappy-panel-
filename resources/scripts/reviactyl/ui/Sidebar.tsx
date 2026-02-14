@@ -147,4 +147,3 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
 };
 
 export default Sidebar;
-

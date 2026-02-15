@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import React, { lazy, type ReactNode } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
 import { store } from '@/state';
@@ -45,6 +45,19 @@ interface ExtendedWindow extends Window {
 
 // setupInterceptors(history);
 
+// Wrapper components for React 19 compatibility with easy-peasy v4
+// I wasn't sure if I should update easy-peasy or just do this, so consider this a temporary duct-tape solution.
+// Brijesh if you're reading this, consider if updating easy-peasy breaks compatibility and if not, update it.
+const StoreProviderWrapper = ({ children }: { children: ReactNode }) => {
+    const Provider = StoreProvider as unknown as React.ComponentType<{ store: typeof store; children: ReactNode }>;
+    return <Provider store={store}>{children}</Provider>;
+};
+
+const ServerContextProviderWrapper = ({ children }: { children: ReactNode }) => {
+    const Provider = ServerContext.Provider as unknown as React.ComponentType<{ children: ReactNode }>;
+    return <Provider>{children}</Provider>;
+};
+
 function App() {
     const { PterodactylUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
     if (PterodactylUser && !store.getState().user.data) {
@@ -74,8 +87,7 @@ function App() {
     return (
         <Invert>
             <GlobalStylesheet />
-            {/* @ts-expect-error - easy-peasy has not updated types for React 19 children prop */}
-            <StoreProvider store={store}>
+            <StoreProviderWrapper>
                 <ThemeLoader />
                 <LocaleLoader />
                 <ProgressBar />
@@ -92,10 +104,9 @@ function App() {
                                 element={
                                     <AuthenticatedRoute>
                                         <Spinner.Suspense>
-                                            {/* @ts-expect-error - easy-peasy has not updated types for React 19 children prop */}
-                                            <ServerContext.Provider>
+                                            <ServerContextProviderWrapper>
                                                 <ServerRouter />
-                                            </ServerContext.Provider>
+                                            </ServerContextProviderWrapper>
                                         </Spinner.Suspense>
                                     </AuthenticatedRoute>
                                 }
@@ -122,7 +133,7 @@ function App() {
                         </Routes>
                     </BrowserRouter>
                 </div>
-            </StoreProvider>
+            </StoreProviderWrapper>
         </Invert>
     );
 };

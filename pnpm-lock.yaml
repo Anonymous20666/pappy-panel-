@@ -151,7 +151,7 @@ importers:
         version: 6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       styled-components-breakpoint:
         specifier: ^3.0.0-preview.20
-        version: 3.0.0-preview.20(@types/styled-components@5.1.7)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
+        version: 3.0.0-preview.20(@types/styled-components@5.1.36)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4))
       swr:
         specifier: ^0.2.3
         version: 0.2.3(react@19.2.4)
@@ -282,9 +282,6 @@ importers:
       '@types/react-transition-group':
         specifier: ^4.4.0
         version: 4.4.0
-      '@types/styled-components':
-        specifier: 5.1.7
-        version: 5.1.7
       '@types/uuid':
         specifier: ^3.4.5
         version: 3.4.5
@@ -1987,8 +1984,8 @@ packages:
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
 
-  '@types/styled-components@5.1.7':
-    resolution: {integrity: sha512-BJzPhFygYspyefAGFZTZ/8lCEY4Tk+Iqktvnko3xmJf9LrLqs3+grxPeU3O0zLl6yjbYBopD0/VikbHgXDbJtA==}
+  '@types/styled-components@5.1.36':
+    resolution: {integrity: sha512-pGMRNY5G2rNDKEv2DOiFYa7Ft1r0jrhmgBwHhOMzPTgCjO76bCot0/4uEfqj7K0Jf1KdQmDtAuaDk9EAs9foSw==}
 
   '@types/stylis@4.2.7':
     resolution: {integrity: sha512-VgDNokpBoKF+wrdvhAAfS55OMQpL6QRglwTwNC3kIgBrzZxA4WsFj+2eLfEA/uMUDzBcEhYmjSbwQakn/i3ajA==}
@@ -6972,11 +6969,11 @@ snapshots:
 
   '@types/stack-utils@2.0.3': {}
 
-  '@types/styled-components@5.1.7':
+  '@types/styled-components@5.1.36':
     dependencies:
       '@types/hoist-non-react-statics': 3.3.7(@types/react@19.2.14)
       '@types/react': 19.2.14
-      csstype: 3.0.5
+      csstype: 3.2.3
 
   '@types/stylis@4.2.7': {}
 
@@ -10079,9 +10076,9 @@ snapshots:
       hey-listen: 1.0.8
       tslib: 2.8.1
 
-  styled-components-breakpoint@3.0.0-preview.20(@types/styled-components@5.1.7)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)):
+  styled-components-breakpoint@3.0.0-preview.20(@types/styled-components@5.1.36)(styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)):
     dependencies:
-      '@types/styled-components': 5.1.7
+      '@types/styled-components': 5.1.36
       styled-components: 6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
 
   styled-components@6.3.9(react-dom@19.2.4(react@19.2.4))(react@19.2.4):

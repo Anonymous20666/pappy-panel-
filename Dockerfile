@@ -6,8 +6,9 @@
 FROM --platform=$BUILDPLATFORM node:22-alpine
 WORKDIR /app
 COPY . ./
-RUN yarn install --frozen-lockfile \
-    && yarn run build
+RUN npm install -g pnpm \
+    && pnpm install --frozen-lockfile \
+    && pnpm run build
 
 # Stage 1:
 # Build the actual container with all of the needed PHP dependencies that will run the application.

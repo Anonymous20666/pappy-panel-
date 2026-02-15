@@ -34,3 +34,6 @@ resources/lang/locales.js
 /public/hot
 result
 docker-compose.yaml
+
+# Testing pnpm-store
+.pnpm-store

@@ -16,7 +16,7 @@ const useActivityLogs = (
 
     return useSWR<PaginatedResult<ActivityLog>>(
         key,
-        async () => {
+        async (): Promise<PaginatedResult<ActivityLog>> => {
             const { data } = await http.get('/api/client/account/activity', {
                 params: {
                     ...withQueryBuilderParams(filters),
@@ -24,7 +24,7 @@ const useActivityLogs = (
                 },
             });
 
-            return toPaginatedSet(data, Transformers.toActivityLog);
+            return toPaginatedSet<ActivityLog>(data, Transformers.toActivityLog);
         },
         { revalidateOnMount: false, ...(config || {}) }
     );

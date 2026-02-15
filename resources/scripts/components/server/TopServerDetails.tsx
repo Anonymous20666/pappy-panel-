@@ -83,7 +83,7 @@ const TopServerDetails = () => {
         let stats: any = {};
         try {
             stats = JSON.parse(data);
-        } catch (e) {
+        } catch {
             return;
         }
 

@@ -88,12 +88,12 @@ export default () => {
     };
 
     useEffect(() => {
-        connected && setError('');
+        void (connected && setError(''));
     }, [connected]);
 
     useEffect(() => {
         return () => {
-            instance && instance.close();
+            void (instance && instance.close());
         };
     }, [instance]);
 

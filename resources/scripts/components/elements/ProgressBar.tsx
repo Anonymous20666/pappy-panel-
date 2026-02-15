@@ -23,8 +23,8 @@ export default () => {
 
     useEffect(() => {
         return () => {
-            timeout.current && clearTimeout(timeout.current);
-            interval.current && clearInterval(interval.current);
+            void (timeout.current && clearTimeout(timeout.current));
+            void (interval.current && clearInterval(interval.current));
         };
     }, []);
 
@@ -38,7 +38,7 @@ export default () => {
 
     useEffect(() => {
         if (!continuous) {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
             return;
         }
 
@@ -49,7 +49,7 @@ export default () => {
 
     useEffect(() => {
         if (continuous) {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
             if ((progress || 0) >= 90) {
                 setProgress(90);
             } else {

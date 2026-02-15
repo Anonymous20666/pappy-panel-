@@ -5,9 +5,8 @@ import {
     getPaginationSet,
     PaginatedResult,
 } from '@/api/http';
-import { Model } from '@definitions/index';
 
-type TransformerFunc<T> = (callback: FractalResponseData) => T;
+type TransformerFunc<T = any> = (callback: FractalResponseData) => T;
 
 const isList = (data: FractalResponseList | FractalResponseData): data is FractalResponseList => data.object === 'list';
 
@@ -42,12 +41,10 @@ function transform<T>(
     return transformer(data);
 }
 
-function toPaginatedSet<T extends TransformerFunc<Model>>(
-    response: FractalPaginatedResponse,
-    transformer: T
-): PaginatedResult<ReturnType<T>> {
+function toPaginatedSet<T>(response: FractalPaginatedResponse, transformer: TransformerFunc<T>): PaginatedResult<T> {
+    const items = transform(response, transformer) as T[];
     return {
-        items: transform(response, transformer) as ReturnType<T>[],
+        items,
         pagination: getPaginationSet(response.meta.pagination),
     };
 }

@@ -32,7 +32,7 @@ export default ({ server }: { server: Server }) => {
         });
 
         return () => {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
         };
     }, [isSuspended]);
 

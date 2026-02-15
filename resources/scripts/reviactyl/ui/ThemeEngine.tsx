@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { XIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 
@@ -20,7 +20,6 @@ type ThemeData = {
     800: string;
     900: string;
 };
-
 
 const getCookie = (name: string): string | null => {
     if (typeof document === 'undefined') return null;
@@ -136,8 +135,9 @@ const ThemeSelector = () => {
             <div className='flex flex-wrap gap-3'>
                 <button
                     onClick={() => handleThemeChange('default')}
-                    className={`w-10 h-10 flex items-center justify-center rounded-full border text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${selected === 'default' ? 'ring-2 ring-reviactyl' : ''
-                        }`}
+                    className={`w-10 h-10 flex items-center justify-center rounded-full border text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
+                        selected === 'default' ? 'ring-2 ring-reviactyl' : ''
+                    }`}
                     title={t('theme-selector.default')}
                 >
                     <XIcon className='h-8 w-8 text-danger/50' />
@@ -151,8 +151,9 @@ const ThemeSelector = () => {
                         <button
                             key={name}
                             onClick={() => handleThemeChange(name)}
-                            className={`w-10 h-10 rounded-full border shadow-sm transition ${selected === name ? 'ring-2 ring-reviactyl' : ''
-                                }`}
+                            className={`w-10 h-10 rounded-full border shadow-sm transition ${
+                                selected === name ? 'ring-2 ring-reviactyl' : ''
+                            }`}
                             style={{ background: gradient }}
                             title={theme.displayName}
                         />

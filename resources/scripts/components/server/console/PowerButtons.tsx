@@ -55,22 +55,16 @@ export default ({ className }: PowerButtonProps) => {
             </Dialog.Confirm>
             <Can action={'control.start'}>
                 {(!alwaysShowKillButton || status === 'offline') && (
-                <Button.Success
-                    className={'flex-1'}
-                    onClick={onButtonClick.bind(this, 'start')}
-                >
-                    {t('start')}
-                </Button.Success>
+                    <Button.Success className={'flex-1'} onClick={onButtonClick.bind(this, 'start')}>
+                        {t('start')}
+                    </Button.Success>
                 )}
             </Can>
             <Can action={'control.restart'}>
                 {(!alwaysShowKillButton || status !== 'offline') && (
-                <Button.Text 
-                    className={'flex-1'}
-                    disabled={!status}
-                    onClick={onButtonClick.bind(this, 'restart')}>
-                    {t('restart')}
-                </Button.Text>
+                    <Button.Text className={'flex-1'} disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>
+                        {t('restart')}
+                    </Button.Text>
                 )}
             </Can>
             <Can action={'control.stop'}>
@@ -82,13 +76,13 @@ export default ({ className }: PowerButtonProps) => {
                     {!alwaysShowKillButton && killable ? t('kill') : t('stop')}
                 </Button.Danger>
                 {alwaysShowKillButton && (
-                <Button.Danger
-                    className={'flex-1'}
-                    disabled={status === 'offline'}
-                    onClick={onButtonClick.bind(this, 'kill')}
-                >
-                    {t('kill')}
-                </Button.Danger>
+                    <Button.Danger
+                        className={'flex-1'}
+                        disabled={status === 'offline'}
+                        onClick={onButtonClick.bind(this, 'kill')}
+                    >
+                        {t('kill')}
+                    </Button.Danger>
                 )}
             </Can>
         </div>

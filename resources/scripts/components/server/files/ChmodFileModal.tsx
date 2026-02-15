@@ -1,6 +1,5 @@
 import { fileBitsToString } from '@/helpers';
 import useFileManagerSwr from '@/plugins/useFileManagerSwr';
-import React from 'react';
 import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import { Form, Formik, FormikHelpers } from 'formik';
 import Field from '@/components/elements/Field';
@@ -34,7 +33,7 @@ const ChmodFileModal = ({ files, ...props }: OwnProps) => {
         await mutate(
             (data) =>
                 data!.map((f) =>
-                    f.name === files[0]?.file ? { ...f, mode: fileBitsToString(mode, !f.isFile), modeBits: mode } : f,
+                    f.name === files[0]?.file ? { ...f, mode: fileBitsToString(mode, !f.isFile), modeBits: mode } : f
                 ),
             false
         );

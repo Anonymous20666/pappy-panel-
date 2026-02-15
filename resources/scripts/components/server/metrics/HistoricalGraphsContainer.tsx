@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -22,15 +22,7 @@ import tw from 'twin.macro';
 import { useTranslation } from 'react-i18next';
 import Select from '@/components/elements/Select';
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 interface StatPoint {
     timestamp: string;
@@ -172,11 +164,7 @@ export default () => {
         <ServerContentBlock title={t('title')}>
             <FlashMessageRender byKey={'server:metrics'} />
             <div css={tw`mb-4 flex justify-end space-x-2`}>
-                <Select
-                    value={days}
-                    onChange={(e) => setDays(e.target.value as TimeRange)}
-                    className={'!w-auto'}
-                >
+                <Select value={days} onChange={(e) => setDays(e.target.value as TimeRange)} className={'!w-auto'}>
                     <option value={1}>{t('time_range.last_24_hours')}</option>
                     <option value={3}>{t('time_range.last_3_days')}</option>
                     <option value={7}>{t('time_range.last_7_days')}</option>

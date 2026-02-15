@@ -20,12 +20,14 @@ const FileEditorSwitcher: React.FC = () => {
         fetch('/file-editors/list.json')
             .then((res) => res.json())
             .then((data) => setEditors(data))
-            .catch(() => setEditors({ cm: { display: 'CodeMirror (Default Editor)' }, mo: { display: 'Monaco (Like VS Code)' } }));
+            .catch(() =>
+                setEditors({ cm: { display: 'CodeMirror (Default Editor)' }, mo: { display: 'Monaco (Like VS Code)' } })
+            );
     }, []);
 
     const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newEditor = e.target.value;
-        setCurrentEditor(newEditor);    
+        setCurrentEditor(newEditor);
 
         if (user) {
             try {
@@ -35,7 +37,7 @@ const FileEditorSwitcher: React.FC = () => {
                 console.error('Failed to update editor:', error);
             }
         }
-    }
+    };
 
     return (
         <div className='flex flex-col gap-2 mb-2 sm:flex-row sm:justify-between sm:items-center'>

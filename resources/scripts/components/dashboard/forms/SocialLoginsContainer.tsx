@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import getSocialLogins, { SocialLogin } from '@/api/account/getSocialLogins';
 import unlinkSocialLogin from '@/api/account/unlinkSocialLogin';
@@ -40,12 +40,14 @@ export default () => {
     const [unlinkProvider, setUnlinkProvider] = useState<string | null>(null);
 
     const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
-    const enabledProviders = Object.keys(socialSettings).filter(k => socialSettings[k as keyof typeof socialSettings]);
+    const enabledProviders = Object.keys(socialSettings).filter(
+        (k) => socialSettings[k as keyof typeof socialSettings]
+    );
 
     useEffect(() => {
         getSocialLogins()
             .then(setLogins)
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             })
             .finally(() => setLoading(false));
@@ -53,12 +55,12 @@ export default () => {
 
     const onUnlink = () => {
         if (!unlinkProvider) return;
-        
+
         unlinkSocialLogin(unlinkProvider)
             .then(() => {
-                setLogins(s => s.filter(l => l.provider !== unlinkProvider));
+                setLogins((s) => s.filter((l) => l.provider !== unlinkProvider));
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             })
             .finally(() => setUnlinkProvider(null));
@@ -76,14 +78,18 @@ export default () => {
                 confirm={t('overview.social.unlink.button')}
                 onConfirmed={onUnlink}
             >
-                <Trans i18nKey={'dashboard/account:overview.social.unlink.confirm'} values={{ provider: unlinkProvider }}>
-                    Are you sure you want to unlink your <b>{unlinkProvider}</b> account? You will no longer be able to use it to log in.
+                <Trans
+                    i18nKey={'dashboard/account:overview.social.unlink.confirm'}
+                    values={{ provider: unlinkProvider }}
+                >
+                    Are you sure you want to unlink your <b>{unlinkProvider}</b> account? You will no longer be able to
+                    use it to log in.
                 </Trans>
             </Dialog.Confirm>
-            
+
             <Container>
-                {enabledProviders.map(provider => {
-                    const login = logins.find(l => l.provider === provider);
+                {enabledProviders.map((provider) => {
+                    const login = logins.find((l) => l.provider === provider);
                     const isLinked = !!login;
 
                     return (
@@ -98,7 +104,9 @@ export default () => {
                                         {isLinked ? (
                                             <span css={tw`text-green-400 flex items-center`}>
                                                 <FaCheckCircle css={tw`mr-1`} />
-                                                {t('overview.social.status.connected', { date: format(login.updatedAt, t('overview.social.date_format')) })}
+                                                {t('overview.social.status.connected', {
+                                                    date: format(login.updatedAt, t('overview.social.date_format')),
+                                                })}
                                             </span>
                                         ) : (
                                             <span css={tw`text-neutral-500 flex items-center`}>
@@ -111,7 +119,10 @@ export default () => {
                             </div>
                             <div>
                                 {isLinked ? (
-                                    <Button.Danger size={Button.Sizes.Small} onClick={() => setUnlinkProvider(provider)}>
+                                    <Button.Danger
+                                        size={Button.Sizes.Small}
+                                        onClick={() => setUnlinkProvider(provider)}
+                                    >
                                         <FaUnlink css={tw`mr-2`} />
                                         {t('overview.social.actions.unlink')}
                                     </Button.Danger>

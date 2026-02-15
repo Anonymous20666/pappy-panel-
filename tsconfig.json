@@ -32,7 +32,7 @@
         "forceConsistentCasingInFileNames": true,
         "inlineSources": false,
         "isolatedModules": true,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "newLine": "lf",
         "noEmit": true,
         "noFallthroughCasesInSwitch": true,

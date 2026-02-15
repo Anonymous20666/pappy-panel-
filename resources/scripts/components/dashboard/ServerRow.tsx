@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaExclamation, FaFloppyDisk, FaGlobe, FaMemory, FaMicrochip } from "react-icons/fa6";
+import { FaExclamation, FaFloppyDisk, FaGlobe, FaMemory, FaMicrochip } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { Server } from '@/api/server/getServer';
 import getServerResourceUsage, { ServerStats } from '@/api/server/getServerResourceUsage';
@@ -19,7 +19,17 @@ type Timer = ReturnType<typeof setInterval>;
 
 import ChangeCategoryModal from '@/components/dashboard/ChangeCategoryModal';
 
-export default ({ server, className, onCategoryChanged, showCategory = true }: { server: Server; className?: string; onCategoryChanged?: () => void; showCategory?: boolean }) => {
+export default ({
+    server,
+    className,
+    onCategoryChanged,
+    showCategory = true,
+}: {
+    server: Server;
+    className?: string;
+    onCategoryChanged?: () => void;
+    showCategory?: boolean;
+}) => {
     const { t } = useTranslation('dashboard/index');
     const interval = useRef<Timer>(null) as React.MutableRefObject<Timer>;
     const [isSuspended, setIsSuspended] = useState(server.status === 'suspended');
@@ -57,7 +67,8 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
     }
 
     const diskLimit = server.limits.disk !== 0 ? bytesToString(mbToBytes(server.limits.disk)) : t('server.unlimited');
-    const memoryLimit = server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : t('server.unlimited');
+    const memoryLimit =
+        server.limits.memory !== 0 ? bytesToString(mbToBytes(server.limits.memory)) : t('server.unlimited');
     const cpuLimit = server.limits.cpu !== 0 ? server.limits.cpu + ' %' : t('server.unlimited');
 
     // Check if server is in a other state (suspended, transferring, etc.)
@@ -80,7 +91,9 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                     <div
                         className='rounded-ui bg-center bg-cover bg-no-repeat bg-center relative px-6 pt-6 pb-6 z-10'
                         style={{
-                            backgroundImage: `url(${server.eggBanner ? server.eggBanner : '/reviactyl/default-bg.png'})`,
+                            backgroundImage: `url(${
+                                server.eggBanner ? server.eggBanner : '/reviactyl/default-bg.png'
+                            })`,
                         }}
                     >
                         <div
@@ -91,7 +104,9 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                         />
                         <div className='flex items-center justify-between pb-5 gap-x-2'>
                             <div className='flex-1 min-w-0'>
-                                <Title className='text-2xl truncate' title={server.name}>{server.name}</Title>
+                                <Title className='text-2xl truncate' title={server.name}>
+                                    {server.name}
+                                </Title>
                                 {showCategory && (
                                     <div
                                         onClick={(e) => {
@@ -99,16 +114,22 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                                             e.stopPropagation();
                                             setCategoryModalVisible(true);
                                         }}
-                                        className={'inline-block text-[10px] px-2 py-0.5 rounded-full mt-1 border transition hover:brightness-110 cursor-pointer'}
-                                        style={server.category ? {
-                                            backgroundColor: `${server.category.color || '#3b82f6'}20`,
-                                            borderColor: server.category.color || '#3b82f6',
-                                            color: server.category.color || '#3b82f6',
-                                        } : {
-                                            backgroundColor: '#334155',
-                                            borderColor: '#475569',
-                                            color: '#94a3b8',
-                                        }}
+                                        className={
+                                            'inline-block text-[10px] px-2 py-0.5 rounded-full mt-1 border transition hover:brightness-110 cursor-pointer'
+                                        }
+                                        style={
+                                            server.category
+                                                ? {
+                                                      backgroundColor: `${server.category.color || '#3b82f6'}20`,
+                                                      borderColor: server.category.color || '#3b82f6',
+                                                      color: server.category.color || '#3b82f6',
+                                                  }
+                                                : {
+                                                      backgroundColor: '#334155',
+                                                      borderColor: '#475569',
+                                                      color: '#94a3b8',
+                                                  }
+                                        }
                                     >
                                         {server.category ? server.category.name : t('categories.set-category')}
                                     </div>
@@ -116,34 +137,36 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                             </div>
                             <span
                                 className={`py-1 px-3 text-xs font-medium rounded-ui
-                            ${stats?.status === 'offline'
-                                        ? 'bg-danger/20 text-danger border border-danger/30'
-                                        : stats?.status === 'running'
-                                            ? 'bg-success/20 text-success border border-success/30'
-                                            : stats?.status === 'starting'
-                                                ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
-                                                : stats?.status === 'stopping'
-                                                    ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
-                                                    : ''
-                                    }
+                            ${
+                                stats?.status === 'offline'
+                                    ? 'bg-danger/20 text-danger border border-danger/30'
+                                    : stats?.status === 'running'
+                                    ? 'bg-success/20 text-success border border-success/30'
+                                    : stats?.status === 'starting'
+                                    ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                                    : stats?.status === 'stopping'
+                                    ? 'bg-orange-500/20 text-orange-400 border border-orange-500/30'
+                                    : ''
+                            }
                         `}
                             >
                                 {stats?.status === 'offline'
                                     ? t('server.offline')
                                     : stats?.status === 'running'
-                                        ? t('server.online')
-                                        : stats?.status === 'starting'
-                                            ? t('server.starting')
-                                            : stats?.status === 'stopping'
-                                                ? t('server.stopping')
-                                                : ''}
+                                    ? t('server.online')
+                                    : stats?.status === 'starting'
+                                    ? t('server.starting')
+                                    : stats?.status === 'stopping'
+                                    ? t('server.stopping')
+                                    : ''}
                             </span>
                         </div>
                         <div
-                            className={`${isSpecialState
-                                ? 'flex justify-center items-center min-h-[100px]'
-                                : 'grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4'
-                                } mt-4`}
+                            className={`${
+                                isSpecialState
+                                    ? 'flex justify-center items-center min-h-[100px]'
+                                    : 'grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4'
+                            } mt-4`}
                         >
                             {!stats || isSuspended ? (
                                 isSuspended ? (
@@ -167,10 +190,10 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                                                 {server.isTransferring
                                                     ? t('server.transferring')
                                                     : server.status === 'installing'
-                                                        ? t('server.installing')
-                                                        : server.status === 'restoring_backup'
-                                                            ? t('server.restoring-backup')
-                                                            : t('server.unavailable')}
+                                                    ? t('server.installing')
+                                                    : server.status === 'restoring_backup'
+                                                    ? t('server.restoring-backup')
+                                                    : t('server.unavailable')}
                                             </p>
                                         </StatBlock>
                                     </React.Fragment>
@@ -226,6 +249,6 @@ export default ({ server, className, onCategoryChanged, showCategory = true }: {
                     </div>
                 </Card>
             </Link>
-        </React.Fragment >
+        </React.Fragment>
     );
 };

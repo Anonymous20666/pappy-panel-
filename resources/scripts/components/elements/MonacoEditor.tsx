@@ -130,10 +130,10 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
     return (
         <EditorContainer style={style}>
             <Editor
-                height="100%"
+                height='100%'
                 language={monacoLanguage}
                 value={initialContent || ''}
-                theme="vs-dark"
+                theme='vs-dark'
                 onMount={handleEditorDidMount}
                 options={{
                     fontSize: 14,

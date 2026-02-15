@@ -1,4 +1,3 @@
-import React from 'react';
 import Modal from '@/components/elements/Modal';
 import { Form, Formik, Field } from 'formik';
 import { object, string } from 'yup';
@@ -22,10 +21,7 @@ interface Props {
 export default ({ server, visible, onDismissed }: Props) => {
     const { t } = useTranslation('dashboard/index');
     const { addError, clearFlashes } = useFlash();
-    const { data: categories } = useSWR(
-        '/api/client/account/categories',
-        () => getServerCategories()
-    );
+    const { data: categories } = useSWR('/api/client/account/categories', () => getServerCategories());
 
     const submit = (values: { category: string }, { setSubmitting }: any) => {
         clearFlashes('server:category');
@@ -34,7 +30,7 @@ export default ({ server, visible, onDismissed }: Props) => {
                 setSubmitting(false);
                 onDismissed();
             })
-            .catch(error => {
+            .catch((error) => {
                 setSubmitting(false);
                 addError({ key: 'server:category', message: error });
             });
@@ -56,10 +52,12 @@ export default ({ server, visible, onDismissed }: Props) => {
                             <Spinner centered />
                         ) : (
                             <div css={tw`mt-6`}>
-                                <label css={tw`block text-sm mb-2 text-gray-300`}>{t('categories.select-category')}</label>
+                                <label css={tw`block text-sm mb-2 text-gray-300`}>
+                                    {t('categories.select-category')}
+                                </label>
                                 <Field name={'category'} as={Select}>
-                                    <option value="">{t('categories.uncategorized')}</option>
-                                    {categories.map(cat => (
+                                    <option value=''>{t('categories.uncategorized')}</option>
+                                    {categories.map((cat) => (
                                         <option key={cat.uuid} value={cat.uuid}>
                                             {cat.name}
                                         </option>

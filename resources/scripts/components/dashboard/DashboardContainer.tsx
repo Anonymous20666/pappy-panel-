@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { Server } from '@/api/server/getServer';
 import getServers from '@/api/getServers';
 import Spinner from '@/components/elements/Spinner';
@@ -52,23 +52,26 @@ export default () => {
     }, [eggFilterOpen]);
 
     const eggsKey = showOnlyAdmin && rootAdmin ? ['/api/client/eggs', 'admin'] : '/api/client/eggs';
-    const { data: eggs } = useSWR(eggsKey, () =>
-        getClientEggs(showOnlyAdmin && rootAdmin ? 'admin' : undefined)
-    );
+    const { data: eggs } = useSWR(eggsKey, () => getClientEggs(showOnlyAdmin && rootAdmin ? 'admin' : undefined));
 
-    const { data: servers, error, mutate: mutateServers } = useSWR<PaginatedResult<Server>>(
+    const {
+        data: servers,
+        error,
+        mutate: mutateServers,
+    } = useSWR<PaginatedResult<Server>>(
         ['/api/client/servers', showOnlyAdmin && rootAdmin, page, selectedCategory, selectedEggId],
-        () => getServers({
-            page,
-            type: showOnlyAdmin && rootAdmin ? 'admin' : undefined,
-            'filter[category_uuid]': selectedCategory === 'all' ? undefined : (selectedCategory === 'primary' ? 'null' : selectedCategory),
-            eggId: selectedEggId ?? undefined,
-        })
+        () =>
+            getServers({
+                page,
+                type: showOnlyAdmin && rootAdmin ? 'admin' : undefined,
+                'filter[category_uuid]':
+                    selectedCategory === 'all' ? undefined : selectedCategory === 'primary' ? 'null' : selectedCategory,
+                eggId: selectedEggId ?? undefined,
+            })
     );
 
-    const { data: categories, mutate: mutateCategories } = useSWR(
-        '/api/client/account/categories',
-        () => getServerCategories()
+    const { data: categories, mutate: mutateCategories } = useSWR('/api/client/account/categories', () =>
+        getServerCategories()
     );
 
     useEffect(() => {
@@ -119,8 +122,8 @@ export default () => {
             return slugs.sort((a, b) => {
                 if (a === 'primary') return 1; // Primary always last
                 if (b === 'primary') return -1;
-                const indexA = categories.findIndex(c => c.uuid === a);
-                const indexB = categories.findIndex(c => c.uuid === b);
+                const indexA = categories.findIndex((c) => c.uuid === a);
+                const indexB = categories.findIndex((c) => c.uuid === b);
                 return indexA - indexB;
             });
         }
@@ -152,24 +155,36 @@ export default () => {
                 <div className='flex items-center gap-4 flex-wrap'>
                     {!showOnlyAdmin && (
                         <>
-                            <div className='min-w-0 max-w-[min(12rem,40vw)]' title={selectedCategory === 'all' ? t('categories.all-categories') : selectedCategory === 'primary' ? t('categories.primary') : categories?.find(c => c.uuid === selectedCategory)?.name}>
+                            <div
+                                className='min-w-0 max-w-[min(12rem,40vw)]'
+                                title={
+                                    selectedCategory === 'all'
+                                        ? t('categories.all-categories')
+                                        : selectedCategory === 'primary'
+                                        ? t('categories.primary')
+                                        : categories?.find((c) => c.uuid === selectedCategory)?.name
+                                }
+                            >
                                 <select
                                     className='w-full bg-[#1e293b] border border-[#334155] text-gray-200 px-3 py-1.5 rounded-lg outline-none focus:border-blue-500 transition truncate max-w-full'
                                     value={selectedCategory}
                                     onChange={(e) => setSelectedCategory(e.target.value)}
                                     aria-label={t('categories.all-categories')}
                                 >
-                                    <option value="all">{t('categories.all-categories')}</option>
-                                    {categories?.map(cat => {
+                                    <option value='all'>{t('categories.all-categories')}</option>
+                                    {categories?.map((cat) => {
                                         const maxLen = 40;
-                                        const label = cat.name.length <= maxLen ? cat.name : cat.name.slice(0, maxLen - 3) + '...';
+                                        const label =
+                                            cat.name.length <= maxLen
+                                                ? cat.name
+                                                : cat.name.slice(0, maxLen - 3) + '...';
                                         return (
                                             <option key={cat.uuid} value={cat.uuid} title={cat.name}>
                                                 {label}
                                             </option>
                                         );
                                     })}
-                                    <option value="primary">{t('categories.primary')}</option>
+                                    <option value='primary'>{t('categories.primary')}</option>
                                 </select>
                             </div>
 
@@ -183,7 +198,9 @@ export default () => {
                     )}
                     {rootAdmin && (
                         <div
-                            className={`flex flex-shrink-0 items-center gap-2 ${!showOnlyAdmin ? 'border-l border-[#334155] pl-4' : ''}`}
+                            className={`flex flex-shrink-0 items-center gap-2 ${
+                                !showOnlyAdmin ? 'border-l border-[#334155] pl-4' : ''
+                            }`}
                         >
                             <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
                                 {showOnlyAdmin ? t('other-servers') : t('your-servers')}
@@ -255,8 +272,8 @@ export default () => {
                                             {selectedEggId !== null
                                                 ? t('eggs.no-servers-for-egg')
                                                 : showOnlyAdmin
-                                                  ? t('no-other-servers')
-                                                  : t('no-servers')}
+                                                ? t('no-other-servers')
+                                                : t('no-servers')}
                                         </p>
                                     </Card>
                                 );
@@ -276,10 +293,10 @@ export default () => {
                                 );
                             }
                             return sortedCategorySlugs.length > 0 ? (
-                                sortedCategorySlugs.map(slug => (
+                                sortedCategorySlugs.map((slug) => (
                                     <CategorySection
                                         key={slug}
-                                        category={categories?.find(c => c.uuid === slug) || null}
+                                        category={categories?.find((c) => c.uuid === slug) || null}
                                         servers={groupedServers[slug] || []}
                                         showOnlyAdmin={showOnlyAdmin || false}
                                         onCategoryChanged={() => mutateServers()}
@@ -288,8 +305,7 @@ export default () => {
                             ) : (
                                 <Card css={tw`col-span-1 lg:col-span-2`}>
                                     <p className='flex justify-center text-center text-sm text-gray-400 py-10'>
-                                        <EmojiSadIcon className='w-5 h-5 mr-1' />{' '}
-                                        {t('no-servers')}
+                                        <EmojiSadIcon className='w-5 h-5 mr-1' /> {t('no-servers')}
                                     </p>
                                 </Card>
                             );

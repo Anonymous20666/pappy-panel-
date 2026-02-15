@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Server } from '@/api/server/getServer';
 import { ServerCategory } from '@/api/server/types';
 import ServerRow from '@/components/dashboard/ServerRow';
@@ -19,7 +19,9 @@ const HeaderButton = styled.button`
     width: 100%;
     transition: all 0.15s ease;
     text-align: left;
-    &:hover { background-color: #1e293b; }
+    &:hover {
+        background-color: #1e293b;
+    }
 
     list-style: none;
     cursor: pointer;
@@ -39,26 +41,15 @@ export default ({ category, servers, showOnlyAdmin, onCategoryChanged }: Props) 
     const displayColor = category ? categoryColor : '#64748b';
 
     return (
-        <div
-            css={[
-                tw`relative border rounded-xl overflow-hidden mb-5 transition`,
-                tw`bg-[#0b1220] border-[#334155]`,
-            ]}
-        >
+        <div css={[tw`relative border rounded-xl overflow-hidden mb-5 transition`, tw`bg-[#0b1220] border-[#334155]`]}>
             {/* LEFT ACCENT BAR */}
-            <div
-                css={tw`absolute left-0 top-0 h-full w-1`}
-                style={{ backgroundColor: displayColor }}
-            />
+            <div css={tw`absolute left-0 top-0 h-full w-1`} style={{ backgroundColor: displayColor }} />
 
             {/* HEADER */}
             <HeaderButton onClick={() => setOpen(!open)}>
                 <div css={tw`flex items-center gap-3 flex-1 min-w-0`}>
                     <div css={tw`min-w-0`}>
-                        <span
-                            css={tw`font-medium`}
-                            style={{ color: displayColor }}
-                        >
+                        <span css={tw`font-medium`} style={{ color: displayColor }}>
                             {category ? category.name : t('categories.primary')}
                         </span>
                         {category?.description && (
@@ -72,12 +63,7 @@ export default ({ category, servers, showOnlyAdmin, onCategoryChanged }: Props) 
                     </span>
                 </div>
 
-                <ChevronDownIcon
-                    css={[
-                        tw`w-5 h-5 text-gray-400 transition-transform`,
-                        open && tw`rotate-180`,
-                    ]}
-                />
+                <ChevronDownIcon css={[tw`w-5 h-5 text-gray-400 transition-transform`, open && tw`rotate-180`]} />
             </HeaderButton>
 
             {/* CONTENT */}

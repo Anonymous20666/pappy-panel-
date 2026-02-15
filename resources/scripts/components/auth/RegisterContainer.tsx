@@ -39,7 +39,9 @@ const RegisterContainer = () => {
 
         // Keep session alive for registration
         const interval = setInterval(() => {
-            fetch('/').catch(() => { /* ignore */ });
+            fetch('/').catch(() => {
+                /* ignore */
+            });
         }, 1000 * 60 * 5); // 5 minutes
 
         return () => clearInterval(interval);
@@ -101,14 +103,23 @@ const RegisterContainer = () => {
     return (
         <Formik
             onSubmit={onSubmit}
-            initialValues={{ email: '', username: '', firstName: '', lastName: '', password: '', passwordConfirmation: '' }}
+            initialValues={{
+                email: '',
+                username: '',
+                firstName: '',
+                lastName: '',
+                password: '',
+                passwordConfirmation: '',
+            }}
             validationSchema={object().shape({
                 email: string().email().required(),
                 username: string().required().min(3),
                 firstName: string().required(),
                 lastName: string().required(),
                 password: string().required().min(8),
-                passwordConfirmation: string().required().oneOf([yupRef('password')], t('register.no-match')),
+                passwordConfirmation: string()
+                    .required()
+                    .oneOf([yupRef('password')], t('register.no-match')),
             })}
         >
             {({ isSubmitting, setSubmitting, submitForm }) => (

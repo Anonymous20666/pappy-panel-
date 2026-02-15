@@ -16,40 +16,43 @@ import { bytesToString } from '@/lib/formatters';
 import styles from './style.module.css';
 import { isImageFile } from '@/api/server/files/isImageFile';
 
-const Clickable: React.FC<{ file: FileObject; onImageClick?: () => void }> = memo(({ file, children, onImageClick }) => {
-    const [canRead] = usePermissions(['file.read']);
-    const [canReadContents] = usePermissions(['file.read-content']);
-    const directory = ServerContext.useStoreState((state) => state.files.directory);
+const Clickable: React.FC<{ file: FileObject; onImageClick?: () => void }> = memo(
+    ({ file, children, onImageClick }) => {
+        const [canRead] = usePermissions(['file.read']);
+        const [canReadContents] = usePermissions(['file.read-content']);
+        const directory = ServerContext.useStoreState((state) => state.files.directory);
 
-    const match = useRouteMatch();
+        const match = useRouteMatch();
 
-    // Handle image files with a click handler instead of navigation
-    if (isImageFile(file) && onImageClick && canReadContents) {
-        return (
-            <div
+        // Handle image files with a click handler instead of navigation
+        if (isImageFile(file) && onImageClick && canReadContents) {
+            return (
+                <div
+                    className={styles.details}
+                    css={tw`cursor-pointer`}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onImageClick();
+                    }}
+                >
+                    {children}
+                </div>
+            );
+        }
+
+        return (file.isFile && (!file.isEditable() || !canReadContents)) || (!file.isFile && !canRead) ? (
+            <div className={styles.details}>{children}</div>
+        ) : (
+            <NavLink
                 className={styles.details}
-                css={tw`cursor-pointer`}
-                onClick={(e) => {
-                    e.preventDefault();
-                    onImageClick();
-                }}
+                to={`${match.url}${file.isFile ? '/edit' : ''}#${encodePathSegments(join(directory, file.name))}`}
             >
                 {children}
-            </div>
+            </NavLink>
         );
-    }
-
-    return (file.isFile && (!file.isEditable() || !canReadContents)) || (!file.isFile && !canRead) ? (
-        <div className={styles.details}>{children}</div>
-    ) : (
-        <NavLink
-            className={styles.details}
-            to={`${match.url}${file.isFile ? '/edit' : ''}#${encodePathSegments(join(directory, file.name))}`}
-        >
-            {children}
-        </NavLink>
-    );
-}, isEqual);
+    },
+    isEqual
+);
 
 interface FileObjectRowProps {
     file: FileObject;

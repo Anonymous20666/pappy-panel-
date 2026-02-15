@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Api\Remote\Servers;
 
 use Illuminate\Http\Request;
+use App\Models\Node;
 use App\Models\Server;
+use Webmozart\Assert\Assert;
 use Illuminate\Http\JsonResponse;
 use App\Facades\Activity;
 use Illuminate\Database\ConnectionInterface;
 use App\Http\Controllers\Controller;
 use App\Services\Eggs\EggConfigurationService;
+use App\Exceptions\Http\HttpForbiddenException;
 use App\Repositories\Eloquent\ServerRepository;
 use App\Http\Resources\Wings\ServerConfigurationCollection;
 use App\Services\Servers\ServerConfigurationStructureService;
@@ -34,7 +37,21 @@ class ServerDetailsController extends Controller
      */
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
+        Assert::isInstanceOf($node = $request->attributes->get('node'), Node::class);
+
         $server = $this->repository->getByUuid($uuid);
+        $transfer = $server->transfer;
+
+        // If the server is being transferred allow either node to request information about
+        // the server. If the server is not being transferred only the target node is allowed
+        // to fetch these details.
+        $valid = $transfer
+            ? $node->id === $transfer->old_node || $node->id === $transfer->new_node
+            : $node->id === $server->node_id;
+
+        if (! $valid) {
+            throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
+        }
 
         return new JsonResponse([
             'settings' => $this->configurationStructureService->handle($server),
@@ -47,7 +64,7 @@ class ServerDetailsController extends Controller
      */
     public function list(Request $request): ServerConfigurationCollection
     {
-        /** @var \App\Models\Node $node */
+        /** @var Node $node */
         $node = $request->attributes->get('node');
 
         // Avoid run-away N+1 SQL queries by preloading the relationships that are used

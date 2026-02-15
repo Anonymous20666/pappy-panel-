@@ -11,6 +11,7 @@ use Illuminate\Database\ConnectionInterface;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquent\ServerRepository;
 use App\Repositories\Wings\DaemonServerRepository;
+use App\Exceptions\Http\HttpForbiddenException;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
 
@@ -39,6 +40,12 @@ class ServerTransferController extends Controller
             throw new ConflictHttpException('Server is not being transferred.');
         }
 
+        // Either node can tell the panel that the transfer has failed. Only the new node
+        // can tell the panel that it was successful.
+        if (! $server->node->is($transfer->newNode) && ! $server->node->is($transfer->oldNode)) {
+            throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
+        }
+
         return $this->processFailedTransfer($transfer);
     }
 
@@ -55,6 +62,12 @@ class ServerTransferController extends Controller
             throw new ConflictHttpException('Server is not being transferred.');
         }
 
+        // Only the new node communicates a successful state to the panel, so we should
+        // not allow the old node to hit this endpoint.
+        if (! $server->node->is($transfer->newNode)) {
+            throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
+            }
+            
         /** @var \App\Models\Server $server */
         $server = $this->connection->transaction(function () use ($server, $transfer) {
             $allocations = array_merge([$transfer->old_allocation], $transfer->old_additional_allocations);

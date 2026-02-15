@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import { useStoreState } from 'easy-peasy';
 import Md2React from '@/reviactyl/ui/Md2React';

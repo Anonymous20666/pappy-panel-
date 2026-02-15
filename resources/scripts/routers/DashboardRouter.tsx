@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { useState } from 'react';
+import { Suspense } from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
-import TransitionRouter from '@/TransitionRouter';
-import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
 import routes from '@/routers/routes';
 import { RouterContainer } from '@/reviactyl/ui/RouterContainer';
@@ -33,7 +32,7 @@ const NavItem = ({ route }: Props) => {
     };
 
     return (
-        <NavLink id={route.name} to={to(route.path)} exact={route.exact}>
+        <NavLink id={route.name} to={to(route.path)} end={route.end}>
             <span className='flex items-center'>
                 {route.icon && <route.icon className={`w-5 mr-1`} />} {route.name ? t(route.name as string) : null}
             </span>
@@ -53,13 +52,12 @@ const DashboardNavigation = () => {
     );
 };
 
-export default () => {
-    const location = useLocation();
+function DashboardRouter() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-    const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
-    const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
+    const isUnderMaintenance = useStoreState(state => state.reviactyl.data?.isUnderMaintenance);
+    const rootAdmin = useStoreState(state => state.user.data?.rootAdmin);
     return (
         <>
             {isUnderMaintenance && !rootAdmin ? (
@@ -97,26 +95,22 @@ export default () => {
                             </Sidebar>
                         </CSSTransition>
                         <div className='w-full flex-1 overflow-y-auto'>
-                            <TransitionRouter>
-                                <React.Suspense fallback={<Spinner centered />}>
-                                    <Switch location={location}>
-                                        <Route path={'/'} exact>
+                            <Suspense fallback={<Spinner centered />}>
+                                    <Routes>
+                                        <Route path="">
                                             <Announcement />
                                             <MaintenanceAlert />
                                             <QuickLinks />
                                             <DashboardContainer />
                                         </Route>
-                                        {routes.account.map(({ path, component: Component }) => (
-                                            <Route key={path} path={`/account/${path}`.replace('//', '/')} exact>
-                                                <Component />
-                                            </Route>
+                                        {routes.account.map(({ route, component: Component }) => (
+                                            <Route key={route} path={`/account/${route}`.replace('//', '/')} element={<Component />} />
                                         ))}
                                         <Route path={'*'}>
                                             <NotFound />
                                         </Route>
-                                    </Switch>
-                                </React.Suspense>
-                            </TransitionRouter>
+                                    </Routes>
+                            </Suspense>
                         </div>
                     </ContentContainer>
                 </RouterContainer>
@@ -124,3 +118,5 @@ export default () => {
         </>
     );
 };
+
+export default DashboardRouter;

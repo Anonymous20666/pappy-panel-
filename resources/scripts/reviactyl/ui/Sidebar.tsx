@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
@@ -124,7 +124,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
             <SidebarContent>
                 {dashboard && (
                     <SideNavigation>
-                        <NavLink className='mt-2' to='/' exact>
+                        <NavLink className='mt-2' to='/' end>
                             <span className='flex items-center'>
                                 <FaHouse className='w-5 mr-1' /> {t('index.dashboard')}
                             </span>

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import login from '@/api/auth/login';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 import { useStoreState } from 'easy-peasy';
-import { Formik, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { object, string } from 'yup';
 import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
@@ -20,16 +21,18 @@ interface Values {
     password: string;
 }
 
-const LoginContainer = ({ history }: RouteComponentProps) => {
+function LoginContainer() {
     const { t } = useTranslation('auth');
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
     const [show, setShow] = useState(false);
 
     const { clearFlashes, clearAndAddHttpError, addFlash } = useFlash();
-    const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
+    const { provider, recaptcha, turnstile } = useStoreState(state => state.settings.data!.captcha);
 
     const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         clearFlashes();
@@ -59,7 +62,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
 
         // If using reCAPTCHA and no token yet, execute captcha
         if (provider === 'recaptcha' && !token) {
-            ref.current!.execute().catch((error) => {
+            ref.current!.execute().catch(error => {
                 console.error(error);
                 setSubmitting(false);
                 clearAndAddHttpError({ error });
@@ -74,16 +77,16 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         }
 
         login({ ...values, captchaToken: token, captchaProvider: provider })
-            .then((response) => {
+            .then(response => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
                     window.location = response.intended || '/';
                     return;
                 }
 
-                history.replace('/auth/login/checkpoint', { token: response.confirmationToken });
+                navigate('/auth/login/checkpoint', { state: { token: response.confirmationToken } });
             })
-            .catch((error) => {
+            .catch(error => {
                 console.error(error);
 
                 setToken('');
@@ -176,7 +179,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             ref={ref}
                             size={'invisible'}
                             sitekey={recaptcha.siteKey || '_invalid_key'}
-                            onVerify={(response) => {
+                            onVerify={response => {
                                 setToken(response);
                                 submitForm();
                             }}

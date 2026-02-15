@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import tw from 'twin.macro';
 import { ServerContext } from '@/state/server';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import Input from '@/components/elements/Input';
 
 export const FileActionCheckbox = styled(Input)`
@@ -12,7 +12,7 @@ export const FileActionCheckbox = styled(Input)`
             ${tw`hover:border-gray-300`};
         }
     }
-`;
+`as typeof Input;
 
 export default ({ name }: { name: string }) => {
     const isChecked = ServerContext.useStoreState((state) => state.files.selectedFiles.indexOf(name) >= 0);

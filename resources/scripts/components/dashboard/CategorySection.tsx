@@ -3,7 +3,7 @@ import { Server } from '@/api/server/getServer';
 import { ServerCategory } from '@/api/server/types';
 import ServerRow from '@/components/dashboard/ServerRow';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 

@@ -3,7 +3,7 @@ import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import Viewer from 'viewerjs';
 import 'viewerjs/dist/viewer.css';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 // Quick styled component for the viewer container (might put this into its own file later)
 const ViewerContainer = styled.div`

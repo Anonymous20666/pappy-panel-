@@ -3,7 +3,7 @@ import { Field as FormikField, FieldProps } from 'formik';
 import Input from '@/components/elements/Input';
 import Label from '@/components/elements/Label';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 interface OwnProps {
     name: string;

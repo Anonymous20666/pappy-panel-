@@ -5,7 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import Card from '@/reviactyl/ui/Card';
 import Title from '@/reviactyl/ui/Title';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';

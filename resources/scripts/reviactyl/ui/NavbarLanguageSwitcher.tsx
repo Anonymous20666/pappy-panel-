@@ -3,7 +3,7 @@ import i18n from '@/i18n';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 import { ApplicationStore } from '@/state';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import 'flag-icons/css/flag-icons.min.css';
 

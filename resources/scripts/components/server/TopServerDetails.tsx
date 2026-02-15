@@ -8,7 +8,7 @@ import { ExternalLinkIcon } from '@heroicons/react/solid';
 import Can from '@/components/elements/Can';
 import { bytesToString, ip, mbToBytes } from '@/lib/formatters';
 import Card from '@/reviactyl/ui/Card';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import Title from '@/reviactyl/ui/Title';
 import { StatBlock } from '@/reviactyl/ui/StatBlock';

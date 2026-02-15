@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
-import App from '@/components/App';
+import { createRoot } from 'react-dom/client';
+import { App } from '@/components/App';
 
 // Enable language support.
 import './i18n';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+createRoot(document.getElementById('app')!).render(<App />);

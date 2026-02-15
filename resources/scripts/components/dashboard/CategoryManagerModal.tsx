@@ -11,7 +11,7 @@ import updateServerCategory from '@/api/account/updateServerCategory';
 import reorderServerCategories from '@/api/account/reorderServerCategories';
 import useFlash from '@/plugins/useFlash';
 import FlashMessageRender from '@/components/FlashMessageRender';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen, faPlus, faLayerGroup, faSortAmountDown, faBars } from '@fortawesome/free-solid-svg-icons';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';

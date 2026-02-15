@@ -17,10 +17,10 @@ const DisableTOTPDialog = () => {
     const [password, setPassword] = useState('');
     const { clearAndAddHttpError } = useFlashKey('account:two-step');
     const { close, setProps } = useContext(DialogWrapperContext);
-    const updateUserData = useStoreActions(actions => actions.user.updateUserData);
+    const updateUserData = useStoreActions((actions) => actions.user.updateUserData);
 
     useEffect(() => {
-        setProps(state => ({
+        setProps((state) => ({
             ...state,
             preventExternalClose: submitting,
             title: t('2fa.disable.title'),

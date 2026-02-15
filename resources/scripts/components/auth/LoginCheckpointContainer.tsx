@@ -52,7 +52,7 @@ function LoginCheckpointContainer() {
                     onClick={() => {
                         setFieldValue('code', '');
                         setFieldValue('recoveryCode', '');
-                        setIsMissingDevice(s => !s);
+                        setIsMissingDevice((s) => !s);
                     }}
                     css={tw`cursor-pointer text-sm text-reviactyl/80 tracking-wide no-underline hover:text-reviactyl/50`}
                 >
@@ -69,12 +69,12 @@ function LoginCheckpointContainer() {
             </div>
         </LoginFormContainer>
     );
-};
+}
 
 const EnhancedForm = withFormik<Props & { location: Location }, Values>({
     handleSubmit: ({ code, recoveryCode }, { setSubmitting, props: { clearAndAddHttpError, location } }) => {
         loginCheckpoint(location.state?.token || '', code, recoveryCode)
-            .then(response => {
+            .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
                     window.location = response.intended || '/';
@@ -83,7 +83,7 @@ const EnhancedForm = withFormik<Props & { location: Location }, Values>({
 
                 setSubmitting(false);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
                 setSubmitting(false);
                 clearAndAddHttpError({ error });

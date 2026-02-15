@@ -38,7 +38,7 @@ function ResetPasswordContainer() {
                 // @ts-expect-error this is valid
                 window.location = '/';
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
 
                 setSubmitting(false);
@@ -99,6 +99,6 @@ function ResetPasswordContainer() {
             )}
         </Formik>
     );
-};
+}
 
 export default ResetPasswordContainer;

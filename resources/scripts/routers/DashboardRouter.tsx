@@ -56,8 +56,8 @@ function DashboardRouter() {
     const [isSidebarOpen, setSidebarOpen] = useState(false);
     const logo = useStoreState((state: ApplicationStore) => state.settings.data!.logo);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
-    const isUnderMaintenance = useStoreState(state => state.reviactyl.data?.isUnderMaintenance);
-    const rootAdmin = useStoreState(state => state.user.data?.rootAdmin);
+    const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
+    const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
     return (
         <>
             {isUnderMaintenance && !rootAdmin ? (
@@ -96,20 +96,24 @@ function DashboardRouter() {
                         </CSSTransition>
                         <div className='w-full flex-1 overflow-y-auto'>
                             <Suspense fallback={<Spinner centered />}>
-                                    <Routes>
-                                        <Route path="">
-                                            <Announcement />
-                                            <MaintenanceAlert />
-                                            <QuickLinks />
-                                            <DashboardContainer />
-                                        </Route>
-                                        {routes.account.map(({ route, component: Component }) => (
-                                            <Route key={route} path={`/account/${route}`.replace('//', '/')} element={<Component />} />
-                                        ))}
-                                        <Route path={'*'}>
-                                            <NotFound />
-                                        </Route>
-                                    </Routes>
+                                <Routes>
+                                    <Route path=''>
+                                        <Announcement />
+                                        <MaintenanceAlert />
+                                        <QuickLinks />
+                                        <DashboardContainer />
+                                    </Route>
+                                    {routes.account.map(({ route, component: Component }) => (
+                                        <Route
+                                            key={route}
+                                            path={`/account/${route}`.replace('//', '/')}
+                                            element={<Component />}
+                                        />
+                                    ))}
+                                    <Route path={'*'}>
+                                        <NotFound />
+                                    </Route>
+                                </Routes>
                             </Suspense>
                         </div>
                     </ContentContainer>
@@ -117,6 +121,6 @@ function DashboardRouter() {
             )}
         </>
     );
-};
+}
 
 export default DashboardRouter;

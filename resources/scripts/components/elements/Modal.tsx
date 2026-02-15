@@ -32,7 +32,7 @@ const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg
     max-width: 95%;
     max-height: calc(100vh - 8rem);
 
-    ${props =>
+    ${(props) =>
         props.size === 'sm'
             ? css`
                   ${breakpoint('md')`max-width: 50%`};
@@ -50,7 +50,7 @@ const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg
 
     ${tw`relative flex flex-col w-full m-auto`};
 
-    ${props =>
+    ${(props) =>
         props.alignTop &&
         css`
             margin-top: 20%;
@@ -114,7 +114,7 @@ function Modal({
     }, [visible]);
 
     return (
-        <FadeTransition as={Fragment} show={render} duration="duration-150" appear={appear ?? true} unmount>
+        <FadeTransition as={Fragment} show={render} duration='duration-150' appear={appear ?? true} unmount>
             <ModalMask
                 className='bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out'
                 onClick={(e: React.MouseEvent) => e.stopPropagation()}
@@ -146,7 +146,7 @@ function Modal({
                             </svg>
                         </div>
                     )}
-                    <FadeTransition duration="duration-150" show={showSpinnerOverlay ?? false} appear>
+                    <FadeTransition duration='duration-150' show={showSpinnerOverlay ?? false} appear>
                         <div
                             css={tw`absolute w-full h-full rounded flex items-center justify-center`}
                             style={{ background: 'hsla(211, 10%, 53%, 0.35)', zIndex: 9999 }}
@@ -166,7 +166,7 @@ function Modal({
             </ModalMask>
         </FadeTransition>
     );
-};
+}
 
 function PortaledModal({ children, ...props }: ModalProps) {
     const element = useRef(document.getElementById('modal-portal'));

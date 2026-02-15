@@ -19,9 +19,7 @@ import { LocaleLoader } from '@/reviactyl/ui/LanguageSwitcher';
 const DashboardRouter = lazy(() => import('@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import('@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import('@/routers/AuthenticationRouter'));
-const PublicServerStatus = lazy(
-    () => import('@/components/public/PublicServerStatus')
-);
+const PublicServerStatus = lazy(() => import('@/components/public/PublicServerStatus'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -94,13 +92,16 @@ function App() {
                 <div css={tw`mx-auto w-auto`}>
                     <BrowserRouter>
                         <Routes>
-                            <Route path="/auth/*" element={
-                                <Spinner.Suspense>
-                                    <AuthenticationRouter />
-                                </Spinner.Suspense>
-                            } />
                             <Route
-                                path="/server/:id/*"
+                                path='/auth/*'
+                                element={
+                                    <Spinner.Suspense>
+                                        <AuthenticationRouter />
+                                    </Spinner.Suspense>
+                                }
+                            />
+                            <Route
+                                path='/server/:id/*'
                                 element={
                                     <AuthenticatedRoute>
                                         <Spinner.Suspense>
@@ -112,15 +113,15 @@ function App() {
                                 }
                             />
                             <Route
-                                path="/status/:id/*"
+                                path='/status/:id/*'
                                 element={
-                                <Spinner.Suspense>
-                                    <PublicServerStatus />
-                                </Spinner.Suspense>
+                                    <Spinner.Suspense>
+                                        <PublicServerStatus />
+                                    </Spinner.Suspense>
                                 }
                             />
                             <Route
-                                path="/*"
+                                path='/*'
                                 element={
                                     <AuthenticatedRoute>
                                         <Spinner.Suspense>
@@ -129,13 +130,13 @@ function App() {
                                     </AuthenticatedRoute>
                                 }
                             />
-                            <Route path="*" element={<NotFound />} />
+                            <Route path='*' element={<NotFound />} />
                         </Routes>
                     </BrowserRouter>
                 </div>
             </StoreProviderWrapper>
         </Invert>
     );
-};
+}
 
 export { App };

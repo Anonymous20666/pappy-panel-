@@ -16,11 +16,11 @@ function PermissionRoute({ children, permission }: Props) {
 
     const can = usePermissions(permission);
 
-    if (can.filter(p => p).length > 0) {
+    if (can.filter((p) => p).length > 0) {
         return <>{children}</>;
     }
 
-    return <ServerError title="Access Denied" message="You do not have permission to access this page." />;
+    return <ServerError title='Access Denied' message='You do not have permission to access this page.' />;
 }
 
 export default PermissionRoute;

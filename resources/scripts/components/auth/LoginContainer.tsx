@@ -28,7 +28,7 @@ function LoginContainer() {
     const [show, setShow] = useState(false);
 
     const { clearFlashes, clearAndAddHttpError, addFlash } = useFlash();
-    const { provider, recaptcha, turnstile } = useStoreState(state => state.settings.data!.captcha);
+    const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
 
     const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
 
@@ -62,7 +62,7 @@ function LoginContainer() {
 
         // If using reCAPTCHA and no token yet, execute captcha
         if (provider === 'recaptcha' && !token) {
-            ref.current!.execute().catch(error => {
+            ref.current!.execute().catch((error) => {
                 console.error(error);
                 setSubmitting(false);
                 clearAndAddHttpError({ error });
@@ -77,7 +77,7 @@ function LoginContainer() {
         }
 
         login({ ...values, captchaToken: token, captchaProvider: provider })
-            .then(response => {
+            .then((response) => {
                 if (response.complete) {
                     // @ts-expect-error this is valid
                     window.location = response.intended || '/';
@@ -86,7 +86,7 @@ function LoginContainer() {
 
                 navigate('/auth/login/checkpoint', { state: { token: response.confirmationToken } });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
 
                 setToken('');
@@ -179,7 +179,7 @@ function LoginContainer() {
                             ref={ref}
                             size={'invisible'}
                             sitekey={recaptcha.siteKey || '_invalid_key'}
-                            onVerify={response => {
+                            onVerify={(response) => {
                                 setToken(response);
                                 submitForm();
                             }}
@@ -234,6 +234,6 @@ function LoginContainer() {
             )}
         </Formik>
     );
-};
+}
 
 export default LoginContainer;

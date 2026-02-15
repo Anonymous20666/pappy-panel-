@@ -77,6 +77,6 @@ function ScheduleContainer() {
             )}
         </ServerContentBlock>
     );
-};
+}
 
 export default ScheduleContainer;

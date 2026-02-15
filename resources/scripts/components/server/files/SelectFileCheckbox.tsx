@@ -12,7 +12,7 @@ export const FileActionCheckbox = styled(Input)`
             ${tw`hover:border-gray-300`};
         }
     }
-`as typeof Input;
+` as typeof Input;
 
 export default ({ name }: { name: string }) => {
     const isChecked = ServerContext.useStoreState((state) => state.files.selectedFiles.indexOf(name) >= 0);

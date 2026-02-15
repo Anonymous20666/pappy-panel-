@@ -58,7 +58,7 @@ function ScheduleContainer() {
                             <GreyRowBox
                                 as={Link}
                                 key={schedule.id}
-                                to={schedule.id}
+                                to={String(schedule.id)}
                                 css={tw`cursor-pointer mb-2 flex-wrap`}
                             >
                                 <ScheduleRow schedule={schedule} />

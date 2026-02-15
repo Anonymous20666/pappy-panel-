@@ -23,7 +23,7 @@ type Interaction = 'hover' | 'click' | 'focus';
 interface Props {
     rest?: number;
     delay?: number | Partial<{ open: number; close: number }>;
-    content: string | React.ReactChild;
+    content: string | React.ReactNode;
     disabled?: boolean;
     arrow?: boolean;
     interactions?: Interaction[];
@@ -77,17 +77,20 @@ export default ({ children, ...props }: Props) => {
         return children;
     }
 
+    const childProps = (children.props || {}) as Record<string, any>;
+    const referenceProps = getReferenceProps({ ref: reference, ...childProps });
+
     return (
         <>
-            {cloneElement(children, getReferenceProps({ ref: reference, ...children.props }))}
+            {cloneElement(children, referenceProps as any)}
             <AnimatePresence>
                 {open && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.85 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.075 }}
-                        {...getFloatingProps({
+                        transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.075 } as any}
+                        {...(getFloatingProps({
                             ref: floating,
                             className:
                                 'bg-gray-900 text-sm text-gray-200 px-3 py-2 rounded pointer-events-none max-w-[24rem]',
@@ -96,7 +99,7 @@ export default ({ children, ...props }: Props) => {
                                 top: `${y || 0}px`,
                                 left: `${x || 0}px`,
                             },
-                        })}
+                        }) as any)}
                     >
                         {props.content}
                         {props.arrow && (

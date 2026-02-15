@@ -9,7 +9,7 @@ interface Props {
     permission?: string | string[];
 }
 
-function PermissionRoute({ children, permission }: Props): JSX.Element {
+function PermissionRoute({ children, permission }: Props) {
     if (permission === undefined) {
         return <>{children}</>;
     }

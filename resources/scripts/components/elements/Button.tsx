@@ -93,9 +93,9 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     }
 `;
 
-type ComponentProps = Omit<JSX.IntrinsicElements['button'], 'ref' | keyof Props> & Props;
+type ComponentProps = Omit<React.JSX.IntrinsicElements['button'], 'ref' | keyof Props> & Props;
 
-const Button: React.FC<ComponentProps> = ({ children, isLoading, ...props }) => (
+const Button = ({ children, isLoading, ...props }: ComponentProps) => (
     <ButtonStyle {...props}>
         {isLoading && (
             <div css={tw`flex absolute justify-center items-center w-full h-full left-0 top-0`}>
@@ -106,9 +106,9 @@ const Button: React.FC<ComponentProps> = ({ children, isLoading, ...props }) => 
     </ButtonStyle>
 );
 
-type LinkProps = Omit<JSX.IntrinsicElements['a'], 'ref' | keyof Props> & Props;
+type LinkProps = Omit<React.JSX.IntrinsicElements['a'], 'ref' | keyof Props> & Props;
 
-const LinkButton: React.FC<LinkProps> = (props) => <ButtonStyle as={'a'} {...props} />;
+const LinkButton = (props: LinkProps) => <ButtonStyle as={'a'} {...props} />;
 
 export { LinkButton, ButtonStyle };
 export default Button;

@@ -1,4 +1,3 @@
-import React from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components';
 import CSSTransition, { CSSTransitionProps } from 'react-transition-group/CSSTransition';
@@ -35,7 +34,7 @@ const Container = styled.div<{ timeout: number }>`
     }
 `;
 
-const Fade: React.FC<Props> = ({ timeout, children, ...props }) => (
+const Fade = ({ timeout, children, ...props }: Props) => (
     <Container timeout={timeout}>
         <CSSTransition timeout={timeout} classNames={'fade'} {...props}>
             {children}

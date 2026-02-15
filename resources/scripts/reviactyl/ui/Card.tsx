@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 interface CardProps {
     className?: string;
-    children: React.ReactChild | React.ReactFragment | React.ReactPortal;
+    children: React.ReactNode;
 }
 
 const CardDefault = styled.div`

@@ -168,7 +168,7 @@ function Modal({
     );
 };
 
-function PortaledModal({ children, ...props }: ModalProps): JSX.Element {
+function PortaledModal({ children, ...props }: ModalProps) {
     const element = useRef(document.getElementById('modal-portal'));
 
     return createPortal(<Modal {...props}>{children}</Modal>, element.current!);

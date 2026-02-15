@@ -4,9 +4,10 @@ import { ServerError } from '@/components/elements/ScreenBlock';
 
 export interface RequireServerPermissionProps {
     permissions: string | string[];
+    children?: React.ReactNode;
 }
 
-const RequireServerPermission: React.FC<RequireServerPermissionProps> = ({ children, permissions }) => {
+const RequireServerPermission = ({ children, permissions }: RequireServerPermissionProps) => {
     return (
         <Can
             action={permissions}

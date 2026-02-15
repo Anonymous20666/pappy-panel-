@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 import Switch from '@/components/elements/Switch';
 import { useTranslation } from 'react-i18next';
 
@@ -6,7 +6,7 @@ interface InvertProps {
     children: ReactNode;
 }
 
-export const Invert: React.FC<InvertProps> = ({ children }) => {
+export const Invert = ({ children }: InvertProps) => {
     const [enabled, setEnabled] = useState(false);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Invert: React.FC<InvertProps> = ({ children }) => {
     );
 };
 
-export const InvertToggle: React.FC = () => {
+export const InvertToggle = () => {
     const { t } = useTranslation('dashboard/account');
     const [enabled, setEnabled] = useState(false);
 

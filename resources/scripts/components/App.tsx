@@ -74,6 +74,7 @@ function App() {
     return (
         <Invert>
             <GlobalStylesheet />
+            {/* @ts-expect-error - easy-peasy has not updated types for React 19 children prop */}
             <StoreProvider store={store}>
                 <ThemeLoader />
                 <LocaleLoader />
@@ -91,6 +92,7 @@ function App() {
                                 element={
                                     <AuthenticatedRoute>
                                         <Spinner.Suspense>
+                                            {/* @ts-expect-error - easy-peasy has not updated types for React 19 children prop */}
                                             <ServerContext.Provider>
                                                 <ServerRouter />
                                             </ServerContext.Provider>

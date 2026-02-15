@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface CodeProps {
-    children: React.ReactChild | React.ReactFragment | React.ReactPortal;
+    children: React.ReactNode;
 }
 
 export default ({ children }: CodeProps) => (

@@ -4,9 +4,9 @@ interface Md2ReactProps {
     markdown: string;
 }
 
-const parseBold = (text: string): (string | JSX.Element)[] => {
+const parseBold = (text: string): (string | React.ReactElement)[] => {
     const boldRegex = /\*\*(.*?)\*\*/g;
-    const result: (string | JSX.Element)[] = [];
+    const result: (string | React.ReactElement)[] = [];
     let lastIndex = 0;
     let match;
 
@@ -25,9 +25,9 @@ const parseBold = (text: string): (string | JSX.Element)[] => {
     return result;
 };
 
-const Md2React: React.FC<Md2ReactProps> = ({ markdown }) => {
+const Md2React = ({ markdown }: Md2ReactProps) => {
     const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-    const parts: (string | JSX.Element)[] = [];
+    const parts: (string | React.ReactElement)[] = [];
     let lastIndex = 0;
     let match;
 

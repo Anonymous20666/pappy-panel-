@@ -7,9 +7,10 @@ import Title from '@/reviactyl/ui/Title';
 
 interface Props extends PageContentBlockProps {
     title: string;
+    children?: React.ReactNode;
 }
 
-const ServerContentBlock: React.FC<Props> = ({ title, children, ...props }) => {
+const ServerContentBlock = ({ title, children, ...props }: Props) => {
     const servername = ServerContext.useStoreState((state) => state.server.data!.name);
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
 

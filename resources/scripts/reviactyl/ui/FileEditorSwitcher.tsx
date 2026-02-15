@@ -9,7 +9,7 @@ interface FileEditorSwitcherProps {
     display: string;
 }
 
-const FileEditorSwitcher: React.FC = () => {
+const FileEditorSwitcher = () => {
     const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: ApplicationStore) => state.user.data);
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);

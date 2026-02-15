@@ -153,6 +153,7 @@
         "clean": "rimraf public/build",
         "coverage": "vitest run --coverage",
         "dev": "vite",
+        "watch": "vite build --watch",
         "tsc": "tsc --noEmit",
         "lint": "eslint ./resources/scripts/**/*.{ts,tsx} --ext .ts,.tsx",
         "test": "vitest run",

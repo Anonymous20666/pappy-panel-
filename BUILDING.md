@@ -6,12 +6,12 @@ However, if you are interested in running custom themes or making modifications 
 system in place to generate these compiled assets. To get your environment setup you'll need at minimum:
 
 * [Node.js](https://nodejs.org/en/) v14.x.x
-* [Yarn](https://classic.yarnpkg.com/lang/en/) v1.x.x
+* [pnpm](https://pnpm.io/) v9.x.x
 * [Go](https://golang.org/) 1.17.x
 
 ### Install Dependencies
 ```bash
-yarn install
+pnpm install
 ```
 
 The command above will download all of the dependencies necessary to get Pterodactyl assets building. After that, its as
@@ -21,11 +21,11 @@ below.
 
 ```bash
 # Build the compiled set of assets for development.
-yarn run build
+pnpm run build
 
 # Build the assets automatically as they are changed. This allows you to refresh
 # the page and see the changes immediately.
-yarn run watch
+pnpm run watch
 ```
 
 ### Hot Module Reloading
@@ -34,7 +34,7 @@ to the Vue template files without having to reload the page you're on. To Get st
 to run the command below.
 
 ```bash
-PUBLIC_PATH=http://192.168.1.1:8080 yarn run serve --host 192.168.1.1
+PUBLIC_PATH=http://192.168.1.1:8080 pnpm run serve --host 192.168.1.1
 ```
 
 There are two _very important_ parts of this command to take note of and change for your specific environment. The first
@@ -44,14 +44,14 @@ the asset URLs used in Pterodactyl.
 
 #### Development Environment
 If you're using the [`pterodactyl/development`](https://github.com/pterodactyl/development) environments, which are
-highly recommended, you can just run `yarn run serve` to run the HMR server, no additional configuration is necessary.
+highly recommended, you can just run `pnpm run serve` to run the HMR server, no additional configuration is necessary.
 
 ### Building for Production
 Once you have your files squared away and ready for the live server, you'll be needing to generate compiled, minified,
 and hashed assets to push live. To do so, run the command below:
 
 ```bash
-yarn run build:production
+pnpm run build:production
 ```
 
 This will generate a production JS bundle and associated assets, all located in `public/assets/` which will need to

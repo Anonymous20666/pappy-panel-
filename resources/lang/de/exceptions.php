@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'Es trat ein Fehler bei der Kommunikation mit dem Daemon auf, der zu einem HTTP/:code Antwortcode führte. Dieser Fehler wurde protokolliert.',
     'node' => [
         'servers_attached' => 'Ein Node darf keine verbundenen Server haben, um gelöscht werden zu können.',
-        'daemon_off_config_updated' => 'Die Daemon-Konfiguration <strong>wurde aktualisiert</strong>, jedoch trat ein Fehler beim Versuch auf, die Konfigurationsdatei auf dem Daemon automatisch zu aktualisieren. Sie müssen die Konfigurationsdatei (config.yml) für den Daemon manuell aktualisieren, um diese Änderungen zu übernehmen.',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'Dieser Zuweisung ist derzeit ein Server zugeordnet. Eine Zuweisung kann nur gelöscht werden, wenn derzeit kein Server zugewiesen ist.',

@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'डेमन के साथ संवाद करने का प्रयास करते समय एक अपवाद था जिसके परिणामस्वरूप HTTP/:code प्रतिक्रिया कोड मिला। यह अपवाद लॉग किया गया है।',
     'node' => [
         'servers_attached' => 'किसी नोड को हटाने के लिए उससे कोई सर्वर जुड़ा नहीं होना चाहिए।',
-        'daemon_off_config_updated' => 'डेमन कॉन्फ़िगरेशन <strong>अपडेट कर दिया गया है</strong>, हालांकि डेमन पर कॉन्फ़िगरेशन फ़ाइल को स्वचालित रूप से अपडेट करने का प्रयास करते समय एक त्रुटि आई। इन परिवर्तनों को लागू करने के लिए आपको डेमन के लिए कॉन्फ़िगरेशन फ़ाइल (config.yml) को मैन्युअल रूप से अपडेट करना होगा।',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'इस आवंटन को वर्तमान में एक सर्वर असाइन किया गया है। एक आवंटन केवल तभी हटाया जा सकता है जब वर्तमान में कोई सर्वर असाइन नहीं है।',

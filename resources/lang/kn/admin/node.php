@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'ಈ ನೋಡ್‌ಗೆ ಅಲೊಕೆಷನ್‌ಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ.',
         'node_deleted' => 'ನೋಡ್ ಅನ್ನು ಪ್ಯಾನೆಲ್‌ನಿಂದ ಯಶಸ್ವಿಯಾಗಿ ತೆಗೆದುಹಾಕಲಾಗಿದೆ.',
         'location_required' => 'ಈ ಪ್ಯಾನೆಲ್‌ಗೆ ನೋಡ್ ಸೇರಿಸುವ ಮೊದಲು ಕನಿಷ್ಠ ಒಂದು ಸ್ಥಳವನ್ನು ಸಂರಚಿಸಿರಬೇಕು.',
-        'node_created' => 'ಹೊಸ ನೋಡ್ ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ. \'Configuration\' ಟ್ಯಾಬ್‌ಗೆ ಭೇಟಿ ನೀಡುವ ಮೂಲಕ ಈ ಯಂತ್ರದಲ್ಲಿನ ಡೀಮನ್ ಅನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಸಂರಚಿಸಬಹುದು. <strong>ಯಾವುದೇ ಸರ್ವರ್‌ಗಳನ್ನು ಸೇರಿಸುವ ಮೊದಲು ಕನಿಷ್ಠ ಒಂದು IP ವಿಳಾಸ ಮತ್ತು ಪೋರ್ಟ್ ಅನ್ನು ಅಲೊಕೆಟ್ ಮಾಡಬೇಕು.</strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'ನೋಡ್ ಮಾಹಿತಿಯನ್ನು ನವೀಕರಿಸಲಾಗಿದೆ. ಯಾವುದೇ ಡೀಮನ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಿದ್ದರೆ, ಅವು ಪರಿಣಾಮಕಾರಿಯಾಗಲು ಡೀಮನ್ ಅನ್ನು ಮರುಪ್ರಾರಂಭಿಸಬೇಕು.',
         'unallocated_deleted' => '<code>:ip</code> ಗಾಗಿ ಅಲೊಕೆಟ್ ಮಾಡದ ಎಲ್ಲಾ ಪೋರ್ಟ್‌ಗಳನ್ನು ಅಳಿಸಲಾಗಿದೆ.',
     ],

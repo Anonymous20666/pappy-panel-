@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Suspense } from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { NavLink, useRoutes } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import Spinner from '@/components/elements/Spinner';
@@ -32,7 +32,7 @@ const NavItem = ({ route }: Props) => {
     };
 
     return (
-        <NavLink id={route.name} to={to(route.path)} end={route.end}>
+        <NavLink id={route.name} to={to(route.path ?? route.route)} end={route.end}>
             <span className='flex items-center'>
                 {route.icon && <route.icon className={`w-5 mr-1`} />} {route.name ? t(route.name as string) : null}
             </span>
@@ -46,7 +46,7 @@ const DashboardNavigation = () => {
             {routes.account
                 .filter((route) => !!route.name)
                 .map((route) => (
-                    <NavItem key={route.path} route={route} />
+                    <NavItem key={route.name} route={route} />
                 ))}
         </>
     );
@@ -58,6 +58,7 @@ function DashboardRouter() {
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
+    const nodeRef = useRef(null);
     return (
         <>
             {isUnderMaintenance && !rootAdmin ? (
@@ -89,31 +90,31 @@ function DashboardRouter() {
                                 className='fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden'
                             />
                         )}
-                        <CSSTransition timeout={150} classNames='fade'>
-                            <Sidebar isOpen={isSidebarOpen} dashboard>
+                        <CSSTransition timeout={150} classNames='fade' nodeRef={nodeRef}>
+                            <Sidebar isOpen={isSidebarOpen} dashboard ref={nodeRef}>
                                 <DashboardNavigation />
                             </Sidebar>
                         </CSSTransition>
                         <div className='w-full flex-1 overflow-y-auto'>
                             <Suspense fallback={<Spinner centered />}>
-                                <Routes>
-                                    <Route path=''>
-                                        <Announcement />
-                                        <MaintenanceAlert />
-                                        <QuickLinks />
-                                        <DashboardContainer />
-                                    </Route>
-                                    {routes.account.map(({ route, component: Component }) => (
-                                        <Route
-                                            key={route}
-                                            path={`/account/${route}`.replace('//', '/')}
-                                            element={<Component />}
-                                        />
-                                    ))}
-                                    <Route path={'*'}>
-                                        <NotFound />
-                                    </Route>
-                                </Routes>
+                                {useRoutes([
+                                    {
+                                        path: '',
+                                        element: (
+                                            <>
+                                                <Announcement />
+                                                <MaintenanceAlert />
+                                                <QuickLinks />
+                                                <DashboardContainer />
+                                            </>
+                                        ),
+                                    },
+                                    ...routes.account.map(({ route, component: Component }) => ({
+                                        path: `/account/${route}`.replace('//', '/'),
+                                        element: <Component />,
+                                    })),
+                                    { path: '*', element: <NotFound /> },
+                                ])}
                             </Suspense>
                         </div>
                     </ContentContainer>

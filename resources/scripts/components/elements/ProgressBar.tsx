@@ -58,10 +58,12 @@ export default () => {
         }
     }, [progress, continuous]);
 
+    const nodeRef = useRef(null);
+
     return (
         <div css={tw`w-full fixed`} style={{ height: '2px' }}>
-            <CSSTransition timeout={150} appear in={visible} unmountOnExit classNames={'fade'}>
-                <BarFill style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
+            <CSSTransition timeout={150} appear in={visible} unmountOnExit classNames={'fade'} nodeRef={nodeRef}>
+                <BarFill ref={nodeRef} style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
             </CSSTransition>
         </div>
     );

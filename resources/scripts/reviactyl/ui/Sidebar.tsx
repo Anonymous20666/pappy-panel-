@@ -75,7 +75,7 @@ export const SideNavigation = styled.div`
     }
 `;
 
-const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
+const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false, dashboard = false }, ref) => {
     const { t } = useTranslation('routes');
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
@@ -92,7 +92,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     };
 
     return (
-        <Container isOpen={isOpen}>
+        <Container isOpen={isOpen} ref={ref}>
             <SpinnerOverlay visible={isLoggingOut} />
             <ProfileHeader>
                 <div className='flex items-center gap-3'>
@@ -143,6 +143,6 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
             )}
         </Container>
     );
-};
+});
 
 export default Sidebar;

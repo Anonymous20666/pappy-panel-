@@ -87,8 +87,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     const onLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
-            // @ts-expect-error this is valid
-            window.location = '/';
+            window.location.href = '/';
         });
     };
 

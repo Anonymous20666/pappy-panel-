@@ -8,8 +8,7 @@ export const setupInterceptors = (history: History) => {
         (error: AxiosError) => {
             if (error.response?.status === 401 || error.response?.status === 403) {
                 if (!window.location.pathname.startsWith('/auth')) {
-                    // @ts-expect-error this is valid
-                    window.location = '/auth/login';
+                    window.location.href = '/auth/login';
                     return;
                 }
             }

@@ -57,6 +57,27 @@ function LoginContainer() {
         }
     }, []);
 
+    const performLogin = (values: Values, captchaToken: string, setSubmitting: (isSubmitting: boolean) => void) => {
+        login({ ...values, captchaToken, captchaProvider: provider })
+            .then((response) => {
+                if (response.complete) {
+                    window.location.href = response.intended || '/';
+                    return;
+                }
+
+                navigate('/auth/login/checkpoint', { state: { token: response.confirmationToken } });
+            })
+            .catch((error) => {
+                console.error(error);
+
+                setToken('');
+                if (ref.current) ref.current.reset();
+
+                setSubmitting(false);
+                clearAndAddHttpError({ error });
+            });
+    };
+
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
 
@@ -76,25 +97,7 @@ function LoginContainer() {
             return;
         }
 
-        login({ ...values, captchaToken: token, captchaProvider: provider })
-            .then((response) => {
-                if (response.complete) {
-                    // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
-                    return;
-                }
-
-                navigate('/auth/login/checkpoint', { state: { token: response.confirmationToken } });
-            })
-            .catch((error) => {
-                console.error(error);
-
-                setToken('');
-                if (ref.current) ref.current.reset();
-
-                setSubmitting(false);
-                clearAndAddHttpError({ error });
-            });
+        performLogin(values, token, setSubmitting);
     };
 
     return (
@@ -106,7 +109,7 @@ function LoginContainer() {
                 password: string().required(t('password-required')),
             })}
         >
-            {({ isSubmitting, setSubmitting, submitForm }) => (
+            {({ isSubmitting, setSubmitting, values }) => (
                 <LoginFormContainer title={t('login-title')} css={tw`w-full flex`}>
                     <Field
                         icon={UserIcon}
@@ -181,7 +184,7 @@ function LoginContainer() {
                             sitekey={recaptcha.siteKey || '_invalid_key'}
                             onVerify={(response) => {
                                 setToken(response);
-                                submitForm();
+                                performLogin(values, response, setSubmitting);
                             }}
                             onExpire={() => {
                                 setSubmitting(false);

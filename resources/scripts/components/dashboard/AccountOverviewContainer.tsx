@@ -81,8 +81,7 @@ export default () => {
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
-            // @ts-expect-error this is valid
-            window.location = '/';
+            window.location.href = '/';
         });
     };
 

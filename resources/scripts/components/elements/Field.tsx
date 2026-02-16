@@ -41,7 +41,7 @@ const Field = forwardRef<HTMLInputElement, Props>(
                             id={id}
                             {...field}
                             {...props}
-                            hasError={!!(touched[field.name] && errors[field.name])}
+                            $hasError={!!(touched[field.name] && errors[field.name])}
                         />
                     </div>
                     <div>

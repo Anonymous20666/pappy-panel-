@@ -35,8 +35,7 @@ function ResetPasswordContainer() {
         clearFlashes();
         performPasswordReset(email, { token: params.token ?? '', password, passwordConfirmation })
             .then(() => {
-                // @ts-expect-error this is valid
-                window.location = '/';
+                window.location.href = '/';
             })
             .catch((error) => {
                 console.error(error);

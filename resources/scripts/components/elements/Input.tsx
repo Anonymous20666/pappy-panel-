@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 
 export interface Props {
-    hasError?: boolean;
+    $hasError?: boolean;
 }
 
 const checkboxStyle = css<Props>`
@@ -33,7 +33,7 @@ const inputStyle = css<Props>`
 
     & + .input-help {
         ${tw`mt-1 text-xs`};
-        ${(props) => (props.hasError ? tw`text-red-200` : tw`text-gray-200`)};
+        ${(props) => (props.$hasError ? tw`text-red-200` : tw`text-gray-200`)};
     }
 
     &:required,
@@ -43,14 +43,14 @@ const inputStyle = css<Props>`
 
     &:not(:disabled):not(:read-only):focus {
         ${tw`shadow-md border-primary-300 ring-2 ring-primary-400 ring-opacity-50`};
-        ${(props) => props.hasError && tw`border-red-300 ring-red-200`};
+        ${(props) => props.$hasError && tw`border-red-300 ring-red-200`};
     }
 
     &:disabled {
         ${tw`opacity-75`};
     }
 
-    ${(props) => props.hasError && tw`text-red-100 border-red-400 hover:border-red-300`};
+    ${(props) => props.$hasError && tw`text-red-100 border-red-400 hover:border-red-300`};
 `;
 
 const Input = styled.input<Props>`

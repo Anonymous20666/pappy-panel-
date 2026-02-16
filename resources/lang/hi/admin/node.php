@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'इस नोड में आवंटन सफलतापूर्वक जोड़े गए हैं।',
         'node_deleted' => 'नोड को पैनल से सफलतापूर्वक हटा दिया गया है।',
         'location_required' => 'इस पैनल में नोड जोड़ने से पहले आपके पास कम से कम एक स्थान कॉन्फ़िगर होना चाहिए।',
-        'node_created' => 'नया नोड सफलतापूर्वक बनाया गया। आप \'कॉन्फ़िगरेशन\' टैब पर जाकर इस मशीन पर डेमन को स्वचालित रूप से कॉन्फ़िगर कर सकते हैं। <strong>कोई भी सर्वर जोड़ने से पहले आपको पहले कम से कम एक IP पता और पोर्ट आवंटित करना होगा।</strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'नोड जानकारी अपडेट कर दी गई है। यदि कोई डेमन सेटिंग्स बदली गई हैं तो उन परिवर्तनों को प्रभावी करने के लिए आपको इसे रीबूट करना होगा।',
         'unallocated_deleted' => '<code>:ip</code> के लिए सभी गैर-आवंटित पोर्ट हटा दिए गए।',
     ],

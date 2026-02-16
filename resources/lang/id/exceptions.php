@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'Terjadi pengecualian saat mencoba berkomunikasi dengan daemon yang menghasilkan kode respons HTTP/:code. Pengecualian ini telah dicatat.',
     'node' => [
         'servers_attached' => 'Sebuah node tidak boleh memiliki server yang terhubung dengannya agar dapat dihapus.',
-        'daemon_off_config_updated' => 'Konfigurasi daemon <strong>telah diperbarui</strong>, namun terjadi kesalahan saat mencoba memperbarui file konfigurasi secara otomatis di Daemon. Anda perlu memperbarui file konfigurasi (config.yml) secara manual agar daemon menerapkan perubahan ini.',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'Sebuah server sedang menggunakan alokasi ini. Alokasi hanya dapat dihapus jika tidak ada server yang sedang menggunakannya.',

@@ -1,11 +1,11 @@
 # Local Development
-Reviactyl is now powered by React, Typescript, and Tailwindcss using webpack at its core to generate compiled assets.
+Reviactyl is now powered by React, Typescript, and Tailwindcss using vite at its core to generate compiled assets.
 Release versions of Reviactyl will include pre-compiled, minified, and hashed assets ready-to-go.
 
 However, if you are interested in running custom themes or making modifications to the React files you'll need a build
 system in place to generate these compiled assets. To get your environment setup you'll need at minimum:
 
-* [Node.js](https://nodejs.org/en/) v14.x.x
+* [Node.js](https://nodejs.org/en/) v22.x.x
 * [pnpm](https://pnpm.io/) v9.x.x
 * [Go](https://golang.org/) 1.17.x
 

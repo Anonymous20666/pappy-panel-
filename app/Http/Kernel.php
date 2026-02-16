@@ -14,6 +14,7 @@ use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Middleware\VerifyCaptcha;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\SetSecurityHeaders;
 use App\Http\Middleware\EditorMiddleware;
 use App\Http\Middleware\UpdateLastSeen;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -48,6 +49,7 @@ class Kernel extends HttpKernel
         ValidatePostSize::class,
         TrimStrings::class,
         ConvertEmptyStringsToNull::class,
+        SetSecurityHeaders::class,
     ];
 
     protected $middlewarePriority = [

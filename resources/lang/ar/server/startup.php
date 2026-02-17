@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'title' => 'Startup',
-    'startup-command' => 'Startup Command',
-    'docker-image' => 'Docker Image',
-    'docker-info' => 'This is an advanced feature allowing you to select a Docker image to use when running this server instance.',
-    'manually-set-docker' => 'This server\'s Docker image has been manually set by an administrator and cannot be changed through this UI.',
-    'variables' => 'Variables',
+    'title' => 'بدء التشغيل',
+    'startup-command' => 'أمر بدء التشغيل',
+    'docker-image' => 'صورة دوكر',
+    'docker-info' => 'هذه ميزة متقدمة تتيح لك تحديد صورة دوكر لاستخدامها عند تشغيل مثيل الخادم هذا.',
+    'manually-set-docker' => 'تم تعيين صورة دوكر لهذا الخادم يدويًا بواسطة المسؤول ولا يمكن تغييرها من خلال واجهة المستخدم هذه.',
+    'variables' => 'المتغيرات',
 ];

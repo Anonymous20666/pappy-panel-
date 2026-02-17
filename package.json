@@ -35,7 +35,7 @@
         "formik": "^2.4.9",
         "framer-motion": "^6.3.10",
         "history": "^4.9.0",
-        "i18next": "^25.8.8",
+        "i18next": "^25.8.10",
         "i18next-browser-languagedetector": "^8.2.0",
         "i18next-http-backend": "^3.0.2",
         "i18next-multiload-backend-adapter": "^2.3.0",
@@ -165,5 +165,6 @@
             "displayName": true,
             "fileName": true
         }
-    }
+    },
+    "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
 }

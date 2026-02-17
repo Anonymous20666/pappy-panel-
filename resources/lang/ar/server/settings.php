@@ -1,32 +1,33 @@
 <?php
 
 return [
-    'title' => 'Settings',
+    'title' => 'الإعدادات',
     'sftp' => [
-        'title' => 'SFTP Details',
-        'address' => 'Server Address',
-        'username' => 'Username',
-        'password' => 'Your SFTP password is the same as the password you use to access this panel.',
-        'button' => 'Launch SFTP',
+        'title' => 'تفاصيل SFTP',
+        'address' => 'عنوان السيرفر',
+        'username' => 'اسم المستخدم',
+        'password' => 'كلمة مرور SFTP الخاصة بك هي نفس كلمة المرور التي تستخدمها للوصول إلى هذه اللوحة.',
+        'button' => 'تشغيل SFTP',
     ],
     'info' => [
-        'title' => 'Debug Information',
-        'node' => 'Node',
-        'server' => 'Server ID',
+        'title' => 'معلومات التصحيح',
+        'node' => 'العقد',
+        'server' => 'معرف السيرفر',
     ],
     'rename' => [
-        'title' => 'Change Server Details',
-        'name' => 'Server Name',
-        'description' => 'Server Description',
-        'button' => 'Save',
+        'title' => 'تعديل بيانات السيرفر',
+        'name' => 'اسم الخادم',
+        'description' => 'وصف الخادم',
+        'button' => 'حفظ',
     ],
     'reinstall' => [
-        'title' => 'Reinstall Server',
-        'confirm-title' => 'Confirm server reinstallation',
-        'confirm' => 'Yes, reinstall server',
-        'info' => 'Your server will be stopped and some files may be deleted or modified during this process, are you sure you wish to continue?',
-        'info-1' => 'Reinstalling your server will stop it, and then re-run the installation script that initially set it up.',
-        'info-2' => 'Some files may be deleted or modified during this process, please back up your data before continuing.',
-        'button' => 'Reinstall Server',
+        'title' => 'إعادة تثبيت السيرفر',
+        'confirm-title' => 'تأكيد إعادة تثبيت السيرفر',
+        'confirm' => 'نعم، أعد تثبيت السيرفر',
+        'info' => 'سيتم إيقاف السيرفر الخاص بك وقد يتم حذف أو تعديل بعض الملفات أثناء هذه العملية،
+هل أنت متأكد أنك تريد المتابعة؟',
+        'info-1' => 'إعادة تثبيت السيرفر ستقوم بإيقافه ثم إعادة تشغيل سكريبت التثبيت الذي قام بإعداده مبدئيًا.',
+        'info-2' => 'قد يتم حذف أو تعديل بعض الملفات أثناء هذه العملية، يرجى عمل نسخة احتياطية لبياناتك قبل المتابعة.',
+        'button' => 'إعادة تثبيت السيرفر',
     ],
 ];

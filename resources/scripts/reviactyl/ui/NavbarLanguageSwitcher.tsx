@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import i18n from '@/i18n';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 import { ApplicationStore } from '@/state';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import 'flag-icons/css/flag-icons.min.css';
 
@@ -55,7 +55,7 @@ const FlagIcon = styled.span`
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
 `;
 
-const NavbarLanguageSwitcher: React.FC = () => {
+const NavbarLanguageSwitcher = () => {
     const user = useStoreState((state: ApplicationStore) => state.user.data);
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
     const [languages, setLanguages] = useState<Record<string, LanguageInfo>>({});

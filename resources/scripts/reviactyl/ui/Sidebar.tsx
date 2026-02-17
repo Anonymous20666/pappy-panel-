@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
@@ -75,7 +75,7 @@ export const SideNavigation = styled.div`
     }
 `;
 
-const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
+const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false, dashboard = false }, ref) => {
     const { t } = useTranslation('routes');
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
@@ -87,13 +87,12 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
     const onLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
-            // @ts-expect-error this is valid
-            window.location = '/';
+            window.location.href = '/';
         });
     };
 
     return (
-        <Container isOpen={isOpen}>
+        <Container isOpen={isOpen} ref={ref}>
             <SpinnerOverlay visible={isLoggingOut} />
             <ProfileHeader>
                 <div className='flex items-center gap-3'>
@@ -124,7 +123,7 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
             <SidebarContent>
                 {dashboard && (
                     <SideNavigation>
-                        <NavLink className='mt-2' to='/' exact>
+                        <NavLink className='mt-2' to='/' end>
                             <span className='flex items-center'>
                                 <FaHouse className='w-5 mr-1' /> {t('index.dashboard')}
                             </span>
@@ -144,6 +143,6 @@ const Sidebar = ({ children, isOpen = false, dashboard = false }: Props) => {
             )}
         </Container>
     );
-};
+});
 
 export default Sidebar;

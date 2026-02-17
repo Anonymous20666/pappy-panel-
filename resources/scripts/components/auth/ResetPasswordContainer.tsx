@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { RouteComponentProps } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import performPasswordReset from '@/api/auth/performPasswordReset';
 import { httpErrorToHuman } from '@/api/http';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
@@ -19,7 +18,7 @@ interface Values {
     passwordConfirmation: string;
 }
 
-export default ({ match, location }: RouteComponentProps<{ token: string }>) => {
+function ResetPasswordContainer() {
     const { t } = useTranslation('auth');
     const [email, setEmail] = useState('');
 
@@ -30,12 +29,13 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
         setEmail(parsed.get('email') || '');
     }
 
+    const params = useParams<'token'>();
+
     const submit = ({ password, passwordConfirmation }: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
-        performPasswordReset(email, { token: match.params.token, password, passwordConfirmation })
+        performPasswordReset(email, { token: params.token ?? '', password, passwordConfirmation })
             .then(() => {
-                // @ts-expect-error this is valid
-                window.location = '/';
+                window.location.href = '/';
             })
             .catch((error) => {
                 console.error(error);
@@ -98,4 +98,6 @@ export default ({ match, location }: RouteComponentProps<{ token: string }>) => 
             )}
         </Formik>
     );
-};
+}
+
+export default ResetPasswordContainer;

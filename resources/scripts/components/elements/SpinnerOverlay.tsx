@@ -8,9 +8,10 @@ interface Props {
     fixed?: boolean;
     size?: SpinnerSize;
     backgroundOpacity?: number;
+    children?: React.ReactNode;
 }
 
-const SpinnerOverlay: React.FC<Props> = ({ size, fixed, visible, backgroundOpacity, children }) => (
+const SpinnerOverlay = ({ size, fixed, visible, backgroundOpacity, children }: Props) => (
     <Fade timeout={150} in={visible} unmountOnExit>
         <div
             css={[

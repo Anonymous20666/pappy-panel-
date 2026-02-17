@@ -17,7 +17,7 @@ const useWebsocketEvent = (event: SocketEvent, callback: (data: string) => void)
         }
 
         return () => {
-            instance && instance.removeListener(event, eventListener);
+            void (instance && instance.removeListener(event, eventListener));
         };
     }, [event, connected, instance]);
 };

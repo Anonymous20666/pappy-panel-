@@ -2,7 +2,7 @@ import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import Md2React from '@/reviactyl/ui/Md2React';
 import { BellIcon, CheckIcon, ExclamationIcon, InboxInIcon, InformationCircleIcon } from '@heroicons/react/solid';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 
 const Container = styled.div`

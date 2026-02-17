@@ -1,7 +1,7 @@
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { ExclamationIcon } from '@heroicons/react/solid';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 
 const Container = styled.div`

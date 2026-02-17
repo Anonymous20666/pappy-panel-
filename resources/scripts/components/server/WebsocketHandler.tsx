@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Websocket } from '@/plugins/Websocket';
 import { ServerContext } from '@/state/server';
 import getWebsocketToken from '@/api/server/getWebsocketToken';
@@ -88,12 +88,12 @@ export default () => {
     };
 
     useEffect(() => {
-        connected && setError('');
+        void (connected && setError(''));
     }, [connected]);
 
     useEffect(() => {
         return () => {
-            instance && instance.close();
+            void (instance && instance.close());
         };
     }, [instance]);
 
@@ -107,9 +107,11 @@ export default () => {
         connect(uuid);
     }, [uuid]);
 
+    const nodeRef = useRef(null);
+
     return error ? (
-        <CSSTransition timeout={150} in appear classNames={'fade'}>
-            <div css={tw`bg-red-500 py-2`}>
+        <CSSTransition timeout={150} in appear classNames={'fade'} nodeRef={nodeRef}>
+            <div css={tw`bg-red-500 py-2`} ref={nodeRef}>
                 <ContentContainer css={tw`flex items-center justify-center`}>
                     {error === 'connecting' ? (
                         <>

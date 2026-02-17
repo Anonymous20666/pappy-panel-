@@ -9,7 +9,7 @@ interface Props {
 
 type OmitFields = 'ref' | 'name' | 'value' | 'type' | 'checked' | 'onClick' | 'onChange';
 
-type InputProps = Omit<JSX.IntrinsicElements['input'], OmitFields>;
+type InputProps = Omit<React.JSX.IntrinsicElements['input'], OmitFields>;
 
 const Checkbox = ({ name, value, className, ...props }: Props & InputProps) => (
     <Field name={name}>
@@ -30,7 +30,7 @@ const Checkbox = ({ name, value, className, ...props }: Props & InputProps) => (
                     onClick={() => form.setFieldTouched(field.name, true)}
                     onChange={(e) => {
                         const set = new Set(field.value);
-                        set.has(value) ? set.delete(value) : set.add(value);
+                        void (set.has(value) ? set.delete(value) : set.add(value));
 
                         field.onChange(e);
                         form.setFieldValue(field.name, Array.from(set));

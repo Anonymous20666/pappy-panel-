@@ -6,7 +6,7 @@ import axios from 'axios';
 import PageContentBlock from '@/components/elements/PageContentBlock';
 import ContentBox from '@/components/elements/ContentBox';
 import { useStoreActions } from 'easy-peasy';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 interface Utilization {
     memory_bytes: number;

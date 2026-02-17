@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { randomInt } from '@/helpers';
 import { CSSTransition } from 'react-transition-group';
@@ -23,8 +23,8 @@ export default () => {
 
     useEffect(() => {
         return () => {
-            timeout.current && clearTimeout(timeout.current);
-            interval.current && clearInterval(interval.current);
+            void (timeout.current && clearTimeout(timeout.current));
+            void (interval.current && clearInterval(interval.current));
         };
     }, []);
 
@@ -38,7 +38,7 @@ export default () => {
 
     useEffect(() => {
         if (!continuous) {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
             return;
         }
 
@@ -49,7 +49,7 @@ export default () => {
 
     useEffect(() => {
         if (continuous) {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
             if ((progress || 0) >= 90) {
                 setProgress(90);
             } else {
@@ -58,10 +58,12 @@ export default () => {
         }
     }, [progress, continuous]);
 
+    const nodeRef = useRef(null);
+
     return (
         <div css={tw`w-full fixed`} style={{ height: '2px' }}>
-            <CSSTransition timeout={150} appear in={visible} unmountOnExit classNames={'fade'}>
-                <BarFill style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
+            <CSSTransition timeout={150} appear in={visible} unmountOnExit classNames={'fade'} nodeRef={nodeRef}>
+                <BarFill ref={nodeRef} style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
             </CSSTransition>
         </div>
     );

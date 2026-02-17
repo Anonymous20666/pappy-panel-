@@ -11,7 +11,7 @@ interface LanguageInfo {
     flag: string;
 }
 
-const LanguageSwitcher: React.FC = () => {
+const LanguageSwitcher = () => {
     const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: ApplicationStore) => state.user.data);
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
@@ -60,7 +60,7 @@ const LanguageSwitcher: React.FC = () => {
 
 export default LanguageSwitcher;
 
-export const LocaleLoader: React.FC = () => {
+export const LocaleLoader = () => {
     const userLanguage = useStoreState((state: any) => state.user.data?.language || 'en');
 
     useEffect(() => {

@@ -4,7 +4,7 @@ import UpdateEmailAddressForm from '@/components/dashboard/forms/UpdateEmailAddr
 import ConfigureTwoFactorForm from '@/components/dashboard/forms/ConfigureTwoFactorForm';
 import tw from 'twin.macro';
 import { breakpoint } from '@/theme';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import MessageBox from '@/components/MessageBox';
 import { useLocation } from 'react-router-dom';
 import ContentBlock from '@/reviactyl/ui/ContentBlock';
@@ -46,7 +46,7 @@ const Container = styled.div`
 
 export default () => {
     const { t } = useTranslation('dashboard/account');
-    const { state } = useLocation<undefined | { twoFactorRedirect?: boolean }>();
+    const { state } = useLocation();
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
@@ -81,8 +81,7 @@ export default () => {
     const onTriggerLogout = () => {
         setIsLoggingOut(true);
         http.post('/auth/logout').finally(() => {
-            // @ts-expect-error this is valid
-            window.location = '/';
+            window.location.href = '/';
         });
     };
 

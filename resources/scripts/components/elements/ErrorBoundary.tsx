@@ -7,8 +7,11 @@ interface State {
     hasError: boolean;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-class ErrorBoundary extends React.Component<{}, State> {
+interface ErrorBoundaryProps {
+    children?: React.ReactNode;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, State> {
     override state: State = {
         hasError: false,
     };

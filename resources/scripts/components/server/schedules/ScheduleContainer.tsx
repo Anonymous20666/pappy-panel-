@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import getServerSchedules from '@/api/server/schedules/getServerSchedules';
 import { ServerContext } from '@/state/server';
 import Spinner from '@/components/elements/Spinner';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import ScheduleRow from '@/components/server/schedules/ScheduleRow';
 import { httpErrorToHuman } from '@/api/http';
@@ -17,10 +17,8 @@ import Card from '@/reviactyl/ui/Card';
 import { ClockIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 
-export default () => {
+function ScheduleContainer() {
     const { t } = useTranslation('server/schedules');
-    const match = useRouteMatch();
-    const history = useHistory();
 
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const { clearFlashes, addError } = useFlash();
@@ -58,14 +56,10 @@ export default () => {
                     ) : (
                         schedules.map((schedule) => (
                             <GreyRowBox
-                                as={'a'}
+                                as={Link}
                                 key={schedule.id}
-                                href={`${match.url}/${schedule.id}`}
+                                to={String(schedule.id)}
                                 css={tw`cursor-pointer mb-2 flex-wrap`}
-                                onClick={(e: any) => {
-                                    e.preventDefault();
-                                    history.push(`${match.url}/${schedule.id}`);
-                                }}
                             >
                                 <ScheduleRow schedule={schedule} />
                             </GreyRowBox>
@@ -83,4 +77,6 @@ export default () => {
             )}
         </ServerContentBlock>
     );
-};
+}
+
+export default ScheduleContainer;

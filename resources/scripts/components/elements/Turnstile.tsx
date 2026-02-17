@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface TurnstileProps {
     siteKey: string;
@@ -30,7 +30,7 @@ interface TurnstileRenderOptions {
     'refresh-expired'?: 'auto' | 'manual' | 'never';
 }
 
-const Turnstile: React.FC<TurnstileProps> = ({ siteKey, onVerify, onExpire, onError }) => {
+const Turnstile = ({ siteKey, onVerify, onExpire, onError }: TurnstileProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const widgetIdRef = useRef<string | null>(null);
     const isRenderedRef = useRef(false);

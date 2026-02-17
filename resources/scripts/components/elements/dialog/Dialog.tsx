@@ -68,7 +68,7 @@ export default ({
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ duration: 0.15 }}
+                        transition={{ duration: 0.15 } as any}
                         open={open}
                         onClose={onDialogClose}
                     >
@@ -81,7 +81,7 @@ export default ({
                                 onMouseUp={onContainerClick.bind(this, false)}
                             >
                                 <HDialog.Panel
-                                    as={motion.div}
+                                    as={motion.div as any}
                                     initial={'closed'}
                                     animate={down ? 'bounce' : 'open'}
                                     exit={'closed'}

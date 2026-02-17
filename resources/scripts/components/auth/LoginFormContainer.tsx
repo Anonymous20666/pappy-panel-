@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Form } from 'formik';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import Card from '@/reviactyl/ui/Card';
 import Title from '@/reviactyl/ui/Title';

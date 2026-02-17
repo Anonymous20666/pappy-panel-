@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import SearchContainer from '@/components/dashboard/search/SearchContainer';
 import NavbarLanguageSwitcher from '@/reviactyl/ui/NavbarLanguageSwitcher';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 
 interface NavbarProps {
-    children: React.ReactChild | React.ReactFragment | React.ReactPortal;
+    children: React.ReactNode;
 }
 
 const Container = styled.div`

@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import login from '@/api/auth/login';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
 import { useStoreState } from 'easy-peasy';
-import { Formik, FormikHelpers } from 'formik';
+import type { FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import { object, string } from 'yup';
 import Field from '@/components/elements/Field';
 import tw from 'twin.macro';
@@ -20,7 +21,7 @@ interface Values {
     password: string;
 }
 
-const LoginContainer = ({ history }: RouteComponentProps) => {
+function LoginContainer() {
     const { t } = useTranslation('auth');
     const ref = useRef<Reaptcha>(null);
     const [token, setToken] = useState('');
@@ -30,6 +31,8 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const { provider, recaptcha, turnstile } = useStoreState((state) => state.settings.data!.captcha);
 
     const socialSettings = window.SocialLoginConfiguration || { google: false, discord: false, github: false };
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         clearFlashes();
@@ -54,6 +57,27 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
         }
     }, []);
 
+    const performLogin = (values: Values, captchaToken: string, setSubmitting: (isSubmitting: boolean) => void) => {
+        login({ ...values, captchaToken, captchaProvider: provider })
+            .then((response) => {
+                if (response.complete) {
+                    window.location.href = response.intended || '/';
+                    return;
+                }
+
+                navigate('/auth/login/checkpoint', { state: { token: response.confirmationToken } });
+            })
+            .catch((error) => {
+                console.error(error);
+
+                setToken('');
+                if (ref.current) ref.current.reset();
+
+                setSubmitting(false);
+                clearAndAddHttpError({ error });
+            });
+    };
+
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
 
@@ -73,25 +97,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             return;
         }
 
-        login({ ...values, captchaToken: token, captchaProvider: provider })
-            .then((response) => {
-                if (response.complete) {
-                    // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
-                    return;
-                }
-
-                history.replace('/auth/login/checkpoint', { token: response.confirmationToken });
-            })
-            .catch((error) => {
-                console.error(error);
-
-                setToken('');
-                if (ref.current) ref.current.reset();
-
-                setSubmitting(false);
-                clearAndAddHttpError({ error });
-            });
+        performLogin(values, token, setSubmitting);
     };
 
     return (
@@ -103,7 +109,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                 password: string().required(t('password-required')),
             })}
         >
-            {({ isSubmitting, setSubmitting, submitForm }) => (
+            {({ isSubmitting, setSubmitting, values }) => (
                 <LoginFormContainer title={t('login-title')} css={tw`w-full flex`}>
                     <Field
                         icon={UserIcon}
@@ -178,7 +184,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                             sitekey={recaptcha.siteKey || '_invalid_key'}
                             onVerify={(response) => {
                                 setToken(response);
-                                submitForm();
+                                performLogin(values, response, setSubmitting);
                             }}
                             onExpire={() => {
                                 setSubmitting(false);
@@ -231,6 +237,6 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
             )}
         </Formik>
     );
-};
+}
 
 export default LoginContainer;

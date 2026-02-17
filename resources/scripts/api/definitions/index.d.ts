@@ -4,7 +4,7 @@ import { FractalResponseData, FractalResponseList } from '../http';
 export type UUID = string;
 export type Identifier<P extends string = string> = `${P}_${string}`;
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface Model {}
 
 interface ModelWithRelationships extends Model {

@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import styled, { css, keyframes } from 'styled-components/macro';
+import styled, { css, keyframes } from 'styled-components';
 import tw from 'twin.macro';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
 
@@ -9,11 +9,7 @@ interface Props {
     size?: SpinnerSize;
     centered?: boolean;
     isBlue?: boolean;
-}
-
-interface Spinner extends React.FC<Props> {
-    Size: Record<'SMALL' | 'BASE' | 'LARGE', SpinnerSize>;
-    Suspense: React.FC<Props>;
+    children?: React.ReactNode;
 }
 
 const spin = keyframes`
@@ -21,7 +17,7 @@ const spin = keyframes`
 `;
 
 // noinspection CssOverwrittenProperties
-const SpinnerComponent = styled.div<Props>`
+const SpinnerElement = styled.div<Props>`
     ${tw`w-8 h-8`};
     border-width: 3px;
     border-radius: 50%;
@@ -41,27 +37,30 @@ const SpinnerComponent = styled.div<Props>`
     border-top-color: ${(props) => (!props.isBlue ? 'rgb(255, 255, 255)' : 'hsl(212, 92%, 43%)')};
 `;
 
-const Spinner: Spinner = ({ centered, ...props }) =>
+const SpinnerFunc = ({ centered, ...props }: Props) =>
     centered ? (
         <div css={[tw`flex justify-center items-center`, props.size === 'large' ? tw`m-20` : tw`m-6`]}>
-            <SpinnerComponent {...props} />
+            <SpinnerElement {...props} />
         </div>
     ) : (
-        <SpinnerComponent {...props} />
+        <SpinnerElement {...props} />
     );
-Spinner.displayName = 'Spinner';
 
-Spinner.Size = {
-    SMALL: 'small',
-    BASE: 'base',
-    LARGE: 'large',
-};
-
-Spinner.Suspense = ({ children, centered = true, size = Spinner.Size.LARGE, ...props }) => (
-    <Suspense fallback={<Spinner centered={centered} size={size} {...props} />}>
+const SuspenseSpinner = ({ children, centered = true, size, ...props }: Props) => (
+    <Suspense fallback={<SpinnerFunc centered={centered} size={size || 'large'} {...props} />}>
         <ErrorBoundary>{children}</ErrorBoundary>
     </Suspense>
 );
-Spinner.Suspense.displayName = 'Spinner.Suspense';
+SuspenseSpinner.displayName = 'Spinner.Suspense';
+
+const Spinner = Object.assign(SpinnerFunc, {
+    displayName: 'Spinner',
+    Size: {
+        SMALL: 'small' as const,
+        BASE: 'base' as const,
+        LARGE: 'large' as const,
+    },
+    Suspense: SuspenseSpinner,
+});
 
 export default Spinner;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import type { Location, RouteProps } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginCheckpoint from '@/api/auth/loginCheckpoint';
 import LoginFormContainer from '@/components/auth/LoginFormContainer';
-import { ActionCreator } from 'easy-peasy';
-import { StaticContext } from 'react-router';
+import type { ActionCreator } from 'easy-peasy';
 import { useFormikContext, withFormik } from 'formik';
 import useFlash from '@/plugins/useFlash';
 import { FlashStore } from '@/state/flashes';
@@ -18,13 +18,13 @@ interface Values {
     recoveryCode: '';
 }
 
-type OwnProps = RouteComponentProps<Record<string, string | undefined>, StaticContext, { token?: string }>;
+type OwnProps = RouteProps;
 
 type Props = OwnProps & {
     clearAndAddHttpError: ActionCreator<FlashStore['clearAndAddHttpError']['payload']>;
 };
 
-const LoginCheckpointContainer = () => {
+function LoginCheckpointContainer() {
     const { t } = useTranslation('auth');
     const { isSubmitting, setFieldValue } = useFormikContext<Values>();
     const [isMissingDevice, setIsMissingDevice] = useState(false);
@@ -69,15 +69,14 @@ const LoginCheckpointContainer = () => {
             </div>
         </LoginFormContainer>
     );
-};
+}
 
-const EnhancedForm = withFormik<Props, Values>({
+const EnhancedForm = withFormik<Props & { location: Location }, Values>({
     handleSubmit: ({ code, recoveryCode }, { setSubmitting, props: { clearAndAddHttpError, location } }) => {
         loginCheckpoint(location.state?.token || '', code, recoveryCode)
             .then((response) => {
                 if (response.complete) {
-                    // @ts-expect-error this is valid
-                    window.location = response.intended || '/';
+                    window.location.href = response.intended || '/';
                     return;
                 }
 
@@ -96,16 +95,17 @@ const EnhancedForm = withFormik<Props, Values>({
     }),
 })(LoginCheckpointContainer);
 
-export default ({ history, location, ...props }: OwnProps) => {
+export default ({ ...props }: OwnProps) => {
     const { clearAndAddHttpError } = useFlash();
 
+    const location = useLocation();
+    const navigate = useNavigate();
+
     if (!location.state?.token) {
-        history.replace('/auth/login');
+        navigate('/auth/login');
 
         return null;
     }
 
-    return (
-        <EnhancedForm clearAndAddHttpError={clearAndAddHttpError} history={history} location={location} {...props} />
-    );
+    return <EnhancedForm clearAndAddHttpError={clearAndAddHttpError} location={location} {...props} />;
 };

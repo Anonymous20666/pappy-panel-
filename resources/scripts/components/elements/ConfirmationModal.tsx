@@ -9,9 +9,10 @@ type Props = {
     buttonText: string;
     onConfirmed: () => void;
     showSpinnerOverlay?: boolean;
+    children?: React.ReactNode;
 };
 
-const ConfirmationModal: React.FC<Props> = ({ title, children, buttonText, onConfirmed }) => {
+const ConfirmationModal = ({ title, children, buttonText, onConfirmed }: Props) => {
     const { dismiss } = useContext(ModalContext);
 
     return (

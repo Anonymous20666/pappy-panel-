@@ -1,9 +1,9 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import Modal, { RequiredModalProps } from '@/components/elements/Modal';
 import Viewer from 'viewerjs';
 import 'viewerjs/dist/viewer.css';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 // Quick styled component for the viewer container (might put this into its own file later)
 const ViewerContainer = styled.div`
@@ -23,7 +23,7 @@ interface Props extends RequiredModalProps {
     imageName: string;
 }
 
-const ImageViewerModal: React.FC<Props> = ({ imageUrl, imageName, ...modalProps }) => {
+const ImageViewerModal = ({ imageUrl, imageName, ...modalProps }: Props) => {
     const imageRef = useRef<HTMLImageElement>(null);
     const viewerRef = useRef<Viewer | null>(null);
 

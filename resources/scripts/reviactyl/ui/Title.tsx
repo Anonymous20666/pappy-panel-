@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import tw from 'twin.macro';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 interface TitleProps extends React.HTMLAttributes<HTMLDivElement> {
     scheme?: 'gray' | 'primary';

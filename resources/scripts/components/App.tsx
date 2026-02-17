@@ -1,5 +1,5 @@
-import { lazy } from 'react';
-import { Route, Router, Switch } from 'react-router-dom';
+import React, { lazy, type ReactNode } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
 import { store } from '@/state';
 import { SiteSettings } from '@/state/settings';
@@ -8,8 +8,6 @@ import ProgressBar from '@/components/elements/ProgressBar';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import tw from 'twin.macro';
 import GlobalStylesheet from '@/assets/css/GlobalStylesheet';
-import { history } from '@/components/history';
-import { setupInterceptors } from '@/api/interceptors';
 import AuthenticatedRoute from '@/components/elements/AuthenticatedRoute';
 import { ServerContext } from '@/state/server';
 import '@/assets/tailwind.css';
@@ -18,12 +16,10 @@ import { ThemeLoader } from '@/reviactyl/ui/ThemeEngine';
 import { Invert } from '@/reviactyl/ui/SmartInvert';
 import { LocaleLoader } from '@/reviactyl/ui/LanguageSwitcher';
 
-const DashboardRouter = lazy(() => import(/* webpackChunkName: "dashboard" */ '@/routers/DashboardRouter'));
-const ServerRouter = lazy(() => import(/* webpackChunkName: "server" */ '@/routers/ServerRouter'));
-const AuthenticationRouter = lazy(() => import(/* webpackChunkName: "auth" */ '@/routers/AuthenticationRouter'));
-const PublicServerStatus = lazy(
-    () => import(/* webpackChunkName: "public-status" */ '@/components/public/PublicServerStatus')
-);
+const DashboardRouter = lazy(() => import('@/routers/DashboardRouter'));
+const ServerRouter = lazy(() => import('@/routers/ServerRouter'));
+const AuthenticationRouter = lazy(() => import('@/routers/AuthenticationRouter'));
+const PublicServerStatus = lazy(() => import('@/components/public/PublicServerStatus'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -45,9 +41,22 @@ interface ExtendedWindow extends Window {
     };
 }
 
-setupInterceptors(history);
+// setupInterceptors(history);
 
-const App = () => {
+// Wrapper components for React 19 compatibility with easy-peasy v4
+// I wasn't sure if I should update easy-peasy or just do this, so consider this a temporary duct-tape solution.
+// Brijesh if you're reading this, consider if updating easy-peasy breaks compatibility and if not, update it.
+const StoreProviderWrapper = ({ children }: { children: ReactNode }) => {
+    const Provider = StoreProvider as unknown as React.ComponentType<{ store: typeof store; children: ReactNode }>;
+    return <Provider store={store}>{children}</Provider>;
+};
+
+const ServerContextProviderWrapper = ({ children }: { children: ReactNode }) => {
+    const Provider = ServerContext.Provider as unknown as React.ComponentType<{ children: ReactNode }>;
+    return <Provider>{children}</Provider>;
+};
+
+function App() {
     const { PterodactylUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
     if (PterodactylUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
@@ -76,44 +85,58 @@ const App = () => {
     return (
         <Invert>
             <GlobalStylesheet />
-            <StoreProvider store={store}>
+            <StoreProviderWrapper>
                 <ThemeLoader />
                 <LocaleLoader />
                 <ProgressBar />
                 <div css={tw`mx-auto w-auto`}>
-                    <Router history={history}>
-                        <Switch>
-                            <Route path={'/auth'}>
-                                <Spinner.Suspense>
-                                    <AuthenticationRouter />
-                                </Spinner.Suspense>
-                            </Route>
-                            <AuthenticatedRoute path={'/server/:id'}>
-                                <Spinner.Suspense>
-                                    <ServerContext.Provider>
-                                        <ServerRouter />
-                                    </ServerContext.Provider>
-                                </Spinner.Suspense>
-                            </AuthenticatedRoute>
-                            <Route path={'/status/:id'}>
-                                <Spinner.Suspense>
-                                    <PublicServerStatus />
-                                </Spinner.Suspense>
-                            </Route>
-                            <AuthenticatedRoute path={'/'}>
-                                <Spinner.Suspense>
-                                    <DashboardRouter />
-                                </Spinner.Suspense>
-                            </AuthenticatedRoute>
-                            <Route path={'*'}>
-                                <NotFound />
-                            </Route>
-                        </Switch>
-                    </Router>
+                    <BrowserRouter>
+                        <Routes>
+                            <Route
+                                path='/auth/*'
+                                element={
+                                    <Spinner.Suspense>
+                                        <AuthenticationRouter />
+                                    </Spinner.Suspense>
+                                }
+                            />
+                            <Route
+                                path='/server/:id/*'
+                                element={
+                                    <AuthenticatedRoute>
+                                        <Spinner.Suspense>
+                                            <ServerContextProviderWrapper>
+                                                <ServerRouter />
+                                            </ServerContextProviderWrapper>
+                                        </Spinner.Suspense>
+                                    </AuthenticatedRoute>
+                                }
+                            />
+                            <Route
+                                path='/status/:id/*'
+                                element={
+                                    <Spinner.Suspense>
+                                        <PublicServerStatus />
+                                    </Spinner.Suspense>
+                                }
+                            />
+                            <Route
+                                path='/*'
+                                element={
+                                    <AuthenticatedRoute>
+                                        <Spinner.Suspense>
+                                            <DashboardRouter />
+                                        </Spinner.Suspense>
+                                    </AuthenticatedRoute>
+                                }
+                            />
+                            <Route path='*' element={<NotFound />} />
+                        </Routes>
+                    </BrowserRouter>
                 </div>
-            </StoreProvider>
+            </StoreProviderWrapper>
         </Invert>
     );
-};
+}
 
-export default App;
+export { App };

@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 import { FaGoogle, FaDiscord, FaGithub, FaLink, FaUnlink, FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import { Dialog } from '@/components/elements/dialog';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { Trans } from 'react-i18next';
 
 const ProviderIcon = ({ provider }: { provider: string }) => {

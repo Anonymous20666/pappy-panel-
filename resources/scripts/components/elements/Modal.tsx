@@ -1,12 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import Spinner from '@/components/elements/Spinner';
 import tw from 'twin.macro';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 import { breakpoint } from '@/theme';
-import Fade from '@/components/elements/Fade';
+import FadeTransition from '@/components/elements/transitions/FadeTransition';
 import { createPortal } from 'react-dom';
 
 export interface RequiredModalProps {
+    children?: ReactNode;
     visible: boolean;
     onDismissed: () => void;
     appear?: boolean;
@@ -71,7 +73,7 @@ const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg
     }
 `;
 
-const Modal: React.FC<ModalProps> = ({
+function Modal({
     visible,
     appear,
     dismissable,
@@ -83,7 +85,7 @@ const Modal: React.FC<ModalProps> = ({
     size = 'md',
     noScroll = false,
     children,
-}) => {
+}: ModalProps) {
     const [render, setRender] = useState(visible);
 
     const isDismissable = useMemo(() => {
@@ -103,15 +105,21 @@ const Modal: React.FC<ModalProps> = ({
         };
     }, [isDismissable, closeOnEscape, render]);
 
-    useEffect(() => setRender(visible), [visible]);
+    useEffect(() => {
+        setRender(visible);
+
+        if (!visible) {
+            onDismissed();
+        }
+    }, [visible]);
 
     return (
-        <Fade in={render} timeout={150} appear={appear || true} unmountOnExit onExited={() => onDismissed()}>
+        <FadeTransition as={Fragment} show={render} duration='duration-150' appear={appear ?? true} unmount>
             <ModalMask
                 className='bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out'
-                onClick={(e) => e.stopPropagation()}
-                onContextMenu={(e) => e.stopPropagation()}
-                onMouseDown={(e) => {
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                onContextMenu={(e: React.MouseEvent) => e.stopPropagation()}
+                onMouseDown={(e: React.MouseEvent) => {
                     if (isDismissable && closeOnBackground) {
                         e.stopPropagation();
                         if (e.target === e.currentTarget) {
@@ -138,16 +146,14 @@ const Modal: React.FC<ModalProps> = ({
                             </svg>
                         </div>
                     )}
-                    {showSpinnerOverlay && (
-                        <Fade timeout={150} appear in>
-                            <div
-                                css={tw`absolute w-full h-full rounded flex items-center justify-center`}
-                                style={{ background: 'hsla(211, 10%, 53%, 0.35)', zIndex: 9999 }}
-                            >
-                                <Spinner />
-                            </div>
-                        </Fade>
-                    )}
+                    <FadeTransition duration='duration-150' show={showSpinnerOverlay ?? false} appear>
+                        <div
+                            css={tw`absolute w-full h-full rounded flex items-center justify-center`}
+                            style={{ background: 'hsla(211, 10%, 53%, 0.35)', zIndex: 9999 }}
+                        >
+                            <Spinner />
+                        </div>
+                    </FadeTransition>
                     <div
                         css={[
                             tw`bg-gray-700 border border-gray-600 p-3 sm:p-4 md:p-6 rounded-ui shadow-md transition-all duration-150`,
@@ -158,14 +164,14 @@ const Modal: React.FC<ModalProps> = ({
                     </div>
                 </ModalContainer>
             </ModalMask>
-        </Fade>
+        </FadeTransition>
     );
-};
+}
 
-const PortaledModal: React.FC<ModalProps> = ({ children, ...props }) => {
+function PortaledModal({ children, ...props }: ModalProps) {
     const element = useRef(document.getElementById('modal-portal'));
 
     return createPortal(<Modal {...props}>{children}</Modal>, element.current!);
-};
+}
 
 export default PortaledModal;

@@ -1,11 +1,11 @@
 import React, { createRef } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import tw from 'twin.macro';
 import Fade from '@/components/elements/Fade';
 
 interface Props {
     children: React.ReactNode;
-    renderToggle: (onClick: (e: React.MouseEvent<any, MouseEvent>) => void) => React.ReactChild;
+    renderToggle: (onClick: (e: React.MouseEvent<any, MouseEvent>) => void) => React.ReactNode;
 }
 
 export const DropdownButtonRow = styled.button<{ danger?: boolean }>`

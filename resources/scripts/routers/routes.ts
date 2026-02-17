@@ -1,4 +1,5 @@
-import React, { lazy } from 'react';
+import type { ComponentType } from 'react';
+import { lazy } from 'react';
 import ServerConsole from '@/components/server/console/ServerConsoleContainer';
 import DatabasesContainer from '@/components/server/databases/DatabasesContainer';
 import ScheduleContainer from '@/components/server/schedules/ScheduleContainer';
@@ -40,17 +41,18 @@ const ScheduleEditContainer = lazy(() => import('@/components/server/schedules/S
 const HistoricalGraphsContainer = lazy(() => import('@/components/server/metrics/HistoricalGraphsContainer'));
 
 interface RouteDefinition {
-    path: string;
+    route: string;
+    path?: string;
     // If undefined is passed this route is still rendered into the router itself
     // but no navigation link is displayed in the sub-navigation menu.
     name: string | undefined;
-    component: React.ComponentType;
-    exact?: boolean;
-    icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    component: ComponentType;
+    end?: boolean;
+    icon?: ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 interface ServerRouteDefinition extends RouteDefinition {
-    permission: string | string[] | null;
+    permission?: string | string[];
     nestId?: number;
     eggId?: number;
     nestIds?: number[];
@@ -71,26 +73,27 @@ interface Routes {
 export default {
     account: [
         {
-            path: '/',
+            route: '',
+            path: '',
             name: 'account.overview',
             component: AccountOverviewContainer,
             icon: FaUser,
-            exact: true,
+            end: true,
         },
         {
-            path: '/api',
+            route: 'api',
             name: 'account.api',
             icon: FaLock,
             component: AccountApiContainer,
         },
         {
-            path: '/ssh',
+            route: 'ssh',
             name: 'account.ssh',
             icon: FaKey,
             component: AccountSSHContainer,
         },
         {
-            path: '/activity',
+            route: 'activity',
             name: 'account.activity',
             icon: FaEye,
             component: ActivityLogContainer,
@@ -99,42 +102,49 @@ export default {
     server: {
         control: [
             {
-                path: '/',
+                route: '',
+                path: '',
                 permission: null,
                 name: 'server.console',
                 component: ServerConsole,
                 icon: FaTerminal,
-                exact: true,
+                end: true,
             },
             {
-                path: '/files',
+                route: 'files/*',
                 permission: 'file.*',
                 name: 'server.files',
                 component: FileManagerContainer,
                 icon: FaFolder,
             },
             {
-                path: '/files/:action(edit|new)',
+                route: 'files/edit/*',
                 permission: 'file.*',
                 name: undefined,
                 component: FileEditContainer,
             },
             {
-                path: '/startup',
+                route: 'files/new/*',
+                permission: 'file.*',
+                name: undefined,
+                component: FileEditContainer,
+            },
+            {
+                route: 'startup/*',
                 permission: 'startup.*',
                 name: 'server.startup',
                 component: StartupContainer,
                 icon: FaPlay,
             },
             {
-                path: '/network',
+                route: 'network/*',
                 permission: 'allocation.*',
                 name: 'server.network',
                 component: NetworkContainer,
                 icon: FaBoltLightning,
             },
             {
-                path: '/metrics',
+                route: 'metrics/*',
                 permission: null,
                 name: 'server.metrics',
                 component: HistoricalGraphsContainer,
@@ -143,27 +153,27 @@ export default {
         ],
         management: [
             {
-                path: '/databases',
+                route: 'databases/*',
                 permission: 'database.*',
                 name: 'server.databases',
                 component: DatabasesContainer,
                 icon: FaDatabase,
             },
             {
-                path: '/schedules',
+                route: 'schedules/*',
                 permission: 'schedule.*',
                 name: 'server.schedules',
                 component: ScheduleContainer,
                 icon: FaCalendar,
             },
             {
-                path: '/schedules/:id',
+                route: 'schedules/:id/*',
                 permission: 'schedule.*',
                 name: undefined,
                 component: ScheduleEditContainer,
             },
             {
-                path: '/backups',
+                route: 'backups/*',
                 permission: 'backup.*',
                 name: 'server.backups',
                 component: BackupContainer,
@@ -172,21 +182,21 @@ export default {
         ],
         administration: [
             {
-                path: '/users',
+                route: 'users/*',
                 permission: 'user.*',
                 name: 'server.users',
                 component: UsersContainer,
                 icon: FaUsers,
             },
             {
-                path: '/settings',
+                route: 'settings/*',
                 permission: ['settings.*', 'file.sftp'],
                 name: 'server.settings',
                 component: SettingsContainer,
                 icon: FaGear,
             },
             {
-                path: '/activity',
+                route: 'activity',
                 permission: 'activity.*',
                 name: 'server.activity',
                 component: ServerActivityLogContainer,

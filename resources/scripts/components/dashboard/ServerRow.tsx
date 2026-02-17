@@ -55,7 +55,7 @@ export default ({
         });
 
         return () => {
-            interval.current && clearInterval(interval.current);
+            void (interval.current && clearInterval(interval.current));
         };
     }, [isSuspended]);
 

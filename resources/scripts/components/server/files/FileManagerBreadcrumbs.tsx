@@ -5,7 +5,7 @@ import { encodePathSegments, hashToPath } from '@/helpers';
 import tw from 'twin.macro';
 
 interface Props {
-    renderLeft?: JSX.Element;
+    renderLeft?: React.ReactElement;
     withinFileEditor?: boolean;
     isNewFile?: boolean;
 }

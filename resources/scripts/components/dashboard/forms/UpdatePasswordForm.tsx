@@ -37,8 +37,7 @@ export default () => {
         clearFlashes('account:password');
         updateAccountPassword({ ...values })
             .then(() => {
-                // @ts-expect-error this is valid
-                window.location = '/auth/login';
+                window.location.href = '/auth/login';
             })
             .catch((error) =>
                 addFlash({

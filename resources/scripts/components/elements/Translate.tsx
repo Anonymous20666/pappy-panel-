@@ -2,7 +2,7 @@ import { Trans, TransSelectorProps, useTranslation } from 'react-i18next';
 
 type Props = Omit<TransSelectorProps<any, any>, 't'>;
 
-export default ({ ns, children, ...props }: Props) => {
+function Translate({ ns, children, ...props }: Props) {
     const { t } = useTranslation(ns);
 
     return (
@@ -10,4 +10,6 @@ export default ({ ns, children, ...props }: Props) => {
             {children}
         </Trans>
     );
-};
+}
+
+export default Translate;

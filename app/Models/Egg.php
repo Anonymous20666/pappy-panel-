@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Pterodactyl\Contracts\Models\Identifiable;
+use App\Contracts\Models\Identifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
+use App\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

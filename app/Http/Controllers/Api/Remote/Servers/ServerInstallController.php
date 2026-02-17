@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Repositories\Eloquent\ServerRepository;
 use App\Events\Server\Installed as ServerInstalled;
+use App\Exceptions\Http\HttpForbiddenException;
 use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 use App\Http\Requests\Api\Remote\InstallationDataRequest;
 
@@ -32,6 +33,10 @@ class ServerInstallController extends Controller
         $server = $this->repository->getByUuid($uuid);
         $egg = $server->egg;
 
+        if (! $server->node->is($request->attributes->get('node'))) {
+            throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
+        }
+
         return new JsonResponse([
             'container_image' => $egg->copy_script_container,
             'entrypoint' => $egg->copy_script_entry,
@@ -49,6 +54,10 @@ class ServerInstallController extends Controller
     {
         $server = $this->repository->getByUuid($uuid);
         $status = null;
+
+        if (! $server->node->is($request->attributes->get('node'))) {
+            throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
+        }
 
         // Make sure the type of failure is accurate
         if (!$request->boolean('successful')) {

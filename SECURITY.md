@@ -2,23 +2,18 @@
 
 ## Supported Versions
 
-The following versions of Pterodactyl are receiving active support and maintenance. Any security vulnerabilities discovered must be reproducible in supported versions.
-
-| Panel  | Daemon       | Supported          |
-|--------|--------------|--------------------|
-| 1.11.x | wings@1.11.x | :white_check_mark: |
-| 0.7.x  | daemon@0.6.x | :x:                |
-
 The following versions of Reviactyl are receiving active support and maintenance. Any security vulnerabilities discovered must be reproducible in supported versions.
 
-| Panel  | Supported          |
-|--------|--------------------|
-| 2.x    | :white_check_mark: |
+| Panel  | Wings       | Supported          |
+|--------|--------------|--------------------|
+| 2.2.x | wings@1.12.x | :white_check_mark: |
+| 26.x  | wings@1.12.x | :white_check_mark: |
+
 
 
 ## Reporting a Vulnerability
 
-Please reach out directly to any project team member on Discord when reporting a security vulnerability, or you can email `contact@reviactyl.dev`.
+Please reach out directly to any project team member on Discord when reporting a security vulnerability, or you can email `security@reviactyl.dev`.
 
 Vulnerability fixes from Pterodactyl panel will be shipped with Reviactyl.
 

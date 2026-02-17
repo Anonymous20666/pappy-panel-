@@ -1,7 +1,6 @@
-import type { TransProps } from 'react-i18next';
-import { Trans, useTranslation } from 'react-i18next';
+import { Trans, TransSelectorProps, useTranslation } from 'react-i18next';
 
-type Props = Omit<TransProps<string, string>, 't'>;
+type Props = Omit<TransSelectorProps<any, any>, 't'>;
 
 function Translate({ ns, children, ...props }: Props) {
     const { t } = useTranslation(ns);

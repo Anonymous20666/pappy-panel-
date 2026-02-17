@@ -1,100 +1,100 @@
 <?php
 
 return [
-    'label' => 'Server',
-    'plural-label' => 'Servers',
+    'label' => 'خادم',
+    'plural-label' => 'الخوادم',
 
     'sections' => [
         'identity' => [
-            'title' => 'Identity',
-            'description' => 'Basic server information and ownership.',
+            'title' => 'الهوية',
+            'description' => 'معلومات أساسية عن الخادم والملكية.',
         ],
         'allocation' => [
-            'title' => 'Allocation',
-            'description' => 'Select the node and network allocation for this server.',
+            'title' => 'التخصيص',
+            'description' => 'اختر العقدة وتخصيص الشبكة لهذا الخادم.',
         ],
         'startup' => [
-            'title' => 'Startup',
-            'description' => 'Configure the egg, startup command, and Docker image.',
+            'title' => 'بدء التشغيل',
+            'description' => 'قم بتكوين البيضة، أمر بدء التشغيل، وصورة دوكر.',
         ],
         'resources' => [
-            'title' => 'Resource Limits',
-            'description' => 'Define the server resource limits.',
+            'title' => 'حدود الموارد',
+            'description' => 'حدد حدود موارد الخادم.',
         ],
         'feature_limits' => [
-            'title' => 'Feature Limits',
-            'description' => 'Limit databases, allocations, and backups.',
+            'title' => 'حدود الميزات',
+            'description' => 'حدد قواعد قواعد البيانات، التخصيصات، والنسخ الاحتياطية.',
         ],
         'environment' => [
-            'title' => 'Environment Variables',
-            'description' => 'Set environment values for the selected egg.',
+            'title' => 'متغيرات البيئة',
+            'description' => 'اضبط قيم البيئة للبيضة المختارة.',
         ],
     ],
 
     'fields' => [
         'advanced_mode' => [
-            'label' => 'Advanced Mode',
-            'helper' => 'Toggle to show additional server configuration options. Toggle on only if you understand the implications of the additional settings.',
+            'label' => 'الوضع المتقدم',
+            'helper' => 'تبديل لإظهار خيارات تكوين الخادم الإضافية. قم بالتشغيل فقط إذا كنت تفهم تبعات الإعدادات الإضافية.',
         ],
         'external_id' => [
-            'label' => 'External ID',
-            'helper' => 'Optional unique identifier for this server.',
+            'label' => 'المعرف الخارجي',
+            'helper' => 'معرّف فريد اختياري لهذا الخادم.',
         ],
         'owner' => [
-            'label' => 'Owner',
-            'helper' => 'Select the user that owns this server.',
+            'label' => 'المالك',
+            'helper' => 'اختر المستخدم الذي يمتلك هذا الخادم.',
         ],
         'name' => [
-            'label' => 'Name',
-            'placeholder' => 'Server Name',
-            'helper' => 'A short name for this server.',
+            'label' => 'الاسم',
+            'placeholder' => 'اسم الخادم',
+            'helper' => 'اسم قصير لهذا الخادم.',
         ],
         'description' => [
-            'label' => 'Description',
-            'placeholder' => 'Server description',
-            'helper' => 'Optional description for this server.',
+            'label' => 'وصف',
+            'placeholder' => 'وصف الخادم',
+            'helper' => 'وصف اختياري لهذا الخادم.',
         ],
         'node' => [
-            'label' => 'Node',
-            'helper' => 'The node this server will be deployed to.',
+            'label' => 'العقد',
+            'helper' => 'العقدة التي سيتم نشر هذا الخادم عليها.',
         ],
         'allocation' => [
-            'label' => 'Primary Allocation',
-            'helper' => 'The default IP/port allocation for this server.',
+            'label' => 'التخصيص الأساسي',
+            'helper' => 'تخصيص IP/Port الافتراضي لهذا الخادم.',
         ],
         'additional_allocations' => [
-            'label' => 'Additional Allocations',
-            'helper' => 'Optional extra allocations to assign.',
+            'label' => 'تخصيصات إضافية',
+            'helper' => 'تخصيصات إضافية اختيارية للتعيين.',
         ],
         'nest' => [
-            'label' => 'Nest',
-            'helper' => 'The service nest for this server.',
+            'label' => 'العش',
+            'helper' => 'خدمة العش لهذا الخادم.',
         ],
         'egg' => [
-            'label' => 'Egg',
-            'helper' => 'The egg that defines server behavior.',
+            'label' => 'القوالب',
+            'helper' => 'البيضة التي تحدد سلوك الخادم.',
         ],
         'startup' => [
-            'label' => 'Startup Command',
-            'helper' => 'The startup command for the server.',
+            'label' => 'أمر بدء التشغيل',
+            'helper' => 'أمر بدء التشغيل للخادم.',
         ],
         'image' => [
-            'label' => 'Docker Image',
-            'placeholder' => 'e.g. ghcr.io/pterodactyl/yolks:java_17',
-            'helper' => 'Docker image used to run this server.',
-            'custom' => 'Custom',
+            'label' => 'صورة دوكر',
+            'placeholder' => 'مثال ghcr.io/pterodactyl/yolks:java_17',
+            'helper' => 'صورة دوكر المستخدمة لتشغيل هذا الخادم.',
+            'custom' => 'مخصص',
         ],
         'skip_scripts' => [
-            'label' => 'Skip Egg Scripts',
-            'helper' => 'Skip egg install scripts during creation.',
+            'label' => 'تجاوز سكربتات البيضة',
+            'helper' => 'تخطي سكربتات تثبيت البيضة أثناء الإنشاء.',
         ],
         'start_on_completion' => [
-            'label' => 'Start on Completion',
-            'helper' => 'Automatically start the server after installation.',
+            'label' => 'البدء عند الاكتمال',
+            'helper' => 'تشغيل الخادم تلقائيًا بعد التثبيت.',
         ],
         'memory' => [
-            'label' => 'Memory',
-            'helper' => 'Total memory allocation. Set to 0 for unlimited. (Unlimited Memory doesn\'t work for Minecraft Eggs due to Startup Command)',
+            'label' => 'الذاكرة',
+            'helper' => 'إجمالي تخصيص الذاكرة. اضبط على 0 لغير محدود. (الذاكرة غير المحدودة لا تعمل لبيوض مينيكرافت بسبب أمر بدء التشغيل)',
         ],
         'swap' => [
             'label' => 'Swap',

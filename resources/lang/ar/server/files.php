@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'title' => 'File Manager',
-    'new-file' => 'New File',
-    'empty' => 'This directory seems to be empty.',
-    'too-large' => 'This directory is too large to display in the browser, limiting the output to the first 250 files.',
-    'move' => 'Move',
-    'archive' => 'Archive',
-    'delete' => 'Delete',
-    'create-directory' => 'Create Directory',
+    'title' => 'مدير الملفات',
+    'new-file' => 'ملف جديد',
+    'empty' => 'يبدو أن هذا المجلد فارغ.',
+    'too-large' => 'هذا المجلد كبير جدا بحيث لا يمكن عرضه في المتصفح، مما يحد من الإخراج إلى أول 250 ملفًا.',
+    'move' => 'نقل',
+    'archive' => 'أرشيف',
+    'delete' => 'حذف',
+    'create-directory' => 'انشاء مجلد',
 ];

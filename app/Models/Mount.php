@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Validation\Rules\NotIn;
-use Pterodactyl\Contracts\Models\Identifiable;
-use Pterodactyl\Models\Traits\HasRealtimeIdentifier;
+use App\Contracts\Models\Identifiable;
+use App\Models\Traits\HasRealtimeIdentifier;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**

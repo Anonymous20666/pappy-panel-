@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Admin;
+namespace App\Tests\Integration\Admin;
 
 use App\Tests\Integration\IntegrationTestCase;
 use App\Http\Controllers\Admin\ServersController;

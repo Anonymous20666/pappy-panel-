@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Admin;
+namespace App\Tests\Integration\Admin;
 
 use App\Models\User;
 use App\Models\Node;

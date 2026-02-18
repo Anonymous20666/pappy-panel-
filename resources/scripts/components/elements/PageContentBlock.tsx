@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import ContentContainer from '@/components/elements/ContentContainer';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import tw from 'twin.macro';
 import FlashMessageRender from '@/components/FlashMessageRender';
 import Footer from '@/reviactyl/ui/Footer';
@@ -19,20 +19,20 @@ const PageContentBlock = ({ title, showFlashKey, className, children }: PageCont
         }
     }, [title]);
 
-    const nodeRef = useRef(null);
-
     return (
-        <CSSTransition timeout={150} classNames={'fade'} appear in nodeRef={nodeRef}>
-            <div ref={nodeRef}>
-                <ContentContainer className={className}>
-                    {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
-                    {children}
-                </ContentContainer>
-                <ContentContainer css={tw`mb-4`}>
-                    <Footer />
-                </ContentContainer>
-            </div>
-        </CSSTransition>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.15, ease: 'easeIn' }}
+        >
+            <ContentContainer className={className}>
+                {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
+                {children}
+            </ContentContainer>
+            <ContentContainer css={tw`mb-4`}>
+                <Footer />
+            </ContentContainer>
+        </motion.div>
     );
 };
 

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Websocket } from '@/plugins/Websocket';
 import { ServerContext } from '@/state/server';
 import getWebsocketToken from '@/api/server/getWebsocketToken';
 import ContentContainer from '@/components/elements/ContentContainer';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import Spinner from '@/components/elements/Spinner';
 import tw from 'twin.macro';
 
@@ -107,24 +107,25 @@ export default () => {
         connect(uuid);
     }, [uuid]);
 
-    const nodeRef = useRef(null);
-
     return error ? (
-        <CSSTransition timeout={150} in appear classNames={'fade'} nodeRef={nodeRef}>
-            <div css={tw`bg-red-500 py-2`} ref={nodeRef}>
-                <ContentContainer css={tw`flex items-center justify-center`}>
-                    {error === 'connecting' ? (
-                        <>
-                            <Spinner size={'small'} />
-                            <p css={tw`ml-2 text-sm text-red-100`}>
-                                We&apos;re having some trouble connecting to your server, please wait...
-                            </p>
-                        </>
-                    ) : (
-                        <p css={tw`ml-2 text-sm text-white`}>{error}</p>
-                    )}
-                </ContentContainer>
-            </div>
-        </CSSTransition>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.15, ease: 'easeIn' }}
+            css={tw`bg-red-500 py-2`}
+        >
+            <ContentContainer css={tw`flex items-center justify-center`}>
+                {error === 'connecting' ? (
+                    <>
+                        <Spinner size={'small'} />
+                        <p css={tw`ml-2 text-sm text-red-100`}>
+                            We&apos;re having some trouble connecting to your server, please wait...
+                        </p>
+                    </>
+                ) : (
+                    <p css={tw`ml-2 text-sm text-white`}>{error}</p>
+                )}
+            </ContentContainer>
+        </motion.div>
     ) : null;
 };

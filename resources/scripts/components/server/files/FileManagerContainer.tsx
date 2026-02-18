@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { httpErrorToHuman } from '@/api/http';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import Spinner from '@/components/elements/Spinner';
 import FileObjectRow from '@/components/server/files/FileObjectRow';
 import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
@@ -120,19 +120,21 @@ export default () => {
                     {!files.length ? (
                         <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
                     ) : (
-                        <CSSTransition classNames={'fade'} timeout={150} appear in>
-                            <div>
-                                {files.length > 250 && (
-                                    <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
-                                        <p css={tw`text-yellow-900 text-sm text-center`}>{t('too-large')}</p>
-                                    </div>
-                                )}
-                                {sortFiles(files.slice(0, 250)).map((file) => (
-                                    <FileObjectRow key={file.key} file={file} onImageClick={handleImageClick} />
-                                ))}
-                                <MassActionsBar />
-                            </div>
-                        </CSSTransition>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.15, ease: 'easeIn' }}
+                        >
+                            {files.length > 250 && (
+                                <div css={tw`rounded bg-yellow-400 mb-px p-3`}>
+                                    <p css={tw`text-yellow-900 text-sm text-center`}>{t('too-large')}</p>
+                                </div>
+                            )}
+                            {sortFiles(files.slice(0, 250)).map((file) => (
+                                <FileObjectRow key={file.key} file={file} onImageClick={handleImageClick} />
+                            ))}
+                            <MassActionsBar />
+                        </motion.div>
                     )}
                 </Card>
             )}

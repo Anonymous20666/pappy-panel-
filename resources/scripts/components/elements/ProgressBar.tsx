@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { randomInt } from '@/helpers';
-import { CSSTransition } from 'react-transition-group';
+import { motion, AnimatePresence } from 'framer-motion';
 import tw from 'twin.macro';
 
 const BarFill = styled.div`
@@ -58,13 +58,20 @@ export default () => {
         }
     }, [progress, continuous]);
 
-    const nodeRef = useRef(null);
-
     return (
         <div css={tw`w-full fixed`} style={{ height: '2px' }}>
-            <CSSTransition timeout={150} appear in={visible} unmountOnExit classNames={'fade'} nodeRef={nodeRef}>
-                <BarFill ref={nodeRef} style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
-            </CSSTransition>
+            <AnimatePresence>
+                {visible && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15, ease: 'easeIn' }}
+                    >
+                        <BarFill style={{ width: progress === undefined ? '100%' : `${progress}%` }} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

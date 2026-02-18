@@ -1,59 +1,51 @@
-import React, { useRef } from 'react';
-import tw from 'twin.macro';
-import styled from 'styled-components';
-import CSSTransition, { CSSTransitionProps } from 'react-transition-group/CSSTransition';
+import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-interface Props extends Omit<CSSTransitionProps, 'timeout' | 'classNames'> {
-    timeout: number;
+interface Props {
+    timeout?: number;
+    in?: boolean;
+    appear?: boolean;
+    unmountOnExit?: boolean;
+    children: React.ReactNode;
 }
 
-const Container = styled.div<{ timeout: number }>`
-    .fade-enter,
-    .fade-exit,
-    .fade-appear {
-        will-change: opacity;
-    }
+const Fade = React.forwardRef<HTMLDivElement, Props>(
+    ({ timeout = 150, in: isIn = true, appear = false, unmountOnExit = false, children }, ref) => {
+        const duration = timeout / 1000;
 
-    .fade-enter,
-    .fade-appear {
-        ${tw`opacity-0`};
-
-        &.fade-enter-active,
-        &.fade-appear-active {
-            ${tw`opacity-100 transition-opacity ease-in`};
-            transition-duration: ${(props) => props.timeout}ms;
+        // If unmountOnExit is true, use AnimatePresence
+        if (unmountOnExit) {
+            return (
+                <AnimatePresence>
+                    {isIn && (
+                        <motion.div
+                            ref={ref}
+                            initial={{ opacity: appear ? 0 : 1 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration, ease: 'easeIn' }}
+                            style={{ width: '100%', height: '100%' }}
+                        >
+                            {children}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            );
         }
+
+        return (
+            <motion.div
+                ref={ref}
+                initial={{ opacity: appear ? 0 : 1 }}
+                animate={{ opacity: isIn ? 1 : 0 }}
+                transition={{ duration, ease: 'easeIn' }}
+                style={{ width: '100%', height: '100%' }}
+            >
+                {children}
+            </motion.div>
+        );
     }
-
-    .fade-exit {
-        ${tw`opacity-100`};
-
-        &.fade-exit-active {
-            ${tw`opacity-0 transition-opacity ease-in`};
-            transition-duration: ${(props) => props.timeout}ms;
-        }
-    }
-`;
-
-const Fade = React.forwardRef<HTMLDivElement, Props>(({ timeout, children, ...props }, ref) => {
-    const nodeRef = useRef<HTMLDivElement>(null);
-    const combinedRef = (node: HTMLDivElement) => {
-        if (typeof ref === 'function') ref(node);
-        else if (ref) ref.current = node;
-
-        nodeRef.current = node;
-    };
-
-    return (
-        <Container timeout={timeout}>
-            <CSSTransition timeout={timeout} classNames={'fade'} nodeRef={nodeRef} {...props}>
-                <div ref={combinedRef} style={{ width: '100%', height: '100%' }}>
-                    {children}
-                </div>
-            </CSSTransition>
-        </Container>
-    );
-});
+);
 Fade.displayName = 'Fade';
 
 export default Fade;

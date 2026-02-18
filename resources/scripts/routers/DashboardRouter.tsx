@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { Suspense } from 'react';
 import { NavLink, useRoutes } from 'react-router-dom';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
@@ -11,7 +11,7 @@ import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import { XIcon, MenuIcon } from '@heroicons/react/solid';
 import tw from 'twin.macro';
 import { ContentContainer } from '@/reviactyl/ui/ContentContainer';
-import { CSSTransition } from 'react-transition-group';
+import { motion } from 'framer-motion';
 import Sidebar from '@/reviactyl/ui/Sidebar';
 import { ApplicationStore } from '@/state';
 import { useStoreState } from 'easy-peasy';
@@ -58,7 +58,6 @@ function DashboardRouter() {
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const isUnderMaintenance = useStoreState((state) => state.reviactyl.data?.isUnderMaintenance);
     const rootAdmin = useStoreState((state) => state.user.data?.rootAdmin);
-    const nodeRef = useRef(null);
     return (
         <>
             {isUnderMaintenance && !rootAdmin ? (
@@ -90,11 +89,15 @@ function DashboardRouter() {
                                 className='fixed inset-0 z-30 bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out lg:hidden'
                             />
                         )}
-                        <CSSTransition timeout={150} classNames='fade' nodeRef={nodeRef}>
-                            <Sidebar isOpen={isSidebarOpen} dashboard ref={nodeRef}>
+                        <motion.div
+                            initial={{ opacity: 1 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.15, ease: 'easeIn' }}
+                        >
+                            <Sidebar isOpen={isSidebarOpen} dashboard>
                                 <DashboardNavigation />
                             </Sidebar>
-                        </CSSTransition>
+                        </motion.div>
                         <div className='w-full flex-1 overflow-y-auto'>
                             <Suspense fallback={<Spinner centered />}>
                                 {useRoutes([

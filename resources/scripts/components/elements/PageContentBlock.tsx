@@ -20,11 +20,7 @@ const PageContentBlock = ({ title, showFlashKey, className, children }: PageCont
     }, [title]);
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.15, ease: 'easeIn' }}
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.15, ease: 'easeIn' }}>
             <ContentContainer className={className}>
                 {showFlashKey && <FlashMessageRender byKey={showFlashKey} css={tw`mb-4`} />}
                 {children}

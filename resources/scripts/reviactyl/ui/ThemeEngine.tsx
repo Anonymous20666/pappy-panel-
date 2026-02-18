@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const paletteKeys = ['Theme1', 'Theme2', 'Theme3', 'Theme4', 'Theme5', 'Theme6', 'Theme7'] as const;
 
-type PaletteKey = typeof paletteKeys[number];
+type PaletteKey = (typeof paletteKeys)[number];
 
 type ThemeData = {
     displayName: string;

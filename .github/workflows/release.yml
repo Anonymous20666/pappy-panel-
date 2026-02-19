@@ -44,7 +44,10 @@ jobs:
           git checkout -b "$BRANCH"
           git push -u origin "$BRANCH"
           sed -i "s/'canary'/'${VERSION:1}'/" config/app.php
+          sed -i 's/26\.0\.0-dev/${VERSION:1}/g' package.json composer.json
           git add config/app.php
+          git add package.json
+          git add composer.json
           git commit -m 'ci(release): bump version'
           git push
       - name: create release archive

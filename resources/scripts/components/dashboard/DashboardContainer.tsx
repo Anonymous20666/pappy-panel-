@@ -161,8 +161,8 @@ export default () => {
                                     selectedCategory === 'all'
                                         ? t('categories.all-categories')
                                         : selectedCategory === 'primary'
-                                            ? t('categories.primary')
-                                            : categories?.find((c) => c.uuid === selectedCategory)?.name
+                                        ? t('categories.primary')
+                                        : categories?.find((c) => c.uuid === selectedCategory)?.name
                                 }
                             >
                                 <select
@@ -200,8 +200,9 @@ export default () => {
                     <div className='flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-0 w-full sm:w-auto sm:space-x-4 border-t border-[#334155] pt-4 sm:border-t-0 sm:pt-0'>
                         {rootAdmin && (
                             <div
-                                className={`flex flex-shrink-0 items-center justify-between gap-2 ${!showOnlyAdmin ? 'sm:border-l sm:border-[#334155] sm:pl-4' : ''
-                                    }`}
+                                className={`flex flex-shrink-0 items-center justify-between gap-2 ${
+                                    !showOnlyAdmin ? 'sm:border-l sm:border-[#334155] sm:pl-4' : ''
+                                }`}
                             >
                                 <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
                                     {showOnlyAdmin ? t('other-servers') : t('your-servers')}
@@ -214,15 +215,19 @@ export default () => {
                             </div>
                         )}
                         {/* Egg filter is global (not user-specific): show for both "your servers" and "others' servers" */}
-                        {((eggs && eggs.length > 0) || (rootAdmin && showOnlyAdmin && Array.isArray(eggs))) ? (
-                            <div className='relative flex flex-shrink-0 items-center sm:border-l sm:border-[#334155] sm:pl-4' ref={eggFilterRef}>
+                        {(eggs && eggs.length > 0) || (rootAdmin && showOnlyAdmin && Array.isArray(eggs)) ? (
+                            <div
+                                className='relative flex flex-shrink-0 items-center sm:border-l sm:border-[#334155] sm:pl-4'
+                                ref={eggFilterRef}
+                            >
                                 <button
                                     type='button'
                                     onClick={() => setEggFilterOpen((o) => !o)}
-                                    className={`p-1.5 rounded-lg transition border ${selectedEggId !== null
-                                        ? 'bg-blue-500/20 border-blue-500 text-blue-400'
-                                        : 'bg-[#1e293b] border-[#334155] text-gray-400 hover:border-gray-500 hover:text-gray-200'
-                                        }`}
+                                    className={`p-1.5 rounded-lg transition border ${
+                                        selectedEggId !== null
+                                            ? 'bg-blue-500/20 border-blue-500 text-blue-400'
+                                            : 'bg-[#1e293b] border-[#334155] text-gray-400 hover:border-gray-500 hover:text-gray-200'
+                                    }`}
                                     title={t('eggs.filter-label')}
                                     aria-label={t('eggs.filter-label')}
                                     aria-expanded={eggFilterOpen}
@@ -273,8 +278,8 @@ export default () => {
                                             {selectedEggId !== null
                                                 ? t('eggs.no-servers-for-egg')
                                                 : showOnlyAdmin
-                                                    ? t('no-other-servers')
-                                                    : t('no-servers')}
+                                                ? t('no-other-servers')
+                                                : t('no-servers')}
                                         </p>
                                     </Card>
                                 );

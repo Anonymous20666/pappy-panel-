@@ -134,9 +134,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
     return (
         <Modal visible={visible} onDismissed={onDismissed} dismissable={true} size={'lg'} noScroll={true}>
             <div className='mb-6 border-b border-[#334155] pb-4'>
-                <h2 className='text-2xl font-semibold text-gray-100'>
-                    {t('categories.manage-title')}
-                </h2>
+                <h2 className='text-2xl font-semibold text-gray-100'>{t('categories.manage-title')}</h2>
             </div>
 
             <div style={{ marginBottom: '1.5rem' }}>
@@ -243,9 +241,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                             <div className='bg-purple-500/10 p-2 rounded-lg'>
                                 <FontAwesomeIcon icon={faSortAmountDown} className='text-purple-400' />
                             </div>
-                            <h3 className='text-lg font-semibold text-gray-200'>
-                                {t('categories.arrange-order')}
-                            </h3>
+                            <h3 className='text-lg font-semibold text-gray-200'>{t('categories.arrange-order')}</h3>
                         </div>
                         <span className='text-xs text-gray-400 bg-[#1e293b] px-2.5 py-1 rounded-lg border border-[#334155]'>
                             {t('categories.categories-count', { count: categories.length })}
@@ -255,13 +251,8 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                     <div style={{ paddingRight: '0.5rem' }}>
                         {categories.length === 0 ? (
                             <div className='bg-[#1e293b] border-2 border-dashed border-[#334155] rounded-2xl p-12 text-center'>
-                                <FontAwesomeIcon
-                                    icon={faLayerGroup}
-                                    className='text-3xl text-gray-600 mb-4'
-                                />
-                                <p className='text-sm text-gray-400'>
-                                    {t('categories.no-custom-categories')}
-                                </p>
+                                <FontAwesomeIcon icon={faLayerGroup} className='text-3xl text-gray-600 mb-4' />
+                                <p className='text-sm text-gray-400'>{t('categories.no-custom-categories')}</p>
                             </div>
                         ) : (
                             <DragDropContext onDragEnd={onDragEnd}>

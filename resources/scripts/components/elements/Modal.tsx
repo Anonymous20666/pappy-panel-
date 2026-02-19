@@ -39,11 +39,11 @@ const ModalContainer = styled.div<{ alignTop?: boolean; size?: 'sm' | 'md' | 'lg
                   ${breakpoint('lg')`max-width: 35%`};
               `
             : props.size === 'lg'
-                ? css`
+            ? css`
                   ${breakpoint('md')`max-width: 90%`};
                   ${breakpoint('lg')`max-width: 80%`};
               `
-                : css`
+            : css`
                   ${breakpoint('md')`max-width: 75%`};
                   ${breakpoint('lg')`max-width: 50%`};
               `};
@@ -130,10 +130,13 @@ function Modal({
             >
                 <ModalContainer alignTop={top} size={size}>
                     {isDismissable && (
-                        <div className={'close-icon'} onClick={() => {
-                            setRender(false);
-                            onDismissed();
-                        }}>
+                        <div
+                            className={'close-icon'}
+                            onClick={() => {
+                                setRender(false);
+                                onDismissed();
+                            }}
+                        >
                             <svg
                                 xmlns={'http://www.w3.org/2000/svg'}
                                 fill={'none'}

@@ -141,7 +141,7 @@ export default () => {
                 }}
             />
 
-            <div className='flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between'>
+            <div className='flex flex-col gap-4 py-4 md:flex-row md:items-center justify-between'>
                 <div className='min-w-0'>
                     {/* TODO: Needs to be updated.
                     1] Show different subtitle based on $showOnlyAdmin
@@ -152,11 +152,11 @@ export default () => {
                     <Title className='text-4xl'>{t('title')}</Title>
                 </div>
 
-                <div className='flex items-center gap-4 flex-wrap'>
+                <div className='flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto'>
                     {!showOnlyAdmin && (
-                        <>
+                        <div className='flex flex-row items-center gap-3 w-full sm:w-auto'>
                             <div
-                                className='min-w-0 max-w-[min(12rem,40vw)]'
+                                className='flex-1 sm:flex-none min-w-0 max-w-full sm:max-w-[min(12rem,40vw)]'
                                 title={
                                     selectedCategory === 'all'
                                         ? t('categories.all-categories')
@@ -166,7 +166,7 @@ export default () => {
                                 }
                             >
                                 <select
-                                    className='w-full bg-[#1e293b] border border-[#334155] text-gray-200 px-3 py-1.5 rounded-lg outline-none focus:border-blue-500 transition truncate max-w-full'
+                                    className='w-full bg-[#1e293b] border border-[#334155] text-gray-200 px-3 py-1.5 rounded-lg outline-none focus:border-blue-500 transition truncate'
                                     value={selectedCategory}
                                     onChange={(e) => setSelectedCategory(e.target.value)}
                                     aria-label={t('categories.all-categories')}
@@ -190,70 +190,76 @@ export default () => {
 
                             <button
                                 onClick={() => setModalVisible(true)}
-                                className='bg-[#1e293b] border border-[#334155] hover:border-blue-500 text-gray-200 px-4 py-1.5 rounded-lg transition'
+                                className='bg-[#1e293b] border border-[#334155] hover:border-blue-500 text-gray-200 px-4 py-1.5 rounded-lg transition whitespace-nowrap'
                             >
                                 {t('categories.manage')}
                             </button>
-                        </>
-                    )}
-                    {rootAdmin && (
-                        <div
-                            className={`flex flex-shrink-0 items-center gap-2 ${
-                                !showOnlyAdmin ? 'border-l border-[#334155] pl-4' : ''
-                            }`}
-                        >
-                            <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
-                                {showOnlyAdmin ? t('other-servers') : t('your-servers')}
-                            </p>
-                            <Switch
-                                name={'show_all_servers'}
-                                defaultChecked={showOnlyAdmin}
-                                onChange={() => setShowOnlyAdmin((s) => !s)}
-                            />
                         </div>
                     )}
-                    {/* Egg filter is global (not user-specific): show for both "your servers" and "others' servers" */}
-                    {(eggs && eggs.length > 0) || (rootAdmin && showOnlyAdmin && Array.isArray(eggs)) ? (
-                        <div className='relative flex items-center border-l border-[#334155] pl-4' ref={eggFilterRef}>
-                            <button
-                                type='button'
-                                onClick={() => setEggFilterOpen((o) => !o)}
-                                className={`p-1.5 rounded-lg transition border ${
-                                    selectedEggId !== null
-                                        ? 'bg-blue-500/20 border-blue-500 text-blue-400'
-                                        : 'bg-[#1e293b] border-[#334155] text-gray-400 hover:border-gray-500 hover:text-gray-200'
+
+                    <div className='flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-0 w-full sm:w-auto sm:space-x-4 border-t border-[#334155] pt-4 sm:border-t-0 sm:pt-0'>
+                        {rootAdmin && (
+                            <div
+                                className={`flex flex-shrink-0 items-center justify-between gap-2 ${
+                                    !showOnlyAdmin ? 'sm:border-l sm:border-[#334155] sm:pl-4' : ''
                                 }`}
-                                title={t('eggs.filter-label')}
-                                aria-label={t('eggs.filter-label')}
-                                aria-expanded={eggFilterOpen}
                             >
-                                <FilterIcon className='w-5 h-5' />
-                            </button>
-                            {eggFilterOpen && (
-                                <div className='absolute right-0 top-full mt-1.5 z-10 min-w-[180px] py-2 px-2 bg-[#1e293b] border border-[#334155] rounded-lg shadow-lg'>
-                                    <p className='text-xs text-gray-400 uppercase px-2 pb-1.5'>
-                                        {t('eggs.filter-label')}
-                                    </p>
-                                    <select
-                                        className='w-full bg-[#0f172a] border border-[#334155] text-gray-200 text-sm px-3 py-2 rounded-lg outline-none focus:border-blue-500 transition'
-                                        value={selectedEggId ?? ''}
-                                        onChange={(e) => {
-                                            setSelectedEggId(e.target.value === '' ? null : Number(e.target.value));
-                                            setEggFilterOpen(false);
-                                        }}
-                                        aria-label={t('eggs.filter-label')}
-                                    >
-                                        <option value=''>{t('eggs.all')}</option>
-                                        {eggs.map((egg) => (
-                                            <option key={egg.id} value={egg.id}>
-                                                {egg.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            )}
-                        </div>
-                    ) : null}
+                                <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
+                                    {showOnlyAdmin ? t('other-servers') : t('your-servers')}
+                                </p>
+                                <Switch
+                                    name={'show_all_servers'}
+                                    defaultChecked={showOnlyAdmin}
+                                    onChange={() => setShowOnlyAdmin((s) => !s)}
+                                />
+                            </div>
+                        )}
+                        {/* Egg filter is global (not user-specific): show for both "your servers" and "others' servers" */}
+                        {(eggs && eggs.length > 0) || (rootAdmin && showOnlyAdmin && Array.isArray(eggs)) ? (
+                            <div
+                                className='relative flex flex-shrink-0 items-center sm:border-l sm:border-[#334155] sm:pl-4'
+                                ref={eggFilterRef}
+                            >
+                                <button
+                                    type='button'
+                                    onClick={() => setEggFilterOpen((o) => !o)}
+                                    className={`p-1.5 rounded-lg transition border ${
+                                        selectedEggId !== null
+                                            ? 'bg-blue-500/20 border-blue-500 text-blue-400'
+                                            : 'bg-[#1e293b] border-[#334155] text-gray-400 hover:border-gray-500 hover:text-gray-200'
+                                    }`}
+                                    title={t('eggs.filter-label')}
+                                    aria-label={t('eggs.filter-label')}
+                                    aria-expanded={eggFilterOpen}
+                                >
+                                    <FilterIcon className='w-5 h-5' />
+                                </button>
+                                {eggFilterOpen && (
+                                    <div className='absolute right-0 sm:left-auto top-full mt-1.5 z-10 min-w-[180px] py-2 px-2 bg-[#1e293b] border border-[#334155] rounded-lg shadow-lg'>
+                                        <p className='text-xs text-gray-400 uppercase px-2 pb-1.5'>
+                                            {t('eggs.filter-label')}
+                                        </p>
+                                        <select
+                                            className='w-full bg-[#0f172a] border border-[#334155] text-gray-200 text-sm px-3 py-2 rounded-lg outline-none focus:border-blue-500 transition'
+                                            value={selectedEggId ?? ''}
+                                            onChange={(e) => {
+                                                setSelectedEggId(e.target.value === '' ? null : Number(e.target.value));
+                                                setEggFilterOpen(false);
+                                            }}
+                                            aria-label={t('eggs.filter-label')}
+                                        >
+                                            <option value=''>{t('eggs.all')}</option>
+                                            {eggs.map((egg) => (
+                                                <option key={egg.id} value={egg.id}>
+                                                    {egg.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
+                            </div>
+                        ) : null}
+                    </div>
                 </div>
             </div>
 

@@ -46,8 +46,8 @@ const Column = styled.div`
 
 const DragItem = styled.div<{ isDragging?: boolean }>`
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 0.85rem;
     background-color: ${(props) => (props.isDragging ? '#334155' : '#1e293b')};
     border: 1px solid ${(props) => (props.isDragging ? '#60a5fa' : '#334155')};
@@ -56,6 +56,12 @@ const DragItem = styled.div<{ isDragging?: boolean }>`
     transition: background-color 0.2s ease, border-color 0.2s ease;
     box-shadow: ${(props) => (props.isDragging ? '0 10px 15px -3px rgba(0, 0, 0, 0.4)' : 'none')};
     cursor: grab;
+
+    @media (min-width: 640px) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     &:active {
         cursor: grabbing;
@@ -127,10 +133,8 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
 
     return (
         <Modal visible={visible} onDismissed={onDismissed} dismissable={true} size={'lg'} noScroll={true}>
-            <div style={{ marginBottom: '1.5rem', borderBottom: '1px solid #1f2937', paddingBottom: '1rem' }}>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: '#f3f4f6' }}>
-                    {t('categories.manage-title')}
-                </h2>
+            <div className='mb-6 border-b border-[#334155] pb-4'>
+                <h2 className='text-2xl font-semibold text-gray-100'>{t('categories.manage-title')}</h2>
             </div>
 
             <div style={{ marginBottom: '1.5rem' }}>
@@ -140,30 +144,16 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
             <ResponsiveLayout>
                 {/* LEFT SECTION: CREATE/EDIT */}
                 <Column>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem' }}>
-                        <div
-                            style={{
-                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                                padding: '0.5rem',
-                                borderRadius: '0.6rem',
-                            }}
-                        >
-                            <FontAwesomeIcon icon={editingCategory ? faPen : faPlus} style={{ color: '#60a5fa' }} />
+                    <div className='flex items-center gap-2 mb-5'>
+                        <div className='bg-blue-500/10 p-2 rounded-lg'>
+                            <FontAwesomeIcon icon={editingCategory ? faPen : faPlus} className='text-blue-400' />
                         </div>
-                        <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#e5e7eb' }}>
+                        <h3 className='text-lg font-semibold text-gray-200'>
                             {editingCategory ? t('categories.modify-category') : t('categories.create-category')}
                         </h3>
                     </div>
 
-                    <div
-                        style={{
-                            backgroundColor: '#111827',
-                            border: '1px solid #1f2937',
-                            borderRadius: '1rem',
-                            padding: '1.5rem',
-                            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
-                        }}
-                    >
+                    <div className='bg-[#1e293b] border border-[#334155] rounded-2xl p-6 shadow-sm'>
                         <Formik
                             onSubmit={submit}
                             initialValues={{
@@ -182,15 +172,15 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                         >
                             {({ isSubmitting, values }) => (
                                 <Form>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                    <div className='flex flex-col gap-5'>
                                         <Field
                                             name={'name'}
                                             label={t('categories.category-name')}
                                             placeholder={t('categories.name-placeholder')}
                                         />
 
-                                        <div style={{ display: 'flex', alignItems: 'flex-end', gap: '0.75rem' }}>
-                                            <div style={{ flex: '1 1 0%' }}>
+                                        <div className='flex items-end gap-3'>
+                                            <div className='flex-1'>
                                                 <Field
                                                     name={'color'}
                                                     label={t('categories.theme-color')}
@@ -198,26 +188,13 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                                     style={{ height: '42px', padding: '0.2rem' }}
                                                 />
                                             </div>
-                                            <div
-                                                style={{
-                                                    flex: 'none',
-                                                    paddingBottom: '0.5rem',
-                                                    fontSize: '0.75rem',
-                                                    color: '#6b7280',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                    gap: '0.4rem',
-                                                }}
-                                            >
+                                            <div className='flex-none pb-2 text-xs text-gray-400 flex items-center gap-1.5'>
                                                 <div
                                                     style={{
                                                         backgroundColor: values.color || '#3b82f6',
-                                                        width: '0.75rem',
-                                                        height: '0.75rem',
-                                                        borderRadius: '9999px',
-                                                        transition: 'background-color 0.2s ease',
                                                     }}
-                                                ></div>
+                                                    className='w-3 h-3 rounded-full transition-colors duration-200'
+                                                />
                                                 {t('categories.preview')}
                                             </div>
                                         </div>
@@ -228,19 +205,12 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                             placeholder={t('categories.description-placeholder')}
                                         />
 
-                                        <div
-                                            style={{
-                                                marginTop: '0.5rem',
-                                                display: 'flex',
-                                                flexDirection: 'column',
-                                                gap: '0.75rem',
-                                            }}
-                                        >
+                                        <div className='mt-2 flex flex-col gap-3'>
                                             <Button
                                                 type={'submit'}
                                                 disabled={isSubmitting}
                                                 isLoading={isSubmitting}
-                                                style={{ width: '100%' }}
+                                                className='w-full'
                                             >
                                                 {editingCategory
                                                     ? t('categories.update-category')
@@ -251,7 +221,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                                     type={'button'}
                                                     isSecondary
                                                     onClick={() => setEditingCategory(null)}
-                                                    style={{ width: '100%' }}
+                                                    className='w-full'
                                                 >
                                                     {t('categories.discard-changes')}
                                                 </Button>
@@ -266,60 +236,23 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
 
                 {/* RIGHT SECTION: ARRANGE */}
                 <Column>
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            marginBottom: '1.25rem',
-                        }}
-                    >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <div
-                                style={{
-                                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                                    padding: '0.5rem',
-                                    borderRadius: '0.6rem',
-                                }}
-                            >
-                                <FontAwesomeIcon icon={faSortAmountDown} style={{ color: '#a78bfa' }} />
+                    <div className='flex items-center justify-between mb-5'>
+                        <div className='flex items-center gap-2'>
+                            <div className='bg-purple-500/10 p-2 rounded-lg'>
+                                <FontAwesomeIcon icon={faSortAmountDown} className='text-purple-400' />
                             </div>
-                            <h3 style={{ fontSize: '1.125rem', fontWeight: 600, color: '#e5e7eb' }}>
-                                {t('categories.arrange-order')}
-                            </h3>
+                            <h3 className='text-lg font-semibold text-gray-200'>{t('categories.arrange-order')}</h3>
                         </div>
-                        <span
-                            style={{
-                                fontSize: '0.75rem',
-                                color: '#6b7280',
-                                backgroundColor: '#111827',
-                                padding: '0.25rem 0.6rem',
-                                borderRadius: '0.5rem',
-                                border: '1px solid #1f2937',
-                            }}
-                        >
+                        <span className='text-xs text-gray-400 bg-[#1e293b] px-2.5 py-1 rounded-lg border border-[#334155]'>
                             {t('categories.categories-count', { count: categories.length })}
                         </span>
                     </div>
 
                     <div style={{ paddingRight: '0.5rem' }}>
                         {categories.length === 0 ? (
-                            <div
-                                style={{
-                                    backgroundColor: '#111827',
-                                    border: '2px dashed #1f2937',
-                                    borderRadius: '1rem',
-                                    padding: '3rem 1rem',
-                                    textAlign: 'center',
-                                }}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faLayerGroup}
-                                    style={{ fontSize: '2rem', color: '#374151', marginBottom: '1rem' }}
-                                />
-                                <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>
-                                    {t('categories.no-custom-categories')}
-                                </p>
+                            <div className='bg-[#1e293b] border-2 border-dashed border-[#334155] rounded-2xl p-12 text-center'>
+                                <FontAwesomeIcon icon={faLayerGroup} className='text-3xl text-gray-600 mb-4' />
+                                <p className='text-sm text-gray-400'>{t('categories.no-custom-categories')}</p>
                             </div>
                         ) : (
                             <DragDropContext onDragEnd={onDragEnd}>
@@ -390,6 +323,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                                             </div>
 
                                                             <div
+                                                                className='mt-3 sm:mt-0 w-full sm:w-auto justify-end'
                                                                 style={{
                                                                     display: 'flex',
                                                                     alignItems: 'center',

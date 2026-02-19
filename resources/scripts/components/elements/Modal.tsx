@@ -96,7 +96,10 @@ function Modal({
         if (!isDismissable || !closeOnEscape) return;
 
         const handler = (e: KeyboardEvent) => {
-            if (e.key === 'Escape') setRender(false);
+            if (e.key === 'Escape') {
+                setRender(false);
+                onDismissed();
+            }
         };
 
         window.addEventListener('keydown', handler);
@@ -107,10 +110,6 @@ function Modal({
 
     useEffect(() => {
         setRender(visible);
-
-        if (!visible) {
-            onDismissed();
-        }
     }, [visible]);
 
     return (
@@ -124,13 +123,20 @@ function Modal({
                         e.stopPropagation();
                         if (e.target === e.currentTarget) {
                             setRender(false);
+                            onDismissed();
                         }
                     }
                 }}
             >
                 <ModalContainer alignTop={top} size={size}>
                     {isDismissable && (
-                        <div className={'close-icon'} onClick={() => setRender(false)}>
+                        <div
+                            className={'close-icon'}
+                            onClick={() => {
+                                setRender(false);
+                                onDismissed();
+                            }}
+                        >
                             <svg
                                 xmlns={'http://www.w3.org/2000/svg'}
                                 fill={'none'}

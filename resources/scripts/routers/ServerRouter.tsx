@@ -49,7 +49,11 @@ const NavItem = ({ route }: NavItemProps) => {
     if (!allowed) return null;
 
     return (
-        <NavLink id={route.name} to={`/server/${params.id}/${route.path ?? ''}`} end>
+        <NavLink
+            id={route.name}
+            to={`/server/${params.id}/${(route.path ?? route.route).replace(/\/\*$/, '')}`}
+            end={route.end ?? false}
+        >
             <span className='flex items-center'>
                 {route.icon && <route.icon className='w-5 mr-1' />}
                 {route.name ? t(route.name) : null}
@@ -202,10 +206,10 @@ export default function ServerRouter() {
                                             <Routes location={location}>
                                                 {allRoutes
                                                     .filter(routeAllowed)
-                                                    .map(({ path, permission, component: Component }) => (
+                                                    .map(({ route, permission, component: Component }) => (
                                                         <Route
-                                                            key={path}
-                                                            path={path}
+                                                            key={route}
+                                                            path={route}
                                                             element={
                                                                 <PermissionRoute permission={permission}>
                                                                     <Spinner.Suspense>

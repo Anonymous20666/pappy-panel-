@@ -202,7 +202,7 @@ export default function ServerRouter() {
                                             <Routes location={location}>
                                                 {allRoutes
                                                     .filter(routeAllowed)
-                                                    .map(({ route, path, permission, component: Component }) => (
+                                                    .map(({ route, permission, component: Component }) => (
                                                         <Route
                                                             key={route}
                                                             path={route}

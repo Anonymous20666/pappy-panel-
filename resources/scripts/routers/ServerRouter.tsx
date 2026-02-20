@@ -49,7 +49,7 @@ const NavItem = ({ route }: NavItemProps) => {
     if (!allowed) return null;
 
     return (
-        <NavLink id={route.name} to={`/server/${params.id}/${(route.path ?? route.route).replace(/\/\*$/, '')}`} end>
+        <NavLink id={route.name} to={`/server/${params.id}/${(route.path ?? route.route).replace(/\/\*$/, '')}`} end={route.end ?? false}>
             <span className='flex items-center'>
                 {route.icon && <route.icon className='w-5 mr-1' />}
                 {route.name ? t(route.name) : null}

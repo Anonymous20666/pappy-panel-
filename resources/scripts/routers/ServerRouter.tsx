@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Route, Routes, useParams, useLocation } from 'react-router-dom';
-import Navigate from '@/reviactyl/ui/components/Navigate';
+import Navigate from '@/reviactyl/components/Navigate';
 
 import TransferListener from '@/components/server/TransferListener';
 import Navbar from '@/reviactyl/ui/Navbar';

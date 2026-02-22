@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import Navigate from '@/reviactyl/ui/components/Navigate';
+import Navigate from '@/reviactyl/components/Navigate';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import Spinner from '@/components/elements/Spinner';

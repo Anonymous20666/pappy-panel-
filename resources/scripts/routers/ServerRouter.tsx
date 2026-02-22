@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
-import { NavLink, Route, Routes, useParams, useLocation } from 'react-router-dom';
+import { Route, Routes, useParams, useLocation } from 'react-router-dom';
+import Navigate from '@/reviactyl/ui/components/Navigate';
 
 import TransferListener from '@/components/server/TransferListener';
 import Navbar from '@/reviactyl/ui/Navbar';
@@ -49,7 +50,7 @@ const NavItem = ({ route }: NavItemProps) => {
     if (!allowed) return null;
 
     return (
-        <NavLink
+        <Navigate
             id={route.name}
             to={`/server/${params.id}/${(route.path ?? route.route).replace(/\/\*$/, '')}`}
             end={route.end ?? false}
@@ -58,7 +59,7 @@ const NavItem = ({ route }: NavItemProps) => {
                 {route.icon && <route.icon className='w-5 mr-1' />}
                 {route.name ? t(route.name) : null}
             </span>
-        </NavLink>
+        </Navigate>
     );
 };
 

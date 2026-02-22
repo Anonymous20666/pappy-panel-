@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Suspense } from 'react';
-import { NavLink, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
+import Navigate from '@/reviactyl/ui/components/Navigate';
 import DashboardContainer from '@/components/dashboard/DashboardContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import Spinner from '@/components/elements/Spinner';
@@ -32,11 +33,11 @@ const NavItem = ({ route }: Props) => {
     };
 
     return (
-        <NavLink id={route.name} to={to(route.path ?? route.route)} end={route.end}>
+        <Navigate id={route.name} to={to(route.path ?? route.route)} end={route.end}>
             <span className='flex items-center'>
                 {route.icon && <route.icon className={`w-5 mr-1`} />} {route.name ? t(route.name as string) : null}
             </span>
-        </NavLink>
+        </Navigate>
     );
 };
 

@@ -68,22 +68,22 @@ return [
     'required' => 'حقل :attribute مطلوب.',
     'required_if' => 'حقل :attribute مطلوب عندما تكون قيمة :other هي :value.',
     'required_unless' => 'حقل :attribute مطلوب ما لم تكن :other ضمن :values.',
-    'required_with' => 'The :attribute field is required when :values is present.',
-    'required_with_all' => 'The :attribute field is required when :values is present.',
-    'required_without' => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute and :other must match.',
+    'required_with' => 'حقل :attribute مطلوب عندما تكون :values موجودة.',
+    'required_with_all' => 'حقل :attribute مطلوب عندما تكون :values موجودة.',
+    'required_without' => 'حقل :attribute مطلوب عندما لا تكون :values موجودة.',
+    'required_without_all' => 'حقل :attribute مطلوب عندما لا تكون أي من :values موجودة.',
+    'same' => 'يجب أن يتطابق :attribute و :other.',
     'size' => [
-        'numeric' => 'The :attribute must be :size.',
-        'file' => 'The :attribute must be :size kilobytes.',
-        'string' => 'The :attribute must be :size characters.',
-        'array' => 'The :attribute must contain :size items.',
+        'numeric' => 'يجب أن يكون حجم :attribute :size.',
+        'file' => 'يجب أن يكون حجم :attribute :size كيلوبايت.',
+        'string' => 'يجب أن يكون :attribute بطول :size أحرف.',
+        'array' => 'يجب أن يحتوي :attribute على :size عنصر.',
     ],
-    'string' => 'The :attribute must be a string.',
-    'timezone' => 'The :attribute must be a valid zone.',
-    'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The :attribute failed to upload.',
-    'url' => 'The :attribute format is invalid.',
+    'string' => 'يجب أن يكون :attribute نصاً.',
+    'timezone' => 'يجب أن تكون :attribute منطقة زمنية صالحة.',
+    'unique' => ':attribute تم استخدامه من قبل.',
+    'uploaded' => 'فشل رفع :attribute.',
+    'url' => 'تنسيق :attribute غير صالح.',
 
     /*
     |--------------------------------------------------------------------------
@@ -100,7 +100,7 @@ return [
 
     // Internal validation logic for Pterodactyl
     'internal' => [
-        'variable_value' => ':env variable',
-        'invalid_password' => 'The password provided was invalid for this account.',
+        'variable_value' => 'متغير:env',
+        'invalid_password' => 'كلمة المرور المقدمة غير صالحة لهذا الحساب.',
     ],
 ];

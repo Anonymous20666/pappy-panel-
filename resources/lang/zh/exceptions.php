@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => '尝试与守护进程通信时发生异常，导致 HTTP/:code 响应代码。此异常已被记录。',
     'node' => [
         'servers_attached' => '节点必须没有任何关联的服务器才能被删除。',
-        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
+        'daemon_off_config_updated' => '守护进程配置已更新，但在尝试自动更新守护进程上的配置文件时遇到错误。您需要手动更新守护进程的配置文件（config.yml）以使这些更改生效。',
     ],
     'allocations' => [
         'server_using' => '目前有服务器分配到此分配。只有在没有服务器分配时才能删除分配。',

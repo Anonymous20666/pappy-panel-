@@ -61,7 +61,7 @@ return [
         'theme-color' => '主题颜色',
         'preview' => '预览',
         'description' => '描述',
-        'description-placeholder' => '简短的用途说明...',
+        'description-placeholder' => '简短的用途说明……',
         'update-category' => '更新分类',
         'create-category-button' => '创建分类',
         'discard-changes' => '放弃更改',

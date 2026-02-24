@@ -10,7 +10,7 @@ import Card from '@/reviactyl/ui/Card';
 
 interface BaseProps {
     title: string;
-    image: string;
+    image: ComponentType<React.SVGProps<SVGSVGElement>>;
     message: string;
     onRetry?: () => void;
     onBack?: () => void;
@@ -40,7 +40,7 @@ const ActionButton = styled(Button)`
     }
 `;
 
-const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProps) => (
+const ScreenBlock = ({ title, image: Image, message, onBack, onRetry }: ScreenBlockProps) => (
     <PageContentBlock>
         <div css={tw`flex justify-center`}>
             <Card css={tw`w-full sm:w-3/4 md:w-1/2 p-12 md:p-20 relative`}>
@@ -54,10 +54,10 @@ const ScreenBlock = ({ title, image, message, onBack, onRetry }: ScreenBlockProp
                         </ActionButton>
                     </div>
                 )}
-                <div className='grid grid-rows-2 gap-x-4 items-center grid-cols-[auto,1fr]'>
-                    <img src={image} className='w-20 h-20 row-span-2 select-none' />
-                    <h2 className='text-gray-200 font-bold text-3xl'>{title}</h2>
-                    <p className='text-sm text-gray-100'>{message}</p>
+                <div className="grid grid-rows-2 gap-x-4 items-center grid-cols-[auto,1fr]">
+                    <Image className="w-20 h-20 row-span-2 select-none" />
+                    <h2 className="text-gray-200 font-bold text-3xl">{title}</h2>
+                    <p className="text-sm text-gray-100">{message}</p>
                 </div>
             </Card>
         </div>

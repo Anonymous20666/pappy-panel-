@@ -2,31 +2,31 @@
 
 return [
     
-    'label' => 'Nest',
-    'plural_label' => 'Nests',
+    'label' => 'Nids',
+    'plural_label' => 'Nids',
 
     'sections' => [
-        'configuration' => 'Nest Configuration',
+        'configuration' => 'Configuration du nid',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'author' => 'Author',
+        'name' => 'Nom',
+        'author' => 'Auteur',
         'description' => 'Description',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to identify this nest.',
-        'author' => 'The author of this nest. Must be a valid email.',
-        'description' => 'A description of this nest.',
+        'name' => 'Un nom unique utilisé pour identifier ce nid.',
+        'author' => 'L’auteur de ce nid. Doit avoir une adresse e-mail valide.',
+        'description' => 'Une description de ce nid.',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
-        'author' => 'Author',
+        'name' => 'Nom',
+        'author' => 'Auteur',
         'eggs' => 'Eggs',
-        'servers' => 'Servers',
+        'servers' => 'Serveurs',
     ],
     
     'notices' => [

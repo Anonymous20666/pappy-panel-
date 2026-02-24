@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'Daemon ile iletişim kurulurken bir istisna oluştu ve HTTP/:code yanıt kodu alındı. Bu istisna günlüğe kaydedildi.',
     'node' => [
         'servers_attached' => 'Bir düğümün silinebilmesi için ona bağlı hiçbir sunucu bulunmamalıdır.',
-        'daemon_off_config_updated' => 'Daemon yapılandırması <strong>güncellendi</strong>, ancak Daemon üzerindeki yapılandırma dosyasını otomatik olarak güncellemeye çalışırken bir hatayla karşılaşıldı. Bu değişikliklerin uygulanması için Daemon yapılandırma dosyasını (config.yml) manuel olarak güncellemeniz gerekmektedir.',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'Bu tahsise şu anda bir sunucu atanmış durumda. Bir tahsis, yalnızca atalı bir sunucu yoksa silinebilir.',

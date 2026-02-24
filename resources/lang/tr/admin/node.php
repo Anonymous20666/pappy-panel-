@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'Tahsisler bu düğüme başarıyla eklendi.',
         'node_deleted' => 'Düğüm başarıyla panelden kaldırıldı.',
         'location_required' => 'Bu panele bir düğüm ekleyebilmeniz için önce en az bir konum yapılandırmış olmanız gerekir.',
-        'node_created' => 'Yeni düğüm başarıyla oluşturuldu. \'Yapılandırma\' sekmesini ziyaret ederek bu makinedeki daemon\'ı otomatik olarak yapılandırabilirsiniz. <strong>Sunucu eklemeden önce en az bir IP adresi ve port tahsis etmelisiniz.</strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'Düğüm bilgileri güncellendi. Herhangi bir daemon ayarı değiştirildiyse, bu değişikliklerin etkili olması için onu yeniden başlatmanız gerekecektir.',
         'unallocated_deleted' => '<code>:ip</code> için tahsis edilmemiş tüm portlar silindi.',
     ],

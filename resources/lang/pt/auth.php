@@ -14,7 +14,7 @@ return [
     'return' => 'Voltar para o Login',
 
     'social' => [
-        'or' => 'OR',
+        'or' => 'Ou',
         'google' => 'Google',
         'discord' => 'Discord',
         'github' => 'GitHub',

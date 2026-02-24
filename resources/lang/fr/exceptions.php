@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'Une exception s\'est produite lors de la tentative de communication avec le daemon, résultant en un code de réponse HTTP/:code. Cette exception a été enregistrée.',
     'node' => [
         'servers_attached' => 'Un noeud ne doit avoir aucun serveur lié pour pouvoir être supprimé.',
-        'daemon_off_config_updated' => 'La configuration du daemon <strong>a été mise à jour</strong>, cependant une erreur s\'est produite lors de la tentative de mise à jour automatique du fichier de configuration sur le Daemon. Vous devrez mettre à jour manuellement le fichier de configuration (config.yml) du daemon pour appliquer ces modifications.',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'Un serveur est actuellement assigné à cette allocation. Une allocation ne peut être supprimée que si aucun serveur n\'y est actuellement assigné.',

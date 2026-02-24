@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'Les allocations ont été ajoutées avec succès à ce noeud.',
         'node_deleted' => 'Le noeud a été supprimé du panneau.',
         'location_required' => 'Vous devez avoir configuré au moins un emplacement avant de pouvoir ajouter un noeud au panel.',
-        'node_created' => 'Nouveau noeud créé avec succès. Vous pouvez configurer automatiquement le daemon sur cette machine en vous rendant dans l\'onglet \'Configuration\'. <strong>Avant de pouvoir ajouter des serveurs, vous devez d\'abord attribuer au moins une adresse IP et un port. </strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'Les informations relatives aux noeuds ont été mises à jour. Si des paramètres du daemon ont été modifiés, vous devrez le redémarrer pour que ces modifications prennent effet.',
         'unallocated_deleted' => 'Suppression de tous les ports non attribués pour <code>:ip</code>.',
     ],

@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'Las asignaciones se han añadido exitosamente a este nodo.',
         'node_deleted' => 'El nodo ha sido eliminado exitosamente del panel.',
         'location_required' => 'Debes tener al menos una ubicación configurada antes de poder añadir un nodo a este panel.',
-        'node_created' => 'Nuevo nodo creado exitosamente. Puedes configurar automáticamente el daemon en esta máquina visitando la pestaña \'Configuración\'. <strong>Antes de poder añadir cualquier servidor, primero debes asignar al menos una dirección IP y puerto.</strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'La información del nodo ha sido actualizada. Si se cambiaron configuraciones del daemon, necesitarás reiniciarlo para que los cambios surtan efecto.',
         'unallocated_deleted' => 'Se eliminaron todos los puertos no asignados para <code>:ip</code>.',
     ],

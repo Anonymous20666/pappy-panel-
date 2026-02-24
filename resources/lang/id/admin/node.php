@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'Alokasi telah berhasil ditambahkan ke node ini.',
         'node_deleted' => 'Node telah berhasil dihapus dari panel.',
         'location_required' => 'Anda harus memiliki setidaknya satu lokasi yang dikonfigurasi sebelum Anda dapat menambahkan node ke panel ini.',
-        'node_created' => 'Berhasil membuat node baru. Anda dapat secara otomatis mengonfigurasi daemon pada mesin ini dengan mengunjungi tab \'Konfigurasi\'. <strong>Sebelum Anda dapat menambahkan server apa pun, Anda harus terlebih dahulu mengalokasikan setidaknya satu alamat IP dan port.</strong>',
+        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
         'node_updated' => 'Informasi node telah diperbarui. Jika pengaturan daemon diubah, Anda perlu me-rebootnya agar perubahan tersebut berlaku.',
         'unallocated_deleted' => 'Menghapus semua port yang tidak dialokasikan untuk <code>:ip</code>.',
     ],

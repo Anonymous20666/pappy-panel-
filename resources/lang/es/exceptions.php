@@ -4,7 +4,7 @@ return [
     'daemon_connection_failed' => 'Hubo una excepción al intentar comunicarse con el daemon resultando en un código de respuesta HTTP/:code. Esta excepción ha sido registrada.',
     'node' => [
         'servers_attached' => 'Un nodo no debe tener servidores vinculados para poder ser eliminado.',
-        'daemon_off_config_updated' => 'La configuración del daemon <strong>ha sido actualizada</strong>, sin embargo hubo un error al intentar actualizar automáticamente el archivo de configuración en el Daemon. Necesitarás actualizar manualmente el archivo de configuración (config.yml) para que el daemon aplique estos cambios.',
+        'daemon_off_config_updated' => 'The daemon configuration has been updated, however there was an error encountered while attempting to automatically update the configuration file on the Daemon. You will need to manually update the configuration file (config.yml) for the daemon to apply these changes.',
     ],
     'allocations' => [
         'server_using' => 'Un servidor está actualmente asignado a esta asignación. Una asignación solo puede ser eliminada si no hay ningún servidor asignado actualmente.',

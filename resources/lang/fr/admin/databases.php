@@ -2,23 +2,23 @@
 
 return [
 
-    'label' => 'Database',
-    'plural-label' => 'Databases',
+    'label' => 'Base de données',
+    'plural-label' => 'Bases de données',
 
-    'none' => 'None',
+    'none' => 'Aucun',
 
     'sections' => [
         'host_details' => [
-            'title' => 'Host Details',
-            'description' => 'Configure the database host connection settings.',
+            'title' => 'Détails Serveur',
+            'description' => 'Configurer les paramètres de connexion au serveur de base de données.',
         ],
 
         'authentication' => [
-            'title' => 'Authentication',
+            'title' => 'Authentification',
         ],
 
         'linked_node' => [
-            'title' => 'Linked Node',
+            'title' => 'Nœud lié',
         ],
     ],
 
@@ -29,32 +29,32 @@ return [
     ],
 
     'helpers' => [
-        'host' => 'The hostname or IP address of the database server.',
-        'linked_node' => 'Optional. Link this host to a specific node.',
+        'host' => 'Le nom d’hôte ou l’adresse IP du serveur de base de données.',
+        'linked_node' => 'Optionnel. Associer cet hôte à un nœud spécifique.',
     ],
 
     'fields' => [
-        'linked_node' => 'Linked Node',
+        'linked_node' => 'Nœud lié',
     ],
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
+        'name' => 'Nom',
         'host' => 'Host',
         'port' => 'Port',
-        'username' => 'Username',
-        'linked_node' => 'Linked Node',
-        'databases' => 'Databases',
-        'created' => 'Created',
+        'username' => 'Nom d\'utilisateur',
+        'linked_node' => 'Nœud lié',
+        'databases' => 'Bases de données',
+        'created' => 'Créé',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'Modifier',
+        'delete' => 'Supprimer',
     ],
 
     'errors' => [
-        'cannot_delete' => 'Cannot delete a database host with associated databases.',
+        'cannot_delete' => 'Vous ne pouvez pas supprimer cet hôte de base de données tant que des bases de données y sont associées.',
     ],
 
 ];

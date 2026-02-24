@@ -15,8 +15,8 @@ return [
 
     'help-btn' => 'Obter ajuda',
     'docs-btn' => 'Documentação',
-    'metrics-header' => 'User Activity Metrics',
-    'most-active-country' => 'Most Active Country',
-    'activity-description' => 'Based on recent login activity.',
+    'metrics-header' => 'Métricas de atividade do usuário',
+    'most-active-country' => 'País mais ativo',
+    'activity-description' => 'Com base na atividade de login recente.',
     'no_activity' => 'Não há atividades recentes para exibir.',
 ];

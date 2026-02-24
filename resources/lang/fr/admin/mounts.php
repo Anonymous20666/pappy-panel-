@@ -10,11 +10,11 @@ return [
     ],
 
     'fields' => [
-        'name' => 'Name',
+        'name' => 'Nom',
         'description' => 'Description',
-        'source' => 'Source Path',
-        'target' => 'Target Path',
-        'read_only' => 'Read Only',
+        'source' => 'Chemin Source',
+        'target' => 'Chemin Cible',
+        'read_only' => 'Lecture seule',
         'user_mountable' => 'User Mountable',
     ],
 
@@ -29,10 +29,10 @@ return [
 
     'columns' => [
         'id' => 'ID',
-        'name' => 'Name',
+        'name' => 'Nom',
         'source' => 'Source',
-        'target' => 'Target',
-        'read_only' => 'Read Only',
+        'target' => 'Cible',
+        'read_only' => 'Lecture seule',
         'user_mountable' => 'User Mountable',
     ],
 

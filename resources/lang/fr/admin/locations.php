@@ -2,44 +2,44 @@
 
 return [
 
-    'label' => 'Location',
-    'plural-label' => 'Locations',
+    'label' => 'Emplacements',
+    'plural-label' => 'Emplacements',
 
     'section' => [
-        'title' => 'Location Details',
-        'description' => 'Define a location that nodes can be assigned to.',
+        'title' => 'Détails des emplacements',
+        'description' => 'Définir un emplacement auquel des nœuds peuvent être assignés.',
     ],
 
     'fields' => [
         'short' => [
-            'label' => 'Short Code',
+            'label' => 'Code Court',
             'placeholder' => 'us.nyc.1',
-            'helper' => 'A short identifier for this location.',
+            'helper' => 'Un identifiant court pour cet emplacement.',
         ],
 
         'long' => [
             'label' => 'Description',
             'placeholder' => 'New York City, NY, USA',
-            'helper' => 'A longer description of this location.',
+            'helper' => 'Une description plus détaillée de cet emplacement.',
         ],
     ],
 
     'table' => [
         'id' => 'ID',
-        'short' => 'Short Code',
+        'short' => 'Code Court',
         'long' => 'Description',
-        'nodes' => 'Nodes',
-        'servers' => 'Servers',
-        'created' => 'Created',
+        'nodes' => 'Noeuds',
+        'servers' => 'Serveurs',
+        'created' => 'Créé',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
-        'delete' => 'Delete',
+        'edit' => 'Modifier',
+        'delete' => 'Supprimer',
     ],
 
     'messages' => [
-        'cannot_delete_with_nodes' => 'Cannot delete a location with associated nodes.',
+        'cannot_delete_with_nodes' => 'Impossible de supprimer un emplacement ayant des nœuds associés.',
     ],
 
 ];

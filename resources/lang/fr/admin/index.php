@@ -5,7 +5,7 @@ return [
     'uptodate-header' => 'Tout est à jour',
     'uptodate-body' => 'Vous utilisez la version :version. Tout est à jour!',
     'notuptodate-header' => 'Le panel n\'est pas à jour!',
-    'notuptodate-body' => ':latest is now available! Read our documentation to update your Panel.',
+    'notuptodate-body' => ':latest est maintenant disponible! Allez lire notre documentation pour mettre à jour le panel.',
     'feedback-header' => 'Un avis?',
     'feedback-body' => 'Si vous appréciez les fonctionnalités et la facilité d\'utilisation de Reviactyl, faites-le-nous savoir ! Vos commentaires nous aident à améliorer et à créer des outils encore plus performants pour vous.',
     'feedback-btn' => 'Faire un retour',
@@ -15,8 +15,8 @@ return [
 
     'help-btn' => 'Obtenez de l\'aide',
     'docs-btn' => 'Documentation',
-    'metrics-header' => 'User Activity Metrics',
-    'most-active-country' => 'Most Active Country',
-    'activity-description' => 'Based on recent login activity.',
-    'no_activity' => 'There is no recent activity to display.',
+    'metrics-header' => 'Indicateurs d’activité des utilisateurs',
+    'most-active-country' => 'Pays le plus actif',
+    'activity-description' => 'Basé sur l’activité récente de connexion.',
+    'no_activity' => 'Aucune activité récente à afficher.',
 ];

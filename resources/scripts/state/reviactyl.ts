@@ -1,5 +1,10 @@
 import { action, Action } from 'easy-peasy';
 
+export interface ReviactylAlert {
+    type: string;
+    message: string;
+}
+
 export interface ReviactylSettings {
     customCopyright: boolean;
     copyright: string;
@@ -10,6 +15,7 @@ export interface ReviactylSettings {
     allocationBlur: boolean;
     alertType: string;
     alertMessage: string;
+    alerts?: ReviactylAlert[];
     statusCardLink: string;
     supportCardLink: string;
     billingCardLink: string;

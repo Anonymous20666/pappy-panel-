@@ -43,6 +43,7 @@ class DesignifyServiceProvider extends ServiceProvider
         "designify:fontFamily",
         "designify:alertType",
         "designify:alertMessage",
+        "designify:alerts",
         "designify:site_color",
         "designify:site_title",
         "designify:site_description",
@@ -171,22 +172,24 @@ class DesignifyServiceProvider extends ServiceProvider
         foreach ($this->keys as $key) {
             $value = array_get($values, 'settings::' . $key, $config->get(str_replace(':', '.', $key)));
 
-            switch (strtolower($value)) {
-                case 'true':
-                case '(true)':
-                    $value = true;
-                    break;
-                case 'false':
-                case '(false)':
-                    $value = false;
-                    break;
-                case 'empty':
-                case '(empty)':
-                    $value = '';
-                    break;
-                case 'null':
-                case '(null)':
-                    $value = null;
+            if (is_string($value)) {
+                switch (strtolower($value)) {
+                    case 'true':
+                    case '(true)':
+                        $value = true;
+                        break;
+                    case 'false':
+                    case '(false)':
+                        $value = false;
+                        break;
+                    case 'empty':
+                    case '(empty)':
+                        $value = '';
+                        break;
+                    case 'null':
+                    case '(null)':
+                        $value = null;
+                }
             }
 
             $config->set(str_replace(':', '.', $key), $value);

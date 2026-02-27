@@ -38,6 +38,7 @@ return [
 
     'alertType' => 'info',
     'alertMessage' => '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.',
+    'alerts' => '[{"type":"info","message":"**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area."}]',
 
     'statusCardLink' => '',
     'supportCardLink' => '',

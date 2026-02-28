@@ -24,16 +24,16 @@ const DropdownButton = styled.button`
     }
 `;
 
-const DropdownMenu = styled.div<{ isOpen: boolean }>`
+const DropdownMenu = styled.div<{ $isOpen: boolean }>`
     ${tw`absolute right-0 top-full mt-1 border border-gray-600 rounded-ui shadow-lg z-50 overflow-hidden min-w-[200px]`};
-    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    display: ${(props) => (props.$isOpen ? 'block' : 'none')};
 `;
 
-const MenuItem = styled.button<{ isActive?: boolean }>`
+const MenuItem = styled.button<{ $isActive?: boolean }>`
     ${tw`flex items-center gap-2 w-full px-3 py-2 text-left text-sm transition-colors hover:text-reviactyl`};
 
     ${(props) =>
-        props.isActive
+        props.$isActive
             ? `
                 color: rgb(var(--color-primary) / 10);
                 background-color: rgb(var(--color-primary) / 0.2);
@@ -106,9 +106,10 @@ const NavbarLanguageSwitcher = () => {
             <DropdownButton onClick={() => setIsOpen(!isOpen)}>
                 {currentLanguage?.flag && <FlagIcon className={`fi fi-${currentLanguage.flag}`} />}
             </DropdownButton>
-            <DropdownMenu className='bg-gray-800/90 backdrop-blur-md' isOpen={isOpen}>
+
+            <DropdownMenu className='bg-gray-800/90 backdrop-blur-md' $isOpen={isOpen}>
                 {Object.entries(languages).map(([code, info]) => (
-                    <MenuItem key={code} isActive={code === currentLang} onClick={() => handleSelect(code)}>
+                    <MenuItem key={code} $isActive={code === currentLang} onClick={() => handleSelect(code)}>
                         {info.flag && <FlagIcon className={`fi fi-${info.flag}`} />}
                         {info.name}
                     </MenuItem>

@@ -59,7 +59,10 @@ const Announcement = () => {
             {alerts
                 .filter((alert) => alert.type !== 'disabled')
                 .map((alert, index) => (
-                    <AlertContainer key={`${index}-${alert.type}-${alert.message.slice(0, 20)}`} className={getAlertClass(alert.type)}>
+                    <AlertContainer
+                        key={`${index}-${alert.type}-${alert.message.slice(0, 20)}`}
+                        className={getAlertClass(alert.type)}
+                    >
                         <div>{getAlertIcon(alert.type)}</div>
                         <div>
                             <Md2React markdown={alert.message} />

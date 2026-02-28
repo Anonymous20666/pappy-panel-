@@ -11,6 +11,7 @@ return [
     'your-servers' => 'Visar dina servrar',
     'no-servers' => 'Det finns inga servrar kopplade till ditt konto',
     'no-other-servers' => 'Det finns inga andra servrar att visa',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'All',
         'filter-label' => 'Filter by egg',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'All Categories',
+        'filter-label' => 'Filter by category',
         'primary' => 'Primary',
         'manage' => 'Manage',
         'set-category' => 'Set category',

@@ -11,6 +11,7 @@ return [
     'your-servers' => '展示你的服务器',
     'no-servers' => '您的账户没有关联的服务器。',
     'no-other-servers' => '没有其他服务器可显示。',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => '全部',
         'filter-label' => '按预设筛选',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => '所有分类',
+        'filter-label' => 'Filter by category',
         'primary' => '主要',
         'manage' => '管理',
         'set-category' => '设置分类',

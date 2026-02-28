@@ -11,6 +11,7 @@ return [
     'your-servers' => 'Sunucularınız gösteriliyor',
     'no-servers' => 'Hesabınızla ilişkilendirilmiş sunucu bulunmamaktadır.',
     'no-other-servers' => 'Görüntülenecek başka sunucu yok.',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'All',
         'filter-label' => 'Filter by egg',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'All Categories',
+        'filter-label' => 'Filter by category',
         'primary' => 'Primary',
         'manage' => 'Manage',
         'set-category' => 'Set category',

@@ -11,6 +11,7 @@ return [
     'your-servers' => 'ನಿಮ್ಮ ಸರ್ವರ್‌ಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ',
     'no-servers' => 'ನಿಮ್ಮ ಖಾತೆಗೆ ಸಂಬಂಧಿಸಿದ ಯಾವುದೇ ಸರ್ವರ್‌ಗಳಿಲ್ಲ.',
     'no-other-servers' => 'ತೋರಿಸಲು ಇನ್ನೂ ಯಾವುದೇ ಸರ್ವರ್‌ಗಳಿಲ್ಲ.',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'All',
         'filter-label' => 'Filter by egg',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'All Categories',
+        'filter-label' => 'Filter by category',
         'primary' => 'Primary',
         'manage' => 'Manage',
         'set-category' => 'Set category',

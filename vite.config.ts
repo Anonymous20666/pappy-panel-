@@ -55,21 +55,6 @@ export default defineConfig({
         },
     },
 
-    server: {
-        host: '0.0.0.0',
-        port: 5173,
-        strictPort: true,
-        origin: 'https://reviactyl.test',
-        hmr: {
-            host: 'reviactyl.test',
-            protocol: 'wss',
-            clientPort: 443,
-        },
-        watch: {
-            usePolling: true,
-        },
-    },
-
     test: {
         environment: 'happy-dom',
         include: ['resources/scripts/**/*.{spec,test}.{ts,tsx}'],

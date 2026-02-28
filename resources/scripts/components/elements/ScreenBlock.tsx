@@ -56,10 +56,10 @@ const ScreenBlock = ({ title, image: Image, message, onBack, onRetry }: ScreenBl
                         </ActionButton>
                     </div>
                 )}
-                <div className="grid grid-rows-2 gap-x-4 items-center grid-cols-[auto,1fr]">
-                    <Image className="w-20 h-20 row-span-2 select-none" />
-                    <h2 className="text-gray-200 font-bold text-3xl">{title}</h2>
-                    <p className="text-sm text-gray-100">{message}</p>
+                <div className='grid grid-rows-2 gap-x-4 items-center grid-cols-[auto,1fr]'>
+                    <Image className='w-20 h-20 row-span-2 select-none' />
+                    <h2 className='text-gray-200 font-bold text-3xl'>{title}</h2>
+                    <p className='text-sm text-gray-100'>{message}</p>
                 </div>
             </Card>
         </div>

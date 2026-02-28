@@ -12,6 +12,8 @@ const CardDefault = styled.div`
     ${tw`rounded-ui bg-gray-700 border border-gray-600`}
 `;
 
-export default ({ className, children }: CardProps) => (
-    <CardDefault className={classNames('p-5', className)}>{children}</CardDefault>
+export default ({ className, children, ...props }: CardProps & React.HTMLAttributes<HTMLDivElement>) => (
+    <CardDefault {...props} className={classNames('p-5', className)}>
+        {children}
+    </CardDefault>
 );

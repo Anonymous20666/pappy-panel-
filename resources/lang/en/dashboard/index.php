@@ -11,6 +11,7 @@ return [
     'your-servers' => 'Showing your servers',
     'no-servers' => 'There are no servers associated with your account.',
     'no-other-servers' => 'There are no other servers to display.',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'All',
         'filter-label' => 'Filter by egg',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'All Categories',
+        'filter-label' => 'Filter by category',
         'primary' => 'Primary',
         'manage' => 'Manage',
         'set-category' => 'Set category',

@@ -21,6 +21,9 @@ import getClientEggs from '@/api/getClientEggs';
 import CategorySection from '@/components/dashboard/CategorySection';
 import CategoryManagerModal from '@/components/dashboard/CategoryManagerModal';
 import ServerRow from '@/components/dashboard/ServerRow';
+import Select from '../elements/Select';
+import { Button } from '../elements/button';
+import { FaUserGear } from 'react-icons/fa6';
 
 export default () => {
     const { t } = useTranslation('dashboard/index');
@@ -151,60 +154,11 @@ export default () => {
                     */}
                     <Title className='text-4xl'>{t('title')}</Title>
                 </div>
-
                 <div className='flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto'>
-                    {!showOnlyAdmin && (
-                        <div className='flex flex-row items-center gap-3 w-full sm:w-auto'>
-                            <div
-                                className='flex-1 sm:flex-none min-w-0 max-w-full sm:max-w-[min(12rem,40vw)]'
-                                title={
-                                    selectedCategory === 'all'
-                                        ? t('categories.all-categories')
-                                        : selectedCategory === 'primary'
-                                        ? t('categories.primary')
-                                        : categories?.find((c) => c.uuid === selectedCategory)?.name
-                                }
-                            >
-                                <select
-                                    className='w-full bg-[#1e293b] border border-[#334155] text-gray-200 px-3 py-1.5 rounded-lg outline-none focus:border-blue-500 transition truncate'
-                                    value={selectedCategory}
-                                    onChange={(e) => setSelectedCategory(e.target.value)}
-                                    aria-label={t('categories.all-categories')}
-                                >
-                                    <option value='all'>{t('categories.all-categories')}</option>
-                                    {categories?.map((cat) => {
-                                        const maxLen = 40;
-                                        const label =
-                                            cat.name.length <= maxLen
-                                                ? cat.name
-                                                : cat.name.slice(0, maxLen - 3) + '...';
-                                        return (
-                                            <option key={cat.uuid} value={cat.uuid} title={cat.name}>
-                                                {label}
-                                            </option>
-                                        );
-                                    })}
-                                    <option value='primary'>{t('categories.primary')}</option>
-                                </select>
-                            </div>
-
-                            <button
-                                onClick={() => setModalVisible(true)}
-                                className='bg-[#1e293b] border border-[#334155] hover:border-blue-500 text-gray-200 px-4 py-1.5 rounded-lg transition whitespace-nowrap'
-                            >
-                                {t('categories.manage')}
-                            </button>
-                        </div>
-                    )}
-
-                    <div className='flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-0 w-full sm:w-auto sm:space-x-4 border-t border-[#334155] pt-4 sm:border-t-0 sm:pt-0'>
+                    <div className='flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-0 w-full sm:w-auto sm:space-x-4'>
                         {rootAdmin && (
-                            <div
-                                className={`flex flex-shrink-0 items-center justify-between gap-2 ${
-                                    !showOnlyAdmin ? 'sm:border-l sm:border-[#334155] sm:pl-4' : ''
-                                }`}
-                            >
-                                <p className='uppercase text-xs text-gray-400 whitespace-nowrap'>
+                            <div className={`flex flex-shrink-0 items-center justify-between gap-2`}>
+                                <p className='uppercase text-xs text-gray-300 whitespace-nowrap'>
                                     {showOnlyAdmin ? t('other-servers') : t('your-servers')}
                                 </p>
                                 <Switch
@@ -214,51 +168,95 @@ export default () => {
                                 />
                             </div>
                         )}
-                        {/* Egg filter is global (not user-specific): show for both "your servers" and "others' servers" */}
-                        {(eggs && eggs.length > 0) || (rootAdmin && showOnlyAdmin && Array.isArray(eggs)) ? (
-                            <div
-                                className='relative flex flex-shrink-0 items-center sm:border-l sm:border-[#334155] sm:pl-4'
-                                ref={eggFilterRef}
-                            >
-                                <button
+                        <div className='relative flex flex-shrink-0 items-center sm:border-l sm:border-[#334155] sm:pl-4 gap-x-1'>
+                            <div>
+                                <Button.Text
                                     type='button'
-                                    onClick={() => setEggFilterOpen((o) => !o)}
-                                    className={`p-1.5 rounded-lg transition border ${
-                                        selectedEggId !== null
-                                            ? 'bg-blue-500/20 border-blue-500 text-blue-400'
-                                            : 'bg-[#1e293b] border-[#334155] text-gray-400 hover:border-gray-500 hover:text-gray-200'
-                                    }`}
-                                    title={t('eggs.filter-label')}
-                                    aria-label={t('eggs.filter-label')}
-                                    aria-expanded={eggFilterOpen}
+                                    onClick={() => setModalVisible(true)}
+                                    className={`!p-2 rounded-lg transition border border-gray-500 hover:border-gray-400`}
+                                    title={t('categories.manage')}
+                                    aria-label={t('categories.manage')}
                                 >
-                                    <FilterIcon className='w-5 h-5' />
-                                </button>
+                                    <FaUserGear className='w-5 h-5 text-gray-50' />
+                                </Button.Text>
+                            </div>
+                            <div>
+                                {!showOnlyAdmin && (
+                                    <Button.Text
+                                        type='button'
+                                        onClick={() => setEggFilterOpen((o) => !o)}
+                                        className={`!p-2 rounded-lg transition border ${
+                                            selectedEggId !== null
+                                                ? 'border-blue-500 hover:border-blue-400'
+                                                : 'border-gray-500 hover:border-gray-400'
+                                        }`}
+                                        title={t('filter-label')}
+                                        aria-label={t('filter-label')}
+                                        aria-expanded={eggFilterOpen}
+                                    >
+                                        <FilterIcon className='w-5 h-5 text-gray-50' />
+                                    </Button.Text>
+                                )}
                                 {eggFilterOpen && (
-                                    <div className='absolute right-0 sm:left-auto top-full mt-1.5 z-10 min-w-[180px] py-2 px-2 bg-[#1e293b] border border-[#334155] rounded-lg shadow-lg'>
-                                        <p className='text-xs text-gray-400 uppercase px-2 pb-1.5'>
-                                            {t('eggs.filter-label')}
-                                        </p>
-                                        <select
-                                            className='w-full bg-[#0f172a] border border-[#334155] text-gray-200 text-sm px-3 py-2 rounded-lg outline-none focus:border-blue-500 transition'
-                                            value={selectedEggId ?? ''}
-                                            onChange={(e) => {
-                                                setSelectedEggId(e.target.value === '' ? null : Number(e.target.value));
-                                                setEggFilterOpen(false);
-                                            }}
-                                            aria-label={t('eggs.filter-label')}
-                                        >
-                                            <option value=''>{t('eggs.all')}</option>
-                                            {eggs.map((egg) => (
-                                                <option key={egg.id} value={egg.id}>
-                                                    {egg.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
+                                    <Card className='absolute right-0 sm:left-auto top-full mt-1.5 z-10 min-w-[180px] !py-2 !px-2 shadow-lg'>
+                                        {/* Egg filter is global (not user-specific): show for both "your servers" and "others' servers" */}
+                                        {(eggs && eggs.length > 0) ||
+                                        (rootAdmin && showOnlyAdmin && Array.isArray(eggs)) ? (
+                                            <div className='mb-2 border-b border-gray-600 pb-2' ref={eggFilterRef}>
+                                                <p className='text-xs text-gray-200 uppercase px-2 pb-1.5'>
+                                                    {t('eggs.filter-label')}
+                                                </p>
+                                                <Select
+                                                    className='w-full'
+                                                    value={selectedEggId ?? ''}
+                                                    onChange={(e) => {
+                                                        setSelectedEggId(
+                                                            e.target.value === '' ? null : Number(e.target.value)
+                                                        );
+                                                        setEggFilterOpen(false);
+                                                    }}
+                                                    aria-label={t('eggs.filter-label')}
+                                                >
+                                                    <option value=''>{t('eggs.all')}</option>
+                                                    {eggs.map((egg) => (
+                                                        <option key={egg.id} value={egg.id}>
+                                                            {egg.name}
+                                                        </option>
+                                                    ))}
+                                                </Select>
+                                            </div>
+                                        ) : null}
+                                        {!showOnlyAdmin && (
+                                            <div>
+                                                <p className='text-xs text-gray-200 uppercase px-2 pb-1.5'>
+                                                    {t('categories.filter-label')}
+                                                </p>
+                                                <Select
+                                                    value={selectedCategory}
+                                                    onChange={(e) => setSelectedCategory(e.target.value)}
+                                                    aria-label={t('categories.all-categories')}
+                                                >
+                                                    <option value='all'>{t('categories.all-categories')}</option>
+                                                    {categories?.map((cat) => {
+                                                        const maxLen = 40;
+                                                        const label =
+                                                            cat.name.length <= maxLen
+                                                                ? cat.name
+                                                                : cat.name.slice(0, maxLen - 3) + '...';
+                                                        return (
+                                                            <option key={cat.uuid} value={cat.uuid} title={cat.name}>
+                                                                {label}
+                                                            </option>
+                                                        );
+                                                    })}
+                                                    <option value='primary'>{t('categories.primary')}</option>
+                                                </Select>
+                                            </div>
+                                        )}
+                                    </Card>
                                 )}
                             </div>
-                        ) : null}
+                        </div>
                     </div>
                 </div>
             </div>

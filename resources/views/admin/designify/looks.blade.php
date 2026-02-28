@@ -83,6 +83,22 @@
                         {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Roboto' ? 'selected' : '' }}>
                         Roboto
                     </option>
+                    <option value="Cairo"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Cairo' ? 'selected' : '' }}>
+                        Cairo
+                    </option>
+                    <option value="Google+Sans"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Google+Sans' ? 'selected' : '' }}>
+                        Google Sans 
+                    </option>
+                    <option value="Playpen+Sans+Arabic"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Playpen+Sans+Arabic' ? 'selected' : '' }}>
+                        Playpen Sans Arabic 
+                    </option>
+                    <option value="Noto+Sans"
+                        {{ old('designify:fontFamily', config('designify.fontFamily')) === 'Noto+Sans' ? 'selected' : '' }}>
+                        Noto Sans
+                    </option>
                 </select>
             </div>
             <div class="border-t border-zinc-700"></div>

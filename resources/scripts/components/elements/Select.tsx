@@ -33,7 +33,7 @@ const Select = styled.select<Props>`
 
             &:hover:not(:disabled),
             &:focus {
-                ${tw`border-neutral-400`};
+                ${tw`border-gray-400`};
             }
         `};
 `;

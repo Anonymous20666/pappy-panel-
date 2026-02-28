@@ -6,6 +6,7 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
+import Card from '@/reviactyl/ui/Card';
 
 interface Props {
     category: ServerCategory | null;
@@ -19,9 +20,6 @@ const HeaderButton = styled.button`
     width: 100%;
     transition: all 0.15s ease;
     text-align: left;
-    &:hover {
-        background-color: #1e293b;
-    }
 
     list-style: none;
     cursor: pointer;
@@ -41,12 +39,12 @@ export default ({ category, servers, showOnlyAdmin, onCategoryChanged }: Props) 
     const displayColor = category ? categoryColor : '#64748b';
 
     return (
-        <div css={[tw`relative border rounded-xl overflow-hidden mb-5 transition`, tw`bg-[#0b1220] border-[#334155]`]}>
+        <Card css={[tw`!p-0 relative overflow-hidden mb-5 transition`]}>
             {/* LEFT ACCENT BAR */}
             <div css={tw`absolute left-0 top-0 h-full w-1`} style={{ backgroundColor: displayColor }} />
 
             {/* HEADER */}
-            <HeaderButton onClick={() => setOpen(!open)}>
+            <HeaderButton className='hover:bg-gray-600' onClick={() => setOpen(!open)}>
                 <div css={tw`flex items-center gap-3 flex-1 min-w-0`}>
                     <div css={tw`min-w-0`}>
                         <span css={tw`font-medium`} style={{ color: displayColor }}>
@@ -82,6 +80,6 @@ export default ({ category, servers, showOnlyAdmin, onCategoryChanged }: Props) 
                     </div>
                 </div>
             )}
-        </div>
+        </Card>
     );
 };

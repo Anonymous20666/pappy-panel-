@@ -16,6 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen, faPlus, faLayerGroup, faSortAmountDown, faBars } from '@fortawesome/free-solid-svg-icons';
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useTranslation } from 'react-i18next';
+import Title from '@/reviactyl/ui/Title';
+import Card from '@/reviactyl/ui/Card';
 
 interface Props {
     visible: boolean;
@@ -49,9 +51,6 @@ const DragItem = styled.div<{ isDragging?: boolean }>`
     flex-direction: column;
     align-items: flex-start;
     padding: 0.85rem;
-    background-color: ${(props) => (props.isDragging ? '#334155' : '#1e293b')};
-    border: 1px solid ${(props) => (props.isDragging ? '#60a5fa' : '#334155')};
-    border-radius: 0.85rem;
     margin-bottom: 0.75rem;
     transition: background-color 0.2s ease, border-color 0.2s ease;
     box-shadow: ${(props) => (props.isDragging ? '0 10px 15px -3px rgba(0, 0, 0, 0.4)' : 'none')};
@@ -133,8 +132,8 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
 
     return (
         <Modal visible={visible} onDismissed={onDismissed} dismissable={true} size={'lg'} noScroll={true}>
-            <div className='mb-6 border-b border-[#334155] pb-4'>
-                <h2 className='text-2xl font-semibold text-gray-100'>{t('categories.manage-title')}</h2>
+            <div className='mb-6 border-b border-gray-600 pb-4'>
+                <Title className='text-2xl font-semibold text-gray-100'>{t('categories.manage-title')}</Title>
             </div>
 
             <div style={{ marginBottom: '1.5rem' }}>
@@ -145,7 +144,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                 {/* LEFT SECTION: CREATE/EDIT */}
                 <Column>
                     <div className='flex items-center gap-2 mb-5'>
-                        <div className='bg-blue-500/10 p-2 rounded-lg'>
+                        <div className='bg-blue-500/10 p-2 rounded-ui'>
                             <FontAwesomeIcon icon={editingCategory ? faPen : faPlus} className='text-blue-400' />
                         </div>
                         <h3 className='text-lg font-semibold text-gray-200'>
@@ -153,7 +152,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                         </h3>
                     </div>
 
-                    <div className='bg-[#1e293b] border border-[#334155] rounded-2xl p-6 shadow-sm'>
+                    <Card className='bg-[#1e293b] border border-[#334155] rounded-2xl p-6 shadow-sm'>
                         <Formik
                             onSubmit={submit}
                             initialValues={{
@@ -231,29 +230,29 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                 </Form>
                             )}
                         </Formik>
-                    </div>
+                    </Card>
                 </Column>
 
                 {/* RIGHT SECTION: ARRANGE */}
                 <Column>
                     <div className='flex items-center justify-between mb-5'>
                         <div className='flex items-center gap-2'>
-                            <div className='bg-purple-500/10 p-2 rounded-lg'>
+                            <div className='bg-purple-500/10 p-2 rounded-ui'>
                                 <FontAwesomeIcon icon={faSortAmountDown} className='text-purple-400' />
                             </div>
                             <h3 className='text-lg font-semibold text-gray-200'>{t('categories.arrange-order')}</h3>
                         </div>
-                        <span className='text-xs text-gray-400 bg-[#1e293b] px-2.5 py-1 rounded-lg border border-[#334155]'>
+                        <span className='text-xs text-gray-400 bg-gray-800 px-2.5 py-1 rounded-ui border border-gray-600'>
                             {t('categories.categories-count', { count: categories.length })}
                         </span>
                     </div>
 
                     <div style={{ paddingRight: '0.5rem' }}>
                         {categories.length === 0 ? (
-                            <div className='bg-[#1e293b] border-2 border-dashed border-[#334155] rounded-2xl p-12 text-center'>
-                                <FontAwesomeIcon icon={faLayerGroup} className='text-3xl text-gray-600 mb-4' />
+                            <Card className='!border-2 !border-dashed !p-12 text-center'>
+                                <FontAwesomeIcon icon={faLayerGroup} className='text-3xl text-gray-500 mb-4' />
                                 <p className='text-sm text-gray-400'>{t('categories.no-custom-categories')}</p>
-                            </div>
+                            </Card>
                         ) : (
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId='categories'>
@@ -263,6 +262,7 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                                 <Draggable key={cat.uuid} draggableId={cat.uuid} index={index}>
                                                     {(provided, snapshot) => (
                                                         <DragItem
+                                                            className='bg-gray-700 border border-gray-600 rounded-ui'
                                                             ref={provided.innerRef}
                                                             {...provided.draggableProps}
                                                             {...provided.dragHandleProps}
@@ -277,8 +277,8 @@ export default ({ visible, onDismissed, onCategoryChanged }: Props) => {
                                                             >
                                                                 <FontAwesomeIcon
                                                                     icon={faBars}
+                                                                    className='text-gray-500'
                                                                     style={{
-                                                                        color: '#374151',
                                                                         marginRight: '0.75rem',
                                                                         cursor: 'grab',
                                                                     }}

@@ -11,6 +11,7 @@ return [
     'your-servers' => 'Menampilkan server Anda',
     'no-servers' => 'Tidak ada server yang terkait dengan akun Anda.',
     'no-other-servers' => 'Tidak ada server lain untuk ditampilkan.',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'All',
         'filter-label' => 'Filter by egg',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'All Categories',
+        'filter-label' => 'Filter by category',
         'primary' => 'Primary',
         'manage' => 'Manage',
         'set-category' => 'Set category',

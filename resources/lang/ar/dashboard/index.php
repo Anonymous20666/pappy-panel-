@@ -11,6 +11,7 @@ return [
     'your-servers' => 'عرض سيرفراتك',
     'no-servers' => 'لا توجد سيرفرات مرتبطة بحسابك.',
     'no-other-servers' => 'لا توجد سيرفرات أخرى لعرضها.',
+    'filter-label' => 'Server Filter',
     'eggs' => [
         'all' => 'الكل',
         'filter-label' => 'تصفية حسب البيضة',
@@ -49,6 +50,7 @@ return [
     ],
     'categories' => [
         'all-categories' => 'جميع الفئات',
+        'filter-label' => 'Filter by category',
         'primary' => 'الأساسية',
         'manage' => 'إدارة',
         'set-category' => 'تعيين كاتيغوري',

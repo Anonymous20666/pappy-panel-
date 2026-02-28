@@ -78,15 +78,17 @@ const ServerNavigation = () => {
 
                     {routes
                         .filter((route) => !!route.name)
-                        .map((route) =>
-                            route.permission ? (
-                                <Can key={route.path} action={route.permission} matchAny>
+                        .map((route) => (
+                            <Fragment key={route.path ?? route.route}>
+                                {route.permission ? (
+                                    <Can action={route.permission} matchAny>
+                                        <NavItem route={route} />
+                                    </Can>
+                                ) : (
                                     <NavItem route={route} />
-                                </Can>
-                            ) : (
-                                <NavItem key={route.path} route={route} />
-                            )
-                        )}
+                                )}
+                            </Fragment>
+                        ))}
                 </div>
             ))}
         </>

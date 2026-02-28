@@ -27,10 +27,19 @@ const DropdownButton = styled.button`
 const DropdownMenu = styled.div<{ $isOpen: boolean }>`
     ${tw`absolute right-0 top-full mt-1 border border-gray-600 rounded-ui shadow-lg z-50 overflow-hidden min-w-[200px]`};
     display: ${(props) => (props.$isOpen ? 'block' : 'none')};
+
+    [dir='rtl'] & {
+        right: auto;
+        left: 0;
+    }
 `;
 
 const MenuItem = styled.button<{ $isActive?: boolean }>`
     ${tw`flex items-center gap-2 w-full px-3 py-2 text-left text-sm transition-colors hover:text-reviactyl`};
+
+    [dir='rtl'] & {
+        text-align: right;
+    }
 
     ${(props) =>
         props.$isActive

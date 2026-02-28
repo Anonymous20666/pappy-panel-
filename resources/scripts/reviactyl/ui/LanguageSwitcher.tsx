@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import updateAccountLanguage from '@/api/account/updateAccountLanguage';
 import { ApplicationStore } from '@/state';
+import { applyDocumentDirection } from '@/lib/rtl';
 
 interface LanguageInfo {
     name: string;
@@ -68,6 +69,14 @@ export const LocaleLoader = () => {
             i18n.changeLanguage(userLanguage);
         }
     }, [userLanguage]);
+
+    useEffect(() => {
+        applyDocumentDirection(i18n.language);
+
+        const handleLanguageChanged = (lng: string) => applyDocumentDirection(lng);
+        i18n.on('languageChanged', handleLanguageChanged);
+        return () => i18n.off('languageChanged', handleLanguageChanged);
+    }, []);
 
     return null;
 };

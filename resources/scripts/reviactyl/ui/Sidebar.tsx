@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
@@ -20,7 +20,14 @@ interface Props {
 const Container = styled.div<{ $isOpen: boolean }>`
     ${tw`w-[225px] self-start m-2 border border-gray-600 rounded-ui bg-gray-700 text-white flex flex-col z-40 transition-transform duration-300 ease-in-out`};
 
-    ${({ $isOpen }) => ($isOpen ? tw`fixed top-16 left-0 translate-x-0` : tw`-translate-x-full hidden`)}
+    ${({ $isOpen }) =>
+        $isOpen
+            ? css`
+                  position: fixed;
+                  top: 4rem;
+                  inset-inline-start: 0;
+              `
+            : tw`hidden`}
 
     height: calc(100dvh - 64px);
     overflow-y: auto;
@@ -29,8 +36,7 @@ const Container = styled.div<{ $isOpen: boolean }>`
     @media (min-width: 1024px) {
         position: fixed;
         top: 64px;
-        left: 0;
-        transform: translateX(0);
+        inset-inline-start: 0;
         display: flex;
         height: calc(100dvh - 100px);
         overflow-y: auto;

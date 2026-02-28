@@ -14,11 +14,11 @@ return [
     'return' => 'Giriş Ekranına Dön',
 
     'social' => [
-        'or' => 'OR',
+        'or' => 'VEYA',
         'google' => 'Google',
         'discord' => 'Discord',
         'github' => 'GitHub',
-        'not_linked' => 'This account has not been linked to any :provider account. Please log in with your email and password first, then link your :provider account in the Account Settings page.',
+        'not_linked' => 'Bu hesap herhangi bir :provider hesabına bağlı değil. Lütfen önce e-posta ve parolanızla giriş yapın, ardından Hesap Ayarları sayfasından :provider hesabınızı bağlayın.',
     ],
 
     'forgot-password' => [
@@ -53,15 +53,15 @@ return [
     ],
 
     'register' => [
-        'no-match' => 'Your password does not match.',
-        'namefirst-label' => 'First Name',
-        'namelast-label' => 'Last Name',
-        'email-label' => 'Email',
-        'username-label' => 'UserName',
-        'password-label' => 'Password',
-        'min-length' => 'Passwords must be at least 8 characters in length.',
-        'confirm-label' => 'Confirm Password',
-        'label' => 'Register',
+        'no-match' => 'Parolanız eşleşmiyor.',
+        'namefirst-label' => 'Ad',
+        'namelast-label' => 'Soyad',
+        'email-label' => 'E-posta',
+        'username-label' => 'Kullanıcı Adı',
+        'password-label' => 'Parola',
+        'min-length' => 'Parolalar en az 8 karakter uzunluğunda olmalıdır.',
+        'confirm-label' => 'Parolayı Onayla',
+        'label' => 'Kayıt Ol',
     ],
     
     'failed' => 'Bu kimlik bilgileriyle eşleşen bir hesap bulunamadı.',

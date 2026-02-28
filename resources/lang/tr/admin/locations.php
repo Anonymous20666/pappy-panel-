@@ -6,27 +6,27 @@ return [
     'plural-label' => 'Konumlar',
 
     'section' => [
-        'title' => 'Location Details',
-        'description' => 'Define a location that nodes can be assigned to.',
+        'title' => 'Konum Detayları',
+        'description' => 'Düğümlerin atanabileceği bir konum tanımlayın.',
     ],
 
     'fields' => [
         'short' => [
-            'label' => 'Short Code',
+            'label' => 'Kısa Kod',
             'placeholder' => 'us.nyc.1',
-            'helper' => 'A short identifier for this location.',
+            'helper' => 'Bu konum için kısa bir tanımlayıcı.',
         ],
 
         'long' => [
-            'label' => 'Description',
+            'label' => 'Açıklama',
             'placeholder' => 'New York City, NY, USA',
-            'helper' => 'A longer description of this location.',
+            'helper' => 'Bu konumun daha uzun bir açıklaması.',
         ],
     ],
 
     'table' => [
         'id' => 'KİMLİK',
-        'short' => 'Short Code',
+        'short' => 'Kısa Kod',
         'long' => 'Açıklama',
         'nodes' => 'Düğümler',
         'servers' => 'Sunucular',
@@ -34,12 +34,12 @@ return [
     ],
 
     'actions' => [
-        'edit' => 'Edit',
+        'edit' => 'Düzenle',
         'delete' => 'Sil',
     ],
 
     'messages' => [
-        'cannot_delete_with_nodes' => 'Cannot delete a location with associated nodes.',
+        'cannot_delete_with_nodes' => 'İlişkili düğümlere sahip bir konum silinemez.',
     ],
 
 ];

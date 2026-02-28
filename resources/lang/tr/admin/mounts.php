@@ -2,7 +2,7 @@
 
 return [
 
-    'label' => 'Mount',
+    'label' => 'Bağlama Noktası',
     'plural_label' => 'Bağlama Noktaları',
 
     'sections' => [
@@ -11,29 +11,29 @@ return [
 
     'fields' => [
         'name' => 'İsim',
-        'description' => 'Description',
-        'source' => 'Source Path',
-        'target' => 'Target Path',
+        'description' => 'Açıklama',
+        'source' => 'Kaynak Yolu',
+        'target' => 'Hedef Yolu',
         'read_only' => 'Salt Okunur',
-        'user_mountable' => 'User Mountable',
+        'user_mountable' => 'Kullanıcı Bağlayabilir',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to separate this mount from another.',
-        'description' => 'A longer, human-readable description of this mount.',
-        'source' => 'The file path on the host machine to mount to containers.',
-        'target' => 'The path inside the container to mount this as.',
-        'read_only' => 'If set, the mount will be read-only inside the container.',
-        'user_mountable' => 'If set, users will be able to mount this to their servers.',
+        'name' => 'Bu bağlama noktasını dğerlerinden ayırmak için kullanılan benzersiz bir ad.',
+        'description' => 'Bu bağlama noktasının daha uzun, okunabilir açıklaması.',
+        'source' => 'Konteynerlere bağlanacak ana makinedeki dosya yolu.',
+        'target' => 'Bunun konteyner içinde bağlanacağı yol.',
+        'read_only' => 'Ayarlanırsa, bağlama noktası konteyner içinde salt okunur olur.',
+        'user_mountable' => 'Ayarlanırsa, kullanıcılar bunu sunucularına bağlayabilecekler.',
     ],
 
     'columns' => [
         'id' => 'KİMLİK',
         'name' => 'İsim',
-        'source' => 'Source',
-        'target' => 'Target',
+        'source' => 'Kaynak',
+        'target' => 'Hedef',
         'read_only' => 'Salt Okunur',
-        'user_mountable' => 'User Mountable',
+        'user_mountable' => 'Kullanıcı Bağlayabilir',
     ],
 
 ];

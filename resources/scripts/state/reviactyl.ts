@@ -5,6 +5,12 @@ export interface ReviactylAlert {
     message: string;
 }
 
+export interface ReviactylSidebarButton {
+    label: string;
+    url: string;
+    newTab: boolean;
+}
+
 export interface ReviactylSettings {
     customCopyright: boolean;
     copyright: string;
@@ -16,6 +22,7 @@ export interface ReviactylSettings {
     alertType: string;
     alertMessage: string;
     alerts?: ReviactylAlert[];
+    sidebarButtons?: ReviactylSidebarButton[];
     statusCardLink: string;
     supportCardLink: string;
     billingCardLink: string;

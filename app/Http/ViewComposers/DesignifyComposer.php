@@ -153,6 +153,7 @@ class DesignifyComposer
             'theme7' => $this->Theme7,
             'themeSelector' => config('designify.themeSelector', false),
             'sidebarLogout' => config('designify.sidebarLogout', false),
+            'sidebarButtons' => $this->getSidebarButtonsConfig(),
             'background' => config('designify.background') ?? 'none',
             'radius' => config('designify.radius') ?? '15px',
             'allocationBlur' => config('designify.allocationBlur', true),
@@ -206,6 +207,43 @@ class DesignifyComposer
         }
 
         return empty($normalized) ? $fallback : $normalized;
+    }
+
+    private function getSidebarButtonsConfig(): array
+    {
+        $buttons = config('designify.sidebarButtons');
+
+        if (is_string($buttons)) {
+            $decoded = json_decode($buttons, true);
+            $buttons = is_array($decoded) ? $decoded : [];
+        }
+
+        if (!is_array($buttons)) {
+            return [];
+        }
+
+        $normalized = [];
+        foreach ($buttons as $button) {
+            if (!is_array($button)) {
+                continue;
+            }
+
+            $label = trim((string) ($button['label'] ?? ''));
+            $url = trim((string) ($button['url'] ?? ''));
+            $newTab = filter_var($button['newTab'] ?? false, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? false;
+
+            if ($label === '' || $url === '') {
+                continue;
+            }
+
+            $normalized[] = [
+                'label' => $label,
+                'url' => $url,
+                'newTab' => $newTab,
+            ];
+        }
+
+        return $normalized;
     }
 
     public function compose(View $view): void

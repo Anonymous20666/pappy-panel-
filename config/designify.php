@@ -25,6 +25,7 @@ return [
 
     'themeSelector' => true,
     'sidebarLogout' => false,
+    'sidebarButtons' => '[]',
     'background' => 'none',
     'radius' => '15px',
     'allocationBlur' => true,

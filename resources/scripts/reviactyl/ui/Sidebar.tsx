@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
+import { ReviactylSidebarButton } from '@/state/reviactyl';
 import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
 import { FaHouse } from 'react-icons/fa6';
@@ -89,6 +90,15 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const sidebarLogout = useStoreState((state) => state.reviactyl.data?.sidebarLogout);
+    const customSidebarButtons = useStoreState((state) => state.reviactyl.data?.sidebarButtons ?? []);
+
+    const normalizedSidebarButtons = (Array.isArray(customSidebarButtons) ? customSidebarButtons : []).filter(
+        (button): button is ReviactylSidebarButton =>
+            typeof button?.label === 'string' &&
+            button.label.trim().length > 0 &&
+            typeof button?.url === 'string' &&
+            button.url.trim().length > 0
+    );
 
     const onLogout = () => {
         setIsLoggingOut(true);
@@ -136,7 +146,25 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
                         </NavLink>
                     </SideNavigation>
                 )}
-                {children && <SideNavigation>{children}</SideNavigation>}
+                {(children || (dashboard && normalizedSidebarButtons.length > 0)) && (
+                    <SideNavigation>
+                        {children}
+                        {dashboard &&
+                            normalizedSidebarButtons.map((button, index) => (
+                                <a
+                                    key={`${button.url}-${index}`}
+                                    href={button.url}
+                                    target={button.newTab === true ? '_blank' : undefined}
+                                    rel={button.newTab === true ? 'noopener noreferrer' : undefined}
+                                >
+                                    <span className='flex items-center'>
+                                        <ExternalLinkIcon className='w-4 h-4 mr-2' />
+                                        {button.label}
+                                    </span>
+                                </a>
+                            ))}
+                    </SideNavigation>
+                )}
             </SidebarContent>
 
             {sidebarLogout && (

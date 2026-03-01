@@ -3,30 +3,30 @@
 return [
     
     'label' => 'Nest',
-    'plural_label' => 'Nests',
+    'plural_label' => 'Nestler',
 
     'sections' => [
-        'configuration' => 'Nest Configuration',
+        'configuration' => 'Nest Yapılandırması',
     ],
 
     'fields' => [
-        'name' => 'Name',
-        'author' => 'Author',
-        'description' => 'Description',
+        'name' => 'İsim',
+        'author' => 'Yazar',
+        'description' => 'Açıklama',
     ],
 
     'helpers' => [
-        'name' => 'A unique name used to identify this nest.',
-        'author' => 'The author of this nest. Must be a valid email.',
-        'description' => 'A description of this nest.',
+        'name' => 'Bu nest`i tanımlamak için kullanılan benzersiz bir ad.',
+        'author' => 'Bu nest`in yazarı. Geçerli bir e-posta olmalıdır.',
+        'description' => 'Bu nest`in açıklaması.',
     ],
 
     'columns' => [
-        'id' => 'ID',
-        'name' => 'Name',
-        'author' => 'Author',
-        'eggs' => 'Eggs',
-        'servers' => 'Servers',
+        'id' => 'KİMLİK',
+        'name' => 'İsim',
+        'author' => 'Yazar',
+        'eggs' => 'Eggler',
+        'servers' => 'Sunucular',
     ],
     
     'notices' => [

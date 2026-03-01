@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'home' => 'Home',
+    'home' => 'Accueil',
     'administration' => [
         'title' => 'Administration',
         'dashboard' => 'Dashboard',
         'settings' => 'Paramètres',
         'api' => 'API',
-        'activity_log' => 'Activity Log',
-        'user_activity_metrics' => 'User Activity Metrics',
-        'no_data' => 'No data available.',
+        'activity_log' => 'Journal d’activité',
+        'user_activity_metrics' => 'Indicateurs d’activité des utilisateurs',
+        'no_data' => 'Aucune donnée disponible.',
     ],
     'management' => [
         'title' => 'Gestion',

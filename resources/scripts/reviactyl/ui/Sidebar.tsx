@@ -124,9 +124,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
                 </div>
             </ProfileHeader>
 
-            <SidebarContent>
-                {children && <SideNavigation>{children}</SideNavigation>}
-            </SidebarContent>
+            <SidebarContent>{children ? <SideNavigation>{children}</SideNavigation> : null}</SidebarContent>
 
             {sidebarLogout && (
                 <SidebarFooter>

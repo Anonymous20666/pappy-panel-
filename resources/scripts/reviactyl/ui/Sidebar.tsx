@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
-import { ReviactylSidebarButton } from '@/state/reviactyl';
 import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
-import { FaHouse } from 'react-icons/fa6';
 import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Props {
     isOpen?: boolean;
     children?: React.ReactNode;
-    dashboard?: boolean;
 }
 
 const Container = styled.div<{ $isOpen: boolean }>`
@@ -82,7 +79,7 @@ export const SideNavigation = styled.div`
     }
 `;
 
-const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false, dashboard = false }, ref) => {
+const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false }, ref) => {
     const { t } = useTranslation('routes');
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
@@ -90,15 +87,6 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const sidebarLogout = useStoreState((state) => state.reviactyl.data?.sidebarLogout);
-    const customSidebarButtons = useStoreState((state) => state.reviactyl.data?.sidebarButtons ?? []);
-
-    const normalizedSidebarButtons = (Array.isArray(customSidebarButtons) ? customSidebarButtons : []).filter(
-        (button): button is ReviactylSidebarButton =>
-            typeof button?.label === 'string' &&
-            button.label.trim().length > 0 &&
-            typeof button?.url === 'string' &&
-            button.url.trim().length > 0
-    );
 
     const onLogout = () => {
         setIsLoggingOut(true);
@@ -137,34 +125,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
             </ProfileHeader>
 
             <SidebarContent>
-                {dashboard && (
-                    <SideNavigation>
-                        <NavLink className='mt-2' to='/' end>
-                            <span className='flex items-center'>
-                                <FaHouse className='w-5 mr-1' /> {t('index.dashboard')}
-                            </span>
-                        </NavLink>
-                    </SideNavigation>
-                )}
-                {(children || (dashboard && normalizedSidebarButtons.length > 0)) && (
-                    <SideNavigation>
-                        {children}
-                        {dashboard &&
-                            normalizedSidebarButtons.map((button, index) => (
-                                <a
-                                    key={`${button.url}-${index}`}
-                                    href={button.url}
-                                    target={button.newTab === true ? '_blank' : undefined}
-                                    rel={button.newTab === true ? 'noopener noreferrer' : undefined}
-                                >
-                                    <span className='flex items-center'>
-                                        <ExternalLinkIcon className='w-4 h-4 mr-2' />
-                                        {button.label}
-                                    </span>
-                                </a>
-                            ))}
-                    </SideNavigation>
-                )}
+                {children && <SideNavigation>{children}</SideNavigation>}
             </SidebarContent>
 
             {sidebarLogout && (

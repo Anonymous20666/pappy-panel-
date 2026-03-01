@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title' => 'User',
+    'title' => 'Kullanıcı',
     'exceptions' => [
         'delete_self' => 'Kendi hesabınızı silemezsiniz.',
         'user_has_servers' => 'Hesabına bağlı aktif sunucuları olan bir kullanıcıyı silemezsiniz. Lütfen devam etmeden önce sunucularını silin.',
@@ -11,18 +11,18 @@ return [
         'account_updated' => 'Hesap başarıyla güncellendi.',
     ],
     'details' => [
-        'account_details' => 'Account Details',
-        'external_id' => 'External ID',
-        'username' => 'Username',
-        'email' => 'Email Address',
-        'first_name' => 'First Name',
-        'last_name' => 'Last Name',
-        'language' => 'Language',
-        'password' => 'Password',
-        'password_confirmation' => 'Confirm Password',
-        'root_admin' => 'Root Administrator',
-        'root_admin_desc' => 'This user will have full access to all servers and settings on the system.',
-        'privileges' => 'Privileges',
-        'admin_status' => 'Admin Status',
+        'account_details' => 'Hesap Detayları',
+        'external_id' => 'Harici Kimlik',
+        'username' => 'Kullanıcı Adı',
+        'email' => 'E-posta Adresi',
+        'first_name' => 'Ad',
+        'last_name' => 'Soyad',
+        'language' => 'Dil',
+        'password' => 'Parola',
+        'password_confirmation' => 'Parolayı Onayla',
+        'root_admin' => 'Kök Yönetici (Root)',
+        'root_admin_desc' => 'Bu kullanıcı, sistemdeki tüm sunuculara ve ayarlara tam erişime sahip olacaktır.',
+        'privileges' => 'Ayrıcalıklar',
+        'admin_status' => 'Yönetici Durumu',
     ],
 ];

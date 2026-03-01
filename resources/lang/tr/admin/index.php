@@ -15,8 +15,8 @@ return [
 
     'help-btn' => 'Yardım Al',
     'docs-btn' => 'Dokümantasyon',
-    'metrics-header' => 'User Activity Metrics',
-    'most-active-country' => 'Most Active Country',
-    'activity-description' => 'Based on recent login activity.',
-    'no_activity' => 'There is no recent activity to display.',
+    'metrics-header' => 'Kullanıcı Etkinlik Metrikleri',
+    'most-active-country' => 'En Aktif Ülke',
+    'activity-description' => 'Son giriş etkinliğine dayanmaktadır.',
+    'no_activity' => 'Görüntülenecek son etkinlik bulunmuyor.',
 ];

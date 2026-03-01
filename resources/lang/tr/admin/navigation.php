@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'home' => 'Home',
+    'home' => 'Ana Sayfa',
     'administration' => [
         'title' => 'Yönetim',
         'dashboard' => 'Panel',
         'settings' => 'Ayarlar',
         'api' => 'Uygulama API',
-        'activity_log' => 'Activity Log',
-        'user_activity_metrics' => 'User Activity Metrics',
-        'no_data' => 'No data available.',
+        'activity_log' => 'Etkinlik Günlüğü',
+        'user_activity_metrics' => 'Kullanıcı Etkinlik Metrikleri',
+        'no_data' => 'Veri mevcut değil.',
     ],
     'management' => [
         'title' => 'Kaynak Yönetimi',

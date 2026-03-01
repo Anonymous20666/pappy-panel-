@@ -9,16 +9,16 @@ return [
 
     'sections' => [
         'host_details' => [
-            'title' => 'Host Details',
-            'description' => 'Configure the database host connection settings.',
+            'title' => 'Sunucu Detayları',
+            'description' => 'Veritabanı sunucusu bağlantı ayarlarını yapılandırın.',
         ],
 
         'authentication' => [
-            'title' => 'Authentication',
+            'title' => 'Kimlik Doğrulama',
         ],
 
         'linked_node' => [
-            'title' => 'Linked Node',
+            'title' => 'Bağlı Düğüm',
         ],
     ],
 
@@ -29,12 +29,12 @@ return [
     ],
 
     'helpers' => [
-        'host' => 'The hostname or IP address of the database server.',
-        'linked_node' => 'Optional. Link this host to a specific node.',
+        'host' => 'Veritabanı sunucusunun ana bilgisayar adı veya IP adresi.',
+        'linked_node' => 'İsteğe bağlı. Bu sunucuyu belirli bir düğüme bağlayın.',
     ],
 
     'fields' => [
-        'linked_node' => 'Linked Node',
+        'linked_node' => 'Bağlı Düğüm',
     ],
 
     'columns' => [
@@ -43,18 +43,18 @@ return [
         'host' => 'Host',
         'port' => 'Port',
         'username' => 'Kullanıcı Adı',
-        'linked_node' => 'Linked Node',
+        'linked_node' => 'Bağlı Düğüm',
         'databases' => 'Veritabanları',
         'created' => 'Oluşturuldu',
     ],
 
     'actions' => [
-        'edit' => 'Edit',
+        'edit' => 'Düzenle',
         'delete' => 'Sil',
     ],
 
     'errors' => [
-        'cannot_delete' => 'Cannot delete a database host with associated databases.',
+        'cannot_delete' => 'İlişkili veritabanlarına sahip bir veritabanı sunucusu silinemez.',
     ],
 
 ];

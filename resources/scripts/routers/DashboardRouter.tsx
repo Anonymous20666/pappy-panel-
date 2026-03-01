@@ -63,15 +63,17 @@ const DashboardNavigation = () => {
                     </span>
                 </Navigate>
 
-                {routes.account
-                    .filter((route) => !!route.name)
-                    .map((route) => (
-                        <NavItem key={route.name} route={route} />
-                    ))}
+                <div className='mt-2'>
+                    {routes.account
+                        .filter((route) => !!route.name)
+                        .map((route) => (
+                            <NavItem key={route.name} route={route} />
+                        ))}
+                </div>
             </div>
 
             {normalizedSidebarButtons.length > 0 && (
-                <div>
+                <div className='mt-2'>
                     <span className='label'>MORE</span>
                     {normalizedSidebarButtons.map((button, index) => (
                         <a

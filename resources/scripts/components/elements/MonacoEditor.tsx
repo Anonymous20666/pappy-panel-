@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Editor, { Monaco } from '@monaco-editor/react';
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react';
+import type { Monaco } from '@monaco-editor/react';
 import type { editor } from 'monaco-editor';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import modes from '@/modes';
+import Spinner from './Spinner';
+
+const Editor = lazy(() => import('@monaco-editor/react'));
 
 const EditorContainer = styled.div`
     min-height: 16rem;
@@ -107,16 +110,16 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
         setMonacoLanguage(mimeToMonacoLanguage(mode));
     }, [mode]);
 
-    const handleEditorDidMount = (editor: editor.IStandaloneCodeEditor, monaco: Monaco) => {
-        editorRef.current = editor;
+    const handleEditorDidMount = (editorInstance: editor.IStandaloneCodeEditor, monaco: Monaco) => {
+        editorRef.current = editorInstance;
 
-        editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+        editorInstance.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
             onContentSaved();
         });
 
-        fetchContent(() => Promise.resolve(editor.getValue()));
+        fetchContent(() => Promise.resolve(editorInstance.getValue()));
 
-        editor.focus();
+        editorInstance.focus();
     };
 
     useEffect(() => {
@@ -129,34 +132,37 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
 
     return (
         <EditorContainer style={style}>
-            <Editor
-                height='100%'
-                language={monacoLanguage}
-                value={initialContent || ''}
-                theme='vs-dark'
-                onMount={handleEditorDidMount}
-                options={{
-                    fontSize: 14,
-                    lineHeight: 22,
-                    minimap: { enabled: true },
-                    scrollBeyondLastLine: true,
-                    automaticLayout: true,
-                    tabSize: 4,
-                    insertSpaces: true,
-                    wordWrap: 'on',
-                    lineNumbers: 'on',
-                    folding: true,
-                    fixedOverflowWidgets: true,
-                    scrollbar: {
-                        verticalScrollbarSize: 10,
-                        horizontalScrollbarSize: 10,
-                    },
-                    bracketPairColorization: {
-                        enabled: true,
-                    },
-                    matchBrackets: 'always',
-                }}
-            />
+            <Suspense fallback={<Spinner centered size={Spinner.Size.LARGE} />}>
+                <Editor
+                    height='100%'
+                    language={monacoLanguage}
+                    value={initialContent || ''}
+                    theme='vs-dark'
+                    onMount={handleEditorDidMount}
+                    loading={<Spinner centered size={Spinner.Size.LARGE} />}
+                    options={{
+                        fontSize: 14,
+                        lineHeight: 22,
+                        minimap: { enabled: true },
+                        scrollBeyondLastLine: true,
+                        automaticLayout: true,
+                        tabSize: 4,
+                        insertSpaces: true,
+                        wordWrap: 'on',
+                        lineNumbers: 'on',
+                        folding: true,
+                        fixedOverflowWidgets: true,
+                        scrollbar: {
+                            verticalScrollbarSize: 10,
+                            horizontalScrollbarSize: 10,
+                        },
+                        bracketPairColorization: {
+                            enabled: true,
+                        },
+                        matchBrackets: 'always',
+                    }}
+                />
+            </Suspense>
         </EditorContainer>
     );
 };

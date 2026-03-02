@@ -17,7 +17,7 @@ import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
 import Sidebar from '@/reviactyl/ui/Sidebar';
-import { XIcon, MenuIcon } from '@heroicons/react/solid';
+import { XIcon, MenuIcon, ExternalLinkIcon } from '@heroicons/react/solid';
 import { LogoContainer } from '@/reviactyl/ui/LogoContainer';
 import tw from 'twin.macro';
 import { RouterContainer } from '@/reviactyl/ui/RouterContainer';
@@ -28,6 +28,7 @@ import Announcement from '@/reviactyl/ui/Announcement';
 import MaintenanceAlert from '@/reviactyl/ui/MaintenanceAlert';
 import Maintenance from '@/reviactyl/ui/Maintenance';
 import { useTranslation } from 'react-i18next';
+import { ReviactylSidebarButton } from '@/state/reviactyl';
 
 interface NavItemProps {
     route: any;
@@ -65,6 +66,14 @@ const NavItem = ({ route }: NavItemProps) => {
 
 const ServerNavigation = () => {
     const { t } = useTranslation('server/index');
+    const customSidebarButtons = useStoreState((state) => state.reviactyl.data?.sidebarButtons ?? []);
+    const normalizedSidebarButtons = (Array.isArray(customSidebarButtons) ? customSidebarButtons : []).filter(
+        (button): button is ReviactylSidebarButton =>
+            typeof button?.label === 'string' &&
+            button.label.trim().length > 0 &&
+            typeof button?.url === 'string' &&
+            button.url.trim().length > 0
+    );
 
     return (
         <>
@@ -91,6 +100,25 @@ const ServerNavigation = () => {
                         ))}
                 </div>
             ))}
+
+            {normalizedSidebarButtons.length > 0 && (
+                <div>
+                    <span className='label'>MORE</span>
+                    {normalizedSidebarButtons.map((button, index) => (
+                        <a
+                            key={`${button.url}-${index}`}
+                            href={button.url}
+                            target={button.newTab === true ? '_blank' : undefined}
+                            rel={button.newTab === true ? 'noopener noreferrer' : undefined}
+                        >
+                            <span className='flex items-center'>
+                                <ExternalLinkIcon className='w-4 h-4 mr-2' />
+                                {button.label}
+                            </span>
+                        </a>
+                    ))}
+                </div>
+            )}
         </>
     );
 };

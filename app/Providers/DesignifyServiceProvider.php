@@ -37,6 +37,7 @@ class DesignifyServiceProvider extends ServiceProvider
         "designify:color900",
         "designify:themeSelector",
         "designify:sidebarLogout",
+        "designify:sidebarButtons",
         "designify:background",
         "designify:radius",
         "designify:allocationBlur",

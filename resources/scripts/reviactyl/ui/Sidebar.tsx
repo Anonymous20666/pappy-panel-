@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Avatar from '@/reviactyl/ui/Avatar';
 import { useStoreState } from 'easy-peasy';
 import { ApplicationStore } from '@/state';
 import { ExternalLinkIcon, LogoutIcon } from '@heroicons/react/solid';
 import { useTranslation } from 'react-i18next';
-import { FaHouse } from 'react-icons/fa6';
 import http from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 
 interface Props {
     isOpen?: boolean;
     children?: React.ReactNode;
-    dashboard?: boolean;
 }
 
 const Container = styled.div<{ $isOpen: boolean }>`
@@ -81,7 +79,7 @@ export const SideNavigation = styled.div`
     }
 `;
 
-const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false, dashboard = false }, ref) => {
+const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = false }, ref) => {
     const { t } = useTranslation('routes');
     const nameFirst = useStoreState((state) => state.user.data?.name_first);
     const nameLast = useStoreState((state) => state.user.data?.name_last);
@@ -126,18 +124,7 @@ const Sidebar = React.forwardRef<HTMLDivElement, Props>(({ children, isOpen = fa
                 </div>
             </ProfileHeader>
 
-            <SidebarContent>
-                {dashboard && (
-                    <SideNavigation>
-                        <NavLink className='mt-2' to='/' end>
-                            <span className='flex items-center'>
-                                <FaHouse className='w-5 mr-1' /> {t('index.dashboard')}
-                            </span>
-                        </NavLink>
-                    </SideNavigation>
-                )}
-                {children && <SideNavigation>{children}</SideNavigation>}
-            </SidebarContent>
+            <SidebarContent>{children ? <SideNavigation>{children}</SideNavigation> : null}</SidebarContent>
 
             {sidebarLogout && (
                 <SidebarFooter>

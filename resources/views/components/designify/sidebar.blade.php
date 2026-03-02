@@ -30,6 +30,11 @@
          icon="fa-solid fa-triangle-exclamation"
          label="Error Pages"
          :active="str_starts_with(Route::currentRouteName(),'admin.designify.errors')" />
+      <x-designify.tab-button
+         :route="route('admin.designify.sidebar-buttons')"
+         icon="fa-solid fa-link"
+         label="Sidebar Buttons"
+         :active="str_starts_with(Route::currentRouteName(),'admin.designify.sidebar-buttons')" />
       @include('partials.admin.designify.save')
    </div>
    <div class="flex-1 overflow-y-auto mt-2 pr-1 text-white p-1">

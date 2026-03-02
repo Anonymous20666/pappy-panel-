@@ -261,5 +261,7 @@ Route::group(['prefix' => 'designify'], function () {
     Route::patch('/site', [Admin\Designify\SiteController::class, 'update']);
     Route::get('/errors', [Admin\Designify\ErrorPagesController::class, 'index'])->name('admin.designify.errors');
     Route::patch('/errors', [Admin\Designify\ErrorPagesController::class, 'update']);
+    Route::get('/sidebar-buttons', [Admin\Designify\SidebarButtonsController::class, 'index'])->name('admin.designify.sidebar-buttons');
+    Route::patch('/sidebar-buttons', [Admin\Designify\SidebarButtonsController::class, 'update']);
     Route::match(['get', 'post', 'patch'], '/errors/preview/{code}', [Admin\Designify\ErrorPagesController::class, 'preview'])->name('admin.designify.errors.preview');
 });

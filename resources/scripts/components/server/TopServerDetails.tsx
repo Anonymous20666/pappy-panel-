@@ -123,7 +123,7 @@ const TopServerDetails = () => {
                     {showStats ? t('hide-stats') : t('show-stats')}
                 </button>
             </div>
-            <StatContainer className={`${showStats ? '' : 'hidden'} flex`}>
+            <StatContainer className={`${showStats ? 'flex' : 'hidden'} sm:flex`}>
                 <StatBlock className='bg-gray-700 border-gray-600'>
                     <span className='w-5 text-gray-300'>
                         <FaGlobe />

@@ -4,12 +4,12 @@
          <span class="text-base text-white/50 bg-zinc-900 px-5 rounded-lg mr-2">
          Preview
          </span>
-         @if(Route::currentRouteName() === 'admin.designify.errors')
+         @if(Route::currentRouteName() === 'designify.errors')
             <div class="flex items-center space-x-1 bg-zinc-900 p-1 rounded-lg border border-zinc-700">
                <button onclick="changePreview('/')" class="error-preview-btn active px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="default">Dashboard</button>
-               <button onclick="changePreview('{{ route('admin.designify.errors.preview', 403) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="403">403</button>
-               <button onclick="changePreview('{{ route('admin.designify.errors.preview', 404) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="404">404</button>
-               <button onclick="changePreview('{{ route('admin.designify.errors.preview', 500) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="500">500</button>
+               <button onclick="changePreview('{{ route('designify.errors.preview', 403) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="403">403</button>
+               <button onclick="changePreview('{{ route('designify.errors.preview', 404) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="404">404</button>
+               <button onclick="changePreview('{{ route('designify.errors.preview', 500) }}')" class="error-preview-btn px-3 py-1 rounded-md text-xs font-bold text-white/50 hover:text-white transition-all" data-code="500">500</button>
             </div>
          @endif
       </div>

@@ -23,6 +23,6 @@ class Designify extends Page
 
     public function mount(): void
     {
-        redirect()->route('admin.designify');
+        redirect()->route('designify.index');
     }
 }

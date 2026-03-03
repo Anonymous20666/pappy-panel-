@@ -1,41 +1,41 @@
 <aside class="w-80 mr-4 flex flex-col text-white">
    <div class="flex items-center space-x-1 bg-zinc-800 p-1 rounded-lg border border-zinc-700">
       <x-designify.tab-button
-         :route="route('admin.designify.general')"
+         :route="route('designify.general')"
          icon="fa-solid fa-bolt"
          label="General Options"
-         :active="Route::currentRouteName() === 'admin.designify.general'" />
+         :active="Route::currentRouteName() === 'designify.general'" />
       <x-designify.tab-button
-         :route="route('admin.designify.colors')"
+         :route="route('designify.colors')"
          icon="fa-solid fa-palette"
          label="Color Options"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.colors')" />
+         :active="str_starts_with(Route::currentRouteName(),'designify.colors')" />
       <x-designify.tab-button
-         :route="route('admin.designify.looks')"
+         :route="route('designify.looks')"
          icon="fa-solid fa-swatchbook"
          label="Look 'N Feel"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.looks')" />
+         :active="str_starts_with(Route::currentRouteName(),'designify.looks')" />
       <x-designify.tab-button
-         :route="route('admin.designify.alerts')"
+         :route="route('designify.alerts')"
          icon="fa-solid fa-bullhorn"
          label="Alerts"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.alerts')" />
+         :active="str_starts_with(Route::currentRouteName(),'designify.alerts')" />
       <x-designify.tab-button
-         :route="route('admin.designify.site')"
+         :route="route('designify.site')"
          icon="fa-solid fa-gear"
          label="Site Meta Settings"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.site')" />
+         :active="str_starts_with(Route::currentRouteName(),'designify.site')" />
       <x-designify.tab-button
-         :route="route('admin.designify.errors')"
+         :route="route('designify.errors')"
          icon="fa-solid fa-triangle-exclamation"
          label="Error Pages"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.errors')" />
+         :active="str_starts_with(Route::currentRouteName(),'designify.errors')" />
       <x-designify.tab-button
-         :route="route('admin.designify.sidebar-buttons')"
+         :route="route('designify.sidebar-buttons')"
          icon="fa-solid fa-link"
          label="Sidebar Buttons"
-         :active="str_starts_with(Route::currentRouteName(),'admin.designify.sidebar-buttons')" />
-      @include('partials.admin.designify.save')
+         :active="str_starts_with(Route::currentRouteName(),'designify.sidebar-buttons')" />
+      @include('partials.designify.save')
    </div>
    <div class="flex-1 overflow-y-auto mt-2 pr-1 text-white p-1">
       @if($errors->any())

@@ -231,37 +231,3 @@ Route::group(['prefix' => 'nests'], function () {
     Route::delete('/egg/{egg:id}', [Admin\Nests\EggController::class, 'destroy']);
     Route::delete('/egg/{egg:id}/variables/{variable:id}', [Admin\Nests\EggVariableController::class, 'destroy']);
 });
-
-/*
-|--------------------------------------------------------------------------
-| Reviactyl Controller Routes
-|--------------------------------------------------------------------------
-|
-| Endpoint: /panel/designify
-|
-*/
-Route::group(['prefix' => 'designify'], function () {
-    Route::view('/', 'admin.designify.index')->name('admin.designify');
-
-    Route::get('/general', [Admin\Designify\GeneralController::class, 'index'])->name('admin.designify.general');
-    Route::patch('/general', [Admin\Designify\GeneralController::class, 'update']);
-
-    Route::post('/reset', [Admin\Designify\DesignifyController::class, 'resetToDefaults'])->name('admin.designify.reset');
-
-    Route::get('/colors', [Admin\Designify\ColorsController::class, 'index'])->name('admin.designify.colors');
-    Route::patch('/colors', [Admin\Designify\ColorsController::class, 'update']);
-
-    Route::get('/looks', [Admin\Designify\LookNFeelController::class, 'index'])->name('admin.designify.looks');
-    Route::patch('/looks', [Admin\Designify\LookNFeelController::class, 'update']);
-
-    Route::get('/alerts', [Admin\Designify\AlertController::class, 'index'])->name('admin.designify.alerts');
-    Route::patch('/alerts', [Admin\Designify\AlertController::class, 'update']);
-
-    Route::get('/site', [Admin\Designify\SiteController::class, 'index'])->name('admin.designify.site');
-    Route::patch('/site', [Admin\Designify\SiteController::class, 'update']);
-    Route::get('/errors', [Admin\Designify\ErrorPagesController::class, 'index'])->name('admin.designify.errors');
-    Route::patch('/errors', [Admin\Designify\ErrorPagesController::class, 'update']);
-    Route::get('/sidebar-buttons', [Admin\Designify\SidebarButtonsController::class, 'index'])->name('admin.designify.sidebar-buttons');
-    Route::patch('/sidebar-buttons', [Admin\Designify\SidebarButtonsController::class, 'update']);
-    Route::match(['get', 'post', 'patch'], '/errors/preview/{code}', [Admin\Designify\ErrorPagesController::class, 'preview'])->name('admin.designify.errors.preview');
-});

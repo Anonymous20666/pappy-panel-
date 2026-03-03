@@ -1,4 +1,4 @@
-<form id="resetForm" action="{{ route('admin.designify.reset') }}" method="POST">
+<form id="resetForm" action="{{ route('designify.reset') }}" method="POST">
     @csrf
     <button type="button"
         onclick="openModal('resetModal')"

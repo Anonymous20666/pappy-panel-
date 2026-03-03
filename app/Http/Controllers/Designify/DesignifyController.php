@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Designify;
+namespace App\Http\Controllers\Designify;
 
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
@@ -29,6 +29,6 @@ class DesignifyController extends Controller
 
         $this->alert->success('All settings have been reset to defaults.')->flash();
 
-        return redirect()->route('admin.designify');
+        return redirect()->route('designify.index');
     }
 }

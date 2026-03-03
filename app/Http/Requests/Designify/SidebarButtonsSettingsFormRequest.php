@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin\Designify;
+namespace App\Http\Requests\Designify;
 
 use Illuminate\Support\Collection;
 use App\Http\Requests\Admin\AdminFormRequest;

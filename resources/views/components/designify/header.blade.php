@@ -24,7 +24,7 @@
          </a>
       </div>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end gap-2">
-         @include('partials.admin.designify.reset')
+         @include('partials.designify.reset')
          <a href="{{ route('account') }}"
             class="flex items-center space-x-2 md:space-x-3 px-2 md:px-4 py-1.5 md:py-2 bg-zinc-800/50 hover:bg-zinc-700/50 border border-zinc-700 rounded-lg transition-all duration-200 group">
             <img src="https://www.gravatar.com/avatar/{{ md5(strtolower(Auth::user()->email)) }}?s=160"

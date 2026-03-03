@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Designify;
+namespace App\Http\Controllers\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -10,12 +10,12 @@ use Illuminate\View\Factory as ViewFactory;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use App\Contracts\Repository\SettingsRepositoryInterface;
-use App\Http\Requests\Admin\Designify\LookNFeelSettingsFormRequest;
+use App\Http\Requests\Designify\AlertSettingsFormRequest;
 
-class LookNFeelController extends Controller
+class AlertController extends Controller
 {
     /**
-     * LookNFeelController constructor.
+     * AlertController constructor.
      */
     public function __construct(
         private AlertsMessageBag $alert,
@@ -31,22 +31,22 @@ class LookNFeelController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.looks');
+        return $this->view->make('designify.alerts');
     }
 
     /**
      * @throws \App\Exceptions\Model\DataValidationException
      * @throws \App\Exceptions\Repository\RecordNotFoundException
      */
-    public function update(LookNFeelSettingsFormRequest $request): RedirectResponse
+    public function update(AlertSettingsFormRequest $request): RedirectResponse
     {
         foreach ($request->normalize() as $key => $value) {
             $this->settings->set('settings::' . $key, $value);
         }
 
         $this->kernel->call('queue:restart');
-        $this->alert->success('Looks settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
+        $this->alert->success('Alert settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
 
-        return redirect()->route('admin.designify.looks');
+        return redirect()->route('designify.alerts');
     }
 }

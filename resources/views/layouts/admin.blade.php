@@ -97,8 +97,8 @@
                         </a>
                     </li>
                     <li class="header">Reviactyl</li>
-                    <li class="{{ Route::currentRouteName() !== 'admin.designify' ?: 'active' }}">
-                        <a href="{{ route('admin.designify') }}">
+                    <li class="{{ Route::currentRouteName() !== 'designify.index' ?: 'active' }}">
+                        <a href="{{ route('designify.index') }}">
                             <i class="RiPaintBrush"></i> <span>Designify</span>
                         </a>
                     </li>

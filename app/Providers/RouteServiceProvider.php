@@ -44,6 +44,10 @@ class RouteServiceProvider extends ServiceProvider
                     ->prefix('/panel') // Legacy Admin Route
                     ->group(base_path('routes/admin.php'));
 
+                Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
+                    ->prefix('/designify')
+                    ->group(base_path('routes/designify.php'));
+
                 Route::middleware('guest')->prefix('/auth')->group(base_path('routes/auth.php'));
             });
 

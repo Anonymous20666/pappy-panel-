@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Designify;
+namespace App\Http\Controllers\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -10,7 +10,7 @@ use Illuminate\View\Factory as ViewFactory;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use App\Contracts\Repository\SettingsRepositoryInterface;
-use App\Http\Requests\Admin\Designify\SidebarButtonsSettingsFormRequest;
+use App\Http\Requests\Designify\SidebarButtonsSettingsFormRequest;
 
 class SidebarButtonsController extends Controller
 {
@@ -31,7 +31,7 @@ class SidebarButtonsController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.sidebar-buttons');
+        return $this->view->make('designify.sidebar-buttons');
     }
 
     /**
@@ -46,6 +46,6 @@ class SidebarButtonsController extends Controller
         $this->kernel->call('queue:restart');
         $this->alert->success('Sidebar button settings have been updated successfully.')->flash();
 
-        return redirect()->route('admin.designify.sidebar-buttons');
+        return redirect()->route('designify.sidebar-buttons');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Designify;
+namespace App\Http\Controllers\Designify;
 
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -10,12 +10,12 @@ use Illuminate\View\Factory as ViewFactory;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use App\Contracts\Repository\SettingsRepositoryInterface;
-use App\Http\Requests\Admin\Designify\GeneralSettingsFormRequest;
+use App\Http\Requests\Designify\ColorSettingsFormRequest;
 
-class GeneralController extends Controller
+class ColorsController extends Controller
 {
     /**
-     * GeneralController constructor.
+     * ColorsController constructor.
      */
     public function __construct(
         private AlertsMessageBag $alert,
@@ -31,22 +31,22 @@ class GeneralController extends Controller
      */
     public function index(): View
     {
-        return $this->view->make('admin.designify.general');
+        return $this->view->make('designify.colors');
     }
 
     /**
      * @throws \App\Exceptions\Model\DataValidationException
      * @throws \App\Exceptions\Repository\RecordNotFoundException
      */
-    public function update(GeneralSettingsFormRequest $request): RedirectResponse
+    public function update(ColorSettingsFormRequest $request): RedirectResponse
     {
         foreach ($request->normalize() as $key => $value) {
             $this->settings->set('settings::' . $key, $value);
         }
 
         $this->kernel->call('queue:restart');
-        $this->alert->success('General settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
+        $this->alert->success('Colors settings have been updated successfully and the queue worker was restarted to apply these changes.')->flash();
 
-        return redirect()->route('admin.designify.general');
+        return redirect()->route('designify.colors');
     }
 }

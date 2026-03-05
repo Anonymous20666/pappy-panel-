@@ -65,7 +65,7 @@ class Egg extends Model implements Identifiable
     /**
      * Defines the current egg export version.
      */
-    public const EXPORT_VERSION = 'PTDL_v2';
+    public const EXPORT_VERSION = 'RCYL_v26';
 
     /**
      * Different features that can be enabled on any given egg. These are used internally

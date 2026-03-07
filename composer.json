@@ -26,6 +26,7 @@
         "league/flysystem-aws-s3-v3": "^3.30.1",
         "league/flysystem-memory": "^3.29.0",
         "matriphe/iso-639": "~2.0",
+        "phiki/phiki": "^2.1",
         "phpseclib/phpseclib": "^3.0.47",
         "pragmarx/google2fa": "~8.0.3",
         "predis/predis": "^3.3.0",

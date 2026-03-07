@@ -117,12 +117,8 @@ class Settings extends Page implements HasSchemas
                 } catch (\Throwable) {}
             }
 
-            if ($value === 'true') {
-                $value = true;
-            }
-            if ($value === 'false') {
-                $value = false;
-            }
+            if ($value === 'true') $value = true;
+            if ($value === 'false') $value = false;
 
             if ($key === 'pterodactyl:auth:2fa_required') {
                 $value = (int) $value;

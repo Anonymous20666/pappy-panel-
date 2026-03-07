@@ -34,6 +34,7 @@ class EggExporterService
             ],
             'exported_at' => Carbon::now()->toAtomString(),
             'name' => $egg->name,
+            'banner' => $egg->banner,
             'author' => $egg->author,
             'description' => $egg->description,
             'features' => $egg->features,

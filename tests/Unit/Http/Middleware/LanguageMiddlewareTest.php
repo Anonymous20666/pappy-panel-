@@ -32,6 +32,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->geoLocaleService = new GeoLocaleService();
     }
 
+    /**
+     * Test that a language is defined via the middleware for guests, and confirm that geolocation is not used when disabled in settings.
+     */
     public function testLanguageIsSetForGuestWithGeolocateDisabled()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -46,6 +49,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that a language is defined via the middleware for a user.
+     */
     public function testLanguageIsSetWithAuthenticatedUser()
     {
         $user = User::factory()->make(['language' => 'de']);
@@ -56,6 +62,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that an authenticated user's language preference takes precedence over geolocation settings.
+     */
     public function testAuthenticatedUserLanguageOverridesGeolocate()
     {
         $user = User::factory()->make(['language' => 'fr']);
@@ -66,6 +75,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that geolocation resolves a locale from the visitor's IP address when enabled in settings.
+     */
     public function testGeolocateResolvesLocaleFromIp()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -84,6 +96,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that geolocation falls back to the default locale when the IP address is from a local network.
+     */
     public function testGeolocateFallsBackToDefaultLocaleWhenIpIsLocal()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -102,6 +117,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that geolocation falls back to the default locale when the API returns null for a given IP address.
+     */
     public function testGeolocateFallsBackToDefaultLocaleWhenApiReturnsNull()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -120,6 +138,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that geolocation falls back to the default locale when the API returns an unmapped country code.
+     */
     public function testGeolocateFallsBackToDefaultLocaleForUnmappedCountry()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -138,6 +159,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Test that geolocation falls back to the default locale when the IP address is null.
+     */
     public function testGeolocateFallsBackWhenIpIsNull()
     {
         $this->request->shouldReceive('user')->withNoArgs()->andReturnNull();
@@ -153,6 +177,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
         $this->getMiddleware()->handle($this->request, $this->getClosureAssertions());
     }
 
+    /**
+     * Return an instance of the middleware using mocked dependencies.
+     */
     private function getMiddleware(): LanguageMiddleware
     {
         return new LanguageMiddleware(

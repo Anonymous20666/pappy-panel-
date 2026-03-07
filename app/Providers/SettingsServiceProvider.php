@@ -21,6 +21,7 @@ class SettingsServiceProvider extends ServiceProvider
         'app:logo',
         'app:icon',
         'app:locale',
+        'app:locale:geolocate',
         'app:debug',
         'app:pwa',
         'pterodactyl:guzzle:timeout',

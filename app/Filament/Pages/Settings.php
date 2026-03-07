@@ -3,28 +3,25 @@
 namespace App\Filament\Pages;
 
 use Filament\Pages\Page;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Pages\Concerns\InteractsWithHeaderActions;
-use Filament\Schemas\Contracts\HasSchemas;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Schemas\Components\Group;
-use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Component;
-use Filament\Forms\Components\TextInput;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\ToggleButtons;
-use Filament\Actions\Action;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Group;
+use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use Illuminate\Contracts\Console\Kernel;
-use App\Contracts\Repository\SettingsRepositoryInterface;
-use App\Traits\Helpers\AvailableLanguages;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\Section;
+use Illuminate\Contracts\Console\Kernel;
+use Filament\Schemas\Components\Tabs\Tab;
+use App\Traits\Helpers\AvailableLanguages;
+use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Forms\Components\ToggleButtons;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Pages\Concerns\InteractsWithHeaderActions;
+use App\Contracts\Repository\SettingsRepositoryInterface;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class Settings extends Page implements HasSchemas
 {
@@ -44,6 +41,7 @@ class Settings extends Page implements HasSchemas
         'app:logo',
         'app:icon',
         'app:locale',
+        'app:locale:geolocate',
         'pterodactyl:auth:2fa_required',
         'app:debug',
         'app:pwa',
@@ -107,10 +105,10 @@ class Settings extends Page implements HasSchemas
 
         foreach ($this->settingKeys as $key) {
 
-            $value = $settings->get('settings::'.$key);
+            $value = $settings->get('settings::' . $key);
 
             if ($value === null) {
-                $value = $config->get(str_replace(':','.', $key));
+                $value = $config->get(str_replace(':', '.', $key));
             }
 
             if ($key === 'mail:mailers:smtp:password' && !empty($value)) {
@@ -196,6 +194,7 @@ class Settings extends Page implements HasSchemas
                 ->schema([
                     Select::make('app:locale')
                         ->label(trans('admin/settings.overview.default-language'))
+                        ->helperText(trans('admin/settings.overview.default-language-hint'))
                         ->options(function () {
                             // Helper to get languages since we can't easily access trait method statically or outside instance context in some cases, 
                             // but here we are in instance context.
@@ -204,6 +203,16 @@ class Settings extends Page implements HasSchemas
                         ->searchable()
                         ->columnSpan(2)
                         ->native(false),
+
+                    Toggle::make('app:locale:geolocate')
+                        ->label(trans('admin/settings.overview.geolocate-language'))
+                        ->helperText(trans('admin/settings.overview.geolocate-language-hint'))
+                        ->inline(false)
+                        ->onIcon('tabler-check')
+                        ->offIcon('tabler-x')
+                        ->onColor('success')
+                        ->offColor('danger')
+                        ->columnSpan(1),
                 ]),
 
             Group::make()
@@ -290,13 +299,13 @@ class Settings extends Page implements HasSchemas
     private function oauthSettings(): array
     {
         return [
-            Section::make("Google")
+            Section::make('Google')
                 ->columns(3)
                 ->icon('tabler-brand-google')
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make("pterodactyl:auth:google_enabled")
+                    Toggle::make('pterodactyl:auth:google_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -305,34 +314,34 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make("pterodactyl:auth:google_client_id")
+                    TextInput::make('pterodactyl:auth:google_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                            fn ($get) => $get('pterodactyl:auth:google_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                            fn ($get) => $get('pterodactyl:auth:google_enabled')
                         ),
 
-                    TextInput::make("pterodactyl:auth:google_client_secret")
+                    TextInput::make('pterodactyl:auth:google_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                            fn ($get) => $get('pterodactyl:auth:google_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:google_enabled")
+                            fn ($get) => $get('pterodactyl:auth:google_enabled')
                         ),
                 ]),
 
-            Section::make("Discord")
+            Section::make('Discord')
                 ->columns(3)
                 ->icon('tabler-brand-discord')
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make("pterodactyl:auth:discord_enabled")
+                    Toggle::make('pterodactyl:auth:discord_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -341,34 +350,34 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make("pterodactyl:auth:discord_client_id")
+                    TextInput::make('pterodactyl:auth:discord_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
                         ),
 
-                    TextInput::make("pterodactyl:auth:discord_client_secret")
+                    TextInput::make('pterodactyl:auth:discord_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:discord_enabled")
+                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
                         ),
                 ]),
 
-            Section::make("Github")
+            Section::make('Github')
                 ->columns(3)
                 ->icon('tabler-brand-github')
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make("pterodactyl:auth:github_enabled")
+                    Toggle::make('pterodactyl:auth:github_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -377,24 +386,24 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make("pterodactyl:auth:github_client_id")
+                    TextInput::make('pterodactyl:auth:github_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                            fn ($get) => $get('pterodactyl:auth:github_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                            fn ($get) => $get('pterodactyl:auth:github_enabled')
                         ),
 
-                    TextInput::make("pterodactyl:auth:github_client_secret")
+                    TextInput::make('pterodactyl:auth:github_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                            fn ($get) => $get('pterodactyl:auth:github_enabled')
                         )
                         ->visible(
-                            fn($get) => $get("pterodactyl:auth:github_enabled")
+                            fn ($get) => $get('pterodactyl:auth:github_enabled')
                         ),
                 ]),
         ];
@@ -566,7 +575,7 @@ class Settings extends Page implements HasSchemas
         config()->set('mail.mailers.smtp.encryption', $data['mail:mailers:smtp:encryption']);
         config()->set('mail.mailers.smtp.username', $data['mail:mailers:smtp:username']);
         config()->set('mail.mailers.smtp.password', $data['mail:mailers:smtp:password']);
-        
+
         config()->set('mail.from.address', $data['mail:from:address']);
         config()->set('mail.from.name', $data['mail:from:name']);
 

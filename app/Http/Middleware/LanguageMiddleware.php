@@ -3,29 +3,67 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use App\Services\Helpers\GeoIPService;
 use Illuminate\Foundation\Application;
+use App\Services\Helpers\GeoLocaleService;
+use App\Traits\Helpers\AvailableLanguages;
+use App\Contracts\Repository\SettingsRepositoryInterface;
 
 class LanguageMiddleware
 {
     /**
      * LanguageMiddleware constructor.
-     */
+     */  
+    use AvailableLanguages;
+
     public function __construct(
         private Application $app,
-        private \App\Contracts\Repository\SettingsRepositoryInterface $settings,
+        private SettingsRepositoryInterface $settings,
+        private GeoIPService $geoIP,
+        private GeoLocaleService $geoLocale,
     ) {
     }
 
-    /**
-     * Handle an incoming request and set the user's preferred language.
-     */
     public function handle(Request $request, \Closure $next): mixed
     {
-        $locale = $request->user()?->language ?? $this->settings->get('settings::app:locale', config('app.locale', 'en'));
+        $user = $request->user();
+
+        if ($user !== null) {
+            $locale = $user->language;
+        } else {
+            $defaultLocale = $this->settings->get('settings::app:locale', config('app.locale', 'en'));
+            $geolocateEnabled = (bool) $this->settings->get('settings::app:locale:geolocate', false);
+
+            if ($geolocateEnabled) {
+                $locale = $this->resolveGeoLocale($request, $defaultLocale);
+            } else {
+                $locale = $defaultLocale;
+            }
+        }
 
         $this->app->setLocale($locale);
         config(['app.locale' => $locale]);
 
         return $next($request);
+    }
+
+    private function resolveGeoLocale(Request $request, string $fallback): string
+    {
+        $ip = $request->ip();
+
+        if ($ip === null) {
+            return $fallback;
+        }
+
+        $countryInfo = $this->geoIP->getCountryInfo($ip);
+
+        if ($countryInfo === null || $countryInfo['code'] === 'LOCAL') {
+            return $fallback;
+        }
+
+        $availableLocales = array_keys($this->getAvailableLanguages());
+        $resolved = $this->geoLocale->resolveLocale($countryInfo['code'], $availableLocales);
+
+        return $resolved ?? $fallback;
     }
 }

@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\Nodes\Schemas;
 
 use App\Models\ApiKey;
+use App\Models\Node;
 use App\Services\Api\KeyCreationService;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Toggle;
+use Filament\Infolists\Components\CodeEntry;
+use Phiki\Grammar\Grammar;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
@@ -212,9 +215,21 @@ class NodeForm
                                     ->columns(2),
                             ]),
 
-                        Tab::make('Auto-Deploy')
+                        Tab::make('Configuration')
                             ->icon('heroicon-o-rocket-launch')
                             ->schema([
+                                Section::make()
+                                    ->description('Configuration File')
+                                    ->schema([
+                                        CodeEntry::make('config')
+                                            ->label('/etc/pterodactyl/config.yml')
+                                            ->grammar(Grammar::Yaml)
+                                            ->state(fn (Node $node) => $node->getYamlConfiguration())
+                                            ->copyable()
+                                            ->disabled()
+                                            ->columnSpanFull(),
+                                    ])
+                                    ->visible(fn ($record) => $record && $record->id),
                                 Section::make()
                                     ->description('Generate a custom deployment command that can be used to configure Wings on the target server.')
                                     ->schema([

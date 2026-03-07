@@ -11,6 +11,9 @@ use App\Contracts\Repository\SettingsRepositoryInterface;
 
 class LanguageMiddleware
 {
+    /**
+     * LanguageMiddleware constructor.
+     */  
     use AvailableLanguages;
 
     public function __construct(

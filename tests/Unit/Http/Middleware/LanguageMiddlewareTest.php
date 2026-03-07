@@ -19,6 +19,9 @@ class LanguageMiddlewareTest extends MiddlewareTestCase
     private MockInterface $geoIPMock;
     private GeoLocaleService $geoLocaleService;
 
+    /**
+     * Setup tests.
+     */
     public function setUp(): void
     {
         parent::setUp();

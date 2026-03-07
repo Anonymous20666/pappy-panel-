@@ -9,4 +9,9 @@ return [
     'archive' => 'Archive',
     'delete' => 'Delete',
     'create-directory' => 'Create Directory',
+    'file-name-label' => 'File Name',
+    'file-name-description' => 'Enter the name that this file should be saved as.',
+    'create-file' => 'Create File',
+    'file-mode-label' => 'File Mode',
+    'update' => 'Update',
 ];

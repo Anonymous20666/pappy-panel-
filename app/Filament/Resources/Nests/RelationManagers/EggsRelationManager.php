@@ -34,22 +34,22 @@ class EggsRelationManager extends RelationManager
                                             ->disabled(),
                                         Forms\Components\TextInput::make('author')
                                             ->email()
-                                            ->required(),
+                                            ->disabled(),
+                                        Forms\Components\TextInput::make('banner')
+                                            ->maxLength(191),
                                         Forms\Components\Textarea::make('description')
-                                            ->columnSpanFull(),
-                                        Forms\Components\TextInput::make('update_url')
-                                            ->label('Update URL')
                                             ->columnSpanFull(),
                                     ])->columns(2),
 
                                 \Filament\Schemas\Components\Section::make('Docker Images')
                                     ->description('The docker images available to servers using this egg. Enter one per line.')
                                     ->schema([
-                                        Forms\Components\Textarea::make('docker_images')
+                                        Forms\Components\KeyValue::make('docker_images')
                                             ->required()
-                                            ->rows(5)
-                                            ->formatStateUsing(fn ($state) => is_array($state) ? implode("\n", $state) : $state)
-                                            ->dehydrateStateUsing(fn ($state) => array_filter(array_map('trim', explode("\n", $state))))
+                                            ->live()
+                                            ->keyLabel('Image Name')
+                                            ->valueLabel('Image URI')
+                                            ->addActionLabel('Add Docker Image')
                                             ->columnSpanFull(),
                                         Forms\Components\Toggle::make('force_outgoing_ip')
                                             ->label('Force Outgoing IP')

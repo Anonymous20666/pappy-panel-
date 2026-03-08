@@ -47,6 +47,11 @@ class NodeResource extends Resource
         return trans('admin/node.plural-label');
     }
 
+    public static function getRecordRouteKeyName(): string
+    {
+        return 'id';
+    }
+    
     public static function form(Schema $schema): Schema
     {
         return NodeForm::configure($schema);

@@ -107,6 +107,11 @@ class NestResource extends Resource
             ]);
     }
 
+    public static function getRecordRouteKeyName(): string
+    {
+        return 'id';
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -119,7 +124,7 @@ class NestResource extends Resource
         return [
             'index' => Pages\ListNests::route('/'),
             'create' => Pages\CreateNest::route('/create'),
-            'edit' => Pages\EditNest::route('/{record}/edit'),
+            'edit' => Pages\EditNest::route('/view/{record}'),
         ];
     }
 }

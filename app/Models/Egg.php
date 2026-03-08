@@ -317,4 +317,9 @@ class Egg extends Model implements Identifiable
     {
         return $this->belongsTo(self::class, 'config_from');
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'id';
+    }
 }

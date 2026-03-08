@@ -65,4 +65,9 @@ class Nest extends Model
     {
         return $this->hasMany(Server::class);
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'id';
+    }
 }

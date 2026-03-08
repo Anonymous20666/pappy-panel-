@@ -177,10 +177,11 @@ class EggsRelationManager extends RelationManager
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(function ($record) {
                         $json = app(\App\Services\Eggs\Sharing\EggExporterService::class)->handle($record->id);
+                        $filename = trim(preg_replace('/\W/', '-', kebab_case($record->name)), '-');
                         
                         return response()->streamDownload(function () use ($json) {
                             echo $json;
-                        }, 'egg-' . $record->name . '.json');
+                        }, 'egg-' . $filename . '.json');
                     }),
                 \Filament\Actions\DeleteAction::make()
                     ->before(function ($record, $action) {

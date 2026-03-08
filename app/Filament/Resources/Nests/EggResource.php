@@ -237,6 +237,7 @@ class EggResource extends Resource
     public static function getPages(): array
     {
         return [
+            'index' => Pages\ListEggs::route('/'),
             'create' => Pages\CreateEgg::route('/create'),
             'edit' => Pages\EditEgg::route('/{record}'),
         ];

@@ -43,9 +43,11 @@ class EggSeeder extends Seeder
     {
         foreach (static::$import as $nest) {
             /* @noinspection PhpParamsInspection */
-            $this->parseEggFiles(
-                Nest::query()->where('author', 'support@pterodactyl.io')->where('name', $nest)->firstOrFail()
-            );
+            // check for old eggs with old author for migration
+            $nestModel = Nest::query()->where('author', 'authors@reviactyl.app')->where('name', $nest)->first()
+                ?? Nest::query()->where('author', 'support@pterodactyl.io')->where('name', $nest)->firstOrFail();
+            
+            $this->parseEggFiles($nestModel);
         }
     }
 
@@ -66,13 +68,30 @@ class EggSeeder extends Seeder
             $decoded = json_decode(file_get_contents($file->getRealPath()), true, 512, JSON_THROW_ON_ERROR);
             $file = new UploadedFile($file->getPathname(), $file->getFilename(), 'application/json');
 
+            // check for existing egg with new author or fallback to old Pterodactyl author for migration
             $egg = $nest->eggs()
                 ->where('author', $decoded['author'])
                 ->where('name', $decoded['name'])
                 ->first();
+            
+            // fallback
+            if (!$egg) {
+                $egg = $nest->eggs()
+                    ->where('author', 'support@pterodactyl.io')
+                    ->where('name', $decoded['name'])
+                    ->first();
+            }
 
             if ($egg instanceof Egg) {
                 $this->updateImporterService->handle($egg, $file);
+                
+                if ($egg->author !== $decoded['author'] || $egg->banner !== ($decoded['banner'] ?? null)) {
+                    $egg->update([
+                        'author' => $decoded['author'],
+                        'banner' => $decoded['banner'] ?? null,
+                    ]);
+                }
+                
                 $this->command->info('Updated ' . $decoded['name']);
             } else {
                 $this->importerService->handle($file, $nest->id);

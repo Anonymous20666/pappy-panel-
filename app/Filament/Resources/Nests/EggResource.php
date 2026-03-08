@@ -29,7 +29,9 @@ class EggResource extends Resource
             ->components([
                 \Filament\Schemas\Components\Tabs::make('Egg Configuration')
                     ->tabs([
-                        \Filament\Schemas\Components\Tabs\Tab::make('Configuration')
+                        \Filament\Schemas\Components\Tabs\Tab::make('configuration')
+                            ->label('Configuration')
+                            ->icon('tabler-settings-2')
                             ->schema([
                                 \Filament\Schemas\Components\Section::make('Identity')
                                     ->schema([
@@ -107,7 +109,9 @@ class EggResource extends Resource
                                     ])->columns(2),
                             ]),
 
-                        \Filament\Schemas\Components\Tabs\Tab::make('Variables')
+                        \Filament\Schemas\Components\Tabs\Tab::make('variables')
+                            ->label('Variables')
+                            ->icon('tabler-variable')
                             ->schema([
                                 Forms\Components\Repeater::make('variables')
                                     ->relationship()
@@ -141,7 +145,9 @@ class EggResource extends Resource
                                     ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
                             ]),
 
-                        \Filament\Schemas\Components\Tabs\Tab::make('Install Script')
+                        \Filament\Schemas\Components\Tabs\Tab::make('install_script')
+                            ->label('Install Script')
+                            ->icon('tabler-file-code')
                             ->schema([
                                 Forms\Components\Textarea::make('script_install')
                                     ->label('Install Script')

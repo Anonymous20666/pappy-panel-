@@ -62,13 +62,18 @@ const LanguageSwitcher = () => {
 export default LanguageSwitcher;
 
 export const LocaleLoader = () => {
-    const userLanguage = useStoreState((state: any) => state.user.data?.language || 'en');
+    // For logged-in users use their stored language preference.
+    // For guests fall back to the server-detected locale (set by LanguageMiddleware
+    // via GeoIP and stored in SiteConfiguration), not hard-coded 'en'.
+    const userLanguage = useStoreState((state: any) => state.user.data?.language);
+    const serverLocale = useStoreState((state: any) => state.settings.data?.locale || 'en');
+    const effectiveLanguage = userLanguage || serverLocale;
 
     useEffect(() => {
-        if (userLanguage && userLanguage !== i18n.language) {
-            i18n.changeLanguage(userLanguage);
+        if (effectiveLanguage && effectiveLanguage !== i18n.language) {
+            i18n.changeLanguage(effectiveLanguage);
         }
-    }, [userLanguage]);
+    }, [effectiveLanguage]);
 
     useEffect(() => {
         applyDocumentDirection(i18n.language);

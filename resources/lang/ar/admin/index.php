@@ -19,4 +19,6 @@ return [
     'most-active-country' => 'الدولة الأكثر نشاطا',
     'activity-description' => 'استنادًا إلى نشاط تسجيل الدخول الأخير.',
     'no_activity' => 'لا توجد أنشطة حديثة لعرضها.',
+    'activity-header' => 'Recent Activity',
+    'more-btn' => 'View More',
 ];

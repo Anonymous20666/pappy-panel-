@@ -19,4 +19,6 @@ return [
     'most-active-country' => 'Pays le plus actif',
     'activity-description' => 'Basé sur l’activité récente de connexion.',
     'no_activity' => 'Aucune activité récente à afficher.',
+    'activity-header' => 'Recent Activity',
+    'more-btn' => 'View More',
 ];

@@ -19,4 +19,6 @@ return [
     'most-active-country' => 'Most Active Country',
     'activity-description' => 'Based on recent login activity.',
     'no_activity' => 'Es gibt keine Aktivitäten zum anzeigen.',
+    'activity-header' => 'Recent Activity',
+    'more-btn' => 'View More',
 ];

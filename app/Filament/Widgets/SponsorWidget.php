@@ -33,6 +33,9 @@ class SponsorWidget extends BaseWidget
                 Section::make(trans('admin/index.sponsor-header'))
                     ->icon('heroicon-o-heart')
                     ->iconColor('danger')
+                    ->collapsible()
+                    ->collapsed()
+                    ->persistCollapsed()
                     ->schema([
                         TextEntry::make('info')
                             ->hiddenLabel()

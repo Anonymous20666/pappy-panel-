@@ -23,6 +23,9 @@ class FeedbackWidget extends BaseWidget
                 Section::make(trans('admin/index.feedback-header'))
                     ->icon('heroicon-o-code-bracket')
                     ->iconColor('primary')
+                    ->collapsible()
+                    ->collapsed()
+                    ->persistCollapsed()
                     ->schema([
                         TextEntry::make('info')
                             ->hiddenLabel()

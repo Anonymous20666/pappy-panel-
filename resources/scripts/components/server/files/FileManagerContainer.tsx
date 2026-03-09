@@ -50,9 +50,7 @@ const RecursiveFileRow = ({ file, serverId }: { file: SearchResult; serverId: st
             <NavLink to={to} className='flex-1 text-sm text-neutral-200 truncate hover:text-primary-400 min-w-0'>
                 {file.fullPath}
             </NavLink>
-            {file.isFile && (
-                <span className='text-xs text-neutral-500 ml-3 flex-none'>{bytesToString(file.size)}</span>
-            )}
+            {file.isFile && <span className='text-xs text-neutral-500 ml-3 flex-none'>{bytesToString(file.size)}</span>}
         </div>
     );
 };
@@ -243,9 +241,7 @@ export default () => {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.15, ease: 'easeIn' }}
                             >
-                                {isSearching && (
-                                    <p css={tw`text-xs text-neutral-500 text-center mb-2`}>Searching...</p>
-                                )}
+                                {isSearching && <p css={tw`text-xs text-neutral-500 text-center mb-2`}>Searching...</p>}
                                 {recursiveResults.map((file) => (
                                     <RecursiveFileRow key={file.fullPath} file={file} serverId={id} />
                                 ))}

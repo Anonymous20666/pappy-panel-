@@ -4,7 +4,7 @@ import { httpErrorToHuman } from '@/api/http';
 import SpinnerOverlay from '@/components/elements/SpinnerOverlay';
 import saveFileContents from '@/api/server/files/saveFileContents';
 import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import FileNameModal from '@/components/server/files/FileNameModal';
 import Can from '@/components/elements/Can';
 import FlashMessageRender from '@/components/FlashMessageRender';

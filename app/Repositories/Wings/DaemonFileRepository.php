@@ -92,7 +92,7 @@ class DaemonFileRepository extends DaemonRepository
             throw new DaemonConnectionException($exception);
         }
 
-        return json_decode($response->getBody(), true);
+        return json_decode($response->getBody(), true) ?? [];
     }
 
     /**

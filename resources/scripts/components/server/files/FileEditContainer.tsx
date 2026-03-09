@@ -28,14 +28,15 @@ import { useStoreState } from 'easy-peasy';
 
 export default () => {
     const [error, setError] = useState('');
-    const { action } = useParams<{ action: 'new' | string }>();
-    const [loading, setLoading] = useState(action === 'edit');
+
+    const navigate = useNavigate();
+    const { hash, pathname } = useLocation();
+    const isNewFile = /\/files\/new(\/|$)/.test(pathname);
+
+    const [loading, setLoading] = useState(!isNewFile);
     const [content, setContent] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [mode, setMode] = useState('text/plain');
-
-    const navigate = useNavigate();
-    const { hash } = useLocation();
 
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -47,11 +48,19 @@ export default () => {
     let fetchFileContent: null | (() => Promise<string>) = null;
 
     useEffect(() => {
-        if (action === 'new') return;
+        if (isNewFile) return;
 
         setError('');
-        setLoading(true);
         const path = hashToPath(hash);
+
+        // Guard: if path resolves to root (no file hash), redirect rather than
+        // asking Wings to read "/" and getting a 200/500 error.
+        if (path === '/' || path === '') {
+            navigate(`/server/${id}/files`);
+            return;
+        }
+
+        setLoading(true);
         setDirectory(dirname(path));
         getFileContents(uuid, path)
             .then(setContent)
@@ -60,7 +69,7 @@ export default () => {
                 setError(httpErrorToHuman(error));
             })
             .then(() => setLoading(false));
-    }, [action, uuid, hash]);
+    }, [isNewFile, uuid, hash]);
 
     const save = (name?: string) => {
         if (!fetchFileContent) {
@@ -95,7 +104,7 @@ export default () => {
             <FlashMessageRender byKey={'files:view'} css={tw`mb-4`} />
             <ErrorBoundary>
                 <Card css={tw`!rounded-b-none !px-2 !py-6 mb-1 mt-2`}>
-                    <FileManagerBreadcrumbs withinFileEditor isNewFile={action !== 'edit'} />
+                    <FileManagerBreadcrumbs withinFileEditor isNewFile={isNewFile} />
                 </Card>
             </ErrorBoundary>
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
@@ -136,7 +145,7 @@ export default () => {
                             fetchFileContent = value;
                         }}
                         onContentSaved={() => {
-                            if (action !== 'edit') {
+                            if (isNewFile) {
                                 setModalVisible(true);
                             } else {
                                 save();
@@ -154,7 +163,7 @@ export default () => {
                             fetchFileContent = value;
                         }}
                         onContentSaved={() => {
-                            if (action !== 'edit') {
+                            if (isNewFile) {
                                 setModalVisible(true);
                             } else {
                                 save();
@@ -173,7 +182,7 @@ export default () => {
                         ))}
                     </Select>
                 </div>
-                {action === 'edit' ? (
+                {!isNewFile ? (
                     <Can action={'file.update'}>
                         <Button css={tw`flex-1 sm:flex-none`} onClick={() => save()}>
                             Save Content

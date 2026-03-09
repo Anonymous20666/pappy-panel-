@@ -9,4 +9,8 @@ return [
     'archive' => 'Archive',
     'delete' => 'Delete',
     'create-directory' => 'Create Directory',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

@@ -41,6 +41,11 @@ class ApiKeyResource extends Resource
         return 'api';
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return ApiKey::count() > 0 ? (string) ApiKey::count() : null;
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()

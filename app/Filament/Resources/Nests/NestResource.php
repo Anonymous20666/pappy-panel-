@@ -34,6 +34,11 @@ class NestResource extends Resource
         return trans('admin/navigation.service.nests');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Nest::count() > 0 ? (string) Nest::count() : null;
+    }
+
     public static function getModelLabel(): string
     {
         return trans('admin/nests.label');

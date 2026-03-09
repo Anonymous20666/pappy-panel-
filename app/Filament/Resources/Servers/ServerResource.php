@@ -45,6 +45,11 @@ class ServerResource extends Resource
         return trans('admin/server.plural-label');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Server::count() > 0 ? (string) Server::count() : null;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ServerForm::configure($schema);

@@ -48,6 +48,11 @@ class DatabaseHostResource extends Resource
         return 'databases';
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return DatabaseHost::count() > 0 ? (string) DatabaseHost::count() : null;
+    }
+
     public static function form(Schema $form): Schema
     {
         return $form

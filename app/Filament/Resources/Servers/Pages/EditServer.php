@@ -211,7 +211,7 @@ class EditServer extends EditRecord
 
             Action::make('view')
                 ->label(trans('admin/server.actions.view'))
-                ->url(fn () => config('app.url') . '/server/' . $this->record->uuid)
+                ->url(fn () => config('app.url') . '/server/' . $this->record->uuidShort)
                 ->openUrlInNewTab(),
         ];
     }

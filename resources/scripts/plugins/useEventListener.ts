@@ -18,7 +18,7 @@ export default (
         const eventListener = (event: any) => savedHandler.current(event);
         window.addEventListener(eventName, eventListener, options);
         return () => {
-            window.removeEventListener(eventName, eventListener);
+            window.removeEventListener(eventName, eventListener, options);
         };
     }, [eventName, window]);
 };

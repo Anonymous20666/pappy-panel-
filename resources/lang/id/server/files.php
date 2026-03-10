@@ -9,4 +9,8 @@ return [
     'archive' => 'Arsipkan',
     'delete' => 'Hapus',
     'create-directory' => 'Buat Direktori',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

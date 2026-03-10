@@ -5,7 +5,7 @@
 @endphp
 
 <div
-    x-data="{ status: 'loading', tooltip: '' }"
+    x-data="{ status: 'loading', tooltip: '', hovered: false }"
     x-init="
         (async function check() {
             try {
@@ -28,11 +28,18 @@
             setTimeout(check, 5000);
         })();
     "
-    x-bind:title="tooltip"
     data-url="{{ $url }}"
     data-token="{{ $token }}"
-    style="display:flex;align-items:center;justify-content:center;min-height:20px"
+    @mouseenter="hovered = true"
+    @mouseleave="hovered = false"
+    style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:20px"
 >
+    <span
+        x-show="hovered && tooltip !== ''"
+        x-text="tooltip"
+        style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1f2937;color:#f9fafb;font-size:12px;padding:2px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;z-index:50;"
+        x-cloak
+    ></span>
     <span x-show="status === 'loading'">
         <svg class="animate-spin" style="width:20px;height:20px;opacity:0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle style="opacity:0.25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>

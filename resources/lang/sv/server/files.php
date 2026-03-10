@@ -9,4 +9,8 @@ return [
     'archive' => 'Arkivera',
     'delete' => 'Radera',
     'create-directory' => 'Skapa katalog',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

@@ -29,6 +29,8 @@ import { useStoreState } from 'easy-peasy';
 export default () => {
     const [error, setError] = useState('');
     const location = useLocation();
+    const { hash } = location;
+    // Use regex that includes # for isNewFile
     const isNewFile = /\/files\/new(\/|$|#)/.test(location.pathname);
     const [loading, setLoading] = useState(!isNewFile);
     const [content, setContent] = useState('');
@@ -36,7 +38,6 @@ export default () => {
     const [mode, setMode] = useState('text/plain');
 
     const navigate = useNavigate();
-    const { hash } = location;
 
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -51,12 +52,13 @@ export default () => {
         if (isNewFile) return;
 
         setError('');
-        setLoading(true);
         const path = hashToPath(hash);
-        if (path === '/') {
+        // Guard: if path resolves to root (no file hash), redirect rather than asking Wings to read "/" and getting a 200/500 error.
+        if (path === '/' || path === '') {
             navigate(`/server/${id}/files`);
             return;
         }
+        setLoading(true);
         setDirectory(dirname(path));
         getFileContents(uuid, path)
             .then(setContent)

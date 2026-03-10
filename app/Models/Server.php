@@ -424,4 +424,9 @@ class Server extends Model implements Identifiable
             throw new ServerStateConflictException($this);
         }
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'id';
+    }
 }

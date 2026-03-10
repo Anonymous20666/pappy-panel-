@@ -126,6 +126,7 @@ class EggResource extends Resource
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('default_value')
+                                            ->dehydrateStateUsing(fn ($state) => $state ?? '')
                                             ->maxLength(191),
                                         Forms\Components\Toggle::make('user_viewable')
                                             ->label('Users Can View')
@@ -133,16 +134,53 @@ class EggResource extends Resource
                                         Forms\Components\Toggle::make('user_editable')
                                             ->label('Users Can Edit')
                                             ->default(true),
-                                        Forms\Components\TextInput::make('rules')
+                                        Forms\Components\TagsInput::make('rules')
                                             ->label('Input Rules')
                                             ->required()
-                                            ->maxLength(191),
+                                            ->suggestions([
+                                                'required',
+                                                'nullable',
+                                                'string',
+                                                'boolean',
+                                                'integer',
+                                                'numeric',
+                                                'alpha',
+                                                'alpha_dash',
+                                                'alpha_num',
+                                                'url',
+                                                'email',
+                                                'regex:',
+                                                'in:',
+                                                'in:true,false',
+                                                'between:',
+                                                'between:1024,65535',
+                                                'min:',
+                                                'max:',
+                                            ]),
                                     ])
                                     ->columns(2)
                                     ->defaultItems(0)
                                     ->reorderableWithButtons()
                                     ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null),
+                                    ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
+                                    ->mutateRelationshipDataBeforeCreateUsing(function (array $data): array {
+                                        if (isset($data['rules']) && is_array($data['rules'])) {
+                                            $data['rules'] = implode('|', $data['rules']);
+                                        }
+                                        return $data;
+                                    })
+                                    ->mutateRelationshipDataBeforeSaveUsing(function (array $data): array {
+                                        if (isset($data['rules']) && is_array($data['rules'])) {
+                                            $data['rules'] = implode('|', $data['rules']);
+                                        }
+                                        return $data;
+                                    })
+                                    ->mutateRelationshipDataBeforeFillUsing(function (array $data): array {
+                                        if (isset($data['rules']) && is_string($data['rules'])) {
+                                            $data['rules'] = explode('|', $data['rules']);
+                                        }
+                                        return $data;
+                                    }),
                             ]),
 
                         \Filament\Schemas\Components\Tabs\Tab::make('install_script')

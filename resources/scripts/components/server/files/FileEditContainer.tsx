@@ -28,15 +28,15 @@ import { useStoreState } from 'easy-peasy';
 
 export default () => {
     const [error, setError] = useState('');
-
-    const navigate = useNavigate();
-    const { hash, pathname } = useLocation();
-    const isNewFile = /\/files\/new(\/|$)/.test(pathname);
-
+    const location = useLocation();
+    const isNewFile = /\/files\/new(\/|$|#)/.test(location.pathname);
     const [loading, setLoading] = useState(!isNewFile);
     const [content, setContent] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
     const [mode, setMode] = useState('text/plain');
+
+    const navigate = useNavigate();
+    const { hash } = location;
 
     const id = ServerContext.useStoreState((state) => state.server.data!.id);
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
@@ -52,15 +52,10 @@ export default () => {
 
         setError('');
         const path = hashToPath(hash);
-
-        // Guard: if path resolves to root (no file hash), redirect rather than
-        // asking Wings to read "/" and getting a 200/500 error.
-        if (path === '/' || path === '') {
+        if (path === '/') {
             navigate(`/server/${id}/files`);
             return;
         }
-
-        setLoading(true);
         setDirectory(dirname(path));
         getFileContents(uuid, path)
             .then(setContent)

@@ -2,7 +2,7 @@ import axios, { AxiosProgressEvent } from 'axios';
 import getFileUploadUrl from '@/api/server/files/getFileUploadUrl';
 import tw from 'twin.macro';
 import { Button } from '@/components/elements/button/index';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ModalMask } from '@/components/elements/Modal';
 import Fade from '@/components/elements/Fade';
 import useEventListener from '@/plugins/useEventListener';
@@ -11,7 +11,6 @@ import useFileManagerSwr from '@/plugins/useFileManagerSwr';
 import { ServerContext } from '@/state/server';
 import { WithClassname } from '@/components/types';
 import Portal from '@/components/elements/Portal';
-import { useSignal } from '@preact/signals-react';
 import Card from '@/reviactyl/ui/Card';
 import { UploadIcon } from '@heroicons/react/solid';
 
@@ -26,8 +25,11 @@ function isFileOrDirectory(event: DragEvent): boolean {
 export default ({ className }: WithClassname) => {
     const fileUploadInput = useRef<HTMLInputElement>(null);
 
-    const visible = useSignal(false);
-    const timeouts = useSignal<NodeJS.Timeout[]>([]);
+    const [visible, setVisible] = useState(false);
+    const visibleRef = useRef(false);
+    const timeouts = useRef<NodeJS.Timeout[]>([]);
+    const dragCounter = useRef(0);
+    const onFileSubmissionRef = useRef<((files: FileList) => void) | null>(null);
 
     const { mutate } = useFileManagerSwr();
     const { addError, clearAndAddHttpError } = useFlashKey('files');
@@ -43,19 +45,54 @@ export default ({ className }: WithClassname) => {
         (e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (isFileOrDirectory(e)) {
-                visible.value = true;
+            dragCounter.current++;
+            if (dragCounter.current === 1 && isFileOrDirectory(e)) {
+                visibleRef.current = true;
+                setVisible(true);
             }
         },
         { capture: true }
     );
 
-    useEventListener('dragexit', () => (visible.value = false), { capture: true });
+    useEventListener(
+        'dragleave',
+        (e) => {
+            e.preventDefault();
+            dragCounter.current = Math.max(dragCounter.current - 1, 0);
+            if (dragCounter.current === 0) {
+                visibleRef.current = false;
+                setVisible(false);
+            }
+        },
+        { capture: true }
+    );
 
-    useEventListener('keydown', () => (visible.value = false));
+    useEventListener('dragover', (e) => e.preventDefault(), { capture: true });
+
+    useEventListener(
+        'drop',
+        (e) => {
+            e.preventDefault();
+            const wasVisible = visibleRef.current;
+            dragCounter.current = 0;
+            visibleRef.current = false;
+            setVisible(false);
+
+            if (wasVisible && e.dataTransfer?.files?.length) {
+                onFileSubmissionRef.current?.(e.dataTransfer.files);
+            }
+        },
+        { capture: true }
+    );
+
+    useEventListener('keydown', () => {
+        dragCounter.current = 0;
+        visibleRef.current = false;
+        setVisible(false);
+    });
 
     useEffect(() => {
-        return () => timeouts.value.forEach(clearTimeout);
+        return () => timeouts.current.forEach(clearTimeout);
     }, []);
 
     const onUploadProgress = (data: AxiosProgressEvent, name: string) => {
@@ -89,7 +126,7 @@ export default ({ className }: WithClassname) => {
                                 onUploadProgress: (data) => onUploadProgress(data, file.name),
                             }
                         )
-                        .then(() => timeouts.value.push(setTimeout(() => removeFileUpload(file.name), 500)))
+                        .then(() => timeouts.current.push(setTimeout(() => removeFileUpload(file.name), 500)))
                 );
         });
 
@@ -101,21 +138,18 @@ export default ({ className }: WithClassname) => {
             });
     };
 
+    // Keep ref in sync so the global drop handler can call the latest onFileSubmission
+    onFileSubmissionRef.current = onFileSubmission;
+
     return (
         <>
             <Portal>
-                <Fade appear in={visible.value} timeout={75} key={'upload_modal_mask'} unmountOnExit>
+                <Fade appear in={visible} timeout={75} key={'upload_modal_mask'} unmountOnExit>
                     <ModalMask
-                        onClick={() => (visible.value = false)}
-                        onDragOver={(e) => e.preventDefault()}
-                        onDrop={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-
-                            visible.value = false;
-                            if (!e.dataTransfer?.files.length) return;
-
-                            onFileSubmission(e.dataTransfer.files);
+                        onClick={() => {
+                            dragCounter.current = 0;
+                            visibleRef.current = false;
+                            setVisible(false);
                         }}
                         className='bg-gray-800/40 backdrop-blur-sm transition-all duration-300 ease-in-out'
                     >

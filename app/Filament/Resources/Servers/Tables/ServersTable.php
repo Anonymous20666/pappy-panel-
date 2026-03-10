@@ -86,7 +86,7 @@ class ServersTable
                             return $state . ' MiB';
                         }
                     })
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('disk')
                     ->label(trans('admin/server.table.disk'))
@@ -102,7 +102,7 @@ class ServersTable
                             return $state . ' MiB';
                         }
                     })
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('cpu')
                     ->label(trans('admin/server.table.cpu'))
@@ -110,7 +110,7 @@ class ServersTable
                     ->sortable()
                     // Change to Infinity and remove the percent suffix if the value is 0 (which indicates no CPU limit)
                     ->formatStateUsing(fn ($state) => $state === 0 ? '∞' : $state . ' %')
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 IconColumn::make('skip_scripts')
                     ->label(trans('admin/server.fields.skip_scripts.label'))
@@ -145,7 +145,7 @@ class ServersTable
                 ViewAction::make('view')
                     ->label(trans('admin/server.actions.view'))
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Server $record) => config('app.url') . '/server/' . $record->uuid)
+                    ->url(fn (Server $record) => config('app.url') . '/server/' . $record->uuidShort)
                     ->openUrlInNewTab(),
             ])
             ->toolbarActions([

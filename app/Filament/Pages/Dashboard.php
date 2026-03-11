@@ -17,6 +17,7 @@ class Dashboard extends BaseDashboard
             \App\Filament\Widgets\FeedbackWidget::class,
             \App\Filament\Widgets\SponsorWidget::class,
             \App\Filament\Widgets\UserActivityWidget::class,
+            \App\Filament\Widgets\ActivityLogWidget::class,
         ];
     }
 

@@ -45,6 +45,11 @@ class MountResource extends Resource
         return trans('admin/mounts.plural_label');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Mount::count() > 0 ? (string) Mount::count() : null;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return $schema->components([

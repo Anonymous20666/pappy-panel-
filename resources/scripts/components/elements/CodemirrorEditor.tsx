@@ -159,7 +159,7 @@ export default ({ style, initialContent, filename, mode, fetchContent, onContent
     const [editor, setEditor] = useState<CodeMirror.Editor>();
 
     const ref = useCallback<(_?: unknown) => void>((node) => {
-        if (node === undefined) {
+        if (!node) {
             return;
         }
 

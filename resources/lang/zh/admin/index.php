@@ -19,4 +19,6 @@ return [
     'most-active-country' => '最活跃的国家',
     'activity-description' => '基于最近的登录活动。',
     'no_activity' => '暂无最近活动记录。',
+    'activity-header' => '最近活动',
+    'more-btn' => '查看更多',
 ];

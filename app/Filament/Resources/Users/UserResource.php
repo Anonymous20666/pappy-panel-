@@ -44,6 +44,11 @@ class UserResource extends Resource
         return trans('admin/navigation.management.users');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return User::count() > 0 ? (string) User::count() : null;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return UserForm::configure($schema);

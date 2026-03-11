@@ -34,6 +34,11 @@ class NestResource extends Resource
         return trans('admin/navigation.service.nests');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Nest::count() > 0 ? (string) Nest::count() : null;
+    }
+
     public static function getModelLabel(): string
     {
         return trans('admin/nests.label');
@@ -107,6 +112,11 @@ class NestResource extends Resource
             ]);
     }
 
+    public static function getRecordRouteKeyName(): string
+    {
+        return 'id';
+    }
+
     public static function getRelations(): array
     {
         return [
@@ -119,7 +129,7 @@ class NestResource extends Resource
         return [
             'index' => Pages\ListNests::route('/'),
             'create' => Pages\CreateNest::route('/create'),
-            'edit' => Pages\EditNest::route('/{record}/edit'),
+            'edit' => Pages\EditNest::route('/view/{record}'),
         ];
     }
 }

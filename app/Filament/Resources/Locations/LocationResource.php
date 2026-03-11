@@ -42,6 +42,11 @@ class LocationResource extends Resource
         return trans('admin/locations.plural-label');
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Location::count() > 0 ? (string) Location::count() : null;
+    }
+
     public static function form(Schema $form): Schema
     {
         return $form

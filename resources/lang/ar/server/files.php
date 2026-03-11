@@ -9,4 +9,8 @@ return [
     'archive' => 'أرشيف',
     'delete' => 'حذف',
     'create-directory' => 'انشاء مجلد',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

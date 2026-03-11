@@ -254,4 +254,9 @@ class Node extends Model implements Identifiable
         // @phpstan-ignore-next-line property.notFound, property.notFound
         return ($this->sum_memory + $memory) <= $memoryLimit && ($this->sum_disk + $disk) <= $diskLimit;
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'id';
+    }
 }

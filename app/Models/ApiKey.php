@@ -116,6 +116,7 @@ class ApiKey extends Model implements HasAbilities
         'r_' . AdminAcl::RESOURCE_NESTS => 'int',
         'r_' . AdminAcl::RESOURCE_NODES => 'int',
         'r_' . AdminAcl::RESOURCE_SERVERS => 'int',
+        'r_' . AdminAcl::RESOURCE_IMPERSONATION => 'int',
     ];
 
     /**
@@ -158,6 +159,7 @@ class ApiKey extends Model implements HasAbilities
         'r_' . AdminAcl::RESOURCE_NESTS => 'integer|min:0|max:3',
         'r_' . AdminAcl::RESOURCE_NODES => 'integer|min:0|max:3',
         'r_' . AdminAcl::RESOURCE_SERVERS => 'integer|min:0|max:3',
+        'r_' . AdminAcl::RESOURCE_IMPERSONATION => 'integer|min:0|max:3',
     ];
 
     public function can($ability)

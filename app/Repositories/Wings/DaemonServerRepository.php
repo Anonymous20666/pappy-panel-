@@ -31,7 +31,7 @@ class DaemonServerRepository extends DaemonRepository
             throw new DaemonConnectionException($exception, false);
         }
 
-        return json_decode($response->getBody()->__toString(), true);
+        return json_decode($response->getBody()->__toString(), true) ?? [];
     }
 
     /**

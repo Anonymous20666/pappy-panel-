@@ -41,6 +41,11 @@ class ApiKeyResource extends Resource
         return 'api';
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return ApiKey::count() > 0 ? (string) ApiKey::count() : null;
+    }
+
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -92,7 +97,13 @@ class ApiKeyResource extends Resource
             ->columns([
                 TextColumn::make('key')
                     ->label(trans('admin/api.key'))
-                    ->state(fn (ApiKey $key) => $key->identifier . decrypt($key->token))
+                    ->state(function (ApiKey $key) {
+                        try {
+                            return $key->identifier . decrypt($key->token);
+                        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+                            return $key->identifier . '(encrypted with old key)';
+                        }
+                    })
                     ->copyable(),
 
                 TextColumn::make('memo')

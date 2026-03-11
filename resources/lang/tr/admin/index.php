@@ -19,4 +19,6 @@ return [
     'most-active-country' => 'En Aktif Ülke',
     'activity-description' => 'Son giriş etkinliğine dayanmaktadır.',
     'no_activity' => 'Görüntülenecek son etkinlik bulunmuyor.',
+    'activity-header' => 'Recent Activity',
+    'more-btn' => 'View More',
 ];

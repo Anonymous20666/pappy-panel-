@@ -9,4 +9,8 @@ return [
     'archive' => 'Arşivle',
     'delete' => 'Sil',
     'create-directory' => 'Dizin Oluştur',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

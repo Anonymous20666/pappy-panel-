@@ -14,4 +14,8 @@ return [
     'create-file' => 'Create File',
     'file-mode-label' => 'File Mode',
     'update' => 'Update',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

@@ -9,4 +9,8 @@ return [
     'archive' => '存档',
     'delete' => '删除',
     'create-directory' => '创建目录',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

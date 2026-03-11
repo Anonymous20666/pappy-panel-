@@ -9,4 +9,8 @@ return [
     'archive' => 'ಆರ್ಕೈವ್',
     'delete' => 'ಅಳಿಸಿ',
     'create-directory' => 'ಡೈರೆಕ್ಟರಿ ರಚಿಸಿ',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

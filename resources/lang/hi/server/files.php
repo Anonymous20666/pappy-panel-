@@ -9,4 +9,8 @@ return [
     'archive' => 'आर्काइव',
     'delete' => 'हटाएं',
     'create-directory' => 'निर्देशिका बनाएँ',
+    'search' => [
+        'placeholder' => 'Search files...',
+        'clear' => 'Clear search',
+    ],
 ];

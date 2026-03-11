@@ -13,13 +13,13 @@ return [
     'fields' => [
         'short' => [
             'label' => 'Kurzkennung',
-            'placeholder' => 'us.nyc.1',
+            'placeholder' => 'de.berlin.1',
             'helper' => 'Ein Kurze Kennung für diesen Standort.',
         ],
 
         'long' => [
             'label' => 'Beschreibung',
-            'placeholder' => 'New York City, NY, USA',
+            'placeholder' => 'Berlin, Deutschland',
             'helper' => 'Eine längere Beschreibung dieses Standortes.',
         ],
     ],

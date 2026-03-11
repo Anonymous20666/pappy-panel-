@@ -10,7 +10,7 @@ return [
     'delete' => 'Löschen',
     'create-directory' => 'Verzeichnis erstellen',
     'search' => [
-        'placeholder' => 'Search files...',
-        'clear' => 'Clear search',
+        'placeholder' => 'Dateien durchsuchen...',
+        'clear' => 'Suche leeren',
     ],
 ];

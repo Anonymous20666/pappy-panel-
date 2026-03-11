@@ -133,7 +133,7 @@ return [
     ],
 
     'actions' => [
-        'create' => 'Create',
+        'create' => 'Erstellen',
         'edit' => 'Bearbeiten',
         'delete' => 'Löschen',
         'view' => 'Ansehen',
@@ -190,7 +190,7 @@ return [
         'allocations_added' => 'Zuweisungen wurden diesem Node erfolgreich hinzugefügt.',
         'node_deleted' => 'Node wurde erfolgreich aus dem Panel entfernt.',
         'location_required' => 'Sie müssen mindestens einen Standort konfiguriert haben, bevor Sie einen Node zu diesem Panel hinzufügen können.',
-        'node_created' => 'Successfully created new node. You can automatically configure the daemon on this machine by visiting the \'Configuration\' tab. Before you can add any servers you must first allocate at least one IP address and port.',
+        'node_created' => 'Neue Node erfolgreich erstellt. Sie können den Daemon auf dieser Maschine automatisch konfigurieren, indem Sie den "Konfiguration" Tab besuchen. Bevor Sie Server hinzufügen können, müssen Sie mindestens eine Allocation erstellen.',
         'node_updated' => 'Die Node-Informationen wurden aktualisiert. Wenn Daemon-Einstellungen geändert wurden, müssen Sie ihn neu starten, damit diese Änderungen wirksam werden.',
         'unallocated_deleted' => 'Alle nicht zugewiesenen Ports für <code>:ip</code> wurden gelöscht.',
     ],

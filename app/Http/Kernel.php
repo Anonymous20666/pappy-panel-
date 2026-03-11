@@ -31,6 +31,7 @@ use Illuminate\Foundation\Http\Middleware\ValidatePostSize;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use App\Http\Middleware\Api\Daemon\DaemonAuthenticate;
 use App\Http\Middleware\Api\Client\RequireClientApiKey;
+use App\Http\Middleware\Api\Client\AuthenticateImpersonation;
 use App\Http\Middleware\RequireTwoFactorAuthentication;
 use Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull;
 use App\Http\Middleware\Api\Client\SubstituteClientBindings;
@@ -85,6 +86,7 @@ class Kernel extends HttpKernel
         ],
         'client-api' => [
             SubstituteClientBindings::class,
+            AuthenticateImpersonation::class,
             RequireClientApiKey::class,
         ],
         'daemon' => [

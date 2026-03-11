@@ -53,7 +53,7 @@ const TopServerDetails = () => {
     const connected = ServerContext.useStoreState((state) => state.socket.connected);
     const instance = ServerContext.useStoreState((state) => state.socket.instance);
     const limits = ServerContext.useStoreState((state) => state.server.data!.limits);
-    const serverId = ServerContext.useStoreState((state) => state.server.data?.uuid);
+    const serverId = ServerContext.useStoreState((state) => state.server.data?.internalId);
     const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
 
     const textLimits = useMemo(

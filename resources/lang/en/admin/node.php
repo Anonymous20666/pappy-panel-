@@ -21,6 +21,11 @@ return [
             'title' => 'Daemon Configuration',
             'description' => 'Configure daemon-specific settings.',
         ],
+        'configuration' => [
+            'title' => 'Configuration',
+            'config_description' => 'Configuration File',
+            'deploy_description' => 'Generate a custom deployment command that can be used to configure Wings on the target server.',
+        ],
     ],
 
     'fields' => [
@@ -110,6 +115,7 @@ return [
     ],
 
     'table' => [
+        'health' => 'Health',
         'id' => 'ID',
         'uuid' => 'UUID',
         'name' => 'Name',
@@ -132,11 +138,31 @@ return [
         'updated' => 'Updated',
     ],
 
+    'filters' => [
+        'public' => 'Public',
+        'maintenance' => 'Maintenance',
+        'public_true' => 'Public',
+        'public_false' => 'Private',
+        'maintenance_true' => 'Under Maintenance',
+        'maintenance_false' => 'Active',
+    ],
+
     'actions' => [
         'create' => 'Create',
         'edit' => 'Edit',
         'delete' => 'Delete',
         'view' => 'View',
+    ],
+
+    'deployment' => [
+        'generate_label' => 'Generate Deployment Token',
+        'modal_heading' => 'Auto-Deploy Command',
+        'modal_description' => 'Run this command on your node to automatically configure Wings.',
+        'modal_close' => 'Close',
+        'command_label' => 'Deployment Command',
+        'command_helper' => 'Copy and run this command on your node server.',
+        'token_success' => 'Token Generated Successfully',
+        'token_success_body' => 'Copy and run the command below on your node.',
     ],
 
     'messages' => [

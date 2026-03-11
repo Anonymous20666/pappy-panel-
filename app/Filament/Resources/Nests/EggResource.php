@@ -27,16 +27,16 @@ class EggResource extends Resource
     {
         return $schema
             ->components([
-                \Filament\Schemas\Components\Tabs::make('Egg Configuration')
+                \Filament\Schemas\Components\Tabs::make('egg_configuration')
                     ->tabs([
                         \Filament\Schemas\Components\Tabs\Tab::make('configuration')
-                            ->label('Configuration')
+                            ->label(trans('admin/eggs.sections.configuration.title'))
                             ->icon('tabler-settings-2')
                             ->schema([
-                                \Filament\Schemas\Components\Section::make('Identity')
+                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.identity.title'))
                                     ->schema([
                                         Forms\Components\Select::make('nest_id')
-                                            ->label('Nest')
+                                            ->label(trans('admin/eggs.fields.nest'))
                                             ->relationship('nest', 'name')
                                             ->required()
                                             ->searchable()
@@ -47,7 +47,7 @@ class EggResource extends Resource
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('uuid')
-                                            ->label('UUID')
+                                            ->label(trans('admin/eggs.fields.uuid'))
                                             ->disabled(),
                                         Forms\Components\TextInput::make('author')
                                             ->email()
@@ -58,59 +58,59 @@ class EggResource extends Resource
                                             ->columnSpanFull(),
                                     ])->columns(2),
 
-                                \Filament\Schemas\Components\Section::make('Docker Images')
-                                    ->description('The docker images available to servers using this egg. Enter one per line.')
+                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.docker_images.title'))
+                                    ->description(trans('admin/eggs.sections.docker_images.description'))
                                     ->schema([
                                         Forms\Components\KeyValue::make('docker_images')
                                             ->required()
                                             ->live()
-                                            ->keyLabel('Image Name')
-                                            ->valueLabel('Image URI')
-                                            ->addActionLabel('Add Docker Image')
+                                            ->keyLabel(trans('admin/eggs.fields.image_name'))
+                                            ->valueLabel(trans('admin/eggs.fields.image_uri'))
+                                            ->addActionLabel(trans('admin/eggs.fields.add_docker_image'))
                                             ->columnSpanFull(),
                                         Forms\Components\Toggle::make('force_outgoing_ip')
-                                            ->label('Force Outgoing IP')
-                                            ->helperText('Forces all outgoing network traffic to have its Source IP NATed to the IP of the server\'s primary allocation IP.'),
+                                            ->label(trans('admin/eggs.fields.force_outgoing_ip'))
+                                            ->helperText(trans('admin/eggs.helpers.force_outgoing_ip')),
                                         Forms\Components\TagsInput::make('features')
-                                            ->label('Features')
-                                            ->helperText('Additional features belonging to the egg. Useful for configuring additional panel modifications.')
+                                            ->label(trans('admin/eggs.fields.features'))
+                                            ->helperText(trans('admin/eggs.helpers.features'))
                                             ->columnSpanFull(),
                                     ]),
 
-                                \Filament\Schemas\Components\Section::make('Process Management')
+                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.process_management.title'))
                                     ->schema([
                                         Forms\Components\Textarea::make('startup')
-                                            ->label('Startup Command')
+                                            ->label(trans('admin/eggs.fields.startup'))
                                             ->required()
                                             ->columnSpanFull(),
                                         Forms\Components\TextInput::make('config_stop')
-                                            ->label('Stop Command'),
+                                            ->label(trans('admin/eggs.fields.config_stop')),
                                         Forms\Components\Select::make('config_from')
-                                            ->label('Copy Settings From')
+                                            ->label(trans('admin/eggs.fields.config_from'))
                                             ->relationship('configFrom', 'name')
                                             ->searchable()
                                             ->preload(),
                                         Forms\Components\Textarea::make('config_startup')
-                                            ->label('Start Configuration (JSON)')
+                                            ->label(trans('admin/eggs.fields.config_startup'))
                                             ->json()
                                             ->columnSpanFull(),
                                         Forms\Components\Textarea::make('config_logs')
-                                            ->label('Log Configuration (JSON)')
+                                            ->label(trans('admin/eggs.fields.config_logs'))
                                             ->json()
                                             ->columnSpanFull(),
                                         Forms\Components\Textarea::make('config_files')
-                                            ->label('Configuration Files (JSON)')
+                                            ->label(trans('admin/eggs.fields.config_files'))
                                             ->json()
                                             ->columnSpanFull(),
                                         Forms\Components\TagsInput::make('file_denylist')
-                                            ->label('File Denylist')
-                                            ->helperText('Files that should not be edited by the user.')
+                                            ->label(trans('admin/eggs.fields.file_denylist'))
+                                            ->helperText(trans('admin/eggs.helpers.file_denylist'))
                                             ->columnSpanFull(),
                                     ])->columns(2),
                             ]),
 
                         \Filament\Schemas\Components\Tabs\Tab::make('variables')
-                            ->label('Variables')
+                            ->label(trans('admin/eggs.sections.variables.title'))
                             ->icon('tabler-variable')
                             ->schema([
                                 Forms\Components\Repeater::make('variables')
@@ -122,20 +122,20 @@ class EggResource extends Resource
                                         Forms\Components\TextInput::make('description')
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('env_variable')
-                                            ->label('Environment Variable')
+                                            ->label(trans('admin/eggs.fields.env_variable'))
                                             ->required()
                                             ->maxLength(191),
                                         Forms\Components\TextInput::make('default_value')
                                             ->dehydrateStateUsing(fn ($state) => $state ?? '')
                                             ->maxLength(191),
                                         Forms\Components\Toggle::make('user_viewable')
-                                            ->label('Users Can View')
+                                            ->label(trans('admin/eggs.fields.user_viewable'))
                                             ->default(true),
                                         Forms\Components\Toggle::make('user_editable')
-                                            ->label('Users Can Edit')
+                                            ->label(trans('admin/eggs.fields.user_editable'))
                                             ->default(true),
                                         Forms\Components\TagsInput::make('rules')
-                                            ->label('Input Rules')
+                                            ->label(trans('admin/eggs.fields.rules'))
                                             ->required()
                                             ->suggestions([
                                                 'required',
@@ -184,29 +184,29 @@ class EggResource extends Resource
                             ]),
 
                         \Filament\Schemas\Components\Tabs\Tab::make('install_script')
-                            ->label('Install Script')
+                            ->label(trans('admin/eggs.sections.install_script.title'))
                             ->icon('tabler-file-code')
                             ->schema([
                                 Forms\Components\Textarea::make('script_install')
-                                    ->label('Install Script')
+                                    ->label(trans('admin/eggs.fields.script_install'))
                                     ->rows(10)
                                     ->columnSpanFull(),
                                 Forms\Components\TextInput::make('script_container')
-                                    ->label('Script Container')
+                                    ->label(trans('admin/eggs.fields.script_container'))
                                     ->required()
                                     ->columnSpan(1),
                                 Forms\Components\TextInput::make('script_entry')
-                                    ->label('Script Entrypoint Command')
+                                    ->label(trans('admin/eggs.fields.script_entry'))
                                     ->required()
                                     ->columnSpan(1),
                                 Forms\Components\Select::make('copy_script_from')
-                                    ->label('Copy Script From')
+                                    ->label(trans('admin/eggs.fields.copy_script_from'))
                                     ->relationship('scriptFrom', 'name')
                                     ->searchable()
                                     ->preload(),
                                 Forms\Components\Toggle::make('script_is_privileged')
-                                    ->label('Privileged')
-                                    ->helperText('Run the install script as a privileged container (root).'),
+                                    ->label(trans('admin/eggs.fields.script_is_privileged'))
+                                    ->helperText(trans('admin/eggs.helpers.script_is_privileged')),
                             ])->columns(2),
                     ])->columnSpanFull(),
             ]);
@@ -228,7 +228,7 @@ class EggResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('export')
-                    ->label('Export')
+                    ->label(trans('admin/eggs.actions.export'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(function ($record) {
                         $json = app(\App\Services\Eggs\Sharing\EggExporterService::class)->handle($record->id);
@@ -242,8 +242,8 @@ class EggResource extends Resource
                     ->before(function ($record, $action) {
                         if ($record->servers()->count() > 0) {
                             \Filament\Notifications\Notification::make()
-                                ->title('Cannot delete egg')
-                                ->body('This egg has ' . $record->servers()->count() . ' server(s) associated. Please delete or reassign them first.')
+                                ->title(trans('admin/eggs.notices.cannot_delete'))
+                                ->body(trans('admin/eggs.notices.cannot_delete_body', ['count' => $record->servers()->count()]))
                                 ->danger()
                                 ->send();
                             
@@ -258,8 +258,8 @@ class EggResource extends Resource
                             $protectedCount = $records->filter(fn ($record) => $record->servers()->count() > 0)->count();
                             if ($protectedCount > 0) {
                                 \Filament\Notifications\Notification::make()
-                                    ->title('Cannot delete eggs with servers')
-                                    ->body("{$protectedCount} egg(s) have associated servers and were skipped.")
+                                    ->title(trans('admin/eggs.notices.cannot_delete_multiple'))
+                                    ->body(trans('admin/eggs.notices.cannot_delete_multiple_body', ['count' => $protectedCount]))
                                     ->warning()
                                     ->send();
                             }

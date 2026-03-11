@@ -17,7 +17,7 @@ class NodesTable
         return $table
         ->columns([
                 IconColumn::make('health')
-                    ->label('Health')
+                    ->label(trans('admin/node.table.health'))
                     ->trueIcon('heroicon-s-heart')
                     ->falseIcon('heroicon-o-heart')
                     ->state(function (Node $record): bool {

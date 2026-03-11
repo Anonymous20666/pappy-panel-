@@ -16,7 +16,7 @@ class EditLocation extends EditRecord
             Actions\DeleteAction::make()
                 ->before(function () {
                     if ($this->record->nodes()->count() > 0) {
-                        throw new \Exception('Cannot delete a location with associated nodes.');
+                        throw new \Exception(trans('admin/locations.messages.cannot_delete_with_nodes'));
                     }
                 }),
         ];

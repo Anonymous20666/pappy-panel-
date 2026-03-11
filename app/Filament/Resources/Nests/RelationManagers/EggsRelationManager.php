@@ -30,17 +30,17 @@ class EggsRelationManager extends RelationManager
             ])
             ->headerActions([
                 \Filament\Actions\Action::make('create')
-                    ->label('Create Egg')
+                    ->label(trans('admin/eggs.actions.create'))
                     ->icon('heroicon-o-plus')
                     ->url(fn () => \App\Filament\Resources\Nests\EggResource::getUrl('create', ['nest_id' => $this->getOwnerRecord()->id])),
             ])
             ->actions([
                 \Filament\Actions\Action::make('view')
-                    ->label('Edit')
+                    ->label(trans('admin/eggs.actions.edit'))
                     ->icon('heroicon-o-pencil')
                     ->url(fn ($record) => \App\Filament\Resources\Nests\EggResource::getUrl('edit', ['record' => $record])),
                 \Filament\Actions\Action::make('export')
-                    ->label('Export')
+                    ->label(trans('admin/eggs.actions.export'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(function ($record) {
                         $json = app(\App\Services\Eggs\Sharing\EggExporterService::class)->handle($record->id);
@@ -54,8 +54,8 @@ class EggsRelationManager extends RelationManager
                     ->before(function ($record, $action) {
                         if ($record->servers()->count() > 0) {
                             \Filament\Notifications\Notification::make()
-                                ->title('Cannot delete egg')
-                                ->body('This egg has ' . $record->servers()->count() . ' server(s) associated. Please delete or reassign them first.')
+                                ->title(trans('admin/eggs.notices.cannot_delete'))
+                                ->body(trans('admin/eggs.notices.cannot_delete_body', ['count' => $record->servers()->count()]))
                                 ->danger()
                                 ->send();
                             
@@ -69,8 +69,8 @@ class EggsRelationManager extends RelationManager
                         $protectedCount = $records->filter(fn ($record) => $record->servers()->count() > 0)->count();
                         if ($protectedCount > 0) {
                             \Filament\Notifications\Notification::make()
-                                ->title('Cannot delete eggs with servers')
-                                ->body("{$protectedCount} egg(s) have associated servers and were skipped.")
+                                ->title(trans('admin/eggs.notices.cannot_delete_multiple'))
+                                ->body(trans('admin/eggs.notices.cannot_delete_multiple_body', ['count' => $protectedCount]))
                                 ->warning()
                                 ->send();
                         }

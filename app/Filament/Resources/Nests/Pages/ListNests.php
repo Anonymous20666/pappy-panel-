@@ -14,16 +14,16 @@ class ListNests extends ListRecords
         return [
             \Filament\Actions\CreateAction::make(),
             \Filament\Actions\Action::make('import')
-                ->label('Import Egg')
+                ->label(trans('admin/nests.actions.import'))
                 ->color('gray')
                 ->form([
                     \Filament\Forms\Components\FileUpload::make('file')
-                        ->label('Egg File (JSON)')
+                        ->label(trans('admin/nests.import.file_label'))
                         ->acceptedFileTypes(['application/json'])
                         ->required()
                         ->storeFiles(true),
                     \Filament\Forms\Components\Select::make('nest_id')
-                        ->label('Associated Nest')
+                        ->label(trans('admin/nests.import.nest_label'))
                         ->options(\App\Models\Nest::all()->pluck('name', 'id'))
                         ->required()
                         ->searchable(),
@@ -52,8 +52,8 @@ class ListNests extends ListRecords
                         
                         if (!$foundPath) {
                             \Filament\Notifications\Notification::make()
-                                ->title('File not found')
-                                ->body('Could not locate uploaded file. Tried: ' . implode(', ', array_map('basename', $possiblePaths)))
+                                ->title(trans('admin/nests.import.file_not_found'))
+                                ->body(trans('admin/nests.import.file_not_found_body'))
                                 ->danger()
                                 ->send();
                             return;
@@ -77,8 +77,8 @@ class ListNests extends ListRecords
                         );
                     } else {
                         \Filament\Notifications\Notification::make()
-                            ->title('Invalid file format')
-                            ->body('Unexpected file format received.')
+                            ->title(trans('admin/nests.import.invalid_format'))
+                            ->body(trans('admin/nests.import.invalid_format_body'))
                             ->danger()
                             ->send();
                         return;
@@ -88,12 +88,12 @@ class ListNests extends ListRecords
                         app(\App\Services\Eggs\Sharing\EggImporterService::class)->handle($file, (int) $data['nest_id']);
                         
                         \Filament\Notifications\Notification::make()
-                            ->title('Egg imported successfully')
+                            ->title(trans('admin/nests.import.success'))
                             ->success()
                             ->send();
                     } catch (\Exception $exception) {
                         \Filament\Notifications\Notification::make()
-                            ->title('Failed to import egg')
+                            ->title(trans('admin/nests.import.failed'))
                             ->body($exception->getMessage())
                             ->danger()
                             ->send();

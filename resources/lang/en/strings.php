@@ -100,4 +100,5 @@ return [
     'server-not-found' => 'Server not found.',
     'copied-value-to-clipboard' => 'Copied ":text" to clipboard.',
     'copied-to-clipboard' => 'Copied text to clipboard.',
+    'copied' => 'Copied!',
 ];

@@ -198,7 +198,7 @@ class ServersWidget extends BaseWidget
             default    => ['rgba(148,163,184,0.08)','#94a3b8', '#64748b', 'rgba(148,163,184,0.3)'],
         };
 
-        $label = e(ucfirst($state));
+        $label = e(trans('admin/monitoring.servers.states.' . $state));
 
         $badge = <<<HTML
         <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:{$bg};color:{$textColor};border:1px solid {$border}">

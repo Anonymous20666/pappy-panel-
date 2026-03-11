@@ -25,7 +25,7 @@ class EditEgg extends EditRecord
     {
         return [
             Actions\Action::make('export')
-                ->label('Export')
+                ->label(trans('admin/eggs.actions.export'))
                 ->icon('heroicon-o-arrow-down-tray')
                 ->action(function () {
                     $record = $this->record;
@@ -51,8 +51,8 @@ class EditEgg extends EditRecord
 
                     if ($record->servers()->count() > 0) {
                         \Filament\Notifications\Notification::make()
-                            ->title('Cannot delete egg')
-                            ->body('This egg has ' . $record->servers()->count() . ' server(s) associated. Please delete or reassign them first.')
+                            ->title(trans('admin/eggs.notices.cannot_delete'))
+                            ->body(trans('admin/eggs.notices.cannot_delete_body', ['count' => $record->servers()->count()]))
                             ->danger()
                             ->send();
                         

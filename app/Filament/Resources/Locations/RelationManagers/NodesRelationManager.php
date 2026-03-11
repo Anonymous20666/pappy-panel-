@@ -50,7 +50,7 @@ class NodesRelationManager extends RelationManager
                     ->searchable()
                     ->sortable()
                     ->copyable()
-                    ->copyMessage('Copied!')
+                    ->copyMessage(trans('strings.copied'))
                     ->copyMessageDuration(1500),
 
                 TextColumn::make('servers_count')
@@ -75,15 +75,15 @@ class NodesRelationManager extends RelationManager
                 Tables\Filters\TernaryFilter::make('public')
                     ->label(trans('admin/node.filters.public'))
                     ->boolean()
-                    ->trueLabel('Public')
-                    ->falseLabel('Private')
+                    ->trueLabel(trans('admin/node.filters.public_true'))
+                    ->falseLabel(trans('admin/node.filters.public_false'))
                     ->native(false),
 
                 Tables\Filters\TernaryFilter::make('maintenance_mode')
                     ->label(trans('admin/node.filters.maintenance'))
                     ->boolean()
-                    ->trueLabel('Under Maintenance')
-                    ->falseLabel('Active')
+                    ->trueLabel(trans('admin/node.filters.maintenance_true'))
+                    ->falseLabel(trans('admin/node.filters.maintenance_false'))
                     ->native(false),
             ])
             ->headerActions([

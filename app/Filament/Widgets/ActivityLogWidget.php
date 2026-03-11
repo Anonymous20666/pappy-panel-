@@ -29,7 +29,7 @@ class ActivityLogWidget extends BaseWidget
             $entries[] = TextEntry::make("log_{$log->id}")
                 ->hiddenLabel()
                 ->state(
-                    ($log->actor?->name ?? 'System')
+                    ($log->actor?->name ?? trans('admin/activity_log.fallback_actor'))
                     . ' — '
                     . $log->event
                     . ' — '

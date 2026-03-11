@@ -5,8 +5,19 @@
 @endphp
 
 <div
-    x-data="{ status: 'loading', tooltip: '', hovered: false }"
+    x-data="{ status: 'loading', tooltip: '', hovered: false, tipX: 0, tipY: 0 }"
     x-init="
+        $watch('tooltip', function() {
+            if (!hovered) return;
+            var tip = $refs.tip;
+            var pr = $el.getBoundingClientRect();
+            var tw = tip.offsetWidth;
+            var th = tip.offsetHeight;
+            if (!tw) return;
+            var ideal = pr.left + pr.width / 2 - tw / 2;
+            tipX = Math.max(8, Math.min(ideal, window.innerWidth - tw - 8));
+            tipY = pr.top - th - 4;
+        });
         (async function check() {
             try {
                 const r = await fetch($el.dataset.url, {
@@ -30,15 +41,25 @@
     "
     data-url="{{ $url }}"
     data-token="{{ $token }}"
-    @mouseenter="hovered = true"
+    @mouseenter="
+        hovered = true;
+        var tip = $refs.tip;
+        var pr = $el.getBoundingClientRect();
+        var tw = tip.offsetWidth;
+        var th = tip.offsetHeight;
+        if (tw > 0) {
+            var ideal = pr.left + pr.width / 2 - tw / 2;
+            tipX = Math.max(8, Math.min(ideal, window.innerWidth - tw - 8));
+            tipY = pr.top - th - 4;
+        }
+    "
     @mouseleave="hovered = false"
-    style="position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:20px"
+    style="display:inline-flex;align-items:center;justify-content:center;min-height:20px"
 >
     <span
-        x-show="hovered && tooltip !== ''"
+        x-ref="tip"
         x-text="tooltip"
-        style="position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1f2937;color:#f9fafb;font-size:12px;padding:2px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;z-index:50;"
-        x-cloak
+        :style="`position:fixed;top:${tipY}px;left:${tipX}px;background:#1f2937;color:#f9fafb;font-size:12px;padding:2px 8px;border-radius:4px;white-space:nowrap;pointer-events:none;z-index:9999;visibility:${hovered && tooltip !== '' ? 'visible' : 'hidden'};`"
     ></span>
     <span x-show="status === 'loading'">
         <svg class="animate-spin" style="width:20px;height:20px;opacity:0.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

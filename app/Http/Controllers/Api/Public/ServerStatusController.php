@@ -51,7 +51,7 @@ class ServerStatusController extends Controller
              $details = $this->repository->setServer($serverModel)->getDetails();
              $response['status'] = $details['state'] ?? 'offline';
              $response['utilization'] = $details['utilization'] ?? $response['utilization'];
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             $response['status'] = 'offline';
         }
         

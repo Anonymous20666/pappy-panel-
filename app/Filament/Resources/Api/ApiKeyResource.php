@@ -48,8 +48,7 @@ class ApiKeyResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->where('user_id', auth()->id());
+        return parent::getEloquentQuery();
     }
 
     public static function form(Schema $schema): Schema
@@ -117,7 +116,13 @@ class ApiKeyResource extends Resource
 
                 TextColumn::make('created_at')
                     ->label(trans('admin/api.created'))
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable(),
+
+                TextColumn::make('user.username')
+                    ->label(trans('admin/api.author'))
+                    ->searchable()
+                    ->sortable(),
             ])
             ->actions([
                 Action::make('revoke')
@@ -129,11 +134,7 @@ class ApiKeyResource extends Resource
                     ->modalDescription(trans('admin/api.revoke-warning'))
                     ->action(fn (ApiKey $record) => $record->delete())
                     ->successNotificationTitle(trans('admin/api.revoked')),
-            ])
-            ->modifyQueryUsing(
-                fn (Builder $query) =>
-                    $query->where('user_id', Auth::id())
-            );
+            ]);
     }
 
     public static function getPages(): array

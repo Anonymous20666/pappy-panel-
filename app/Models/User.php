@@ -206,7 +206,7 @@ class User extends Model implements
     {
         $rules = parent::getRules();
 
-        $rules['language'][] = new In(array_keys((new self())->getAvailableLanguages()));
+        $rules['language'][] = new In([...array_keys((new self())->getAvailableLanguages()), 'geo']);
         $rules['username'][] = new Username();
 
         return $rules;

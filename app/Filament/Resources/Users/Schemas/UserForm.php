@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Contracts\Repository\SettingsRepositoryInterface;
 use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -46,9 +47,12 @@ class UserForm
                             ->maxLength(191),
                         Select::make('language')
                             ->label(trans('admin/user.details.language'))
-                            ->options((new User())->getAvailableLanguages(true))
-                            ->default('en')
-                            ->required(),
+                            ->options(array_merge(
+                                ['geo' => trans('admin/user.details.geolocate')],
+                                (new User())->getAvailableLanguages(true)
+                            ))
+                            ->default(fn () => app(SettingsRepositoryInterface::class)->get('settings::app:locale', 'en'))
+                            ->dehydrateStateUsing(fn ($state) => $state ?: app(SettingsRepositoryInterface::class)->get('settings::app:locale', 'en')),
                     ])
                     ->columns(2)
                     ->columnSpan(6),

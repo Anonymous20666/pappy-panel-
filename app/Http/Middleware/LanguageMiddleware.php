@@ -29,7 +29,12 @@ class LanguageMiddleware
         $user = $request->user();
 
         if ($user !== null) {
-            $locale = $user->language;
+            if ($user->language === 'geo') {
+                $defaultLocale = $this->settings->get('settings::app:locale', config('app.locale', 'en'));
+                $locale = $this->resolveGeoLocale($request, $defaultLocale);
+            } else {
+                $locale = $user->language;
+            }
         } else {
             $defaultLocale = $this->settings->get('settings::app:locale', config('app.locale', 'en'));
             $geolocateEnabled = (bool) $this->settings->get('settings::app:locale:geolocate', false);

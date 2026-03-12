@@ -8,6 +8,7 @@ import StatBlock from '@/components/server/console/StatBlock';
 import useWebsocketEvent from '@/plugins/useWebsocketEvent';
 import classNames from 'classnames';
 import { capitalize } from '@/lib/strings';
+import { useTranslation } from 'react-i18next';
 
 type Stats = Record<'memory' | 'cpu' | 'disk' | 'uptime' | 'rx' | 'tx', number>;
 
@@ -25,6 +26,7 @@ const getBackgroundColor = (value: number, max: number | null): string | undefin
 };
 
 const ServerDetailsBlock = ({ className }: { className?: string }) => {
+    const { t } = useTranslation('server/console');
     const [stats, setStats] = useState<Stats>({ memory: 0, cpu: 0, disk: 0, uptime: 0, tx: 0, rx: 0 });
 
     const status = ServerContext.useStoreState((state) => state.status.value);
@@ -61,22 +63,30 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
         <div className={classNames('grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4', className)}>
             <StatBlock
                 icon={faClock}
-                title={'Uptime'}
+                title={t('uptime')}
                 color={getBackgroundColor(status === 'running' ? 0 : status !== 'offline' ? 9 : 10, 10)}
             >
                 {status === null ? (
-                    'Offline'
+                    t('offline')
                 ) : stats.uptime > 0 ? (
                     <UptimeDuration uptime={stats.uptime / 1000} />
                 ) : (
                     capitalize(status)
                 )}
             </StatBlock>
-            <StatBlock icon={faCloudDownloadAlt} title={'Network (Inbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.rx)}
+            <StatBlock icon={faCloudDownloadAlt} title={t('network-inbound')}>
+                {status === 'offline' ? (
+                    <span className={'text-gray-400'}>{t('offline')}</span>
+                ) : (
+                    bytesToString(stats.rx)
+                )}
             </StatBlock>
-            <StatBlock icon={faCloudUploadAlt} title={'Network (Outbound)'}>
-                {status === 'offline' ? <span className={'text-gray-400'}>Offline</span> : bytesToString(stats.tx)}
+            <StatBlock icon={faCloudUploadAlt} title={t('network-outbound')}>
+                {status === 'offline' ? (
+                    <span className={'text-gray-400'}>{t('offline')}</span>
+                ) : (
+                    bytesToString(stats.tx)
+                )}
             </StatBlock>
         </div>
     );

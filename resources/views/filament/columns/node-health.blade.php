@@ -26,14 +26,17 @@
                 });
                 if (r.ok) {
                     const j = await r.json();
-                    tooltip = 'v' + (j.version ?? '?');
+                    tooltip = ($el.dataset.versionPrefix ?? 'v') + (j.version ?? '?');
                     status = 'up';
                 } else {
-                    tooltip = 'HTTP ' + r.status + ' — check browser console';
+                    const httpTip = ($el.dataset.httpTemplate ?? 'HTTP __STATUS__').replace('__STATUS__', String(r.status));
+                    tooltip = httpTip + ' - ' + ($el.dataset.checkConsole ?? 'check browser console');
                     status = 'down';
                 }
             } catch (e) {
-                tooltip = e.message + ' — check browser console';
+                const err = e instanceof Error ? e.message : 'Unknown error';
+                const errTip = ($el.dataset.errorTemplate ?? '__ERROR__').replace('__ERROR__', err);
+                tooltip = errTip + ' - ' + ($el.dataset.checkConsole ?? 'check browser console');
                 status = 'down';
             }
             setTimeout(check, 5000);
@@ -41,6 +44,10 @@
     "
     data-url="{{ $url }}"
     data-token="{{ $token }}"
+    data-version-prefix="{{ trans('admin/node.table.health_version_prefix') }}"
+    data-http-template="{{ trans('admin/node.table.health_http_status', ['status' => '__STATUS__']) }}"
+    data-error-template="{{ trans('admin/node.table.health_error', ['error' => '__ERROR__']) }}"
+    data-check-console="{{ trans('admin/node.table.health_check_console') }}"
     @mouseenter="
         hovered = true;
         var tip = $refs.tip;

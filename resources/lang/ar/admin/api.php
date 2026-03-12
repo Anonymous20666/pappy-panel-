@@ -7,6 +7,7 @@ return [
     'memo' => 'ملاحظة',
     'last-used' => 'أخر استخدام',
     'created' => 'تاريخ الإنشاء',
+    'author' => 'Author',
     'never-used' => 'لم يستخدم أبدا',
 
     'revoke' => 'إلغاء',

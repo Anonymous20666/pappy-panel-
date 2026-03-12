@@ -66,9 +66,12 @@ const FlagIcon = styled.span`
 
 const NavbarLanguageSwitcher = () => {
     const user = useStoreState((state: ApplicationStore) => state.user.data);
+    const serverLocale = useStoreState((state: any) => state.settings.data?.locale || 'en');
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
     const [languages, setLanguages] = useState<Record<string, LanguageInfo>>({});
-    const [currentLang, setCurrentLang] = useState(user?.language || i18n.language);
+    const [currentLang, setCurrentLang] = useState(
+        user?.language && user.language !== 'geo' ? user.language : serverLocale
+    );
     const [isOpen, setIsOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 

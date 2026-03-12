@@ -7,6 +7,7 @@ return [
     'memo' => 'Memo',
     'last-used' => 'Last Used',
     'created' => 'Created On',
+    'author' => 'Author',
     'never-used' => 'Never Used',
 
     'revoke' => 'Revoke',

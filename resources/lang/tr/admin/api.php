@@ -7,6 +7,7 @@ return [
     'memo' => 'Not',
     'last-used' => 'Son Kullanım',
     'created' => 'Oluşturulma Tarihi',
+    'author' => 'Author',
     'never-used' => 'Hiç Kullanılmadı',
 
     'revoke' => 'İptal Et',

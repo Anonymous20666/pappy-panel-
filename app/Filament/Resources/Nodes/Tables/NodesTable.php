@@ -2,13 +2,11 @@
 
 namespace App\Filament\Resources\Nodes\Tables;
 
-use App\Models\Node;
-use App\Repositories\Wings\DaemonConfigurationRepository;
 use Filament\Actions;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Cache;
 
 class NodesTable
 {
@@ -16,30 +14,9 @@ class NodesTable
     {
         return $table
         ->columns([
-                IconColumn::make('health')
+                ViewColumn::make('health')
                     ->label(trans('admin/node.table.health'))
-                    ->trueIcon('heroicon-s-heart')
-                    ->falseIcon('heroicon-o-heart')
-                    ->state(function (Node $record): bool {
-                        return Cache::remember(
-                            'nodes.health.' . $record->id,
-                            now()->addSeconds(5), // No need to check health more than once every 5 seconds
-                            function () use ($record): bool {
-                                try {
-                                    // TODO: Consider if the CLIENT's Health should be used here because of CORS Errors otherwise being hard to debug
-                                    app(DaemonConfigurationRepository::class)
-                                        ->setNode($record)
-                                        ->getSystemInformation(2);
-                
-                                    return true;
-                                } catch (\Throwable) {
-                                    return false;
-                                }
-                            }
-                        );
-                    })
-                    ->boolean()
-                    ->sortable(),
+                    ->view('filament.columns.node-health'),
                     
                 TextColumn::make('name')
                     ->label(trans('admin/node.table.name'))

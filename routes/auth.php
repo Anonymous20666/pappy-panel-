@@ -42,12 +42,13 @@ Route::middleware(['throttle:authentication'])->group(function () {
     Route::post('/password', [Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])
         ->name('auth.post.forgot-password')
         ->middleware('captcha');
-});
 
-// Password reset routes. This endpoint is hit after going through
-// the forgot password routes to acquire a token (or after an account
-// is created).
-Route::post('/password/reset', Auth\ResetPasswordController::class)->name('auth.reset-password');
+    // Password reset route. This endpoint is hit after going through
+    // the forgot password routes to acquire a token (or after an account
+    // is created). Kept inside the throttle group to prevent brute-force
+    // attacks against reset tokens.
+    Route::post('/password/reset', Auth\ResetPasswordController::class)->name('auth.reset-password');
+});
 
 // Remove the guest middleware and apply the authenticated middleware to this endpoint,
 // so it cannot be used unless you're already logged in.

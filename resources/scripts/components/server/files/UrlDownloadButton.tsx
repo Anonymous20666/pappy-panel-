@@ -135,9 +135,7 @@ export default ({ className }: WithClassname) => {
                     {({ submitForm, isSubmitting }) => (
                         <>
                             <Form css={tw`m-0`}>
-                                <p className={'mb-3 text-sm text-gray-400'}>
-                                    {t('url-download.url-description')}
-                                </p>
+                                <p className={'mb-3 text-sm text-gray-400'}>{t('url-download.url-description')}</p>
                                 <Field
                                     autoFocus
                                     id={'url'}
@@ -150,11 +148,7 @@ export default ({ className }: WithClassname) => {
                                 <Button.Text className={'w-full sm:w-auto'} onClick={() => setOpen(false)}>
                                     {t('url-download.cancel')}
                                 </Button.Text>
-                                <Button
-                                    className={'w-full sm:w-auto'}
-                                    onClick={submitForm}
-                                    disabled={isSubmitting}
-                                >
+                                <Button className={'w-full sm:w-auto'} onClick={submitForm} disabled={isSubmitting}>
                                     {t('url-download.download')}
                                 </Button>
                             </Dialog.Footer>

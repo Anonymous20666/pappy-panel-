@@ -67,7 +67,13 @@ const NewDirectoryDialog = asDialog({
     };
 
     return (
-        <Formik onSubmit={submit} validationSchema={schema} validateOnChange={false} validateOnBlur={false} initialValues={{ directoryName: '' }}>
+        <Formik
+            onSubmit={submit}
+            validationSchema={schema}
+            validateOnChange={false}
+            validateOnBlur={false}
+            initialValues={{ directoryName: '' }}
+        >
             {({ submitForm, values }) => (
                 <>
                     <FlashMessageRender key={'files:directory-modal'} />

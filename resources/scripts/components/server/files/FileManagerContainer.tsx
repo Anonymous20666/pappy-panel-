@@ -6,6 +6,7 @@ import FileObjectRow from '@/components/server/files/FileObjectRow';
 import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
 import loadDirectory, { FileObject } from '@/api/server/files/loadDirectory';
 import NewDirectoryButton from '@/components/server/files/NewDirectoryButton';
+import UrlDownloadButton from '@/components/server/files/UrlDownloadButton';
 import { NavLink, useLocation } from 'react-router-dom';
 import Can from '@/components/elements/Can';
 import { ServerError } from '@/components/elements/ScreenBlock';
@@ -22,7 +23,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath, encodePathSegments } from '@/helpers';
 import style from './style.module.css';
-import { SearchIcon, XIcon, FolderIcon, DocumentIcon } from '@heroicons/react/solid';
+import { SearchIcon, XIcon, FolderIcon, FolderOpenIcon, DocumentIcon } from '@heroicons/react/solid';
 import Card from '@/reviactyl/ui/Card';
 import { useTranslation } from 'react-i18next';
 import ImageViewerModal from '@/components/server/files/ImageViewerModal';
@@ -82,6 +83,7 @@ export default () => {
         clearFlashes('files');
         setSelectedFiles([]);
         setDirectory(hashToPath(hash));
+        setInputValue('');
     }, [hash]);
 
     useEffect(() => {
@@ -213,6 +215,7 @@ export default () => {
                         <Can action={'file.create'}>
                             <div className={style.manager_actions}>
                                 <FileManagerStatus />
+                                <UrlDownloadButton />
                                 <NewDirectoryButton />
                                 <UploadButton />
                                 <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
@@ -234,7 +237,10 @@ export default () => {
                         isSearching && recursiveResults.length === 0 ? (
                             <Spinner size={'base'} centered />
                         ) : recursiveResults.length === 0 ? (
-                            <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
+                            <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                                <SearchIcon className={'w-10 h-10 mb-2 opacity-40'} />
+                                <p className={'text-sm'}>{t('no-results')}</p>
+                            </div>
                         ) : (
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -248,7 +254,10 @@ export default () => {
                             </motion.div>
                         )
                     ) : !filteredFiles.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
+                        <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                            <FolderOpenIcon className={'w-12 h-12 mb-2 opacity-40'} />
+                            <p className={'text-sm'}>{t('empty')}</p>
+                        </div>
                     ) : (
                         <motion.div
                             initial={{ opacity: 0 }}

@@ -36,9 +36,12 @@ import { Dialog } from '@/components/elements/dialog';
 type ModalType = 'rename' | 'move' | 'chmod';
 
 const StyledRow = styled.div<{ $danger?: boolean }>`
-    ${tw`p-2 flex items-center rounded-ui`};
-    ${(props) =>
-        props.$danger ? tw`hover:bg-red-100 hover:text-red-700` : tw`hover:bg-neutral-100 hover:text-neutral-700`};
+    ${tw`p-2 flex items-center rounded-ui w-full cursor-pointer`};
+    transition: 150ms all ease;
+
+    &:hover {
+        ${(props) => (props.$danger ? tw`text-red-700 bg-red-100` : tw`text-neutral-700 bg-neutral-100`)};
+    }
 `;
 
 interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -138,30 +141,29 @@ const FileDropdownMenu = ({ file }: { file: FileObject }) => {
                 You will not be able to recover the contents of&nbsp;
                 <span className={'font-semibold text-gray-50'}>{file.name}</span> once deleted.
             </Dialog.Confirm>
+            {modal === 'chmod' && (
+                <ChmodFileModal
+                    visible
+                    appear
+                    files={[{ file: file.name, mode: file.modeBits }]}
+                    onDismissed={() => setModal(null)}
+                />
+            )}
+            {(modal === 'rename' || modal === 'move') && (
+                <RenameFileModal
+                    visible
+                    appear
+                    files={[file.name]}
+                    useMoveTerminology={modal === 'move'}
+                    onDismissed={() => setModal(null)}
+                />
+            )}
+            <SpinnerOverlay visible={showSpinner} fixed size={'large'} />
             <DropdownMenu
                 ref={onClickRef}
                 renderToggle={(onClick) => (
                     <div css={tw`px-4 py-2 hover:text-white`} onClick={onClick}>
                         <FontAwesomeIcon icon={faEllipsisH} />
-                        {modal ? (
-                            modal === 'chmod' ? (
-                                <ChmodFileModal
-                                    visible
-                                    appear
-                                    files={[{ file: file.name, mode: file.modeBits }]}
-                                    onDismissed={() => setModal(null)}
-                                />
-                            ) : (
-                                <RenameFileModal
-                                    visible
-                                    appear
-                                    files={[file.name]}
-                                    useMoveTerminology={modal === 'move'}
-                                    onDismissed={() => setModal(null)}
-                                />
-                            )
-                        ) : null}
-                        <SpinnerOverlay visible={showSpinner} fixed size={'large'} />
                     </div>
                 )}
             >

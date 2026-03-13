@@ -6,4 +6,9 @@ return [
     'server-installing' => 'ಈ ಸರ್ವರ್ ಪ್ರಸ್ತುತ ಸ್ಥಾಪನಾ ಪ್ರಕ್ರಿಯೆಯನ್ನು ನಡೆಸುತ್ತಿದೆ ಮತ್ತು ಹೆಚ್ಚಿನ ಕ್ರಿಯೆಗಳು ಲಭ್ಯವಿಲ್ಲ.',
     'server-transferring' => 'ಈ ಸರ್ವರ್ ಪ್ರಸ್ತುತ ಮತ್ತೊಂದು ನೋಡ್‌ಗೆ ವರ್ಗಾಯಿಸಲಾಗುತ್ತಿದೆ ಮತ್ತು ಎಲ್ಲಾ ಕ್ರಿಯೆಗಳು ಲಭ್ಯವಿಲ್ಲ.',
     'run-command' => 'ಕಮಾಂಡ್ ಅನ್ನು ಟೈಪ್ ಮಾಡಿ...',
+    'connection-trouble' => "We're having trouble connecting to your server, please wait...",
+    'uptime' => 'Uptime',
+    'network-inbound' => 'Network (Inbound)',
+    'network-outbound' => 'Network (Outbound)',
+    'offline' => 'Offline',
 ];

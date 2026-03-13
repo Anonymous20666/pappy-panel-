@@ -18,6 +18,7 @@ return [
         'first_name' => 'ಮೊದಲ ಹೆಸರು',
         'last_name' => 'ಕೊನೆಯ ಹೆಸರು',
         'language' => 'ಭಾಷೆ',
+        'geolocate' => 'Geolocate (Automatic)',
         'password' => 'ಪಾಸ್‌ವರ್ಡ್',
         'password_confirmation' => 'ಪಾಸ್‌ವರ್ಡ್ ದೃಢೀಕರಿಸಿ',
         'root_admin' => 'ರೂಟ್ ನಿರ್ವಾಹಕ',

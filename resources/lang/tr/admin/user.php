@@ -18,6 +18,7 @@ return [
         'first_name' => 'Ad',
         'last_name' => 'Soyad',
         'language' => 'Dil',
+        'geolocate' => 'Geolocate (Automatic)',
         'password' => 'Parola',
         'password_confirmation' => 'Parolayı Onayla',
         'root_admin' => 'Kök Yönetici (Root)',

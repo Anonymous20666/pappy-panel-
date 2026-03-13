@@ -18,6 +18,7 @@ return [
         'first_name' => 'Nama Depan',
         'last_name' => 'Nama Belakang',
         'language' => 'Bahasa',
+        'geolocate' => 'Geolocate (Automatic)',
         'password' => 'Kata Sandi',
         'password_confirmation' => 'Konfirmasi Kata Sandi',
         'root_admin' => 'Administrator',

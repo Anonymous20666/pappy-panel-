@@ -67,7 +67,13 @@ const NewDirectoryDialog = asDialog({
     };
 
     return (
-        <Formik onSubmit={submit} validationSchema={schema} initialValues={{ directoryName: '' }}>
+        <Formik
+            onSubmit={submit}
+            validationSchema={schema}
+            validateOnChange={false}
+            validateOnBlur={false}
+            initialValues={{ directoryName: '' }}
+        >
             {({ submitForm, values }) => (
                 <>
                     <FlashMessageRender key={'files:directory-modal'} />
@@ -76,9 +82,9 @@ const NewDirectoryDialog = asDialog({
                         <p css={tw`mt-2 text-sm md:text-base break-all`}>
                             <span css={tw`text-neutral-200`}>This directory will be created as&nbsp;</span>
                             <Code>
-                                /home/container/
+                                /home/container
                                 <span css={tw`text-cyan-200`}>
-                                    {join(directory, values.directoryName).replace(/^(\.\.\/|\/)+/, '')}
+                                    /{join(directory, values.directoryName).replace(/^(\.\.\/|\/)+/, '')}
                                 </span>
                             </Code>
                         </p>

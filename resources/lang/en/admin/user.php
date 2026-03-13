@@ -18,6 +18,7 @@ return [
         'first_name' => 'First Name',
         'last_name' => 'Last Name',
         'language' => 'Language',
+        'geolocate' => 'Geolocate (Automatic)',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
         'root_admin' => 'Root Administrator',

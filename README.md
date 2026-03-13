@@ -19,8 +19,8 @@ Manage Game Servers like Never Before!
 * ` 🌍 ` **Multilingual**: Reviactyl is fully translatable and can be localized to your native language.
 * ` 🧩 ` **Extensions API**: ( Planned, check [#200](https://github.com/reviactyl/panel/discussions/200) for updates on this. )
 * ` 📦 ` **Modern Software**: Reviactyl is built with Laravel 12, Filament v5, React v19 Vite for User Dashboard.
-* ` 🔋 ` **Batteries Included**: Reviactyl has most of core features built-in, which means there's no need of spending money on addons.
-* ` 🍀 ` **Open Source & Free**: The first and only free frontend modifications for pterodactyl with premium-like customizability.
+* ` 🔋 ` **Batteries Included**: Reviactyl has most of core features built-in, which means there's no need of spending money for basic features.
+* ` 🍀 ` **Open Source & Free**: Reviactyl is the free open-source game server management panel built upon Pterodactyl offering modern codebase, security, & improvements.
 
 ## Sponsors
 
@@ -45,14 +45,17 @@ Contributors help the development of Reviactyl panel. To start contributing you 
   <img src="https://contrib.rocks/image?repo=reviactyl/panel" />
 </a>
 
-## Stargazers
+## v26 Milestone (The Future of Game-Server Management)
 
-<a href="https://github.com/reviactyl/panel/stargazers/">
-  <picture>
-    <source media="(prefers-color-scheme: light)" srcset="http://reporoster.com/stars/reviactyl/panel">
-    <img alt="stargazer-widget" src="http://reporoster.com/stars/dark/reviactyl/panel">
-  </picture>
-</a>
+Reviactyl v26 focuses on modernizing codebase, bringing more stability and exposing a beautiful frontend for admins & users.
+
+- [x] React 19 Migration
+- [X] Yarn -> pnpm Migration
+- [X] Laravel 12 Migration
+- [X] FilamentPHP for Admin Dashboard
+- [ ] Extensions System
+
+And much more!
 
 ## v2 Branch
 

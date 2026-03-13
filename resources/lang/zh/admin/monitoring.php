@@ -88,5 +88,13 @@ return [
             'network' => 'Network',
             'uptime'  => 'Uptime',
         ],
+        'states' => [
+            'running'  => 'Running',
+            'starting' => 'Starting',
+            'stopping' => 'Stopping',
+            'offline'  => 'Offline',
+            'crashed'  => 'Crashed',
+            'unknown'  => 'Unknown',
+        ],
     ],
 ];

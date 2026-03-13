@@ -31,12 +31,6 @@ I would like to extend my sincere thanks to the following sponsors for helping f
 |-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Tietokettu**](https://tietokettu.net/)                         | Tietokettu is a company that provides network and server services founded in 2019. Our goal is to create affordable and functional solutions for old ones.                                                                                                 |
 
-## License
-
-Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSES.md))
-
-Reviactyl™, Copyright © 2025 - 2026 Reviactyl and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))
-
 ## Contributors
 
 Contributors help the development of Reviactyl panel. To start contributing you have to [fork this repository](https://github.com/reviactyl/panel/fork) and [open a pull request](https://github.com/reviactyl/panel/compare).
@@ -70,3 +64,9 @@ https://github.com/reviactyl/panel/tree/2.0-develop
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=reviactyl/panel&type=Date" />
  </picture>
 </a>
+
+## License
+
+Pterodactyl® Copyright © 2015 - 2022 Dane Everitt and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSES.md))
+
+Reviactyl™, Copyright © 2025 - 2026 Reviactyl and contributors. (Licensed under [MIT](https://github.com/reviactyl/panel/blob/develop/LICENSE.md))

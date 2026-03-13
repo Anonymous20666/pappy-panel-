@@ -29,6 +29,21 @@ return [
         'servers' => '服务器',
     ],
     
+    'actions' => [
+        'import' => 'Import Egg',
+    ],
+
+    'import' => [
+        'file_label' => 'Egg File (JSON)',
+        'nest_label' => 'Associated Nest',
+        'file_not_found' => 'File not found',
+        'file_not_found_body' => 'Could not locate uploaded file.',
+        'invalid_format' => 'Invalid file format',
+        'invalid_format_body' => 'Unexpected file format received.',
+        'success' => 'Egg imported successfully',
+        'failed' => 'Failed to import egg',
+    ],
+
     'notices' => [
         'created' => '新的巢穴 :name 已成功创建。',
         'deleted' => '已成功从面板中删除所请求的巢穴。',

@@ -6,6 +6,7 @@ import FileObjectRow from '@/components/server/files/FileObjectRow';
 import FileManagerBreadcrumbs from '@/components/server/files/FileManagerBreadcrumbs';
 import loadDirectory, { FileObject } from '@/api/server/files/loadDirectory';
 import NewDirectoryButton from '@/components/server/files/NewDirectoryButton';
+import UrlDownloadButton from '@/components/server/files/UrlDownloadButton';
 import { NavLink, useLocation } from 'react-router-dom';
 import Can from '@/components/elements/Can';
 import { ServerError } from '@/components/elements/ScreenBlock';
@@ -22,7 +23,7 @@ import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FileActionCheckbox } from '@/components/server/files/SelectFileCheckbox';
 import { hashToPath, encodePathSegments } from '@/helpers';
 import style from './style.module.css';
-import { SearchIcon, XIcon, FolderIcon, DocumentIcon } from '@heroicons/react/solid';
+import { SearchIcon, XIcon, FolderIcon, FolderOpenIcon, DocumentIcon } from '@heroicons/react/solid';
 import Card from '@/reviactyl/ui/Card';
 import { useTranslation } from 'react-i18next';
 import ImageViewerModal from '@/components/server/files/ImageViewerModal';
@@ -73,15 +74,20 @@ export default () => {
     const [selectedImage, setSelectedImage] = useState<{ url: string; name: string } | null>(null);
 
     const [inputValue, setInputValue] = useState('');
+    const [searchExpanded, setSearchExpanded] = useState(false);
     const [query, setQuery] = useState('');
     const [recursiveResults, setRecursiveResults] = useState<SearchResult[]>([]);
     const [isSearching, setIsSearching] = useState(false);
     const searchGenRef = useRef(0);
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    const isSearchExpanded = searchExpanded || !!inputValue;
 
     useEffect(() => {
         clearFlashes('files');
         setSelectedFiles([]);
         setDirectory(hashToPath(hash));
+        setInputValue('');
+        setSearchExpanded(false);
     }, [hash]);
 
     useEffect(() => {
@@ -92,6 +98,12 @@ export default () => {
         const timer = setTimeout(() => setQuery(inputValue), 300);
         return () => clearTimeout(timer);
     }, [inputValue]);
+
+    useEffect(() => {
+        if (isSearchExpanded) {
+            searchInputRef.current?.focus();
+        }
+    }, [isSearchExpanded]);
 
     useEffect(() => {
         if (!query) {
@@ -186,39 +198,74 @@ export default () => {
                             checked={!query && selectedFilesLength > 0 && selectedFilesLength === filteredFiles.length}
                             onChange={onSelectAllClick}
                         />
-                        <div role='search' className='relative flex items-center flex-1 min-w-0'>
-                            <SearchIcon className='absolute left-2 h-4 w-4 text-neutral-400 pointer-events-none' />
-                            <input
-                                type='text'
-                                placeholder={t('search.placeholder')}
-                                aria-label={t('search.placeholder')}
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Escape') setInputValue('');
-                                }}
-                                className='w-full bg-neutral-700 rounded pl-8 pr-8 py-1.5 text-sm text-neutral-100 placeholder-neutral-400 border border-neutral-600 focus:outline-none focus:border-primary-400'
-                            />
-                            {inputValue && (
+                        <div
+                            role='search'
+                            className={`relative flex items-center min-w-0 ${
+                                isSearchExpanded ? 'flex-1' : 'flex-none w-10'
+                            }`}
+                        >
+                            {isSearchExpanded ? (
+                                <>
+                                    <SearchIcon className='absolute left-2 h-4 w-4 text-neutral-400 pointer-events-none' />
+                                    <input
+                                        ref={searchInputRef}
+                                        type='text'
+                                        placeholder={t('search.placeholder')}
+                                        aria-label={t('search.placeholder')}
+                                        value={inputValue}
+                                        onChange={(e) => setInputValue(e.target.value)}
+                                        onBlur={() => {
+                                            if (!inputValue) setSearchExpanded(false);
+                                        }}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Escape') {
+                                                if (inputValue) {
+                                                    setInputValue('');
+                                                } else {
+                                                    setSearchExpanded(false);
+                                                }
+                                            }
+                                        }}
+                                        className='w-full bg-neutral-700 rounded pl-8 pr-8 py-1.5 text-sm text-neutral-100 placeholder-neutral-400 border border-neutral-600 focus:outline-none focus:border-primary-400'
+                                    />
+                                    <button
+                                        type='button'
+                                        aria-label={t('search.clear')}
+                                        onClick={() => {
+                                            if (inputValue) {
+                                                setInputValue('');
+                                            } else {
+                                                setSearchExpanded(false);
+                                            }
+                                        }}
+                                        className='absolute right-2 text-neutral-400 hover:text-neutral-200'
+                                    >
+                                        <XIcon className='h-4 w-4' />
+                                    </button>
+                                </>
+                            ) : (
                                 <button
                                     type='button'
-                                    aria-label={t('search.clear')}
-                                    onClick={() => setInputValue('')}
-                                    className='absolute right-2 text-neutral-400 hover:text-neutral-200'
+                                    aria-label={t('search.placeholder')}
+                                    onClick={() => setSearchExpanded(true)}
+                                    className='flex items-center justify-center w-10 h-10 rounded bg-neutral-700 border border-neutral-600 text-neutral-300 hover:text-neutral-100 hover:border-neutral-500 transition-colors'
                                 >
-                                    <XIcon className='h-4 w-4' />
+                                    <SearchIcon className='h-4 w-4' />
                                 </button>
                             )}
                         </div>
                         <Can action={'file.create'}>
-                            <div className={style.manager_actions}>
-                                <FileManagerStatus />
-                                <NewDirectoryButton />
-                                <UploadButton />
-                                <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                    <Button>{t('new-file')}</Button>
-                                </NavLink>
-                            </div>
+                            {!isSearchExpanded && (
+                                <div className={style.manager_actions}>
+                                    <FileManagerStatus />
+                                    <UrlDownloadButton />
+                                    <NewDirectoryButton />
+                                    <UploadButton />
+                                    <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
+                                        <Button>{t('new-file')}</Button>
+                                    </NavLink>
+                                </div>
+                            )}
                         </Can>
                     </div>
                     <div className='flex items-center mt-2'>
@@ -234,7 +281,10 @@ export default () => {
                         isSearching && recursiveResults.length === 0 ? (
                             <Spinner size={'base'} centered />
                         ) : recursiveResults.length === 0 ? (
-                            <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
+                            <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                                <SearchIcon className={'w-10 h-10 mb-2 opacity-40'} />
+                                <p className={'text-sm'}>{t('no-results')}</p>
+                            </div>
                         ) : (
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -248,7 +298,10 @@ export default () => {
                             </motion.div>
                         )
                     ) : !filteredFiles.length ? (
-                        <p css={tw`text-sm text-neutral-400 text-center`}>{t('empty')}</p>
+                        <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                            <FolderOpenIcon className={'w-12 h-12 mb-2 opacity-40'} />
+                            <p className={'text-sm'}>{t('empty')}</p>
+                        </div>
                     ) : (
                         <motion.div
                             initial={{ opacity: 0 }}

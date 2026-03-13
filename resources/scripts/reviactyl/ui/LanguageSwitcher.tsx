@@ -15,9 +15,12 @@ interface LanguageInfo {
 const LanguageSwitcher = () => {
     const { t } = useTranslation('dashboard/account');
     const user = useStoreState((state: ApplicationStore) => state.user.data);
+    const serverLocale = useStoreState((state: any) => state.settings.data?.locale || 'en');
     const setUserData = useStoreActions((actions: any) => actions.user.setUserData);
     const [languages, setLanguages] = useState<Record<string, LanguageInfo>>({});
-    const [currentLang, setCurrentLang] = useState(user?.language || i18n.language);
+    const [currentLang, setCurrentLang] = useState(
+        user?.language && user.language !== 'geo' ? user.language : serverLocale
+    );
 
     useEffect(() => {
         fetch('/locales/list.json')
@@ -67,7 +70,7 @@ export const LocaleLoader = () => {
     // via GeoIP and stored in SiteConfiguration), not hard-coded 'en'.
     const userLanguage = useStoreState((state: any) => state.user.data?.language);
     const serverLocale = useStoreState((state: any) => state.settings.data?.locale || 'en');
-    const effectiveLanguage = userLanguage || serverLocale;
+    const effectiveLanguage = userLanguage && userLanguage !== 'geo' ? userLanguage : serverLocale;
 
     useEffect(() => {
         if (effectiveLanguage && effectiveLanguage !== i18n.language) {

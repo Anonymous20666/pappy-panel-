@@ -62,6 +62,7 @@ return [
         'min-length' => '密码长度至少为8个字符。',
         'confirm-label' => '确认密码',
         'label' => '注册',
+        'create-account' => 'Create Account',
     ],
     
     'failed' => '未找到与这些凭证匹配的账户。',

@@ -18,6 +18,7 @@ return [
         'first_name' => 'Förnamn',
         'last_name' => 'Efternamn',
         'language' => 'Språk',
+        'geolocate' => 'Geolocate (Automatic)',
         'password' => 'Lösenord',
         'password_confirmation' => 'Bekräfta lösenord',
         'root_admin' => 'Root-administratör',

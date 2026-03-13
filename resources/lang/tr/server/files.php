@@ -10,6 +10,11 @@ return [
     'archive' => 'Arşivle',
     'delete' => 'Sil',
     'create-directory' => 'Dizin Oluştur',
+    'file-name-label' => 'File Name',
+    'file-name-description' => 'Enter the name that this file should be saved as.',
+    'create-file' => 'Create File',
+    'file-mode-label' => 'File Mode',
+    'update' => 'Update',
     'url-download' => [
         'button' => 'URL Download',
         'url-label' => 'File URL',

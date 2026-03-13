@@ -62,6 +62,7 @@ return [
         'min-length' => 'Passwords must be at least 8 characters in length.',
         'confirm-label' => 'Confirm Password',
         'label' => 'Register',
+        'create-account' => 'Create Account',
     ],
     
     'failed' => 'Tidak ada akun yang cocok dengan kredensial tersebut.',

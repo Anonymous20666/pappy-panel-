@@ -38,9 +38,11 @@ class DropdownMenu extends React.PureComponent<Props, State> {
         const menu = this.menu.current;
 
         if (this.state.visible && !prevState.visible && menu) {
-            document.addEventListener('click', this.windowListener);
-            document.addEventListener('contextmenu', this.contextMenuListener);
             menu.style.left = `${Math.round(this.state.posX - menu.clientWidth)}px`;
+            setTimeout(() => {
+                document.addEventListener('click', this.windowListener);
+                document.addEventListener('contextmenu', this.contextMenuListener);
+            }, 0);
         }
 
         if (!this.state.visible && prevState.visible) {

@@ -6,10 +6,12 @@ import ContentContainer from '@/components/elements/ContentContainer';
 import { motion } from 'framer-motion';
 import Spinner from '@/components/elements/Spinner';
 import tw from 'twin.macro';
+import { useTranslation } from 'react-i18next';
 
 const reconnectErrors = ['jwt: exp claim is invalid', 'jwt: created too far in past (denylist)'];
 
 export default () => {
+    const { t } = useTranslation('server/console');
     let updatingToken = false;
     const [error, setError] = useState<'connecting' | string>('');
     const { connected, instance } = ServerContext.useStoreState((state) => state.socket);
@@ -118,9 +120,7 @@ export default () => {
                 {error === 'connecting' ? (
                     <>
                         <Spinner size={'small'} />
-                        <p css={tw`ml-2 text-sm text-red-100`}>
-                            We&apos;re having some trouble connecting to your server, please wait...
-                        </p>
+                        <p css={tw`ml-2 text-sm text-red-100`}>{t('connection-trouble')}</p>
                     </>
                 ) : (
                     <p css={tw`ml-2 text-sm text-white`}>{error}</p>

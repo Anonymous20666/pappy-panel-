@@ -39,22 +39,22 @@ class ActivityLogResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('actor.name')
-                    ->label('User')
+                    ->label(trans('admin/activity_log.columns.user'))
                     ->description(fn (ActivityLog $record) => $record->actor?->email)
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('event')
-                    ->label('Action')
+                    ->label(trans('admin/activity_log.columns.action'))
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('ip')
-                    ->label('IP Address')
+                    ->label(trans('strings.ip'))
                     ->searchable(),
 
                 TextColumn::make('timestamp')
-                    ->label('Time')
+                    ->label(trans('admin/activity_log.columns.time'))
                     ->dateTime()
                     ->sortable(),
             ])

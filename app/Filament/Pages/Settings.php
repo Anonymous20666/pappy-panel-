@@ -147,7 +147,7 @@ class Settings extends Page implements HasSchemas
                         ->schema($this->securitySettings()),
 
                     Tab::make('oauth')
-                        ->label(trans('admin/settings.oauth.title'))
+                        ->label('OAuth') // Untranslated because this is a common acronym that stands for "Open Authorization" and is shared across languages.
                         ->icon('tabler-navigation')
                         ->schema($this->oauthSettings()),
 
@@ -239,7 +239,7 @@ class Settings extends Page implements HasSchemas
                         ->columnSpan(1),
 
                     Toggle::make('app:pwa')
-                        ->label('Progressive Web App')
+                        ->label(trans('admin/settings.overview.pwa'))
                         ->inline(false)
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -253,13 +253,13 @@ class Settings extends Page implements HasSchemas
     private function securitySettings(): array
     {
         return [
-            Section::make('CAPTCHA')
+            Section::make('CAPTCHA') // Untranslated because this is a common term, it's acronym stands for "Completely Automated Public Turing test to tell Computers and Humans Apart" and is widely recognized as is.
                 ->columns(2)
                 ->schema([
                     ToggleButtons::make('captcha:provider')
                         ->label(trans('admin/settings.security.provider'))
                         ->options([
-                            'disable' => 'Disabled',
+                            'disable' => trans('admin/settings.security.disabled'),
                             'recaptcha' => 'reCAPTCHA',
                             'turnstile' => 'Turnstile',
                         ])
@@ -274,22 +274,22 @@ class Settings extends Page implements HasSchemas
                         ->columnSpan(2),
 
                     TextInput::make('captcha:recaptcha:website_key')
-                        ->label('reCAPTCHA Site Key')
+                        ->label(trans('admin/settings.security.recaptcha-site-key'))
                         ->columnSpan(1)
                         ->visible(fn ($get) => $get('captcha:provider') === 'recaptcha'),
 
                     TextInput::make('captcha:recaptcha:secret_key')
-                        ->label('reCAPTCHA Secret Key')
+                        ->label(trans('admin/settings.security.recaptcha-secret-key'))
                         ->columnSpan(1)
                         ->visible(fn ($get) => $get('captcha:provider') === 'recaptcha'),
 
                     TextInput::make('captcha:turnstile:site_key')
-                        ->label('Turnstile Site Key')
+                        ->label(trans('admin/settings.security.turnstile-site-key'))
                         ->columnSpan(1)
                         ->visible(fn ($get) => $get('captcha:provider') === 'turnstile'),
 
                     TextInput::make('captcha:turnstile:secret_key')
-                        ->label('Turnstile Secret Key')
+                        ->label(trans('admin/settings.security.turnstile-secret-key'))
                         ->columnSpan(1)
                         ->visible(fn ($get) => $get('captcha:provider') === 'turnstile'),
                 ]),
@@ -299,7 +299,7 @@ class Settings extends Page implements HasSchemas
     private function oauthSettings(): array
     {
         return [
-            Section::make('Google')
+            Section::make('Google') // Untranslated because this is a proper noun, it's the name of a company.
                 ->columns(3)
                 ->icon('tabler-brand-google')
                 ->collapsible()
@@ -335,7 +335,7 @@ class Settings extends Page implements HasSchemas
                         ),
                 ]),
 
-            Section::make('Discord')
+            Section::make('Discord') // Untranslated because this is a proper noun, it's the name of a social platform.
                 ->columns(3)
                 ->icon('tabler-brand-discord')
                 ->collapsible()
@@ -371,7 +371,7 @@ class Settings extends Page implements HasSchemas
                         ),
                 ]),
 
-            Section::make('Github')
+            Section::make('GitHub') // Untranslated because this is a proper noun, it's the name of a company.
                 ->columns(3)
                 ->icon('tabler-brand-github')
                 ->collapsible()
@@ -431,7 +431,7 @@ class Settings extends Page implements HasSchemas
                     Select::make('mail:mailers:smtp:encryption')
                         ->label(trans('admin/settings.mail.encryption-label'))
                         ->options([
-                            null => 'None',
+                            null => trans('admin/settings.mail.none'),
                             'tls' => 'TLS',
                             'ssl' => 'SSL',
                         ])
@@ -559,7 +559,7 @@ class Settings extends Page implements HasSchemas
         }
 
         Notification::make()
-            ->title('Settings saved')
+            ->title(trans('admin/settings.overview.saved'))
             ->success()
             ->send();
 
@@ -596,12 +596,12 @@ class Settings extends Page implements HasSchemas
                 ->notify(new \App\Notifications\MailTested(auth()->user()));
 
             Notification::make()
-                ->title('Test email sent')
+                ->title(trans('admin/settings.mail.test-sent'))
                 ->success()
                 ->send();
         } catch (\Exception $exception) {
             Notification::make()
-                ->title('Failed to send test email')
+                ->title(trans('admin/settings.mail.test-failed'))
                 ->body($exception->getMessage())
                 ->danger()
                 ->send();
@@ -612,7 +612,7 @@ class Settings extends Page implements HasSchemas
     {
         return [
             Action::make('save')
-                ->label('Save')
+                ->label(trans('admin/settings.overview.save-btn'))
                 ->icon('tabler-device-floppy')
                 ->action('save')
                 ->keyBindings(['mod+s']),

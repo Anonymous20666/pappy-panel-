@@ -22,19 +22,19 @@ class NodesRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
+                    ->label(trans('strings.id'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('location.short')
-                    ->label('Location')
+                    ->label(trans('admin/node.table.location'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('fqdn')
-                    ->label('FQDN')
+                    ->label(trans('admin/node.table.fqdn'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('servers_count')
-                    ->label('Servers')
+                    ->label(trans('admin/node.table.servers'))
                     ->counts('servers')
                     ->sortable(),
             ])
@@ -45,7 +45,7 @@ class NodesRelationManager extends RelationManager
                 AttachAction::make()
                     ->preloadRecordSelect()
                     ->recordSelectSearchColumns(['name', 'fqdn'])
-                    ->label('Attach Node'),
+                    ->label(trans('admin/mounts.actions.attach_node')),
             ])
             ->actions([
                 DetachAction::make(),

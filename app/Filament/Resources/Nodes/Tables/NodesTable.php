@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Nodes\Tables;
 
-use App\Models\Node;
 use Filament\Actions;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -16,7 +15,7 @@ class NodesTable
         return $table
         ->columns([
                 ViewColumn::make('health')
-                    ->label('Health')
+                    ->label(trans('admin/node.table.health'))
                     ->view('filament.columns.node-health'),
                     
                 TextColumn::make('name')

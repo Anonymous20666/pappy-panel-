@@ -22,13 +22,13 @@ class EggsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('id')
-                    ->label('ID')
+                    ->label(trans('strings.id'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nest.name')
-                    ->label('Nest')
+                    ->label(trans('admin/nests.label'))
                     ->sortable(),
                 Tables\Columns\TextColumn::make('author')
                     ->searchable(),
@@ -40,7 +40,7 @@ class EggsRelationManager extends RelationManager
                 AttachAction::make()
                     ->preloadRecordSelect()
                     ->recordSelectSearchColumns(['name', 'author'])
-                    ->label('Attach Egg'),
+                    ->label(trans('admin/mounts.actions.attach_egg')),
             ])
             ->actions([
                 DetachAction::make(),

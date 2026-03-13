@@ -215,11 +215,11 @@ class NodeForm
                                     ->columns(2),
                             ]),
 
-                        Tab::make('Configuration')
+                        Tab::make(trans('admin/node.sections.configuration.title'))
                             ->icon('heroicon-o-rocket-launch')
                             ->schema([
                                 Section::make()
-                                    ->description('Configuration File')
+                                    ->description(trans('admin/node.sections.configuration.config_description'))
                                     ->schema([
                                         CodeEntry::make('config')
                                             ->label('/etc/pterodactyl/config.yml')
@@ -231,24 +231,24 @@ class NodeForm
                                     ])
                                     ->visible(fn ($record) => $record && $record->id),
                                 Section::make()
-                                    ->description('Generate a custom deployment command that can be used to configure Wings on the target server.')
+                                    ->description(trans('admin/node.sections.configuration.deploy_description'))
                                     ->schema([
                                         Actions::make([
                                             Action::make('generateToken')
-                                                ->label('Generate Deployment Token')
+                                                ->label(trans('admin/node.deployment.generate_label'))
                                                 ->icon('heroicon-o-key')
                                                 ->color('success')
-                                                ->modalHeading('Auto-Deploy Command')
-                                                ->modalDescription('Run this command on your node to automatically configure Wings.')
-                                                ->modalSubmitActionLabel('Close')
+                                                ->modalHeading(trans('admin/node.deployment.modal_heading'))
+                                                ->modalDescription(trans('admin/node.deployment.modal_description'))
+                                                ->modalSubmitActionLabel(trans('admin/node.deployment.modal_close'))
                                                 ->modalCancelAction(false)
                                                 ->form([
                                                     Textarea::make('command')
-                                                        ->label('Deployment Command')
+                                                        ->label(trans('admin/node.deployment.command_label'))
                                                         ->rows(3)
                                                         ->disabled()
                                                         ->extraAttributes(['class' => 'font-mono text-xs'])
-                                                        ->helperText('Copy and run this command on your node server.'),
+                                                        ->helperText(trans('admin/node.deployment.command_helper')),
                                                 ])
                                                 ->fillForm(function ($record) {
                                                     if (!$record || !$record->id) {
@@ -292,8 +292,8 @@ class NodeForm
                                                         $command = "cd /etc/pterodactyl && sudo wings configure --panel-url {$appUrl} --token {$token} --node {$record->id}{$allowInsecure}";
                                                         
                                                         Notification::make()
-                                                            ->title('Token Generated Successfully')
-                                                            ->body('Copy and run the command below on your node.')
+                                                            ->title(trans('admin/node.deployment.token_success'))
+                                                            ->body(trans('admin/node.deployment.token_success_body'))
                                                             ->success()
                                                             ->send();
                                                         

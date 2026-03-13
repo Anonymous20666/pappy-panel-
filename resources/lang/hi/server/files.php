@@ -10,6 +10,11 @@ return [
     'archive' => 'आर्काइव',
     'delete' => 'हटाएं',
     'create-directory' => 'निर्देशिका बनाएँ',
+    'file-name-label' => 'File Name',
+    'file-name-description' => 'Enter the name that this file should be saved as.',
+    'create-file' => 'Create File',
+    'file-mode-label' => 'File Mode',
+    'update' => 'Update',
     'url-download' => [
         'button' => 'URL Download',
         'url-label' => 'File URL',

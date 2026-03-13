@@ -29,6 +29,21 @@ return [
         'servers' => 'Servers',
     ],
     
+    'actions' => [
+        'import' => 'Import Egg',
+    ],
+
+    'import' => [
+        'file_label' => 'Egg File (JSON)',
+        'nest_label' => 'Associated Nest',
+        'file_not_found' => 'File not found',
+        'file_not_found_body' => 'Could not locate uploaded file.',
+        'invalid_format' => 'Invalid file format',
+        'invalid_format_body' => 'Unexpected file format received.',
+        'success' => 'Egg imported successfully',
+        'failed' => 'Failed to import egg',
+    ],
+
     'notices' => [
         'created' => 'एक नया नेस्ट, :name, सफलतापूर्वक बनाया गया है।',
         'deleted' => 'पैनल से अनुरोधित नेस्ट सफलतापूर्वक हटा दिया गया है।',

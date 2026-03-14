@@ -250,14 +250,16 @@ export default () => {
                                         </button>
                                     </>
                                 ) : (
-                                    <button
-                                        type='button'
-                                        aria-label={t('search.placeholder')}
-                                        onClick={() => setSearchExpanded(true)}
-                                        className='flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300 hover:text-gray-100 hover:border-gray-500 transition-colors'
-                                    >
-                                        <SearchIcon className='h-4 w-4' />
-                                    </button>
+                                    <Tooltip content={t('search.button')}>
+                                        <button
+                                            type='button'
+                                            aria-label={t('search.button')}
+                                            onClick={() => setSearchExpanded(true)}
+                                            className='flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300 hover:text-gray-100 hover:border-gray-500 transition-colors'
+                                        >
+                                            <SearchIcon className='h-4 w-4' />
+                                        </button>
+                                    </Tooltip>
                                 )}
                             </div>
                         </div>

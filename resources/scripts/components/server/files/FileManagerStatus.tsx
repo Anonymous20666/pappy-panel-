@@ -7,6 +7,7 @@ import { Button } from '@/components/elements/button/index';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import Code from '@/components/elements/Code';
 import { useSignal } from '@preact/signals-react';
+import { WithClassname } from '@/components/types';
 
 const svgProps = {
     cx: 16,
@@ -71,7 +72,7 @@ const FileUploadListDialog = asDialog({
     description: 'The following files are being uploaded to your server.',
 })(FileUploadList);
 
-export default () => {
+export default ({ className }: WithClassname) => {
     const open = useSignal(false);
 
     const count = ServerContext.useStoreState((state) => Object.keys(state.files.uploads).length);
@@ -91,7 +92,10 @@ export default () => {
             {count > 0 && (
                 <Tooltip content={`${count} files are uploading, click to view`}>
                     <button
-                        className={'flex items-center justify-center w-10 h-10'}
+                        className={
+                            className ||
+                            'flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300 hover:text-gray-100 hover:border-gray-500 transition-colors'
+                        }
                         onClick={() => (open.value = true)}
                     >
                         <Spinner progress={(progress.uploaded / progress.total) * 100} className={'w-8 h-8'} />

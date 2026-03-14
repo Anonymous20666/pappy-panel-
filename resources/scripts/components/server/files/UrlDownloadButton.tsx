@@ -117,7 +117,12 @@ export default ({ className, compact = false }: WithClassname & { compact?: bool
         <>
             {downloading && (
                 <Tooltip content={`Downloading${downloadingFile ? ` ${downloadingFile}` : ''}...`}>
-                    <button className={'relative flex items-center justify-center w-10 h-10'}>
+                    <button
+                        className={
+                            className ||
+                            'relative flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300'
+                        }
+                    >
                         <DownloadSpinner className={'w-8 h-8'} />
                         <CloudDownloadIcon className={'h-3 absolute mx-auto animate-pulse'} />
                     </button>

@@ -48,12 +48,12 @@ const RecursiveFileRow = ({ file, serverId }: { file: SearchResult; serverId: st
         : `/server/${serverId}/files#${encodePathSegments(file.fullPath)}`;
     const Icon = file.isFile ? DocumentIcon : FolderIcon;
     return (
-        <div className='flex items-center py-2 px-2 border-b border-neutral-700 last:border-0 hover:bg-neutral-700 rounded'>
-            <Icon className='w-4 h-4 mr-3 flex-none text-neutral-400' aria-hidden='true' />
-            <NavLink to={to} className='flex-1 text-sm text-neutral-200 truncate hover:text-primary-400 min-w-0'>
+        <div className='flex items-center py-2 px-2 border-b border-gray-700 last:border-0 hover:bg-gray-700 rounded-ui'>
+            <Icon className='w-4 h-4 mr-3 flex-none text-gray-400' aria-hidden='true' />
+            <NavLink to={to} className='flex-1 text-sm text-gray-200 truncate hover:text-primary-400 min-w-0'>
                 {file.fullPath}
             </NavLink>
-            {file.isFile && <span className='text-xs text-neutral-500 ml-3 flex-none'>{bytesToString(file.size)}</span>}
+            {file.isFile && <span className='text-xs text-gray-500 ml-3 flex-none'>{bytesToString(file.size)}</span>}
         </div>
     );
 };
@@ -200,94 +200,94 @@ export default () => {
                             checked={!query && selectedFilesLength > 0 && selectedFilesLength === filteredFiles.length}
                             onChange={onSelectAllClick}
                         />
-                        <div
-                            role='search'
-                            className={`relative flex items-center min-w-0 ${
-                                isSearchExpanded ? 'flex-1' : 'flex-none w-10'
-                            }`}
-                        >
-                            {isSearchExpanded ? (
-                                <>
-                                    <SearchIcon className='absolute left-2 h-4 w-4 text-neutral-400 pointer-events-none' />
-                                    <input
-                                        ref={searchInputRef}
-                                        type='text'
-                                        placeholder={t('search.placeholder')}
-                                        aria-label={t('search.placeholder')}
-                                        value={inputValue}
-                                        onChange={(e) => setInputValue(e.target.value)}
-                                        onBlur={() => {
-                                            if (!inputValue) setSearchExpanded(false);
-                                        }}
-                                        onKeyDown={(e) => {
-                                            if (e.key === 'Escape') {
+                        <div className='order-3 w-full min-w-0 md:order-none md:flex-1 md:w-auto'>
+                            <FileManagerBreadcrumbs renderLeft={<></>} />
+                        </div>
+                        <div className='order-2 md:order-none md:ml-auto flex items-center gap-1 w-full md:w-auto'>
+                            <div
+                                role='search'
+                                className={`relative flex items-center min-w-0 transition-all duration-200 ease-in-out ${
+                                    isSearchExpanded ? 'flex-1 md:w-72 lg:w-96' : 'w-10'
+                                }`}
+                            >
+                                {isSearchExpanded ? (
+                                    <>
+                                        <SearchIcon className='absolute left-2 h-4 w-4 text-gray-400 pointer-events-none' />
+                                        <input
+                                            ref={searchInputRef}
+                                            type='text'
+                                            placeholder={t('search.placeholder')}
+                                            aria-label={t('search.placeholder')}
+                                            value={inputValue}
+                                            onChange={(e) => setInputValue(e.target.value)}
+                                            onBlur={() => {
+                                                if (!inputValue) setSearchExpanded(false);
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Escape') {
+                                                    if (inputValue) {
+                                                        setInputValue('');
+                                                    } else {
+                                                        setSearchExpanded(false);
+                                                    }
+                                                }
+                                            }}
+                                            className='w-full bg-gray-700 rounded-ui pl-8 pr-8 py-1.5 text-sm text-gray-100 placeholder-gray-400 border border-gray-600 focus:outline-none focus:border-primary-400'
+                                        />
+                                        <button
+                                            type='button'
+                                            aria-label={t('search.clear')}
+                                            onClick={() => {
                                                 if (inputValue) {
                                                     setInputValue('');
                                                 } else {
                                                     setSearchExpanded(false);
                                                 }
-                                            }
-                                        }}
-                                        className='w-full bg-neutral-700 rounded pl-8 pr-8 py-1.5 text-sm text-neutral-100 placeholder-neutral-400 border border-neutral-600 focus:outline-none focus:border-primary-400'
-                                    />
+                                            }}
+                                            className='absolute right-2 text-gray-400 hover:text-gray-200'
+                                        >
+                                            <XIcon className='h-4 w-4' />
+                                        </button>
+                                    </>
+                                ) : (
                                     <button
                                         type='button'
-                                        aria-label={t('search.clear')}
-                                        onClick={() => {
-                                            if (inputValue) {
-                                                setInputValue('');
-                                            } else {
-                                                setSearchExpanded(false);
-                                            }
-                                        }}
-                                        className='absolute right-2 text-neutral-400 hover:text-neutral-200'
+                                        aria-label={t('search.placeholder')}
+                                        onClick={() => setSearchExpanded(true)}
+                                        className='flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300 hover:text-gray-100 hover:border-gray-500 transition-colors'
                                     >
-                                        <XIcon className='h-4 w-4' />
+                                        <SearchIcon className='h-4 w-4' />
                                     </button>
-                                </>
-                            ) : (
-                                <button
-                                    type='button'
-                                    aria-label={t('search.placeholder')}
-                                    onClick={() => setSearchExpanded(true)}
-                                    className='flex items-center justify-center w-10 h-10 rounded bg-neutral-700 border border-neutral-600 text-neutral-300 hover:text-neutral-100 hover:border-neutral-500 transition-colors'
-                                >
-                                    <SearchIcon className='h-4 w-4' />
-                                </button>
-                            )}
-                        </div>
-                        <div className='order-3 w-full min-w-0 md:order-none md:flex-1 md:w-auto'>
-                            <FileManagerBreadcrumbs />
+                                )}
+                            </div>
                         </div>
                         <Can action={'file.create'}>
-                            {!isSearchExpanded && (
-                                <>
-                                    <div className={style.manager_actions_mobile}>
-                                        <FileManagerStatus />
-                                        <UrlDownloadButton />
-                                        <NewDirectoryButton />
-                                        <UploadButton />
-                                        <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                            <Button>{t('new-file')}</Button>
+                            <>
+                                <div className={style.manager_actions_mobile}>
+                                    <FileManagerStatus />
+                                    <UrlDownloadButton />
+                                    <NewDirectoryButton />
+                                    <UploadButton />
+                                    <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
+                                        <Button>{t('new-file')}</Button>
+                                    </NavLink>
+                                </div>
+                                <div className={style.manager_actions_compact}>
+                                    <FileManagerStatus className={style.icon_action} />
+                                    <UrlDownloadButton compact className={style.icon_action} />
+                                    <NewDirectoryButton compact className={style.icon_action} />
+                                    <UploadButton compact className={style.icon_action} />
+                                    <Tooltip content={t('new-file')}>
+                                        <NavLink
+                                            to={`/server/${id}/files/new${window.location.hash}`}
+                                            className={style.icon_action}
+                                            aria-label={t('new-file')}
+                                        >
+                                            <PlusSmIcon className='h-5 w-5' />
                                         </NavLink>
-                                    </div>
-                                    <div className={style.manager_actions_compact}>
-                                        <FileManagerStatus />
-                                        <UrlDownloadButton compact className={style.icon_action} />
-                                        <NewDirectoryButton compact className={style.icon_action} />
-                                        <UploadButton compact className={style.icon_action} />
-                                        <Tooltip content={t('new-file')}>
-                                            <NavLink
-                                                to={`/server/${id}/files/new${window.location.hash}`}
-                                                className={style.icon_action}
-                                                aria-label={t('new-file')}
-                                            >
-                                                <PlusSmIcon className='h-5 w-5' />
-                                            </NavLink>
-                                        </Tooltip>
-                                    </div>
-                                </>
-                            )}
+                                    </Tooltip>
+                                </div>
+                            </>
                         </Can>
                     </div>
                 </Card>
@@ -300,7 +300,7 @@ export default () => {
                         isSearching && recursiveResults.length === 0 ? (
                             <Spinner size={'base'} centered />
                         ) : recursiveResults.length === 0 ? (
-                            <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                            <div className={'flex flex-col items-center justify-center py-10 text-gray-500'}>
                                 <SearchIcon className={'w-10 h-10 mb-2 opacity-40'} />
                                 <p className={'text-sm'}>{t('no-results')}</p>
                             </div>
@@ -310,14 +310,14 @@ export default () => {
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.15, ease: 'easeIn' }}
                             >
-                                {isSearching && <p css={tw`text-xs text-neutral-500 text-center mb-2`}>Searching...</p>}
+                                {isSearching && <p css={tw`text-xs text-gray-500 text-center mb-2`}>Searching...</p>}
                                 {recursiveResults.map((file) => (
                                     <RecursiveFileRow key={file.fullPath} file={file} serverId={id} />
                                 ))}
                             </motion.div>
                         )
                     ) : !filteredFiles.length ? (
-                        <div className={'flex flex-col items-center justify-center py-10 text-neutral-500'}>
+                        <div className={'flex flex-col items-center justify-center py-10 text-gray-500'}>
                             <FolderOpenIcon className={'w-12 h-12 mb-2 opacity-40'} />
                             <p className={'text-sm'}>{t('empty')}</p>
                         </div>

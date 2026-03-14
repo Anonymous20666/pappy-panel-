@@ -108,7 +108,7 @@ export default () => {
             {hash.replace(/^#/, '').endsWith('.pteroignore') && (
                 <Card className='!rounded-none mb-1'>
                     <div css={tw`mb-4 p-4 rounded-ui border border-gray-600`}>
-                        <p css={tw`text-neutral-300 text-sm`}>
+                        <p css={tw`text-gray-300 text-sm`}>
                             You&apos;re editing a{' '}
                             <code css={tw`font-mono bg-gray-900 rounded-ui border border-gray-600 py-px px-1`}>
                                 .pteroignore

@@ -161,7 +161,7 @@ export default ({ className, compact = false }: WithClassname & { compact?: bool
                                 }
                             >
                                 <UploadIcon className={'w-10 h-10 flex-shrink-0'} />
-                                <p className={'font-header flex-1 text-lg text-neutral-100 text-center'}>
+                                <p className={'font-header flex-1 text-lg text-gray-100 text-center'}>
                                     Drag and drop files to upload.
                                 </p>
                             </Card>

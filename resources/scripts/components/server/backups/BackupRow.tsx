@@ -27,6 +27,7 @@ export default ({ backup, className }: Props) => {
     const handleContextMenu = (e: MouseEvent) => {
         if (!backup.completedAt) return;
         e.preventDefault();
+        e.stopPropagation();
         contextMenuRef.current?.triggerMenu(e.clientX);
     };
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import {
     faBoxOpen,
     faCloudDownloadAlt,
@@ -28,7 +28,11 @@ interface Props {
     backup: ServerBackup;
 }
 
-export default ({ backup }: Props) => {
+export interface BackupContextMenuHandle {
+    triggerMenu: (posX: number) => void;
+}
+
+const BackupContextMenu = forwardRef<BackupContextMenuHandle, Props>(({ backup }, ref) => {
     const { t } = useTranslation('server/backups');
     const uuid = ServerContext.useStoreState((state) => state.server.data!.uuid);
     const setServerFromState = ServerContext.useStoreActions((actions) => actions.server.setServerFromState);
@@ -37,6 +41,13 @@ export default ({ backup }: Props) => {
     const [truncate, setTruncate] = useState(false);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { mutate } = getServerBackups();
+    const dropdownRef = useRef<DropdownMenu>(null);
+
+    useImperativeHandle(ref, () => ({
+        triggerMenu: (posX: number) => {
+            dropdownRef.current?.triggerMenu(posX);
+        },
+    }));
 
     const doDownload = () => {
         setLoading(true);
@@ -162,6 +173,7 @@ export default ({ backup }: Props) => {
             <SpinnerOverlay visible={loading} fixed />
             {backup.isSuccessful ? (
                 <DropdownMenu
+                    ref={dropdownRef}
                     renderToggle={(onClick) => (
                         <button
                             onClick={onClick}
@@ -214,4 +226,6 @@ export default ({ backup }: Props) => {
             )}
         </>
     );
-};
+});
+
+export default BackupContextMenu;

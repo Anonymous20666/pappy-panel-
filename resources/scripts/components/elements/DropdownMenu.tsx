@@ -37,11 +37,15 @@ class DropdownMenu extends React.PureComponent<Props, State> {
     override componentDidUpdate(_prevProps: Readonly<Props>, prevState: Readonly<State>) {
         const menu = this.menu.current;
 
-        if (this.state.visible && !prevState.visible && menu) {
-            document.addEventListener('click', this.windowListener);
-            // Delay by one tick so the contextmenu event that opened this menu
-            // finishes propagating before we register the listener that closes it.
-            setTimeout(() => document.addEventListener('contextmenu', this.contextMenuListener), 0);
+        if (this.state.visible && menu && (!prevState.visible || prevState.posX !== this.state.posX)) {
+            if (!prevState.visible) {
+                // Delay by one tick so the event that opened this menu finishes
+                // propagating before we register listeners that can close it.
+                setTimeout(() => {
+                    document.addEventListener('click', this.windowListener);
+                    document.addEventListener('contextmenu', this.contextMenuListener);
+                }, 0);
+            }
             menu.style.left = `${Math.round(this.state.posX - menu.clientWidth)}px`;
         }
 
@@ -57,10 +61,22 @@ class DropdownMenu extends React.PureComponent<Props, State> {
 
     onClickHandler = (e: React.MouseEvent<any, MouseEvent>) => {
         e.preventDefault();
-        this.triggerMenu(e.clientX);
+        this.toggleMenu(e.clientX);
     };
 
-    contextMenuListener = () => this.setState({ visible: false });
+    contextMenuListener = (e: MouseEvent) => {
+        const menu = this.menu.current;
+
+        if (!this.state.visible || !menu) {
+            return;
+        }
+
+        if (e.defaultPrevented || e.target === menu || menu.contains(e.target as Node)) {
+            return;
+        }
+
+        this.setState({ visible: false });
+    };
 
     windowListener = (e: MouseEvent) => {
         const menu = this.menu.current;
@@ -78,11 +94,17 @@ class DropdownMenu extends React.PureComponent<Props, State> {
         }
     };
 
-    triggerMenu = (posX: number) =>
+    toggleMenu = (posX: number) =>
         this.setState((s) => ({
             posX: !s.visible ? posX : s.posX,
             visible: !s.visible,
         }));
+
+    triggerMenu = (posX: number) =>
+        this.setState({
+            posX,
+            visible: true,
+        });
 
     override render() {
         return (

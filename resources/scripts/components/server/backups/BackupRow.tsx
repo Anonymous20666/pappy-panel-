@@ -1,3 +1,4 @@
+import { useRef, type MouseEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArchive, faEllipsisH, faLock } from '@fortawesome/free-solid-svg-icons';
 import { format, formatDistanceToNow } from 'date-fns';
@@ -5,7 +6,7 @@ import Spinner from '@/components/elements/Spinner';
 import { bytesToString } from '@/lib/formatters';
 import Can from '@/components/elements/Can';
 import useWebsocketEvent from '@/plugins/useWebsocketEvent';
-import BackupContextMenu from '@/components/server/backups/BackupContextMenu';
+import BackupContextMenu, { BackupContextMenuHandle } from '@/components/server/backups/BackupContextMenu';
 import tw from 'twin.macro';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import getServerBackups from '@/api/swr/getServerBackups';
@@ -21,6 +22,14 @@ interface Props {
 export default ({ backup, className }: Props) => {
     const { t } = useTranslation('server/backups');
     const { mutate } = getServerBackups();
+    const contextMenuRef = useRef<BackupContextMenuHandle>(null);
+
+    const handleContextMenu = (e: MouseEvent) => {
+        if (!backup.completedAt) return;
+        e.preventDefault();
+        e.stopPropagation();
+        contextMenuRef.current?.triggerMenu(e.clientX);
+    };
 
     useWebsocketEvent(`${SocketEvent.BACKUP_COMPLETED}:${backup.uuid}` as SocketEvent, (data) => {
         try {
@@ -49,7 +58,11 @@ export default ({ backup, className }: Props) => {
     });
 
     return (
-        <GreyRowBox css={tw`flex-wrap md:flex-nowrap items-center`} className={className}>
+        <GreyRowBox
+            css={tw`flex-wrap md:flex-nowrap items-center`}
+            className={className}
+            onContextMenu={handleContextMenu}
+        >
             <div css={tw`flex items-center truncate w-full md:flex-1`}>
                 <div css={tw`mr-4`}>
                     {backup.completedAt !== null ? (
@@ -94,7 +107,7 @@ export default ({ backup, className }: Props) => {
                             <FontAwesomeIcon icon={faEllipsisH} />
                         </div>
                     ) : (
-                        <BackupContextMenu backup={backup} />
+                        <BackupContextMenu ref={contextMenuRef} backup={backup} />
                     )}
                 </div>
             </Can>

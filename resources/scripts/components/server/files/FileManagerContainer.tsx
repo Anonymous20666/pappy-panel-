@@ -30,6 +30,8 @@ import ImageViewerModal from '@/components/server/files/ImageViewerModal';
 import getFileDownloadUrl from '@/api/server/files/getFileDownloadUrl';
 import { join } from 'pathe';
 import { bytesToString } from '@/lib/formatters';
+import Tooltip from '@/components/elements/tooltip/Tooltip';
+import { PlusSmIcon } from '@heroicons/react/solid';
 
 const sortFiles = (files: FileObject[]): FileObject[] => {
     const sortedFiles: FileObject[] = files
@@ -254,22 +256,39 @@ export default () => {
                                 </button>
                             )}
                         </div>
+                        <div className='order-3 w-full min-w-0 md:order-none md:flex-1 md:w-auto'>
+                            <FileManagerBreadcrumbs />
+                        </div>
                         <Can action={'file.create'}>
                             {!isSearchExpanded && (
-                                <div className={style.manager_actions}>
-                                    <FileManagerStatus />
-                                    <UrlDownloadButton />
-                                    <NewDirectoryButton />
-                                    <UploadButton />
-                                    <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
-                                        <Button>{t('new-file')}</Button>
-                                    </NavLink>
-                                </div>
+                                <>
+                                    <div className={style.manager_actions_mobile}>
+                                        <FileManagerStatus />
+                                        <UrlDownloadButton />
+                                        <NewDirectoryButton />
+                                        <UploadButton />
+                                        <NavLink to={`/server/${id}/files/new${window.location.hash}`}>
+                                            <Button>{t('new-file')}</Button>
+                                        </NavLink>
+                                    </div>
+                                    <div className={style.manager_actions_compact}>
+                                        <FileManagerStatus />
+                                        <UrlDownloadButton compact className={style.icon_action} />
+                                        <NewDirectoryButton compact className={style.icon_action} />
+                                        <UploadButton compact className={style.icon_action} />
+                                        <Tooltip content={t('new-file')}>
+                                            <NavLink
+                                                to={`/server/${id}/files/new${window.location.hash}`}
+                                                className={style.icon_action}
+                                                aria-label={t('new-file')}
+                                            >
+                                                <PlusSmIcon className='h-5 w-5' />
+                                            </NavLink>
+                                        </Tooltip>
+                                    </div>
+                                </>
                             )}
                         </Can>
-                    </div>
-                    <div className='flex items-center mt-2'>
-                        <FileManagerBreadcrumbs />
                     </div>
                 </Card>
             </ErrorBoundary>

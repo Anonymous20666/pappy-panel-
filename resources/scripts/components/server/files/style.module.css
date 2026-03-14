@@ -1,4 +1,4 @@
-.manager_actions {
+.manager_actions_mobile {
     @apply grid grid-cols-2 sm:grid-cols-3 w-full gap-4 mb-4;
 
     & button {
@@ -6,11 +6,32 @@
     }
 
     @screen md {
-        @apply flex flex-1 items-center justify-end gap-1 mb-0;
+        @apply hidden;
+    }
+}
 
-        & button {
-            @apply w-auto;
-        }
+.manager_actions_compact {
+    @apply hidden;
+
+    @screen md {
+        @apply flex items-center justify-end gap-1;
+    }
+
+    & button {
+        @apply w-10 h-10 p-0 inline-flex items-center justify-center;
+    }
+}
+
+.icon_action {
+    @apply w-10 h-10 inline-flex items-center justify-center rounded bg-neutral-700 border border-neutral-600 text-neutral-300;
+    transition: 150ms all ease;
+
+    &:hover {
+        @apply text-neutral-100 border-neutral-500 bg-neutral-600;
+    }
+
+    @screen md {
+        @apply flex;
     }
 }
 

@@ -36,4 +36,9 @@ return [
         'user_mountable' => 'Kullanıcı Bağlayabilir',
     ],
 
+    'actions' => [
+        'attach_egg' => 'Attach Egg',
+        'attach_node' => 'Attach Node',
+    ],
+
 ];

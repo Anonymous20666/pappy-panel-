@@ -93,4 +93,12 @@ return [
     'save' => 'Sauvegarder',
     'copyright' => '&copy; :year Reviactyl™ Software',
     'local_network' => 'Local Network',
+    'server-status' => 'Server Status',
+    'loading-server-status' => 'Loading server status...',
+    'no-description' => 'No description provided.',
+    'resource-usage' => 'Resource Usage',
+    'server-not-found' => 'Server not found.',
+    'copied-value-to-clipboard' => 'Copied ":text" to clipboard.',
+    'copied-to-clipboard' => 'Copied text to clipboard.',
+    'copied' => 'Copied!',
 ];

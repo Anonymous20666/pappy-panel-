@@ -62,6 +62,7 @@ return [
         'min-length' => 'Parolalar en az 8 karakter uzunluğunda olmalıdır.',
         'confirm-label' => 'Parolayı Onayla',
         'label' => 'Kayıt Ol',
+        'create-account' => 'Create Account',
     ],
     
     'failed' => 'Bu kimlik bilgileriyle eşleşen bir hesap bulunamadı.',

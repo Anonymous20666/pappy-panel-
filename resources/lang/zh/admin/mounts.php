@@ -36,4 +36,9 @@ return [
         'user_mountable' => '允许用户挂载',
     ],
 
+    'actions' => [
+        'attach_egg' => 'Attach Egg',
+        'attach_node' => 'Attach Node',
+    ],
+
 ];

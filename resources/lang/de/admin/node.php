@@ -21,6 +21,11 @@ return [
             'title' => 'Daemon-Konfiguration',
             'description' => 'Konfigurieren Sie daemon-spezifische Einstellungen.',
         ],
+        'configuration' => [
+            'title' => 'Configuration',
+            'config_description' => 'Configuration File',
+            'deploy_description' => 'Generate a custom deployment command that can be used to configure Wings on the target server.',
+        ],
     ],
 
     'fields' => [
@@ -110,6 +115,11 @@ return [
     ],
 
     'table' => [
+        'health' => 'Health',
+        'health_version_prefix' => 'v',
+        'health_http_status' => 'HTTP :status',
+        'health_error' => ':error',
+        'health_check_console' => 'check browser console',
         'id' => 'ID',
         'uuid' => 'UUID',
         'name' => 'Name',
@@ -132,11 +142,31 @@ return [
         'updated' => 'Aktualisiert',
     ],
 
+    'filters' => [
+        'public' => 'Public',
+        'maintenance' => 'Maintenance',
+        'public_true' => 'Public',
+        'public_false' => 'Private',
+        'maintenance_true' => 'Under Maintenance',
+        'maintenance_false' => 'Active',
+    ],
+
     'actions' => [
         'create' => 'Erstellen',
         'edit' => 'Bearbeiten',
         'delete' => 'Löschen',
         'view' => 'Ansehen',
+    ],
+
+    'deployment' => [
+        'generate_label' => 'Generate Deployment Token',
+        'modal_heading' => 'Auto-Deploy Command',
+        'modal_description' => 'Run this command on your node to automatically configure Wings.',
+        'modal_close' => 'Close',
+        'command_label' => 'Deployment Command',
+        'command_helper' => 'Copy and run this command on your node server.',
+        'token_success' => 'Token Generated Successfully',
+        'token_success_body' => 'Copy and run the command below on your node.',
     ],
 
     'messages' => [

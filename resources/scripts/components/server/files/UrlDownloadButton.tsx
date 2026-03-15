@@ -61,7 +61,7 @@ const extractFilename = (url: string): string | null => {
     }
 };
 
-export default ({ className }: WithClassname) => {
+export default ({ className, compact = false }: WithClassname & { compact?: boolean }) => {
     const { t } = useTranslation('server/files');
     const [open, setOpen] = useState(false);
     const [downloading, setDownloading] = useState(false);
@@ -117,7 +117,12 @@ export default ({ className }: WithClassname) => {
         <>
             {downloading && (
                 <Tooltip content={`Downloading${downloadingFile ? ` ${downloadingFile}` : ''}...`}>
-                    <button className={'relative flex items-center justify-center w-10 h-10'}>
+                    <button
+                        className={
+                            className ||
+                            'relative flex items-center justify-center w-10 h-10 rounded-ui bg-gray-700 border border-gray-600 text-gray-300'
+                        }
+                    >
                         <DownloadSpinner className={'w-8 h-8'} />
                         <CloudDownloadIcon className={'h-3 absolute mx-auto animate-pulse'} />
                     </button>
@@ -156,9 +161,21 @@ export default ({ className }: WithClassname) => {
                     )}
                 </Formik>
             </Dialog>
-            <Button.Text onClick={() => setOpen(true)} className={className}>
-                {t('url-download.button')}
-            </Button.Text>
+            {compact ? (
+                <Tooltip content={t('url-download.button')}>
+                    <Button.Text
+                        onClick={() => setOpen(true)}
+                        className={className}
+                        aria-label={t('url-download.button')}
+                    >
+                        <CloudDownloadIcon className='h-5 w-5' />
+                    </Button.Text>
+                </Tooltip>
+            ) : (
+                <Button.Text onClick={() => setOpen(true)} className={className}>
+                    {t('url-download.button')}
+                </Button.Text>
+            )}
         </>
     );
 };

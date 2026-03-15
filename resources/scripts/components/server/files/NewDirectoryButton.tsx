@@ -16,6 +16,8 @@ import { Dialog, DialogWrapperContext } from '@/components/elements/dialog';
 import Code from '@/components/elements/Code';
 import asDialog from '@/hoc/asDialog';
 import { useTranslation } from 'react-i18next';
+import Tooltip from '@/components/elements/tooltip/Tooltip';
+import { FolderAddIcon } from '@heroicons/react/solid';
 
 interface Values {
     directoryName: string;
@@ -80,7 +82,7 @@ const NewDirectoryDialog = asDialog({
                     <Form css={tw`m-0`}>
                         <Field autoFocus id={'directoryName'} name={'directoryName'} label={'Name'} />
                         <p css={tw`mt-2 text-sm md:text-base break-all`}>
-                            <span css={tw`text-neutral-200`}>This directory will be created as&nbsp;</span>
+                            <span css={tw`text-gray-200`}>This directory will be created as&nbsp;</span>
                             <Code>
                                 /home/container
                                 <span css={tw`text-cyan-200`}>
@@ -103,16 +105,28 @@ const NewDirectoryDialog = asDialog({
     );
 });
 
-export default ({ className }: WithClassname) => {
+export default ({ className, compact = false }: WithClassname & { compact?: boolean }) => {
     const { t } = useTranslation('server/files');
     const [open, setOpen] = useState(false);
 
     return (
         <>
             <NewDirectoryDialog open={open} onClose={setOpen.bind(this, false)} />
-            <Button.Text onClick={setOpen.bind(this, true)} className={className}>
-                {t('create-directory')}
-            </Button.Text>
+            {compact ? (
+                <Tooltip content={t('create-directory')}>
+                    <Button.Text
+                        onClick={setOpen.bind(this, true)}
+                        className={className}
+                        aria-label={t('create-directory')}
+                    >
+                        <FolderAddIcon className='h-5 w-5' />
+                    </Button.Text>
+                </Tooltip>
+            ) : (
+                <Button.Text onClick={setOpen.bind(this, true)} className={className}>
+                    {t('create-directory')}
+                </Button.Text>
+            )}
         </>
     );
 };

@@ -13,6 +13,7 @@ import { WithClassname } from '@/components/types';
 import Portal from '@/components/elements/Portal';
 import Card from '@/reviactyl/ui/Card';
 import { UploadIcon } from '@heroicons/react/solid';
+import Tooltip from '@/components/elements/tooltip/Tooltip';
 
 function isFileOrDirectory(event: DragEvent): boolean {
     if (!event.dataTransfer?.types) {
@@ -22,7 +23,7 @@ function isFileOrDirectory(event: DragEvent): boolean {
     return event.dataTransfer.types.some((value) => value.toLowerCase() === 'files');
 }
 
-export default ({ className }: WithClassname) => {
+export default ({ className, compact = false }: WithClassname & { compact?: boolean }) => {
     const fileUploadInput = useRef<HTMLInputElement>(null);
 
     const [visible, setVisible] = useState(false);
@@ -160,7 +161,7 @@ export default ({ className }: WithClassname) => {
                                 }
                             >
                                 <UploadIcon className={'w-10 h-10 flex-shrink-0'} />
-                                <p className={'font-header flex-1 text-lg text-neutral-100 text-center'}>
+                                <p className={'font-header flex-1 text-lg text-gray-100 text-center'}>
                                     Drag and drop files to upload.
                                 </p>
                             </Card>
@@ -182,9 +183,24 @@ export default ({ className }: WithClassname) => {
                 }}
                 multiple
             />
-            <Button className={className} onClick={() => fileUploadInput.current && fileUploadInput.current.click()}>
-                Upload
-            </Button>
+            {compact ? (
+                <Tooltip content={'Upload'}>
+                    <Button
+                        className={className}
+                        aria-label={'Upload'}
+                        onClick={() => fileUploadInput.current && fileUploadInput.current.click()}
+                    >
+                        <UploadIcon className='h-5 w-5' />
+                    </Button>
+                </Tooltip>
+            ) : (
+                <Button
+                    className={className}
+                    onClick={() => fileUploadInput.current && fileUploadInput.current.click()}
+                >
+                    Upload
+                </Button>
+            )}
         </>
     );
 };

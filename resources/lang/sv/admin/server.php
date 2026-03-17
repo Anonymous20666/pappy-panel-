@@ -80,7 +80,7 @@ return [
         ],
         'image' => [
             'label' => 'Docker-image',
-            'placeholder' => 't.ex. ghcr.io/pterodactyl/yolks:java_17',
+            'placeholder' => 'e.g. ghcr.io/reviactyl/images:java_17',
             'helper' => 'Docker-image som används för att köra denna server.',
             'custom' => 'Anpassad',
         ],

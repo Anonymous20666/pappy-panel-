@@ -53,7 +53,7 @@ class ProcessRunnableCommand extends Command
      *
      * @see https://github.com/pterodactyl/panel/issues/2609
      */
-    protected function processSchedule(Schedule $schedule)
+    protected function processSchedule(Schedule $schedule): void
     {
         if ($schedule->tasks->isEmpty()) {
             return;
@@ -69,7 +69,7 @@ class ProcessRunnableCommand extends Command
         } catch (\Throwable $exception) {
             Log::error($exception, ['schedule_id' => $schedule->id]);
 
-            $this->error("An error was encountered while processing Schedule #$schedule->id: " . $exception->getMessage());
+            $this->error("An error was encountered while processing Schedule #{$schedule->id}: " . $exception->getMessage());
         }
     }
 }

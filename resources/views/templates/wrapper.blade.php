@@ -51,7 +51,7 @@ SOFTWARE.
     @section('user-data')
         @if (!is_null(Auth::user()))
             <script>
-                window.PterodactylUser = {!! json_encode(Auth::user()->toVueObject()) !!};
+                window.PanelUser = {!! json_encode(Auth::user()->toVueObject()) !!};
             </script>
         @endif
         @if (!empty($siteConfiguration))
@@ -74,9 +74,9 @@ SOFTWARE.
         </script>
         <script>
             window.SocialLoginConfiguration = {!! json_encode([
-                'google' => config('pterodactyl.auth.google_enabled'),
-                'discord' => config('pterodactyl.auth.discord_enabled'),
-                'github' => config('pterodactyl.auth.github_enabled'),
+                'google' => config('panel.auth.google_enabled'),
+                'discord' => config('panel.auth.discord_enabled'),
+                'github' => config('panel.auth.github_enabled'),
             ]) !!};
         </script>
     @show

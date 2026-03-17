@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Transformer;
 
-use App\Exceptions\PterodactylException;
+use App\Exceptions\PanelException;
 
-class InvalidTransformerLevelException extends PterodactylException
+class InvalidTransformerLevelException extends PanelException
 {
 }

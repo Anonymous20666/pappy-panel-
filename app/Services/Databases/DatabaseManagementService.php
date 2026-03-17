@@ -71,7 +71,7 @@ class DatabaseManagementService
      */
     public function create(Server $server, array $data): Database
     {
-        if (!config('pterodactyl.client_features.databases.enabled')) {
+        if (!config('panel.client_features.databases.enabled')) {
             throw new DatabaseClientFeatureNotEnabledException();
         }
 
@@ -121,7 +121,7 @@ class DatabaseManagementService
         } catch (\Exception $exception) {
             try {
                 // This is actually incorrect, it can be null in the case that the $database model
-                // itself isn't able to be created in Pterodactyl's database.
+                // itself isn't able to be created in Reviactyl's database.
                 //
                 // @phpstan-ignore-next-line instanceof.alwaysFalse
                 if ($database instanceof Database) {

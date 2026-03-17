@@ -6,7 +6,7 @@
 @endsection
 
 @section('content-header')
-    <h1>Panel Settings<small>Configure Pterodactyl to your liking.</small></h1>
+    <h1>Panel Settings<small>Configure Reviactyl to your liking.</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.index') }}">Admin</a></li>
         <li class="active">Settings</li>
@@ -80,20 +80,20 @@
                                     <div class="btn-group btn-group-sm" data-toggle="buttons">
                                         @php
                                             $level = old(
-                                                'pterodactyl:auth:2fa_required',
-                                                config('pterodactyl.auth.2fa_required'),
+                                                'panel:auth:2fa_required',
+                                                config('panel.auth.2fa_required'),
                                             );
                                         @endphp
                                         <label class="btn btn-primary @if ($level == 0) active @endif">
-                                            <input type="radio" name="pterodactyl:auth:2fa_required" autocomplete="off"
+                                            <input type="radio" name="panel:auth:2fa_required" autocomplete="off"
                                                 value="0" @if ($level == 0) checked @endif> @lang('admin/settings.overview.not-required')
                                         </label>
                                         <label class="btn btn-primary @if ($level == 1) active @endif">
-                                            <input type="radio" name="pterodactyl:auth:2fa_required" autocomplete="off"
+                                            <input type="radio" name="panel:auth:2fa_required" autocomplete="off"
                                                 value="1" @if ($level == 1) checked @endif> @lang('admin/settings.overview.admin-only')
                                         </label>
                                         <label class="btn btn-primary @if ($level == 2) active @endif">
-                                            <input type="radio" name="pterodactyl:auth:2fa_required" autocomplete="off"
+                                            <input type="radio" name="panel:auth:2fa_required" autocomplete="off"
                                                 value="2" @if ($level == 2) checked @endif> @lang('admin/settings.overview.all-users')
                                         </label>
                                     </div>

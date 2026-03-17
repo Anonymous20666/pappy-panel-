@@ -14,12 +14,12 @@ export interface Allocation {
 
 export interface Server {
     /**
-     * This value is determined by the presence of the `PTERODACTYL_USE_SERVER_IDENTIFIERS` environment
+     * This value is determined by the presence of the `PANEL_USE_SERVER_IDENTIFIERS` environment
      * variable which changes what the API can respond with. It will eventually be removed and referenced
      * as the "identifier" key, but this allows users to slowly opt-in to these new URLs and trial it
      * as they wish.
      *
-     * @deprecated this is the "uuid_short" which will be removed in 2.0, prefer use of "identifier"
+     * @deprecated this is the "uuid_short" which will be removed in future releases, prefer use of "identifier"
      */
     id: string | Identifier<'serv'>;
     identifier: Identifier<'serv'>; // Set from "server_identifier" and should be used moving forward to reference a server.

@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('server:capture-stats')->everyTenMinutes();
         
-        if (config('pterodactyl.telemetry.enabled')) {
+        if (config('panel.telemetry.enabled')) {
             $this->registerTelemetry($schedule);
         }
     }

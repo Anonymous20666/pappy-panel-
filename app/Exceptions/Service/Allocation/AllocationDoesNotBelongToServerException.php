@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Service\Allocation;
 
-use App\Exceptions\PterodactylException;
+use App\Exceptions\PanelException;
 
-class AllocationDoesNotBelongToServerException extends PterodactylException
+class AllocationDoesNotBelongToServerException extends PanelException
 {
 }

@@ -23,23 +23,23 @@ class SettingsServiceProvider extends ServiceProvider
         'app:locale',
         'app:debug',
         'app:pwa',
-        'pterodactyl:guzzle:timeout',
-        'pterodactyl:guzzle:connect_timeout',
-        'pterodactyl:console:count',
-        'pterodactyl:console:frequency',
-        'pterodactyl:auth:2fa_required',
-        'pterodactyl:client_features:allocations:enabled',
-        'pterodactyl:client_features:allocations:range_start',
-        'pterodactyl:client_features:allocations:range_end',
-        'pterodactyl:auth:google_enabled',
-        'pterodactyl:auth:google_client_id',
-        'pterodactyl:auth:google_client_secret',
-        'pterodactyl:auth:discord_enabled',
-        'pterodactyl:auth:discord_client_id',
-        'pterodactyl:auth:discord_client_secret',
-        'pterodactyl:auth:github_enabled',
-        'pterodactyl:auth:github_client_id',
-        'pterodactyl:auth:github_client_secret',
+        'panel:guzzle:timeout',
+        'panel:guzzle:connect_timeout',
+        'panel:console:count',
+        'panel:console:frequency',
+        'panel:auth:2fa_required',
+        'panel:client_features:allocations:enabled',
+        'panel:client_features:allocations:range_start',
+        'panel:client_features:allocations:range_end',
+        'panel:auth:google_enabled',
+        'panel:auth:google_client_id',
+        'panel:auth:google_client_secret',
+        'panel:auth:discord_enabled',
+        'panel:auth:discord_client_id',
+        'panel:auth:discord_client_secret',
+        'panel:auth:github_enabled',
+        'panel:auth:github_client_id',
+        'panel:auth:github_client_secret',
     ];
 
     /**
@@ -62,9 +62,9 @@ class SettingsServiceProvider extends ServiceProvider
      */
     protected static array $encrypted = [
         'mail:mailers:smtp:password',
-        'pterodactyl:auth:google_client_secret',
-        'pterodactyl:auth:discord_client_secret',
-        'pterodactyl:auth:github_client_secret',
+        'panel:auth:google_client_secret',
+        'panel:auth:discord_client_secret',
+        'panel:auth:github_client_secret',
     ];
 
     /**

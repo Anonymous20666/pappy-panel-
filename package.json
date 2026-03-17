@@ -2,7 +2,7 @@
     "name": "@reviactyl/panel",
     "version": "26.0.0-dev",
     "private": true,
-    "description": "Open-source game panel built upon pterodactyl.",
+    "description": "Reviactyl is a modern and open-source game server management panel built using Laravel, React, FilamentPHP, Vite, and Go.",
     "engines": {
         "node": ">=22"
     },

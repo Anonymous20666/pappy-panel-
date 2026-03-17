@@ -12,7 +12,7 @@ class CreateNest extends CreateRecord
     protected function mutateFormDataBeforeCreate(array $data): array
     {
         $data['uuid'] = \Illuminate\Support\Str::uuid()->toString();
-        $data['author'] = $data['author'] ?? config('pterodactyl.service.author');
+        $data['author'] = $data['author'] ?? config('panel.service.author');
         return $data;
     }
 }

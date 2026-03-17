@@ -5,7 +5,7 @@ declare module '*.css';
 declare module 'i18next-http-backend';
 
 interface Window {
-    PterodactylUser?: {
+    PanelUser?: {
         uuid: string;
         username: string;
         email: string;

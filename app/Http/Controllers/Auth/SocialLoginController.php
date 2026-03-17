@@ -123,13 +123,13 @@ class SocialLoginController extends Controller
 
     protected function configureDriver(string $provider): bool
     {
-        $enabled = config('pterodactyl.auth.' . $provider . '_enabled');
+        $enabled = config('panel.auth.' . $provider . '_enabled');
         if (!$enabled) {
             return false;
         }
 
-        $clientId = config('pterodactyl.auth.' . $provider . '_client_id');
-        $clientSecret = config('pterodactyl.auth.' . $provider . '_client_secret');
+        $clientId = config('panel.auth.' . $provider . '_client_id');
+        $clientSecret = config('panel.auth.' . $provider . '_client_secret');
         $redirectUri = route('auth.social.callback', ['provider' => $provider]);
 
         if (empty($clientId) || empty($clientSecret)) {

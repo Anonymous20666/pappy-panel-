@@ -42,7 +42,7 @@ class Settings extends Page implements HasSchemas
         'app:icon',
         'app:locale',
         'app:locale:geolocate',
-        'pterodactyl:auth:2fa_required',
+        'panel:auth:2fa_required',
         'app:debug',
         'app:pwa',
 
@@ -60,24 +60,24 @@ class Settings extends Page implements HasSchemas
         'captcha:turnstile:secret_key',
         'captcha:turnstile:site_key',
 
-        'pterodactyl:auth:google_enabled',
-        'pterodactyl:auth:google_client_id',
-        'pterodactyl:auth:google_client_secret',
+        'panel:auth:google_enabled',
+        'panel:auth:google_client_id',
+        'panel:auth:google_client_secret',
 
-        'pterodactyl:auth:discord_enabled',
-        'pterodactyl:auth:discord_client_id',
-        'pterodactyl:auth:discord_client_secret',
+        'panel:auth:discord_enabled',
+        'panel:auth:discord_client_id',
+        'panel:auth:discord_client_secret',
 
-        'pterodactyl:auth:github_enabled',
-        'pterodactyl:auth:github_client_id',
-        'pterodactyl:auth:github_client_secret',
+        'panel:auth:github_enabled',
+        'panel:auth:github_client_id',
+        'panel:auth:github_client_secret',
 
-        'pterodactyl:guzzle:timeout',
-        'pterodactyl:guzzle:connect_timeout',
+        'panel:guzzle:timeout',
+        'panel:guzzle:connect_timeout',
 
-        'pterodactyl:client_features:allocations:enabled',
-        'pterodactyl:client_features:allocations:range_start',
-        'pterodactyl:client_features:allocations:range_end',
+        'panel:client_features:allocations:enabled',
+        'panel:client_features:allocations:range_start',
+        'panel:client_features:allocations:range_end',
     ];
 
     public function getHeading(): string
@@ -120,7 +120,7 @@ class Settings extends Page implements HasSchemas
             if ($value === 'true') $value = true;
             if ($value === 'false') $value = false;
 
-            if ($key === 'pterodactyl:auth:2fa_required') {
+            if ($key === 'panel:auth:2fa_required') {
                 $value = (int) $value;
             }
 
@@ -218,7 +218,7 @@ class Settings extends Page implements HasSchemas
             Group::make()
                 ->columns(4)
                 ->schema([
-                    ToggleButtons::make('pterodactyl:auth:2fa_required')
+                    ToggleButtons::make('panel:auth:2fa_required')
                         ->label(trans('admin/settings.overview.2fa'))
                         ->inline()
                         ->options([
@@ -305,7 +305,7 @@ class Settings extends Page implements HasSchemas
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make('pterodactyl:auth:google_enabled')
+                    Toggle::make('panel:auth:google_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -314,24 +314,24 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make('pterodactyl:auth:google_client_id')
+                    TextInput::make('panel:auth:google_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:google_enabled')
+                            fn ($get) => $get('panel:auth:google_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:google_enabled')
+                            fn ($get) => $get('panel:auth:google_enabled')
                         ),
 
-                    TextInput::make('pterodactyl:auth:google_client_secret')
+                    TextInput::make('panel:auth:google_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:google_enabled')
+                            fn ($get) => $get('panel:auth:google_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:google_enabled')
+                            fn ($get) => $get('panel:auth:google_enabled')
                         ),
                 ]),
 
@@ -341,7 +341,7 @@ class Settings extends Page implements HasSchemas
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make('pterodactyl:auth:discord_enabled')
+                    Toggle::make('panel:auth:discord_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -350,24 +350,24 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make('pterodactyl:auth:discord_client_id')
+                    TextInput::make('panel:auth:discord_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
+                            fn ($get) => $get('panel:auth:discord_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
+                            fn ($get) => $get('panel:auth:discord_enabled')
                         ),
 
-                    TextInput::make('pterodactyl:auth:discord_client_secret')
+                    TextInput::make('panel:auth:discord_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
+                            fn ($get) => $get('panel:auth:discord_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:discord_enabled')
+                            fn ($get) => $get('panel:auth:discord_enabled')
                         ),
                 ]),
 
@@ -377,7 +377,7 @@ class Settings extends Page implements HasSchemas
                 ->collapsible()
                 ->collapsed()
                 ->schema([
-                    Toggle::make('pterodactyl:auth:github_enabled')
+                    Toggle::make('panel:auth:github_enabled')
                         ->label(trans('admin/settings.oauth.enabled'))
                         ->onIcon('tabler-check')
                         ->offIcon('tabler-x')
@@ -386,24 +386,24 @@ class Settings extends Page implements HasSchemas
                         ->inline(false)
                         ->live(),
 
-                    TextInput::make('pterodactyl:auth:github_client_id')
+                    TextInput::make('panel:auth:github_client_id')
                         ->label(trans('admin/settings.oauth.id-label'))
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:github_enabled')
+                            fn ($get) => $get('panel:auth:github_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:github_enabled')
+                            fn ($get) => $get('panel:auth:github_enabled')
                         ),
 
-                    TextInput::make('pterodactyl:auth:github_client_secret')
+                    TextInput::make('panel:auth:github_client_secret')
                         ->label(trans('admin/settings.oauth.secret-label'))
                         ->password()
                         ->revealable()
                         ->required(
-                            fn ($get) => $get('pterodactyl:auth:github_enabled')
+                            fn ($get) => $get('panel:auth:github_enabled')
                         )
                         ->visible(
-                            fn ($get) => $get('pterodactyl:auth:github_enabled')
+                            fn ($get) => $get('panel:auth:github_enabled')
                         ),
                 ]),
         ];
@@ -483,7 +483,7 @@ class Settings extends Page implements HasSchemas
             Section::make(trans('admin/settings.advanced.http-label'))
                 ->columns(4)
                 ->schema([
-                    TextInput::make('pterodactyl:guzzle:timeout')
+                    TextInput::make('panel:guzzle:timeout')
                         ->label(trans('admin/settings.advanced.request-label'))
                         ->numeric()
                         ->minValue(1)
@@ -491,7 +491,7 @@ class Settings extends Page implements HasSchemas
                         ->required()
                         ->columnSpan(2),
 
-                    TextInput::make('pterodactyl:guzzle:connect_timeout')
+                    TextInput::make('panel:guzzle:connect_timeout')
                         ->label(trans('admin/settings.advanced.timeout-label'))
                         ->numeric()
                         ->minValue(1)
@@ -503,29 +503,29 @@ class Settings extends Page implements HasSchemas
             Section::make(trans('admin/settings.advanced.creation-title'))
                 ->columns(4)
                 ->schema([
-                    Toggle::make('pterodactyl:client_features:allocations:enabled')
+                    Toggle::make('panel:client_features:allocations:enabled')
                         ->label(trans('admin/settings.advanced.creation-title'))
                         ->inline(false)
                         ->live()
                         ->columnSpan(2),
 
-                    TextInput::make('pterodactyl:client_features:allocations:range_start')
+                    TextInput::make('panel:client_features:allocations:range_start')
                         ->label(trans('admin/settings.advanced.starting-label'))
                         ->numeric()
                         ->minValue(1024)
                         ->maxValue(65535)
-                        ->required(fn ($get) => $get('pterodactyl:client_features:allocations:enabled'))
-                        ->visible(fn ($get) => $get('pterodactyl:client_features:allocations:enabled'))
+                        ->required(fn ($get) => $get('panel:client_features:allocations:enabled'))
+                        ->visible(fn ($get) => $get('panel:client_features:allocations:enabled'))
                         ->columnSpan(1),
 
-                    TextInput::make('pterodactyl:client_features:allocations:range_end')
+                    TextInput::make('panel:client_features:allocations:range_end')
                         ->label(trans('admin/settings.advanced.ending-label'))
                         ->numeric()
                         ->minValue(1024)
                         ->maxValue(65535)
-                        ->gt('pterodactyl:client_features:allocations:range_start')
-                        ->required(fn ($get) => $get('pterodactyl:client_features:allocations:enabled'))
-                        ->visible(fn ($get) => $get('pterodactyl:client_features:allocations:enabled'))
+                        ->gt('panel:client_features:allocations:range_start')
+                        ->required(fn ($get) => $get('panel:client_features:allocations:enabled'))
+                        ->visible(fn ($get) => $get('panel:client_features:allocations:enabled'))
                         ->columnSpan(1),
                 ]),
         ];

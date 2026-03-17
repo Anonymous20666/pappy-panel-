@@ -126,7 +126,7 @@ class DesignifyComposer
 
         $this->reviactylDefaults = [
             'customCopyright' => config('designify.customCopyright', true),
-            'copyright' => config('designify.copyright') ?? 'Powered by [Reviactyl](https://reviactyl.dev/)',
+            'copyright' => config('designify.copyright') ?? 'Powered by [Reviactyl](https://reviactyl.app/)',
             'isUnderMaintenance' => config('designify.isUnderMaintenance', false),
             'maintenance' => config('designify.maintenance') ?? 'We are currently under maintenance. Kindly check back later!',
             'colorPrimary' => config('designify.colorPrimary') ?? '#3b82f6',

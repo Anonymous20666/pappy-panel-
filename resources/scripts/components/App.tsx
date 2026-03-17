@@ -24,7 +24,7 @@ const PublicServerStatus = lazy(() => import('@/components/public/PublicServerSt
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
     ReviactylConfiguration?: ReviactylSettings;
-    PterodactylUser?: {
+    PanelUser?: {
         uuid: string;
         username: string;
         name_first: string;
@@ -57,20 +57,20 @@ const ServerContextProviderWrapper = ({ children }: { children: ReactNode }) => 
 };
 
 function App() {
-    const { PterodactylUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
-    if (PterodactylUser && !store.getState().user.data) {
+    const { PanelUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
+    if (PanelUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
-            uuid: PterodactylUser.uuid,
-            username: PterodactylUser.username,
-            name_first: PterodactylUser.name_first,
-            name_last: PterodactylUser.name_last,
-            email: PterodactylUser.email,
-            language: PterodactylUser.language,
-            rootAdmin: PterodactylUser.root_admin,
-            useTotp: PterodactylUser.use_totp,
-            createdAt: new Date(PterodactylUser.created_at),
-            fileEditor: PterodactylUser.editor,
-            updatedAt: new Date(PterodactylUser.updated_at),
+            uuid: PanelUser.uuid,
+            username: PanelUser.username,
+            name_first: PanelUser.name_first,
+            name_last: PanelUser.name_last,
+            email: PanelUser.email,
+            language: PanelUser.language,
+            rootAdmin: PanelUser.root_admin,
+            useTotp: PanelUser.use_totp,
+            createdAt: new Date(PanelUser.created_at),
+            fileEditor: PanelUser.editor,
+            updatedAt: new Date(PanelUser.updated_at),
         });
     }
 

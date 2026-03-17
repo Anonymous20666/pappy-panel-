@@ -4,7 +4,7 @@ namespace App\Extensions\League\Fractal\Serializers;
 
 use League\Fractal\Serializer\ArraySerializer;
 
-class PterodactylSerializer extends ArraySerializer
+class PanelSerializer extends ArraySerializer
 {
     /**
      * Serialize an item.

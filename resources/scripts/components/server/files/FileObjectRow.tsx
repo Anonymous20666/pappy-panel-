@@ -72,7 +72,7 @@ const FileObjectRow = ({ file, onImageClick }: FileObjectRowProps) => {
             onContextMenu={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                window.dispatchEvent(new CustomEvent(`pterodactyl:files:ctx:${file.key}`, { detail: e.clientX }));
+                window.dispatchEvent(new CustomEvent(`panel:files:ctx:${file.key}`, { detail: e.clientX }));
             }}
         >
             <SelectFileCheckbox name={file.name} />

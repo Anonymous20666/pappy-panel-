@@ -85,8 +85,8 @@ class Mount extends Model implements Identifiable
      * Blacklisted source paths.
      */
     public static $invalidSourcePaths = [
-        '/etc/pterodactyl',
-        '/var/lib/pterodactyl/volumes',
+        '/etc/reviactyl',
+        '/var/lib/reviactyl/volumes',
         '/srv/daemon-data',
     ];
 

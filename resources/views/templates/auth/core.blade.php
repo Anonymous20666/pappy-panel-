@@ -13,9 +13,9 @@
     @parent
     <script>
         window.SocialLoginConfiguration = {
-            google: {{ config('pterodactyl.auth.google_enabled') ? 'true' : 'false' }},
-            discord: {{ config('pterodactyl.auth.discord_enabled') ? 'true' : 'false' }},
-            github: {{ config('pterodactyl.auth.github_enabled') ? 'true' : 'false' }},
+            google: {{ config('panel.auth.google_enabled') ? 'true' : 'false' }},
+            discord: {{ config('panel.auth.discord_enabled') ? 'true' : 'false' }},
+            github: {{ config('panel.auth.github_enabled') ? 'true' : 'false' }},
         };
     </script>
 @endsection

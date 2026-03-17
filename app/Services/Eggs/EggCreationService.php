@@ -8,7 +8,6 @@ use App\Contracts\Repository\EggRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 use App\Exceptions\Service\Egg\NoParentConfigurationFoundException;
 
-// When a mommy and a daddy pterodactyl really like each other...
 class EggCreationService
 {
     /**
@@ -40,7 +39,33 @@ class EggCreationService
 
         return $this->repository->create(array_merge($data, [
             'uuid' => Uuid::uuid4()->toString(),
-            'author' => $this->config->get('pterodactyl.service.author'),
+            'author' => $this->config->get('panel.service.author'),
         ]), true, true);
     }
 }
+
+// :::::::                                          Hey, you! A developer? Please read CONTRIBUTING.md and help us make Reviactyl better! :)
+//  -::::::::::                                    
+//     -::::::::::                                 
+//       --::::::::::                              
+//         -:::::::::::     :::::::                
+//           -:::::::::::      -::::::::::         
+//            -:::::::::::       ::::::::::::      
+//             -------:::::      ::::::::::::::::  
+//              -----------:   ::::::---      ---::
+//              ------------:::------              
+//              ------------:-------               
+//              -------------------                
+//              -------:---------                  
+//              ----------------                   
+//              -- :---------                      
+//               ---------------                   
+//             ---------------                     
+//                  --------                       
+//                 -------                         
+//                ------                           
+//               -----                             
+//              ---                                
+//             ---                                 
+//            --                                   
+                                                 

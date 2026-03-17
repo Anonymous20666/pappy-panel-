@@ -2,9 +2,9 @@
 
 namespace App\Exceptions\Service\Database;
 
-use App\Exceptions\PterodactylException;
+use App\Exceptions\PanelException;
 
-class DatabaseClientFeatureNotEnabledException extends PterodactylException
+class DatabaseClientFeatureNotEnabledException extends PanelException
 {
     public function __construct()
     {

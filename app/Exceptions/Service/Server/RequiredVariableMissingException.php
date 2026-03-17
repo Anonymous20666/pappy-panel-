@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Service\Server;
 
-use App\Exceptions\PterodactylException;
+use App\Exceptions\PanelException;
 
-class RequiredVariableMissingException extends PterodactylException
+class RequiredVariableMissingException extends PanelException
 {
 }

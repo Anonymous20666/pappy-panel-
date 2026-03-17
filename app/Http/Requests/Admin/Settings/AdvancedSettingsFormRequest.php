@@ -12,21 +12,21 @@ class AdvancedSettingsFormRequest extends AdminFormRequest
     public function rules(): array
     {
         return [
-            'pterodactyl:guzzle:timeout' => 'required|integer|between:1,60',
-            'pterodactyl:guzzle:connect_timeout' => 'required|integer|between:1,60',
-            'pterodactyl:client_features:allocations:enabled' => 'required|in:true,false',
-            'pterodactyl:client_features:allocations:range_start' => [
+            'panel:guzzle:timeout' => 'required|integer|between:1,60',
+            'panel:guzzle:connect_timeout' => 'required|integer|between:1,60',
+            'panel:client_features:allocations:enabled' => 'required|in:true,false',
+            'panel:client_features:allocations:range_start' => [
                 'nullable',
-                'required_if:pterodactyl:client_features:allocations:enabled,true',
+                'required_if:panel:client_features:allocations:enabled,true',
                 'integer',
                 'between:1024,65535',
             ],
-            'pterodactyl:client_features:allocations:range_end' => [
+            'panel:client_features:allocations:range_end' => [
                 'nullable',
-                'required_if:pterodactyl:client_features:allocations:enabled,true',
+                'required_if:panel:client_features:allocations:enabled,true',
                 'integer',
                 'between:1024,65535',
-                'gt:pterodactyl:client_features:allocations:range_start',
+                'gt:panel:client_features:allocations:range_start',
             ],
         ];
     }
@@ -39,11 +39,11 @@ class AdvancedSettingsFormRequest extends AdminFormRequest
             'captcha:recaptcha:website_key' => 'reCAPTCHA Site Key',
             'captcha:turnstile:secret_key' => 'Turnstile Secret Key',
             'captcha:turnstile:site_key' => 'Turnstile Site Key',
-            'pterodactyl:guzzle:timeout' => 'HTTP Request Timeout',
-            'pterodactyl:guzzle:connect_timeout' => 'HTTP Connection Timeout',
-            'pterodactyl:client_features:allocations:enabled' => 'Auto Create Allocations Enabled',
-            'pterodactyl:client_features:allocations:range_start' => 'Starting Port',
-            'pterodactyl:client_features:allocations:range_end' => 'Ending Port',
+            'panel:guzzle:timeout' => 'HTTP Request Timeout',
+            'panel:guzzle:connect_timeout' => 'HTTP Connection Timeout',
+            'panel:client_features:allocations:enabled' => 'Auto Create Allocations Enabled',
+            'panel:client_features:allocations:range_start' => 'Starting Port',
+            'panel:client_features:allocations:range_end' => 'Ending Port',
         ];
     }
 }

@@ -130,7 +130,7 @@ class NodeForm
                                             ->label(trans('admin/node.fields.daemon_base.label'))
                                             ->required()
                                             ->maxLength(255)
-                                            ->default('/var/lib/pterodactyl/volumes')
+                                            ->default('/var/lib/reviactyl/volumes')
                                             ->placeholder(trans('admin/node.fields.daemon_base.placeholder'))
                                             ->helperText(trans('admin/node.fields.daemon_base.helper')),
 
@@ -222,7 +222,7 @@ class NodeForm
                                     ->description(trans('admin/node.sections.configuration.config_description'))
                                     ->schema([
                                         CodeEntry::make('config')
-                                            ->label('/etc/pterodactyl/config.yml')
+                                            ->label('/etc/reviactyl/config.yml')
                                             ->grammar(Grammar::Yaml)
                                             ->state(fn (Node $node) => $node->getYamlConfiguration())
                                             ->copyable()
@@ -289,7 +289,7 @@ class NodeForm
                                                         $debug = config('app.debug');
                                                         $allowInsecure = $debug ? ' --allow-insecure' : '';
                                                         
-                                                        $command = "cd /etc/pterodactyl && sudo wings configure --panel-url {$appUrl} --token {$token} --node {$record->id}{$allowInsecure}";
+                                                        $command = "cd /etc/reviactyl && sudo wings configure --panel-url {$appUrl} --token {$token} --node {$record->id}{$allowInsecure}";
                                                         
                                                         Notification::make()
                                                             ->title(trans('admin/node.deployment.token_success'))

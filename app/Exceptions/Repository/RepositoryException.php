@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Repository;
 
-use App\Exceptions\PterodactylException;
+use App\Exceptions\PanelException;
 
-class RepositoryException extends PterodactylException
+class RepositoryException extends PanelException
 {
 }

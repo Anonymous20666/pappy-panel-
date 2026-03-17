@@ -79,7 +79,7 @@ class LoginCheckpointController extends AbstractLoginController
                 $decrypted,
                 $request->input('authentication_code') ?? '',
                 $oldTimestamp,
-                config('pterodactyl.auth.2fa.window') ?? 1,
+                config('panel.auth.2fa.window') ?? 1,
             );
 
             if ($verified !== false) {

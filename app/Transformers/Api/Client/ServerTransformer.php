@@ -39,11 +39,11 @@ class ServerTransformer extends BaseClientTransformer
 
         return [
             'server_owner' => $user->id === $server->owner_id,
-            'identifier' => config('pterodactyl.features.new_server_identifiers')
+            'identifier' => config('panel.features.new_server_identifiers')
                 ? $server->identifier
                 : $server->uuidShort,
             '__deprecated_uuid_short' => $server->uuidShort,
-            // In Pterodactyl 2.0 we'll be replacing `identifier` above with the actual
+            // In Future Releases we'll be replacing `identifier` above with the actual
             // "identifier" used internally. This is a completely different value compared
             // to the current however, and would be quite a breaking change to URLs.
             'server_identifier' => $server->identifier,

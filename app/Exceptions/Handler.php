@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
 use Illuminate\Container\Container;
@@ -80,11 +81,15 @@ class Handler extends ExceptionHandler
         }
 
         $this->reportable(function (\PDOException $ex) {
-            $ex = $this->generateCleanedExceptionStack($ex);
+            Log::error($this->generateCleanedExceptionStack($ex));
+
+            return false;
         });
 
         $this->reportable(function (TransportException $ex) {
-            $ex = $this->generateCleanedExceptionStack($ex);
+            Log::error($this->generateCleanedExceptionStack($ex));
+
+            return false;
         });
     }
 
@@ -123,7 +128,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, \Throwable $e): Response
     {
-        $connections = $this->container->make(Connection::class);
+        $connection = $this->container->make(Connection::class);
 
         // If we are currently wrapped up inside a transaction, we will roll all the way
         // back to the beginning. This needs to happen, otherwise session data does not
@@ -134,8 +139,10 @@ class Handler extends ExceptionHandler
         // ton of actions and were written before this bug discovery was made.
         //
         // @see https://github.com/pterodactyl/panel/pull/1468
-        if ($connections->transactionLevel()) {
-            $connections->rollBack(0);
+        if ($connection->transactionLevel() > 0) {
+            while ($connection->transactionLevel() > 0) {
+                $connection->rollBack();
+            }
         }
 
         return parent::render($request, $e);
@@ -220,8 +227,10 @@ class Handler extends ExceptionHandler
                         ->map(fn ($trace) => Arr::except($trace, ['args']))
                         ->all(),
                     'previous' => Collection::make($this->extractPrevious($e))
-                        ->map(fn ($exception) => $e->getTrace())
-                        ->map(fn ($trace) => Arr::except($trace, ['args']))
+                        ->map(fn ($exception) => Collection::make($exception->getTrace())
+                            ->map(fn ($trace) => Arr::except($trace, ['args']))
+                            ->all()
+                        )
                         ->all(),
                 ],
             ]);

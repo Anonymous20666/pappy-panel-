@@ -80,7 +80,7 @@ return [
         ],
         'image' => [
             'label' => 'صورة دوكر',
-            'placeholder' => 'مثال ghcr.io/pterodactyl/yolks:java_17',
+            'placeholder' => 'e.g. ghcr.io/reviactyl/images:java_17',
             'helper' => 'صورة دوكر المستخدمة لتشغيل هذا الخادم.',
             'custom' => 'مخصص',
         ],

@@ -80,7 +80,7 @@ return [
         ],
         'image' => [
             'label' => 'Docker 镜像',
-            'placeholder' => '例如：ghcr.io/pterodactyl/yolks:java_17',
+            'placeholder' => 'e.g. ghcr.io/reviactyl/images:java_17',
             'helper' => '用于运行此服务器的 Docker 镜像。',
             'custom' => '自定义',
         ],

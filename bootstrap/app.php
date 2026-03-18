@@ -8,7 +8,13 @@ use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Foundation\Application;
 
-return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
+$app = Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__));
+
+if (!empty($_ENV['APP_STORAGE_PATH'])) {
+    $app->useStoragePath($_ENV['APP_STORAGE_PATH']);
+}
+
+return $app
     ->withProviders()
     ->withExceptions()
     ->withSingletons([
@@ -17,7 +23,3 @@ return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR_
         ExceptionHandlerContract::class => ExceptionHandler::class,
     ])
     ->create();
-
-// if (isset($_ENV['APP_STORAGE_PATH'])) {
-//    $app->useStoragePath($_ENV['APP_STORAGE_PATH']);
-//}

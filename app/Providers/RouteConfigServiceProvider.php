@@ -11,7 +11,7 @@ use App\Models\Database;
 use App\Enum\ResourceLimit;
 use App\Http\Middleware\TrimStrings;
 
-class RouteServiceProvider extends ServiceProvider
+class RouteConfigServiceProvider extends ServiceProvider
 {
     protected const FILE_PATH_REGEX = '/^\/api\/client\/servers\/([a-z0-9-]{36})\/files(\/?$|\/(.)*$)/i';
 

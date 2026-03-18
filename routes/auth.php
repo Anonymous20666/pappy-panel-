@@ -30,7 +30,7 @@ Route::get('/login/{provider}/callback', [Auth\SocialLoginController::class, 'ca
 // Apply a throttle to authentication action endpoints, in addition to the
 // recaptcha endpoints to slow down manual attack spammers even more. 🤷‍
 //
-// @see \App\Providers\RouteServiceProvider
+// @see \App\Providers\RouteConfigServiceProvider
 Route::middleware(['throttle:authentication'])->group(function () {
     // Login endpoints.
     Route::post('/login', [Auth\LoginController::class, 'login'])->middleware('captcha');

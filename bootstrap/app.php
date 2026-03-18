@@ -7,12 +7,9 @@ use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Foundation\Application;
-use Prologue\Alerts\AlertsServiceProvider;
 
 return Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__))
-    ->withProviders([
-        AlertsServiceProvider::class,
-    ])
+    ->withProviders()
     ->withExceptions()
     ->withSingletons([
         HttpKernelContract::class => HttpKernel::class,

@@ -22,23 +22,14 @@ return $app
     ->withRouting(function () {
 
         Route::middleware('web')->group(function () {
-            Route::middleware([
-                    'auth.session',
-                    RequireTwoFactorAuthentication::class
-                ])
+            Route::middleware(['auth.session', RequireTwoFactorAuthentication::class])
                 ->group(base_path('routes/base.php'));
-            Route::middleware([
-                    'auth.session',
-                    RequireTwoFactorAuthentication::class,
-                    AdminAuthenticate::class
-                ])
+                
+            Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
                 ->prefix('/panel')
                 ->group(base_path('routes/admin.php'));
-            Route::middleware([
-                    'auth.session',
-                    RequireTwoFactorAuthentication::class,
-                    AdminAuthenticate::class
-                ])
+
+            Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
                 ->prefix('/designify')
                 ->group(base_path('routes/designify.php'));
 
@@ -47,24 +38,15 @@ return $app
                 ->group(base_path('routes/auth.php'));
         });
 
-        Route::middleware([
-               'api',
-                RequireTwoFactorAuthentication::class
-            ])
+        Route::middleware(['api', RequireTwoFactorAuthentication::class])
             ->group(function () {
 
-                Route::middleware([
-                        'application-api',
-                        'throttle:api.application'
-                    ])
+                Route::middleware(['application-api', 'throttle:api.application'])
                     ->prefix('/api/application')
                     ->scopeBindings()
                     ->group(base_path('routes/api-application.php'));
 
-                Route::middleware([
-                        'client-api',
-                        'throttle:api.client'
-                    ])
+                Route::middleware(['client-api', 'throttle:api.client'])
                     ->prefix('/api/client')
                     ->scopeBindings()
                     ->group(base_path('routes/api-client.php'));

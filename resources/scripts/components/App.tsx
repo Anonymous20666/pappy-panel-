@@ -30,14 +30,12 @@ interface ExtendedWindow extends Window {
         name_first: string;
         name_last: string;
         email: string;
-        /* eslint-disable camelcase */
         root_admin: boolean;
         use_totp: boolean;
         language: string;
         editor: string;
         updated_at: string;
         created_at: string;
-        /* eslint-enable camelcase */
     };
 }
 

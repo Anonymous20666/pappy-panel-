@@ -55,11 +55,7 @@ export default () => {
     return (
         <PageContentBlock title={'Server Status'}>
             <div css={tw`w-full max-w-3xl mx-auto`}>
-                {error && (
-                    <div css={tw`mb-4 p-4 bg-red-600 rounded text-white`}>
-                        {error}
-                    </div>
-                )}
+                {error && <div css={tw`mb-4 p-4 bg-red-600 rounded text-white`}>{error}</div>}
 
                 {loading ? (
                     <ContentBox>
@@ -74,7 +70,9 @@ export default () => {
                                 <StatusIndicator status={status.status} />
                                 {status.name}
                             </h1>
-                            <p css={tw`text-gray-300 mb-6 whitespace-pre-wrap`}>{status.description || 'No description provided.'}</p>
+                            <p css={tw`text-gray-300 mb-6 whitespace-pre-wrap`}>
+                                {status.description || 'No description provided.'}
+                            </p>
 
                             <div css={tw`grid grid-cols-1 md:grid-cols-2 gap-4`}>
                                 <div css={tw`bg-gray-700 p-4 rounded-lg`}>
@@ -89,15 +87,21 @@ export default () => {
                                     <div css={tw`grid grid-cols-1 md:grid-cols-3 gap-4`}>
                                         <div css={tw`bg-gray-800 p-3 rounded`}>
                                             <div css={tw`text-gray-400 text-xs uppercase mb-1`}>CPU</div>
-                                            <div css={tw`text-lg font-mono`}>{status.utilization.cpu_absolute.toFixed(2)}%</div>
+                                            <div css={tw`text-lg font-mono`}>
+                                                {status.utilization.cpu_absolute.toFixed(2)}%
+                                            </div>
                                         </div>
                                         <div css={tw`bg-gray-800 p-3 rounded`}>
                                             <div css={tw`text-gray-400 text-xs uppercase mb-1`}>Memory</div>
-                                            <div css={tw`text-lg font-mono`}>{bytesToString(status.utilization.memory_bytes)}</div>
+                                            <div css={tw`text-lg font-mono`}>
+                                                {bytesToString(status.utilization.memory_bytes)}
+                                            </div>
                                         </div>
                                         <div css={tw`bg-gray-800 p-3 rounded`}>
                                             <div css={tw`text-gray-400 text-xs uppercase mb-1`}>Disk</div>
-                                            <div css={tw`text-lg font-mono`}>{bytesToString(status.utilization.disk_bytes)}</div>
+                                            <div css={tw`text-lg font-mono`}>
+                                                {bytesToString(status.utilization.disk_bytes)}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

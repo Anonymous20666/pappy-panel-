@@ -157,7 +157,7 @@ export default () => {
         })().catch(() => {
             if (gen === searchGenRef.current) setIsSearching(false);
         });
-    }, [query]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [query]);
 
     const filteredFiles = useMemo(() => {
         if (!files) return [];

@@ -1,5 +1,4 @@
 import { ComponentType, ReactElement } from 'react';
-// eslint-disable-next-line no-restricted-imports
 import styledImport, { css as cssImport, CSSProp, StyledComponentProps } from 'styled-components';
 
 declare module 'react' {

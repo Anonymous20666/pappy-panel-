@@ -32,6 +32,7 @@ resources/lang/locales.js
 
 /public/build
 /public/hot
+/public/storage
 result
 docker-compose.yaml
 

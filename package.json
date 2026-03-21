@@ -7,8 +7,7 @@
         "node": ">=22"
     },
     "dependencies": {
-        "@floating-ui/react": "^0.27.17",
-        "@floating-ui/react-dom-interactions": "^0.6.6",
+        "@floating-ui/react": "^0.27.19",
         "@headlessui/react": "^2.2.9",
         "@hello-pangea/dnd": "^18.0.1",
         "@heroicons/react": "^1.0.6",

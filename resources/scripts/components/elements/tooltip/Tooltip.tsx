@@ -4,17 +4,17 @@ import {
     autoUpdate,
     flip,
     offset,
-    Placement,
     shift,
-    Side,
+    useFloating,
+    useHover,
+    useFocus,
     useClick,
     useDismiss,
-    useFloating,
-    useFocus,
-    useHover,
-    useInteractions,
     useRole,
-} from '@floating-ui/react-dom-interactions';
+    useInteractions,
+    Placement,
+    Side,
+} from '@floating-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import classNames from 'classnames';
 
@@ -40,24 +40,25 @@ const arrowSides: Record<Side, string> = {
 };
 
 export default ({ children, ...props }: Props) => {
-    const arrowEl = useRef<HTMLDivElement>(null);
+    const arrowEl = useRef<HTMLDivElement | null>(null);
     const [open, setOpen] = useState(false);
 
-    const { x, y, reference, floating, middlewareData, strategy, context } = useFloating({
+    const { x, y, refs, middlewareData, strategy, context } = useFloating({
         open,
-        strategy: 'fixed',
+        onOpenChange: setOpen,
         placement: props.placement || 'top',
+        strategy: 'fixed',
         middleware: [
             offset(props.arrow ? 10 : 6),
             flip(),
             shift({ padding: 6 }),
             arrow({ element: arrowEl, padding: 6 }),
         ],
-        onOpenChange: setOpen,
         whileElementsMounted: autoUpdate,
     });
 
     const interactions = props.interactions || ['hover', 'focus'];
+
     const { getReferenceProps, getFloatingProps } = useInteractions([
         useHover(context, {
             restMs: props.rest ?? 30,
@@ -71,46 +72,63 @@ export default ({ children, ...props }: Props) => {
     ]);
 
     const side = arrowSides[(props.placement || 'top').split('-')[0] as Side];
-    const { x: ax, y: ay } = middlewareData.arrow || {};
+    const { x: ax = 0, y: ay = 0 } = middlewareData.arrow || {};
 
     if (props.disabled) {
         return children;
     }
 
     const childProps = (children.props || {}) as Record<string, any>;
-    const referenceProps = getReferenceProps({ ref: reference, ...childProps });
 
     return (
         <>
-            {cloneElement(children, referenceProps as any)}
+            {cloneElement(
+                children,
+                getReferenceProps({
+                    ...childProps,
+                    ref: refs.setReference,
+                }) as any
+            )}
+
             <AnimatePresence>
                 {open && (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.85 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{ type: 'spring', damping: 20, stiffness: 300, duration: 0.075 } as any}
-                        {...(getFloatingProps({
-                            ref: floating,
-                            className:
-                                'bg-gray-900 text-sm text-gray-200 px-3 py-2 rounded pointer-events-none max-w-[24rem]',
+                        transition={
+                            {
+                                type: 'spring',
+                                damping: 20,
+                                stiffness: 300,
+                                duration: 0.075,
+                            } as any
+                        }
+                        {...getFloatingProps({
+                            ref: refs.setFloating,
+                            className: classNames(
+                                'bg-gray-800 text-sm text-gray-200 px-3 py-2 rounded-ui border border-gray-600 pointer-events-none max-w-[24rem]',
+                                props.className
+                            ),
                             style: {
                                 position: strategy,
-                                top: `${y || 0}px`,
-                                left: `${x || 0}px`,
+                                top: y ?? 0,
+                                left: x ?? 0,
                             },
-                        }) as any)}
+                        })}
                     >
                         {props.content}
+
                         {props.arrow && (
                             <div
                                 ref={arrowEl}
                                 style={{
-                                    transform: `translate(${Math.round(ax || 0)}px, ${Math.round(
-                                        ay || 0
-                                    )}px) rotate(45deg)`,
+                                    position: 'absolute',
+                                    left: ax ?? 0,
+                                    top: ay ?? 0,
+                                    transform: 'rotate(45deg)',
                                 }}
-                                className={classNames('absolute bg-gray-900 w-3 h-3', side)}
+                                className={classNames('bg-gray-900 w-3 h-3', 'absolute', side)}
                             />
                         )}
                     </motion.div>

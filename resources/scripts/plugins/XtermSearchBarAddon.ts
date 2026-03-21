@@ -90,7 +90,7 @@ export class SearchBarAddon implements ITerminalAddon {
             this.searchKey = this.input!.value;
 
             this.searchAddon.findNext(this.searchKey, {
-                incremental: e.key !== 'Enter'
+                incremental: e.key !== 'Enter',
             });
         });
 

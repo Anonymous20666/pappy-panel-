@@ -1,6 +1,6 @@
 <!-- 
-Reviactyl Panel (https://reviactyl.dev/)
-Copyright (c) 2025 Reviactyl™ and contributors
+Reviactyl Panel (https://reviactyl.app/)
+Copyright (c) Reviactyl™ and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ SOFTWARE.
         <link rel="icon" type="image/x-icon" href="{{ $siteConfiguration['icon'] }}">
         @if ($siteConfiguration['pwa'])
         <link rel="manifest" href="{{ url('manifest.json') }}">
-        <link rel="apple-touch-icon" href="{{ asset('favicons/android-icon-192x192.png') }}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicons/apple-touch-icon.png') }}">
         <meta name="mobile-web-app-capable" content="yes">
         @endif
         <meta name="theme-color" content="{{ $reviactylConfiguration['site_color'] }}" />

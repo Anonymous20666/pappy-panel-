@@ -3,9 +3,13 @@
 return [
     'flag' => 'es',
     'title' => 'Panel de control',
-    'welcome' => [
-        'title' => 'Bienvenido de nuevo',
-        'subtitle' => 'Aquí puedes ver todos los servidores a los que tienes acceso.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'Mostrando servidores de otros',
     'your-servers' => 'Mostrando tus servidores',

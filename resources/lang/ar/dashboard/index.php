@@ -3,9 +3,13 @@
 return [
     'flag' => 'sa',
     'title' => 'لوحة التحكم',
-    'welcome' => [
-        'title' => 'مرحبًا بعودتك',
-        'subtitle' => 'هنا يمكنك رؤية جميع السيرفرات التي لديك حق الوصول إليها.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'عرض سيرفرات الآخرين',
     'your-servers' => 'عرض سيرفراتك',

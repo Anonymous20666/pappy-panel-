@@ -3,9 +3,13 @@
 return [
     'flag' => 'tr',
     'title' => 'Panel',
-    'welcome' => [
-        'title' => 'Tekrar hoş geldiniz',
-        'subtitle' => 'Burada erişiminiz olan tüm sunucuları görebilirsiniz.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'Diğerlerinin sunucuları gösteriliyor',
     'your-servers' => 'Sunucularınız gösteriliyor',

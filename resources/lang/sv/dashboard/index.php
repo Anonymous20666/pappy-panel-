@@ -3,9 +3,13 @@
 return [
     'flag' => 'se',
     'title' => 'Dashboard',
-    'welcome' => [
-        'title' => 'Välkommen tillbaka',
-        'subtitle' => 'Här kan du se alla servrar du har tillgång till.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'Visar andras servrar',
     'your-servers' => 'Visar dina servrar',

@@ -3,15 +3,19 @@
 return [
     'flag' => 'cn',
     'title' => '仪表板',
-    'welcome' => [
-        'title' => '欢迎回来',
-        'subtitle' => '在这里您可以查看您有权访问的所有服务器。',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => '显示其他人的服务器',
     'your-servers' => '展示你的服务器',
     'no-servers' => '您的账户没有关联的服务器。',
     'no-other-servers' => '没有其他服务器可显示。',
-    'filter-label' => 'Server Filter',
+    'filter-label' => '服务器筛选',
     'eggs' => [
         'all' => '全部',
         'filter-label' => '按预设筛选',
@@ -50,7 +54,7 @@ return [
     ],
     'categories' => [
         'all-categories' => '所有分类',
-        'filter-label' => 'Filter by category',
+        'filter-label' => '按类别筛选',
         'primary' => '主要',
         'manage' => '管理',
         'set-category' => '设置分类',

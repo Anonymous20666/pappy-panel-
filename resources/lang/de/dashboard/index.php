@@ -3,9 +3,13 @@
 return [
     'flag' => 'de',
     'title' => 'Dashboard',
-    'welcome' => [
-        'title' => 'Willkommen zurück',
-        'subtitle' => 'Hier können Sie alle Server sehen, auf die Sie zugriff haben.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'Zeige Server von anderen',
     'your-servers' => 'Zeige Ihre Server',

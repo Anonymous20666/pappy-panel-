@@ -3,9 +3,13 @@
 return [
     'flag' => 'in',
     'title' => 'ಡ್ಯಾಶ್‌ಬೋರ್ಡ್',
-    'welcome' => [
-        'title' => 'ಮತ್ತೆ ಸ್ವಾಗತ',
-        'subtitle' => 'ಇಲ್ಲಿ ನೀವು ಪ್ರವೇಶ ಹೊಂದಿರುವ ಎಲ್ಲಾ ಸರ್ವರ್‌ಗಳನ್ನು ನೋಡಬಹುದು.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'ಇತರರ ಸರ್ವರ್‌ಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ',
     'your-servers' => 'ನಿಮ್ಮ ಸರ್ವರ್‌ಗಳನ್ನು ತೋರಿಸಲಾಗುತ್ತಿದೆ',

@@ -48,7 +48,8 @@ class ApiKeyResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery();
+        return parent::getEloquentQuery()
+            ->where('key_type', ApiKey::TYPE_APPLICATION);
     }
 
     public static function form(Schema $schema): Schema

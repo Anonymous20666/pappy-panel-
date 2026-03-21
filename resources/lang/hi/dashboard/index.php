@@ -3,9 +3,13 @@
 return [
     'flag' => 'in',
     'title' => 'डैशबोर्ड',
-    'welcome' => [
-        'title' => 'वापस स्वागत है',
-        'subtitle' => 'यहां आप उन सभी सर्वरों को देख सकते हैं जिन तक आपकी पहुंच है।',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'अन्य सर्वरों को दिखा रहे हैं',
     'your-servers' => 'आपके सर्वरों को दिखा रहे हैं',

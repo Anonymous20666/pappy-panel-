@@ -1,9 +1,15 @@
 import { createTypedHooks } from 'easy-peasy';
-import { ApplicationStore } from '@/state/index';
+import type { ApplicationStore } from '@/state/index';
+import type { Dispatch } from 'redux';
 
-const hooks = createTypedHooks<ApplicationStore>();
+const {
+    useStore,
+    useStoreState,
+    useStoreActions,
+    useStoreDispatch: baseUseStoreDispatch,
+} = createTypedHooks<ApplicationStore>();
 
-export const useStore = hooks.useStore;
-export const useStoreState = hooks.useStoreState;
-export const useStoreActions = hooks.useStoreActions;
-export const useStoreDispatch = hooks.useStoreDispatch;
+export { useStore, useStoreState, useStoreActions };
+
+// explicitly type this one to stop TS2742
+export const useStoreDispatch: () => Dispatch<any> = baseUseStoreDispatch;

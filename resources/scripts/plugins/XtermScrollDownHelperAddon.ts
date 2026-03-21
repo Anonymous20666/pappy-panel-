@@ -1,4 +1,4 @@
-import { Terminal, ITerminalAddon } from 'xterm';
+import { Terminal, ITerminalAddon } from '@xterm/xterm';
 
 export class ScrollDownHelperAddon implements ITerminalAddon {
     private terminal: Terminal = new Terminal();
@@ -10,7 +10,10 @@ export class ScrollDownHelperAddon implements ITerminalAddon {
         this.terminal.onScroll(() => {
             if (this.isScrolledDown()) {
                 this.hide();
+                return;
             }
+
+            this.show();
         });
 
         this.terminal.onLineFeed(() => {
@@ -19,7 +22,15 @@ export class ScrollDownHelperAddon implements ITerminalAddon {
             }
         });
 
-        this.show();
+        // Addon activation can happen before terminal.open(), so defer initial mount.
+        requestAnimationFrame(() => {
+            if (this.isScrolledDown()) {
+                this.hide();
+                return;
+            }
+
+            this.show();
+        });
     }
 
     dispose(): void {
@@ -47,6 +58,7 @@ export class ScrollDownHelperAddon implements ITerminalAddon {
         this.element.style.fontSize = '1.25em';
         this.element.style.boxShadow = '0 2px 8px #000';
         this.element.style.backgroundColor = '#252526';
+        this.element.style.color = '#f3f4f6';
         this.element.style.zIndex = '999';
         this.element.style.cursor = 'pointer';
 

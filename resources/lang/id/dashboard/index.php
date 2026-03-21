@@ -3,9 +3,13 @@
 return [
     'flag' => 'id',
     'title' => 'Dashboard',
-    'welcome' => [
-        'title' => 'Selamat datang kembali',
-        'subtitle' => 'Di sini Anda dapat melihat semua server yang dapat diakses.',
+    'servers-user' => [
+        'title' => 'Your Servers',
+        'subtitle' => 'Here you can see all the servers you have access to.',
+    ],
+    'servers-admin' => [
+        'title' => 'Others\' Servers',
+        'subtitle' => 'Here you can see all the servers created on this panel.',
     ],
     'other-servers' => 'Menampilkan server orang lain',
     'your-servers' => 'Menampilkan server Anda',

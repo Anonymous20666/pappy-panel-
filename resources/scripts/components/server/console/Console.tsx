@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { SearchBarAddon } from 'xterm-addon-search-bar';
+import { SearchBarAddon } from '@/plugins/XtermSearchBarAddon';
 import { ITerminalAddon, ITerminalOptions, ITheme, Terminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { SearchAddon } from '@xterm/addon-search';
@@ -45,8 +45,7 @@ export default () => {
     const terminal = useMemo(() => new Terminal({ ...terminalProps }), []);
     const fitAddon = new FitAddon();
     const searchAddon = new SearchAddon();
-    // xterm-addon-search-bar still ships legacy xterm typings; cast at this boundary for compatibility.
-    const searchBar = new SearchBarAddon({ searchAddon } as unknown as ConstructorParameters<typeof SearchBarAddon>[0]);
+    const searchBar = new SearchBarAddon(searchAddon);
     const webLinksAddon = new WebLinksAddon();
     const unicode11Addon = new Unicode11Addon();
     const scrollDownHelperAddon = new ScrollDownHelperAddon();
@@ -56,11 +55,6 @@ export default () => {
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    // SearchBarAddon has hardcoded z-index: 999 :(
-    const zIndex = `
-    .xterm-search-bar__addon {
-        z-index: 10;
-    }`;
 
     const handleConsoleOutput = (line: string, prelude = false) => {
         terminal.writeln(
@@ -128,7 +122,6 @@ export default () => {
             terminal.open(ref.current);
             terminal.unicode.activeVersion = '11';
             fitAddon.fit();
-            searchBar.addNewStyle(zIndex);
 
             // Add support for capturing keys
             terminal.attachCustomKeyEventHandler((e: KeyboardEvent) => {
@@ -140,7 +133,7 @@ export default () => {
                     searchBar.show();
                     return false;
                 } else if (e.key === 'Escape') {
-                    searchBar.hidden();
+                    searchBar.hide();
                 }
                 return true;
             });

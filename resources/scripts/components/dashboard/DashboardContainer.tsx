@@ -146,13 +146,8 @@ export default () => {
 
             <div className='flex flex-col gap-4 py-4 md:flex-row md:items-center justify-between'>
                 <div className='min-w-0'>
-                    {/* TODO: Needs to be updated.
-                    1] Show different subtitle based on $showOnlyAdmin
-                    2] It somehow looks odd and doesn't match reviactyl v2 design.
-                    <h1 className='text-xl font-semibold text-gray-100'>{t('welcome.title')}</h1>
-                    <p className='text-sm text-gray-400'>{t('welcome.subtitle')}</p>
-                    */}
-                    <Title className='text-4xl'>{t('title')}</Title>
+                    <Title className='text-4xl !font-bold'>{showOnlyAdmin ? t('servers-admin.title') : t('servers-user.title')}</Title>
+                    <p className='text-sm text-gray-200/80 hidden lg:block'>{showOnlyAdmin ? t('servers-admin.subtitle') : t('servers-user.subtitle')}</p>
                 </div>
                 <div className='flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full md:w-auto'>
                     <div className='flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-0 w-full sm:w-auto sm:space-x-4'>

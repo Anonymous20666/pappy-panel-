@@ -38,3 +38,7 @@ docker-compose.yaml
 
 # Testing pnpm-store
 .pnpm-store
+
+# Extensions System
+extensions/*
+!extensions/.gitkeep

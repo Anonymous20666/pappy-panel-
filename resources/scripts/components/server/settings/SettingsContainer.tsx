@@ -45,7 +45,7 @@ export default () => {
                             <div css={tw`mt-6 flex items-center`}>
                                 <div css={tw`flex-1`}>
                                     <div css={tw`border-l-4 border-cyan-500 p-3`}>
-                                        <p css={tw`text-xs text-neutral-200`}>{t('sftp.password')}</p>
+                                        <p css={tw`text-xs text-gray-200`}>{t('sftp.password')}</p>
                                     </div>
                                 </div>
                                 <div css={tw`ml-4`}>

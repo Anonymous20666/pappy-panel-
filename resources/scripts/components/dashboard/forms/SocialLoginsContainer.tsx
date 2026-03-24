@@ -95,12 +95,12 @@ export default () => {
                     return (
                         <Item key={provider}>
                             <div css={tw`flex items-center`}>
-                                <div css={tw`text-2xl w-10 text-center text-neutral-300`}>
+                                <div css={tw`text-2xl w-10 text-center text-gray-300`}>
                                     <ProviderIcon provider={provider} />
                                 </div>
                                 <div css={tw`ml-4`}>
                                     <p css={tw`font-bold capitalize`}>{provider}</p>
-                                    <div css={tw`text-xs text-neutral-400 mt-1`}>
+                                    <div css={tw`text-xs text-gray-400 mt-1`}>
                                         {isLinked ? (
                                             <span css={tw`text-green-400 flex items-center`}>
                                                 <FaCheckCircle css={tw`mr-1`} />
@@ -109,7 +109,7 @@ export default () => {
                                                 })}
                                             </span>
                                         ) : (
-                                            <span css={tw`text-neutral-500 flex items-center`}>
+                                            <span css={tw`text-gray-500 flex items-center`}>
                                                 <FaTimesCircle css={tw`mr-1`} />
                                                 {t('overview.social.status.not-connected')}
                                             </span>

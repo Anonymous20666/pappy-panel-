@@ -45,7 +45,7 @@ const BackupContainer = () => {
                         // Don't show any error messages if the server has no backups and the user cannot
                         // create additional ones for the server.
                         !backupLimit ? null : (
-                            <p css={tw`text-center text-sm text-neutral-300`}>
+                            <p css={tw`text-center text-sm text-gray-300`}>
                                 {page > 1 ? t('out-of-backups') : t('no-backups')}
                             </p>
                         )
@@ -67,7 +67,7 @@ const BackupContainer = () => {
             <Can action={'backup.create'}>
                 <div css={tw`mt-6 sm:flex items-center justify-end`}>
                     {backupLimit > 0 && backups.backupCount > 0 && (
-                        <p css={tw`text-sm text-neutral-300 mb-4 sm:mr-6 sm:mb-0`}>
+                        <p css={tw`text-sm text-gray-300 mb-4 sm:mr-6 sm:mb-0`}>
                             {t('created-count', { count: backups.backupCount, limit: backupLimit })}
                         </p>
                     )}

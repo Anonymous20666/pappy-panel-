@@ -37,7 +37,7 @@ export default ({ name, fingerprint }: { name: string; fingerprint: string }) =>
                 {t('ssh.delete.info')} <Code>{name}</Code>
             </Dialog.Confirm>
             <button css={tw`ml-4 p-2 text-sm`} onClick={() => setVisible(true)}>
-                <FaTrash className={'text-neutral-400 hover:text-red-400 transition-colors duration-150'} />
+                <FaTrash className={'text-gray-400 hover:text-red-400 transition-colors duration-150'} />
             </button>
         </>
     );

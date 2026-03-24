@@ -29,7 +29,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, State> {
             <div css={tw`flex items-center justify-center w-full my-4`}>
                 <div css={tw`flex items-center bg-gray-800 border border-gray-600 rounded-ui p-3 text-red-500`}>
                     <Icon icon={FaTriangleExclamation} css={tw`h-4 w-auto mr-2`} />
-                    <p css={tw`text-sm text-neutral-100`}>
+                    <p css={tw`text-sm text-gray-100`}>
                         An error was encountered by the application while rendering this view. Try refreshing the page.
                     </p>
                 </div>

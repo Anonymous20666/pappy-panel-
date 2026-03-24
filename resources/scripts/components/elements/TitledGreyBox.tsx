@@ -22,7 +22,7 @@ const TitledGreyBox = ({ icon, title, children, className, showFlashes }: Props)
             <div css={tw`p-3`}>
                 {typeof title === 'string' ? (
                     <Title css={tw`text-sm`}>
-                        {HeaderIcon && <HeaderIcon className={'mr-2 text-neutral-300 inline-block'} />}
+                        {HeaderIcon && <HeaderIcon className={'mr-2 text-gray-300 inline-block'} />}
                         {title}
                     </Title>
                 ) : (

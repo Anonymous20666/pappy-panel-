@@ -71,7 +71,7 @@ const Switch = ({ name, label, description, defaultChecked, readOnly, onChange, 
                             {label}
                         </Label>
                     )}
-                    {description && <p css={tw`text-neutral-400 text-sm mt-2`}>{description}</p>}
+                    {description && <p css={tw`text-gray-400 text-sm mt-2`}>{description}</p>}
                 </div>
             )}
         </div>

@@ -110,12 +110,12 @@ const StartupContainer = () => {
                                     ))}
                                 </Select>
                             </InputSpinner>
-                            <p css={tw`text-xs text-neutral-300 mt-2`}>{t('docker-info')}</p>
+                            <p css={tw`text-xs text-gray-300 mt-2`}>{t('docker-info')}</p>
                         </>
                     ) : (
                         <>
                             <Input disabled readOnly value={variables.dockerImage} />
-                            {isCustomImage && <p css={tw`text-xs text-neutral-300 mt-2`}>{t('manually-set-docker')}</p>}
+                            {isCustomImage && <p css={tw`text-xs text-gray-300 mt-2`}>{t('manually-set-docker')}</p>}
                         </>
                     )}
                 </TitledGreyBox>

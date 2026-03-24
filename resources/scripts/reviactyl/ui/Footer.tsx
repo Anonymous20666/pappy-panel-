@@ -21,7 +21,7 @@ export default () => {
                     rel={'noopener nofollow noreferrer'}
                     href={'https://reviactyl.app'}
                     target={'_blank'}
-                    css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
+                    css={tw`no-underline text-gray-500 hover:text-gray-300`}
                 >
                     Reviactyl&trade;
                 </a>

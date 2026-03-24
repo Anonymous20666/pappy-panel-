@@ -19,7 +19,7 @@ export default () => {
             <Copyright>
                 <a
                     rel={'noopener nofollow noreferrer'}
-                    href={'https://reviactyl.dev'}
+                    href={'https://reviactyl.app'}
                     target={'_blank'}
                     css={tw`no-underline text-neutral-500 hover:text-neutral-300`}
                 >

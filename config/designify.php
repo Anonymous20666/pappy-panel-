@@ -32,7 +32,7 @@ return [
     'fontFamily' => 'Poppins',
 
     'customCopyright' => true,
-    'copyright' => 'Powered by [Reviactyl](https://reviactyl.dev/)',
+    'copyright' => 'Designed with [Designify](https://reviactyl.app/designify)',
 
     'isUnderMaintenance' => false,
     'maintenance' => 'We are currently under maintenance. Kindly check back later!',

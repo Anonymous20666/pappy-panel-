@@ -35,7 +35,7 @@ class UpdateChecker extends Command
         }
 
         try {
-            $response = Http::get('https://reviactyl.dev/api/v2/get-version');
+            $response = Http::get('https://reviactyl.app/api/v26/get-version');
             if ($response->failed()) {
                 $this->error('Failed to check for updates.');
 

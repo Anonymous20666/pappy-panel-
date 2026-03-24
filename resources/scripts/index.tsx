@@ -4,7 +4,7 @@ import { App } from '@/components/App';
 // Enable language support.
 import './i18n';
 
-console.info('🐦 Reviactyl, a modern, secure and fast application management panel -- https://reviactyl.dev/');
+console.info('🐦 Reviactyl, a modern, secure and fast application management panel -- https://reviactyl.app/');
 
 if (import.meta.env.PROD && typeof window !== 'undefined') {
     console.log('%cStop!', 'color:#ef4444;font-size:64px;font-weight:900;text-shadow:0 2px 8px rgba(0,0,0,0.4);');

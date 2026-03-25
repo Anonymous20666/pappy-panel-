@@ -65,7 +65,6 @@ export interface Server {
     eggId: number;
     eggBanner: string;
     containerText: string;
-    daemonText: string;
 }
 
 export const rawDataToServerObject = ({ attributes: data }: FractalResponseData): Server => ({
@@ -111,7 +110,6 @@ export const rawDataToServerObject = ({ attributes: data }: FractalResponseData)
     eggId: data.egg_id,
     eggBanner: data.egg_banner,
     containerText: data.containerText,
-    daemonText: data.daemonText,
 });
 
 export default (uuid: string): Promise<[Server, string[]]> => {

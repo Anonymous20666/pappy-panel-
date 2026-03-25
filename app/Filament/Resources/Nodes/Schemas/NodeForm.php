@@ -157,12 +157,6 @@ class NodeForm
                                             ->maxLength(50)
                                             ->default('container@reviactyl~')
                                             ->helperText(trans('admin/node.fields.container_text.helper')),
-
-                                        TextInput::make('daemonText')
-                                            ->label(trans('admin/node.fields.daemon_text.label'))
-                                            ->maxLength(50)
-                                            ->default('[Reviactyl Daemon]:')
-                                            ->helperText(trans('admin/node.fields.daemon_text.helper')),
                                     ])
                                     ->columns(2),
                             ]),

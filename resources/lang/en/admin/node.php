@@ -108,10 +108,6 @@ return [
             'label' => 'Container Prefix',
             'helper' => 'Text prefix displayed in container names.',
         ],
-        'daemon_text' => [
-            'label' => 'Daemon Prefix',
-            'helper' => 'Text prefix displayed in daemon logs.',
-        ],
     ],
 
     'table' => [

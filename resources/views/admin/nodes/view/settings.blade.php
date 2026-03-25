@@ -61,14 +61,6 @@
                             </div>
                         </div>
                         <div class="form-group col-xs-12">
-                            <label for="pdaemonText" class="control-label">Daemon Prelude Text</label>
-                            <div>
-                                <input type="text" autocomplete="off" id="pdaemonText" name="daemonText"
-                                    class="form-control" value="{{ old('daemonText', $node->daemonText) }}" />
-                                <p class="text-muted"><small>Change the "<code>[Reviactyl Daemon]:</code>" text.</small></p>
-                            </div>
-                        </div>
-                        <div class="form-group col-xs-12">
                             <label for="name" class="control-label">Location</label>
                             <div>
                                 <select name="location_id" class="form-control">

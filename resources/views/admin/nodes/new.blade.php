@@ -43,14 +43,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="pdaemonText" class="control-label">Daemon Prelude Text</label>
-                            <div>
-                                <input type="text" autocomplete="off" id="pdaemonText" name="daemonText"
-                                    class="form-control" value="{{ old('daemonText') }}" />
-                                <p class="text-muted"><small>Change the "<code>[Reviactyl Daemon]:</code>" text.</small></p>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label for="pLocationId" class="form-label">Location</label>
                             <select name="location_id" id="pLocationId">
                                 @foreach ($locations as $location)

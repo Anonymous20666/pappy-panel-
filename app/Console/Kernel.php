@@ -7,6 +7,7 @@ use App\Models\ActivityLog;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Console\PruneCommand;
 use App\Repositories\Eloquent\SettingsRepository;
+use App\Services\Extensions\ExtensionManager;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Services\Telemetry\TelemetryCollectionService;
 use App\Console\Commands\Schedule\ProcessRunnableCommand;
@@ -49,6 +50,8 @@ class Kernel extends ConsoleKernel
         if (config('panel.telemetry.enabled')) {
             $this->registerTelemetry($schedule);
         }
+
+        app(ExtensionManager::class)->applySchedules($schedule);
     }
 
     /**

@@ -84,7 +84,6 @@ class ServerTransformer extends BaseClientTransformer
             'egg_id' => $server->egg_id,
             'egg_banner' => $server->egg->banner,
             'containerText' => $server->node->containerText,
-            'daemonText' => $server->node->daemonText,
         ];
     }
 

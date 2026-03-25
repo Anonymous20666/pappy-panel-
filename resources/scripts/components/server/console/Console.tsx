@@ -38,9 +38,7 @@ const terminalProps: ITerminalOptions = {
 export default () => {
     const { t } = useTranslation('server/console');
     const containerText = ServerContext.useStoreState((state) => state.server.data?.containerText);
-    const daemonText = ServerContext.useStoreState((state) => state.server.data?.daemonText);
     const TERMINAL_PRELUDE = `\u001b[1m\u001b[33m${containerText} \u001b[0m`;
-    const DAEMON_PRELUDE = `\u001b[1m\u001b[33m${daemonText} \u001b[0m`;
     const ref = useRef<HTMLDivElement>(null);
     const terminal = useMemo(() => new Terminal({ ...terminalProps }), []);
     const fitAddon = new FitAddon();
@@ -56,13 +54,8 @@ export default () => {
     const [history, setHistory] = usePersistedState<string[]>(`${serverId}:command_history`, []);
     const [historyIndex, setHistoryIndex] = useState(-1);
 
-    const handleConsoleOutput = (line: string, prelude = false) => {
-        terminal.writeln(
-            (prelude ? TERMINAL_PRELUDE : '') +
-                line.replace('[Pterodactyl Daemon]:', DAEMON_PRELUDE).replace(/(?:\r\n|\r|\n)$/im, '') +
-                '\u001b[0m'
-        );
-    };
+    const handleConsoleOutput = (line: string, prelude = false) =>
+        terminal.writeln((prelude ? TERMINAL_PRELUDE : '') + line.replace(/(?:\r\n|\r|\n)$/im, '') + '\u001b[0m');
 
     const handleTransferStatus = (status: string) => {
         switch (status) {

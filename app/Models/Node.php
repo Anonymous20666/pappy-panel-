@@ -88,7 +88,7 @@ class Node extends Model implements Identifiable
      */
     protected $fillable = [
         'public', 'name', 'location_id',
-        'containerText', 'daemonText',
+        'containerText',
         'description', 'fqdn', 'scheme', 'behind_proxy',
         'memory', 'memory_overallocate', 'disk',
         'disk_overallocate', 'upload_size', 'daemonBase',
@@ -101,7 +101,6 @@ class Node extends Model implements Identifiable
         'description' => 'string|nullable',
         'location_id' => 'required|exists:locations,id',
         'containerText' => 'sometimes|string|max:50',
-        'daemonText' => 'sometimes|string|max:50',
         'public' => 'boolean',
         'fqdn' => 'required|string',
         'scheme' => 'required',

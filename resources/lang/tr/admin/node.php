@@ -108,10 +108,6 @@ return [
             'label' => 'Konteyner Öneki',
             'helper' => 'Konteyner isimlerinde görüntülenen metin öneki.',
         ],
-        'daemon_text' => [
-            'label' => 'Daemon Öneki',
-            'helper' => 'Daemon günlüklerinde görüntülenen metin öneki.',
-        ],
     ],
 
     'table' => [

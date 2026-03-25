@@ -108,10 +108,6 @@ return [
             'label' => 'Prefixo do contêiner',
             'helper' => 'Prefixo de texto exibido nos nomes dos contêineres.',
         ],
-        'daemon_text' => [
-            'label' => 'Prefixo Daemon',
-            'helper' => 'Prefixo de texto exibido nos logs do daemon.',
-        ],
     ],
 
     'table' => [

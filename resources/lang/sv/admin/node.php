@@ -108,10 +108,6 @@ return [
             'label' => 'Containerprefix',
             'helper' => 'Textprefix som visas i containernamn.',
         ],
-        'daemon_text' => [
-            'label' => 'Daemonprefix',
-            'helper' => 'Textprefix som visas i daemon-loggar.',
-        ],
     ],
 
     'table' => [

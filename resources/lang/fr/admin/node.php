@@ -108,10 +108,6 @@ return [
             'label' => 'Container Prefix',
             'helper' => 'Préfixe textuel affiché dans les noms des conteneurs.',
         ],
-        'daemon_text' => [
-            'label' => 'Préfixe démon',
-            'helper' => 'Préfixe du texte affiché dans les journaux du démon.',
-        ],
     ],
 
     'table' => [

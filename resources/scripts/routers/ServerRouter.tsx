@@ -104,11 +104,7 @@ const ServerNavigation = () => {
                     return true;
                 }
 
-                if (
-                    Array.isArray(routeNestIds) &&
-                    serverNestId !== undefined &&
-                    routeNestIds.includes(serverNestId)
-                ) {
+                if (Array.isArray(routeNestIds) && serverNestId !== undefined && routeNestIds.includes(serverNestId)) {
                     return true;
                 }
 
@@ -124,9 +120,7 @@ const ServerNavigation = () => {
                 permission: route?.permission,
                 path: route.path,
                 icon: resolveExtensionIcon(
-                    typeof route?.icon === 'string' && route.icon.trim().length > 0
-                        ? route.icon
-                        : undefined
+                    typeof route?.icon === 'string' && route.icon.trim().length > 0 ? route.icon : undefined
                 ),
             }))
     );
@@ -169,9 +163,7 @@ const ServerNavigation = () => {
                         const item = (
                             <Navigate id={`ext:${route.id}`} to={to}>
                                 <span className='flex items-center'>
-                                    {route.icon.component ? (
-                                        <route.icon.component className='w-4 h-4 mr-2' />
-                                    ) : null}
+                                    {route.icon.component ? <route.icon.component className='w-4 h-4 mr-2' /> : null}
                                     {route.label}
                                 </span>
                             </Navigate>
@@ -356,7 +348,11 @@ export default function ServerRouter() {
                                                     <Route
                                                         key={`extension:${path}`}
                                                         path={path}
-                                                        element={<PermissionRoute permission={permission}>{element}</PermissionRoute>}
+                                                        element={
+                                                            <PermissionRoute permission={permission}>
+                                                                {element}
+                                                            </PermissionRoute>
+                                                        }
                                                     />
                                                 ))}
 

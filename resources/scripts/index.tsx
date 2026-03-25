@@ -26,9 +26,7 @@ if (typeof window !== 'undefined') {
     const reviactylModules = import.meta.glob('./reviactyl/**/*.{ts,tsx}', { eager: true });
     const moduleRegistry = Object.fromEntries(
         Object.entries(reviactylModules).map(([key, mod]) => {
-            const normalized = key
-                .replace(/^\.\/reviactyl\//, 'reviactyl/')
-                .replace(/\.(ts|tsx)$/, '');
+            const normalized = key.replace(/^\.\/reviactyl\//, 'reviactyl/').replace(/\.(ts|tsx)$/, '');
 
             return [normalized, mod];
         })

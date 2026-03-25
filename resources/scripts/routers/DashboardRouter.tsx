@@ -120,9 +120,7 @@ const DashboardNavigation = () => {
                             to={route.path.startsWith('/') ? route.path : `/${route.path.replace(/^\/+/, '')}`}
                         >
                             <span className='flex items-center'>
-                                {route.icon.component ? (
-                                    <route.icon.component className='w-4 h-4 mr-2' />
-                                ) : null}
+                                {route.icon.component ? <route.icon.component className='w-4 h-4 mr-2' /> : null}
                                 {route.label}
                             </span>
                         </Navigate>

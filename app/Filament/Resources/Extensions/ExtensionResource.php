@@ -42,6 +42,11 @@ class ExtensionResource extends Resource
         return 'Extensions';
     }
 
+    public static function getNavigationBadge(): ?string
+    {
+        return Extension::count() > 0 ? (string) Extension::count() : null;
+    }
+
     public static function table(Table $table): Table
     {
         return $table

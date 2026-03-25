@@ -165,7 +165,7 @@ class DevCommand extends Command
         $this->line("Install path link: {$installLinkPath} -> {$sourceReal}");
         $this->line("Public frontend link: {$publicFrontendLinkPath} -> {$sourceFrontendPath}");
         $this->newLine();
-        $this->line("<bg=blue, fg=white> TIP </> <fg=yellow>run 'php artisan d:extensions:watch {$sourceReal}' to keep frontend files updated live.</>");
+        $this->line("<bg=blue> TIP </> <fg=yellow>run 'php artisan d:extensions:watch {$sourceReal}' to keep frontend files updated live.</>");
 
         return self::SUCCESS;
     }

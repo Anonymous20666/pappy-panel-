@@ -55,6 +55,8 @@ class ExtensionResource extends Resource
 
                 TextColumn::make('version'),
 
+                TextColumn::make('author'),
+
                 IconColumn::make('enabled')
                     ->boolean(),
 

@@ -122,7 +122,7 @@ return [
             'save' => 'Spara',
         ],
         'delete' => [
-            'delete-ssh-key' => '',
+            'delete-ssh-key' => 'Delete SSH Key',
             'delete-key' => 'Ta bort nyckel',
             'info' => 'Att ta bort SSH-nyckeln kommer att ogiltigförklara dess användning över panelen',
         ],

@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Pterodactyl
+    // Internal validation logic for Reviactyl
     'internal' => [
         'variable_value' => ':env Variable',
         'invalid_password' => 'Das angegebene Passwort war für dieses Konto ungültig.',

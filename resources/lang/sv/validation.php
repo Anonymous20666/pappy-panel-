@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Pterodactyl
+    // Internal validation logic for Reviactyl
     'internal' => [
         'variable_value' => ':env-variabel',
         'invalid_password' => 'Lösenordet som angavs var ogiltigt för detta konto.',

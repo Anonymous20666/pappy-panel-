@@ -21,6 +21,7 @@ return [
     ],
     'service' => [
         'title' => 'Gestion des services',
+        'extensions' => 'Extensions',
         'mounts' => 'Supports',
         'nests' => 'Nids',
     ],

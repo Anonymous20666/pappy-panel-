@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Pterodactyl
+    // Internal validation logic for Reviactyl
     'internal' => [
         'variable_value' => ':env वेरिएबल',
         'invalid_password' => 'इस खाते के लिए प्रदान किया गया पासवर्ड अमान्य था।',

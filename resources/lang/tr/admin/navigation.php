@@ -21,6 +21,7 @@ return [
     ],
     'service' => [
         'title' => 'Hizmet Yönetimi',
+        'extensions' => 'Extensions',
         'mounts' => 'Bağlama Noktaları',
         'nests' => 'Nestler',
     ],

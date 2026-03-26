@@ -3,9 +3,9 @@
 namespace App\Console\Commands\Extensions;
 
 use App\Models\Extension;
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class DevInitCommand extends Command
 {

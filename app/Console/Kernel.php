@@ -5,12 +5,12 @@ namespace App\Console;
 use Ramsey\Uuid\Uuid;
 use App\Models\ActivityLog;
 use Illuminate\Console\Scheduling\Schedule;
+use App\Services\Extensions\ExtensionManager;
 use Illuminate\Database\Console\PruneCommand;
 use App\Repositories\Eloquent\SettingsRepository;
-use App\Services\Extensions\ExtensionManager;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Services\Telemetry\TelemetryCollectionService;
 use App\Console\Commands\Schedule\ProcessRunnableCommand;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
 use App\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
 
@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
         }
 
         $schedule->command('server:capture-stats')->everyTenMinutes();
-        
+
         if (config('panel.telemetry.enabled')) {
             $this->registerTelemetry($schedule);
         }

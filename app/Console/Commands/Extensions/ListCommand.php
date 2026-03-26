@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands\Extensions;
 
-use App\Services\Extensions\ExtensionManager;
 use Illuminate\Console\Command;
+use App\Services\Extensions\ExtensionManager;
 
 class ListCommand extends Command
 {

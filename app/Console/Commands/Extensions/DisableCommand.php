@@ -2,9 +2,8 @@
 
 namespace App\Console\Commands\Extensions;
 
-use App\Services\Extensions\ExtensionManager;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use App\Services\Extensions\ExtensionManager;
 
 class DisableCommand extends Command
 {

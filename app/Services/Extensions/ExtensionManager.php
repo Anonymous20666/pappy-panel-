@@ -3,15 +3,14 @@
 namespace App\Services\Extensions;
 
 use App\Models\Extension;
-use App\Services\Extensions\Exceptions\ExtensionInstallException;
-use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
-use ZipArchive;
+use Illuminate\Console\Scheduling\Schedule;
+use App\Services\Extensions\Exceptions\ExtensionInstallException;
 
 class ExtensionManager
 {
@@ -305,7 +304,7 @@ class ExtensionManager
         $extractPath = $tempRoot . DIRECTORY_SEPARATOR . Str::uuid()->toString();
         File::ensureDirectoryExists($extractPath);
 
-        $zip = new ZipArchive();
+        $zip = new \ZipArchive();
         $open = $zip->open($archivePath);
         if ($open !== true) {
             throw new ExtensionInstallException('Could not open extension archive.');
@@ -318,8 +317,8 @@ class ExtensionManager
             }
 
             if (
-                Str::contains($name, ['../', '..\\']) ||
-                Str::startsWith($name, ['/','\\'])
+                Str::contains($name, ['../', '..\\'])
+                || Str::startsWith($name, ['/', '\\'])
             ) {
                 $zip->close();
                 throw new ExtensionInstallException('Archive contains invalid paths.');
@@ -385,6 +384,7 @@ class ExtensionManager
 
     /**
      * @param array<string, mixed> $manifest
+     *
      * @return array<int, string>
      */
     private function resolveFrontendEntryPoints(array $manifest): array
@@ -532,18 +532,10 @@ class ExtensionManager
         }
 
         if (count($requestedVersions) === 1) {
-            throw new ExtensionInstallException(sprintf(
-                'Unsupported extension api_version "%s". Supported: %s.',
-                $requestedVersions[0],
-                implode(', ', self::SUPPORTED_API_VERSIONS)
-            ));
+            throw new ExtensionInstallException(sprintf('Unsupported extension api_version "%s". Supported: %s.', $requestedVersions[0], implode(', ', self::SUPPORTED_API_VERSIONS)));
         }
 
-        throw new ExtensionInstallException(sprintf(
-            'Unsupported extension api_version list [%s]. Supported: %s.',
-            implode(', ', $requestedVersions),
-            implode(', ', self::SUPPORTED_API_VERSIONS)
-        ));
+        throw new ExtensionInstallException(sprintf('Unsupported extension api_version list [%s]. Supported: %s.', implode(', ', $requestedVersions), implode(', ', self::SUPPORTED_API_VERSIONS)));
     }
 
     /**

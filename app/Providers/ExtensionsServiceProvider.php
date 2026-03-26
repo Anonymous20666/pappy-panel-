@@ -2,24 +2,24 @@
 
 namespace App\Providers;
 
-use App\Http\Middleware\ConfigureExtensionFilesystem;
 use App\Models\Extension;
-use App\Http\Middleware\AdminAuthenticate;
-use App\Http\Middleware\RequireTwoFactorAuthentication;
-use App\Services\Extensions\ExtensionFilesystemService;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
+use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\ConfigureExtensionFilesystem;
+use App\Http\Middleware\RequireTwoFactorAuthentication;
+use App\Services\Extensions\ExtensionFilesystemService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExtensionsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //
+
     }
 
     public function boot(): void
@@ -86,7 +86,6 @@ class ExtensionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param mixed $scopeConfig
      * @param array<int, string> $baseMiddleware
      */
     private function mountRouteScope(
@@ -94,7 +93,7 @@ class ExtensionsServiceProvider extends ServiceProvider
         string $installPath,
         mixed $scopeConfig,
         array $baseMiddleware,
-        string $prefix
+        string $prefix,
     ): void {
         if (!is_array($scopeConfig)) {
             return;

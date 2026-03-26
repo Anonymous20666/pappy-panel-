@@ -6,7 +6,7 @@ return [
     'plural_label' => 'Bağlama Noktaları',
 
     'sections' => [
-        'configuration' => '',
+        'configuration' => 'Mount Configuration',
     ],
 
     'fields' => [

@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Pterodactyl
+    // Internal validation logic for Reviactyl
     'internal' => [
         'variable_value' => 'Variabel :env',
         'invalid_password' => 'Kata sandi yang diberikan tidak valid untuk akun ini.',

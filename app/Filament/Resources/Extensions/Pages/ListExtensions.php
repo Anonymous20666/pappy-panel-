@@ -19,12 +19,12 @@ class ListExtensions extends ListRecords
     {
         return [
             Action::make('uploadInstall')
-                ->label('Upload .rext')
+                ->label(trans('admin/extensions.actions.upload'))
                 ->icon('heroicon-o-arrow-up-tray')
                 ->disabled() // not finished yet, so disable for now
                 ->form([
                     FileUpload::make('file')
-                        ->label('Extension package (.rext)')
+                        ->label(trans('admin/extensions.columns.file'))
                         ->helperText('Only .rext extension packages are allowed.')
                         ->required()
                         ->storeFiles(false),
@@ -34,7 +34,7 @@ class ListExtensions extends ListRecords
 
                     if ($path === null) {
                         Notification::make()
-                            ->title('Could not locate uploaded package file.')
+                            ->title(trans('admin/extensions.alerts.could_not_locate_file'))
                             ->danger()
                             ->send();
                         return;
@@ -43,7 +43,7 @@ class ListExtensions extends ListRecords
                     // check if .rext
                     if (strtolower(pathinfo($path, PATHINFO_EXTENSION)) !== 'rext') {
                         Notification::make()
-                            ->title('Only .rext files are allowed.')
+                            ->title(trans('admin/extensions.alerts.invalid_file_type'))
                             ->danger()
                             ->send();
                         return;
@@ -69,13 +69,13 @@ class ListExtensions extends ListRecords
                         $extension = $manager->installFromArchive($path, basename($path));
 
                         Notification::make()
-                            ->title("Installed {$extension->name} ({$extension->version})")
+                            ->title(trans('admin/extensions.alerts.install_success', ['name' => $extension->name, 'version' => $extension->version]))
                             ->success()
                             ->send();
 
                     } catch (\Throwable $exception) {
                         Notification::make()
-                            ->title('Extension install failed')
+                            ->title(trans('admin/extensions.alerts.install_failed'))
                             ->body($exception->getMessage())
                             ->danger()
                             ->send();

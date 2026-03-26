@@ -29,17 +29,17 @@ class ExtensionResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return 'Extensions';
+        return trans('admin/navigation.service.extensions');
     }
 
     public static function getModelLabel(): string
     {
-        return 'Extension';
+        return trans('admin/extensions.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Extensions';
+        return trans('admin/extensions.plural-label');
     }
 
     public static function getNavigationBadge(): ?string
@@ -52,73 +52,79 @@ class ExtensionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('identifier')
-                    ->label('ID')
+                    ->label(trans('admin/extensions.columns.id'))
                     ->searchable(),
 
                 TextColumn::make('name')
+                    ->label(trans('admin/extensions.columns.name'))
                     ->searchable(),
 
-                TextColumn::make('version'),
+                TextColumn::make('version')
+                    ->label(trans('admin/extensions.columns.version')),
 
-                TextColumn::make('author'),
+                TextColumn::make('author')
+                    ->label(trans('admin/extensions.columns.author')),
 
                 IconColumn::make('enabled')
+                    ->label(trans('admin/extensions.columns.enabled'))
                     ->boolean(),
 
                 TextColumn::make('updated_at')
-                    ->label('Updated')
+                    ->label(trans('admin/extensions.columns.updated'))
                     ->dateTime(),
             ])
             ->actions([
                 Action::make('manifest')
-                    ->label('Manifest')
+                    ->label(trans('admin/extensions.actions.manifest'))
                     ->icon('heroicon-o-document-text')
-                    ->modalHeading('Extension Manifest')
+                    ->modalHeading(trans('admin/extensions.modals.manifest'))
                     ->modalSubmitAction(false)
-                    ->modalCancelActionLabel('Close')
+                    ->modalCancelActionLabel(trans('admin/extensions.actions.close'))
                     ->infolist([
-                        \Filament\Infolists\Components\TextEntry::make('identifier')->label('Identifier'),
-                        \Filament\Infolists\Components\TextEntry::make('name')->label('Name'),
-                        \Filament\Infolists\Components\TextEntry::make('version')->label('Version'),
+                        \Filament\Infolists\Components\TextEntry::make('identifier')->label(trans('admin/extensions.columns.id')),
+                        \Filament\Infolists\Components\TextEntry::make('name')->label(trans('admin/extensions.columns.name')),
+                        \Filament\Infolists\Components\TextEntry::make('version')->label(trans('admin/extensions.columns.version')),
                         \Filament\Infolists\Components\TextEntry::make('manifest_json')
-                            ->label('Manifest JSON')
+                            ->label(trans('admin/extensions.columns.manifest_json'))
                             ->state(fn (Extension $record) => json_encode($record->manifest ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)),
                     ]),
 
                 Action::make('enable')
                     ->icon('heroicon-o-check-circle')
+                    ->label(trans('admin/extensions.actions.enable'))
                     ->visible(fn (Extension $record): bool => !$record->enabled)
                     ->action(function (Extension $record): void {
                         try {
                             app(ExtensionManager::class)->enable($record->identifier);
-                            Notification::make()->title('Extension enabled')->success()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.enabled'))->success()->send();
                         } catch (\Throwable $exception) {
-                            Notification::make()->title('Enable failed')->body($exception->getMessage())->danger()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.enable_failed'))->body($exception->getMessage())->danger()->send();
                         }
                     }),
 
                 Action::make('disable')
                     ->color('warning')
+                    ->label(trans('admin/extensions.actions.disable'))
                     ->icon('heroicon-o-pause-circle')
                     ->visible(fn (Extension $record): bool => $record->enabled)
                     ->action(function (Extension $record): void {
                         try {
                             app(ExtensionManager::class)->disable($record->identifier);
-                            Notification::make()->title('Extension disabled')->success()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.disabled'))->success()->send();
                         } catch (\Throwable $exception) {
-                            Notification::make()->title('Disable failed')->body($exception->getMessage())->danger()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.disable_failed'))->body($exception->getMessage())->danger()->send();
                         }
                     }),
 
                 DeleteAction::make()
-                    ->label('Uninstall')
+                    ->label(trans('admin/extensions.actions.delete'))
                     ->requiresConfirmation()
                     ->action(function (Extension $record): void {
                         try {
                             app(ExtensionManager::class)->remove($record->identifier);
-                            Notification::make()->title('Extension uninstalled')->success()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.uninstalled'))->success()->send();
                         } catch (\Throwable $exception) {
-                            Notification::make()->title('Uninstall failed')->body($exception->getMessage())->danger()->send();
+                            Notification::make()->title(trans('admin/extensions.alerts.uninstall_failed'))->body($exception->getMessage())->danger()->send();
                         }
                     }),
             ]);

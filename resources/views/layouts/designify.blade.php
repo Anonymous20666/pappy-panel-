@@ -12,10 +12,7 @@
     @include('layouts.scripts')
 
     @section('scripts')
-        {!! Theme::css('vendor/select2/select2.min.css?t={cache-version}') !!}
-        {!! Theme::css('vendor/sweetalert/sweetalert.min.css?t={cache-version}') !!}
-        {!! Theme::css('vendor/animate/animate.min.css?t={cache-version}') !!}
-        {!! Theme::js('vendor/tailwindcss/tailwind.min.js?t={cache-version}') !!}
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     @show

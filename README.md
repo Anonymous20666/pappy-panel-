@@ -4,10 +4,10 @@
 </a>
 </p>
 
-# Reviactyl v26 | React 19, Laravel 12, FilamentPHP v5 ⚡
+# Reviactyl v26 | React 19, Laravel 12, FilamentPHP 5
 [![Crowdin](https://badges.crowdin.net/reviactyl/localized.svg)](https://crowdin.com/project/reviactyl) ![GitHub Release](https://img.shields.io/github/v/release/reviactyl/panel) ![CalVer Badge](https://img.shields.io/badge/calver-YY.MM.MICRO-22bfda)
 
-**Reviactyl** is a fast, modern, & open-source game server management panel built with PHP, React, and Go. Designed with security in mind, Reviactyl runs all game servers in isolated Docker containers while exposing a beautiful and intuitive UI to end users.
+**Reviactyl** is a modern and open-source game server management panel built using Laravel, React, FilamentPHP, Vite, and Go. It focuses on security and performance by running every game server inside isolated Docker containers while providing users with a clean and intuitive interface.
 
 Manage Game Servers like Never Before!
 
@@ -17,7 +17,7 @@ Manage Game Servers like Never Before!
 * ` 🎨 ` **Client-side Theme Selector**: Let your clients' choose between various styles according to their liking.
 * ` 🖥️ ` **Modern UI**: Reviactyl offers a modern and sleek UI that's more accessible than other modifications on market.
 * ` 🌍 ` **Multilingual**: Reviactyl is fully translatable and can be localized to your native language.
-* ` 🧩 ` **Extensions API**: ( Planned, check [#200](https://github.com/reviactyl/panel/discussions/200) for updates on this. )
+* ` 🧩 ` **Extensions API**: Reviactyl provides a robust Extensions API that allows developers to create and integrate custom functionality seamlessly.
 * ` 📦 ` **Modern Software**: Reviactyl is built with Laravel 12, Filament v5, React v19 Vite for User Dashboard.
 * ` 🔋 ` **Batteries Included**: Reviactyl has most of core features built-in, which means there's no need of spending money for basic features.
 * ` 🍀 ` **Open Source & Free**: Reviactyl is the free open-source game server management panel built upon Pterodactyl offering modern codebase, security, & improvements.
@@ -48,7 +48,8 @@ Reviactyl v26 focuses on modernizing codebase, bringing more stability and expos
 - [X] Yarn -> pnpm Migration
 - [X] Laravel 12 Migration
 - [X] FilamentPHP for Admin Dashboard
-- [ ] Extensions System
+- [X] Extensions System
+- [ ] [Remaining Tasks](https://github.com/reviactyl/panel/milestone/1)
 
 And much more!
 

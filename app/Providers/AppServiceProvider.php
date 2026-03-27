@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\Sanctum;
-use App\Extensions\Themes\Theme;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -62,17 +61,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Only load the settings service provider if the environment
-        // is configured to allow it.
-        if (!config('panel.load_environment_only', false) && $this->app->environment() !== 'testing') {
-            $this->app->register(SettingsServiceProvider::class);
-        }
-
         $this->app->register(DesignifyServiceProvider::class);
-
-        $this->app->singleton('extensions.themes', function () {
-            return new Theme();
-        });
     }
 
     /**

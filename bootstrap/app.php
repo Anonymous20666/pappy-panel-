@@ -26,10 +26,6 @@ return $app
                 ->group(base_path('routes/base.php'));
 
             Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
-                ->prefix('/panel')
-                ->group(base_path('routes/admin.php'));
-
-            Route::middleware(['auth.session', RequireTwoFactorAuthentication::class, AdminAuthenticate::class])
                 ->prefix('/designify')
                 ->group(base_path('routes/designify.php'));
 

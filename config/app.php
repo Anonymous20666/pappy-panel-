@@ -211,7 +211,6 @@ return [
         'Alert' => Prologue\Alerts\Facades\Alert::class,
         'Carbon' => Carbon\Carbon::class,
         'JavaScript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
-        'Theme' => App\Extensions\Facades\Theme::class,
 
         // Custom Facades
         'Activity' => App\Facades\Activity::class,

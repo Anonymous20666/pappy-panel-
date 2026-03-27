@@ -3,6 +3,7 @@
 namespace Tests\Traits\Integration;
 
 use App\Models\Egg;
+use App\Models\Nest;
 use App\Models\Node;
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
@@ -10,6 +11,7 @@ use App\Models\Server;
 use App\Models\Subuser;
 use App\Models\Location;
 use App\Models\Allocation;
+use App\Models\EggVariable;
 
 trait CreatesTestModels
 {
@@ -129,9 +131,63 @@ trait CreatesTestModels
      */
     private function getBungeecordEgg(): Egg
     {
-        /** @var Egg $egg */
-        $egg = Egg::query()->where('author', 'authors@reviactyl.app')->where('name', 'Bungeecord')->firstOrFail();
+        /** @var Egg|null $egg */
+        $egg = Egg::query()->where('author', 'authors@reviactyl.app')->where('name', 'Bungeecord')->first();
+
+        if ($egg instanceof Egg) {
+            $this->ensureBungeecordVariables($egg);
+
+            return $egg;
+        }
+
+        $nest = Nest::factory()->create([
+            'author' => 'authors@reviactyl.app',
+            'name' => 'Proxy',
+        ]);
+
+        $egg = Egg::factory()->create([
+            'nest_id' => $nest->id,
+            'author' => 'authors@reviactyl.app',
+            'name' => 'Bungeecord',
+            'docker_images' => ['ghcr.io/reviactyl/images:java_21'],
+            'startup' => 'java -jar server.jar',
+            'config_files' => '[]',
+            'config_startup' => '{"done":"Server marked as running"}',
+            'config_logs' => '[]',
+            'config_stop' => 'end',
+        ]);
+
+        $this->ensureBungeecordVariables($egg);
 
         return $egg;
+    }
+
+    private function ensureBungeecordVariables(Egg $egg): void
+    {
+        if (!$egg->variables()->where('env_variable', 'BUNGEE_VERSION')->exists()) {
+            EggVariable::factory()->create([
+                'egg_id' => $egg->id,
+                'name' => 'Bungeecord Version',
+                'description' => 'The Bungeecord version to install.',
+                'env_variable' => 'BUNGEE_VERSION',
+                'default_value' => 'latest',
+                'user_viewable' => true,
+                'user_editable' => true,
+                'rules' => 'required|alpha_num',
+            ]);
+        }
+
+        if (!$egg->variables()->where('env_variable', 'SERVER_JARFILE')->exists()) {
+            EggVariable::factory()->create([
+                'egg_id' => $egg->id,
+                'name' => 'Bungeecord Jar File',
+                'description' => 'The jar file name to run.',
+                'env_variable' => 'SERVER_JARFILE',
+                'default_value' => 'bungeecord.jar',
+                'user_viewable' => true,
+                'user_editable' => true,
+                'rules' => 'required|string',
+            ]);
+        }
     }
 }

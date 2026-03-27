@@ -3,6 +3,7 @@
 namespace Tests\Integration\Services\Servers;
 
 use Exception;
+use App\Models\Egg;
 use App\Models\Nest;
 use App\Models\User;
 use App\Models\Server;
@@ -70,10 +71,18 @@ class StartupModificationServiceTest extends IntegrationTestCase
      */
     public function testServerIsProperlyModifiedAsAdminUser()
     {
-        /** @var \App\Models\Egg $nextEgg */
-        $nextEgg = Nest::query()->findOrFail(2)->eggs()->firstOrFail();
+        $server = $this->createServerModel();
 
-        $server = $this->createServerModel(['egg_id' => 1]);
+        $nextNest = Nest::factory()->create();
+        $nextEgg = Egg::factory()->create([
+            'nest_id' => $nextNest->id,
+            'author' => 'authors@reviactyl.app',
+            'docker_images' => ['ghcr.io/reviactyl/images:java_21'],
+            'config_files' => '[]',
+            'config_startup' => '{"done":"Server marked as running"}',
+            'config_logs' => '[]',
+            'config_stop' => 'end',
+        ]);
 
         $this->assertNotSame($nextEgg->id, $server->egg_id);
         $this->assertNotSame($nextEgg->nest_id, $server->nest_id);

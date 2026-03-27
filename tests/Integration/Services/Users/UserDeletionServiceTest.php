@@ -4,8 +4,8 @@ namespace Tests\Integration\Services\Users;
 
 use App\Models\User;
 use App\Exceptions\DisplayException;
-use App\Services\Users\UserDeletionService;
 use Tests\Integration\IntegrationTestCase;
+use App\Services\Users\UserDeletionService;
 
 class UserDeletionServiceTest extends IntegrationTestCase
 {

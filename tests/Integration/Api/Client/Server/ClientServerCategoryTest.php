@@ -3,13 +3,12 @@
 namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\User;
-use App\Models\Server;
 use App\Models\ServerCategory;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ClientServerCategoryTest extends ClientApiIntegrationTestCase
 {
-    /** @var Server */
+    /** @var \App\Models\Server */
     private $server;
 
     /** @var User */
@@ -20,7 +19,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
         parent::setUp();
 
         $this->user = User::factory()->create();
-        $this->server = Server::factory()->create(['owner_id' => $this->user->id]);
+        $this->server = $this->createServerModel(['user_id' => $this->user->id]);
     }
 
     public function testUserCanListCategories()
@@ -96,8 +95,8 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
     public function testFilterServersByCategory()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
-        $server1 = Server::factory()->create(['owner_id' => $this->user->id, 'category_id' => $category->id]);
-        $server2 = Server::factory()->create(['owner_id' => $this->user->id, 'category_id' => null]);
+        $server1 = $this->createServerModel(['user_id' => $this->user->id, 'category_id' => $category->id]);
+        $server2 = $this->createServerModel(['user_id' => $this->user->id, 'category_id' => null]);
 
         // Filter by category
         $response = $this->actingAs($this->user)->getJson("/api/client?filter[category_uuid]={$category->uuid}");

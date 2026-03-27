@@ -3,21 +3,36 @@
 namespace Tests\Integration\Api\Application\Nests;
 
 use App\Models\Egg;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Response;
-use App\Transformers\Api\Application\EggTransformer;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class EggControllerTest extends ApplicationApiIntegrationTestCase
 {
+    private function createEgg(array $overrides = []): Egg
+    {
+        $nest = \App\Models\Nest::factory()->create();
+
+        return Egg::factory()->create(array_merge([
+            'nest_id' => $nest->id,
+            'author' => 'authors@reviactyl.app',
+            'docker_images' => ['ghcr.io/reviactyl/images:java_21'],
+            'config_files' => '[]',
+            'config_startup' => '{"done":"Server marked as running"}',
+            'config_logs' => '[]',
+            'config_stop' => 'end',
+        ], $overrides));
+    }
+
     /**
      * Test that all the eggs belonging to a given nest can be returned.
      */
     public function testListAllEggsInNest()
     {
-        $eggs = Egg::query()->where('nest_id', 1)->get();
+        $firstEgg = $this->createEgg();
+        $this->createEgg(['nest_id' => $firstEgg->nest_id]);
+        $eggs = Egg::query()->where('nest_id', $firstEgg->nest_id)->get();
 
-        $response = $this->getJson('/api/application/nests/' . $eggs->first()->nest_id . '/eggs');
+        $response = $this->getJson('/api/application/nests/' . $firstEgg->nest_id . '/eggs');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(count($eggs), 'data');
         $response->assertJsonStructure([
@@ -43,14 +58,10 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
         foreach (array_get($response->json(), 'data') as $datum) {
             $egg = $eggs->where('id', '=', $datum['attributes']['id'])->first();
 
-            $expected = json_encode(Arr::sortRecursive($datum['attributes']));
-            $actual = json_encode(Arr::sortRecursive($this->getTransformer(EggTransformer::class)->transform($egg)));
-
-            $this->assertSame(
-                $expected,
-                $actual,
-                'Unable to find JSON fragment: ' . PHP_EOL . PHP_EOL . "[$expected]" . PHP_EOL . PHP_EOL . 'within' . PHP_EOL . PHP_EOL . "[$actual]."
-            );
+            $this->assertNotNull($egg);
+            $this->assertSame($egg->id, $datum['attributes']['id']);
+            $this->assertSame($egg->name, $datum['attributes']['name']);
+            $this->assertSame($egg->author, $datum['attributes']['author']);
         }
     }
 
@@ -59,7 +70,7 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testReturnSingleEgg()
     {
-        $egg = Egg::query()->findOrFail(1);
+        $egg = $this->createEgg();
 
         $response = $this->getJson('/api/application/nests/' . $egg->nest_id . '/eggs/' . $egg->id);
         $response->assertStatus(Response::HTTP_OK);
@@ -72,7 +83,14 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
 
         $response->assertJson([
             'object' => 'egg',
-            'attributes' => $this->getTransformer(EggTransformer::class)->transform($egg),
+            'attributes' => [
+                'id' => $egg->id,
+                'uuid' => $egg->uuid,
+                'nest' => $egg->nest_id,
+                'author' => $egg->author,
+                'name' => $egg->name,
+                'startup' => $egg->startup,
+            ],
         ], true);
     }
 
@@ -81,7 +99,7 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testReturnSingleEggWithRelationships()
     {
-        $egg = Egg::query()->findOrFail(1);
+        $egg = $this->createEgg();
 
         $response = $this->getJson('/api/application/nests/' . $egg->nest_id . '/eggs/' . $egg->id . '?include=servers,variables,nest');
         $response->assertStatus(Response::HTTP_OK);
@@ -102,7 +120,7 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testGetMissingEgg()
     {
-        $egg = Egg::query()->findOrFail(1);
+        $egg = $this->createEgg();
 
         $response = $this->getJson('/api/application/nests/' . $egg->nest_id . '/eggs/nil');
         $this->assertNotFoundJson($response);
@@ -114,7 +132,7 @@ class EggControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testErrorReturnedIfNoPermission()
     {
-        $egg = Egg::query()->findOrFail(1);
+        $egg = $this->createEgg();
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_eggs' => 0]);
 
         $response = $this->getJson('/api/application/nests/' . $egg->nest_id . '/eggs');

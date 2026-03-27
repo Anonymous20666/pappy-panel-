@@ -9,8 +9,8 @@ use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
-use PHPUnit\Framework\Attributes\TestWith;
 use Tests\Integration\Http\HttpTestCase;
+use PHPUnit\Framework\Attributes\TestWith;
 use App\Events\Auth\ProvidedAuthenticationToken;
 
 class LoginCheckpointControllerTest extends HttpTestCase

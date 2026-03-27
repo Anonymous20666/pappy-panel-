@@ -2,9 +2,9 @@
 
 namespace App\Services\Extensions;
 
-use App\Services\Extensions\Exceptions\ExtensionInstallException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use App\Services\Extensions\Exceptions\ExtensionInstallException;
 
 class ExtensionManifestService
 {
@@ -32,6 +32,7 @@ class ExtensionManifestService
 
     /**
      * @param array<string, mixed> $manifest
+     *
      * @return array<string, mixed>
      */
     public function normalize(array $manifest): array

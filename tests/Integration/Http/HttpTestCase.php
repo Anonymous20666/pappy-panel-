@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Integration\Http;
+namespace Tests\Integration\Http;
 
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 
 abstract class HttpTestCase extends IntegrationTestCase
 {

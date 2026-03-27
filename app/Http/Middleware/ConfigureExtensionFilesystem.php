@@ -3,13 +3,12 @@
 namespace App\Http\Middleware;
 
 use App\Models\Extension;
-use App\Services\Extensions\ExtensionFilesystemService;
-use Closure;
 use Illuminate\Http\Request;
+use App\Services\Extensions\ExtensionFilesystemService;
 
 class ConfigureExtensionFilesystem
 {
-    public function handle(Request $request, Closure $next, string $identifier)
+    public function handle(Request $request, \Closure $next, string $identifier)
     {
         $extension = Extension::query()->where('identifier', $identifier)->first();
 

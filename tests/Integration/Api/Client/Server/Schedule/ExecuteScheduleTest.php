@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Schedule;
+namespace Tests\Integration\Api\Client\Server\Schedule;
 
 use App\Models\Task;
-use Illuminate\Http\Response;
 use App\Models\Schedule;
 use App\Models\Permission;
-use Illuminate\Support\Facades\Bus;
+use Illuminate\Http\Response;
 use App\Jobs\Schedule\RunTaskJob;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Illuminate\Support\Facades\Bus;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ExecuteScheduleTest extends ClientApiIntegrationTestCase
 {

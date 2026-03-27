@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Users;
+namespace Tests\Integration\Api\Application\Users;
 
-use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Response;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class ExternalUserControllerTest extends ApplicationApiIntegrationTestCase
 {

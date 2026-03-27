@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Integration\Http\Controllers\Admin\UserController;
+namespace Tests\Integration\Http\Controllers\Admin\UserController;
 
 use App\Models\User;
-use App\Tests\Integration\Http\HttpTestCase;
+use Tests\Integration\Http\HttpTestCase;
 
 class DeleteUserTest extends HttpTestCase
 {

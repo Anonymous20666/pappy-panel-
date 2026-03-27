@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Services\Databases;
+namespace Tests\Integration\Services\Databases;
 
-use Mockery\MockInterface;
 use App\Models\Database;
+use Mockery\MockInterface;
 use App\Models\DatabaseHost;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Repositories\Eloquent\DatabaseRepository;
 use App\Services\Databases\DatabaseManagementService;
 use App\Exceptions\Repository\DuplicateDatabaseNameException;

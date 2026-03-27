@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Traits\Integration;
+namespace Tests\Traits\Integration;
 
-use Ramsey\Uuid\Uuid;
 use App\Models\Egg;
 use App\Models\Node;
 use App\Models\User;
+use Ramsey\Uuid\Uuid;
 use App\Models\Server;
 use App\Models\Subuser;
 use App\Models\Location;

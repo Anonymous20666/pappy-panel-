@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Traits\Http;
+namespace Tests\Traits\Http;
 
 use Illuminate\Http\Response;
 use Illuminate\Testing\TestResponse;

@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources\Extensions;
 
-use App\Filament\Resources\Extensions\Pages\ListExtensions;
 use App\Models\Extension;
-use App\Services\Extensions\ExtensionManager;
+use Filament\Tables\Table;
 use Filament\Actions\Action;
-use Filament\Actions\DeleteAction;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Actions\DeleteAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Table;
+use Filament\Notifications\Notification;
+use App\Services\Extensions\ExtensionManager;
+use App\Filament\Resources\Extensions\Pages\ListExtensions;
 
 class ExtensionResource extends Resource
 {
     protected static ?string $model = Extension::class;
 
     protected static ?int $navigationSort = 1;
-     
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-puzzle-piece';
     protected static string|\BackedEnum|null $activeNavigationIcon = 'heroicon-s-puzzle-piece';
 

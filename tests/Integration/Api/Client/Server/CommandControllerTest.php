@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server;
+namespace Tests\Integration\Api\Client\Server;
 
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Http\Response;
 use App\Models\Server;
 use App\Models\Permission;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Response;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use App\Repositories\Wings\DaemonCommandRepository;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CommandControllerTest extends ClientApiIntegrationTestCase
 {

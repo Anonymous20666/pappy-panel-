@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use App\Models\Egg;
 use App\Models\User;
 use Illuminate\Support\Collection;
+use Tests\Integration\IntegrationTestCase;
 use Illuminate\Validation\ValidationException;
-use App\Tests\Integration\IntegrationTestCase;
 use App\Services\Servers\VariableValidatorService;
 
 class VariableValidatorServiceTest extends IntegrationTestCase

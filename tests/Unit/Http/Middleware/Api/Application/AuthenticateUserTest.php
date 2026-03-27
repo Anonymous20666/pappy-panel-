@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Unit\Http\Middleware\Api\Application;
+namespace Tests\Unit\Http\Middleware\Api\Application;
 
-use App\Tests\Unit\Http\Middleware\MiddlewareTestCase;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Tests\Unit\Http\Middleware\MiddlewareTestCase;
 use App\Http\Middleware\Api\Application\AuthenticateApplicationUser;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AuthenticateUserTest extends MiddlewareTestCase
 {

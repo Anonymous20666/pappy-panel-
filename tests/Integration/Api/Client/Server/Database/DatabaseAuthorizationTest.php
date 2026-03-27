@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Database;
+namespace Tests\Integration\Api\Client\Server\Database;
 
 use App\Models\Subuser;
 use App\Models\Database;
@@ -8,7 +8,7 @@ use App\Models\DatabaseHost;
 use App\Contracts\Extensions\HashidsInterface;
 use App\Services\Databases\DatabasePasswordService;
 use App\Services\Databases\DatabaseManagementService;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DatabaseAuthorizationTest extends ClientApiIntegrationTestCase
 {

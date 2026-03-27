@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Integration;
+namespace Tests\Integration;
 
 use Illuminate\Http\Response;
-use Illuminate\Testing\Assert as PHPUnit;
 use App\Exceptions\DisplayException;
+use Illuminate\Testing\Assert as PHPUnit;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Testing\TestResponse as IlluminateTestResponse;
 

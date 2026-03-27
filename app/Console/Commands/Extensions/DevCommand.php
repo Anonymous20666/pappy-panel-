@@ -3,10 +3,10 @@
 namespace App\Console\Commands\Extensions;
 
 use App\Models\Extension;
-use App\Services\Extensions\ExtensionManifestService;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use App\Services\Extensions\ExtensionManifestService;
 
 class DevCommand extends Command
 {

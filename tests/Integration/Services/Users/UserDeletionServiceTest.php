@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Services\Users;
+namespace Tests\Integration\Services\Users;
 
 use App\Models\User;
 use App\Exceptions\DisplayException;
 use App\Services\Users\UserDeletionService;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 
 class UserDeletionServiceTest extends IntegrationTestCase
 {

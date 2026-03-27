@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Tests\Integration\Services\Backups;
+namespace Tests\Integration\Services\Backups;
 
+use App\Models\Backup;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use App\Models\Backup;
-use GuzzleHttp\Exception\ClientException;
 use App\Extensions\Backups\BackupManager;
+use GuzzleHttp\Exception\ClientException;
 use App\Extensions\Filesystem\S3Filesystem;
 use App\Services\Backups\DeleteBackupService;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Repositories\Wings\DaemonBackupRepository;
 use App\Exceptions\Service\Backup\BackupLockedException;
 use App\Exceptions\Http\Connection\DaemonConnectionException;

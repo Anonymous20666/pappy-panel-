@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
 use App\Models\Node;
 use App\Models\Task;
@@ -11,13 +11,13 @@ use App\Models\Server;
 use App\Models\Database;
 use App\Models\Location;
 use App\Models\Schedule;
-use Illuminate\Support\Collection;
 use App\Models\Allocation;
 use App\Models\DatabaseHost;
-use App\Tests\Integration\TestResponse;
-use App\Tests\Integration\IntegrationTestCase;
-use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Support\Collection;
+use Tests\Integration\TestResponse;
+use Tests\Integration\IntegrationTestCase;
 use App\Transformers\Api\Client\BaseClientTransformer;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 abstract class ClientApiIntegrationTestCase extends IntegrationTestCase
 {

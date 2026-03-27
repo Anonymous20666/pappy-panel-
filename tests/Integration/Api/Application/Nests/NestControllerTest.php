@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Nests;
+namespace Tests\Integration\Api\Application\Nests;
 
 use Illuminate\Http\Response;
 use App\Contracts\Repository\NestRepositoryInterface;
 use App\Transformers\Api\Application\NestTransformer;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class NestControllerTest extends ApplicationApiIntegrationTestCase
 {

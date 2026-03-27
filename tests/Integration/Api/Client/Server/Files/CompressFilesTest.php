@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Files;
+namespace Tests\Integration\Api\Client\Server\Files;
 
-use Mockery\MockInterface;
 use App\Models\Permission;
+use Mockery\MockInterface;
 use App\Repositories\Wings\DaemonFileRepository;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CompressFilesTest extends ClientApiIntegrationTestCase
 {

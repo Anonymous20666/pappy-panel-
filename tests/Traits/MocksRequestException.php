@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Traits;
+namespace Tests\Traits;
 
 use Mockery\Mock;
 use Mockery\MockInterface;

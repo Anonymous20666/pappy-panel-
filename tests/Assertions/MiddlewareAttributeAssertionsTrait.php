@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Assertions;
+namespace Tests\Assertions;
 
 use PHPUnit\Framework\Assert;
 

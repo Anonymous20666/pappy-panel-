@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use ZipArchive;
 
 class DevCompileCommand extends Command
 {
@@ -95,8 +94,8 @@ class DevCompileCommand extends Command
             File::delete($output);
         }
 
-        $zip = new ZipArchive();
-        $open = $zip->open($output, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $zip = new \ZipArchive();
+        $open = $zip->open($output, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
         if ($open !== true) {
             $this->error('Could not create output archive.');
 

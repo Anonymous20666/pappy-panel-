@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Allocation;
+namespace Tests\Integration\Api\Client\Server\Allocation;
 
 use App\Models\Subuser;
 use App\Models\Allocation;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class AllocationAuthorizationTest extends ClientApiIntegrationTestCase
 {

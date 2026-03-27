@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Schedule;
+namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use Illuminate\Http\Response;
 use App\Models\Schedule;
 use App\Models\Permission;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Illuminate\Http\Response;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CreateServerScheduleTest extends ClientApiIntegrationTestCase
 {

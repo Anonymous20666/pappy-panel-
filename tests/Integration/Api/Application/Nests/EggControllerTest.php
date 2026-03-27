@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Nests;
+namespace Tests\Integration\Api\Application\Nests;
 
-use Illuminate\Support\Arr;
 use App\Models\Egg;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Response;
 use App\Transformers\Api\Application\EggTransformer;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class EggControllerTest extends ApplicationApiIntegrationTestCase
 {

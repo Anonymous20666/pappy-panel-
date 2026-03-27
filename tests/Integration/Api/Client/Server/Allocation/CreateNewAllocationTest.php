@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Allocation;
+namespace Tests\Integration\Api\Client\Server\Allocation;
 
-use Illuminate\Http\Response;
 use App\Models\Allocation;
 use App\Models\Permission;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Illuminate\Http\Response;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CreateNewAllocationTest extends ClientApiIntegrationTestCase
 {

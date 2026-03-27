@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Integration\Services\Deployment;
+namespace Tests\Integration\Services\Deployment;
 
 use App\Models\Node;
 use App\Models\Server;
 use App\Models\Database;
 use App\Models\Location;
 use Illuminate\Support\Collection;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Services\Deployment\FindViableNodesService;
 use App\Exceptions\Service\Deployment\NoViableNodeException;
 

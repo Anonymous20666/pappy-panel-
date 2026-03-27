@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Integration\Api\Remote;
+namespace Tests\Integration\Api\Remote;
 
-use phpseclib3\Crypt\EC;
 use App\Models\Node;
 use App\Models\User;
 use App\Models\Server;
+use phpseclib3\Crypt\EC;
 use App\Models\Permission;
 use App\Models\UserSSHKey;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 
 class SftpAuthenticationControllerTest extends IntegrationTestCase
 {

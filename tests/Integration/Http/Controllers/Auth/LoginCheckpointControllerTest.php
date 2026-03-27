@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Tests\Integration\Http\Controllers\Auth;
+namespace Tests\Integration\Http\Controllers\Auth;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Events\Auth\DirectLogin;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
-use App\Events\Auth\DirectLogin;
 use PHPUnit\Framework\Attributes\TestWith;
-use App\Tests\Integration\Http\HttpTestCase;
+use Tests\Integration\Http\HttpTestCase;
 use App\Events\Auth\ProvidedAuthenticationToken;
 
 class LoginCheckpointControllerTest extends HttpTestCase

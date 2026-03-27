@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Users;
+namespace Tests\Integration\Api\Application\Users;
 
 use App\Models\User;
 use Illuminate\Http\Response;
 use App\Services\Acl\Api\AdminAcl;
 use App\Transformers\Api\Application\UserTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class UserControllerTest extends ApplicationApiIntegrationTestCase
 {

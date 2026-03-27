@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Traits\Http;
+namespace Tests\Traits\Http;
 
 use Mockery as m;
 use Mockery\Mock;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 trait RequestMockHelpers

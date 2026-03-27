@@ -2,8 +2,8 @@
 
 namespace App\Services\Extensions;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Config;
 
 class ExtensionFilesystemService
 {

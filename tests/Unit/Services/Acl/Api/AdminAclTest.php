@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Unit\Services\Acl\Api;
+namespace Tests\Unit\Services\Acl\Api;
 
 use App\Models\ApiKey;
-use App\Tests\TestCase;
+use Tests\TestCase;
 use App\Services\Acl\Api\AdminAcl;
 
 class AdminAclTest extends TestCase

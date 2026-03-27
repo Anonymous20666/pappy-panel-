@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\Extensions\Pages;
 
-use App\Filament\Resources\Extensions\ExtensionResource;
-use App\Services\Extensions\ExtensionManager;
-use Filament\Actions\Action;
-use Filament\Forms\Components\FileUpload;
-use Filament\Notifications\Notification;
-use Filament\Resources\Pages\ListRecords;
 use Illuminate\Support\Arr;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\FileUpload;
+use Filament\Resources\Pages\ListRecords;
+use App\Services\Extensions\ExtensionManager;
+use App\Filament\Resources\Extensions\ExtensionResource;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ListExtensions extends ListRecords
@@ -37,6 +37,7 @@ class ListExtensions extends ListRecords
                             ->title(trans('admin/extensions.alerts.could_not_locate_file'))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
@@ -46,6 +47,7 @@ class ListExtensions extends ListRecords
                             ->title(trans('admin/extensions.alerts.invalid_file_type'))
                             ->danger()
                             ->send();
+
                         return;
                     }
 
@@ -88,6 +90,7 @@ class ListExtensions extends ListRecords
     {
         if ($uploaded instanceof TemporaryUploadedFile) {
             $path = $uploaded->getRealPath();
+
             return is_string($path) ? $path : null;
         }
 

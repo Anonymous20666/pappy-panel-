@@ -56,14 +56,15 @@ class InfoCommand extends Command
         $this->newLine();
         $this->line("Identifier: <fg=cyan>{$extension->identifier}</>");
         $this->line("Name: <fg=green>{$extension->name}</>");
-        $this->line("Update URL: <fg=yellow>" . ($extension->update_url ?? '-') . "</>");
+        $this->line('Update URL: <fg=yellow>' . ($extension->update_url ?? '-') . '</>');
         $this->line("Description: <fg=white>{$extension->description}</>");
         $this->line("Author: <fg=blue>{$extension->author}</>");
-        $this->line("Website: <fg=yellow>" . ($extension->website ?? '-') . "</>");
+        $this->line('Website: <fg=yellow>' . ($extension->website ?? '-') . '</>');
         $this->line("Version: <fg=magenta>{$extension->version}</>");
         $this->line('Enabled: ' . ($extension->enabled ? '<fg=green>yes</>' : '<fg=red>no</>'));
         $this->line('Installed At: ' . ($extension->installed_at?->toDateTimeString() ?? '-'));
         $this->line("Install Path: <fg=cyan>{$extension->install_path}</>");
+
         return self::SUCCESS;
     }
 }

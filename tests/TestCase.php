@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Tests;
 
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
@@ -11,7 +11,7 @@ abstract class TestCase extends BaseTestCase
     /**
      * Setup tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
-use Illuminate\Support\Str;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 

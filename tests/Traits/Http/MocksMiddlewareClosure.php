@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Traits\Http;
+namespace Tests\Traits\Http;
 
 use Closure;
 use Illuminate\Http\Request;

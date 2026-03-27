@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
 use App\Models\User;
-use Illuminate\Http\Response;
 use App\Models\ApiKey;
-use Illuminate\Support\Facades\Event;
+use Illuminate\Http\Response;
 use App\Events\ActivityLogged;
+use Illuminate\Support\Facades\Event;
 
 class ApiKeyControllerTest extends ClientApiIntegrationTestCase
 {

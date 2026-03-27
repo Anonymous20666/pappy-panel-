@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Services\Acl\Api;
 
-use App\Models\ApiKey;
 use Tests\TestCase;
+use App\Models\ApiKey;
 use App\Services\Acl\Api\AdminAcl;
 
 class AdminAclTest extends TestCase

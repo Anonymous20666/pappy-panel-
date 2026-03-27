@@ -4,8 +4,8 @@ namespace Tests\Integration\Services\Servers;
 
 use App\Models\Server;
 use Mockery\MockInterface;
-use App\Services\Servers\SuspensionService;
 use Tests\Integration\IntegrationTestCase;
+use App\Services\Servers\SuspensionService;
 use App\Repositories\Wings\DaemonServerRepository;
 
 class SuspensionServiceTest extends IntegrationTestCase

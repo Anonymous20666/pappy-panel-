@@ -26,7 +26,9 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testNestResponse()
     {
-        /** @var \App\Models\Nest[] $nests */
+        \App\Models\Nest::factory()->count(2)->create();
+
+        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\Nest> $nests */
         $nests = $this->repository->all();
 
         $response = $this->getJson('/api/application/nests');
@@ -43,8 +45,8 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
             'data' => [],
             'meta' => [
                 'pagination' => [
-                    'total' => 4,
-                    'count' => 4,
+                    'total' => count($nests),
+                    'count' => count($nests),
                     'per_page' => 50,
                     'current_page' => 1,
                     'total_pages' => 1,
@@ -65,7 +67,7 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testSingleNestResponse()
     {
-        $nest = $this->repository->find(1);
+        $nest = \App\Models\Nest::factory()->create();
 
         $response = $this->getJson('/api/application/nests/' . $nest->id);
         $response->assertStatus(Response::HTTP_OK);
@@ -85,7 +87,16 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testSingleNestWithEggsIncluded()
     {
-        $nest = $this->repository->find(1);
+        $nest = \App\Models\Nest::factory()->create();
+        \App\Models\Egg::factory()->count(2)->create([
+            'nest_id' => $nest->id,
+            'author' => 'authors@reviactyl.app',
+            'docker_images' => ['ghcr.io/reviactyl/images:java_21'],
+            'config_files' => '[]',
+            'config_startup' => '{"done":"Server marked as running"}',
+            'config_logs' => '[]',
+            'config_stop' => 'end',
+        ]);
         $nest->loadMissing('eggs');
 
         $response = $this->getJson('/api/application/nests/' . $nest->id . '?include=servers,eggs');
@@ -118,7 +129,7 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
      */
     public function testErrorReturnedIfNoPermission()
     {
-        $nest = $this->repository->find(1);
+        $nest = \App\Models\Nest::factory()->create();
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_nests' => 0]);
 
         $response = $this->getJson('/api/application/nests/' . $nest->id);

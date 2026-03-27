@@ -2,9 +2,9 @@
 
 namespace Tests\Integration\Admin;
 
-use App\Services\Activity\ActivityLogService;
 use Tests\Integration\IntegrationTestCase;
-use App\Http\Controllers\Admin\ServersController;
+use App\Services\Nodes\NodeCreationService;
+use App\Services\Activity\ActivityLogService;
 
 class ControllerResolutionTest extends IntegrationTestCase
 {
@@ -14,9 +14,9 @@ class ControllerResolutionTest extends IntegrationTestCase
         $this->assertNotNull($service);
     }
 
-    public function testControllerResolves()
+    public function testNodeCreationServiceResolves()
     {
-        $controller = $this->app->make(ServersController::class);
-        $this->assertNotNull($controller);
+        $service = $this->app->make(NodeCreationService::class);
+        $this->assertNotNull($service);
     }
 }

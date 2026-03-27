@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Rules;
 
-use App\Rules\Username;
 use Tests\TestCase;
+use App\Rules\Username;
 
 class UsernameTest extends TestCase
 {

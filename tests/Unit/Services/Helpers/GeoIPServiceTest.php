@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Services\Helpers;
+namespace Tests\Unit\Services\Helpers;
 
-use App\Tests\TestCase;
+use Tests\TestCase;
 use Psr\Log\LoggerInterface;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;

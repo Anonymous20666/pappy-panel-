@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Http\Middleware;
+namespace Tests\Unit\Http\Middleware;
 
 use App\Models\User;
 use App\Http\Middleware\AdminAuthenticate;

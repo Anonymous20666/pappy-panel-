@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Unit\Rules;
+namespace Tests\Unit\Rules;
 
 use App\Rules\Username;
-use App\Tests\TestCase;
+use Tests\TestCase;
 
 class UsernameTest extends TestCase
 {

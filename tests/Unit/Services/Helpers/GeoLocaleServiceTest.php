@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Services\Helpers;
+namespace Tests\Unit\Services\Helpers;
 
-use App\Tests\TestCase;
+use Tests\TestCase;
 use App\Services\Helpers\GeoLocaleService;
 
 class GeoLocaleServiceTest extends TestCase

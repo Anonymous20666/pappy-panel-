@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use App\Models\Database;
 use Mockery\MockInterface;
 use App\Models\DatabaseHost;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use GuzzleHttp\Exception\BadResponseException;
 use App\Services\Servers\ServerDeletionService;
 use App\Repositories\Wings\DaemonServerRepository;

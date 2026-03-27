@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Admin;
+namespace Tests\Integration\Admin;
 
 use App\Models\Node;
 use App\Models\User;
 use App\Models\Server;
 use App\Models\Location;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ActivityLogTest extends IntegrationTestCase

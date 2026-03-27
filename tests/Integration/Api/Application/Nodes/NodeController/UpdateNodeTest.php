@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Nodes\NodeController;
+namespace Tests\Integration\Api\Application\Nodes\NodeController;
 
 use App\Models\Node;
 use App\Models\Location;
 use Mockery\MockInterface;
 use GuzzleHttp\Psr7\Response;
 use App\Repositories\Wings\DaemonConfigurationRepository;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class UpdateNodeTest extends ApplicationApiIntegrationTestCase
 {

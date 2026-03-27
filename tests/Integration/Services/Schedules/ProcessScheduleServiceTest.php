@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Services\Schedules;
+namespace Tests\Integration\Services\Schedules;
 
 use Exception;
 use App\Models\Task;
@@ -10,7 +10,7 @@ use App\Jobs\Schedule\RunTaskJob;
 use Illuminate\Support\Facades\Bus;
 use App\Exceptions\DisplayException;
 use Illuminate\Contracts\Bus\Dispatcher;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Services\Schedules\ProcessScheduleService;
 
 class ProcessScheduleServiceTest extends IntegrationTestCase

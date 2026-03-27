@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration;
+namespace Tests\Integration;
 
 use Illuminate\Http\Response;
 use App\Exceptions\DisplayException;

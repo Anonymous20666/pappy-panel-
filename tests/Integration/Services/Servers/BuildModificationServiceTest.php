@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use App\Models\Server;
 use App\Models\Allocation;
@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use App\Exceptions\DisplayException;
 use GuzzleHttp\Exception\RequestException;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Repositories\Wings\DaemonServerRepository;
 use App\Services\Servers\BuildModificationService;
 use App\Exceptions\Http\Connection\DaemonConnectionException;

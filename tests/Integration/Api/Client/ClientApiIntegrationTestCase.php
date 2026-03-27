@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
 use App\Models\Node;
 use App\Models\Task;
@@ -14,8 +14,8 @@ use App\Models\Schedule;
 use App\Models\Allocation;
 use App\Models\DatabaseHost;
 use Illuminate\Support\Collection;
-use App\Tests\Integration\TestResponse;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\TestResponse;
+use Tests\Integration\IntegrationTestCase;
 use App\Transformers\Api\Client\BaseClientTransformer;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 

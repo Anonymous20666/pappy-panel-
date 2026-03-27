@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server;
+namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\Permission;
 use Carbon\CarbonImmutable;
@@ -9,7 +9,7 @@ use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key\InMemory;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class WebsocketControllerTest extends ClientApiIntegrationTestCase
 {

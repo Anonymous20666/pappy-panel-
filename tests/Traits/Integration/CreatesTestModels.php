@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Traits\Integration;
+namespace Tests\Traits\Integration;
 
 use App\Models\Egg;
 use App\Models\Node;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Unit\Http\Middleware;
+namespace Tests\Unit\Http\Middleware;
 
-use App\Tests\TestCase;
-use App\Tests\Traits\Http\RequestMockHelpers;
-use App\Tests\Traits\Http\MocksMiddlewareClosure;
-use App\Tests\Assertions\MiddlewareAttributeAssertionsTrait;
+use Tests\TestCase;
+use Tests\Traits\Http\RequestMockHelpers;
+use Tests\Traits\Http\MocksMiddlewareClosure;
+use Tests\Assertions\MiddlewareAttributeAssertionsTrait;
 
 abstract class MiddlewareTestCase extends TestCase
 {

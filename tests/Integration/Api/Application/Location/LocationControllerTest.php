@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Application\Location;
+namespace Tests\Integration\Api\Application\Location;
 
 use App\Models\Node;
 use App\Models\Location;
@@ -8,7 +8,7 @@ use Illuminate\Http\Response;
 use App\Transformers\Api\Application\NodeTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
 use App\Transformers\Api\Application\LocationTransformer;
-use App\Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class LocationControllerTest extends ApplicationApiIntegrationTestCase
 {

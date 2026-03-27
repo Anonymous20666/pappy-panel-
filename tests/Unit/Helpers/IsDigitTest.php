@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Tests\Unit\Helpers;
+namespace Tests\Unit\Helpers;
 
-use App\Tests\TestCase;
+use Tests\TestCase;
 
 class IsDigitTest extends TestCase
 {

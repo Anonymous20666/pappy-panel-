@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server;
+namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\User;
 use App\Models\Allocation;
 use App\Models\Permission;
 use Illuminate\Http\Response;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class NetworkAllocationControllerTest extends ClientApiIntegrationTestCase
 {

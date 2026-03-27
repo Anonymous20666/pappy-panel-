@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use App\Models\Server;
 use Mockery\MockInterface;
 use App\Services\Servers\SuspensionService;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Repositories\Wings\DaemonServerRepository;
 
 class SuspensionServiceTest extends IntegrationTestCase

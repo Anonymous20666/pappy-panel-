@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Tests\Integration;
+namespace Tests\Integration;
 
-use App\Tests\TestCase;
+use Tests\TestCase;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use App\Events\ActivityLogged;
 use Illuminate\Support\Facades\Event;
-use App\Tests\Assertions\AssertsActivityLogged;
-use App\Tests\Traits\Integration\CreatesTestModels;
+use Tests\Assertions\AssertsActivityLogged;
+use Tests\Traits\Integration\CreatesTestModels;
 use App\Transformers\Api\Application\BaseTransformer;
 
 abstract class IntegrationTestCase extends TestCase
@@ -22,7 +22,7 @@ abstract class IntegrationTestCase extends TestCase
         'Accept' => 'application/json',
     ];
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

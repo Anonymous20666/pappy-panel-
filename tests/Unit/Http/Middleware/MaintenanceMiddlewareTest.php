@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Http\Middleware;
+namespace Tests\Unit\Http\Middleware;
 
 use Mockery as m;
 use App\Models\Node;

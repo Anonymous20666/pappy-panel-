@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Backup;
+namespace Tests\Integration\Api\Client\Server\Backup;
 
 use App\Models\Backup;
 use App\Models\Permission;
@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use App\Events\ActivityLogged;
 use Illuminate\Support\Facades\Event;
 use App\Repositories\Wings\DaemonBackupRepository;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DeleteBackupTest extends ClientApiIntegrationTestCase
 {

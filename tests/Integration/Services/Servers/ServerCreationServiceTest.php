@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use App\Models\Egg;
 use App\Models\Node;
@@ -13,7 +13,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use App\Models\Objects\DeploymentObject;
 use Illuminate\Foundation\Testing\WithFaker;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Validation\ValidationException;
 use App\Services\Servers\ServerCreationService;

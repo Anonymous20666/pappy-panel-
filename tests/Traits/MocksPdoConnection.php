@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Traits;
+namespace Tests\Traits;
 
 use PDO;
 use Mockery;

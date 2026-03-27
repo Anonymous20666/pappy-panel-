@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Backup;
+namespace Tests\Integration\Api\Client\Server\Backup;
 
 use App\Models\Backup;
 use App\Models\Subuser;
 use Carbon\CarbonImmutable;
 use App\Services\Backups\DeleteBackupService;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class BackupAuthorizationTest extends ClientApiIntegrationTestCase
 {

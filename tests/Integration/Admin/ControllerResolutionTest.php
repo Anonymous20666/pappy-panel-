@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Integration\Admin;
+namespace Tests\Integration\Admin;
 
 use App\Services\Activity\ActivityLogService;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use App\Http\Controllers\Admin\ServersController;
 
 class ControllerResolutionTest extends IntegrationTestCase

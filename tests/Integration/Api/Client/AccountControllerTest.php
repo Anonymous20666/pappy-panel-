@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
 use App\Models\User;
 use Illuminate\Support\Str;

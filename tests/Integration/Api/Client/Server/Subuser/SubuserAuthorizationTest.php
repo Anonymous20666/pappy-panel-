@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server\Subuser;
+namespace Tests\Integration\Api\Client\Server\Subuser;
 
 use App\Models\User;
 use App\Models\Subuser;
 use Mockery\MockInterface;
 use App\Repositories\Wings\DaemonRevocationRepository;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class SubuserAuthorizationTest extends ClientApiIntegrationTestCase
 {

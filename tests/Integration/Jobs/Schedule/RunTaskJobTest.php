@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Jobs\Schedule;
+namespace Tests\Integration\Jobs\Schedule;
 
 use Carbon\Carbon;
 use App\Models\Task;
@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
 use App\Jobs\Schedule\RunTaskJob;
 use Illuminate\Support\Facades\Bus;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use GuzzleHttp\Exception\BadResponseException;
 use App\Repositories\Wings\DaemonPowerRepository;
 use App\Exceptions\Http\Connection\DaemonConnectionException;

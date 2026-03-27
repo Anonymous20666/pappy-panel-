@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client;
+namespace Tests\Integration\Api\Client;
 
 use Carbon\Carbon;
 use App\Models\User;

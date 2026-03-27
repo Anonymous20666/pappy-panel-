@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Tests\Integration\Services\Servers;
+namespace Tests\Integration\Services\Servers;
 
 use Exception;
 use App\Models\Nest;
 use App\Models\User;
 use App\Models\Server;
 use App\Models\ServerVariable;
-use App\Tests\Integration\IntegrationTestCase;
+use Tests\Integration\IntegrationTestCase;
 use Illuminate\Validation\ValidationException;
 use App\Services\Servers\StartupModificationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

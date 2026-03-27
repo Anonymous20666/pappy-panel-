@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Integration\Api\Client\Server;
+namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\User;
 use App\Models\Server;
 use App\Models\ServerCategory;
-use App\Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
+use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ClientServerCategoryTest extends ClientApiIntegrationTestCase
 {

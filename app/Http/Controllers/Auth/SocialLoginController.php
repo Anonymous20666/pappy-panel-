@@ -83,23 +83,11 @@ class SocialLoginController extends Controller
             return redirect('/');
         }
 
-        // Check if user with email exists (Auto-Link)
-        $user = User::where('email', $socialUser->getEmail())->first();
-
-        if ($user) {
-            // Link account automatically if email matches
-            $user->socialLogins()->create([
-                'provider' => $provider,
-                'provider_user_id' => $socialUser->getId(),
-                'provider_token' => $socialUser->token,
-                'provider_refresh_token' => $socialUser->refreshToken,
-            ]);
-
-            Auth::login($user);
-
-            return redirect('/');
-        }
-
+        // If a user with the same email already exists, do NOT auto-link.
+        // Auto-linking allows account takeover: an attacker could create a
+        // social account using the victim's email and gain full access.
+        // Instead, require the user to log in with their password first,
+        // then manually link the social account from Account Settings.
         return redirect()->route('auth.login')->with('error', trans('auth.social.not_linked', ['provider' => ucfirst($provider)]));
     }
 

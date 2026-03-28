@@ -22,6 +22,12 @@ class SetSecurityHeaders
         'X-Content-Type-Options' => 'nosniff',
         'X-XSS-Protection' => '1; mode=block',
         'Referrer-Policy' => 'no-referrer-when-downgrade',
+        // script-src requires 'unsafe-inline' because the base template injects server-side data
+        // via inline <script> blocks using {!! json_encode() !!}. Until those are replaced with
+        // a nonce-based approach, 'unsafe-inline' is the only viable option.
+        // connect-src uses broad wss:/https: because Wings daemon addresses are user-configured
+        // and cannot be enumerated at request time.
+        'Content-Security-Policy' => "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' wss: https:; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self';",
     ];
 
     /**

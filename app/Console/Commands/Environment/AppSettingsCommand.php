@@ -5,6 +5,7 @@ namespace App\Console\Commands\Environment;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 use App\Traits\Commands\EnvironmentWriterTrait;
+use Illuminate\Support\Str;
 
 class AppSettingsCommand extends Command
 {
@@ -64,7 +65,7 @@ class AppSettingsCommand extends Command
     public function handle(): int
     {
         if (empty(config('hashids.salt')) || $this->option('new-salt')) {
-            $this->variables['HASHIDS_SALT'] = str_random(20);
+            $this->variables['HASHIDS_SALT'] = Str::random(20);
         }
 
         $this->output->comment('Provide the email address that eggs exported by this Panel should be from. This should be a valid email address.');

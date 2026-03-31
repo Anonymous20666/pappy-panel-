@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Contracts\Repository\DaemonKeyRepositoryInterface;
+use Illuminate\Support\Str;
 
 class RemoveDaemonSecretFromSubusersTable extends Migration
 {
@@ -20,7 +21,7 @@ class RemoveDaemonSecretFromSubusersTable extends Migration
             $inserts[] = [
                 'user_id' => $subuser->user_id,
                 'server_id' => $subuser->server_id,
-                'secret' => DaemonKeyRepositoryInterface::INTERNAL_KEY_IDENTIFIER . str_random(40),
+                'secret' => DaemonKeyRepositoryInterface::INTERNAL_KEY_IDENTIFIER . Str::random(40),
                 'expires_at' => Carbon::now()->addMinutes(config('panel.api.key_expire_time', 720))->toDateTimeString(),
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),

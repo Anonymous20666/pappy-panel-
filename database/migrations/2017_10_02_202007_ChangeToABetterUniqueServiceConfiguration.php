@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 class ChangeToABetterUniqueServiceConfiguration extends Migration
 {
@@ -51,7 +52,7 @@ class ChangeToABetterUniqueServiceConfiguration extends Migration
         DB::transaction(function () {
             DB::table('service_options')->select(['id', 'tag'])->get()->each(function ($option) {
                 DB::table('service_options')->where('id', $option->id)->update([
-                    'tag' => str_random(10),
+                    'tag' => Str::random(10),
                 ]);
             });
         });

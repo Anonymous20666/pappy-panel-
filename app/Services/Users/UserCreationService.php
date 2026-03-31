@@ -9,6 +9,7 @@ use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use App\Contracts\Repository\UserRepositoryInterface;
+use Illuminate\Support\Str;
 
 class UserCreationService
 {
@@ -38,7 +39,7 @@ class UserCreationService
         $this->connection->beginTransaction();
         if (!isset($data['password']) || empty($data['password'])) {
             $generateResetToken = true;
-            $data['password'] = $this->hasher->make(str_random(30));
+            $data['password'] = $this->hasher->make(Str::random(30));
         }
 
         /** @var User $user */

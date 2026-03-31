@@ -20,7 +20,7 @@ class MigratePubPrivFormatToSingleKey extends Migration
                 try {
                     $decrypted = Crypt::decrypt($item->secret);
                 } catch (DecryptException) {
-                    $decrypted = str_random(32);
+                    $decrypted = Str::random(32);
                 } finally {
                     DB::table('api_keys')->where('id', $item->id)->update([
                         'secret' => $decrypted,

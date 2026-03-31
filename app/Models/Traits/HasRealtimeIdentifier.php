@@ -39,7 +39,7 @@ trait HasRealtimeIdentifier
 
     public function scopeWhereIdentifier(Builder $builder, string $identifier): void
     {
-        if (!str_starts_with($identifier, $prefix = self::$identifierPrefix . '_')) {
+        if (!Str::startsWith($identifier, $prefix = self::$identifierPrefix . '_')) {
             $builder->whereRaw('0 = 1');
 
             return;

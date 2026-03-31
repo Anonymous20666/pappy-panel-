@@ -61,7 +61,7 @@ class ErrorPagesController extends Controller
 
         // Override config values if data is provided in the request (Live Preview)
         foreach ($request->all() as $key => $value) {
-            if (str_starts_with($key, 'designify:errors:' . $code . ':')) {
+            if (Str::startsWith($key, 'designify:errors:' . $code . ':')) {
                 $configKey = Str::replace(':', '.', Str::replace('designify:', 'designify.', $key));
                 $this->config->set($configKey, $value);
             }

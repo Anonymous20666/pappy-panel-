@@ -1,3 +1,6 @@
+@php
+use Illuminate\Support\Str;
+@endphp
 <aside class="w-80 mr-4 flex flex-col text-white">
    <div class="flex items-center space-x-1 bg-zinc-800 p-1 rounded-lg border border-zinc-700">
       <x-designify.tab-button
@@ -9,32 +12,32 @@
          :route="route('designify.colors')"
          icon="fa-solid fa-palette"
          label="Color Options"
-         :active="str_starts_with(Route::currentRouteName(),'designify.colors')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.colors')" />
       <x-designify.tab-button
          :route="route('designify.looks')"
          icon="fa-solid fa-swatchbook"
          label="Look 'N Feel"
-         :active="str_starts_with(Route::currentRouteName(),'designify.looks')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.looks')" />
       <x-designify.tab-button
          :route="route('designify.alerts')"
          icon="fa-solid fa-bullhorn"
          label="Alerts"
-         :active="str_starts_with(Route::currentRouteName(),'designify.alerts')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.alerts')" />
       <x-designify.tab-button
          :route="route('designify.site')"
          icon="fa-solid fa-gear"
          label="Site Meta Settings"
-         :active="str_starts_with(Route::currentRouteName(),'designify.site')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.site')" />
       <x-designify.tab-button
          :route="route('designify.errors')"
          icon="fa-solid fa-triangle-exclamation"
          label="Error Pages"
-         :active="str_starts_with(Route::currentRouteName(),'designify.errors')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.errors')" />
       <x-designify.tab-button
          :route="route('designify.sidebar-buttons')"
          icon="fa-solid fa-link"
          label="Sidebar Buttons"
-         :active="str_starts_with(Route::currentRouteName(),'designify.sidebar-buttons')" />
+         :active="Str::startsWith(Route::currentRouteName(),'designify.sidebar-buttons')" />
       @include('partials.designify.save')
    </div>
    <div class="flex-1 overflow-y-auto mt-2 pr-1 text-white p-1">

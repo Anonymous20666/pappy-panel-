@@ -3,6 +3,7 @@
 namespace App\Http\Middleware\Api\Client;
 
 use App\Models\Server;
+use Illuminate\Support\Str;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 
 class SubstituteClientBindings extends SubstituteBindings
@@ -17,7 +18,7 @@ class SubstituteClientBindings extends SubstituteBindings
         $this->router->bind('server', function ($value) {
             return Server::query()
                 ->when(
-                    str_starts_with($value, 'serv_'),
+                    Str::startsWith($value, 'serv_'),
                     fn ($builder) => $builder->whereIdentifier($value),
                     fn ($builder) => $builder->where(strlen($value) === 8 ? 'uuidShort' : 'uuid', $value)
                 )

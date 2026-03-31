@@ -128,8 +128,8 @@ class DevCompileCommand extends Command
             return '';
         }
 
-        if (str_contains($source, '/') || str_starts_with($source, '.')) {
-            return str_starts_with($source, '/') ? $source : base_path($source);
+        if (str_contains($source, '/') || Str::startsWith($source, '.')) {
+            return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 
         return base_path('extensions/' . $source);
@@ -142,8 +142,8 @@ class DevCompileCommand extends Command
             return '';
         }
 
-        if (str_contains($output, '/') || str_starts_with($output, '.')) {
-            return str_starts_with($output, '/') ? $output : base_path($output);
+        if (str_contains($output, '/') || Str::startsWith($output, '.')) {
+            return Str::startsWith($output, '/') ? $output : base_path($output);
         }
 
         return base_path($output);

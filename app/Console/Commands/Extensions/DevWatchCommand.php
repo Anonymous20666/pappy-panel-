@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Extensions;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Process\Process;
@@ -115,8 +116,8 @@ class DevWatchCommand extends Command
             return '';
         }
 
-        if (str_contains($source, '/') || str_starts_with($source, '.')) {
-            return str_starts_with($source, '/') ? $source : base_path($source);
+        if (str_contains($source, '/') || Str::startsWith($source, '.')) {
+            return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 
         return base_path('extensions/' . $source);

@@ -127,7 +127,7 @@ class AppSettingsCommand extends Command
         ) ? 'true' : 'false';
 
         // Make sure session cookies are set as "secure" when using HTTPS
-        if (str_starts_with($this->variables['APP_URL'], 'https://')) {
+        if (Str::startsWith($this->variables['APP_URL'], 'https://')) {
             $this->variables['SESSION_SECURE_COOKIE'] = 'true';
         }
 

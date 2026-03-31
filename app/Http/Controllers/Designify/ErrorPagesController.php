@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Designify;
 
 use Illuminate\View\View;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
@@ -11,7 +12,6 @@ use Illuminate\View\Factory as ViewFactory;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use App\Http\Requests\Designify\ErrorPagesSettingsFormRequest;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Support\Str;
 
 class ErrorPagesController extends Controller
 {

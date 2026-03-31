@@ -5,6 +5,7 @@ namespace App\Services\Databases;
 use App\Models\Server;
 use App\Models\Database;
 use App\Helpers\Utilities;
+use Illuminate\Support\Str;
 use Illuminate\Database\ConnectionInterface;
 use App\Extensions\DynamicDatabaseConnection;
 use Illuminate\Contracts\Encryption\Encrypter;
@@ -12,7 +13,6 @@ use App\Repositories\Eloquent\DatabaseRepository;
 use App\Exceptions\Repository\DuplicateDatabaseNameException;
 use App\Exceptions\Service\Database\TooManyDatabasesException;
 use App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
-use Illuminate\Support\Str;
 
 class DatabaseManagementService
 {

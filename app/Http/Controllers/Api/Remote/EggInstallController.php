@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Remote;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Services\Servers\EnvironmentService;
 use App\Contracts\Repository\ServerRepositoryInterface;
-use Illuminate\Support\Str;
 
 class EggInstallController extends Controller
 {

@@ -4,12 +4,12 @@ namespace App\Services\Users;
 
 use App\Models\User;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 use App\Notifications\AccountCreated;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use App\Contracts\Repository\UserRepositoryInterface;
-use Illuminate\Support\Str;
 
 class UserCreationService
 {

@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands\Environment;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 use App\Traits\Commands\EnvironmentWriterTrait;
-use Illuminate\Support\Str;
 
 class AppSettingsCommand extends Command
 {

@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api\Client\Servers;
 use App\Models\Server;
 use App\Models\Permission;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
 use App\Services\Nodes\NodeJWTService;
 use App\Exceptions\Http\HttpForbiddenException;
 use App\Http\Requests\Api\Client\ClientApiRequest;
 use App\Services\Servers\GetUserPermissionsService;
 use App\Http\Controllers\Api\Client\ClientApiController;
-use Illuminate\Support\Str;
 
 class WebsocketController extends ClientApiController
 {

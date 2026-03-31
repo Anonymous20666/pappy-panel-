@@ -2,11 +2,11 @@
 
 namespace App\Console\Commands\Extensions;
 
+use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
-use Illuminate\Support\Str;
 
 class DevCompileCommand extends Command
 {

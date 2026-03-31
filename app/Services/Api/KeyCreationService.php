@@ -3,9 +3,9 @@
 namespace App\Services\Api;
 
 use App\Models\ApiKey;
+use Illuminate\Support\Str;
 use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\ApiKeyRepositoryInterface;
-use Illuminate\Support\Str;
 
 class KeyCreationService
 {

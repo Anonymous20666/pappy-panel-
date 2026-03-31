@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Psr\Log\LoggerInterface as Log;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
-use Illuminate\Support\Str;
 
 class DesignifyServiceProvider extends ServiceProvider
 {

@@ -3,12 +3,12 @@
 namespace Tests\Integration\Api\Application\Users;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use App\Services\Acl\Api\AdminAcl;
 use App\Transformers\Api\Application\UserTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
-use Illuminate\Support\Str;
 
 class UserControllerTest extends ApplicationApiIntegrationTestCase
 {

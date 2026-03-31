@@ -3,6 +3,7 @@
 namespace App\Services\Servers;
 
 use App\Models\Server;
+use Illuminate\Support\Str;
 
 class StartupCommandService
 {
@@ -19,6 +20,6 @@ class StartupCommandService
             $replace[] = ($variable->user_viewable && !$hideAllValues) ? ($variable->server_value ?? $variable->default_value) : '[hidden]';
         }
 
-        return str_replace($find, $replace, $server->startup);
+        return Str::replace($find, $replace, $server->startup);
     }
 }

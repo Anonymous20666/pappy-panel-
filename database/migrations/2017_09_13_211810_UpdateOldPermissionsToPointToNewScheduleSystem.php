@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 class UpdateOldPermissionsToPointToNewScheduleSystem extends Migration
 {
@@ -17,7 +18,7 @@ class UpdateOldPermissionsToPointToNewScheduleSystem extends Migration
                 continue;
             }
 
-            $newPermission = $parts[0] . '-' . str_replace('task', 'schedule', $parts[1]);
+            $newPermission = $parts[0] . '-' . Str::replace('task', 'schedule', $parts[1]);
 
             DB::table('permissions')->where('id', '=', $record->id)->update(['permission' => $newPermission]);
         }
@@ -35,7 +36,7 @@ class UpdateOldPermissionsToPointToNewScheduleSystem extends Migration
                 continue;
             }
 
-            $newPermission = $parts[0] . '-' . str_replace('schedule', 'task', $parts[1]);
+            $newPermission = $parts[0] . '-' . Str::replace('schedule', 'task', $parts[1]);
 
             DB::table('permissions')->where('id', '=', $record->id)->update(['permission' => $newPermission]);
         }

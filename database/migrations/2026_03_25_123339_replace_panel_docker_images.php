@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 return new class () extends Migration {
     /**
@@ -17,7 +18,7 @@ return new class () extends Migration {
                 ->orderBy('id')
                 ->chunkById(100, function ($servers) {
                     foreach ($servers as $server) {
-                        $newImage = str_replace(
+                        $newImage = Str::replace(
                             'ghcr.io/pterodactyl/',
                             'ghcr.io/reviactyl/',
                             $server->image
@@ -46,7 +47,7 @@ return new class () extends Migration {
 
                         foreach ($images as $key => $value) {
                             if (is_string($value) && str_contains($value, 'pterodactyl')) {
-                                $images[$key] = str_replace(
+                                $images[$key] = Str::replace(
                                     'pterodactyl',
                                     'reviactyl',
                                     $value

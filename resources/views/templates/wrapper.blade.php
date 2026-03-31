@@ -81,9 +81,10 @@ SOFTWARE.
         </script>
     @show
     @php
+    use Illuminate\Support\Str;
         function reviactyl($hex)
         {
-            $hex = str_replace('#', '', $hex);
+            $hex = Str::replace('#', '', $hex);
             if (strlen($hex) === 3) {
                 $r = hexdec(str_repeat($hex[0], 2));
                 $g = hexdec(str_repeat($hex[1], 2));

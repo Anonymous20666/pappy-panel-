@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Str;
 
 class ChangeServiceVariablesValidationRules extends Migration
 {
@@ -39,7 +40,7 @@ class ChangeServiceVariablesValidationRules extends Migration
 
         DB::transaction(function () {
             foreach (DB::table('service_variables')->get() as $variable) {
-                $variable->regex = str_replace(['required|regex:', 'regex:'], '', $variable->regex);
+                $variable->regex = Str::replace(['required|regex:', 'regex:'], '', $variable->regex);
                 $variable->save();
             }
         });

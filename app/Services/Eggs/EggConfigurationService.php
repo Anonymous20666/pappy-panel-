@@ -149,7 +149,7 @@ class EggConfigurationService
                 $replace = $key;
         }
 
-        return str_replace("{{{$key}}}", "{{{$replace}}}", $value);
+        return Str::replace("{{{$key}}}", "{{{$replace}}}", $value);
     }
 
     protected function matchAndReplaceKeys(mixed $value, array $structure): mixed
@@ -185,7 +185,7 @@ class EggConfigurationService
             if (Str::startsWith($key, 'server.')) {
                 $plucked = Arr::get($structure, preg_replace('/^server\./', '', $key), '');
 
-                $value = str_replace("{{{$key}}}", $plucked, $value);
+                $value = Str::replace("{{{$key}}}", $plucked, $value);
                 continue;
             }
 
@@ -197,7 +197,7 @@ class EggConfigurationService
                 ''
             );
 
-            $value = str_replace("{{{$key}}}", $plucked, $value);
+            $value = Str::replace("{{{$key}}}", $plucked, $value);
         }
 
         return $value;

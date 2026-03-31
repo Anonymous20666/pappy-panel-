@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Str;
 
 class DevCompileCommand extends Command
 {
@@ -109,7 +110,7 @@ class DevCompileCommand extends Command
                 continue;
             }
 
-            $relative = ltrim(str_replace($sourcePath, '', $absolute), DIRECTORY_SEPARATOR);
+            $relative = ltrim(Str::replace($sourcePath, '', $absolute), DIRECTORY_SEPARATOR);
             $zip->addFile($absolute, $relative);
         }
 

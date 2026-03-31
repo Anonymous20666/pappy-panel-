@@ -22,6 +22,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Pages\Concerns\InteractsWithHeaderActions;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Support\Str;
 
 class Settings extends Page implements HasSchemas
 {
@@ -108,7 +109,7 @@ class Settings extends Page implements HasSchemas
             $value = $settings->get('settings::' . $key);
 
             if ($value === null) {
-                $value = $config->get(str_replace(':', '.', $key));
+                $value = $config->get(Str::replace(':', '.', $key));
             }
 
             if ($key === 'mail:mailers:smtp:password' && !empty($value)) {

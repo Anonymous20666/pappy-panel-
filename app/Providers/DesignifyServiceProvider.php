@@ -8,6 +8,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Support\Str;
 
 class DesignifyServiceProvider extends ServiceProvider
 {
@@ -171,7 +172,7 @@ class DesignifyServiceProvider extends ServiceProvider
         }
 
         foreach ($this->keys as $key) {
-            $value = array_get($values, 'settings::' . $key, $config->get(str_replace(':', '.', $key)));
+            $value = array_get($values, 'settings::' . $key, $config->get(Str::replace(':', '.', $key)));
 
             if (is_string($value)) {
                 switch (strtolower($value)) {
@@ -193,7 +194,7 @@ class DesignifyServiceProvider extends ServiceProvider
                 }
             }
 
-            $config->set(str_replace(':', '.', $key), $value);
+            $config->set(Str::replace(':', '.', $key), $value);
         }
     }
 

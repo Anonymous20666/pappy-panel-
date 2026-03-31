@@ -162,7 +162,7 @@ class Handler extends ExceptionHandler
                 $cleaned[] = Str::snake($reason);
             }
 
-            return [str_replace('.', '_', $field) => $cleaned];
+            return [Str::replace('.', '_', $field) => $cleaned];
         })->toArray();
 
         $errors = Collection::make($exception->errors())->map(function ($errors, $field) use ($codes, $exception) {
@@ -170,9 +170,9 @@ class Handler extends ExceptionHandler
             foreach ($errors as $key => $error) {
                 $meta = [
                     'source_field' => $field,
-                    'rule' => str_replace(self::PANEL_RULE_STRING, 'p_', Arr::get(
+                    'rule' => Str::replace(self::PANEL_RULE_STRING, 'p_', Arr::get(
                         $codes,
-                        str_replace('.', '_', $field) . '.' . $key
+                        Str::replace('.', '_', $field) . '.' . $key
                     )),
                 ];
 
@@ -220,7 +220,7 @@ class Handler extends ExceptionHandler
                 'detail' => $e->getMessage(),
                 'source' => [
                     'line' => $e->getLine(),
-                    'file' => str_replace(Application::getInstance()->basePath(), '', $e->getFile()),
+                    'file' => Str::replace(Application::getInstance()->basePath(), '', $e->getFile()),
                 ],
                 'meta' => [
                     'trace' => Collection::make($e->getTrace())

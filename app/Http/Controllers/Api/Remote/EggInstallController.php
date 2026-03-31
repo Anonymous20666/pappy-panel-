@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Services\Servers\EnvironmentService;
 use App\Contracts\Repository\ServerRepositoryInterface;
+use Illuminate\Support\Str;
 
 class EggInstallController extends Controller
 {
@@ -38,7 +39,7 @@ class EggInstallController extends Controller
 
         return response()->json([
             'scripts' => [
-                'install' => !$egg->copy_script_install ? null : str_replace(["\r\n", "\n", "\r"], "\n", $egg->copy_script_install),
+                'install' => !$egg->copy_script_install ? null : Str::replace(["\r\n", "\n", "\r"], "\n", $egg->copy_script_install),
                 'privileged' => $egg->script_is_privileged,
             ],
             'config' => [

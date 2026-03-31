@@ -8,6 +8,7 @@ use App\Services\Acl\Api\AdminAcl;
 use App\Transformers\Api\Application\UserTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
+use Illuminate\Support\Str;
 
 class UserControllerTest extends ApplicationApiIntegrationTestCase
 {
@@ -287,7 +288,7 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
 
         if (str_contains($url, '{id}')) {
             $user = User::factory()->create();
-            $url = str_replace('{id}', $user->id, $url);
+            $url = Str::replace('{id}', $user->id, $url);
         }
 
         $response = $this->$method($url);

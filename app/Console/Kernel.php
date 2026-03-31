@@ -13,6 +13,7 @@ use App\Console\Commands\Schedule\ProcessRunnableCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
 use App\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
+use Illuminate\Support\Str;
 
 class Kernel extends ConsoleKernel
 {
@@ -71,7 +72,7 @@ class Kernel extends ConsoleKernel
         }
 
         // Calculate a fixed time to run the data push at, this will be the same time every day.
-        $time = hexdec(str_replace('-', '', substr($uuid, 27))) % 1440;
+        $time = hexdec(Str::replace('-', '', substr($uuid, 27))) % 1440;
         $hour = floor($time / 60);
         $minute = $time % 60;
 

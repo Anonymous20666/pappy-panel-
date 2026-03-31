@@ -11,6 +11,7 @@ use App\Exceptions\Http\HttpForbiddenException;
 use App\Http\Requests\Api\Client\ClientApiRequest;
 use App\Services\Servers\GetUserPermissionsService;
 use App\Http\Controllers\Api\Client\ClientApiController;
+use Illuminate\Support\Str;
 
 class WebsocketController extends ClientApiController
 {
@@ -61,7 +62,7 @@ class WebsocketController extends ClientApiController
             ])
             ->handle($node, $user->id . $server->uuid);
 
-        $socket = str_replace(['https://', 'http://'], ['wss://', 'ws://'], $node->getConnectionAddress());
+        $socket = Str::replace(['https://', 'http://'], ['wss://', 'ws://'], $node->getConnectionAddress());
 
         return new JsonResponse([
             'data' => [

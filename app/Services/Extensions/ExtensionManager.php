@@ -405,11 +405,11 @@ class ExtensionManager
 
     private function normalizeFrontendModulePath(string $path): string
     {
-        $normalized = ltrim(str_replace('\\', '/', trim($path)), '/');
+        $normalized = ltrim(Str::replace('\\', '/', trim($path)), '/');
 
         if (Str::startsWith($normalized, 'frontend/src/')) {
             if (Str::endsWith($normalized, '.tsx') || Str::endsWith($normalized, '.ts')) {
-                return preg_replace('/\.(tsx|ts)$/', '.js', str_replace('frontend/src/', 'frontend/dist/', $normalized))
+                return preg_replace('/\.(tsx|ts)$/', '.js', Str::replace('frontend/src/', 'frontend/dist/', $normalized))
                     ?? $normalized;
             }
         }

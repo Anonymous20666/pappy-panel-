@@ -4,6 +4,7 @@ namespace Tests\Integration\Services\Databases;
 
 use App\Models\Database;
 use Mockery\MockInterface;
+use Illuminate\Support\Str;
 use App\Models\DatabaseHost;
 use Tests\Integration\IntegrationTestCase;
 use App\Repositories\Eloquent\DatabaseRepository;
@@ -35,7 +36,7 @@ class DatabaseManagementServiceTest extends IntegrationTestCase
     {
         $this->assertSame('s1_example', DatabaseManagementService::generateUniqueDatabaseName('example', 1));
         $this->assertSame('s123_something_else', DatabaseManagementService::generateUniqueDatabaseName('something_else', 123));
-        $this->assertSame('s123_' . str_repeat('a', 43), DatabaseManagementService::generateUniqueDatabaseName(str_repeat('a', 100), 123));
+        $this->assertSame('s123_' . Str::repeat('a', 43), DatabaseManagementService::generateUniqueDatabaseName(Str::repeat('a', 100), 123));
     }
 
     /**

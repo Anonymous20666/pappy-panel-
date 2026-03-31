@@ -86,9 +86,9 @@ SOFTWARE.
         {
             $hex = Str::replace('#', '', $hex);
             if (strlen($hex) === 3) {
-                $r = hexdec(str_repeat($hex[0], 2));
-                $g = hexdec(str_repeat($hex[1], 2));
-                $b = hexdec(str_repeat($hex[2], 2));
+                $r = hexdec(Str::repeat($hex[0], 2));
+                $g = hexdec(Str::repeat($hex[1], 2));
+                $b = hexdec(Str::repeat($hex[2], 2));
             } else {
                 $r = hexdec(substr($hex, 0, 2));
                 $g = hexdec(substr($hex, 2, 2));

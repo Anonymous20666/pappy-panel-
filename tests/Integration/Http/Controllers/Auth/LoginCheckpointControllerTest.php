@@ -4,6 +4,7 @@ namespace Tests\Integration\Http\Controllers\Auth;
 
 use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Str;
 use App\Events\Auth\DirectLogin;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Auth\Events\Failed;
@@ -34,7 +35,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
     {
         $user = User::factory()->create([
             'use_totp' => true,
-            'totp_secret' => encrypt(str_repeat('a', 16)),
+            'totp_secret' => encrypt(Str::repeat('a', 16)),
             'totp_authenticated_at' => is_null($ts) ? null : Carbon::now()->addSeconds($ts),
         ]);
 
@@ -44,7 +45,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
             'expires_at' => now()->addMinutes(5),
         ]);
 
-        $totp = $this->app->make(Google2FA::class)->getCurrentOtp(str_repeat('a', 16));
+        $totp = $this->app->make(Google2FA::class)->getCurrentOtp(Str::repeat('a', 16));
 
         $this->withoutExceptionHandling()->postJson(route('auth.login-checkpoint', [
             'confirmation_token' => 'token',
@@ -78,7 +79,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
     {
         $user = User::factory()->create([
             'use_totp' => true,
-            'totp_secret' => encrypt(str_repeat('a', 16)),
+            'totp_secret' => encrypt(Str::repeat('a', 16)),
             'totp_authenticated_at' => now()->addSeconds($seconds),
         ]);
 
@@ -88,7 +89,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
             'expires_at' => now()->addMinutes(5),
         ]);
 
-        $totp = $this->app->make(Google2FA::class)->getCurrentOtp(str_repeat('a', 16));
+        $totp = $this->app->make(Google2FA::class)->getCurrentOtp(Str::repeat('a', 16));
 
         $this->postJson(route('auth.login-checkpoint', [
             'confirmation_token' => 'token',
@@ -138,7 +139,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
     {
         $user = User::factory()->create([
             'use_totp' => true,
-            'totp_secret' => str_repeat('a', 16),
+            'totp_secret' => Str::repeat('a', 16),
         ]);
 
         Session::put('auth_confirmation_token', [
@@ -149,7 +150,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
 
         $this->postJson(route('auth.login-checkpoint', [
             'confirmation_token' => 'wrong-token',
-            'authentication_code' => $this->app->make(Google2FA::class)->getCurrentOtp(str_repeat('a', 16)),
+            'authentication_code' => $this->app->make(Google2FA::class)->getCurrentOtp(Str::repeat('a', 16)),
         ]))
             ->assertBadRequest();
 

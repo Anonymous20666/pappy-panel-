@@ -4,6 +4,7 @@ namespace Tests\Integration\Api\Client;
 
 use App\Models\User;
 use App\Models\ApiKey;
+use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use App\Events\ActivityLogged;
 use Illuminate\Support\Facades\Event;
@@ -136,7 +137,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
             ->assertJsonPath('errors.0.detail', 'The description field is required.');
 
         $this->postJson('/api/client/account/api-keys', [
-            'description' => str_repeat('a', 501),
+            'description' => Str::repeat('a', 501),
             'allowed_ips' => ['127.0.0.1'],
         ])
             ->assertUnprocessable()

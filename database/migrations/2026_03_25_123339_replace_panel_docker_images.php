@@ -46,7 +46,7 @@ return new class () extends Migration {
                         $updated = false;
 
                         foreach ($images as $key => $value) {
-                            if (is_string($value) && str_contains($value, 'pterodactyl')) {
+                            if (is_string($value) && Str::contains($value, 'pterodactyl')) {
                                 $images[$key] = Str::replace(
                                     'pterodactyl',
                                     'reviactyl',

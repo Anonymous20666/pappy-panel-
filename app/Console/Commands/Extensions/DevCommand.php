@@ -178,7 +178,7 @@ class DevCommand extends Command
             return '';
         }
 
-        if (str_contains($source, '/') || Str::startsWith($source, '.')) {
+        if (Str::contains($source, '/') || Str::startsWith($source, '.')) {
             return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 

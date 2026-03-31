@@ -131,7 +131,7 @@ class DevInitCommand extends Command
             return '';
         }
 
-        if (str_contains($path, '/') || Str::startsWith($path, '.')) {
+        if (Str::contains($path, '/') || Str::startsWith($path, '.')) {
             return Str::startsWith($path, '/') ? $path : base_path($path);
         }
 

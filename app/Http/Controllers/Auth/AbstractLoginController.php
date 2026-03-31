@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Events\Auth\DirectLogin;
 use Illuminate\Auth\AuthManager;
@@ -95,7 +96,7 @@ abstract class AbstractLoginController extends Controller
      */
     protected function getField(?string $input = null): string
     {
-        return ($input && str_contains($input, '@')) ? 'email' : 'username';
+        return ($input && Str::contains($input, '@')) ? 'email' : 'username';
     }
 
     /**

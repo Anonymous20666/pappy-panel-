@@ -286,7 +286,7 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     {
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_users' => AdminAcl::READ]);
 
-        if (str_contains($url, '{id}')) {
+        if (Str::contains($url, '{id}')) {
             $user = User::factory()->create();
             $url = Str::replace('{id}', $user->id, $url);
         }

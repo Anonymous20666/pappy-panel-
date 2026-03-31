@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Extension;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
@@ -201,7 +202,7 @@ class ExtensionsServiceProvider extends ServiceProvider
             }
 
             $requested = trim((string) ($path ?? ''), '/');
-            if ($requested === '' || str_contains($requested, '..')) {
+            if ($requested === '' || Str::contains($requested, '..')) {
                 throw new NotFoundHttpException();
             }
 

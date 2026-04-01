@@ -4,8 +4,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateOldPermissionsToPointToNewScheduleSystem extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -41,4 +40,4 @@ class UpdateOldPermissionsToPointToNewScheduleSystem extends Migration
             DB::table('permissions')->where('id', '=', $record->id)->update(['permission' => $newPermission]);
         }
     }
-}
+};

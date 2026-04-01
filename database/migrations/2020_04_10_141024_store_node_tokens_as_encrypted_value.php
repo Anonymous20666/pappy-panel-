@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Contracts\Encryption\Encrypter;
 
-class StoreNodeTokensAsEncryptedValue extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -82,4 +81,4 @@ class StoreNodeTokensAsEncryptedValue extends Migration
             $table->unique(['daemonSecret']);
         });
     }
-}
+};

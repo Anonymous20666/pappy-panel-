@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Contracts\Encryption\DecryptException;
 
-class MigratePubPrivFormatToSingleKey extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -71,4 +70,4 @@ class MigratePubPrivFormatToSingleKey extends Migration
             });
         });
     }
-}
+};

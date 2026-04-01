@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveUserInteraction extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -44,4 +43,4 @@ class RemoveUserInteraction extends Migration
                 break;
         }
     }
-}
+};

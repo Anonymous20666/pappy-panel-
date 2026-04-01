@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DeleteTaskWhenParentServerIsDeleted extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -24,4 +23,4 @@ class DeleteTaskWhenParentServerIsDeleted extends Migration
     public function down(): void
     {
     }
-}
+};

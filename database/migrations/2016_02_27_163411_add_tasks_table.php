@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTasksTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -37,4 +36,4 @@ class AddTasksTable extends Migration
     {
         Schema::drop('tasks');
     }
-}
+};

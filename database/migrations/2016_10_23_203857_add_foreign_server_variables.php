@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignServerVariables extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -31,4 +30,4 @@ class AddForeignServerVariables extends Migration
             $table->mediumInteger('variable_id', false, true)->nullable(false)->change();
         });
     }
-}
+};

@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCopyScriptFromColumn extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -28,4 +27,4 @@ class AddCopyScriptFromColumn extends Migration
             $table->dropColumn('copy_script_from');
         });
     }
-}
+};

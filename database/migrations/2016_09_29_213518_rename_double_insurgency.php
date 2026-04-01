@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class RenameDoubleInsurgency extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -24,4 +23,4 @@ class RenameDoubleInsurgency extends Migration
     public function down(): void
     {
     }
-}
+};

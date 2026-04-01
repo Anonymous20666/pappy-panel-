@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveActiveColumn extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -25,4 +24,4 @@ class RemoveActiveColumn extends Migration
             $table->tinyInteger('active')->after('name')->unsigned()->default(0);
         });
     }
-}
+};

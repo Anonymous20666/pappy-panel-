@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddOnlyRunWhenServerOnlineOptionToSchedules extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -25,4 +24,4 @@ class AddOnlyRunWhenServerOnlineOptionToSchedules extends Migration
             $table->dropColumn('only_when_online');
         });
     }
-}
+};

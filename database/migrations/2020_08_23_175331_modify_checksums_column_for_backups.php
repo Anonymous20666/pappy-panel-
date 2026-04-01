@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyChecksumsColumnForBackups extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -34,4 +33,4 @@ class ModifyChecksumsColumnForBackups extends Migration
             DB::update('UPDATE backups SET sha256_hash = SUBSTRING(sha256_hash, 8)');
         });
     }
-}
+};

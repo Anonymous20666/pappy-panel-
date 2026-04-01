@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeysToMountServerTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -51,4 +50,4 @@ class AddForeignKeysToMountServerTable extends Migration
             $table->dropForeign(['mount_id']);
         });
     }
-}
+};

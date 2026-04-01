@@ -8,8 +8,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Contracts\Repository\DaemonKeyRepositoryInterface;
 
-class RemoveDaemonSecretFromSubusersTable extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -56,4 +55,4 @@ class RemoveDaemonSecretFromSubusersTable extends Migration
             $table->unique('daemonSecret');
         });
     }
-}
+};

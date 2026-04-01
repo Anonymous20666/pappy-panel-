@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CascadeDeletionWhenAServerOrVariableIsDeleted extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -33,4 +32,4 @@ class CascadeDeletionWhenAServerOrVariableIsDeleted extends Migration
             $table->foreign('variable_id')->references('id')->on('service_variables');
         });
     }
-}
+};

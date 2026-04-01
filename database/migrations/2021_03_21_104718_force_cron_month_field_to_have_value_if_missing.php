@@ -3,8 +3,7 @@
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
 
-class ForceCronMonthFieldToHaveValueIfMissing extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -20,4 +19,4 @@ class ForceCronMonthFieldToHaveValueIfMissing extends Migration
     {
         // No down function.
     }
-}
+};

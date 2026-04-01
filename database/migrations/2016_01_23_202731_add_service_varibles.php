@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddServiceVaribles extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -33,4 +32,4 @@ class AddServiceVaribles extends Migration
     {
         Schema::dropIfExists('service_variables');
     }
-}
+};

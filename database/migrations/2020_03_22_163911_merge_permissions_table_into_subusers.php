@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MergePermissionsTableIntoSubusers extends Migration
-{
+return new class extends Migration {
     /**
      * A list of all pre-1.0 permissions available to a user and their associated
      * casting for the new permissions system.
@@ -127,4 +126,4 @@ class MergePermissionsTableIntoSubusers extends Migration
             $table->dropColumn('permissions');
         });
     }
-}
+};

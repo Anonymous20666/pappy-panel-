@@ -2,8 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddArkServiceOptionFixed extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -87,4 +86,4 @@ class AddArkServiceOptionFixed extends Migration
             }
         });
     }
-}
+};

@@ -4,8 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateFileDenylistToJson extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -33,4 +32,4 @@ class UpdateFileDenylistToJson extends Migration
             $table->text('file_denylist')->after('docker_images');
         });
     }
-}
+};

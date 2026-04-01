@@ -11,13 +11,11 @@ use Tests\Integration\IntegrationTestCase;
 use Tests\Traits\Integration\CreatesTestModels;
 use App\Transformers\Api\Application\BaseTransformer;
 use App\Transformers\Api\Client\BaseClientTransformer;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\Traits\Http\IntegrationJsonRequestAssertions;
 
 abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
 {
     use CreatesTestModels;
-    use DatabaseTransactions;
     use IntegrationJsonRequestAssertions;
 
     private ApiKey $key;

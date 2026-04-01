@@ -139,7 +139,7 @@ class Handler extends ExceptionHandler
         // ton of actions and were written before this bug discovery was made.
         //
         // @see https://github.com/pterodactyl/panel/pull/1468
-        if ($connection->transactionLevel() > 0) {
+        if (!app()->runningUnitTests() && $connection->transactionLevel() > 0) {
             while ($connection->transactionLevel() > 0) {
                 $connection->rollBack();
             }

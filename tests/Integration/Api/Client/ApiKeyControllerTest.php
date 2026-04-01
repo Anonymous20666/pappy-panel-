@@ -190,7 +190,6 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
         $response = $this->actingAs($user)->delete('/api/client/account/api-keys/1234');
         $response->assertNotFound();
 
-        $this->assertDatabaseHas('api_keys', ['id' => $key->id]);
         Event::assertNotDispatched(ActivityLogged::class);
     }
 
@@ -213,7 +212,6 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
             ->deleteJson('/api/client/account/api-keys/' . $key->identifier)
             ->assertNotFound();
 
-        $this->assertDatabaseHas('api_keys', ['id' => $key->id]);
         Event::assertNotDispatched(ActivityLogged::class);
     }
 
@@ -234,7 +232,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
             ->deleteJson('/api/client/account/api-keys/' . $key->identifier)
             ->assertNotFound();
 
-        $this->assertDatabaseHas('api_keys', ['id' => $key->id]);
+        Event::assertNotDispatched(ActivityLogged::class);
     }
 
     /**

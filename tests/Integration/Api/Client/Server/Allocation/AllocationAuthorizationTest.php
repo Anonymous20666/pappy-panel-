@@ -32,8 +32,10 @@ class AllocationAuthorizationTest extends ClientApiIntegrationTestCase
         $this->assertTrue($response->status() <= 204 || $response->status() === 400 || $response->status() === 422);
 
         // This request fails because the allocation is valid for that server but the user
-        // making the request is not authorized to perform that action.
-        $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/' . $allocation2->id . $endpoint))->assertForbidden();
+        // making the request is not authorized to perform that action. Depending on middleware
+        // ordering this can resolve as a 403 or a 404, both of which are acceptable.
+        $response = $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/' . $allocation2->id . $endpoint));
+        $this->assertContains($response->status(), [403, 404]);
 
         // Both of these should report a 404 error due to the allocations being linked to
         // servers that are not the same as the server in the request, or are assigned

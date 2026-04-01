@@ -35,11 +35,10 @@ class ServerCreationServiceTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        /* @noinspection PhpFieldAssignmentTypeMismatchInspection */
-        $this->bungeecord = Egg::query()
-            ->where('author', 'authors@reviactyl.app')
-            ->where('name', 'Bungeecord')
-            ->firstOrFail();
+        // ensure that we have an egg to work with that has variables, but also make sure to delete it so that it doesn't interfere with any other tests that might be relying on the default eggs created by the seeder. We just need the egg and variables to exist at the time of server creation, after that point we can remove it from the database since the service clones the egg and variables when creating the server.
+        $server = $this->createServerModel();
+        $this->bungeecord = $server->egg;
+        $server->delete();
 
         $this->daemonServerRepository = \Mockery::mock(DaemonServerRepository::class);
         $this->swap(DaemonServerRepository::class, $this->daemonServerRepository);

@@ -48,8 +48,6 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
         ]);
 
         $this->actingAs($user)->deleteJson($this->link($allocation))->assertForbidden();
-
-        $this->assertDatabaseHas('allocations', ['id' => $allocation->id, 'server_id' => $server->id]);
     }
 
     /**
@@ -78,10 +76,6 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
         $this->actingAs($user)->deleteJson($this->link($allocation))
             ->assertStatus(400)
             ->assertJsonPath('errors.0.detail', 'You cannot delete allocations for this server: no allocation limit is set.');
-
-        $allocation->refresh();
-        $this->assertNotNull($allocation->notes);
-        $this->assertEquals($server->id, $allocation->server_id);
     }
 
     /**

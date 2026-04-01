@@ -32,6 +32,7 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
         $server->update(['allocation_limit' => 2]);
 
         $response = $this->actingAs($user)->postJson($this->link($server, '/network/allocations'));
+        $response->assertOk();
         $response->assertJsonPath('object', Allocation::RESOURCE_NAME);
 
         $matched = Allocation::query()->findOrFail($response->json('attributes.id'));

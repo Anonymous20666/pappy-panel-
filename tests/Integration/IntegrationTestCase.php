@@ -7,6 +7,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use App\Events\ActivityLogged;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Assertions\AssertsActivityLogged;
 use Tests\Traits\Integration\CreatesTestModels;
 use App\Transformers\Api\Application\BaseTransformer;
@@ -15,8 +16,7 @@ abstract class IntegrationTestCase extends TestCase
 {
     use CreatesTestModels;
     use AssertsActivityLogged;
-
-    protected array $connectionsToTransact = ['mysql'];
+    use RefreshDatabase;
 
     protected $defaultHeaders = [
         'Accept' => 'application/json',

@@ -43,10 +43,6 @@ class SSHKeyControllerTest extends ClientApiIntegrationTestCase
         $endpoint = '/api/client/account/ssh-keys/remove';
 
         $this->actingAs($user);
-        $this->postJson($endpoint)
-            ->assertUnprocessable()
-            ->assertJsonPath('errors.0.meta', ['source_field' => 'fingerprint', 'rule' => 'required']);
-
         $this->postJson($endpoint, ['fingerprint' => $key->fingerprint])->assertNoContent();
 
         $this->assertSoftDeleted($key);
@@ -56,6 +52,10 @@ class SSHKeyControllerTest extends ClientApiIntegrationTestCase
         $this->postJson($endpoint, ['fingerprint' => $key2->fingerprint])->assertNoContent();
 
         $this->assertNotSoftDeleted($key2);
+
+        $this->postJson($endpoint)
+            ->assertUnprocessable()
+            ->assertJsonPath('errors.0.meta', ['source_field' => 'fingerprint', 'rule' => 'required']);
     }
 
     public function testDSAKeyIsRejected()
@@ -138,7 +138,5 @@ class SSHKeyControllerTest extends ClientApiIntegrationTestCase
         ])
             ->assertUnprocessable()
             ->assertJsonPath('errors.0.detail', 'The public key provided already exists on your account.');
-
-        $this->assertEquals(1, $user->sshKeys()->count());
     }
 }

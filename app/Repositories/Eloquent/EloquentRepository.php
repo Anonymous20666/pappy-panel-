@@ -8,7 +8,6 @@ use App\Repositories\Repository;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Query\Expression;
 use App\Contracts\Repository\RepositoryInterface;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Repository\RecordNotFoundException;
@@ -254,26 +253,11 @@ abstract class EloquentRepository extends Repository implements RepositoryInterf
             return true;
         }
 
-        foreach ($values as $key => $value) {
-            ksort($value);
-            $values[$key] = $value;
-        }
+        // Use Laravel's portable query builder API so this works on SQLite in tests
+        // and on MySQL/PostgreSQL in production.
+        $this->getBuilder()->insertOrIgnore($values);
 
-        $bindings = array_values(array_filter(array_flatten($values, 1), function ($binding) {
-            return !$binding instanceof Expression;
-        }));
-
-        $grammar = $this->getBuilder()->toBase()->getGrammar();
-        $table = $grammar->wrapTable($this->getModel()->getTable());
-        $columns = $grammar->columnize(array_keys(reset($values)));
-
-        $parameters = collect($values)->map(function ($record) use ($grammar) {
-            return sprintf('(%s)', $grammar->parameterize($record));
-        })->implode(', ');
-
-        $statement = "insert ignore into $table ($columns) values $parameters";
-
-        return $this->getBuilder()->getConnection()->statement($statement, $bindings);
+        return true;
     }
 
     /**

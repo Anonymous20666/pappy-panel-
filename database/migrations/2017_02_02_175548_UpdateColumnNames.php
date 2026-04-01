@@ -41,9 +41,17 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('servers', function (Blueprint $table) {
-            $table->dropForeign(['node_id', 'owner_id', 'allocation_id', 'service_id', 'option_id']);
+        foreach (['node_id', 'owner_id', 'allocation_id', 'service_id', 'option_id'] as $column) {
+            try {
+                Schema::table('servers', function (Blueprint $table) use ($column) {
+                    $table->dropForeign([$column]);
+                });
+            } catch (Throwable) {
+                //
+            }
+        }
 
+        Schema::table('servers', function (Blueprint $table) {
             $table->renameColumn('node_id', 'node');
             $table->renameColumn('owner_id', 'owner');
             $table->renameColumn('allocation_id', 'allocation');

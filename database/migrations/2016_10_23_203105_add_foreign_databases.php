@@ -21,12 +21,20 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('databases', function (Blueprint $table) {
-            $table->dropForeign(['server_id']);
-            $table->dropIndex(['server_id']);
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+                $table->dropForeign(['server_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
-            $table->dropForeign(['db_server']);
-            $table->dropIndex(['db_server']);
-        });
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+                $table->dropForeign(['db_server']);
+            });
+        } catch (Throwable) {
+            //
+        }
     }
 };

@@ -17,8 +17,11 @@ return new class extends Migration {
 
         DB::transaction(function () {
             foreach (DB::table('service_variables')->get() as $variable) {
-                $variable->rules = ($variable->required) ? 'required|regex:' . $variable->rules : 'regex:' . $variable->rules;
-                $variable->save();
+                $rules = $variable->required ? 'required|regex:' . $variable->rules : 'regex:' . $variable->rules;
+
+                DB::table('service_variables')
+                    ->where('id', $variable->id)
+                    ->update(['rules' => $rules]);
             }
         });
 
@@ -39,8 +42,11 @@ return new class extends Migration {
 
         DB::transaction(function () {
             foreach (DB::table('service_variables')->get() as $variable) {
-                $variable->regex = Str::replace(['required|regex:', 'regex:'], '', $variable->regex);
-                $variable->save();
+                $regex = Str::replace(['required|regex:', 'regex:'], '', $variable->regex);
+
+                DB::table('service_variables')
+                    ->where('id', $variable->id)
+                    ->update(['regex' => $regex]);
             }
         });
     }

@@ -40,11 +40,19 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('services', function (Blueprint $table) {
+                $table->dropUnique(['uuid']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('services', function (Blueprint $table) {
             $table->dropColumn('uuid');
             $table->string('folder')->nullable();
             $table->text('startup')->nullable();
-            $table->text('index_file');
+            $table->text('index_file')->nullable();
             $table->string('author', 36)->change();
 
             $table->unique('name');

@@ -20,9 +20,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('api_keys', function (Blueprint $table) {
-            $table->dropForeign(['user']);
-            $table->dropIndex(['user']);
-        });
+        try {
+            Schema::table('api_keys', function (Blueprint $table) {
+                $table->dropForeign(['user']);
+            });
+        } catch (Throwable) {
+            //
+        }
     }
 };

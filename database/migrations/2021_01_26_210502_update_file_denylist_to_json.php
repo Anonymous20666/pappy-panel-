@@ -29,7 +29,7 @@ return new class extends Migration {
         });
 
         Schema::table('eggs', function (Blueprint $table) {
-            $table->text('file_denylist')->after('docker_images');
+            $table->text('file_denylist')->nullable()->after('docker_images');
         });
     }
 };

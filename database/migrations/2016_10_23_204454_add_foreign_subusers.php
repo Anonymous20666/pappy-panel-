@@ -21,12 +21,20 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('subusers', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
-            $table->dropIndex(['user_id']);
+        try {
+            Schema::table('subusers', function (Blueprint $table) {
+                $table->dropForeign(['user_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
-            $table->dropForeign(['server_id']);
-            $table->dropIndex(['server_id']);
-        });
+        try {
+            Schema::table('subusers', function (Blueprint $table) {
+                $table->dropForeign(['server_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
     }
 };

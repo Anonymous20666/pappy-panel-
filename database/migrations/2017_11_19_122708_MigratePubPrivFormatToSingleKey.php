@@ -44,19 +44,23 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('api_keys', function (Blueprint $table) {
+                $table->dropUnique(['token']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('api_keys', function (Blueprint $table) {
-            $table->dropUnique(['token']);
+            $table->text('token')->nullable()->change();
+        });
+
+        Schema::table('api_keys', function (Blueprint $table) {
             $table->renameColumn('token', 'secret');
         });
 
         Schema::table('api_keys', function (Blueprint $table) {
-            $table->dropUnique('token');
-            $table->text('token')->change();
-        });
-
-        Schema::table('api_keys', function (Blueprint $table) {
-            $table->renameColumn('token', 'secret');
-
             $table->text('secret')->nullable()->change();
             $table->char('public', 16)->after('user_id');
         });

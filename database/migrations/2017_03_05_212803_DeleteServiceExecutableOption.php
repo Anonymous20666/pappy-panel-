@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,8 +24,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        DB::table('services')->whereNull('description')->update(['description' => '']);
+        DB::table('services')->whereNull('startup')->update(['startup' => '']);
+
         Schema::table('services', function (Blueprint $table) {
-            $table->string('executable')->after('folder');
+            $table->string('executable')->nullable()->after('folder');
             $table->renameColumn('folder', 'file');
             $table->text('description')->nullable(false)->change();
             $table->text('startup')->nullable(false)->change();

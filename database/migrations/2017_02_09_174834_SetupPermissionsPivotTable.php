@@ -56,9 +56,15 @@ return new class extends Migration {
             }
         });
 
+        try {
+            Schema::table('permissions', function (Blueprint $table) {
+                $table->dropForeign(['subuser_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('permissions', function (Blueprint $table) {
-            $table->dropForeign(['subuser_id']);
-            $table->dropIndex(['subuser_id']);
             $table->dropColumn('subuser_id');
 
             $table->foreign('server_id')->references('id')->on('servers');

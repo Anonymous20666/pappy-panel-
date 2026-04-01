@@ -50,9 +50,8 @@ return new class extends Migration {
             });
         });
 
-        DB::statement('ALTER TABLE users MODIFY totp_secret CHAR(16) DEFAULT NULL');
-
         Schema::table('users', function (Blueprint $table) {
+            $table->char('totp_secret', 16)->nullable()->change();
             $table->dropColumn('totp_authenticated_at');
         });
     }

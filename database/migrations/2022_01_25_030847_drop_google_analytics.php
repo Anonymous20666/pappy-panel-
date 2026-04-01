@@ -17,8 +17,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        DB::table('settings')->insert([
-            'key' => 'settings::app:analytics',
-        ]);
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'settings::app:analytics'],
+            ['value' => '']
+        );
     }
 };

@@ -23,10 +23,15 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('service_options', function (Blueprint $table) {
-            $table->dropForeign(['service_id']);
-            $table->dropIndex(['service_id']);
+        try {
+            Schema::table('service_options', function (Blueprint $table) {
+                $table->dropForeign(['service_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
+        Schema::table('service_options', function (Blueprint $table) {
             $table->renameColumn('service_id', 'parent_service');
             $table->foreign('parent_service')->references('id')->on('services');
         });

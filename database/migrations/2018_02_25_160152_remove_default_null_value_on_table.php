@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('external_id')->default(null)->change();
+            $table->string('external_id')->nullable()->change();
         });
 
         DB::transaction(function () {
@@ -30,6 +30,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // This should not be rolled back.
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('external_id')->nullable()->change();
+        });
     }
 };

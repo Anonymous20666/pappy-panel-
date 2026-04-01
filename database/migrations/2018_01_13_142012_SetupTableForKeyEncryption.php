@@ -31,6 +31,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('api_keys', function (Blueprint $table) {
+                $table->dropUnique(['identifier']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('api_keys', function (Blueprint $table) {
             $table->dropColumn('identifier');
             $table->string('token', 32)->unique()->change();

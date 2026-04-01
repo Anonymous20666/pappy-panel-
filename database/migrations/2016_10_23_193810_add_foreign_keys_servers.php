@@ -32,22 +32,47 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('servers', function (Blueprint $table) {
+                $table->dropForeign(['node']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        try {
+            Schema::table('servers', function (Blueprint $table) {
+                $table->dropForeign(['owner']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        try {
+            Schema::table('servers', function (Blueprint $table) {
+                $table->dropForeign(['allocation']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        try {
+            Schema::table('servers', function (Blueprint $table) {
+                $table->dropForeign(['service']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        try {
+            Schema::table('servers', function (Blueprint $table) {
+                $table->dropForeign(['option']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('servers', function (Blueprint $table) {
-            $table->dropForeign(['node']);
-            $table->dropIndex(['node']);
-
-            $table->dropForeign(['owner']);
-            $table->dropIndex(['owner']);
-
-            $table->dropForeign(['allocation']);
-            $table->dropIndex(['allocation']);
-
-            $table->dropForeign(['service']);
-            $table->dropIndex(['service']);
-
-            $table->dropForeign(['option']);
-            $table->dropIndex(['option']);
-
             $table->dropColumn('deleted_at');
 
             $table->mediumInteger('node', false, true)->change();

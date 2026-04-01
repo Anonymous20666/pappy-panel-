@@ -36,18 +36,26 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('eggs', function (Blueprint $table) {
-            $table->text('docker_image')->after('docker_images');
+            $table->text('docker_image')->nullable()->after('docker_images');
         });
 
-        switch (DB::getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME)) {
-            case 'mysql':
-                DB::table('eggs')->update(['docker_images' => DB::raw('JSON_UNQUOTE(JSON_EXTRACT(docker_images, "$[0]")')]);
-                break;
-            case 'pgsql':
-                DB::table('eggs')->update(['docker_images' => DB::raw('JSON_UNQUOTE(JSON_EXTRACT(docker_images, "$[0]")')]);
-                DB::table('eggs')->update(['docker_images' => DB::raw('docker_images->>0')]);
-                break;
-        }
+        DB::table('eggs')
+            ->select(['id', 'docker_images'])
+            ->orderBy('id')
+            ->chunkById(100, function ($eggs): void {
+                foreach ($eggs as $egg) {
+                    $dockerImage = null;
+                    $images = json_decode((string) $egg->docker_images, true);
+
+                    if (is_array($images)) {
+                        $dockerImage = $images[0] ?? null;
+                    }
+
+                    DB::table('eggs')
+                        ->where('id', $egg->id)
+                        ->update(['docker_image' => $dockerImage]);
+                }
+            });
 
         Schema::table('eggs', function (Blueprint $table) {
             $table->dropColumn('docker_images');

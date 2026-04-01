@@ -22,8 +22,8 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('nodes', function (Blueprint $table) {
-            DB::statement('ALTER TABLE nodes MODIFY disk_overallocate MEDIUMINT UNSIGNED NULL,
-                                             MODIFY memory_overallocate MEDIUMINT UNSIGNED NULL');
+            $table->mediumInteger('disk_overallocate')->unsigned()->nullable()->change();
+            $table->mediumInteger('memory_overallocate')->unsigned()->nullable()->change();
         });
     }
 };

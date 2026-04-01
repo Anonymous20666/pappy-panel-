@@ -26,12 +26,23 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('allocations', function (Blueprint $table) {
-            $table->dropForeign(['node_id']);
-            $table->dropForeign(['server_id']);
-            $table->dropIndex(['node_id']);
-            $table->dropIndex(['server_id']);
+        try {
+            Schema::table('allocations', function (Blueprint $table) {
+                $table->dropForeign(['node_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
+        try {
+            Schema::table('allocations', function (Blueprint $table) {
+                $table->dropForeign(['server_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        Schema::table('allocations', function (Blueprint $table) {
             $table->renameColumn('node_id', 'node');
             $table->renameColumn('server_id', 'assigned_to');
             $table->foreign('node')->references('id')->on('nodes');

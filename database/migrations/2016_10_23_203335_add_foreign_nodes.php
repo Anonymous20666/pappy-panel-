@@ -21,10 +21,15 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('nodes', function (Blueprint $table) {
-            $table->dropForeign(['location']);
-            $table->dropIndex(['location']);
+        try {
+            Schema::table('nodes', function (Blueprint $table) {
+                $table->dropForeign(['location']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
+        Schema::table('nodes', function (Blueprint $table) {
             $table->mediumInteger('location', false, true)->nullable(false)->change();
         });
     }

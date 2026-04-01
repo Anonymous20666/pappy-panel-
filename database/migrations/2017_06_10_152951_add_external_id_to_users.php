@@ -20,6 +20,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropUnique(['external_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('external_id');
         });

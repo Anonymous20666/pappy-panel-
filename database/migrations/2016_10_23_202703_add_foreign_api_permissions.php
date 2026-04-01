@@ -21,10 +21,15 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('api_permissions', function (Blueprint $table) {
-            $table->dropForeign(['key_id']);
-            $table->dropIndex(['key_id']);
+        try {
+            Schema::table('api_permissions', function (Blueprint $table) {
+                $table->dropForeign(['key_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
+        Schema::table('api_permissions', function (Blueprint $table) {
             $table->mediumInteger('key_id', false, true)->nullable(false)->change();
         });
     }

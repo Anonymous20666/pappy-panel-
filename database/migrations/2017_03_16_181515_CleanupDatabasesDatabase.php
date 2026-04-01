@@ -5,18 +5,32 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration {
+    public $withinTransaction = false;
+
     /**
      * Run the migrations.
      */
     public function up(): void
     {
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+                $table->dropForeign(['db_server']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('databases', function (Blueprint $table) {
-            $table->dropForeign(['db_server']);
-
             $table->renameColumn('db_server', 'database_host_id');
-
-            $table->foreign('database_host_id')->references('id')->on('database_hosts');
         });
+
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+            $table->foreign('database_host_id')->references('id')->on('database_hosts');
+            });
+        } catch (Throwable) {
+            // Ignore foreign key recreation issues on legacy or partially rolled back schemas.
+        }
     }
 
     /**
@@ -24,12 +38,24 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+                $table->dropForeign(['database_host_id']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('databases', function (Blueprint $table) {
-            $table->dropForeign(['database_host_id']);
-
             $table->renameColumn('database_host_id', 'db_server');
-
-            $table->foreign('db_server')->references('id')->on('database_hosts');
         });
+
+        try {
+            Schema::table('databases', function (Blueprint $table) {
+            $table->foreign('db_server')->references('id')->on('database_hosts');
+            });
+        } catch (Throwable) {
+            // Ignore foreign key recreation issues on legacy or partially rolled back schemas.
+        }
     }
 };

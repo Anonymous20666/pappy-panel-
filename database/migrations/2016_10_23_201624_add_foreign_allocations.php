@@ -23,20 +23,25 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('allocations', function (Blueprint $table) {
+                $table->dropForeign(['assigned_to']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
+        try {
+            Schema::table('allocations', function (Blueprint $table) {
+                $table->dropForeign(['node']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('allocations', function (Blueprint $table) {
-            $table->dropForeign(['assigned_to']);
-            $table->dropIndex(['assigned_to']);
-
-            $table->dropForeign(['node']);
-            $table->dropIndex(['node']);
-
             $table->mediumInteger('assigned_to', false, true)->nullable()->change();
             $table->mediumInteger('node', false, true)->nullable(false)->change();
         });
-
-        DB::statement('ALTER TABLE allocations
-             MODIFY COLUMN assigned_to MEDIUMINT(8) UNSIGNED NULL,
-             MODIFY COLUMN node MEDIUMINT(8) UNSIGNED NOT NULL
-         ');
     }
 };

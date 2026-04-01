@@ -1,23 +1,27 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        $table = DB::getQueryGrammar()->wrapTable('tasks');
-        DB::statement('ALTER TABLE ' . $table . ' CHANGE `last_run` `last_run` TIMESTAMP NULL;');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->timestamp('last_run')->nullable()->change();
+        });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
-        $table = DB::getQueryGrammar()->wrapTable('tasks');
-        DB::statement('ALTER TABLE ' . $table . ' CHANGE `last_run` `last_run` TIMESTAMP;');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->timestamp('last_run')->nullable(false)->change();
+        });
     }
 };

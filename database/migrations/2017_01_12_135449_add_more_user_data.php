@@ -35,6 +35,14 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropUnique(['username']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('name_first');
             $table->dropColumn('name_last');

@@ -12,9 +12,11 @@ return new class extends Migration {
     public function up(): void
     {
         DB::table('settings')->truncate();
-        Schema::table('settings', function (Blueprint $table) {
-            $table->increments('id')->first();
-        });
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('settings', function (Blueprint $table) {
+                $table->increments('id')->first();
+            });
+        }
     }
 
     /**
@@ -22,8 +24,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('settings', function (Blueprint $table) {
-            $table->dropColumn('id');
-        });
+        if (DB::getDriverName() !== 'sqlite') {
+            Schema::table('settings', function (Blueprint $table) {
+                $table->dropColumn('id');
+            });
+        }
     }
 };

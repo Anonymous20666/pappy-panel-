@@ -21,10 +21,15 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('service_options', function (Blueprint $table) {
-            $table->dropForeign(['parent_service']);
-            $table->dropIndex(['parent_service']);
+        try {
+            Schema::table('service_options', function (Blueprint $table) {
+                $table->dropForeign(['parent_service']);
+            });
+        } catch (Throwable) {
+            //
+        }
 
+        Schema::table('service_options', function (Blueprint $table) {
             $table->mediumInteger('parent_service', false, true)->change();
         });
     }

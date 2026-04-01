@@ -42,10 +42,18 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        try {
+            Schema::table('service_options', function (Blueprint $table) {
+                $table->dropUnique(['uuid']);
+            });
+        } catch (Throwable) {
+            //
+        }
+
         Schema::table('service_options', function (Blueprint $table) {
             $table->dropColumn('uuid');
             $table->dropColumn('author');
-            $table->string('tag');
+            $table->string('tag')->nullable();
         });
 
         DB::transaction(function () {

@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Server;
+use App\Models\User;
 
 class ServerPolicy
 {
@@ -13,7 +13,7 @@ class ServerPolicy
     protected function checkPermission(User $user, Server $server, string $permission): bool
     {
         $subuser = $server->subusers->where('user_id', $user->id)->first();
-        if (!$subuser || empty($permission)) {
+        if (! $subuser || empty($permission)) {
             return false;
         }
 

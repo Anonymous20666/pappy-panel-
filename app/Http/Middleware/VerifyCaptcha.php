@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use GuzzleHttp\Client;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Events\Auth\FailedCaptcha;
+use GuzzleHttp\Client;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class VerifyCaptcha
@@ -15,9 +15,7 @@ class VerifyCaptcha
     /**
      * VerifyCaptcha constructor.
      */
-    public function __construct(private Dispatcher $dispatcher, private Repository $config)
-    {
-    }
+    public function __construct(private Dispatcher $dispatcher, private Repository $config) {}
 
     /**
      * Handle an incoming request.
@@ -76,7 +74,7 @@ class VerifyCaptcha
         if ($res->getStatusCode() === 200) {
             $result = json_decode($res->getBody());
 
-            if ($result->success && (!$this->config->get('captcha.verify_domain') || $this->isResponseVerified($result, $request))) {
+            if ($result->success && (! $this->config->get('captcha.verify_domain') || $this->isResponseVerified($result, $request))) {
                 return true;
             }
         }
@@ -114,7 +112,7 @@ class VerifyCaptcha
      */
     private function isResponseVerified(\stdClass $result, Request $request): bool
     {
-        if (!$this->config->get('captcha.verify_domain')) {
+        if (! $this->config->get('captcha.verify_domain')) {
             return false;
         }
 

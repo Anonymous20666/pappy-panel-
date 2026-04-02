@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use App\Models\Extension;
-use Illuminate\Http\Request;
 use App\Services\Extensions\ExtensionFilesystemService;
+use Illuminate\Http\Request;
 
 class ConfigureExtensionFilesystem
 {

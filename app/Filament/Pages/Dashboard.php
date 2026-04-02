@@ -2,6 +2,11 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\ActivityLogWidget;
+use App\Filament\Widgets\FeedbackWidget;
+use App\Filament\Widgets\SponsorWidget;
+use App\Filament\Widgets\UpdateWidget;
+use App\Filament\Widgets\UserActivityWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 
 class Dashboard extends BaseDashboard
@@ -13,11 +18,11 @@ class Dashboard extends BaseDashboard
     public function getWidgets(): array
     {
         return [
-            \App\Filament\Widgets\UpdateWidget::class,
-            \App\Filament\Widgets\FeedbackWidget::class,
-            \App\Filament\Widgets\SponsorWidget::class,
-            \App\Filament\Widgets\UserActivityWidget::class,
-            \App\Filament\Widgets\ActivityLogWidget::class,
+            UpdateWidget::class,
+            FeedbackWidget::class,
+            SponsorWidget::class,
+            UserActivityWidget::class,
+            ActivityLogWidget::class,
         ];
     }
 

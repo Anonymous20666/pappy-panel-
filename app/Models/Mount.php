@@ -3,9 +3,10 @@
 namespace App\Models;
 
 use App\Contracts\Models\Identifiable;
-use Illuminate\Validation\Rules\NotIn;
 use App\Models\Traits\HasRealtimeIdentifier;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Validation\Rules\NotIn;
 
 /**
  * @property int $id
@@ -16,9 +17,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $target
  * @property bool $read_only
  * @property bool $user_mountable
- * @property \App\Models\Egg[]|\Illuminate\Database\Eloquent\Collection $eggs
- * @property \App\Models\Node[]|\Illuminate\Database\Eloquent\Collection $nodes
- * @property \App\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
+ * @property Egg[]|Collection $eggs
+ * @property Node[]|Collection $nodes
+ * @property Server[]|Collection $servers
  */
 #[Attributes\Identifiable('moun')]
 class Mount extends Model implements Identifiable
@@ -100,7 +101,7 @@ class Mount extends Model implements Identifiable
     /**
      * Returns all eggs that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Egg, $this>
+     * @return BelongsToMany<Egg, $this>
      */
     public function eggs(): BelongsToMany
     {
@@ -110,7 +111,7 @@ class Mount extends Model implements Identifiable
     /**
      * Returns all nodes that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Node, $this>
+     * @return BelongsToMany<Node, $this>
      */
     public function nodes(): BelongsToMany
     {
@@ -120,7 +121,7 @@ class Mount extends Model implements Identifiable
     /**
      * Returns all servers that have this mount assigned.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany<\App\Models\Server, $this>
+     * @return BelongsToMany<Server, $this>
      */
     public function servers(): BelongsToMany
     {

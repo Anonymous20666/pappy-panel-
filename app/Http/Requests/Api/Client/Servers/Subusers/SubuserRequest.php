@@ -2,12 +2,14 @@
 
 namespace App\Http\Requests\Api\Client\Servers\Subusers;
 
-use App\Models\User;
-use App\Models\Subuser;
-use Illuminate\Http\Request;
 use App\Exceptions\Http\HttpForbiddenException;
 use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Models\Server;
+use App\Models\Subuser;
+use App\Models\User;
 use App\Services\Servers\GetUserPermissionsService;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Http\Request;
 
 abstract class SubuserRequest extends ClientApiRequest
 {
@@ -16,11 +18,11 @@ abstract class SubuserRequest extends ClientApiRequest
     /**
      * Authorize the request and ensure that a user is not trying to modify themselves.
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function authorize(): bool
     {
-        if (!parent::authorize()) {
+        if (! parent::authorize()) {
             return false;
         }
 
@@ -47,12 +49,12 @@ abstract class SubuserRequest extends ClientApiRequest
      * Validates that the permissions we are trying to assign can actually be assigned
      * by the user making the request.
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected function validatePermissionsCanBeAssigned(array $permissions)
     {
         $user = $this->user();
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         $server = $this->route()->parameter('server');
 
         // If we are a root admin or the server owner, no need to perform these checks.

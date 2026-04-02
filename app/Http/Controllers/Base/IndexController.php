@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Base;
 
-use Illuminate\View\View;
+use App\Contracts\Repository\ServerRepositoryInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\View\Factory as ViewFactory;
-use App\Contracts\Repository\ServerRepositoryInterface;
+use Illuminate\View\View;
 
 class IndexController extends Controller
 {
@@ -15,8 +15,7 @@ class IndexController extends Controller
     public function __construct(
         protected ServerRepositoryInterface $repository,
         protected ViewFactory $view,
-    ) {
-    }
+    ) {}
 
     /**
      * Returns listing of user's servers.

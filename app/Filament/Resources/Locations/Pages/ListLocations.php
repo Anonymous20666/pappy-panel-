@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Locations\Pages;
 
-use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\Locations\LocationResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
 
 class ListLocations extends ListRecords
 {
@@ -12,7 +13,7 @@ class ListLocations extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

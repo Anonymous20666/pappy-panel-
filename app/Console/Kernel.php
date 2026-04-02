@@ -2,18 +2,20 @@
 
 namespace App\Console;
 
-use Ramsey\Uuid\Uuid;
-use App\Models\ActivityLog;
-use Illuminate\Support\Str;
-use Illuminate\Console\Scheduling\Schedule;
-use App\Services\Extensions\ExtensionManager;
-use Illuminate\Database\Console\PruneCommand;
-use App\Repositories\Eloquent\SettingsRepository;
-use App\Services\Telemetry\TelemetryCollectionService;
-use App\Console\Commands\Schedule\ProcessRunnableCommand;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
 use App\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
+use App\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
+use App\Console\Commands\Schedule\ProcessRunnableCommand;
+use App\Exceptions\Model\DataValidationException;
+use App\Models\ActivityLog;
+use App\Repositories\Eloquent\SettingsRepository;
+use App\Services\Extensions\ExtensionManager;
+use App\Services\Telemetry\TelemetryCollectionService;
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Console\PruneCommand;
+use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class Kernel extends ConsoleKernel
 {
@@ -22,7 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
     }
 
     /**
@@ -58,8 +60,8 @@ class Kernel extends ConsoleKernel
     /**
      * I wonder what this does.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws DataValidationException
+     * @throws BindingResolutionException
      */
     private function registerTelemetry(Schedule $schedule): void
     {

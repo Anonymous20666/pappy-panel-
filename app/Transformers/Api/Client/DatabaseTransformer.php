@@ -2,12 +2,12 @@
 
 namespace App\Transformers\Api\Client;
 
+use App\Contracts\Extensions\HashidsInterface;
 use App\Models\Database;
 use App\Models\Permission;
+use Illuminate\Contracts\Encryption\Encrypter;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
-use App\Contracts\Extensions\HashidsInterface;
-use Illuminate\Contracts\Encryption\Encrypter;
 
 class DatabaseTransformer extends BaseClientTransformer
 {
@@ -53,7 +53,7 @@ class DatabaseTransformer extends BaseClientTransformer
      */
     public function includePassword(Database $database): Item|NullResource
     {
-        if (!$this->request->user()->can(Permission::ACTION_DATABASE_VIEW_PASSWORD, $database->server)) {
+        if (! $this->request->user()->can(Permission::ACTION_DATABASE_VIEW_PASSWORD, $database->server)) {
             return $this->null();
         }
 

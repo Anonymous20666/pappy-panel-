@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Api\Remote;
 
-use App\Models\User;
-use App\Models\Server;
+use App\Exceptions\Http\HttpForbiddenException;
 use App\Facades\Activity;
-use App\Models\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Remote\SftpAuthenticationFormRequest;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Models\User;
+use App\Services\Servers\GetUserPermissionsService;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use phpseclib3\Crypt\PublicKeyLoader;
 use phpseclib3\Exception\NoKeyLoadedException;
-use App\Exceptions\Http\HttpForbiddenException;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use App\Services\Servers\GetUserPermissionsService;
-use App\Http\Requests\Api\Remote\SftpAuthenticationFormRequest;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
@@ -22,9 +22,7 @@ class SftpAuthenticationController extends Controller
 {
     use ThrottlesLogins;
 
-    public function __construct(protected GetUserPermissionsService $permissions)
-    {
-    }
+    public function __construct(protected GetUserPermissionsService $permissions) {}
 
     /**
      * Authenticate a set of credentials and return the associated server details
@@ -48,7 +46,7 @@ class SftpAuthenticationController extends Controller
         $server = $this->getServer($request, $connection['server']);
 
         if ($request->input('type') !== 'public_key') {
-            if (!password_verify($request->input('password'), $user->password)) {
+            if (! password_verify($request->input('password'), $user->password)) {
                 Activity::event('auth:sftp.fail')->property('method', 'password')->subject($user)->log();
 
                 $this->reject($request);
@@ -61,7 +59,7 @@ class SftpAuthenticationController extends Controller
                 // do nothing
             }
 
-            if (!$key || !$user->sshKeys()->where('fingerprint', $key->getFingerprint('sha256'))->exists()) {
+            if (! $key || ! $user->sshKeys()->where('fingerprint', $key->getFingerprint('sha256'))->exists()) {
                 // We don't log here because of the way the SFTP system works. This endpoint
                 // will get hit for every key the user provides, which could be 4 or 5. That is
                 // a lot of unnecessary log noise.
@@ -140,10 +138,10 @@ class SftpAuthenticationController extends Controller
      */
     protected function validateSftpAccess(User $user, Server $server): void
     {
-        if (!$user->root_admin && $server->owner_id !== $user->id) {
+        if (! $user->root_admin && $server->owner_id !== $user->id) {
             $permissions = $this->permissions->handle($server, $user);
 
-            if (!in_array(Permission::ACTION_FILE_SFTP, $permissions)) {
+            if (! in_array(Permission::ACTION_FILE_SFTP, $permissions)) {
                 Activity::event('server:sftp.denied')->actor($user)->subject($server)->log();
 
                 throw new HttpForbiddenException('You do not have permission to access SFTP for this server.');
@@ -160,6 +158,6 @@ class SftpAuthenticationController extends Controller
     {
         $username = explode('.', strrev($request->input('username', '')));
 
-        return strtolower(strrev($username[0] ?? '') . '|' . $request->ip()); // @phpstan-ignore nullCoalesce.offset
+        return strtolower(strrev($username[0] ?? '').'|'.$request->ip()); // @phpstan-ignore nullCoalesce.offset
     }
 }

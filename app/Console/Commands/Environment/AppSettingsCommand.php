@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands\Environment;
 
-use Illuminate\Support\Str;
+use App\Exceptions\PanelException;
+use App\Traits\Commands\EnvironmentWriterTrait;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
-use App\Traits\Commands\EnvironmentWriterTrait;
+use Illuminate\Support\Str;
 
 class AppSettingsCommand extends Command
 {
@@ -60,7 +61,7 @@ class AppSettingsCommand extends Command
     /**
      * Handle command execution.
      *
-     * @throws \App\Exceptions\PanelException
+     * @throws PanelException
      */
     public function handle(): int
     {
@@ -74,7 +75,7 @@ class AppSettingsCommand extends Command
             config('panel.service.author', 'unknown@unknown.com')
         );
 
-        if (!filter_var($this->variables['APP_SERVICE_AUTHOR'], FILTER_VALIDATE_EMAIL)) {
+        if (! filter_var($this->variables['APP_SERVICE_AUTHOR'], FILTER_VALIDATE_EMAIL)) {
             $this->output->error('The service author email provided is invalid.');
 
             return 1;
@@ -114,7 +115,7 @@ class AppSettingsCommand extends Command
             array_key_exists($selected, self::QUEUE_DRIVERS) ? $selected : null
         );
 
-        if (!is_null($this->option('settings-ui'))) {
+        if (! is_null($this->option('settings-ui'))) {
             $this->variables['APP_ENVIRONMENT_ONLY'] = $this->option('settings-ui') == 'true' ? 'false' : 'true';
         } else {
             $this->variables['APP_ENVIRONMENT_ONLY'] = $this->confirm('Enable UI based settings editor?', true) ? 'false' : 'true';
@@ -160,7 +161,7 @@ class AppSettingsCommand extends Command
         );
 
         $askForRedisPassword = true;
-        if (!empty(config('database.redis.default.password'))) {
+        if (! empty(config('database.redis.default.password'))) {
             $this->variables['REDIS_PASSWORD'] = config('database.redis.default.password');
             $askForRedisPassword = $this->confirm('It seems a password is already defined for Redis, would you like to change it?');
         }

@@ -2,10 +2,11 @@
 
 namespace App\Services\Api;
 
-use App\Models\ApiKey;
-use Illuminate\Support\Str;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\ApiKeyRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Models\ApiKey;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Support\Str;
 
 class KeyCreationService
 {
@@ -14,9 +15,7 @@ class KeyCreationService
     /**
      * ApiKeyService constructor.
      */
-    public function __construct(private ApiKeyRepositoryInterface $repository, private Encrypter $encrypter)
-    {
-    }
+    public function __construct(private ApiKeyRepositoryInterface $repository, private Encrypter $encrypter) {}
 
     /**
      * Set the type of key that should be created. By default an orphaned key will be
@@ -34,7 +33,7 @@ class KeyCreationService
      * This will automatically generate an identifier and an encrypted token that are
      * stored in the database.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle(array $data, array $permissions = []): ApiKey
     {

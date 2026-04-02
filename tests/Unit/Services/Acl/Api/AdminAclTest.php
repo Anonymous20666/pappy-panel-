@@ -2,17 +2,18 @@
 
 namespace Tests\Unit\Services\Acl\Api;
 
-use Tests\TestCase;
 use App\Models\ApiKey;
 use App\Services\Acl\Api\AdminAcl;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class AdminAclTest extends TestCase
 {
     /**
      * Test that permissions return the expects values.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testPermissions(int $permission, int $check, bool $outcome)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_permissions(int $permission, int $check, bool $outcome)
     {
         $this->assertSame($outcome, AdminAcl::can($permission, $check));
     }
@@ -20,7 +21,7 @@ class AdminAclTest extends TestCase
     /**
      * Test that checking against a model works as expected.
      */
-    public function testCheck()
+    public function test_check()
     {
         $model = ApiKey::factory()->make(['r_servers' => AdminAcl::READ | AdminAcl::WRITE]);
 

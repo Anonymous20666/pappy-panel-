@@ -1,19 +1,19 @@
 <?php
 
-use App\Http\Kernel as HttpKernel;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
 use App\Console\Kernel as ConsoleKernel;
-use App\Http\Middleware\AdminAuthenticate;
 use App\Exceptions\Handler as ExceptionHandler;
+use App\Http\Kernel as HttpKernel;
+use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\RequireTwoFactorAuthentication;
-use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Contracts\Console\Kernel as ConsoleKernelContract;
 use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
+use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Route;
 
 $app = Application::configure(basePath: $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__));
 
-if (!empty($_ENV['APP_STORAGE_PATH'])) {
+if (! empty($_ENV['APP_STORAGE_PATH'])) {
     $app->useStoragePath($_ENV['APP_STORAGE_PATH']);
 }
 

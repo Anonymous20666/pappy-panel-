@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Contracts\Repository\EggVariableRepositoryInterface;
 use App\Models\EggVariable;
 use Illuminate\Support\Collection;
-use App\Contracts\Repository\EggVariableRepositoryInterface;
 
 class EggVariableRepository extends EloquentRepository implements EggVariableRepositoryInterface
 {

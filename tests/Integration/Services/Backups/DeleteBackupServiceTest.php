@@ -2,21 +2,21 @@
 
 namespace Tests\Integration\Services\Backups;
 
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Service\Backup\BackupLockedException;
+use App\Extensions\Backups\BackupManager;
+use App\Extensions\Filesystem\S3Filesystem;
 use App\Models\Backup;
+use App\Repositories\Wings\DaemonBackupRepository;
+use App\Services\Backups\DeleteBackupService;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use App\Extensions\Backups\BackupManager;
-use GuzzleHttp\Exception\ClientException;
 use Tests\Integration\IntegrationTestCase;
-use App\Extensions\Filesystem\S3Filesystem;
-use App\Services\Backups\DeleteBackupService;
-use App\Repositories\Wings\DaemonBackupRepository;
-use App\Exceptions\Service\Backup\BackupLockedException;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
 
 class DeleteBackupServiceTest extends IntegrationTestCase
 {
-    public function testLockedBackupCannotBeDeleted()
+    public function test_locked_backup_cannot_be_deleted()
     {
         $server = $this->createServerModel();
         $backup = Backup::factory()->create([
@@ -29,7 +29,7 @@ class DeleteBackupServiceTest extends IntegrationTestCase
         $this->app->make(DeleteBackupService::class)->handle($backup);
     }
 
-    public function testFailedBackupThatIsLockedCanBeDeleted()
+    public function test_failed_backup_that_is_locked_can_be_deleted()
     {
         $server = $this->createServerModel();
         $backup = Backup::factory()->create([
@@ -48,7 +48,7 @@ class DeleteBackupServiceTest extends IntegrationTestCase
         $this->assertNotNull($backup->deleted_at);
     }
 
-    public function testExceptionThrownDueToMissingBackupIsIgnored()
+    public function test_exception_thrown_due_to_missing_backup_is_ignored()
     {
         $server = $this->createServerModel();
         $backup = Backup::factory()->create(['server_id' => $server->id]);
@@ -67,7 +67,7 @@ class DeleteBackupServiceTest extends IntegrationTestCase
         $this->assertNotNull($backup->deleted_at);
     }
 
-    public function testExceptionIsThrownIfNot404()
+    public function test_exception_is_thrown_if_not404()
     {
         $server = $this->createServerModel();
         $backup = Backup::factory()->create(['server_id' => $server->id]);
@@ -88,7 +88,7 @@ class DeleteBackupServiceTest extends IntegrationTestCase
         $this->assertNull($backup->deleted_at);
     }
 
-    public function testS3ObjectCanBeDeleted()
+    public function test_s3_object_can_be_deleted()
     {
         $server = $this->createServerModel();
         $backup = Backup::factory()->create([

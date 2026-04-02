@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Container\Container;
 use App\Contracts\Extensions\HashidsInterface;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Database\Factories\DatabaseFactory;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -16,14 +19,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $remote
  * @property string $password
  * @property int $max_connections
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property Server $server
  * @property DatabaseHost $host
  */
 class Database extends Model
 {
-    /** @use HasFactory<\Database\Factories\DatabaseFactory> */
+    /** @use HasFactory<DatabaseFactory> */
     use HasFactory;
 
     /**
@@ -77,9 +80,9 @@ class Database extends Model
      * Resolves the database using the ID by checking if the value provided is a HashID
      * string value, or just the ID to the database itself.
      *
-     * @param string|null $field
+     * @param  string|null  $field
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function resolveRouteBinding($value, $field = null): ?\Illuminate\Database\Eloquent\Model
     {
@@ -95,7 +98,7 @@ class Database extends Model
     /**
      * Gets the host database server associated with a database.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\DatabaseHost, $this>
+     * @return BelongsTo<DatabaseHost, $this>
      */
     public function host(): BelongsTo
     {
@@ -105,7 +108,7 @@ class Database extends Model
     /**
      * Gets the server associated with a database.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {

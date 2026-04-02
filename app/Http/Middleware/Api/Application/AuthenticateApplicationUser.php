@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Api\Application;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -13,9 +14,9 @@ class AuthenticateApplicationUser
      */
     public function handle(Request $request, \Closure $next): mixed
     {
-        /** @var \App\Models\User|null $user */
+        /** @var User|null $user */
         $user = $request->user();
-        if (!$user || !$user->root_admin) {
+        if (! $user || ! $user->root_admin) {
             throw new AccessDeniedHttpException('This account does not have permission to access the API.');
         }
 

@@ -2,13 +2,13 @@
 
 namespace Tests\Integration\Api\Client\Server\Subuser;
 
-use App\Models\User;
-use Ramsey\Uuid\Uuid;
-use App\Models\Subuser;
 use App\Models\Permission;
+use App\Models\Subuser;
+use App\Models\User;
+use App\Repositories\Wings\DaemonRevocationRepository;
 use Mockery\MockInterface;
 use PHPUnit\Framework\Attributes\TestWith;
-use App\Repositories\Wings\DaemonRevocationRepository;
+use Ramsey\Uuid\Uuid;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DeleteSubuserTest extends ClientApiIntegrationTestCase
@@ -26,7 +26,7 @@ class DeleteSubuserTest extends ClientApiIntegrationTestCase
      */
     #[TestWith([null])]
     #[TestWith(['18180000'])]
-    public function testCorrectSubuserIsDeletedFromServer(?string $prefix)
+    public function test_correct_subuser_is_deleted_from_server(?string $prefix)
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -35,7 +35,7 @@ class DeleteSubuserTest extends ClientApiIntegrationTestCase
 
         $real = Uuid::uuid4()->toString();
         // Generate a UUID that lines up with a user in the database if it were to be cast to an int.
-        $uuid = ($prefix ?: $differentUser->id) . substr($real, strlen($prefix ?: (string) $differentUser->id));
+        $uuid = ($prefix ?: $differentUser->id).substr($real, strlen($prefix ?: (string) $differentUser->id));
 
         /** @var User $subuser */
         $subuser = User::factory()->create(['uuid' => $uuid]);
@@ -58,6 +58,6 @@ class DeleteSubuserTest extends ClientApiIntegrationTestCase
 
         $this->withoutExceptionHandling()
             ->actingAs($user)
-            ->deleteJson($this->link($server) . "/users/$subuser->uuid")->assertNoContent();
+            ->deleteJson($this->link($server)."/users/$subuser->uuid")->assertNoContent();
     }
 }

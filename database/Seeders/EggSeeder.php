@@ -4,10 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\Egg;
 use App\Models\Nest;
-use Illuminate\Database\Seeder;
-use Illuminate\Http\UploadedFile;
 use App\Services\Eggs\Sharing\EggImporterService;
 use App\Services\Eggs\Sharing\EggUpdateImporterService;
+use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
 
 class EggSeeder extends Seeder
 {
@@ -56,12 +56,12 @@ class EggSeeder extends Seeder
      */
     protected function parseEggFiles(Nest $nest)
     {
-        $files = new \DirectoryIterator(database_path('Seeders/eggs/' . kebab_case($nest->name)));
+        $files = new \DirectoryIterator(database_path('Seeders/eggs/'.kebab_case($nest->name)));
 
-        $this->command->alert('Updating Eggs for Nest: ' . $nest->name);
+        $this->command->alert('Updating Eggs for Nest: '.$nest->name);
         /** @var \DirectoryIterator $file */
         foreach ($files as $file) {
-            if (!$file->isFile() || !$file->isReadable()) {
+            if (! $file->isFile() || ! $file->isReadable()) {
                 continue;
             }
 
@@ -75,7 +75,7 @@ class EggSeeder extends Seeder
                 ->first();
 
             // fallback
-            if (!$egg) {
+            if (! $egg) {
                 $egg = $nest->eggs()
                     ->where('author', 'support@pterodactyl.io')
                     ->where('name', $decoded['name'])
@@ -92,10 +92,10 @@ class EggSeeder extends Seeder
                     ]);
                 }
 
-                $this->command->info('Updated ' . $decoded['name']);
+                $this->command->info('Updated '.$decoded['name']);
             } else {
                 $this->importerService->handle($file, $nest->id);
-                $this->command->comment('Created ' . $decoded['name']);
+                $this->command->comment('Created '.$decoded['name']);
             }
         }
 

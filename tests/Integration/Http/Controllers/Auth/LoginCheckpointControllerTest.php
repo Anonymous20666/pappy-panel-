@@ -2,21 +2,21 @@
 
 namespace Tests\Integration\Http\Controllers\Auth;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Illuminate\Support\Str;
 use App\Events\Auth\DirectLogin;
-use PragmaRX\Google2FA\Google2FA;
+use App\Events\Auth\ProvidedAuthenticationToken;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
-use Tests\Integration\Http\HttpTestCase;
+use Illuminate\Support\Str;
 use PHPUnit\Framework\Attributes\TestWith;
-use App\Events\Auth\ProvidedAuthenticationToken;
+use PragmaRX\Google2FA\Google2FA;
+use Tests\Integration\Http\HttpTestCase;
 
 class LoginCheckpointControllerTest extends HttpTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,7 +31,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
     #[TestWith([null])]
     #[TestWith([-31])]
     #[TestWith([-60])]
-    public function testUserCanSignInUsingTotpToken(?int $ts): void
+    public function test_user_can_sign_in_using_totp_token(?int $ts): void
     {
         $user = User::factory()->create([
             'use_totp' => true,
@@ -75,7 +75,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
     #[TestWith([1])]
     #[TestWith([30])]
     #[TestWith([80])]
-    public function testTotpTokenCannotBeReused(int $seconds): void
+    public function test_totp_token_cannot_be_reused(int $seconds): void
     {
         $user = User::factory()->create([
             'use_totp' => true,
@@ -104,7 +104,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
         Event::assertDispatched(fn (Failed $event) => $event->guard === 'auth' && $event->user->is($user));
     }
 
-    public function testEndpointReturnsErrorIfSessionMissing(): void
+    public function test_endpoint_returns_error_if_session_missing(): void
     {
         $this->postJson(route('auth.login-checkpoint'))
             ->assertUnprocessable()
@@ -124,9 +124,9 @@ class LoginCheckpointControllerTest extends HttpTestCase
         Event::assertDispatched(fn (Failed $event) => $event->guard === 'auth');
     }
 
-    public function testEndpointAppliesThrottling(): void
+    public function test_endpoint_applies_throttling(): void
     {
-        for ($i = 0; $i < 5; ++$i) {
+        for ($i = 0; $i < 5; $i++) {
             $this->postJson(route('auth.login-checkpoint', ['confirmation_token' => 'token', 'authentication_code' => '123456']))
                 ->assertBadRequest();
         }
@@ -135,7 +135,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
             ->assertTooManyRequests();
     }
 
-    public function testEndpointBlocksSessionDataMismatch(): void
+    public function test_endpoint_blocks_session_data_mismatch(): void
     {
         $user = User::factory()->create([
             'use_totp' => true,
@@ -159,7 +159,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
         Event::assertDispatched(Failed::class);
     }
 
-    public function testEndpointReturnsErrorIfUserDoesNotExist(): void
+    public function test_endpoint_returns_error_if_user_does_not_exist(): void
     {
         Session::put('auth_confirmation_token', [
             'user_id' => 0,
@@ -175,7 +175,7 @@ class LoginCheckpointControllerTest extends HttpTestCase
             ->assertJsonPath('errors.0.detail', 'The authentication token provided has expired, please refresh the page and try again.');
     }
 
-    public function testEndpointAllowsRecoveryToken(): void
+    public function test_endpoint_allows_recovery_token(): void
     {
         $user = User::factory()->create();
         $token = $user->recoveryTokens()->forceCreate(['token' => password_hash('recovery', PASSWORD_DEFAULT)]);

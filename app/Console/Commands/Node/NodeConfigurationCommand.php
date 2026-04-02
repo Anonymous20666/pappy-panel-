@@ -25,7 +25,7 @@ class NodeConfigurationCommand extends Command
         });
 
         $format = $this->option('format');
-        if (!in_array($format, ['yaml', 'yml', 'json'])) {
+        if (! in_array($format, ['yaml', 'yml', 'json'])) {
             $this->error('Invalid format specified. Valid options are "yaml" and "json".');
 
             return 1;

@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Nests\Eggs\Pages;
 
-use App\Models\Nest;
-use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\Nests\EggResource;
 use App\Filament\Resources\Nests\NestResource;
+use App\Models\Nest;
+use App\Services\Eggs\Sharing\EggExporterService;
+use Filament\Actions;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
 
 class EditEgg extends EditRecord
 {
@@ -29,12 +31,12 @@ class EditEgg extends EditRecord
                 ->icon('heroicon-o-arrow-down-tray')
                 ->action(function () {
                     $record = $this->record;
-                    $json = app(\App\Services\Eggs\Sharing\EggExporterService::class)->handle($record->id);
+                    $json = app(EggExporterService::class)->handle($record->id);
                     $filename = trim(preg_replace('/\W/', '-', kebab_case($record->name)), '-');
 
                     return response()->streamDownload(function () use ($json) {
                         echo $json;
-                    }, 'egg-' . $filename . '.json');
+                    }, 'egg-'.$filename.'.json');
                 }),
             Actions\DeleteAction::make()
                 ->successRedirectUrl(function (): string {
@@ -50,7 +52,7 @@ class EditEgg extends EditRecord
                     $this->redirectNestId = $record?->nest_id ?? $this->redirectNestId;
 
                     if ($record->servers()->count() > 0) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/eggs.notices.cannot_delete'))
                             ->body(trans('admin/eggs.notices.cannot_delete_body', ['count' => $record->servers()->count()]))
                             ->danger()

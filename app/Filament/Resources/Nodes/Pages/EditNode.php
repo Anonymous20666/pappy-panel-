@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\Nodes\Pages;
 
+use App\Filament\Resources\Nodes\NodeResource;
+use App\Services\Activity\ActivityLogService;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Resources\Nodes\NodeResource;
 
 class EditNode extends EditRecord
 {
@@ -12,7 +13,7 @@ class EditNode extends EditRecord
 
     protected function afterSave(): void
     {
-        app(\App\Services\Activity\ActivityLogService::class)->subject($this->record)->event('node:update')->log();
+        app(ActivityLogService::class)->subject($this->record)->event('node:update')->log();
     }
 
     protected function getHeaderActions(): array
@@ -20,7 +21,7 @@ class EditNode extends EditRecord
         return [
             DeleteAction::make()
                 ->before(function () {
-                    if (!$this->record) {
+                    if (! $this->record) {
                         return;
                     }
 
@@ -29,7 +30,7 @@ class EditNode extends EditRecord
                     }
                 })
                 ->after(function () {
-                    app(\App\Services\Activity\ActivityLogService::class)->subject($this->record)->event('node:delete')->log();
+                    app(ActivityLogService::class)->subject($this->record)->event('node:delete')->log();
                 }),
         ];
     }

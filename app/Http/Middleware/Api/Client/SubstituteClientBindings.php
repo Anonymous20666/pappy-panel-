@@ -3,13 +3,15 @@
 namespace App\Http\Middleware\Api\Client;
 
 use App\Models\Server;
-use Illuminate\Support\Str;
+use App\Models\Subuser;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Support\Str;
 
 class SubstituteClientBindings extends SubstituteBindings
 {
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      */
     public function handle($request, \Closure $next): mixed
     {
@@ -26,7 +28,7 @@ class SubstituteClientBindings extends SubstituteBindings
         });
 
         $this->router->bind('user', function ($value, $route) {
-            /** @var \App\Models\Subuser $match */
+            /** @var Subuser $match */
             $match = $route->parameter('server')
                 ->subusers()
                 ->whereRelation('user', 'uuid', '=', $value)

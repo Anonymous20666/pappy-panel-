@@ -3,15 +3,15 @@
 namespace App\Services\Activity;
 
 use App\Models\ActivityLog;
-use Illuminate\Support\Arr;
-use Webmozart\Assert\Assert;
 use App\Models\ActivityLogSubject;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Database\ConnectionInterface;
-use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Webmozart\Assert\Assert;
 
 class ActivityLogService
 {
@@ -24,8 +24,7 @@ class ActivityLogService
         protected ActivityLogBatchService $batch,
         protected ActivityLogTargetableService $targetable,
         protected ConnectionInterface $connection,
-    ) {
-    }
+    ) {}
 
     /**
      * Sets the activity logger as having been caused by an anonymous
@@ -65,7 +64,7 @@ class ActivityLogService
      *
      * @template T extends \Illuminate\Database\Eloquent\Model|\Illuminate\Contracts\Auth\Authenticatable
      *
-     * @param T|T[]|null $subjects
+     * @param  T|T[]|null  $subjects
      */
     public function subject(...$subjects): self
     {
@@ -101,7 +100,7 @@ class ActivityLogService
     /**
      * Sets a custom property on the activity log instance.
      *
-     * @param string|array $key
+     * @param  string|array  $key
      */
     public function property($key, $value = null): self
     {
@@ -134,7 +133,7 @@ class ActivityLogService
     {
         $activity = $this->getActivity();
 
-        if (!is_null($description)) {
+        if (! is_null($description)) {
             $activity->description = $description;
         }
 
@@ -166,7 +165,7 @@ class ActivityLogService
      * and will only save the activity log entry if everything else successfully
      * settles.
      *
-     * @param \Closure($this): mixed $callback
+     * @param  \Closure($this): mixed  $callback
      *
      * @throws \Throwable
      */

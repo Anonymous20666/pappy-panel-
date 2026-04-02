@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources\Locations\RelationManagers;
 
+use App\Filament\Resources\Nodes\NodeResource;
 use App\Models\Node;
-use Filament\Tables;
-use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use App\Filament\Resources\Nodes\NodeResource;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Table;
 
 class NodesRelationManager extends RelationManager
 {
@@ -102,7 +102,7 @@ class NodesRelationManager extends RelationManager
                 Action::make('allocations')
                     ->label(trans('admin/node.allocations.label'))
                     ->icon('heroicon-o-server-stack')
-                    ->url(fn (Node $record): string => NodeResource::getUrl('edit', ['record' => $record]) . '?activeRelationManager=0')
+                    ->url(fn (Node $record): string => NodeResource::getUrl('edit', ['record' => $record]).'?activeRelationManager=0')
                     ->color('info')
                     ->visible(fn (Node $record): bool => $record->allocations_count > 0),
             ])

@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware\Api;
 
+use App\Facades\Activity;
+use App\Models\ApiKey;
+use Illuminate\Http\Request;
 use IPTools\IP;
 use IPTools\Range;
-use App\Facades\Activity;
-use Illuminate\Http\Request;
 use Laravel\Sanctum\TransientToken;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -19,7 +20,7 @@ class AuthenticateIPAccess
      */
     public function handle(Request $request, \Closure $next): mixed
     {
-        /** @var TransientToken|\App\Models\ApiKey $token */
+        /** @var TransientToken|ApiKey $token */
         $token = $request->user()->currentAccessToken();
 
         // If this is a stateful request just push the request through to the next
@@ -43,6 +44,6 @@ class AuthenticateIPAccess
             ->property('identifier', $token->identifier)
             ->log();
 
-        throw new AccessDeniedHttpException('This IP address (' . $request->ip() . ') does not have permission to access the API using these credentials.');
+        throw new AccessDeniedHttpException('This IP address ('.$request->ip().') does not have permission to access the API using these credentials.');
     }
 }

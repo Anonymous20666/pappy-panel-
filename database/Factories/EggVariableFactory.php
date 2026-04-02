@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\EggVariable;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class EggVariableFactory extends Factory
 {

@@ -15,7 +15,7 @@ class UpCommand extends BaseUpCommand
      */
     public function handle(): int
     {
-        if (!$this->hasCompletedMigrations()) {
+        if (! $this->hasCompletedMigrations()) {
             $this->showMigrationWarning();
 
             return 1;

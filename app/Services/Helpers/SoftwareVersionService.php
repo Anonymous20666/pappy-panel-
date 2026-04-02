@@ -2,11 +2,11 @@
 
 namespace App\Services\Helpers;
 
-use GuzzleHttp\Client;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Arr;
-use Illuminate\Contracts\Cache\Repository as CacheRepository;
 use App\Exceptions\Service\Helper\CdnVersionFetchingException;
+use Carbon\CarbonImmutable;
+use GuzzleHttp\Client;
+use Illuminate\Contracts\Cache\Repository as CacheRepository;
+use Illuminate\Support\Arr;
 
 class SoftwareVersionService
 {

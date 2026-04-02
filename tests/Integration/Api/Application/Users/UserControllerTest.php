@@ -3,11 +3,12 @@
 namespace Tests\Integration\Api\Application\Users;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Response;
 use App\Services\Acl\Api\AdminAcl;
-use App\Transformers\Api\Application\UserTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
+use App\Transformers\Api\Application\UserTransformer;
+use Illuminate\Http\Response;
+use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class UserControllerTest extends ApplicationApiIntegrationTestCase
@@ -15,7 +16,7 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test the response when requesting all users on the panel.
      */
-    public function testGetUsers()
+    public function test_get_users()
     {
         $user = User::factory()->create();
 
@@ -84,11 +85,11 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test getting a single user.
      */
-    public function testGetSingleUser()
+    public function test_get_single_user()
     {
         $user = User::factory()->create();
 
-        $response = $this->getJson('/api/application/users/' . $user->id);
+        $response = $this->getJson('/api/application/users/'.$user->id);
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2);
         $response->assertJsonStructure([
@@ -118,12 +119,12 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that the correct relationships can be loaded.
      */
-    public function testRelationshipsCanBeLoaded()
+    public function test_relationships_can_be_loaded()
     {
         $user = User::factory()->create();
         $server = $this->createServerModel(['user_id' => $user->id]);
 
-        $response = $this->getJson('/api/application/users/' . $user->id . '?include=servers');
+        $response = $this->getJson('/api/application/users/'.$user->id.'?include=servers');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2);
         $response->assertJsonStructure([
@@ -149,14 +150,14 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
      * Test that attempting to load a relationship that the key does not have permission
      * for returns a null object.
      */
-    public function testKeyWithoutPermissionCannotLoadRelationship()
+    public function test_key_without_permission_cannot_load_relationship()
     {
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_servers' => 0]);
 
         $user = User::factory()->create();
         $this->createServerModel(['user_id' => $user->id]);
 
-        $response = $this->getJson('/api/application/users/' . $user->id . '?include=servers');
+        $response = $this->getJson('/api/application/users/'.$user->id.'?include=servers');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2)->assertJsonCount(1, 'attributes.relationships');
         $response->assertJsonStructure([
@@ -183,7 +184,7 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that an invalid external ID returns a 404 error.
      */
-    public function testGetMissingUser()
+    public function test_get_missing_user()
     {
         $response = $this->getJson('/api/application/users/nil');
         $this->assertNotFoundJson($response);
@@ -193,19 +194,19 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
      * Test that an authentication error occurs if a key does not have permission
      * to access a resource.
      */
-    public function testErrorReturnedIfNoPermission()
+    public function test_error_returned_if_no_permission()
     {
         $user = User::factory()->create();
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_users' => 0]);
 
-        $response = $this->getJson('/api/application/users/' . $user->id);
+        $response = $this->getJson('/api/application/users/'.$user->id);
         $this->assertAccessDeniedJson($response);
     }
 
     /**
      * Test that a user can be created.
      */
-    public function testCreateUser()
+    public function test_create_user()
     {
         $response = $this->postJson('/api/application/users', [
             'username' => 'testuser',
@@ -237,11 +238,11 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a user can be updated.
      */
-    public function testUpdateUser()
+    public function test_update_user()
     {
         $user = User::factory()->create();
 
-        $response = $this->patchJson('/api/application/users/' . $user->id, [
+        $response = $this->patchJson('/api/application/users/'.$user->id, [
             'username' => 'new.test.name',
             'email' => 'new@emailtest.com',
             'first_name' => $user->name_first,
@@ -266,12 +267,12 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a user can be deleted from the database.
      */
-    public function testDeleteUser()
+    public function test_delete_user()
     {
         $user = User::factory()->create();
         $this->assertDatabaseHas('users', ['id' => $user->id]);
 
-        $response = $this->delete('/api/application/users/' . $user->id);
+        $response = $this->delete('/api/application/users/'.$user->id);
         $response->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
@@ -281,8 +282,8 @@ class UserControllerTest extends ApplicationApiIntegrationTestCase
      * Test that an API key without write permissions cannot create, update, or
      * delete a user model.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('userWriteEndpointsDataProvider')]
-    public function testApiKeyWithoutWritePermissions(string $method, string $url)
+    #[DataProvider('userWriteEndpointsDataProvider')]
+    public function test_api_key_without_write_permissions(string $method, string $url)
     {
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_users' => AdminAcl::READ]);
 

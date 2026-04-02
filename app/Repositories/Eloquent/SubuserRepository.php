@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Subuser;
-use App\Exceptions\Repository\RecordNotFoundException;
 use App\Contracts\Repository\SubuserRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Subuser;
 
 class SubuserRepository extends EloquentRepository implements SubuserRepositoryInterface
 {
@@ -21,11 +21,11 @@ class SubuserRepository extends EloquentRepository implements SubuserRepositoryI
      */
     public function loadServerAndUserRelations(Subuser $subuser, bool $refresh = false): Subuser
     {
-        if (!$subuser->relationLoaded('server') || $refresh) {
+        if (! $subuser->relationLoaded('server') || $refresh) {
             $subuser->load('server');
         }
 
-        if (!$subuser->relationLoaded('user') || $refresh) {
+        if (! $subuser->relationLoaded('user') || $refresh) {
             $subuser->load('user');
         }
 
@@ -37,11 +37,11 @@ class SubuserRepository extends EloquentRepository implements SubuserRepositoryI
      */
     public function getWithPermissions(Subuser $subuser, bool $refresh = false): Subuser
     {
-        if (!$subuser->relationLoaded('permissions') || $refresh) {
+        if (! $subuser->relationLoaded('permissions') || $refresh) {
             $subuser->load('permissions');
         }
 
-        if (!$subuser->relationLoaded('user') || $refresh) {
+        if (! $subuser->relationLoaded('user') || $refresh) {
             $subuser->load('user');
         }
 

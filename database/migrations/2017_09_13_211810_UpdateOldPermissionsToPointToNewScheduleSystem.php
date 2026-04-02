@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,11 +14,11 @@ return new class extends Migration {
         $permissions = DB::table('permissions')->where('permission', 'like', '%-task%')->get();
         foreach ($permissions as $record) {
             $parts = explode('-', $record->permission);
-            if (!in_array(array_get($parts, 1), ['tasks', 'task']) || count($parts) !== 2) {
+            if (! in_array(array_get($parts, 1), ['tasks', 'task']) || count($parts) !== 2) {
                 continue;
             }
 
-            $newPermission = $parts[0] . '-' . Str::replace('task', 'schedule', $parts[1]);
+            $newPermission = $parts[0].'-'.Str::replace('task', 'schedule', $parts[1]);
 
             DB::table('permissions')->where('id', '=', $record->id)->update(['permission' => $newPermission]);
         }
@@ -31,11 +32,11 @@ return new class extends Migration {
         $permissions = DB::table('permissions')->where('permission', 'like', '%-schedule%')->get();
         foreach ($permissions as $record) {
             $parts = explode('-', $record->permission);
-            if (!in_array(array_get($parts, 1), ['schedules', 'schedule']) || count($parts) !== 2) {
+            if (! in_array(array_get($parts, 1), ['schedules', 'schedule']) || count($parts) !== 2) {
                 continue;
             }
 
-            $newPermission = $parts[0] . '-' . Str::replace('schedule', 'task', $parts[1]);
+            $newPermission = $parts[0].'-'.Str::replace('schedule', 'task', $parts[1]);
 
             DB::table('permissions')->where('id', '=', $record->id)->update(['permission' => $newPermission]);
         }

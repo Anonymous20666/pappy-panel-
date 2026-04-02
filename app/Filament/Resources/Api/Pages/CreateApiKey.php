@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\Api\Pages;
 
+use App\Filament\Resources\Api\ApiKeyResource;
 use App\Models\ApiKey;
 use App\Services\Acl\Api\AdminAcl;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Database\Eloquent\Model;
 use App\Services\Api\KeyCreationService;
 use Filament\Resources\Pages\CreateRecord;
-use App\Filament\Resources\Api\ApiKeyResource;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class CreateApiKey extends CreateRecord
 {
@@ -21,7 +21,7 @@ class CreateApiKey extends CreateRecord
         $permissions = [];
 
         foreach (AdminAcl::getResourceList() as $resource) {
-            $key = AdminAcl::COLUMN_IDENTIFIER . $resource;
+            $key = AdminAcl::COLUMN_IDENTIFIER.$resource;
 
             if (array_key_exists($key, $data)) {
                 $permissions[$key] = (int) $data[$key];

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Carbon;
 
 /**
  * @property int $id
@@ -16,8 +17,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @property string|null $api_version
  * @property string|null $target_version
  * @property bool $enabled
- * @property \Illuminate\Support\Carbon|null $installed_at
- * @property \Illuminate\Support\Carbon|null $extension_updated_at
+ * @property Carbon|null $installed_at
+ * @property Carbon|null $extension_updated_at
  * @property string $install_path
  * @property array<string, mixed>|null $manifest
  */
@@ -59,7 +60,7 @@ class Extension extends Model
     {
         $identifier = (string) ($this->attributes['identifier'] ?? '');
 
-        return base_path('extensions/' . $identifier);
+        return base_path('extensions/'.$identifier);
     }
 
     public function scopeEnabled(Builder $query): Builder

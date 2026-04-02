@@ -3,8 +3,8 @@
 namespace App\Console\Commands\Extensions;
 
 use App\Models\Extension;
-use Illuminate\Console\Command;
 use App\Services\Extensions\ExtensionManager;
+use Illuminate\Console\Command;
 
 class RepairCommand extends Command
 {

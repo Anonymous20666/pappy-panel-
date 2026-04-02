@@ -3,9 +3,9 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class SendPasswordReset extends Notification implements ShouldQueue
 {
@@ -14,9 +14,7 @@ class SendPasswordReset extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(public string $token)
-    {
-    }
+    public function __construct(public string $token) {}
 
     /**
      * Get the notification's delivery channels.
@@ -34,7 +32,7 @@ class SendPasswordReset extends Notification implements ShouldQueue
         return (new MailMessage())
             ->subject('Reset Password')
             ->line('You are receiving this email because we received a password reset request for your account.')
-            ->action('Reset Password', url('/auth/password/reset/' . $this->token . '?email=' . urlencode($notifiable->email)))
+            ->action('Reset Password', url('/auth/password/reset/'.$this->token.'?email='.urlencode($notifiable->email)))
             ->line('If you did not request a password reset, no further action is required.');
     }
 }

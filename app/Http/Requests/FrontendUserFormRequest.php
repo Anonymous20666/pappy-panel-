@@ -13,7 +13,7 @@ abstract class FrontendUserFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return !is_null($this->user());
+        return ! is_null($this->user());
     }
 
     /**

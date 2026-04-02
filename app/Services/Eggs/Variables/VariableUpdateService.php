@@ -2,13 +2,15 @@
 
 namespace App\Services\Eggs\Variables;
 
-use App\Models\EggVariable;
-use Illuminate\Support\Str;
-use App\Exceptions\DisplayException;
-use App\Traits\Services\ValidatesValidationRules;
 use App\Contracts\Repository\EggVariableRepositoryInterface;
-use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Exceptions\Service\Egg\Variable\ReservedVariableNameException;
+use App\Models\EggVariable;
+use App\Traits\Services\ValidatesValidationRules;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Support\Str;
 
 class VariableUpdateService
 {
@@ -17,9 +19,7 @@ class VariableUpdateService
     /**
      * VariableUpdateService constructor.
      */
-    public function __construct(private EggVariableRepositoryInterface $repository, private ValidationFactory $validator)
-    {
-    }
+    public function __construct(private EggVariableRepositoryInterface $repository, private ValidationFactory $validator) {}
 
     /**
      * Return the validation factory instance to be used by rule validation
@@ -34,13 +34,13 @@ class VariableUpdateService
      * Update a specific egg variable.
      *
      * @throws DisplayException
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      * @throws ReservedVariableNameException
      */
     public function handle(EggVariable $variable, array $data): mixed
     {
-        if (!is_null(array_get($data, 'env_variable'))) {
+        if (! is_null(array_get($data, 'env_variable'))) {
             if (in_array(strtoupper(array_get($data, 'env_variable')), explode(',', EggVariable::RESERVED_ENV_NAMES))) {
                 throw new ReservedVariableNameException(trans('exceptions.service.variables.reserved_name', ['name' => array_get($data, 'env_variable')]));
             }
@@ -56,7 +56,7 @@ class VariableUpdateService
             }
         }
 
-        if (!empty($data['rules'] ?? '')) {
+        if (! empty($data['rules'] ?? '')) {
             $this->validateRules(
                 (is_string($data['rules']) && Str::contains($data['rules'], ';;'))
                     ? explode(';;', $data['rules'])

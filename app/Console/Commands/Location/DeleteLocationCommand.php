@@ -2,10 +2,12 @@
 
 namespace App\Console\Commands\Location;
 
+use App\Contracts\Repository\LocationRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Location\HasActiveNodesException;
+use App\Services\Locations\LocationDeletionService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use App\Services\Locations\LocationDeletionService;
-use App\Contracts\Repository\LocationRepositoryInterface;
 
 class DeleteLocationCommand extends Command
 {
@@ -28,8 +30,8 @@ class DeleteLocationCommand extends Command
     /**
      * Respond to the command request.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
-     * @throws \App\Exceptions\Service\Location\HasActiveNodesException
+     * @throws RecordNotFoundException
+     * @throws HasActiveNodesException
      */
     public function handle()
     {

@@ -2,25 +2,25 @@
 
 namespace App\Services\Databases;
 
-use App\Models\Server;
+use App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
+use App\Exceptions\Service\Database\NoSuitableDatabaseHostException;
+use App\Exceptions\Service\Database\TooManyDatabasesException;
 use App\Models\Database;
 use App\Models\DatabaseHost;
+use App\Models\Server;
 use Webmozart\Assert\Assert;
-use App\Exceptions\Service\Database\NoSuitableDatabaseHostException;
 
 class DeployServerDatabaseService
 {
     /**
      * DeployServerDatabaseService constructor.
      */
-    public function __construct(private DatabaseManagementService $managementService)
-    {
-    }
+    public function __construct(private DatabaseManagementService $managementService) {}
 
     /**
      * @throws \Throwable
-     * @throws \App\Exceptions\Service\Database\TooManyDatabasesException
-     * @throws \App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException
+     * @throws TooManyDatabasesException
+     * @throws DatabaseClientFeatureNotEnabledException
      */
     public function handle(Server $server, array $data): Database
     {
@@ -33,7 +33,7 @@ class DeployServerDatabaseService
         } else {
             $nodeHosts = $hosts->where('node_id', $server->node_id)->toBase();
 
-            if ($nodeHosts->isEmpty() && !config('panel.client_features.databases.allow_random')) {
+            if ($nodeHosts->isEmpty() && ! config('panel.client_features.databases.allow_random')) {
                 throw new NoSuitableDatabaseHostException();
             }
         }

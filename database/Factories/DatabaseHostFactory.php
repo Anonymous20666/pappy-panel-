@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\DatabaseHost;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Crypt;
 
 class DatabaseHostFactory extends Factory
 {

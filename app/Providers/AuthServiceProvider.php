@@ -4,9 +4,9 @@ namespace App\Providers;
 
 use App\Models\ApiKey;
 use App\Models\Server;
-use Laravel\Sanctum\Sanctum;
 use App\Policies\ServerPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Sanctum\Sanctum;
 
 class AuthServiceProvider extends ServiceProvider
 {

@@ -2,13 +2,13 @@
 
 namespace App\Services\Servers;
 
-use App\Models\Server;
-use Illuminate\Support\Arr;
-use Illuminate\Database\ConnectionInterface;
-use App\Traits\Services\ReturnsUpdatedModels;
-use App\Repositories\Wings\DaemonServerRepository;
-use App\Repositories\Wings\DaemonRevocationRepository;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonRevocationRepository;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Traits\Services\ReturnsUpdatedModels;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Arr;
 
 class DetailsModificationService
 {
@@ -21,8 +21,7 @@ class DetailsModificationService
         private ConnectionInterface $connection,
         private DaemonServerRepository $serverRepository,
         private DaemonRevocationRepository $revocationRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Update the details for a single server instance.

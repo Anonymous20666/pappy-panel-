@@ -207,7 +207,7 @@ return [
             'failed' => 'Allocation action failed.',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => 'El FQDN o dirección IP proporcionada no resuelve a una dirección IP válida.',
         'fqdn_required_for_ssl' => 'Se requiere un nombre de dominio completamente cualificado que resuelva a una dirección IP pública para usar SSL en este nodo.',

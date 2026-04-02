@@ -3,8 +3,8 @@
 namespace Tests\Integration\Api\Application\Users;
 
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Http\Response;
+use Illuminate\Support\Str;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class ExternalUserControllerTest extends ApplicationApiIntegrationTestCase
@@ -12,11 +12,11 @@ class ExternalUserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a user can be retrieved by their external ID.
      */
-    public function testGetRemoteUser()
+    public function test_get_remote_user()
     {
         $user = User::factory()->create(['external_id' => Str::random()]);
 
-        $response = $this->getJson('/api/application/users/external/' . $user->external_id);
+        $response = $this->getJson('/api/application/users/external/'.$user->external_id);
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2);
         $response->assertJsonStructure([
@@ -49,7 +49,7 @@ class ExternalUserControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that an invalid external ID returns a 404 error.
      */
-    public function testGetMissingUser()
+    public function test_get_missing_user()
     {
         $response = $this->getJson('/api/application/users/external/nil');
         $this->assertNotFoundJson($response);
@@ -59,12 +59,12 @@ class ExternalUserControllerTest extends ApplicationApiIntegrationTestCase
      * Test that an authentication error occurs if a key does not have permission
      * to access a resource.
      */
-    public function testErrorReturnedIfNoPermission()
+    public function test_error_returned_if_no_permission()
     {
         $user = User::factory()->create(['external_id' => Str::random()]);
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_users' => 0]);
 
-        $response = $this->getJson('/api/application/users/external/' . $user->external_id);
+        $response = $this->getJson('/api/application/users/external/'.$user->external_id);
         $this->assertAccessDeniedJson($response);
     }
 }

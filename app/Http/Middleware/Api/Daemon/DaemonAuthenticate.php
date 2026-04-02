@@ -2,13 +2,14 @@
 
 namespace App\Http\Middleware\Api\Daemon;
 
-use Illuminate\Http\Request;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Node;
 use App\Repositories\Eloquent\NodeRepository;
 use Illuminate\Contracts\Encryption\Encrypter;
-use App\Exceptions\Repository\RecordNotFoundException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class DaemonAuthenticate
 {
@@ -22,9 +23,7 @@ class DaemonAuthenticate
     /**
      * DaemonAuthenticate constructor.
      */
-    public function __construct(private Encrypter $encrypter, private NodeRepository $repository)
-    {
-    }
+    public function __construct(private Encrypter $encrypter, private NodeRepository $repository) {}
 
     /**
      * Check if a request from the daemon can be properly attributed back to a single node instance.
@@ -48,7 +47,7 @@ class DaemonAuthenticate
         }
 
         try {
-            /** @var \App\Models\Node $node */
+            /** @var Node $node */
             $node = $this->repository->findFirstWhere([
                 'daemon_token_id' => $parts[0],
             ]);

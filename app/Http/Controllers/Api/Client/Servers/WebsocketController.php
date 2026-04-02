@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
-use App\Models\Permission;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Str;
-use Illuminate\Http\JsonResponse;
-use App\Services\Nodes\NodeJWTService;
 use App\Exceptions\Http\HttpForbiddenException;
-use App\Http\Requests\Api\Client\ClientApiRequest;
-use App\Services\Servers\GetUserPermissionsService;
 use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Services\Nodes\NodeJWTService;
+use App\Services\Servers\GetUserPermissionsService;
+use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 class WebsocketController extends ClientApiController
 {
@@ -41,9 +41,9 @@ class WebsocketController extends ClientApiController
         $permissions = $this->permissionsService->handle($server, $user);
 
         $node = $server->node;
-        if (!is_null($server->transfer)) {
+        if (! is_null($server->transfer)) {
             // Check if the user has permissions to receive transfer logs.
-            if (!in_array('admin.websocket.transfer', $permissions)) {
+            if (! in_array('admin.websocket.transfer', $permissions)) {
                 throw new HttpForbiddenException('You do not have permission to view server transfer logs.');
             }
 
@@ -60,14 +60,14 @@ class WebsocketController extends ClientApiController
                 'server_uuid' => $server->uuid,
                 'permissions' => $permissions,
             ])
-            ->handle($node, $user->id . $server->uuid);
+            ->handle($node, $user->id.$server->uuid);
 
         $socket = Str::replace(['https://', 'http://'], ['wss://', 'ws://'], $node->getConnectionAddress());
 
         return new JsonResponse([
             'data' => [
                 'token' => $token->toString(),
-                'socket' => $socket . sprintf('/api/servers/%s/ws', $server->uuid),
+                'socket' => $socket.sprintf('/api/servers/%s/ws', $server->uuid),
             ],
         ]);
     }

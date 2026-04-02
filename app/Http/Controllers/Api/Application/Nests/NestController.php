@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Application\Nests;
 
-use App\Models\Nest;
 use App\Contracts\Repository\NestRepositoryInterface;
-use App\Transformers\Api\Application\NestTransformer;
-use App\Http\Requests\Api\Application\Nests\GetNestsRequest;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Nests\GetNestsRequest;
+use App\Models\Nest;
+use App\Transformers\Api\Application\NestTransformer;
 
 class NestController extends ApplicationApiController
 {

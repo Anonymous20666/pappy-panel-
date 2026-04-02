@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -16,8 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array|null $new_additional_allocations
  * @property bool|null $successful
  * @property bool $archived
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property Server $server
  * @property Node $oldNode
  * @property Node $newNode
@@ -71,7 +72,7 @@ class ServerTransfer extends Model
     /**
      * Gets the server associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {
@@ -81,7 +82,7 @@ class ServerTransfer extends Model
     /**
      * Gets the source node associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Node, $this>
+     * @return HasOne<Node, $this>
      */
     public function oldNode(): HasOne
     {
@@ -91,7 +92,7 @@ class ServerTransfer extends Model
     /**
      * Gets the target node associated with a server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Node, $this>
+     * @return HasOne<Node, $this>
      */
     public function newNode(): HasOne
     {

@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Api\Client;
 
 use App\Facades\Activity;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Auth\AuthManager;
-use Illuminate\Http\JsonResponse;
-use App\Services\Users\UserUpdateService;
-use App\Transformers\Api\Client\AccountTransformer;
 use App\Http\Requests\Api\Client\Account\UpdateEmailRequest;
 use App\Http\Requests\Api\Client\Account\UpdatePasswordRequest;
+use App\Services\Users\UserUpdateService;
+use App\Transformers\Api\Client\AccountTransformer;
+use Illuminate\Auth\AuthManager;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class AccountController extends ClientApiController
 {

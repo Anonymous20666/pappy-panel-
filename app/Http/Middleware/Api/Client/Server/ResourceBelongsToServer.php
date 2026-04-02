@@ -2,16 +2,16 @@
 
 namespace App\Http\Middleware\Api\Client\Server;
 
-use App\Models\Task;
-use App\Models\User;
+use App\Models\Allocation;
 use App\Models\Backup;
-use App\Models\Server;
-use App\Models\Subuser;
 use App\Models\Database;
 use App\Models\Schedule;
-use App\Models\Allocation;
-use Illuminate\Http\Request;
+use App\Models\Server;
+use App\Models\Subuser;
+use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResourceBelongsToServer
@@ -27,7 +27,7 @@ class ResourceBelongsToServer
     public function handle(Request $request, \Closure $next): mixed
     {
         $params = $request->route()->parameters();
-        if (! isset($params['server']) || !$params['server'] instanceof Server) {
+        if (! isset($params['server']) || ! $params['server'] instanceof Server) {
             throw new \InvalidArgumentException('This middleware cannot be used in a context that is missing a server in the parameters.');
         }
 
@@ -39,7 +39,7 @@ class ResourceBelongsToServer
             // other resources are assigned to this server. Also skip anything that
             // is not currently a Model instance since those will just end up being
             // a 404 down the road.
-            if ($key === 'server' || !$model instanceof Model) {
+            if ($key === 'server' || ! $model instanceof Model) {
                 continue;
             }
 
@@ -70,14 +70,14 @@ class ResourceBelongsToServer
                     // that requires something in addition to the server in order to be accessed.
                 case Task::class:
                     $schedule = $request->route()->parameter('schedule');
-                    if (!$schedule instanceof Schedule || $model->schedule_id !== $schedule->id || $schedule->server_id !== $server->id) {
+                    if (! $schedule instanceof Schedule || $model->schedule_id !== $schedule->id || $schedule->server_id !== $server->id) {
                         throw $exception;
                     }
                     break;
                 default:
                     // Don't return a 404 here since we want to make sure no one relies
                     // on this middleware in a context in which it will not work. Fail safe.
-                    throw new \InvalidArgumentException('There is no handler configured for a resource of this type: ' . get_class($model));
+                    throw new \InvalidArgumentException('There is no handler configured for a resource of this type: '.get_class($model));
             }
         }
 

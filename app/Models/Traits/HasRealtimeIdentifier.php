@@ -2,13 +2,14 @@
 
 namespace App\Models\Traits;
 
-use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use ParagonIE\ConstantTime\Base32;
 use App\Models\Attributes\Identifiable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+use ParagonIE\ConstantTime\Base32;
+use Ramsey\Uuid\Uuid;
+use Webmozart\Assert\Assert;
 
 /**
  * Support realtime identifiers on models that do not track an "identifier" column in
@@ -20,7 +21,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  *
  * @method static Builder whereIdentifier(string $identifier)
  *
- * @mixin \Illuminate\Database\Eloquent\Model
+ * @mixin Model
  */
 trait HasRealtimeIdentifier
 {
@@ -39,7 +40,7 @@ trait HasRealtimeIdentifier
 
     public function scopeWhereIdentifier(Builder $builder, string $identifier): void
     {
-        if (!Str::startsWith($identifier, $prefix = self::$identifierPrefix . '_')) {
+        if (! Str::startsWith($identifier, $prefix = self::$identifierPrefix.'_')) {
             $builder->whereRaw('0 = 1');
 
             return;
@@ -62,7 +63,7 @@ trait HasRealtimeIdentifier
         Assert::count(
             $attrs,
             1,
-            'The #[' . Identifiable::class . '] attribute must be set on ' . static::class . ' to use realtime identifiers.'
+            'The #['.Identifiable::class.'] attribute must be set on '.static::class.' to use realtime identifiers.'
         );
 
         $instance = $attrs[0]->newInstance();

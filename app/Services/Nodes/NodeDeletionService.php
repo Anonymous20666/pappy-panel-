@@ -2,11 +2,11 @@
 
 namespace App\Services\Nodes;
 
+use App\Contracts\Repository\NodeRepositoryInterface;
+use App\Contracts\Repository\ServerRepositoryInterface;
+use App\Exceptions\Service\HasActiveServersException;
 use App\Models\Node;
 use Illuminate\Contracts\Translation\Translator;
-use App\Contracts\Repository\NodeRepositoryInterface;
-use App\Exceptions\Service\HasActiveServersException;
-use App\Contracts\Repository\ServerRepositoryInterface;
 
 class NodeDeletionService
 {
@@ -17,8 +17,7 @@ class NodeDeletionService
         protected NodeRepositoryInterface $repository,
         protected ServerRepositoryInterface $serverRepository,
         protected Translator $translator,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete a node from the panel if no servers are attached to it.

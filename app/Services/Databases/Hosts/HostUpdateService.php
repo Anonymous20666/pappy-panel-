@@ -2,12 +2,12 @@
 
 namespace App\Services\Databases\Hosts;
 
-use App\Models\DatabaseHost;
-use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\ConnectionInterface;
-use App\Extensions\DynamicDatabaseConnection;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\DatabaseHostRepositoryInterface;
+use App\Extensions\DynamicDatabaseConnection;
+use App\Models\DatabaseHost;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\DatabaseManager;
 
 class HostUpdateService
 {
@@ -20,8 +20,7 @@ class HostUpdateService
         private DynamicDatabaseConnection $dynamic,
         private Encrypter $encrypter,
         private DatabaseHostRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Update a database host and persist to the database.
@@ -30,7 +29,7 @@ class HostUpdateService
      */
     public function handle(int $hostId, array $data): DatabaseHost
     {
-        if (!empty(array_get($data, 'password'))) {
+        if (! empty(array_get($data, 'password'))) {
             $data['password'] = $this->encrypter->encrypt($data['password']);
         } else {
             unset($data['password']);

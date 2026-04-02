@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Facades\Activity;
-use Carbon\CarbonImmutable;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Services\Nodes\NodeJWTService;
-use App\Repositories\Wings\DaemonFileRepository;
-use App\Transformers\Api\Client\FileObjectTransformer;
 use App\Http\Controllers\Api\Client\ClientApiController;
-use App\Http\Requests\Api\Client\Servers\Files\CopyFileRequest;
-use App\Http\Requests\Api\Client\Servers\Files\PullFileRequest;
-use App\Http\Requests\Api\Client\Servers\Files\ListFilesRequest;
 use App\Http\Requests\Api\Client\Servers\Files\ChmodFilesRequest;
-use App\Http\Requests\Api\Client\Servers\Files\DeleteFileRequest;
-use App\Http\Requests\Api\Client\Servers\Files\RenameFileRequest;
-use App\Http\Requests\Api\Client\Servers\Files\CreateFolderRequest;
 use App\Http\Requests\Api\Client\Servers\Files\CompressFilesRequest;
+use App\Http\Requests\Api\Client\Servers\Files\CopyFileRequest;
+use App\Http\Requests\Api\Client\Servers\Files\CreateFolderRequest;
 use App\Http\Requests\Api\Client\Servers\Files\DecompressFilesRequest;
+use App\Http\Requests\Api\Client\Servers\Files\DeleteFileRequest;
 use App\Http\Requests\Api\Client\Servers\Files\GetFileContentsRequest;
+use App\Http\Requests\Api\Client\Servers\Files\ListFilesRequest;
+use App\Http\Requests\Api\Client\Servers\Files\PullFileRequest;
+use App\Http\Requests\Api\Client\Servers\Files\RenameFileRequest;
 use App\Http\Requests\Api\Client\Servers\Files\WriteFileContentRequest;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonFileRepository;
+use App\Services\Nodes\NodeJWTService;
+use App\Transformers\Api\Client\FileObjectTransformer;
+use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 class FileController extends ClientApiController
 {
@@ -38,7 +39,7 @@ class FileController extends ClientApiController
     /**
      * Returns a listing of files in a given directory.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function directory(ListFilesRequest $request, Server $server): array
     {
@@ -83,7 +84,7 @@ class FileController extends ClientApiController
                 'file_path' => rawurldecode($request->get('file')),
                 'server_uuid' => $server->uuid,
             ])
-            ->handle($server->node, $request->user()->id . $server->uuid);
+            ->handle($server->node, $request->user()->id.$server->uuid);
 
         Activity::event('server:file.download')->property('file', $request->get('file'))->log();
 
@@ -102,7 +103,7 @@ class FileController extends ClientApiController
     /**
      * Writes the contents of the specified file to the server.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function write(WriteFileContentRequest $request, Server $server): JsonResponse
     {
@@ -154,7 +155,7 @@ class FileController extends ClientApiController
     /**
      * Copies a file on the server.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function copy(CopyFileRequest $request, Server $server): JsonResponse
     {
@@ -168,7 +169,7 @@ class FileController extends ClientApiController
     }
 
     /**
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function compress(CompressFilesRequest $request, Server $server): array
     {
@@ -188,7 +189,7 @@ class FileController extends ClientApiController
     }
 
     /**
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function decompress(DecompressFilesRequest $request, Server $server): JsonResponse
     {
@@ -210,7 +211,7 @@ class FileController extends ClientApiController
     /**
      * Deletes files or folders for the server in the given root directory.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function delete(DeleteFileRequest $request, Server $server): JsonResponse
     {
@@ -230,7 +231,7 @@ class FileController extends ClientApiController
     /**
      * Updates file permissions for file(s) in the given root directory.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function chmod(ChmodFilesRequest $request, Server $server): JsonResponse
     {

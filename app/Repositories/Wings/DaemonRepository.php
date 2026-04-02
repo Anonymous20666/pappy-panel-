@@ -5,8 +5,8 @@ namespace App\Repositories\Wings;
 use App\Models\Node;
 use App\Models\Server;
 use GuzzleHttp\Client;
-use Webmozart\Assert\Assert;
 use Illuminate\Contracts\Foundation\Application;
+use Webmozart\Assert\Assert;
 
 abstract class DaemonRepository
 {
@@ -17,9 +17,7 @@ abstract class DaemonRepository
     /**
      * DaemonRepository constructor.
      */
-    public function __construct(protected Application $app)
-    {
-    }
+    public function __construct(protected Application $app) {}
 
     /**
      * Set the server model this request is stemming from.
@@ -56,7 +54,7 @@ abstract class DaemonRepository
             'timeout' => config('panel.guzzle.timeout'),
             'connect_timeout' => config('panel.guzzle.connect_timeout'),
             'headers' => array_merge($headers, [
-                'Authorization' => 'Bearer ' . $this->node->getDecryptedKey(),
+                'Authorization' => 'Bearer '.$this->node->getDecryptedKey(),
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
             ]),

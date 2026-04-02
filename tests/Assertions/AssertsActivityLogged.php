@@ -2,16 +2,16 @@
 
 namespace Tests\Assertions;
 
-use PHPUnit\Framework\Assert;
 use App\Events\ActivityLogged;
 use App\Models\ActivityLogSubject;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Assert;
 
 trait AssertsActivityLogged
 {
     /**
-     * @param Model|array $subjects
+     * @param  Model|array  $subjects
      */
     public function assertActivityFor(string $event, ?Model $actor, ...$subjects): void
     {
@@ -35,7 +35,7 @@ trait AssertsActivityLogged
     public function assertActivitySubjects(string $event, Model|array $subjects): void
     {
         if (is_array($subjects)) {
-            \Webmozart\Assert\Assert::lessThanEq(count(func_get_args()), 2, 'Invalid call to ' . __METHOD__ . ': cannot provide additional arguments if providing an array.');
+            \Webmozart\Assert\Assert::lessThanEq(count(func_get_args()), 2, 'Invalid call to '.__METHOD__.': cannot provide additional arguments if providing an array.');
         } else {
             $subjects = array_slice(func_get_args(), 1);
         }

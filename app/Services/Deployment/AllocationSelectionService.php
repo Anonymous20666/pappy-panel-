@@ -2,11 +2,11 @@
 
 namespace App\Services\Deployment;
 
-use App\Models\Allocation;
-use App\Exceptions\DisplayException;
-use App\Services\Allocations\AssignmentService;
 use App\Contracts\Repository\AllocationRepositoryInterface;
+use App\Exceptions\DisplayException;
 use App\Exceptions\Service\Deployment\NoViableAllocationException;
+use App\Models\Allocation;
+use App\Services\Allocations\AssignmentService;
 
 class AllocationSelectionService
 {
@@ -19,9 +19,7 @@ class AllocationSelectionService
     /**
      * AllocationSelectionService constructor.
      */
-    public function __construct(private AllocationRepositoryInterface $repository)
-    {
-    }
+    public function __construct(private AllocationRepositoryInterface $repository) {}
 
     /**
      * Toggle if the selected allocation should be the only allocation belonging

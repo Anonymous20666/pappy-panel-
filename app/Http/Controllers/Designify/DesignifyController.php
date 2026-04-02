@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers\Designify;
 
-use Psr\Log\LoggerInterface;
+use App\Contracts\Repository\SettingsRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Providers\DesignifyServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Prologue\Alerts\AlertsMessageBag;
-use App\Providers\DesignifyServiceProvider;
-use App\Contracts\Repository\SettingsRepositoryInterface;
+use Psr\Log\LoggerInterface;
 
 class DesignifyController extends Controller
 {
     public function __construct(
         private AlertsMessageBag $alert,
-    ) {
-    }
+    ) {}
 
     /**
      * Reset Reviactyl theme settings to default.

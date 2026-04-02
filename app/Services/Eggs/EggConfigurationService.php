@@ -3,18 +3,16 @@
 namespace App\Services\Eggs;
 
 use App\Models\Server;
+use App\Services\Servers\ServerConfigurationStructureService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use App\Services\Servers\ServerConfigurationStructureService;
 
 class EggConfigurationService
 {
     /**
      * EggConfigurationService constructor.
      */
-    public function __construct(private ServerConfigurationStructureService $configurationStructureService)
-    {
-    }
+    public function __construct(private ServerConfigurationStructureService $configurationStructureService) {}
 
     /**
      * Return an Egg file to be used by the Daemon.
@@ -56,7 +54,7 @@ class EggConfigurationService
      */
     protected function convertStopToNewFormat(string $stop): array
     {
-        if (!Str::startsWith($stop, '^')) {
+        if (! Str::startsWith($stop, '^')) {
             return [
                 'type' => 'command',
                 'value' => $stop,
@@ -87,7 +85,7 @@ class EggConfigurationService
             // 500 error which would crash the entire Wings boot process.
             //
             // @see https://github.com/pterodactyl/panel/issues/3055
-            if (!is_object($data) || !isset($data->find)) {
+            if (! is_object($data) || ! isset($data->find)) {
                 continue;
             }
 
@@ -161,13 +159,13 @@ class EggConfigurationService
             // value from the server properties.
             //
             // The Daemon supports server.X, env.X, and config.X placeholders.
-            if (!Str::startsWith($key, ['server.', 'env.', 'config.'])) {
+            if (! Str::startsWith($key, ['server.', 'env.', 'config.'])) {
                 continue;
             }
 
             // Don't do a replacement on anything that is not a string, we don't want to unintentionally
             // modify the resulting output.
-            if (!is_string($value)) {
+            if (! is_string($value)) {
                 continue;
             }
 
@@ -186,6 +184,7 @@ class EggConfigurationService
                 $plucked = Arr::get($structure, preg_replace('/^server\./', '', $key), '');
 
                 $value = Str::replace("{{{$key}}}", $plucked, $value);
+
                 continue;
             }
 
@@ -210,7 +209,7 @@ class EggConfigurationService
      */
     private function iterate(mixed $data, array $structure): mixed
     {
-        if (!is_iterable($data) && !is_object($data)) {
+        if (! is_iterable($data) && ! is_object($data)) {
             return $data;
         }
 

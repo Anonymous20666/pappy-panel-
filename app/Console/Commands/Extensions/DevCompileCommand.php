@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands\Extensions;
 
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Process\Process;
 
@@ -60,13 +60,13 @@ class DevCompileCommand extends Command
             return self::FAILURE;
         }
 
-        if (!File::isDirectory($sourcePath)) {
+        if (! File::isDirectory($sourcePath)) {
             $this->error('Source directory does not exist.');
 
             return self::FAILURE;
         }
 
-        if (!File::isFile($sourcePath . '/extension.json')) {
+        if (! File::isFile($sourcePath.'/extension.json')) {
             $this->error('Source directory must contain extension.json.');
 
             return self::FAILURE;
@@ -83,7 +83,7 @@ class DevCompileCommand extends Command
                 }
             });
 
-            if (!$process->isSuccessful()) {
+            if (! $process->isSuccessful()) {
                 $this->error('Frontend build failed.');
 
                 return self::FAILURE;
@@ -106,7 +106,7 @@ class DevCompileCommand extends Command
         $finder = Finder::create()->files()->in($sourcePath);
         foreach ($finder as $file) {
             $absolute = $file->getRealPath();
-            if (!is_string($absolute)) {
+            if (! is_string($absolute)) {
                 continue;
             }
 
@@ -132,7 +132,7 @@ class DevCompileCommand extends Command
             return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 
-        return base_path('extensions/' . $source);
+        return base_path('extensions/'.$source);
     }
 
     private function resolveOutputPath(string $output): string
@@ -153,6 +153,6 @@ class DevCompileCommand extends Command
     {
         $id = basename($sourcePath);
 
-        return base_path($id . '.rext');
+        return base_path($id.'.rext');
     }
 }

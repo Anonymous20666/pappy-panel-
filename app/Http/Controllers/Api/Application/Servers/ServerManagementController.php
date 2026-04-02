@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api\Application\Servers;
 
-use App\Models\Server;
-use Illuminate\Http\Response;
-use App\Services\Servers\SuspensionService;
-use App\Services\Servers\ReinstallServerService;
-use App\Http\Requests\Api\Application\Servers\ServerWriteRequest;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Servers\ServerWriteRequest;
+use App\Models\Server;
+use App\Services\Servers\ReinstallServerService;
+use App\Services\Servers\SuspensionService;
+use Illuminate\Http\Response;
 
 class ServerManagementController extends ApplicationApiController
 {
@@ -48,9 +51,9 @@ class ServerManagementController extends ApplicationApiController
     /**
      * Mark a server as needing to be reinstalled.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DisplayException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function reinstall(ServerWriteRequest $request, Server $server): Response
     {

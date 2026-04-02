@@ -2,9 +2,10 @@
 
 namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use App\Models\Schedule;
 use App\Helpers\Utilities;
 use App\Models\Permission;
+use App\Models\Schedule;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class UpdateServerScheduleTest extends ClientApiIntegrationTestCase
@@ -25,8 +26,8 @@ class UpdateServerScheduleTest extends ClientApiIntegrationTestCase
     /**
      * Test that a schedule can be updated.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testScheduleCanBeUpdated(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_schedule_can_be_updated(array $permissions)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -51,7 +52,7 @@ class UpdateServerScheduleTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the schedule exists but does not belong to this
      * specific server instance.
      */
-    public function testErrorIsReturnedIfScheduleDoesNotBelongToServer()
+    public function test_error_is_returned_if_schedule_does_not_belong_to_server()
     {
         [$user, $server] = $this->generateTestAccount();
         $server2 = $this->createServerModel(['owner_id' => $user->id]);
@@ -67,7 +68,7 @@ class UpdateServerScheduleTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the subuser does not have permission to modify a
      * server schedule.
      */
-    public function testErrorIsReturnedIfSubuserDoesNotHavePermissionToModifySchedule()
+    public function test_error_is_returned_if_subuser_does_not_have_permission_to_modify_schedule()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_SCHEDULE_CREATE]);
 
@@ -84,7 +85,7 @@ class UpdateServerScheduleTest extends ClientApiIntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2425
      */
-    public function testScheduleIsProcessingIsSetToFalseWhenActiveStateChanges()
+    public function test_schedule_is_processing_is_set_to_false_when_active_state_changes()
     {
         [$user, $server] = $this->generateTestAccount();
 

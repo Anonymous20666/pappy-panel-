@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests\Api\Application\Servers;
 
-use App\Models\Server;
-use Illuminate\Validation\Rule;
-use App\Services\Acl\Api\AdminAcl;
-use Illuminate\Validation\Validator;
-use App\Models\Objects\DeploymentObject;
 use App\Http\Requests\Api\Application\ApplicationApiRequest;
+use App\Models\Objects\DeploymentObject;
+use App\Models\Server;
+use App\Services\Acl\Api\AdminAcl;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 
 class StoreServerRequest extends ApplicationApiRequest
 {
@@ -111,7 +111,7 @@ class StoreServerRequest extends ApplicationApiRequest
                 $query->whereNull('server_id');
             }),
         ], function ($input) {
-            return !$input->deploy;
+            return ! $input->deploy;
         });
 
         $validator->sometimes('allocation.additional.*', [
@@ -120,7 +120,7 @@ class StoreServerRequest extends ApplicationApiRequest
                 $query->whereNull('server_id');
             }),
         ], function ($input) {
-            return !$input->deploy;
+            return ! $input->deploy;
         });
 
         $validator->sometimes('deploy.locations', 'present', function ($input) {

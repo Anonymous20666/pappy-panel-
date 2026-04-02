@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Task;
-use App\Models\Server;
-use App\Models\Schedule;
-use App\Facades\Activity;
-use App\Models\Permission;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Eloquent\TaskRepository;
 use App\Exceptions\Http\HttpForbiddenException;
-use App\Transformers\Api\Client\TaskTransformer;
-use App\Http\Requests\Api\Client\ClientApiRequest;
-use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Exceptions\Service\ServiceLimitExceededException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Facades\Activity;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\ClientApiRequest;
 use App\Http\Requests\Api\Client\Servers\Schedules\StoreTaskRequest;
+use App\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Server;
+use App\Models\Task;
+use App\Repositories\Eloquent\TaskRepository;
+use App\Transformers\Api\Client\TaskTransformer;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ScheduleTaskController extends ClientApiController
 {
@@ -34,7 +36,7 @@ class ScheduleTaskController extends ClientApiController
     /**
      * Create a new task for a given schedule and store it in the database.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      * @throws ServiceLimitExceededException
      */
     public function store(StoreTaskRequest $request, Server $server, Schedule $schedule): array
@@ -95,8 +97,8 @@ class ScheduleTaskController extends ClientApiController
     /**
      * Updates a given task for a server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(StoreTaskRequest $request, Server $server, Schedule $schedule, Task $task): array
     {
@@ -159,7 +161,7 @@ class ScheduleTaskController extends ClientApiController
             throw new NotFoundHttpException();
         }
 
-        if (!$request->user()->can(Permission::ACTION_SCHEDULE_UPDATE, $server)) {
+        if (! $request->user()->can(Permission::ACTION_SCHEDULE_UPDATE, $server)) {
             throw new HttpForbiddenException('You do not have permission to perform this action.');
         }
 

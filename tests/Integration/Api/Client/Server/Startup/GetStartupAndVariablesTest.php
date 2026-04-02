@@ -2,9 +2,11 @@
 
 namespace Tests\Integration\Api\Client\Server\Startup;
 
-use App\Models\User;
-use App\Models\Permission;
 use App\Models\EggVariable;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Models\User;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
@@ -13,10 +15,10 @@ class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
      * Test that the startup command and variables are returned for a server, but only the variables
      * that can be viewed by a user (e.g. user_viewable=true).
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testStartupVariablesAreReturnedForServer(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_startup_variables_are_returned_for_server(array $permissions)
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
 
         $egg = $this->cloneEggAndVariables($server->egg);
@@ -32,7 +34,7 @@ class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
         ])->save();
         $server = $server->refresh();
 
-        $response = $this->actingAs($user)->getJson($this->link($server) . '/startup');
+        $response = $this->actingAs($user)->getJson($this->link($server).'/startup');
 
         $response->assertOk();
         $response->assertJsonPath('meta.startup_command', 'java bungeecord.jar --version [hidden]');
@@ -48,13 +50,13 @@ class GetStartupAndVariablesTest extends ClientApiIntegrationTestCase
      * Test that a user without the required permission, or who does not have any permission to
      * access the server cannot get the startup information for it.
      */
-    public function testStartupDataIsNotReturnedWithoutPermission()
+    public function test_startup_data_is_not_returned_without_permission()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
-        $this->actingAs($user)->getJson($this->link($server) . '/startup')->assertForbidden();
+        $this->actingAs($user)->getJson($this->link($server).'/startup')->assertForbidden();
 
         $user2 = User::factory()->create();
-        $this->actingAs($user2)->getJson($this->link($server) . '/startup')->assertNotFound();
+        $this->actingAs($user2)->getJson($this->link($server).'/startup')->assertNotFound();
     }
 
     public static function permissionsDataProvider(): array

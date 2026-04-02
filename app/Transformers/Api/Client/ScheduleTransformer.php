@@ -2,8 +2,9 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\Task;
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Schedule;
+use App\Models\Task;
 use League\Fractal\Resource\Collection;
 
 class ScheduleTransformer extends BaseClientTransformer
@@ -45,7 +46,7 @@ class ScheduleTransformer extends BaseClientTransformer
     /**
      * Allows attaching the tasks specific to the schedule in the response.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeTasks(Schedule $model): Collection
     {

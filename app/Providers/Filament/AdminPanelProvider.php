@@ -2,21 +2,21 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Middleware\AdminAuthenticate;
+use App\Http\Middleware\EncryptCookies;
+use App\Http\Middleware\LanguageMiddleware;
+use App\Http\Middleware\VerifyCsrfToken;
+use Filament\Http\Middleware\AuthenticateSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationGroup;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use App\Http\Middleware\EncryptCookies;
-use App\Http\Middleware\VerifyCsrfToken;
-use Filament\Navigation\NavigationGroup;
-use App\Http\Middleware\AdminAuthenticate;
-use App\Http\Middleware\LanguageMiddleware;
-use Illuminate\Session\Middleware\StartSession;
-use Filament\Http\Middleware\AuthenticateSession;
-use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {

@@ -2,11 +2,11 @@
 
 namespace App\Services\Users;
 
-use App\Models\User;
-use App\Exceptions\DisplayException;
-use Illuminate\Contracts\Translation\Translator;
-use App\Contracts\Repository\UserRepositoryInterface;
 use App\Contracts\Repository\ServerRepositoryInterface;
+use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\DisplayException;
+use App\Models\User;
+use Illuminate\Contracts\Translation\Translator;
 
 class UserDeletionService
 {
@@ -17,8 +17,7 @@ class UserDeletionService
         protected UserRepositoryInterface $repository,
         protected ServerRepositoryInterface $serverRepository,
         protected Translator $translator,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete a user from the panel only if they have no servers attached to their account.

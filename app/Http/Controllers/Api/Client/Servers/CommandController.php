@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
-use App\Facades\Activity;
-use Illuminate\Http\Response;
-use GuzzleHttp\Exception\BadResponseException;
-use App\Repositories\Wings\DaemonCommandRepository;
-use App\Http\Controllers\Api\Client\ClientApiController;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use App\Http\Requests\Api\Client\Servers\SendCommandRequest;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Facades\Activity;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\Servers\SendCommandRequest;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonCommandRepository;
+use GuzzleHttp\Exception\BadResponseException;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CommandController extends ClientApiController
 {

@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use App\Services\Acl\Api\AdminAcl;
-use Laravel\Sanctum\PersonalAccessToken;
 use App\Models\Traits\HasValidationRules;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Services\Acl\Api\AdminAcl;
+use Database\Factories\ApiKeyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\Guard;
+use Laravel\Sanctum\PersonalAccessToken;
+use Webmozart\Assert\Assert;
 
 /**
  * App\Models\ApiKey.
@@ -20,10 +23,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $token
  * @property array|null $allowed_ips
  * @property string|null $memo
- * @property \Illuminate\Support\Carbon|null $last_used_at
- * @property \Illuminate\Support\Carbon|null $expires_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $last_used_at
+ * @property Carbon|null $expires_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property int $r_servers
  * @property int $r_nodes
  * @property int $r_allocations
@@ -64,7 +67,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class ApiKey extends PersonalAccessToken
 {
-    /** @use HasFactory<\Database\Factories\ApiKeyFactory> */
+    /** @use HasFactory<ApiKeyFactory> */
     use HasFactory;
 
     /** @use HasValidationRules */
@@ -75,21 +78,28 @@ class ApiKey extends PersonalAccessToken
      * API representation using fractal.
      */
     public const RESOURCE_NAME = 'api_key';
+
     /**
      * Different API keys that can exist on the system.
      */
     public const TYPE_NONE = 0;
+
     public const TYPE_ACCOUNT = 1;
+
     /* @deprecated */
     public const TYPE_APPLICATION = 2;
+
     /* @deprecated */
     public const TYPE_DAEMON_USER = 3;
+
     /* @deprecated */
     public const TYPE_DAEMON_APPLICATION = 4;
+
     /**
      * The length of API key identifiers.
      */
     public const IDENTIFIER_LENGTH = 16;
+
     /**
      * The length of the actual API key that is encrypted and stored
      * in the database.
@@ -111,16 +121,16 @@ class ApiKey extends PersonalAccessToken
         'expires_at' => 'datetime',
         self::CREATED_AT => 'datetime',
         self::UPDATED_AT => 'datetime',
-        'r_' . AdminAcl::RESOURCE_USERS => 'int',
-        'r_' . AdminAcl::RESOURCE_ALLOCATIONS => 'int',
-        'r_' . AdminAcl::RESOURCE_DATABASE_HOSTS => 'int',
-        'r_' . AdminAcl::RESOURCE_SERVER_DATABASES => 'int',
-        'r_' . AdminAcl::RESOURCE_EGGS => 'int',
-        'r_' . AdminAcl::RESOURCE_LOCATIONS => 'int',
-        'r_' . AdminAcl::RESOURCE_NESTS => 'int',
-        'r_' . AdminAcl::RESOURCE_NODES => 'int',
-        'r_' . AdminAcl::RESOURCE_SERVERS => 'int',
-        'r_' . AdminAcl::RESOURCE_IMPERSONATION => 'int',
+        'r_'.AdminAcl::RESOURCE_USERS => 'int',
+        'r_'.AdminAcl::RESOURCE_ALLOCATIONS => 'int',
+        'r_'.AdminAcl::RESOURCE_DATABASE_HOSTS => 'int',
+        'r_'.AdminAcl::RESOURCE_SERVER_DATABASES => 'int',
+        'r_'.AdminAcl::RESOURCE_EGGS => 'int',
+        'r_'.AdminAcl::RESOURCE_LOCATIONS => 'int',
+        'r_'.AdminAcl::RESOURCE_NESTS => 'int',
+        'r_'.AdminAcl::RESOURCE_NODES => 'int',
+        'r_'.AdminAcl::RESOURCE_SERVERS => 'int',
+        'r_'.AdminAcl::RESOURCE_IMPERSONATION => 'int',
     ];
 
     /**
@@ -154,16 +164,16 @@ class ApiKey extends PersonalAccessToken
         'allowed_ips.*' => 'string',
         'last_used_at' => 'nullable|date',
         'expires_at' => 'nullable|date',
-        'r_' . AdminAcl::RESOURCE_USERS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_ALLOCATIONS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_DATABASE_HOSTS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_SERVER_DATABASES => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_EGGS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_LOCATIONS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_NESTS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_NODES => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_SERVERS => 'integer|min:0|max:3',
-        'r_' . AdminAcl::RESOURCE_IMPERSONATION => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_USERS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_ALLOCATIONS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_DATABASE_HOSTS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_SERVER_DATABASES => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_EGGS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_LOCATIONS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_NESTS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_NODES => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_SERVERS => 'integer|min:0|max:3',
+        'r_'.AdminAcl::RESOURCE_IMPERSONATION => 'integer|min:0|max:3',
     ];
 
     public function can($ability)
@@ -181,7 +191,7 @@ class ApiKey extends PersonalAccessToken
     /**
      * Returns the user this token is assigned to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
@@ -191,9 +201,9 @@ class ApiKey extends PersonalAccessToken
     /**
      * Required for support with Laravel Sanctum.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      *
-     * @see \Laravel\Sanctum\Guard::supportsTokens()
+     * @see Guard::supportsTokens()
      */
     public function tokenable(): BelongsTo
     {
@@ -208,7 +218,7 @@ class ApiKey extends PersonalAccessToken
         $identifier = substr($token, 0, self::IDENTIFIER_LENGTH);
 
         $model = static::where('identifier', $identifier)->first();
-        if (!is_null($model) && decrypt($model->token) === substr($token, strlen($identifier))) {
+        if (! is_null($model) && decrypt($model->token) === substr($token, strlen($identifier))) {
             return $model;
         }
 
@@ -232,6 +242,6 @@ class ApiKey extends PersonalAccessToken
     {
         $prefix = self::getPrefixForType($type);
 
-        return $prefix . Str::random(self::IDENTIFIER_LENGTH - strlen($prefix));
+        return $prefix.Str::random(self::IDENTIFIER_LENGTH - strlen($prefix));
     }
 }

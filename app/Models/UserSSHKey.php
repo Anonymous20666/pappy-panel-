@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Database\Factories\UserSSHKeyFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 
 /**
  * \App\Models\UserSSHKey.
@@ -14,9 +16,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $name
  * @property string $fingerprint
  * @property string $public_key
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
  * @property User $user
  *
  * @method static \Illuminate\Database\Eloquent\Builder|UserSSHKey newModelQuery()
@@ -39,8 +41,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class UserSSHKey extends Model
 {
-    /** @use HasFactory<\Database\Factories\UserSSHKeyFactory> */
+    /** @use HasFactory<UserSSHKeyFactory> */
     use HasFactory;
+
     use SoftDeletes;
 
     public const RESOURCE_NAME = 'ssh_key';
@@ -60,7 +63,7 @@ class UserSSHKey extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {

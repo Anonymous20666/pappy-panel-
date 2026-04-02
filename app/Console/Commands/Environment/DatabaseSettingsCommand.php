@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands\Environment;
 
+use App\Exceptions\PanelException;
+use App\Traits\Commands\EnvironmentWriterTrait;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Database\DatabaseManager;
-use App\Traits\Commands\EnvironmentWriterTrait;
 
 class DatabaseSettingsCommand extends Command
 {
@@ -33,7 +34,7 @@ class DatabaseSettingsCommand extends Command
     /**
      * Handle command execution.
      *
-     * @throws \App\Exceptions\PanelException
+     * @throws PanelException
      */
     public function handle(): int
     {
@@ -60,7 +61,7 @@ class DatabaseSettingsCommand extends Command
         );
 
         $askForMySQLPassword = true;
-        if (!empty(config('database.connections.mysql.password')) && $this->input->isInteractive()) {
+        if (! empty(config('database.connections.mysql.password')) && $this->input->isInteractive()) {
             $this->variables['DB_PASSWORD'] = config('database.connections.mysql.password');
             $askForMySQLPassword = $this->confirm('It appears you already have a MySQL connection password defined, would you like to change it?');
         }

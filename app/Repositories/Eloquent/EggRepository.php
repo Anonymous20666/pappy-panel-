@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Egg;
-use Webmozart\Assert\Assert;
-use Illuminate\Database\Eloquent\Collection;
 use App\Contracts\Repository\EggRepositoryInterface;
 use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Egg;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Webmozart\Assert\Assert;
 
 class EggRepository extends EloquentRepository implements EggRepositoryInterface
 {
@@ -44,7 +44,7 @@ class EggRepository extends EloquentRepository implements EggRepositoryInterface
     /**
      * Return an egg with the scriptFrom and configFrom relations loaded onto the model.
      *
-     * @param int|string $value
+     * @param  int|string  $value
      *
      * @throws RecordNotFoundException
      */

@@ -2,14 +2,15 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Egg;
+use App\Models\EggVariable;
 use App\Models\Nest;
 use App\Models\Server;
-use App\Models\EggVariable;
-use Illuminate\Support\Arr;
-use League\Fractal\Resource\Item;
 use App\Services\Acl\Api\AdminAcl;
+use Illuminate\Support\Arr;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
 
 class EggTransformer extends BaseTransformer
@@ -83,11 +84,11 @@ class EggTransformer extends BaseTransformer
     /**
      * Include the Nest relationship for the given Egg in the transformation.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeNest(Egg $model): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_NESTS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_NESTS)) {
             return $this->null();
         }
 
@@ -99,11 +100,11 @@ class EggTransformer extends BaseTransformer
     /**
      * Include the Servers relationship for the given Egg in the transformation.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeServers(Egg $model): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVERS)) {
             return $this->null();
         }
 
@@ -159,11 +160,11 @@ class EggTransformer extends BaseTransformer
     /**
      * Include the variables that are defined for this Egg.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeVariables(Egg $model): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_EGGS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_EGGS)) {
             return $this->null();
         }
 

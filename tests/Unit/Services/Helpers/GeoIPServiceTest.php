@@ -2,18 +2,19 @@
 
 namespace Tests\Unit\Services\Helpers;
 
-use Tests\TestCase;
-use Psr\Log\LoggerInterface;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use App\Services\Helpers\GeoIPService;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Psr\Log\LoggerInterface;
+use Tests\TestCase;
 
 class GeoIPServiceTest extends TestCase
 {
     private GeoIPService $service;
+
     private $logger;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
         $this->logger = \Mockery::mock(LoggerInterface::class);
@@ -21,7 +22,7 @@ class GeoIPServiceTest extends TestCase
         Cache::flush();
     }
 
-    public function testItReturnsLocalNetworkForLoopbackIpv4()
+    public function test_it_returns_local_network_for_loopback_ipv4()
     {
         $info = $this->service->getCountryInfo('127.0.0.1');
 
@@ -29,7 +30,7 @@ class GeoIPServiceTest extends TestCase
         $this->assertEquals('LOCAL', $info['code']);
     }
 
-    public function testItReturnsLocalNetworkForLoopbackIpv6()
+    public function test_it_returns_local_network_for_loopback_ipv6()
     {
         $info = $this->service->getCountryInfo('::1');
 
@@ -37,7 +38,7 @@ class GeoIPServiceTest extends TestCase
         $this->assertEquals('LOCAL', $info['code']);
     }
 
-    public function testItReturnsLocalNetworkForPrivateIpv4Ranges()
+    public function test_it_returns_local_network_for_private_ipv4_ranges()
     {
         $privateIps = ['10.0.0.1', '172.16.0.1', '192.168.1.1']; // Private IP Ranges for Class A, B, and C (RFC1918)
 
@@ -48,7 +49,7 @@ class GeoIPServiceTest extends TestCase
         }
     }
 
-    public function testItReturnsLocalNetworkForPrivateIpv6Ranges()
+    public function test_it_returns_local_network_for_private_ipv6_ranges()
     {
         $privateIps = ['fc00::1', 'fd00::1']; // Unique Local Address (ULA) range for IPv6 (RFC4193 [Proposed Standard, but sometimes treated as private])
 
@@ -59,7 +60,7 @@ class GeoIPServiceTest extends TestCase
         }
     }
 
-    public function testItResolvesPublicIpAndCachesResult()
+    public function test_it_resolves_public_ip_and_caches_result()
     {
         $ip = '8.8.8.8';
         Http::fake([
@@ -82,7 +83,7 @@ class GeoIPServiceTest extends TestCase
         Http::assertSentCount(1);
     }
 
-    public function testItReturnsNullOnApiFailureAndDoesNotThrowException()
+    public function test_it_returns_null_on_api_failure_and_does_not_throw_exception()
     {
         $ip = '8.8.8.8';
         Http::fake([
@@ -96,7 +97,7 @@ class GeoIPServiceTest extends TestCase
         $this->assertNull($info);
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         \Mockery::close();
         parent::tearDown();

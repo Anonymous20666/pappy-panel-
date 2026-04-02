@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\Client;
 
 use App\Facades\Activity;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\Api\Client\Account\StoreSSHKeyRequest;
 use App\Http\Requests\Api\Client\ClientApiRequest;
 use App\Transformers\Api\Client\UserSSHKeyTransformer;
-use App\Http\Requests\Api\Client\Account\StoreSSHKeyRequest;
+use Illuminate\Http\JsonResponse;
 
 class SSHKeyController extends ClientApiController
 {
@@ -53,7 +53,7 @@ class SSHKeyController extends ClientApiController
             ->where('fingerprint', $request->input('fingerprint'))
             ->first();
 
-        if (!is_null($key)) {
+        if (! is_null($key)) {
             $key->delete();
 
             Activity::event('user:ssh-key.delete')

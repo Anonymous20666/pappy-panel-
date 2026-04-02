@@ -2,16 +2,16 @@
 
 namespace Tests\Unit\Http\Middleware\Api\Application;
 
-use Tests\Unit\Http\Middleware\MiddlewareTestCase;
 use App\Http\Middleware\Api\Application\AuthenticateApplicationUser;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Tests\Unit\Http\Middleware\MiddlewareTestCase;
 
 class AuthenticateUserTest extends MiddlewareTestCase
 {
     /**
      * Test that no user defined results in an access denied exception.
      */
-    public function testNoUserDefined()
+    public function test_no_user_defined()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
@@ -23,7 +23,7 @@ class AuthenticateUserTest extends MiddlewareTestCase
     /**
      * Test that a non-admin user results in an exception.
      */
-    public function testNonAdminUser()
+    public function test_non_admin_user()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
@@ -35,7 +35,7 @@ class AuthenticateUserTest extends MiddlewareTestCase
     /**
      * Test that an admin user continues though the middleware.
      */
-    public function testAdminUser()
+    public function test_admin_user()
     {
         $this->generateRequestUserModel(['root_admin' => true]);
 

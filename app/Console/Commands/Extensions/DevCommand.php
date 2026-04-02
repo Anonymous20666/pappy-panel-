@@ -3,11 +3,11 @@
 namespace App\Console\Commands\Extensions;
 
 use App\Models\Extension;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 use App\Services\Extensions\ExtensionManifestService;
+use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class DevCommand extends Command
 {
@@ -60,14 +60,14 @@ class DevCommand extends Command
         }
 
         $sourceReal = realpath($sourcePath);
-        if ($sourceReal === false || !is_dir($sourceReal)) {
+        if ($sourceReal === false || ! is_dir($sourceReal)) {
             $this->error('Source directory does not exist.');
 
             return self::FAILURE;
         }
 
-        $manifestPath = $sourceReal . '/extension.json';
-        if (!is_file($manifestPath)) {
+        $manifestPath = $sourceReal.'/extension.json';
+        if (! is_file($manifestPath)) {
             $this->error('Source directory must contain extension.json.');
 
             return self::FAILURE;
@@ -76,7 +76,7 @@ class DevCommand extends Command
         try {
             $manifest = $this->manifestService->parseFromFile($manifestPath);
         } catch (\Throwable $exception) {
-            $this->error('extension.json is invalid: ' . $exception->getMessage());
+            $this->error('extension.json is invalid: '.$exception->getMessage());
 
             return self::FAILURE;
         }
@@ -88,10 +88,10 @@ class DevCommand extends Command
             return self::FAILURE;
         }
 
-        $installLinkPath = base_path('extensions/' . $identifier);
-        $publicRootPath = public_path('extensions/' . $identifier);
-        $publicFrontendLinkPath = $publicRootPath . '/frontend';
-        $sourceFrontendPath = $sourceReal . '/frontend';
+        $installLinkPath = base_path('extensions/'.$identifier);
+        $publicRootPath = public_path('extensions/'.$identifier);
+        $publicFrontendLinkPath = $publicRootPath.'/frontend';
+        $sourceFrontendPath = $sourceReal.'/frontend';
 
         if ((bool) $this->option('unlink')) {
             $this->removeLinkIfExists($installLinkPath);
@@ -106,7 +106,7 @@ class DevCommand extends Command
             return self::SUCCESS;
         }
 
-        if (is_dir($installLinkPath) && !is_link($installLinkPath)) {
+        if (is_dir($installLinkPath) && ! is_link($installLinkPath)) {
             $existingReal = realpath($installLinkPath);
 
             if ($existingReal === $sourceReal) {
@@ -117,7 +117,7 @@ class DevCommand extends Command
                 return self::FAILURE;
             }
         } else {
-            if (!$this->replaceWithSymlink($installLinkPath, $sourceReal)) {
+            if (! $this->replaceWithSymlink($installLinkPath, $sourceReal)) {
                 return self::FAILURE;
             }
         }
@@ -126,17 +126,17 @@ class DevCommand extends Command
         if (is_dir($sourceFrontendPath)) {
             File::ensureDirectoryExists($publicRootPath);
 
-            if (is_dir($publicFrontendLinkPath) && !is_link($publicFrontendLinkPath)) {
+            if (is_dir($publicFrontendLinkPath) && ! is_link($publicFrontendLinkPath)) {
                 $existingReal = realpath($publicFrontendLinkPath);
 
                 if ($existingReal === $sourceFrontendPath) {
                     $this->line("Public frontend path already points to source frontend directory: {$publicFrontendLinkPath}");
                 } else {
-                    $backupRoot = base_path('extensions/.dev/backups/' . $identifier);
+                    $backupRoot = base_path('extensions/.dev/backups/'.$identifier);
                     File::ensureDirectoryExists($backupRoot);
 
-                    $backupPath = $backupRoot . '/public-frontend-' . now()->format('Ymd_His');
-                    if (!@rename($publicFrontendLinkPath, $backupPath)) {
+                    $backupPath = $backupRoot.'/public-frontend-'.now()->format('Ymd_His');
+                    if (! @rename($publicFrontendLinkPath, $backupPath)) {
                         $this->error("Could not back up existing public frontend directory: {$publicFrontendLinkPath}");
 
                         return self::FAILURE;
@@ -144,12 +144,12 @@ class DevCommand extends Command
 
                     $this->line("Backed up existing public frontend directory to: {$backupPath}");
 
-                    if (!$this->replaceWithSymlink($publicFrontendLinkPath, $sourceFrontendPath)) {
+                    if (! $this->replaceWithSymlink($publicFrontendLinkPath, $sourceFrontendPath)) {
                         return self::FAILURE;
                     }
                 }
             } else {
-                if (!$this->replaceWithSymlink($publicFrontendLinkPath, $sourceFrontendPath)) {
+                if (! $this->replaceWithSymlink($publicFrontendLinkPath, $sourceFrontendPath)) {
                     return self::FAILURE;
                 }
             }
@@ -182,11 +182,11 @@ class DevCommand extends Command
             return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 
-        return base_path('extensions/' . $source);
+        return base_path('extensions/'.$source);
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function syncManifestSnapshot(string $identifier, string $sourceReal, array $manifest, ?bool $forceEnabled): void
     {

@@ -60,7 +60,7 @@ class GeoLocaleService
     /**
      * Resolve a country code to the best available language locale.
      *
-     * @param string[] $availableLocales
+     * @param  string[]  $availableLocales
      */
     public function resolveLocale(string $countryCode, array $availableLocales): ?string
     {

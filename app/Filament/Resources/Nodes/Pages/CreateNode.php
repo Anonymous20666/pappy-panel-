@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\Nodes\Pages;
 
-use Illuminate\Database\Eloquent\Model;
-use Filament\Resources\Pages\CreateRecord;
-use App\Services\Nodes\NodeCreationService;
 use App\Filament\Resources\Nodes\NodeResource;
+use App\Services\Activity\ActivityLogService;
+use App\Services\Nodes\NodeCreationService;
+use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateNode extends CreateRecord
 {
@@ -18,7 +19,7 @@ class CreateNode extends CreateRecord
     protected function handleRecordCreation(array $data): Model
     {
         $node = app(NodeCreationService::class)->handle($data);
-        app(\App\Services\Activity\ActivityLogService::class)->subject($node)->event('node:create')->log();
+        app(ActivityLogService::class)->subject($node)->event('node:create')->log();
 
         return $node;
     }

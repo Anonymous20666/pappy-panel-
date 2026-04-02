@@ -2,11 +2,11 @@
 
 namespace App\Listeners\Auth;
 
-use App\Facades\Activity;
 use App\Events\Auth\DirectLogin;
+use App\Extensions\Illuminate\Events\Contracts\SubscribesToEvents;
+use App\Facades\Activity;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Contracts\Events\Dispatcher;
-use App\Extensions\Illuminate\Events\Contracts\SubscribesToEvents;
 
 class AuthenticationListener implements SubscribesToEvents
 {

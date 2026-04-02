@@ -2,13 +2,18 @@
 
 namespace App\Filament\Resources\Nests;
 
+use App\Filament\Resources\Nests\Eggs\Pages;
 use App\Models\Egg;
+use App\Services\Eggs\Sharing\EggExporterService;
 use Filament\Forms;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
-use App\Filament\Resources\Nests\Eggs\Pages;
 
 class EggResource extends Resource
 {
@@ -27,13 +32,13 @@ class EggResource extends Resource
     {
         return $schema
             ->components([
-                \Filament\Schemas\Components\Tabs::make('egg_configuration')
+                Tabs::make('egg_configuration')
                     ->tabs([
-                        \Filament\Schemas\Components\Tabs\Tab::make('configuration')
+                        Tab::make('configuration')
                             ->label(trans('admin/eggs.sections.configuration.title'))
                             ->icon('tabler-settings-2')
                             ->schema([
-                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.identity.title'))
+                                Section::make(trans('admin/eggs.sections.identity.title'))
                                     ->schema([
                                         Forms\Components\Select::make('nest_id')
                                             ->label(trans('admin/eggs.fields.nest'))
@@ -58,7 +63,7 @@ class EggResource extends Resource
                                             ->columnSpanFull(),
                                     ])->columns(2),
 
-                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.docker_images.title'))
+                                Section::make(trans('admin/eggs.sections.docker_images.title'))
                                     ->description(trans('admin/eggs.sections.docker_images.description'))
                                     ->schema([
                                         Forms\Components\KeyValue::make('docker_images')
@@ -77,7 +82,7 @@ class EggResource extends Resource
                                             ->columnSpanFull(),
                                     ]),
 
-                                \Filament\Schemas\Components\Section::make(trans('admin/eggs.sections.process_management.title'))
+                                Section::make(trans('admin/eggs.sections.process_management.title'))
                                     ->schema([
                                         Forms\Components\Textarea::make('startup')
                                             ->label(trans('admin/eggs.fields.startup'))
@@ -109,7 +114,7 @@ class EggResource extends Resource
                                     ])->columns(2),
                             ]),
 
-                        \Filament\Schemas\Components\Tabs\Tab::make('variables')
+                        Tab::make('variables')
                             ->label(trans('admin/eggs.sections.variables.title'))
                             ->icon('tabler-variable')
                             ->schema([
@@ -186,7 +191,7 @@ class EggResource extends Resource
                                     }),
                             ]),
 
-                        \Filament\Schemas\Components\Tabs\Tab::make('install_script')
+                        Tab::make('install_script')
                             ->label(trans('admin/eggs.sections.install_script.title'))
                             ->icon('tabler-file-code')
                             ->schema([
@@ -234,17 +239,17 @@ class EggResource extends Resource
                     ->label(trans('admin/eggs.actions.export'))
                     ->icon('heroicon-o-arrow-down-tray')
                     ->action(function ($record) {
-                        $json = app(\App\Services\Eggs\Sharing\EggExporterService::class)->handle($record->id);
+                        $json = app(EggExporterService::class)->handle($record->id);
                         $filename = trim(preg_replace('/\W/', '-', kebab_case($record->name)), '-');
 
                         return response()->streamDownload(function () use ($json) {
                             echo $json;
-                        }, 'egg-' . $filename . '.json');
+                        }, 'egg-'.$filename.'.json');
                     }),
                 Tables\Actions\DeleteAction::make()
                     ->before(function ($record, $action) {
                         if ($record->servers()->count() > 0) {
-                            \Filament\Notifications\Notification::make()
+                            Notification::make()
                                 ->title(trans('admin/eggs.notices.cannot_delete'))
                                 ->body(trans('admin/eggs.notices.cannot_delete_body', ['count' => $record->servers()->count()]))
                                 ->danger()
@@ -260,7 +265,7 @@ class EggResource extends Resource
                         ->before(function ($records) {
                             $protectedCount = $records->filter(fn ($record) => $record->servers()->count() > 0)->count();
                             if ($protectedCount > 0) {
-                                \Filament\Notifications\Notification::make()
+                                Notification::make()
                                     ->title(trans('admin/eggs.notices.cannot_delete_multiple'))
                                     ->body(trans('admin/eggs.notices.cannot_delete_multiple_body', ['count' => $protectedCount]))
                                     ->warning()

@@ -2,12 +2,10 @@
 
 namespace App\Events\Auth;
 
-use App\Models\User;
 use App\Events\Event;
+use App\Models\User;
 
 class ProvidedAuthenticationToken extends Event
 {
-    public function __construct(public User $user, public bool $recovery = false)
-    {
-    }
+    public function __construct(public User $user, public bool $recovery = false) {}
 }

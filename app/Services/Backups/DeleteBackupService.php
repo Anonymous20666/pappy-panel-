@@ -2,14 +2,15 @@
 
 namespace App\Services\Backups;
 
-use App\Models\Backup;
-use Illuminate\Http\Response;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Service\Backup\BackupLockedException;
 use App\Extensions\Backups\BackupManager;
+use App\Extensions\Filesystem\S3Filesystem;
+use App\Models\Backup;
+use App\Repositories\Wings\DaemonBackupRepository;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Wings\DaemonBackupRepository;
-use App\Exceptions\Service\Backup\BackupLockedException;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Illuminate\Http\Response;
 
 class DeleteBackupService
 {
@@ -17,8 +18,7 @@ class DeleteBackupService
         private ConnectionInterface $connection,
         private BackupManager $manager,
         private DaemonBackupRepository $daemonBackupRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Deletes a backup from the system. If the backup is stored in S3 a request
@@ -34,7 +34,7 @@ class DeleteBackupService
         // I also don't really see any reason you'd have a locked, failed backup to keep
         // around. The logic that updates the backup to the failed state will also remove
         // the lock, so this condition should really never happen.
-        if ($backup->is_locked && ($backup->is_successful && !is_null($backup->completed_at))) {
+        if ($backup->is_locked && ($backup->is_successful && ! is_null($backup->completed_at))) {
             throw new BackupLockedException();
         }
 
@@ -51,7 +51,7 @@ class DeleteBackupService
                 $previous = $exception->getPrevious();
                 // Don't fail the request if the Daemon responds with a 404, just assume the backup
                 // doesn't actually exist and remove its reference from the Panel as well.
-                if (!$previous instanceof ClientException || $previous->getResponse()->getStatusCode() !== Response::HTTP_NOT_FOUND) {
+                if (! $previous instanceof ClientException || $previous->getResponse()->getStatusCode() !== Response::HTTP_NOT_FOUND) {
                     throw $exception;
                 }
             }
@@ -70,7 +70,7 @@ class DeleteBackupService
         $this->connection->transaction(function () use ($backup) {
             $backup->delete();
 
-            /** @var \App\Extensions\Filesystem\S3Filesystem $adapter */
+            /** @var S3Filesystem $adapter */
             $adapter = $this->manager->adapter(Backup::ADAPTER_AWS_S3);
 
             // @phpstan-ignore-next-line method.notFound

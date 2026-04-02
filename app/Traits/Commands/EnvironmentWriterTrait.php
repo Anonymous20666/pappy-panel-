@@ -17,7 +17,7 @@ trait EnvironmentWriterTrait
             return '';
         }
 
-        if (!preg_match('/^\"(.*)\"$/', $value) && preg_match('/([^\w.\-+\/])+/', $value)) {
+        if (! preg_match('/^\"(.*)\"$/', $value) && preg_match('/([^\w.\-+\/])+/', $value)) {
             return sprintf('"%s"', addslashes($value));
         }
 
@@ -32,7 +32,7 @@ trait EnvironmentWriterTrait
     public function writeToEnvironment(array $values = []): void
     {
         $path = base_path('.env');
-        if (!file_exists($path)) {
+        if (! file_exists($path)) {
             throw new PanelException('Cannot locate .env file, was this software installed correctly?');
         }
 
@@ -41,10 +41,10 @@ trait EnvironmentWriterTrait
             $key = strtoupper($key);
             $saveValue = sprintf('%s=%s', $key, $this->escapeEnvironmentValue($value));
 
-            if (preg_match_all('/^' . $key . '=(.*)$/m', $saveContents) < 1) {
-                $saveContents = $saveContents . PHP_EOL . $saveValue;
+            if (preg_match_all('/^'.$key.'=(.*)$/m', $saveContents) < 1) {
+                $saveContents = $saveContents.PHP_EOL.$saveValue;
             } else {
-                $saveContents = preg_replace('/^' . $key . '=(.*)$/m', $saveValue, $saveContents);
+                $saveContents = preg_replace('/^'.$key.'=(.*)$/m', $saveValue, $saveContents);
             }
         });
 

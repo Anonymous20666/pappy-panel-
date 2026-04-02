@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Nest;
-use Illuminate\Database\Eloquent\Collection;
 use App\Contracts\Repository\NestRepositoryInterface;
 use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Nest;
+use Illuminate\Database\Eloquent\Collection;
 
 class NestRepository extends EloquentRepository implements NestRepositoryInterface
 {
@@ -20,7 +20,7 @@ class NestRepository extends EloquentRepository implements NestRepositoryInterfa
     /**
      * Return a nest or all nests with their associated eggs and variables.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, \App\Models\Nest>|\App\Models\Nest
+     * @return Collection<int, Nest>|Nest
      *
      * @throws RecordNotFoundException
      */
@@ -28,9 +28,9 @@ class NestRepository extends EloquentRepository implements NestRepositoryInterfa
     {
         $instance = $this->getBuilder()->with('eggs', 'eggs.variables');
 
-        if (!is_null($id)) {
+        if (! is_null($id)) {
             $instance = $instance->find($id, $this->getColumns());
-            if (!$instance) {
+            if (! $instance) {
                 throw new RecordNotFoundException();
             }
 
@@ -43,7 +43,7 @@ class NestRepository extends EloquentRepository implements NestRepositoryInterfa
     /**
      * Return a nest or all nests and the count of eggs and servers for that nest.
      *
-     * @return \Illuminate\Database\Eloquent\Collection<int, \App\Models\Nest>|\App\Models\Nest
+     * @return Collection<int, Nest>|Nest
      *
      * @throws RecordNotFoundException
      */
@@ -51,9 +51,9 @@ class NestRepository extends EloquentRepository implements NestRepositoryInterfa
     {
         $instance = $this->getBuilder()->withCount(['eggs', 'servers']);
 
-        if (!is_null($id)) {
+        if (! is_null($id)) {
             $instance = $instance->find($id, $this->getColumns());
-            if (!$instance) {
+            if (! $instance) {
                 throw new RecordNotFoundException();
             }
 
@@ -71,7 +71,7 @@ class NestRepository extends EloquentRepository implements NestRepositoryInterfa
     public function getWithEggServers(int $id): Nest
     {
         $instance = $this->getBuilder()->with('eggs.servers')->find($id, $this->getColumns());
-        if (!$instance) {
+        if (! $instance) {
             throw new RecordNotFoundException();
         }
 

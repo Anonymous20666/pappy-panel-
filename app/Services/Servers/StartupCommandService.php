@@ -16,8 +16,8 @@ class StartupCommandService
         $replace = [$server->memory, $server->allocation->ip, $server->allocation->port];
 
         foreach ($server->variables as $variable) {
-            $find[] = '{{' . $variable->env_variable . '}}';
-            $replace[] = ($variable->user_viewable && !$hideAllValues) ? ($variable->server_value ?? $variable->default_value) : '[hidden]';
+            $find[] = '{{'.$variable->env_variable.'}}';
+            $replace[] = ($variable->user_viewable && ! $hideAllValues) ? ($variable->server_value ?? $variable->default_value) : '[hidden]';
         }
 
         return Str::replace($find, $replace, $server->startup);

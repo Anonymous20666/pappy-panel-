@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Backup;
-use App\Models\Server;
 use App\Facades\Activity;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\Servers\Backups\RestoreBackupRequest;
+use App\Http\Requests\Api\Client\Servers\Backups\StoreBackupRequest;
+use App\Models\Backup;
 use App\Models\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use App\Models\Server;
+use App\Repositories\Eloquent\BackupRepository;
+use App\Repositories\Wings\DaemonBackupRepository;
 use App\Services\Backups\DeleteBackupService;
 use App\Services\Backups\DownloadLinkService;
-use App\Repositories\Eloquent\BackupRepository;
 use App\Services\Backups\InitiateBackupService;
-use App\Repositories\Wings\DaemonBackupRepository;
 use App\Transformers\Api\Client\BackupTransformer;
 use Illuminate\Auth\Access\AuthorizationException;
-use App\Http\Controllers\Api\Client\ClientApiController;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Spatie\Fractalistic\Exceptions\InvalidTransformation;
+use Spatie\Fractalistic\Exceptions\NoTransformerSpecified;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use App\Http\Requests\Api\Client\Servers\Backups\StoreBackupRequest;
-use App\Http\Requests\Api\Client\Servers\Backups\RestoreBackupRequest;
 
 class BackupController extends ClientApiController
 {
@@ -43,7 +45,7 @@ class BackupController extends ClientApiController
      */
     public function index(Request $request, Server $server): array
     {
-        if (!$request->user()->can(Permission::ACTION_BACKUP_READ, $server)) {
+        if (! $request->user()->can(Permission::ACTION_BACKUP_READ, $server)) {
             throw new AuthorizationException();
         }
 
@@ -60,8 +62,8 @@ class BackupController extends ClientApiController
     /**
      * Starts the backup process for a server.
      *
-     * @throws \Spatie\Fractalistic\Exceptions\InvalidTransformation
-     * @throws \Spatie\Fractalistic\Exceptions\NoTransformerSpecified
+     * @throws InvalidTransformation
+     * @throws NoTransformerSpecified
      * @throws \Throwable
      */
     public function store(StoreBackupRequest $request, Server $server): array
@@ -103,13 +105,13 @@ class BackupController extends ClientApiController
      */
     public function toggleLock(Request $request, Server $server, Backup $backup): array
     {
-        if (!$request->user()->can(Permission::ACTION_BACKUP_DELETE, $server)) {
+        if (! $request->user()->can(Permission::ACTION_BACKUP_DELETE, $server)) {
             throw new AuthorizationException();
         }
 
         $action = $backup->is_locked ? 'server:backup.unlock' : 'server:backup.lock';
 
-        $backup->update(['is_locked' => !$backup->is_locked]);
+        $backup->update(['is_locked' => ! $backup->is_locked]);
 
         Activity::event($action)->subject($backup)->property('name', $backup->name)->log();
 
@@ -125,7 +127,7 @@ class BackupController extends ClientApiController
      */
     public function view(Request $request, Server $server, Backup $backup): array
     {
-        if (!$request->user()->can(Permission::ACTION_BACKUP_READ, $server)) {
+        if (! $request->user()->can(Permission::ACTION_BACKUP_READ, $server)) {
             throw new AuthorizationException();
         }
 
@@ -142,7 +144,7 @@ class BackupController extends ClientApiController
      */
     public function delete(Request $request, Server $server, Backup $backup): JsonResponse
     {
-        if (!$request->user()->can(Permission::ACTION_BACKUP_DELETE, $server)) {
+        if (! $request->user()->can(Permission::ACTION_BACKUP_DELETE, $server)) {
             throw new AuthorizationException();
         }
 
@@ -150,7 +152,7 @@ class BackupController extends ClientApiController
 
         Activity::event('server:backup.delete')
             ->subject($backup)
-            ->property(['name' => $backup->name, 'failed' => !$backup->is_successful])
+            ->property(['name' => $backup->name, 'failed' => ! $backup->is_successful])
             ->log();
 
         return new JsonResponse([], JsonResponse::HTTP_NO_CONTENT);
@@ -166,7 +168,7 @@ class BackupController extends ClientApiController
      */
     public function download(Request $request, Server $server, Backup $backup): JsonResponse
     {
-        if (!$request->user()->can(Permission::ACTION_BACKUP_DOWNLOAD, $server)) {
+        if (! $request->user()->can(Permission::ACTION_BACKUP_DOWNLOAD, $server)) {
             throw new AuthorizationException();
         }
 
@@ -199,11 +201,11 @@ class BackupController extends ClientApiController
     {
         // Cannot restore a backup unless a server is fully installed and not currently
         // processing a different backup restoration request.
-        if (!is_null($server->status)) {
+        if (! is_null($server->status)) {
             throw new BadRequestHttpException('This server is not currently in a state that allows for a backup to be restored.');
         }
 
-        if (!$backup->is_successful && is_null($backup->completed_at)) {
+        if (! $backup->is_successful && is_null($backup->completed_at)) {
             throw new BadRequestHttpException('This backup cannot be restored at this time: not completed or failed.');
         }
 

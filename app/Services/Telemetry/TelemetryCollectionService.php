@@ -2,21 +2,22 @@
 
 namespace App\Services\Telemetry;
 
+use App\Exceptions\Model\DataValidationException;
+use App\Models\Allocation;
+use App\Models\Backup;
 use App\Models\Egg;
+use App\Models\Location;
+use App\Models\Mount;
 use App\Models\Nest;
 use App\Models\Node;
-use App\Models\User;
-use App\Models\Mount;
-use Ramsey\Uuid\Uuid;
-use App\Models\Backup;
 use App\Models\Server;
-use App\Models\Location;
-use App\Models\Allocation;
+use App\Models\User;
+use App\Repositories\Eloquent\SettingsRepository;
+use App\Repositories\Wings\DaemonConfigurationRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Repositories\Eloquent\SettingsRepository;
-use App\Repositories\Wings\DaemonConfigurationRepository;
+use Ramsey\Uuid\Uuid;
 
 class TelemetryCollectionService
 {
@@ -26,8 +27,7 @@ class TelemetryCollectionService
     public function __construct(
         private DaemonConfigurationRepository $daemonConfigurationRepository,
         private SettingsRepository $settingsRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Collects telemetry data and sends it to the Reviactyl Telemetry Service.
@@ -46,7 +46,7 @@ class TelemetryCollectionService
     /**
      * Collects telemetry data and returns it as an array.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function collect(): array
     {
@@ -101,7 +101,7 @@ class TelemetryCollectionService
                     'osType' => Arr::get($info, 'system.os_type', ''),
                 ],
             ];
-        })->filter(fn ($node) => !is_null($node))->toArray();
+        })->filter(fn ($node) => ! is_null($node))->toArray();
 
         return [
             'id' => $uuid,

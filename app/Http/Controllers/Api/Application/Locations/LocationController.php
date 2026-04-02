@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers\Api\Application\Locations;
 
-use App\Models\Location;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use Spatie\QueryBuilder\QueryBuilder;
-use App\Services\Locations\LocationUpdateService;
-use App\Services\Locations\LocationCreationService;
-use App\Services\Locations\LocationDeletionService;
-use App\Transformers\Api\Application\LocationTransformer;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Location\HasActiveNodesException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Locations\DeleteLocationRequest;
 use App\Http\Requests\Api\Application\Locations\GetLocationRequest;
 use App\Http\Requests\Api\Application\Locations\GetLocationsRequest;
 use App\Http\Requests\Api\Application\Locations\StoreLocationRequest;
-use App\Http\Requests\Api\Application\Locations\DeleteLocationRequest;
 use App\Http\Requests\Api\Application\Locations\UpdateLocationRequest;
+use App\Models\Location;
+use App\Services\Locations\LocationCreationService;
+use App\Services\Locations\LocationDeletionService;
+use App\Services\Locations\LocationUpdateService;
+use App\Transformers\Api\Application\LocationTransformer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class LocationController extends ApplicationApiController
 {
@@ -59,7 +62,7 @@ class LocationController extends ApplicationApiController
      * Store a new location on the Panel and return an HTTP/201 response code with the
      * new location attached.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function store(StoreLocationRequest $request): JsonResponse
     {
@@ -78,8 +81,8 @@ class LocationController extends ApplicationApiController
     /**
      * Update a location on the Panel and return the updated record to the user.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateLocationRequest $request, Location $location): array
     {
@@ -93,7 +96,7 @@ class LocationController extends ApplicationApiController
     /**
      * Delete a location from the Panel.
      *
-     * @throws \App\Exceptions\Service\Location\HasActiveNodesException
+     * @throws HasActiveNodesException
      */
     public function delete(DeleteLocationRequest $request, Location $location): Response
     {

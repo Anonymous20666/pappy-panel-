@@ -2,27 +2,31 @@
 
 namespace App\Models;
 
-use App\Rules\Username;
+use App\Contracts\Models\Identifiable;
 use App\Facades\Activity;
+use App\Models\Traits\HasAccessTokens;
+use App\Models\Traits\HasRealtimeIdentifier;
+use App\Notifications\SendPasswordReset as ResetPasswordNotification;
+use App\Rules\Username;
+use App\Traits\Helpers\AvailableLanguages;
+use Database\Factories\UserFactory;
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Validation\Rules\In;
-use Illuminate\Auth\Authenticatable;
-use App\Contracts\Models\Identifiable;
-use App\Models\Traits\HasAccessTokens;
-use Filament\Models\Contracts\HasAvatar;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Builder;
-use App\Traits\Helpers\AvailableLanguages;
-use App\Models\Traits\HasRealtimeIdentifier;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use App\Notifications\SendPasswordReset as ResetPasswordNotification;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 /**
  * App\Models\User.
@@ -40,22 +44,22 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property bool $root_admin
  * @property bool $use_totp
  * @property string|null $totp_secret
- * @property \Illuminate\Support\Carbon|null $totp_authenticated_at
+ * @property Carbon|null $totp_authenticated_at
  * @property bool $gravatar
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\ApiKey[] $apiKeys
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection|ApiKey[] $apiKeys
  * @property int|null $api_keys_count
  * @property string $name
- * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property int|null $notifications_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\RecoveryToken[] $recoveryTokens
+ * @property \Illuminate\Database\Eloquent\Collection|RecoveryToken[] $recoveryTokens
  * @property int|null $recovery_tokens_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Server[] $servers
+ * @property \Illuminate\Database\Eloquent\Collection|Server[] $servers
  * @property int|null $servers_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\UserSSHKey[] $sshKeys
+ * @property \Illuminate\Database\Eloquent\Collection|UserSSHKey[] $sshKeys
  * @property int|null $ssh_keys_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\ApiKey[] $tokens
+ * @property \Illuminate\Database\Eloquent\Collection|ApiKey[] $tokens
  * @property int|null $tokens_count
  *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
@@ -83,25 +87,24 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @mixin \Eloquent
  */
 #[Attributes\Identifiable('user')]
-class User extends Model implements
-    AuthenticatableContract,
-    HasAvatar,
-    AuthorizableContract,
-    CanResetPasswordContract,
-    Identifiable
+class User extends Model implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasAvatar, Identifiable
 {
     use Authenticatable;
     use Authorizable;
     use AvailableLanguages;
     use CanResetPassword;
-    /** @use \App\Models\Traits\HasAccessTokens<\App\Models\ApiKey> */
+
+    /** @use HasAccessTokens<ApiKey> */
     use HasAccessTokens;
-    use Notifiable;
-    /** @use \Illuminate\Database\Eloquent\Factories\HasFactory<\Database\Factories\UserFactory> */
+
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
+
     use HasRealtimeIdentifier;
+    use Notifiable;
 
     public const USER_LEVEL_USER = 0;
+
     public const USER_LEVEL_ADMIN = 1;
 
     public function socialLogins(): HasMany
@@ -225,7 +228,7 @@ class User extends Model implements
     /**
      * Send the password reset notification.
      *
-     * @param string $token
+     * @param  string  $token
      */
     public function sendPasswordResetNotification($token)
     {
@@ -250,13 +253,13 @@ class User extends Model implements
      */
     public function getNameAttribute(): string
     {
-        return trim($this->name_first . ' ' . $this->name_last);
+        return trim($this->name_first.' '.$this->name_last);
     }
 
     /**
      * Returns all servers that a user owns.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
+     * @return HasMany<Server, $this>
      */
     public function servers(): HasMany
     {
@@ -264,7 +267,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ApiKey, $this>
+     * @return HasMany<ApiKey, $this>
      */
     public function apiKeys(): HasMany
     {
@@ -273,7 +276,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\RecoveryToken, $this>
+     * @return HasMany<RecoveryToken, $this>
      */
     public function recoveryTokens(): HasMany
     {
@@ -281,7 +284,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserSSHKey, $this>
+     * @return HasMany<UserSSHKey, $this>
      */
     public function sshKeys(): HasMany
     {
@@ -292,7 +295,7 @@ class User extends Model implements
      * Returns all the activity logs where this user is the subject — not to
      * be confused by activity logs where this user is the _actor_.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany<\App\Models\ActivityLog, $this>
+     * @return MorphToMany<ActivityLog, $this>
      */
     public function activity(): MorphToMany
     {
@@ -303,7 +306,7 @@ class User extends Model implements
      * Returns all the servers that a user can access by way of being the owner of the
      * server, or because they are assigned as a subuser for that server.
      *
-     * @return \Illuminate\Database\Eloquent\Builder<\App\Models\Server>
+     * @return Builder<Server>
      */
     public function accessibleServers(): Builder
     {
@@ -330,7 +333,7 @@ class User extends Model implements
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ServerCategory, $this>
+     * @return HasMany<ServerCategory, $this>
      */
     public function categories(): HasMany
     {

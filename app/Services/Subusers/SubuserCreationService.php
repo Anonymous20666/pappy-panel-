@@ -2,16 +2,17 @@
 
 namespace App\Services\Subusers;
 
+use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Subuser\ServerSubuserExistsException;
+use App\Exceptions\Service\Subuser\UserIsServerOwnerException;
 use App\Models\Server;
 use App\Models\Subuser;
-use Illuminate\Support\Str;
+use App\Repositories\Eloquent\SubuserRepository;
 use App\Services\Users\UserCreationService;
 use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Eloquent\SubuserRepository;
-use App\Contracts\Repository\UserRepositoryInterface;
-use App\Exceptions\Repository\RecordNotFoundException;
-use App\Exceptions\Service\Subuser\UserIsServerOwnerException;
-use App\Exceptions\Service\Subuser\ServerSubuserExistsException;
+use Illuminate\Support\Str;
 
 class SubuserCreationService
 {
@@ -23,15 +24,14 @@ class SubuserCreationService
         private SubuserRepository $subuserRepository,
         private UserCreationService $userCreationService,
         private UserRepositoryInterface $userRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a new user on the system and assigns them access to the provided server.
      * If the email address already belongs to a user on the system a new user will not
      * be created.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      * @throws ServerSubuserExistsException
      * @throws UserIsServerOwnerException
      * @throws \Throwable
@@ -53,7 +53,7 @@ class SubuserCreationService
             } catch (RecordNotFoundException) {
                 // Just cap the username generated at 64 characters at most and then append a random string
                 // to the end to make it "unique"...
-                $username = substr(preg_replace('/([^\w\.-]+)/', '', strtok($email, '@')), 0, 64) . Str::random(3);
+                $username = substr(preg_replace('/([^\w\.-]+)/', '', strtok($email, '@')), 0, 64).Str::random(3);
 
                 $user = $this->userCreationService->handle([
                     'email' => $email,

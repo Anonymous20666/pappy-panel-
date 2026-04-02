@@ -2,12 +2,12 @@
 
 use App\Enum\ResourceLimit;
 use App\Http\Controllers\Api\Client;
-use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\Activity\ServerSubject;
 use App\Http\Middleware\Activity\AccountSubject;
-use App\Http\Middleware\RequireTwoFactorAuthentication;
-use App\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
+use App\Http\Middleware\Activity\ServerSubject;
 use App\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
+use App\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
+use App\Http\Middleware\RequireTwoFactorAuthentication;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

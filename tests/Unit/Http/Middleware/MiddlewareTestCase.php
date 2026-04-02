@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Http\Middleware;
 
-use Tests\TestCase;
-use Tests\Traits\Http\RequestMockHelpers;
-use Tests\Traits\Http\MocksMiddlewareClosure;
 use Tests\Assertions\MiddlewareAttributeAssertionsTrait;
+use Tests\TestCase;
+use Tests\Traits\Http\MocksMiddlewareClosure;
+use Tests\Traits\Http\RequestMockHelpers;
 
 abstract class MiddlewareTestCase extends TestCase
 {
@@ -16,7 +16,7 @@ abstract class MiddlewareTestCase extends TestCase
     /**
      * Setup tests with a mocked request object and normal attributes.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 

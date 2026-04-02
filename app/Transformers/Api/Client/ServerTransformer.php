@@ -2,18 +2,19 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\Egg;
-use App\Models\Server;
-use App\Models\Subuser;
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Allocation;
-use App\Models\Permission;
+use App\Models\Egg;
 use App\Models\EggVariable;
+use App\Models\Permission;
+use App\Models\Server;
 use App\Models\ServerCategory;
-use League\Fractal\Resource\Item;
+use App\Models\Subuser;
+use App\Services\Servers\StartupCommandService;
 use Illuminate\Container\Container;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
-use App\Services\Servers\StartupCommandService;
 
 class ServerTransformer extends BaseClientTransformer
 {
@@ -66,7 +67,7 @@ class ServerTransformer extends BaseClientTransformer
                 'threads' => $server->threads,
                 'oom_disabled' => $server->oom_disabled,
             ],
-            'invocation' => $service->handle($server, !$user->can(Permission::ACTION_STARTUP_READ, $server)),
+            'invocation' => $service->handle($server, ! $user->can(Permission::ACTION_STARTUP_READ, $server)),
             'docker_image' => $server->image,
             'egg_features' => $server->egg->inherit_features,
             'feature_limits' => [
@@ -78,8 +79,8 @@ class ServerTransformer extends BaseClientTransformer
             // This field is deprecated, please use "status".
             'is_suspended' => $server->isSuspended(),
             // This field is deprecated, please use "status".
-            'is_installing' => !$server->isInstalled(),
-            'is_transferring' => !is_null($server->transfer),
+            'is_installing' => ! $server->isInstalled(),
+            'is_transferring' => ! is_null($server->transfer),
             'nest_id' => $server->nest_id,
             'egg_id' => $server->egg_id,
             'egg_banner' => $server->egg->banner,
@@ -90,7 +91,7 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the allocations associated with this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeAllocations(Server $server): Collection
     {
@@ -104,7 +105,7 @@ class ServerTransformer extends BaseClientTransformer
         //
         // This allows us to avoid too much permission regression, without also hiding information that
         // is generally needed for the frontend to make sense when browsing or searching results.
-        if (!$user->can(Permission::ACTION_ALLOCATION_READ, $server)) {
+        if (! $user->can(Permission::ACTION_ALLOCATION_READ, $server)) {
             $primary = clone $server->allocation;
             $primary->notes = null;
 
@@ -115,11 +116,11 @@ class ServerTransformer extends BaseClientTransformer
     }
 
     /**
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeVariables(Server $server): Collection|NullResource
     {
-        if (!$this->request->user()->can(Permission::ACTION_STARTUP_READ, $server)) {
+        if (! $this->request->user()->can(Permission::ACTION_STARTUP_READ, $server)) {
             return $this->null();
         }
 
@@ -133,7 +134,7 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the egg associated with this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeEgg(Server $server): Item
     {
@@ -143,11 +144,11 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the subusers associated with this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeSubusers(Server $server): Collection|NullResource
     {
-        if (!$this->request->user()->can(Permission::ACTION_USER_READ, $server)) {
+        if (! $this->request->user()->can(Permission::ACTION_USER_READ, $server)) {
             return $this->null();
         }
 
@@ -157,11 +158,11 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the category associated with this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeCategory(Server $server): Item|NullResource
     {
-        if (!$server->category) {
+        if (! $server->category) {
             return $this->null();
         }
 

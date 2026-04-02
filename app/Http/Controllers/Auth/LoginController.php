@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use App\Exceptions\DisplayException;
 use App\Facades\Activity;
+use App\Models\User;
 use Carbon\CarbonImmutable;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends AbstractLoginController
 {
@@ -26,8 +28,8 @@ class LoginController extends AbstractLoginController
     /**
      * Handle a login request to the application.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws DisplayException
+     * @throws ValidationException
      */
     public function login(Request $request): JsonResponse
     {
@@ -49,11 +51,11 @@ class LoginController extends AbstractLoginController
         // continue. Previously this was handled in the 2FA checkpoint, however that has
         // a flaw in which you can discover if an account exists simply by seeing if you
         // can proceed to the next step in the login process.
-        if (!password_verify($request->input('password'), $user->password)) {
+        if (! password_verify($request->input('password'), $user->password)) {
             $this->sendFailedLoginResponse($request, $user);
         }
 
-        if (!$user->use_totp) {
+        if (! $user->use_totp) {
             return $this->sendLoginResponse($user, $request);
         }
 

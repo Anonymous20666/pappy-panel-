@@ -63,7 +63,7 @@ class UpdateServerBuildConfigurationRequest extends ServerWriteRequest
         unset($data['allocation'], $data['feature_limits']);
 
         // Adjust the limits field to match what is expected by the model.
-        if (!empty($data['limits'])) {
+        if (! empty($data['limits'])) {
             foreach ($data['limits'] as $key => $value) {
                 $data[$key] = $value;
             }
@@ -99,7 +99,7 @@ class UpdateServerBuildConfigurationRequest extends ServerWriteRequest
      */
     protected function requiredToOptional(string $field, array $rules, bool $limits = false): array
     {
-        if (!in_array('required', $rules)) {
+        if (! in_array('required', $rules)) {
             return $rules;
         }
 

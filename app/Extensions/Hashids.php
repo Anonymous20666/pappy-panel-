@@ -2,9 +2,9 @@
 
 namespace App\Extensions;
 
-use Illuminate\Support\Arr;
-use Hashids\Hashids as VendorHashids;
 use App\Contracts\Extensions\HashidsInterface;
+use Hashids\Hashids as VendorHashids;
+use Illuminate\Support\Arr;
 
 class Hashids extends VendorHashids implements HashidsInterface
 {

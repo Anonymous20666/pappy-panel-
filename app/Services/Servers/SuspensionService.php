@@ -3,13 +3,14 @@
 namespace App\Services\Servers;
 
 use App\Models\Server;
-use Webmozart\Assert\Assert;
 use App\Repositories\Wings\DaemonServerRepository;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use Webmozart\Assert\Assert;
 
 class SuspensionService
 {
     public const ACTION_SUSPEND = 'suspend';
+
     public const ACTION_UNSUSPEND = 'unsuspend';
 
     /**
@@ -17,8 +18,7 @@ class SuspensionService
      */
     public function __construct(
         private DaemonServerRepository $daemonServerRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Suspends a server on the system.
@@ -38,7 +38,7 @@ class SuspensionService
         }
 
         // Check if the server is currently being transferred.
-        if (!is_null($server->transfer)) {
+        if (! is_null($server->transfer)) {
             throw new ConflictHttpException('Cannot toggle suspension status on a server that is currently being transferred.');
         }
 

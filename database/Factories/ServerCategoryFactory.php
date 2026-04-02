@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
-use Ramsey\Uuid\Uuid;
 use App\Models\ServerCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ramsey\Uuid\Uuid;
 
 class ServerCategoryFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
-     * @var class-string<\App\Models\ServerCategory>
+     * @var class-string<ServerCategory>
      */
     protected $model = ServerCategory::class;
 

@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands\User;
 
-use Illuminate\Console\Command;
 use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use Illuminate\Console\Command;
 
 class DisableTwoFactorCommand extends Command
 {
@@ -22,8 +24,8 @@ class DisableTwoFactorCommand extends Command
     /**
      * Handle command execution process.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function handle()
     {

@@ -4,7 +4,9 @@ namespace Tests\Integration\Api\Client\Server\Allocation;
 
 use App\Models\Allocation;
 use App\Models\Permission;
+use App\Models\Server;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DeleteAllocationTest extends ClientApiIntegrationTestCase
@@ -13,10 +15,10 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
      * Test that an allocation is deleted from the server and the notes are properly reset
      * to an empty value on assignment.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionDataProvider')]
-    public function testAllocationCanBeDeletedFromServer(array $permission)
+    #[DataProvider('permissionDataProvider')]
+    public function test_allocation_can_be_deleted_from_server(array $permission)
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permission);
         $server->update(['allocation_limit' => 2]);
 
@@ -35,9 +37,9 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Test that an error is returned if the user does not have permissiont to delete an allocation.
      */
-    public function testErrorIsReturnedIfUserDoesNotHavePermission()
+    public function test_error_is_returned_if_user_does_not_have_permission()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_ALLOCATION_CREATE]);
 
         /** @var Allocation $allocation */
@@ -54,9 +56,9 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
      * Test that an allocation is not deleted if it is currently marked as the primary allocation
      * for the server.
      */
-    public function testErrorIsReturnedIfAllocationIsPrimary()
+    public function test_error_is_returned_if_allocation_is_primary()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
         $server->update(['allocation_limit' => 2]);
 
@@ -66,7 +68,7 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
             ->assertJsonPath('errors.0.detail', 'You cannot delete the primary allocation for this server.');
     }
 
-    public function testAllocationCannotBeDeletedIfServerLimitIsNotDefined()
+    public function test_allocation_cannot_be_deleted_if_server_limit_is_not_defined()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -81,9 +83,9 @@ class DeleteAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Test that an allocation cannot be deleted if it does not belong to the server instance.
      */
-    public function testErrorIsReturnedIfAllocationDoesNotBelongToServer()
+    public function test_error_is_returned_if_allocation_does_not_belong_to_server()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
         [, $server2] = $this->generateTestAccount();
 

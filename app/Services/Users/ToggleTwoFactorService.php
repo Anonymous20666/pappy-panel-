@@ -2,15 +2,18 @@
 
 namespace App\Services\Users;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Illuminate\Support\Str;
-use PragmaRX\Google2FA\Google2FA;
-use Illuminate\Database\ConnectionInterface;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\UserRepositoryInterface;
-use App\Repositories\Eloquent\RecoveryTokenRepository;
 use App\Exceptions\Service\User\TwoFactorAuthenticationTokenInvalid;
+use App\Models\User;
+use App\Repositories\Eloquent\RecoveryTokenRepository;
+use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Str;
+use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
+use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
+use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
+use PragmaRX\Google2FA\Google2FA;
 
 class ToggleTwoFactorService
 {
@@ -23,16 +26,15 @@ class ToggleTwoFactorService
         private Google2FA $google2FA,
         private RecoveryTokenRepository $recoveryTokenRepository,
         private UserRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Toggle 2FA on an account only if the token provided is valid.
      *
      * @throws \Throwable
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws IncompatibleWithGoogleAuthenticatorException
+     * @throws InvalidCharactersException
+     * @throws SecretKeyTooShortException
      * @throws TwoFactorAuthenticationTokenInvalid
      */
     public function handle(User $user, string $token, ?bool $toggleState = null): array
@@ -41,7 +43,7 @@ class ToggleTwoFactorService
 
         $isValidToken = $this->google2FA->verifyKey($secret, $token, config()->get('panel.auth.2fa.window'));
 
-        if (!$isValidToken) {
+        if (! $isValidToken) {
             throw new TwoFactorAuthenticationTokenInvalid();
         }
 
@@ -54,9 +56,9 @@ class ToggleTwoFactorService
             // which will then be marked as deleted from the database and will also bypass 2FA protections
             // on their account.
             $tokens = [];
-            if ((!$toggleState && !$user->use_totp) || $toggleState) {
+            if ((! $toggleState && ! $user->use_totp) || $toggleState) {
                 $inserts = [];
-                for ($i = 0; $i < 10; ++$i) {
+                for ($i = 0; $i < 10; $i++) {
                     $token = Str::random(10);
 
                     $inserts[] = [
@@ -80,7 +82,7 @@ class ToggleTwoFactorService
 
             $this->repository->withoutFreshModel()->update($user->id, [
                 'totp_authenticated_at' => null,
-                'use_totp' => (is_null($toggleState) ? !$user->use_totp : $toggleState),
+                'use_totp' => (is_null($toggleState) ? ! $user->use_totp : $toggleState),
             ]);
 
             return $tokens;

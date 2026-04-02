@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Base;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Translation\Translator;
 use App\Http\Requests\Base\LocaleRequest;
 use App\Traits\Helpers\AvailableLanguages;
 use Illuminate\Contracts\Translation\Loader;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Translation\Translator;
 
 class LocaleController extends Controller
 {
     use AvailableLanguages;
+
     protected Loader $loader;
 
     public function __construct(Translator $translator)

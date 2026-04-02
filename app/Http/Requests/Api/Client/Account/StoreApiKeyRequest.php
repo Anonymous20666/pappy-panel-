@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\Client\Account;
 
-use IPTools\Range;
+use App\Http\Requests\Api\Client\ClientApiRequest;
 use App\Models\ApiKey;
 use Illuminate\Validation\Validator;
-use App\Http\Requests\Api\Client\ClientApiRequest;
+use IPTools\Range;
 
 class StoreApiKeyRequest extends ClientApiRequest
 {
@@ -26,7 +26,7 @@ class StoreApiKeyRequest extends ClientApiRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
-            if (!is_array($ips = $this->input('allowed_ips'))) {
+            if (! is_array($ips = $this->input('allowed_ips'))) {
                 return;
             }
 
@@ -39,7 +39,7 @@ class StoreApiKeyRequest extends ClientApiRequest
                         throw $exception;
                     }
                 } finally {
-                    $validator->errors()->addIf(!$valid, "allowed_ips.{$index}", '"' . $ip . '" is not a valid IP address or CIDR range.');
+                    $validator->errors()->addIf(! $valid, "allowed_ips.{$index}", '"'.$ip.'" is not a valid IP address or CIDR range.');
                 }
             }
         });

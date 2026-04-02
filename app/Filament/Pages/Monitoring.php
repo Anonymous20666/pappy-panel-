@@ -2,26 +2,29 @@
 
 namespace App\Filament\Pages;
 
+use App\Filament\Widgets\MonitoringWidget;
+use App\Filament\Widgets\NodeSelectorWidget;
+use App\Filament\Widgets\ServersWidget;
 use App\Models\Node;
-use Filament\Pages\Page;
-use Livewire\Attributes\On;
-use Filament\Actions\Action;
-use Illuminate\Support\HtmlString;
-use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\Placeholder;
 use App\Repositories\Wings\DaemonMonitoringRepository;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Placeholder;
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Section;
+use Illuminate\Support\HtmlString;
+use Livewire\Attributes\On;
 
 class Monitoring extends Page
 {
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-chart-bar';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'heroicon-s-chart-bar';
+
     protected static ?int $navigationSort = 3;
 
     public ?int $selectedNodeId = null;
 
-    public function mount(): void
-    {
-    }
+    public function mount(): void {}
 
     #[On('nodeChanged')]
     public function updateSelectedNode(?int $nodeId = null): void
@@ -62,9 +65,9 @@ class Monitoring extends Page
                 ->modalHeading(trans('admin/monitoring.details.heading'))
                 ->modalSubmitAction(false)
                 ->modalCancelActionLabel(trans('admin/monitoring.details.close'))
-                ->disabled(fn (): bool => !$this->selectedNodeId)
+                ->disabled(fn (): bool => ! $this->selectedNodeId)
                 ->form(function (): array {
-                    if (!$this->selectedNodeId) {
+                    if (! $this->selectedNodeId) {
                         return [
                             Placeholder::make('no_data')
                                 ->hiddenLabel()
@@ -87,9 +90,9 @@ class Monitoring extends Page
     protected function getHeaderWidgets(): array
     {
         return [
-            \App\Filament\Widgets\NodeSelectorWidget::class,
-            \App\Filament\Widgets\MonitoringWidget::class,
-            \App\Filament\Widgets\ServersWidget::class,
+            NodeSelectorWidget::class,
+            MonitoringWidget::class,
+            ServersWidget::class,
         ];
     }
 
@@ -107,7 +110,7 @@ class Monitoring extends Page
 
     protected function buildDetailsForm(?array $data): array
     {
-        if (!$data) {
+        if (! $data) {
             return [
                 Placeholder::make('no_data')
                     ->hiddenLabel()
@@ -122,7 +125,7 @@ class Monitoring extends Page
                 ->schema([
                     Placeholder::make('cpu_total')
                         ->label(trans('admin/monitoring.details.cpu_total'))
-                        ->content(number_format($data['cpu']['usage_percent'], 2) . '%'),
+                        ->content(number_format($data['cpu']['usage_percent'], 2).'%'),
 
                     Placeholder::make('cpu_cores')
                         ->label(trans('admin/monitoring.details.cpu_cores'))
@@ -139,10 +142,10 @@ class Monitoring extends Page
                             $items = array_map(function (int $i, float $pct): string {
                                 $color = $pct >= 80 ? 'text-danger-500' : ($pct >= 50 ? 'text-warning-500' : 'text-success-500');
 
-                                return "<div class=\"text-xs\"><span class=\"text-gray-400\">Core {$i}</span> <span class=\"{$color} font-mono\">" . number_format($pct, 1) . '%</span></div>';
+                                return "<div class=\"text-xs\"><span class=\"text-gray-400\">Core {$i}</span> <span class=\"{$color} font-mono\">".number_format($pct, 1).'%</span></div>';
                             }, array_keys($cores), $cores);
 
-                            return new HtmlString('<div class="grid grid-cols-4 gap-x-4 gap-y-1">' . implode('', $items) . '</div>');
+                            return new HtmlString('<div class="grid grid-cols-4 gap-x-4 gap-y-1">'.implode('', $items).'</div>');
                         }),
                 ]),
 
@@ -195,7 +198,7 @@ class Monitoring extends Page
 
                         Placeholder::make('swap_pct')
                             ->label(trans('admin/monitoring.details.swap_usage'))
-                            ->content(number_format((float) ($data['memory']['swap_usage_percent'] ?? 0), 2) . '%'),
+                            ->content(number_format((float) ($data['memory']['swap_usage_percent'] ?? 0), 2).'%'),
                     ];
                 }),
 
@@ -251,7 +254,7 @@ class Monitoring extends Page
         $pow = min($pow, count($units) - 1);
         $bytes /= (1 << (10 * $pow));
 
-        return round($bytes, 2) . ' ' . $units[$pow];
+        return round($bytes, 2).' '.$units[$pow];
     }
 
     private function formatUptime(int $seconds): string

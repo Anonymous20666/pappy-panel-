@@ -2,15 +2,15 @@
 
 namespace App\Services\Nodes;
 
-use App\Models\Node;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Eloquent\NodeRepository;
-use Illuminate\Contracts\Encryption\Encrypter;
-use App\Repositories\Wings\DaemonConfigurationRepository;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Exceptions\Service\Node\ConfigurationNotPersistedException;
+use App\Models\Node;
+use App\Repositories\Eloquent\NodeRepository;
+use App\Repositories\Wings\DaemonConfigurationRepository;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class NodeUpdateService
 {
@@ -22,8 +22,7 @@ class NodeUpdateService
         private DaemonConfigurationRepository $configurationRepository,
         private Encrypter $encrypter,
         private NodeRepository $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Update the configuration values for a given node on the machine.

@@ -2,12 +2,13 @@
 
 namespace Tests\Integration\Api\Client;
 
-use App\Models\User;
-use App\Models\ApiKey;
-use Illuminate\Support\Str;
-use Illuminate\Http\Response;
 use App\Events\ActivityLogged;
+use App\Models\ApiKey;
+use App\Models\User;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class ApiKeyControllerTest extends ClientApiIntegrationTestCase
 {
@@ -24,7 +25,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that the client's API key can be returned successfully.
      */
-    public function testApiKeysAreReturned()
+    public function test_api_keys_are_returned()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -46,8 +47,8 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
      * API key secret is returned as metadata in the response since it will not be returned
      * after that point.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('validIPAddressDataProvider')]
-    public function testApiKeyCanBeCreatedForAccount(array $data)
+    #[DataProvider('validIPAddressDataProvider')]
+    public function test_api_key_can_be_created_for_account(array $data)
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -79,11 +80,11 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
     /**
      * Block requests to create an API key specifying more than 50 IP addresses.
      */
-    public function testApiKeyCannotSpecifyMoreThanFiftyIps()
+    public function test_api_key_cannot_specify_more_than_fifty_ips()
     {
         $ips = [];
-        for ($i = 0; $i < 100; ++$i) {
-            $ips[] = '127.0.0.' . $i;
+        for ($i = 0; $i < 100; $i++) {
+            $ips[] = '127.0.0.'.$i;
         }
 
         $this->actingAs(User::factory()->create())
@@ -102,7 +103,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
      * @see https://github.com/pterodactyl/panel/security/advisories/GHSA-pjmh-7xfm-r4x9
      * @see https://github.com/pterodactyl/panel/issues/4394
      */
-    public function testApiKeyLimitIsApplied()
+    public function test_api_key_limit_is_applied()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -124,7 +125,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2457
      */
-    public function testValidationErrorIsReturnedForBadRequests()
+    public function test_validation_error_is_returned_for_bad_requests()
     {
         $this->actingAs(User::factory()->create());
 
@@ -158,7 +159,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
     /**
      * Tests that an API key can be deleted from the account.
      */
-    public function testApiKeyCanBeDeleted()
+    public function test_api_key_can_be_deleted()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -167,7 +168,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
             'key_type' => ApiKey::TYPE_ACCOUNT,
         ]);
 
-        $response = $this->actingAs($user)->delete('/api/client/account/api-keys/' . $key->identifier);
+        $response = $this->actingAs($user)->delete('/api/client/account/api-keys/'.$key->identifier);
         $response->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('api_keys', ['id' => $key->id]);
@@ -177,7 +178,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that trying to delete an API key that does not exist results in a 404.
      */
-    public function testNonExistentApiKeyDeletionReturns404Error()
+    public function test_non_existent_api_key_deletion_returns404_error()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -197,7 +198,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
      * Test that an API key that exists on the system cannot be deleted if the user
      * who created it is not the authenticated user.
      */
-    public function testApiKeyBelongingToAnotherUserCannotBeDeleted()
+    public function test_api_key_belonging_to_another_user_cannot_be_deleted()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -209,7 +210,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
         ]);
 
         $this->actingAs($user)
-            ->deleteJson('/api/client/account/api-keys/' . $key->identifier)
+            ->deleteJson('/api/client/account/api-keys/'.$key->identifier)
             ->assertNotFound();
 
         Event::assertNotDispatched(ActivityLogged::class);
@@ -219,7 +220,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
      * Tests that an application API key also belonging to the logged-in user cannot be
      * deleted through this endpoint if it exists.
      */
-    public function testApplicationApiKeyCannotBeDeleted()
+    public function test_application_api_key_cannot_be_deleted()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -229,7 +230,7 @@ class ApiKeyControllerTest extends ClientApiIntegrationTestCase
         ]);
 
         $this->actingAs($user)
-            ->deleteJson('/api/client/account/api-keys/' . $key->identifier)
+            ->deleteJson('/api/client/account/api-keys/'.$key->identifier)
             ->assertNotFound();
 
         Event::assertNotDispatched(ActivityLogged::class);

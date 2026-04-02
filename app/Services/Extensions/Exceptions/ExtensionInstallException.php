@@ -2,6 +2,4 @@
 
 namespace App\Services\Extensions\Exceptions;
 
-class ExtensionInstallException extends \RuntimeException
-{
-}
+class ExtensionInstallException extends \RuntimeException {}

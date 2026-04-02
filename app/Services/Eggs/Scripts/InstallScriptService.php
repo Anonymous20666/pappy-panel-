@@ -2,30 +2,30 @@
 
 namespace App\Services\Eggs\Scripts;
 
-use App\Models\Egg;
 use App\Contracts\Repository\EggRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Exceptions\Service\Egg\InvalidCopyFromException;
+use App\Models\Egg;
 
 class InstallScriptService
 {
     /**
      * InstallScriptService constructor.
      */
-    public function __construct(protected EggRepositoryInterface $repository)
-    {
-    }
+    public function __construct(protected EggRepositoryInterface $repository) {}
 
     /**
      * Modify the install script for a given Egg.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      * @throws InvalidCopyFromException
      */
     public function handle(Egg $egg, array $data): void
     {
-        if (!is_null(array_get($data, 'copy_script_from'))) {
-            if (!$this->repository->isCopyableScript(array_get($data, 'copy_script_from'), $egg->nest_id)) {
+        if (! is_null(array_get($data, 'copy_script_from'))) {
+            if (! $this->repository->isCopyableScript(array_get($data, 'copy_script_from'), $egg->nest_id)) {
                 throw new InvalidCopyFromException(trans('exceptions.nest.egg.invalid_copy_id'));
             }
         }

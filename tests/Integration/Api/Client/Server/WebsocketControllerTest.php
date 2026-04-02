@@ -3,11 +3,14 @@
 namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\Permission;
+use App\Models\Server;
+use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Response;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Token\Plain;
 use Lcobucci\JWT\Validation\Constraint\SignedWith;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
@@ -17,7 +20,7 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
      * Test that a subuser attempting to connect to the websocket receives an error if they
      * do not explicitly have the permission.
      */
-    public function testSubuserWithoutWebsocketPermissionReceivesError()
+    public function test_subuser_without_websocket_permission_receives_error()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_CONTROL_RESTART]);
 
@@ -30,7 +33,7 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
     /**
      * Confirm users cannot access the websocket for another user's server.
      */
-    public function testUserWithoutPermissionForServerReceivesError()
+    public function test_user_without_permission_for_server_receives_error()
     {
         [, $server] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
         [$user] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
@@ -43,10 +46,10 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
      * Test that the expected permissions are returned for the server owner and that the JWT is
      * configured correctly.
      */
-    public function testJwtAndWebsocketUrlAreReturnedForServerOwner()
+    public function test_jwt_and_websocket_url_are_returned_for_server_owner()
     {
-        /** @var \App\Models\User $user */
-        /** @var \App\Models\Server $server */
+        /** @var User $user */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
 
         // Force the node to HTTPS since we want to confirm it gets transformed to wss:// in the URL.
@@ -64,7 +67,7 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
 
         $config = Configuration::forSymmetricSigner(new Sha256(), $key = InMemory::plainText($server->node->getDecryptedKey()));
         $config->setValidationConstraints(new SignedWith(new Sha256(), $key));
-        /** @var \Lcobucci\JWT\Token\Plain $token */
+        /** @var Plain $token */
         $token = $config->parser()->parse($response->json('data.token'));
 
         $this->assertTrue(
@@ -94,12 +97,12 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that the subuser's permissions are passed along correctly in the generated JWT.
      */
-    public function testJwtIsConfiguredCorrectlyForServerSubuser()
+    public function test_jwt_is_configured_correctly_for_server_subuser()
     {
         $permissions = [Permission::ACTION_WEBSOCKET_CONNECT, Permission::ACTION_CONTROL_CONSOLE];
 
-        /** @var \App\Models\User $user */
-        /** @var \App\Models\Server $server */
+        /** @var User $user */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
 
         $response = $this->actingAs($user)->getJson("/api/client/servers/$server->uuid/websocket");
@@ -109,7 +112,7 @@ class WebsocketControllerTest extends ClientApiIntegrationTestCase
 
         $config = Configuration::forSymmetricSigner(new Sha256(), $key = InMemory::plainText($server->node->getDecryptedKey()));
         $config->setValidationConstraints(new SignedWith(new Sha256(), $key));
-        /** @var \Lcobucci\JWT\Token\Plain $token */
+        /** @var Plain $token */
         $token = $config->parser()->parse($response->json('data.token'));
 
         $this->assertTrue(

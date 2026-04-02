@@ -2,18 +2,18 @@
 
 namespace Tests\Integration\Services\Deployment;
 
-use App\Models\Node;
-use App\Models\Server;
+use App\Exceptions\Service\Deployment\NoViableNodeException;
 use App\Models\Database;
 use App\Models\Location;
+use App\Models\Node;
+use App\Models\Server;
+use App\Services\Deployment\FindViableNodesService;
 use Illuminate\Support\Collection;
 use Tests\Integration\IntegrationTestCase;
-use App\Services\Deployment\FindViableNodesService;
-use App\Exceptions\Service\Deployment\NoViableNodeException;
 
 class FindViableNodesServiceTest extends IntegrationTestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +22,7 @@ class FindViableNodesServiceTest extends IntegrationTestCase
         Node::query()->delete();
     }
 
-    public function testExceptionIsThrownIfNoDiskSpaceHasBeenSet()
+    public function test_exception_is_thrown_if_no_disk_space_has_been_set()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Disk space must be an int, got NULL');
@@ -30,7 +30,7 @@ class FindViableNodesServiceTest extends IntegrationTestCase
         $this->getService()->handle();
     }
 
-    public function testExceptionIsThrownIfNoMemoryHasBeenSet()
+    public function test_exception_is_thrown_if_no_memory_has_been_set()
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Memory usage must be an int, got NULL');
@@ -43,7 +43,7 @@ class FindViableNodesServiceTest extends IntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2529
      */
-    public function testNoExceptionIsThrownIfStringifiedIntegersArePassedForLocations()
+    public function test_no_exception_is_thrown_if_stringified_integers_are_passed_for_locations()
     {
         $this->getService()->setLocations([1, 2, 3]);
         $this->getService()->setLocations(['1', '2', '3']);
@@ -66,12 +66,12 @@ class FindViableNodesServiceTest extends IntegrationTestCase
         }
     }
 
-    public function testExpectedNodeIsReturnedForLocation()
+    public function test_expected_node_is_returned_for_location()
     {
-        /** @var \App\Models\Location[] $locations */
+        /** @var Location[] $locations */
         $locations = Location::factory()->times(2)->create();
 
-        /** @var \App\Models\Node[] $nodes */
+        /** @var Node[] $nodes */
         $nodes = [
             // This node should never be returned once we've completed the initial test which
             // runs without a location filter.

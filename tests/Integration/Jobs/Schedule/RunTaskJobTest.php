@@ -2,26 +2,27 @@
 
 namespace Tests\Integration\Jobs\Schedule;
 
-use Carbon\Carbon;
-use App\Models\Task;
-use App\Models\Server;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Jobs\Schedule\RunTaskJob;
 use App\Models\Schedule;
+use App\Models\Server;
+use App\Models\Task;
+use App\Repositories\Wings\DaemonPowerRepository;
+use Carbon\Carbon;
 use Carbon\CarbonImmutable;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use App\Jobs\Schedule\RunTaskJob;
 use Illuminate\Support\Facades\Bus;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\IntegrationTestCase;
-use GuzzleHttp\Exception\BadResponseException;
-use App\Repositories\Wings\DaemonPowerRepository;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
 
 class RunTaskJobTest extends IntegrationTestCase
 {
     /**
      * An inactive job should not be run by the system.
      */
-    public function testInactiveJobIsNotRun()
+    public function test_inactive_job_is_not_run()
     {
         $server = $this->createServerModel();
 
@@ -48,7 +49,7 @@ class RunTaskJobTest extends IntegrationTestCase
         $this->assertTrue(CarbonImmutable::now()->isSameAs(\DateTimeInterface::ATOM, $schedule->last_run_at));
     }
 
-    public function testJobWithInvalidActionThrowsException()
+    public function test_job_with_invalid_action_throws_exception()
     {
         $server = $this->createServerModel();
 
@@ -64,15 +65,15 @@ class RunTaskJobTest extends IntegrationTestCase
         Bus::dispatchSync($job);
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('isManualRunDataProvider')]
-    public function testJobIsExecuted(bool $isManualRun)
+    #[DataProvider('isManualRunDataProvider')]
+    public function test_job_is_executed(bool $isManualRun)
     {
         $server = $this->createServerModel();
 
         /** @var Schedule $schedule */
         $schedule = Schedule::factory()->create([
             'server_id' => $server->id,
-            'is_active' => !$isManualRun,
+            'is_active' => ! $isManualRun,
             'is_processing' => true,
             'last_run_at' => null,
         ]);
@@ -103,8 +104,8 @@ class RunTaskJobTest extends IntegrationTestCase
         $this->assertTrue(CarbonImmutable::now()->isSameAs(\DateTimeInterface::ATOM, $schedule->last_run_at));
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('isManualRunDataProvider')]
-    public function testExceptionDuringRunIsHandledCorrectly(bool $continueOnFailure)
+    #[DataProvider('isManualRunDataProvider')]
+    public function test_exception_during_run_is_handled_correctly(bool $continueOnFailure)
     {
         $server = $this->createServerModel();
 
@@ -125,7 +126,7 @@ class RunTaskJobTest extends IntegrationTestCase
             new DaemonConnectionException(new BadResponseException('Bad request', new Request('GET', '/test'), new Response()))
         );
 
-        if (!$continueOnFailure) {
+        if (! $continueOnFailure) {
             $this->expectException(DaemonConnectionException::class);
         }
 
@@ -146,7 +147,7 @@ class RunTaskJobTest extends IntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/4008
      */
-    public function testTaskIsNotRunIfServerIsSuspended()
+    public function test_task_is_not_run_if_server_is_suspended()
     {
         $server = $this->createServerModel([
             'status' => Server::STATUS_SUSPENDED,

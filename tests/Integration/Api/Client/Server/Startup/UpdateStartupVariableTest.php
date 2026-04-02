@@ -2,10 +2,12 @@
 
 namespace Tests\Integration\Api\Client\Server\Startup;
 
-use App\Models\User;
-use App\Models\Permission;
 use App\Models\EggVariable;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Models\User;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
@@ -13,16 +15,16 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
     /**
      * Test that a startup variable can be edited successfully for a server.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testStartupVariableCanBeUpdated(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_startup_variable_can_be_updated(array $permissions)
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
         $server->fill([
             'startup' => 'java {{SERVER_JARFILE}} --version {{BUNGEE_VERSION}}',
         ])->save();
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'BUNGEE_VERSION',
             'value' => '1.2.3',
         ]);
@@ -31,7 +33,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         $response->assertJsonPath('errors.0.code', 'ValidationException');
         $response->assertJsonPath('errors.0.detail', 'The value may only contain letters and numbers.');
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'BUNGEE_VERSION',
             'value' => '123',
         ]);
@@ -47,10 +49,10 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
      * Test that variables that are either not user_viewable, or not user_editable, cannot be
      * updated via this endpoint.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testStartupVariableCannotBeUpdatedIfNotUserViewableOrEditable(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_startup_variable_cannot_be_updated_if_not_user_viewable_or_editable(array $permissions)
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permissions);
 
         $egg = $this->cloneEggAndVariables($server->egg);
@@ -60,7 +62,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         $server->fill(['egg_id' => $egg->id])->save();
         $server->refresh();
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'BUNGEE_VERSION',
             'value' => '123',
         ]);
@@ -69,7 +71,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         $response->assertJsonPath('errors.0.code', 'BadRequestHttpException');
         $response->assertJsonPath('errors.0.detail', 'The environment variable you are trying to edit does not exist.');
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'SERVER_JARFILE',
             'value' => 'server2.jar',
         ]);
@@ -83,9 +85,9 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
      * Test that a hidden variable is not included in the startup_command output for the server if
      * a different variable is updated.
      */
-    public function testHiddenVariablesAreNotReturnedInStartupCommandWhenUpdatingVariable()
+    public function test_hidden_variables_are_not_returned_in_startup_command_when_updating_variable()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
 
         $egg = $this->cloneEggAndVariables($server->egg);
@@ -98,7 +100,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
 
         $server->refresh();
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'SERVER_JARFILE',
             'value' => 'server2.jar',
         ]);
@@ -114,9 +116,9 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2433
      */
-    public function testEggVariableWithNullableStringIsNotRequired()
+    public function test_egg_variable_with_nullable_string_is_not_required()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
 
         $egg = $this->cloneEggAndVariables($server->egg);
@@ -125,7 +127,7 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
         $server->fill(['egg_id' => $egg->id])->save();
         $server->refresh();
 
-        $response = $this->actingAs($user)->putJson($this->link($server) . '/startup/variable', [
+        $response = $this->actingAs($user)->putJson($this->link($server).'/startup/variable', [
             'key' => 'BUNGEE_VERSION',
             'value' => '',
         ]);
@@ -138,13 +140,13 @@ class UpdateStartupVariableTest extends ClientApiIntegrationTestCase
      * Test that a variable cannot be updated if the user does not have permission to perform
      * that action, or they aren't assigned at all to the server.
      */
-    public function testStartupVariableCannotBeUpdatedIfNotUserViewable()
+    public function test_startup_variable_cannot_be_updated_if_not_user_viewable()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
-        $this->actingAs($user)->putJson($this->link($server) . '/startup/variable')->assertForbidden();
+        $this->actingAs($user)->putJson($this->link($server).'/startup/variable')->assertForbidden();
 
         $user2 = User::factory()->create();
-        $this->actingAs($user2)->putJson($this->link($server) . '/startup/variable')->assertNotFound();
+        $this->actingAs($user2)->putJson($this->link($server).'/startup/variable')->assertNotFound();
     }
 
     public static function permissionsDataProvider(): array

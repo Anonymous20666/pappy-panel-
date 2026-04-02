@@ -2,13 +2,13 @@
 
 namespace App\Console\Commands\Server;
 
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Server;
+use App\Repositories\Wings\DaemonPowerRepository;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Validation\ValidationException;
-use App\Repositories\Wings\DaemonPowerRepository;
 use Illuminate\Validation\Factory as ValidatorFactory;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Illuminate\Validation\ValidationException;
 
 class BulkPowerActionCommand extends Command
 {
@@ -59,7 +59,7 @@ class BulkPowerActionCommand extends Command
         }
 
         $count = $this->getQueryBuilder($servers, $nodes)->count();
-        if (!$this->confirm(trans('command/messages.server.power.confirm', ['action' => $action, 'count' => $count])) && $this->input->isInteractive()) {
+        if (! $this->confirm(trans('command/messages.server.power.confirm', ['action' => $action, 'count' => $count])) && $this->input->isInteractive()) {
             return;
         }
 
@@ -93,11 +93,11 @@ class BulkPowerActionCommand extends Command
     {
         $instance = Server::query()->whereNull('status');
 
-        if (!empty($nodes) && !empty($servers)) {
+        if (! empty($nodes) && ! empty($servers)) {
             $instance->whereIn('id', $servers)->orWhereIn('node_id', $nodes);
-        } elseif (empty($nodes) && !empty($servers)) {
+        } elseif (empty($nodes) && ! empty($servers)) {
             $instance->whereIn('id', $servers);
-        } elseif (!empty($nodes) && empty($servers)) { // @phpstan-ignore empty.variable
+        } elseif (! empty($nodes) && empty($servers)) { // @phpstan-ignore empty.variable
             $instance->whereIn('node_id', $nodes);
         }
 

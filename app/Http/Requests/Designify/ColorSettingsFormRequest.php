@@ -27,7 +27,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:color800' => 'required|string',
             'designify:color900' => 'required|string',
 
-            'designify:theme1:name'    => 'required|string',
+            'designify:theme1:name' => 'required|string',
             'designify:theme1:colorPrimary' => 'required|string',
             'designify:theme1:color50' => 'required|string',
             'designify:theme1:color100' => 'required|string',
@@ -40,7 +40,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme1:color800' => 'required|string',
             'designify:theme1:color900' => 'required|string',
 
-            'designify:theme2:name'    => 'required|string',
+            'designify:theme2:name' => 'required|string',
             'designify:theme2:colorPrimary' => 'required|string',
             'designify:theme2:color50' => 'required|string',
             'designify:theme2:color100' => 'required|string',
@@ -53,7 +53,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme2:color800' => 'required|string',
             'designify:theme2:color900' => 'required|string',
 
-            'designify:theme3:name'    => 'required|string',
+            'designify:theme3:name' => 'required|string',
             'designify:theme3:colorPrimary' => 'required|string',
             'designify:theme3:color50' => 'required|string',
             'designify:theme3:color100' => 'required|string',
@@ -66,7 +66,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme3:color800' => 'required|string',
             'designify:theme3:color900' => 'required|string',
 
-            'designify:theme4:name'    => 'required|string',
+            'designify:theme4:name' => 'required|string',
             'designify:theme4:colorPrimary' => 'required|string',
             'designify:theme4:color50' => 'required|string',
             'designify:theme4:color100' => 'required|string',
@@ -79,7 +79,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme4:color800' => 'required|string',
             'designify:theme4:color900' => 'required|string',
 
-            'designify:theme5:name'    => 'required|string',
+            'designify:theme5:name' => 'required|string',
             'designify:theme5:colorPrimary' => 'required|string',
             'designify:theme5:color50' => 'required|string',
             'designify:theme5:color100' => 'required|string',
@@ -92,7 +92,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme5:color800' => 'required|string',
             'designify:theme5:color900' => 'required|string',
 
-            'designify:theme6:name'    => 'required|string',
+            'designify:theme6:name' => 'required|string',
             'designify:theme6:colorPrimary' => 'required|string',
             'designify:theme6:color50' => 'required|string',
             'designify:theme6:color100' => 'required|string',
@@ -105,7 +105,7 @@ class ColorSettingsFormRequest extends AdminFormRequest
             'designify:theme6:color800' => 'required|string',
             'designify:theme6:color900' => 'required|string',
 
-            'designify:theme7:name'    => 'required|string',
+            'designify:theme7:name' => 'required|string',
             'designify:theme7:colorPrimary' => 'required|string',
             'designify:theme7:color50' => 'required|string',
             'designify:theme7:color100' => 'required|string',

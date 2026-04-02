@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Api\Remote\Backups;
 
-use App\Models\Backup;
-use Carbon\CarbonImmutable;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
+use App\Exceptions\Http\HttpForbiddenException;
 use App\Extensions\Backups\BackupManager;
 use App\Extensions\Filesystem\S3Filesystem;
-use App\Exceptions\Http\HttpForbiddenException;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
+use App\Http\Controllers\Controller;
+use App\Models\Backup;
+use App\Models\Node;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class BackupRemoteUploadController extends Controller
 {
@@ -20,21 +22,19 @@ class BackupRemoteUploadController extends Controller
     /**
      * BackupRemoteUploadController constructor.
      */
-    public function __construct(private BackupManager $backupManager)
-    {
-    }
+    public function __construct(private BackupManager $backupManager) {}
 
     /**
      * Returns the required presigned urls to upload a backup to S3 cloud storage.
      *
      * @throws \Exception
      * @throws \Throwable
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     * @throws ModelNotFoundException
      */
     public function __invoke(Request $request, string $backup): JsonResponse
     {
         // Get the node associated with the request.
-        /** @var \App\Models\Node $node */
+        /** @var Node $node */
         $node = $request->attributes->get('node');
 
         // Get the size query parameter.
@@ -54,13 +54,13 @@ class BackupRemoteUploadController extends Controller
 
         // Prevent backups that have already been completed from trying to
         // be uploaded again.
-        if (!is_null($model->completed_at)) {
+        if (! is_null($model->completed_at)) {
             throw new ConflictHttpException('This backup is already in a completed state.');
         }
 
         // Ensure we are using the S3 adapter.
         $adapter = $this->backupManager->adapter();
-        if (!$adapter instanceof S3Filesystem) {
+        if (! $adapter instanceof S3Filesystem) {
             throw new BadRequestHttpException('The configured backup adapter is not an S3 compatible adapter.');
         }
 
@@ -79,7 +79,7 @@ class BackupRemoteUploadController extends Controller
         ];
 
         $storageClass = config('backups.disks.s3.storage_class');
-        if (!is_null($storageClass)) {
+        if (! is_null($storageClass)) {
             $params['StorageClass'] = $storageClass;
         }
 
@@ -95,7 +95,7 @@ class BackupRemoteUploadController extends Controller
 
         // Create as many UploadPart presigned urls as needed
         $parts = [];
-        for ($i = 0; $i < ($size / $maxPartSize); ++$i) {
+        for ($i = 0; $i < ($size / $maxPartSize); $i++) {
             $parts[] = $client->createPresignedRequest(
                 $client->getCommand('UploadPart', array_merge($params, ['PartNumber' => $i + 1])),
                 $expires

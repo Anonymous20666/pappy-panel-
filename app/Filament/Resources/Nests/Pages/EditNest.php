@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Nests\Pages;
 
-use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\Nests\NestResource;
+use Filament\Actions\DeleteAction;
+use Filament\Resources\Pages\EditRecord;
 
 class EditNest extends EditRecord
 {
@@ -12,7 +13,7 @@ class EditNest extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

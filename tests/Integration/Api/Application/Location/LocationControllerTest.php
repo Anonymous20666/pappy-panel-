@@ -2,12 +2,12 @@
 
 namespace Tests\Integration\Api\Application\Location;
 
-use App\Models\Node;
 use App\Models\Location;
-use Illuminate\Http\Response;
+use App\Models\Node;
+use App\Transformers\Api\Application\LocationTransformer;
 use App\Transformers\Api\Application\NodeTransformer;
 use App\Transformers\Api\Application\ServerTransformer;
-use App\Transformers\Api\Application\LocationTransformer;
+use Illuminate\Http\Response;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class LocationControllerTest extends ApplicationApiIntegrationTestCase
@@ -15,7 +15,7 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test getting all locations through the API.
      */
-    public function testGetLocations()
+    public function test_get_locations()
     {
         $locations = Location::factory()->times(2)->create();
 
@@ -69,11 +69,11 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test getting a single location on the API.
      */
-    public function testGetSingleLocation()
+    public function test_get_single_location()
     {
         $location = Location::factory()->create();
 
-        $response = $this->getJson('/api/application/locations/' . $location->id);
+        $response = $this->getJson('/api/application/locations/'.$location->id);
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2);
         $response->assertJsonStructure(['object', 'attributes' => ['id', 'short', 'long', 'created_at', 'updated_at']]);
@@ -92,7 +92,7 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a location can be created.
      */
-    public function testCreateLocation()
+    public function test_create_location()
     {
         $response = $this->postJson('/api/application/locations', [
             'short' => 'inhouse',
@@ -122,11 +122,11 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a location can be updated.
      */
-    public function testUpdateLocation()
+    public function test_update_location()
     {
         $location = Location::factory()->create();
 
-        $response = $this->patchJson('/api/application/locations/' . $location->id, [
+        $response = $this->patchJson('/api/application/locations/'.$location->id, [
             'short' => 'new inhouse',
             'long' => 'This is my new inhouse location',
         ]);
@@ -149,12 +149,12 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a location can be deleted from the database.
      */
-    public function testDeleteLocation()
+    public function test_delete_location()
     {
         $location = Location::factory()->create();
         $this->assertDatabaseHas('locations', ['id' => $location->id]);
 
-        $response = $this->delete('/api/application/locations/' . $location->id);
+        $response = $this->delete('/api/application/locations/'.$location->id);
         $response->assertStatus(Response::HTTP_NO_CONTENT);
 
         $this->assertDatabaseMissing('locations', ['id' => $location->id]);
@@ -163,12 +163,12 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that all the defined relationships for a location can be loaded successfully.
      */
-    public function testRelationshipsCanBeLoaded()
+    public function test_relationships_can_be_loaded()
     {
         $location = Location::factory()->create();
         $server = $this->createServerModel(['user_id' => $this->getApiUser()->id, 'location_id' => $location->id]);
 
-        $response = $this->getJson('/api/application/locations/' . $location->id . '?include=servers,nodes');
+        $response = $this->getJson('/api/application/locations/'.$location->id.'?include=servers,nodes');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2)->assertJsonCount(2, 'attributes.relationships');
         $response->assertJsonStructure([
@@ -211,14 +211,14 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
      * Test that a relationship that an API key does not have permission to access
      * cannot be loaded onto the model.
      */
-    public function testKeyWithoutPermissionCannotLoadRelationship()
+    public function test_key_without_permission_cannot_load_relationship()
     {
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_nodes' => 0]);
 
         $location = Location::factory()->create();
         Node::factory()->create(['location_id' => $location->id]);
 
-        $response = $this->getJson('/api/application/locations/' . $location->id . '?include=nodes');
+        $response = $this->getJson('/api/application/locations/'.$location->id.'?include=nodes');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonCount(2)->assertJsonCount(1, 'attributes.relationships');
         $response->assertJsonStructure([
@@ -247,7 +247,7 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
      *
      * GET /api/application/locations/:id
      */
-    public function testGetMissingLocation()
+    public function test_get_missing_location()
     {
         $response = $this->getJson('/api/application/locations/nil');
         $this->assertNotFoundJson($response);
@@ -257,12 +257,12 @@ class LocationControllerTest extends ApplicationApiIntegrationTestCase
      * Test that an authentication error occurs if a key does not have permission
      * to access a resource.
      */
-    public function testErrorReturnedIfNoPermission()
+    public function test_error_returned_if_no_permission()
     {
         $location = Location::factory()->create();
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_locations' => 0]);
 
-        $response = $this->getJson('/api/application/locations/' . $location->id);
+        $response = $this->getJson('/api/application/locations/'.$location->id);
         $this->assertAccessDeniedJson($response);
     }
 }

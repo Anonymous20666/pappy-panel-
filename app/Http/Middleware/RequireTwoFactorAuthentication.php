@@ -2,15 +2,17 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Prologue\Alerts\AlertsMessageBag;
 use App\Exceptions\Http\TwoFactorAuthRequiredException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Prologue\Alerts\AlertsMessageBag;
 
 class RequireTwoFactorAuthentication
 {
     public const LEVEL_NONE = 0;
+
     public const LEVEL_ADMIN = 1;
+
     public const LEVEL_ALL = 2;
 
     /**
@@ -21,9 +23,7 @@ class RequireTwoFactorAuthentication
     /**
      * RequireTwoFactorAuthentication constructor.
      */
-    public function __construct(private AlertsMessageBag $alert)
-    {
-    }
+    public function __construct(private AlertsMessageBag $alert) {}
 
     /**
      * Check the user state on the incoming request to determine if they should be allowed to
@@ -36,10 +36,10 @@ class RequireTwoFactorAuthentication
     public function handle(Request $request, \Closure $next): mixed
     {
         $user = $request->user();
-        $uri = rtrim($request->getRequestUri(), '/') . '/';
+        $uri = rtrim($request->getRequestUri(), '/').'/';
         $current = $request->route()->getName();
 
-        if (!$user || Str::startsWith($uri, ['/auth/']) || Str::startsWith($current, ['auth.', 'account.'])) {
+        if (! $user || Str::startsWith($uri, ['/auth/']) || Str::startsWith($current, ['auth.', 'account.'])) {
             return $next($request);
         }
 
@@ -50,7 +50,7 @@ class RequireTwoFactorAuthentication
         // If the level is set as admin and the user is not an admin, pass them through as well.
         if ($level === self::LEVEL_NONE || $user->use_totp) {
             return $next($request);
-        } elseif ($level === self::LEVEL_ADMIN && !$user->root_admin) {
+        } elseif ($level === self::LEVEL_ADMIN && ! $user->root_admin) {
             return $next($request);
         }
 

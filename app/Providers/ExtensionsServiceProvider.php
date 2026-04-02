@@ -2,30 +2,27 @@
 
 namespace App\Providers;
 
-use App\Models\Extension;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\ServiceProvider;
 use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Middleware\ConfigureExtensionFilesystem;
 use App\Http\Middleware\RequireTwoFactorAuthentication;
+use App\Models\Extension;
 use App\Services\Extensions\ExtensionFilesystemService;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExtensionsServiceProvider extends ServiceProvider
 {
-    public function register(): void
-    {
-
-    }
+    public function register(): void {}
 
     public function boot(): void
     {
-        if (!$this->canBootExtensionsTable()) {
+        if (! $this->canBootExtensionsTable()) {
             return;
         }
 
@@ -44,12 +41,12 @@ class ExtensionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function registerRoutes(string $identifier, string $installPath, array $manifest): void
     {
         $routes = Arr::get($manifest, 'backend.routes', []);
-        if (!is_array($routes)) {
+        if (! is_array($routes)) {
             return;
         }
 
@@ -87,7 +84,7 @@ class ExtensionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param array<int, string> $baseMiddleware
+     * @param  array<int, string>  $baseMiddleware
      */
     private function mountRouteScope(
         string $identifier,
@@ -96,16 +93,16 @@ class ExtensionsServiceProvider extends ServiceProvider
         array $baseMiddleware,
         string $prefix,
     ): void {
-        if (!is_array($scopeConfig)) {
+        if (! is_array($scopeConfig)) {
             return;
         }
 
         $file = Arr::get($scopeConfig, 'file');
-        if (!is_string($file) || trim($file) === '') {
+        if (! is_string($file) || trim($file) === '') {
             return;
         }
 
-        $routeFilePath = realpath($installPath . DIRECTORY_SEPARATOR . ltrim($file, '/'));
+        $routeFilePath = realpath($installPath.DIRECTORY_SEPARATOR.ltrim($file, '/'));
         $installPathReal = realpath($installPath);
 
         if ($routeFilePath === false || $installPathReal === false || strpos($routeFilePath, $installPathReal) !== 0) {
@@ -117,7 +114,7 @@ class ExtensionsServiceProvider extends ServiceProvider
             return;
         }
 
-        if (!is_file($routeFilePath)) {
+        if (! is_file($routeFilePath)) {
             return;
         }
 
@@ -125,7 +122,7 @@ class ExtensionsServiceProvider extends ServiceProvider
         $middleware = [
             ...$baseMiddleware,
             ...array_filter($manifestMiddleware, fn ($value) => is_string($value)),
-            ConfigureExtensionFilesystem::class . ':' . $identifier,
+            ConfigureExtensionFilesystem::class.':'.$identifier,
         ];
 
         Route::middleware($middleware)
@@ -134,7 +131,7 @@ class ExtensionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function registerCommands(string $identifier, array $manifest): void
     {
@@ -162,7 +159,7 @@ class ExtensionsServiceProvider extends ServiceProvider
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function runBootHooks(string $identifier, string $installPath, array $manifest): void
     {
@@ -173,12 +170,12 @@ class ExtensionsServiceProvider extends ServiceProvider
         }
 
         foreach ($hooks as $hook) {
-            if (!is_string($hook) || trim($hook) === '') {
+            if (! is_string($hook) || trim($hook) === '') {
                 continue;
             }
 
-            $path = realpath($installPath . DIRECTORY_SEPARATOR . ltrim($hook, '/'));
-            if ($path === false || strpos($path, $installPathReal) !== 0 || !is_file($path)) {
+            $path = realpath($installPath.DIRECTORY_SEPARATOR.ltrim($hook, '/'));
+            if ($path === false || strpos($path, $installPathReal) !== 0 || ! is_file($path)) {
                 Log::warning('Skipping extension boot hook due to invalid path.', [
                     'extension' => $identifier,
                     'hook' => $hook,
@@ -208,9 +205,9 @@ class ExtensionsServiceProvider extends ServiceProvider
 
             $fs = app(ExtensionFilesystemService::class);
             $root = $fs->publicRootPath($identifier);
-            $absolute = realpath($root . DIRECTORY_SEPARATOR . $requested);
+            $absolute = realpath($root.DIRECTORY_SEPARATOR.$requested);
 
-            if ($absolute === false || strpos($absolute, $root) !== 0 || !is_file($absolute)) {
+            if ($absolute === false || strpos($absolute, $root) !== 0 || ! is_file($absolute)) {
                 throw new NotFoundHttpException();
             }
 

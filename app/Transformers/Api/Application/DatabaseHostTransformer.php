@@ -2,6 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Database;
 use App\Models\DatabaseHost;
 use App\Services\Acl\Api\AdminAcl;
@@ -42,11 +43,11 @@ class DatabaseHostTransformer extends BaseTransformer
     /**
      * Include the databases associated with this host.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeDatabases(DatabaseHost $model): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVER_DATABASES)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVER_DATABASES)) {
             return $this->null();
         }
 

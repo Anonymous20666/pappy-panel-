@@ -2,22 +2,28 @@
 
 namespace App\Services\Servers;
 
-use App\Models\Egg;
-use App\Models\User;
-use Ramsey\Uuid\Uuid;
-use App\Models\Server;
-use App\Models\Allocation;
-use Illuminate\Support\Arr;
-use Webmozart\Assert\Assert;
-use Illuminate\Support\Collection;
-use App\Models\Objects\DeploymentObject;
-use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Eloquent\ServerRepository;
-use App\Repositories\Wings\DaemonServerRepository;
-use App\Services\Deployment\FindViableNodesService;
-use App\Repositories\Eloquent\ServerVariableRepository;
-use App\Services\Deployment\AllocationSelectionService;
+use App\Exceptions\DisplayException;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Deployment\NoViableAllocationException;
+use App\Exceptions\Service\Deployment\NoViableNodeException;
+use App\Models\Allocation;
+use App\Models\Egg;
+use App\Models\Objects\DeploymentObject;
+use App\Models\Server;
+use App\Models\User;
+use App\Repositories\Eloquent\ServerRepository;
+use App\Repositories\Eloquent\ServerVariableRepository;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Services\Deployment\AllocationSelectionService;
+use App\Services\Deployment\FindViableNodesService;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Uuid;
+use Webmozart\Assert\Assert;
 
 class ServerCreationService
 {
@@ -33,8 +39,7 @@ class ServerCreationService
         private ServerDeletionService $serverDeletionService,
         private ServerVariableRepository $serverVariableRepository,
         private VariableValidatorService $validatorService,
-    ) {
-    }
+    ) {}
 
     /**
      * Create a server on the Panel and trigger a request to the Daemon to begin the server
@@ -43,11 +48,11 @@ class ServerCreationService
      * no node_id the node_is will be picked from the allocation.
      *
      * @throws \Throwable
-     * @throws \App\Exceptions\DisplayException
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
-     * @throws \App\Exceptions\Service\Deployment\NoViableNodeException
-     * @throws \App\Exceptions\Service\Deployment\NoViableAllocationException
+     * @throws DisplayException
+     * @throws ValidationException
+     * @throws RecordNotFoundException
+     * @throws NoViableNodeException
+     * @throws NoViableAllocationException
      */
     public function handle(array $data, ?DeploymentObject $deployment = null): Server
     {
@@ -109,9 +114,9 @@ class ServerCreationService
     /**
      * Gets an allocation to use for automatic deployment.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \App\Exceptions\Service\Deployment\NoViableAllocationException
-     * @throws \App\Exceptions\Service\Deployment\NoViableNodeException
+     * @throws DisplayException
+     * @throws NoViableAllocationException
+     * @throws NoViableNodeException
      */
     private function configureDeployment(array $data, DeploymentObject $deployment): Allocation
     {
@@ -130,7 +135,7 @@ class ServerCreationService
     /**
      * Store the server in the database and return the model.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     private function createModel(array $data): Server
     {
@@ -195,7 +200,7 @@ class ServerCreationService
             ];
         })->toArray();
 
-        if (!empty($records)) {
+        if (! empty($records)) {
             $this->serverVariableRepository->insert($records);
         }
     }
@@ -207,7 +212,7 @@ class ServerCreationService
     {
         $uuid = Uuid::uuid4()->toString();
 
-        if (!$this->repository->isUniqueUuidCombo($uuid, substr($uuid, 0, 8))) {
+        if (! $this->repository->isUniqueUuidCombo($uuid, substr($uuid, 0, 8))) {
             return $this->generateUniqueUuidCombo();
         }
 

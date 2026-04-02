@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Nest;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ramsey\Uuid\Uuid;
 
 class NestFactory extends Factory
 {

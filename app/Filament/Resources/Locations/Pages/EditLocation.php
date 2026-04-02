@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources\Locations\Pages;
 
+use App\Filament\Resources\Locations\LocationResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Resources\Locations\LocationResource;
 
 class EditLocation extends EditRecord
 {

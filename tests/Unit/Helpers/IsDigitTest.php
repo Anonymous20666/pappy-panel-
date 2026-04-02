@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Helpers;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class IsDigitTest extends TestCase
@@ -9,8 +10,8 @@ class IsDigitTest extends TestCase
     /**
      * Test the is_digit helper.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('helperDataProvider')]
-    public function testHelper($value, $response)
+    #[DataProvider('helperDataProvider')]
+    public function test_helper($value, $response)
     {
         $this->assertSame($response, is_digit($value));
     }

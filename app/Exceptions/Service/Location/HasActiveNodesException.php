@@ -2,8 +2,8 @@
 
 namespace App\Exceptions\Service\Location;
 
-use Illuminate\Http\Response;
 use App\Exceptions\DisplayException;
+use Illuminate\Http\Response;
 
 class HasActiveNodesException extends DisplayException
 {

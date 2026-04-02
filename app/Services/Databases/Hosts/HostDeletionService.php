@@ -2,9 +2,9 @@
 
 namespace App\Services\Databases\Hosts;
 
-use App\Exceptions\Service\HasActiveServersException;
-use App\Contracts\Repository\DatabaseRepositoryInterface;
 use App\Contracts\Repository\DatabaseHostRepositoryInterface;
+use App\Contracts\Repository\DatabaseRepositoryInterface;
+use App\Exceptions\Service\HasActiveServersException;
 
 class HostDeletionService
 {
@@ -14,8 +14,7 @@ class HostDeletionService
     public function __construct(
         private DatabaseRepositoryInterface $databaseRepository,
         private DatabaseHostRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete a specified host from the Panel if no databases are

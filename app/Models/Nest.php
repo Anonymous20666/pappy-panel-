@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
+use Database\Factories\NestFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -11,14 +14,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $author
  * @property string $name
  * @property string|null $description
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Server[] $servers
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Egg[] $eggs
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Collection|Server[] $servers
+ * @property Collection|Egg[] $eggs
  */
 class Nest extends Model
 {
-    /** @use HasFactory<\Database\Factories\NestFactory> */
+    /** @use HasFactory<NestFactory> */
     use HasFactory;
 
     /**
@@ -49,7 +52,7 @@ class Nest extends Model
     /**
      * Gets all eggs associated with this service.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Egg, $this>
+     * @return HasMany<Egg, $this>
      */
     public function eggs(): HasMany
     {
@@ -59,7 +62,7 @@ class Nest extends Model
     /**
      * Gets all servers associated with this nest.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
+     * @return HasMany<Server, $this>
      */
     public function servers(): HasMany
     {

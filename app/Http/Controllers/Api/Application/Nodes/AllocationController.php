@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers\Api\Application\Nodes;
 
-use App\Models\Node;
-use App\Models\Allocation;
-use Illuminate\Http\JsonResponse;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
-use Illuminate\Database\Eloquent\Builder;
-use App\Services\Allocations\AssignmentService;
-use App\Services\Allocations\AllocationDeletionService;
-use App\Transformers\Api\Application\AllocationTransformer;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Service\Allocation\CidrOutOfRangeException;
+use App\Exceptions\Service\Allocation\InvalidPortMappingException;
+use App\Exceptions\Service\Allocation\PortOutOfRangeException;
+use App\Exceptions\Service\Allocation\ServerUsingAllocationException;
+use App\Exceptions\Service\Allocation\TooManyPortsInRangeException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Allocations\DeleteAllocationRequest;
 use App\Http\Requests\Api\Application\Allocations\GetAllocationsRequest;
 use App\Http\Requests\Api\Application\Allocations\StoreAllocationRequest;
-use App\Http\Requests\Api\Application\Allocations\DeleteAllocationRequest;
+use App\Models\Allocation;
+use App\Models\Node;
+use App\Services\Allocations\AllocationDeletionService;
+use App\Services\Allocations\AssignmentService;
+use App\Transformers\Api\Application\AllocationTransformer;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\JsonResponse;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class AllocationController extends ApplicationApiController
 {
@@ -39,7 +45,7 @@ class AllocationController extends ApplicationApiController
                 AllowedFilter::exact('port'),
                 'ip_alias',
                 AllowedFilter::callback('server_id', function (Builder $builder, $value) {
-                    if (empty($value) || is_bool($value) || !ctype_digit((string) $value)) {
+                    if (empty($value) || is_bool($value) || ! ctype_digit((string) $value)) {
                         return $builder->whereNull('server_id');
                     }
 
@@ -56,11 +62,11 @@ class AllocationController extends ApplicationApiController
     /**
      * Store new allocations for a given node.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \App\Exceptions\Service\Allocation\CidrOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\InvalidPortMappingException
-     * @throws \App\Exceptions\Service\Allocation\PortOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\TooManyPortsInRangeException
+     * @throws DisplayException
+     * @throws CidrOutOfRangeException
+     * @throws InvalidPortMappingException
+     * @throws PortOutOfRangeException
+     * @throws TooManyPortsInRangeException
      */
     public function store(StoreAllocationRequest $request, Node $node): JsonResponse
     {
@@ -72,7 +78,7 @@ class AllocationController extends ApplicationApiController
     /**
      * Delete a specific allocation from the Panel.
      *
-     * @throws \App\Exceptions\Service\Allocation\ServerUsingAllocationException
+     * @throws ServerUsingAllocationException
      */
     public function delete(DeleteAllocationRequest $request, Node $node, Allocation $allocation): JsonResponse
     {

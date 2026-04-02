@@ -4,12 +4,12 @@ namespace App\Filament\Widgets;
 
 use App\Models\Node;
 use App\Models\Server;
-use Livewire\Attributes\On;
+use App\Repositories\Wings\DaemonServerStatusRepository;
+use Filament\Forms\Components\Placeholder;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Illuminate\Support\HtmlString;
-use Filament\Schemas\Components\Section;
-use Filament\Forms\Components\Placeholder;
-use App\Repositories\Wings\DaemonServerStatusRepository;
+use Livewire\Attributes\On;
 
 class ServersWidget extends BaseWidget
 {
@@ -23,9 +23,7 @@ class ServersWidget extends BaseWidget
 
     protected ?string $pollingInterval = '1s';
 
-    public function mount(): void
-    {
-    }
+    public function mount(): void {}
 
     #[On('nodeChanged')]
     public function updateNodeId(?int $nodeId = null): void
@@ -56,7 +54,7 @@ class ServersWidget extends BaseWidget
 
     private function buildTable(): HtmlString
     {
-        if (!$this->selectedNodeId) {
+        if (! $this->selectedNodeId) {
             return $this->emptyState(trans('admin/monitoring.servers.no_node'), '#94a3b8');
         }
 
@@ -91,13 +89,13 @@ class ServersWidget extends BaseWidget
             $rows .= $this->buildRow($uuid, $row, $names[$uuid] ?? null);
         }
 
-        $hName    = e(trans('admin/monitoring.servers.col.name'));
-        $hState   = e(trans('admin/monitoring.servers.col.state'));
-        $hCpu     = e(trans('admin/monitoring.servers.col.cpu'));
-        $hMemory  = e(trans('admin/monitoring.servers.col.memory'));
-        $hDisk    = e(trans('admin/monitoring.servers.col.disk'));
+        $hName = e(trans('admin/monitoring.servers.col.name'));
+        $hState = e(trans('admin/monitoring.servers.col.state'));
+        $hCpu = e(trans('admin/monitoring.servers.col.cpu'));
+        $hMemory = e(trans('admin/monitoring.servers.col.memory'));
+        $hDisk = e(trans('admin/monitoring.servers.col.disk'));
         $hNetwork = e(trans('admin/monitoring.servers.col.network'));
-        $hUptime  = e(trans('admin/monitoring.servers.col.uptime'));
+        $hUptime = e(trans('admin/monitoring.servers.col.uptime'));
 
         $thStyle = 'padding:10px 16px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:#64748b';
 
@@ -123,35 +121,35 @@ class ServersWidget extends BaseWidget
 
     private function buildRow(string $uuid, array $row, ?string $serverName): string
     {
-        $state    = $row['state'] ?? 'unknown';
-        $util     = $row['utilization'] ?? [];
+        $state = $row['state'] ?? 'unknown';
+        $util = $row['utilization'] ?? [];
 
-        $cpuRaw   = (float) ($util['cpu_absolute'] ?? 0);
-        $memUsed  = (int) ($util['memory_bytes'] ?? 0);
+        $cpuRaw = (float) ($util['cpu_absolute'] ?? 0);
+        $memUsed = (int) ($util['memory_bytes'] ?? 0);
         $memLimit = (int) ($util['memory_limit_bytes'] ?? 0);
-        $disk     = (int) ($util['disk_bytes'] ?? 0);
-        $netRx    = (int) ($util['network']['rx_bytes'] ?? 0);
-        $netTx    = (int) ($util['network']['tx_bytes'] ?? 0);
+        $disk = (int) ($util['disk_bytes'] ?? 0);
+        $netRx = (int) ($util['network']['rx_bytes'] ?? 0);
+        $netTx = (int) ($util['network']['tx_bytes'] ?? 0);
         $uptimeMs = (int) ($util['uptime'] ?? 0);
 
-        $name       = e($serverName ?? substr($uuid, 0, 8));
-        $cpuPct     = min($cpuRaw, 100);
-        $memPct     = $memLimit > 0 ? min(round($memUsed / $memLimit * 100, 1), 100) : 0;
+        $name = e($serverName ?? substr($uuid, 0, 8));
+        $cpuPct = min($cpuRaw, 100);
+        $memPct = $memLimit > 0 ? min(round($memUsed / $memLimit * 100, 1), 100) : 0;
 
-        $cpuLabel   = number_format($cpuRaw, 1) . '%';
-        $memLabel   = $this->formatBytes($memUsed) . ' / ' . $this->formatBytes($memLimit);
-        $diskLabel  = $this->formatBytes($disk);
+        $cpuLabel = number_format($cpuRaw, 1).'%';
+        $memLabel = $this->formatBytes($memUsed).' / '.$this->formatBytes($memLimit);
+        $diskLabel = $this->formatBytes($disk);
         $netRxLabel = $this->formatBytes($netRx);
         $netTxLabel = $this->formatBytes($netTx);
-        $uptime     = $uptimeMs > 0 ? $this->formatUptime((int) ($uptimeMs / 1000)) : '—';
+        $uptime = $uptimeMs > 0 ? $this->formatUptime((int) ($uptimeMs / 1000)) : '—';
 
         $cpuColor = $cpuPct >= 80 ? '#ef4444' : ($cpuPct >= 60 ? '#eab308' : '#22c55e');
         $memColor = $memPct >= 80 ? '#ef4444' : ($memPct >= 60 ? '#eab308' : '#3b82f6');
 
         [$badgeHtml, $avatarBorder] = $this->stateBadge($state);
 
-        $initial  = e(strtoupper(mb_substr($serverName ?? $uuid, 0, 1)));
-        $tdStyle  = 'padding:12px 16px;vertical-align:middle';
+        $initial = e(strtoupper(mb_substr($serverName ?? $uuid, 0, 1)));
+        $tdStyle = 'padding:12px 16px;vertical-align:middle';
 
         return <<<HTML
         <tr style="border-bottom:1px solid rgba(255,255,255,0.05)">
@@ -189,15 +187,15 @@ class ServersWidget extends BaseWidget
     private function stateBadge(string $state): array
     {
         [$bg, $textColor, $dotColor, $border] = match ($state) {
-            'running'  => ['rgba(34,197,94,0.12)',  '#4ade80', '#22c55e', 'rgba(34,197,94,0.5)'],
+            'running' => ['rgba(34,197,94,0.12)',  '#4ade80', '#22c55e', 'rgba(34,197,94,0.5)'],
             'starting' => ['rgba(234,179,8,0.12)',  '#facc15', '#eab308', 'rgba(234,179,8,0.5)'],
             'stopping' => ['rgba(249,115,22,0.12)', '#fb923c', '#f97316', 'rgba(249,115,22,0.5)'],
-            'offline'  => ['rgba(148,163,184,0.08)', '#94a3b8', '#64748b', 'rgba(148,163,184,0.3)'],
-            'crashed'  => ['rgba(239,68,68,0.12)',  '#f87171', '#ef4444', 'rgba(239,68,68,0.5)'],
-            default    => ['rgba(148,163,184,0.08)', '#94a3b8', '#64748b', 'rgba(148,163,184,0.3)'],
+            'offline' => ['rgba(148,163,184,0.08)', '#94a3b8', '#64748b', 'rgba(148,163,184,0.3)'],
+            'crashed' => ['rgba(239,68,68,0.12)',  '#f87171', '#ef4444', 'rgba(239,68,68,0.5)'],
+            default => ['rgba(148,163,184,0.08)', '#94a3b8', '#64748b', 'rgba(148,163,184,0.3)'],
         };
 
-        $label = e(trans('admin/monitoring.servers.states.' . $state));
+        $label = e(trans('admin/monitoring.servers.states.'.$state));
 
         $badge = <<<HTML
         <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600;background:{$bg};color:{$textColor};border:1px solid {$border}">
@@ -227,7 +225,7 @@ class ServersWidget extends BaseWidget
     {
         try {
             $node = Node::find($this->selectedNodeId);
-            if (!$node) {
+            if (! $node) {
                 return [];
             }
             $repository = app(DaemonServerStatusRepository::class);
@@ -246,15 +244,15 @@ class ServersWidget extends BaseWidget
             return '0 B';
         }
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
-        $pow   = (int) min(floor(log($bytes) / log(1024)), count($units) - 1);
+        $pow = (int) min(floor(log($bytes) / log(1024)), count($units) - 1);
 
-        return round($bytes / (1024 ** $pow), 2) . ' ' . $units[$pow];
+        return round($bytes / (1024 ** $pow), 2).' '.$units[$pow];
     }
 
     private function formatUptime(int $seconds): string
     {
-        $days    = intdiv($seconds, 86400);
-        $hours   = intdiv($seconds % 86400, 3600);
+        $days = intdiv($seconds, 86400);
+        $hours = intdiv($seconds % 86400, 3600);
         $minutes = intdiv($seconds % 3600, 60);
 
         if ($days > 0) {

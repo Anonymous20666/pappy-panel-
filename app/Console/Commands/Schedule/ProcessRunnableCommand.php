@@ -3,10 +3,10 @@
 namespace App\Console\Commands\Schedule;
 
 use App\Models\Schedule;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\Eloquent\Builder;
 use App\Services\Schedules\ProcessScheduleService;
+use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 
 class ProcessRunnableCommand extends Command
 {
@@ -69,7 +69,7 @@ class ProcessRunnableCommand extends Command
         } catch (\Throwable $exception) {
             Log::error($exception, ['schedule_id' => $schedule->id]);
 
-            $this->error("An error was encountered while processing Schedule #{$schedule->id}: " . $exception->getMessage());
+            $this->error("An error was encountered while processing Schedule #{$schedule->id}: ".$exception->getMessage());
         }
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\CarbonImmutable;
+use Database\Factories\EggVariableFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property int $id
@@ -16,8 +18,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property bool $user_viewable
  * @property bool $user_editable
  * @property string $rules
- * @property \Carbon\CarbonImmutable $created_at
- * @property \Carbon\CarbonImmutable $updated_at
+ * @property CarbonImmutable $created_at
+ * @property CarbonImmutable $updated_at
  * @property bool $required
  * @property Egg $egg
  * @property ServerVariable $serverVariable
@@ -28,7 +30,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class EggVariable extends Model
 {
-    /** @use HasFactory<\Database\Factories\EggVariableFactory> */
+    /** @use HasFactory<EggVariableFactory> */
     use HasFactory;
 
     /**
@@ -67,7 +69,7 @@ class EggVariable extends Model
         'egg_id' => 'exists:eggs,id',
         'name' => 'required|string|between:1,191',
         'description' => 'string',
-        'env_variable' => 'required|regex:/^[\w]{1,191}$/|notIn:' . self::RESERVED_ENV_NAMES,
+        'env_variable' => 'required|regex:/^[\w]{1,191}$/|notIn:'.self::RESERVED_ENV_NAMES,
         'default_value' => 'string',
         'user_viewable' => 'boolean',
         'user_editable' => 'boolean',
@@ -85,7 +87,7 @@ class EggVariable extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Egg, $this>
+     * @return HasOne<Egg, $this>
      */
     public function egg(): HasOne
     {
@@ -95,7 +97,7 @@ class EggVariable extends Model
     /**
      * Return server variables associated with this variable.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ServerVariable, $this>
+     * @return HasMany<ServerVariable, $this>
      */
     public function serverVariable(): HasMany
     {

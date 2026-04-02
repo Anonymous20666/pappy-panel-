@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Contracts\Models\Identifiable;
 use App\Models\Traits\HasRealtimeIdentifier;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Database\Factories\EggFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -32,8 +35,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $script_entry
  * @property string $script_container
  * @property int|null $copy_script_from
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string|null $copy_script_install
  * @property string $copy_script_entry
  * @property string $copy_script_container
@@ -44,16 +47,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string $inherit_file_denylist
  * @property array|null $inherit_features
  * @property Nest $nest
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Server[] $servers
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\EggVariable[] $variables
+ * @property Collection|Server[] $servers
+ * @property Collection|EggVariable[] $variables
  * @property Egg|null $scriptFrom
  * @property Egg|null $configFrom
  */
 #[Attributes\Identifiable('eegg')]
 class Egg extends Model implements Identifiable
 {
-    /** @use HasFactory<\Database\Factories\EggFactory> */
+    /** @use HasFactory<EggFactory> */
     use HasFactory;
+
     use HasRealtimeIdentifier;
 
     /**
@@ -77,6 +81,7 @@ class Egg extends Model implements Identifiable
      * than leaving it null.
      */
     public const FEATURE_EULA_POPUP = 'eula';
+
     public const FEATURE_FASTDL = 'fastdl';
 
     /**
@@ -161,7 +166,7 @@ class Egg extends Model implements Identifiable
      */
     public function getCopyScriptInstallAttribute(): ?string
     {
-        if (!is_null($this->script_install) || is_null($this->copy_script_from)) {
+        if (! is_null($this->script_install) || is_null($this->copy_script_from)) {
             return $this->script_install;
         }
 
@@ -199,7 +204,7 @@ class Egg extends Model implements Identifiable
      */
     public function getInheritConfigFilesAttribute(): ?string
     {
-        if (!is_null($this->config_files) || is_null($this->config_from)) {
+        if (! is_null($this->config_files) || is_null($this->config_from)) {
             return $this->config_files;
         }
 
@@ -211,7 +216,7 @@ class Egg extends Model implements Identifiable
      */
     public function getInheritConfigStartupAttribute(): ?string
     {
-        if (!is_null($this->config_startup) || is_null($this->config_from)) {
+        if (! is_null($this->config_startup) || is_null($this->config_from)) {
             return $this->config_startup;
         }
 
@@ -223,7 +228,7 @@ class Egg extends Model implements Identifiable
      */
     public function getInheritConfigLogsAttribute(): ?string
     {
-        if (!is_null($this->config_logs) || is_null($this->config_from)) {
+        if (! is_null($this->config_logs) || is_null($this->config_from)) {
             return $this->config_logs;
         }
 
@@ -235,7 +240,7 @@ class Egg extends Model implements Identifiable
      */
     public function getInheritConfigStopAttribute(): ?string
     {
-        if (!is_null($this->config_stop) || is_null($this->config_from)) {
+        if (! is_null($this->config_stop) || is_null($this->config_from)) {
             return $this->config_stop;
         }
 
@@ -248,7 +253,7 @@ class Egg extends Model implements Identifiable
      */
     public function getInheritFeaturesAttribute(): ?array
     {
-        if (!is_null($this->features) || is_null($this->config_from)) {
+        if (! is_null($this->features) || is_null($this->config_from)) {
             return $this->features;
         }
 
@@ -271,7 +276,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets nest associated with an egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Nest, $this>
+     * @return BelongsTo<Nest, $this>
      */
     public function nest(): BelongsTo
     {
@@ -281,7 +286,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets all servers associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
+     * @return HasMany<Server, $this>
      */
     public function servers(): HasMany
     {
@@ -291,7 +296,7 @@ class Egg extends Model implements Identifiable
     /**
      * Gets all variables associated with this egg.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\EggVariable, $this>
+     * @return HasMany<EggVariable, $this>
      */
     public function variables(): HasMany
     {
@@ -301,7 +306,7 @@ class Egg extends Model implements Identifiable
     /**
      * Get the parent egg from which to copy scripts.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<self, $this>
+     * @return BelongsTo<self, $this>
      */
     public function scriptFrom(): BelongsTo
     {
@@ -311,7 +316,7 @@ class Egg extends Model implements Identifiable
     /**
      * Get the parent egg from which to copy configuration settings.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<self, $this>
+     * @return BelongsTo<self, $this>
      */
     public function configFrom(): BelongsTo
     {

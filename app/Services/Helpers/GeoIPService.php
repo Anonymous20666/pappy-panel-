@@ -2,17 +2,15 @@
 
 namespace App\Services\Helpers;
 
-use Psr\Log\LoggerInterface;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Psr\Log\LoggerInterface;
 
 class GeoIPService
 {
     private const API_URL = 'http://ip-api.com/json/';
 
-    public function __construct(private LoggerInterface $logger)
-    {
-    }
+    public function __construct(private LoggerInterface $logger) {}
 
     /**
      * Resolve an IP address to country information.
@@ -21,16 +19,16 @@ class GeoIPService
      */
     public function getCountryInfo(string $ip): ?array
     {
-        if (!$this->isPublicIP($ip)) {
+        if (! $this->isPublicIP($ip)) {
             return [
                 'country' => __('strings.local_network'),
                 'code' => 'LOCAL',
             ];
         }
 
-        return Cache::remember('geoip:v2:' . $ip, 86400, function () use ($ip) {
+        return Cache::remember('geoip:v2:'.$ip, 86400, function () use ($ip) {
             try {
-                $response = Http::get(self::API_URL . $ip, [
+                $response = Http::get(self::API_URL.$ip, [
                     'fields' => 'status,message,country,countryCode',
                 ]);
 
@@ -44,12 +42,12 @@ class GeoIPService
                     }
                 }
 
-                $this->logger->warning('GeoIP resolution failed for IP: ' . $ip, [
+                $this->logger->warning('GeoIP resolution failed for IP: '.$ip, [
                     'status' => $response->status(),
                     'body' => $response->body(),
                 ]);
             } catch (\Exception $e) {
-                $this->logger->error('GeoIP resolution exception for IP: ' . $ip . ' - ' . $e->getMessage());
+                $this->logger->error('GeoIP resolution exception for IP: '.$ip.' - '.$e->getMessage());
             }
 
             return null;

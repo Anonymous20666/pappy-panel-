@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Services\Helpers\SoftwareVersionService;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class InfoCommand extends Command
@@ -36,7 +36,7 @@ class InfoCommand extends Command
         $this->output->title('Application Configuration');
         $this->table([], [
             ['Environment', $this->formatText($this->config->get('app.env'), $this->config->get('app.env') === 'production' ?: 'bg=red')],
-            ['Debug Mode', $this->formatText($this->config->get('app.debug') ? 'Yes' : 'No', !$this->config->get('app.debug') ?: 'bg=red')],
+            ['Debug Mode', $this->formatText($this->config->get('app.debug') ? 'Yes' : 'No', ! $this->config->get('app.debug') ?: 'bg=red')],
             ['Installation URL', $this->config->get('app.url')],
             ['Installation Directory', base_path()],
             ['Timezone', $this->config->get('app.timezone')],

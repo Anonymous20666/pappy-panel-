@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources\DatabaseHost;
 
-use Filament\Panel;
-use Filament\Actions;
-use Filament\Tables\Table;
 use App\Models\DatabaseHost;
-use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Services\Activity\ActivityLogService;
+use Filament\Actions;
 use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Panel;
+use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class DatabaseHostResource extends Resource
 {
@@ -20,6 +22,7 @@ class DatabaseHostResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-circle-stack';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'heroicon-s-circle-stack';
 
     public static function getNavigationGroup(): ?string
@@ -162,7 +165,7 @@ class DatabaseHostResource extends Resource
                     ->requiresConfirmation()
                     ->action(function (DatabaseHost $record, Actions\Action $action) {
                         if ($record->databases()->count() > 0) {
-                            \Filament\Notifications\Notification::make()
+                            Notification::make()
                                 ->title(trans('admin/databases.errors.cannot_delete'))
                                 ->danger()
                                 ->send();
@@ -171,8 +174,8 @@ class DatabaseHostResource extends Resource
                             $action->halt();
                         }
 
-                        /** @var \App\Services\Activity\ActivityLogService $logService */
-                        $logService = app(\App\Services\Activity\ActivityLogService::class);
+                        /** @var ActivityLogService $logService */
+                        $logService = app(ActivityLogService::class);
                         $logService->subject($record)->event('server:database-host.delete')->log();
 
                         $record->delete();

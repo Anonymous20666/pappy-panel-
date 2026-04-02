@@ -2,10 +2,11 @@
 
 namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use App\Models\Task;
-use App\Models\Schedule;
 use App\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Task;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DeleteServerScheduleTest extends ClientApiIntegrationTestCase
@@ -13,8 +14,8 @@ class DeleteServerScheduleTest extends ClientApiIntegrationTestCase
     /**
      * Test that a schedule can be deleted from the system.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testScheduleCanBeDeleted(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_schedule_can_be_deleted(array $permissions)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -32,7 +33,7 @@ class DeleteServerScheduleTest extends ClientApiIntegrationTestCase
     /**
      * Test that no error is returned if the schedule does not exist on the system at all.
      */
-    public function testNotFoundErrorIsReturnedIfScheduleDoesNotExistAtAll()
+    public function test_not_found_error_is_returned_if_schedule_does_not_exist_at_all()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -45,7 +46,7 @@ class DeleteServerScheduleTest extends ClientApiIntegrationTestCase
      * Ensure that a schedule belonging to another server cannot be deleted and its presence is not
      * revealed to the user.
      */
-    public function testNotFoundErrorIsReturnedIfScheduleDoesNotBelongToServer()
+    public function test_not_found_error_is_returned_if_schedule_does_not_belong_to_server()
     {
         [$user, $server] = $this->generateTestAccount();
         $server2 = $this->createServerModel(['owner_id' => $user->id]);
@@ -63,7 +64,7 @@ class DeleteServerScheduleTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the subuser does not have the required permissions to
      * delete the schedule from the server.
      */
-    public function testErrorIsReturnedIfSubuserDoesNotHaveRequiredPermissions()
+    public function test_error_is_returned_if_subuser_does_not_have_required_permissions()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_SCHEDULE_UPDATE]);
 

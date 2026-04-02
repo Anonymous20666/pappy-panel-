@@ -14,11 +14,11 @@ class IsValidJson
      */
     public function handle(Request $request, \Closure $next): mixed
     {
-        if ($request->isJson() && !empty($request->getContent())) {
+        if ($request->isJson() && ! empty($request->getContent())) {
             try {
                 json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
             } catch (\JsonException $exception) {
-                throw new BadRequestHttpException('The JSON data passed in the request appears to be malformed: ' . $exception->getMessage());
+                throw new BadRequestHttpException('The JSON data passed in the request appears to be malformed: '.$exception->getMessage());
             }
         }
 

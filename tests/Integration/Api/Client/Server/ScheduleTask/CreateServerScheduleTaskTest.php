@@ -2,10 +2,11 @@
 
 namespace Tests\Integration\Api\Client\Server\ScheduleTask;
 
-use App\Models\Task;
-use App\Models\Schedule;
 use App\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Task;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
@@ -13,8 +14,8 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
     /**
      * Test that a task can be created.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testTaskCanBeCreated(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_task_can_be_created(array $permissions)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -44,7 +45,7 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
     /**
      * Test that validation errors are returned correctly if bad data is passed into the API.
      */
-    public function testValidationErrorsAreReturned()
+    public function test_validation_errors_are_returned()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -89,7 +90,7 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
     /**
      * Test that backups can not be tasked when the backup limit is 0.
      */
-    public function testBackupsCanNotBeTaskedIfLimit0()
+    public function test_backups_can_not_be_tasked_if_limit0()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -116,7 +117,7 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the user attempts to create an additional task that
      * would put the schedule over the task limit.
      */
-    public function testErrorIsReturnedIfTooManyTasksExistForSchedule()
+    public function test_error_is_returned_if_too_many_tasks_exist_for_schedule()
     {
         config()->set('panel.client_features.schedules.per_schedule_task_limit', 2);
 
@@ -140,7 +141,7 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the targeted schedule does not belong to the server
      * in the request.
      */
-    public function testErrorIsReturnedIfScheduleDoesNotBelongToServer()
+    public function test_error_is_returned_if_schedule_does_not_belong_to_server()
     {
         [$user, $server] = $this->generateTestAccount();
         $server2 = $this->createServerModel(['owner_id' => $user->id]);
@@ -157,7 +158,7 @@ class CreateServerScheduleTaskTest extends ClientApiIntegrationTestCase
      * Test that an error is returned if the subuser making the request does not have permission
      * to update a schedule.
      */
-    public function testErrorIsReturnedIfSubuserDoesNotHaveScheduleUpdatePermissions()
+    public function test_error_is_returned_if_subuser_does_not_have_schedule_update_permissions()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_SCHEDULE_CREATE]);
 

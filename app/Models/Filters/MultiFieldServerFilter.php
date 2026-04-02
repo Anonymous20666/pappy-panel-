@@ -2,9 +2,9 @@
 
 namespace App\Models\Filters;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use Spatie\QueryBuilder\Filters\Filter;
-use Illuminate\Database\Eloquent\Builder;
 
 class MultiFieldServerFilter implements Filter
 {
@@ -19,7 +19,7 @@ class MultiFieldServerFilter implements Filter
      * search across multiple columns. This allows us to provide a very generic search ability for
      * the frontend.
      *
-     * @param string $value
+     * @param  string  $value
      */
     public function __invoke(Builder $query, $value, string $property)
     {
@@ -37,18 +37,18 @@ class MultiFieldServerFilter implements Filter
                     $parts = explode(':', $value);
 
                     $builder->when(
-                        !Str::startsWith($value, ':'),
+                        ! Str::startsWith($value, ':'),
                         // When the string does not start with a ":" it means we're looking for an IP or IP:Port
                         // combo, so use a query to handle that.
                         function (Builder $builder) use ($parts) {
                             $builder->orWhere('allocations.ip', $parts[0]);
-                            if (!is_null($parts[1] ?? null)) {
+                            if (! is_null($parts[1] ?? null)) {
                                 $builder->where('allocations.port', 'LIKE', "{$parts[1]}%");
                             }
                         },
                         // Otherwise, just try to search for that specific port in the allocations.
                         function (Builder $builder) use ($value) {
-                            $builder->orWhere('allocations.port', 'LIKE', substr($value, 1) . '%');
+                            $builder->orWhere('allocations.port', 'LIKE', substr($value, 1).'%');
                         }
                     );
                 })

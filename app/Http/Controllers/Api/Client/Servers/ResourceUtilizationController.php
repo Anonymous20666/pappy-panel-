@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use Carbon\Carbon;
-use App\Models\Server;
-use Illuminate\Cache\Repository;
-use App\Transformers\Api\Client\StatsTransformer;
-use App\Repositories\Wings\DaemonServerRepository;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Http\Controllers\Api\Client\ClientApiController;
 use App\Http\Requests\Api\Client\Servers\GetServerRequest;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Transformers\Api\Client\StatsTransformer;
+use Carbon\Carbon;
+use Illuminate\Cache\Repository;
 
 class ResourceUtilizationController extends ClientApiController
 {
@@ -25,7 +26,7 @@ class ResourceUtilizationController extends ClientApiController
      * 20 seconds at a time to ensure that repeated requests to this endpoint do not cause
      * a flood of unnecessary API calls.
      *
-     * @throws \App\Exceptions\Http\Connection\DaemonConnectionException
+     * @throws DaemonConnectionException
      */
     public function __invoke(GetServerRequest $request, Server $server): array
     {

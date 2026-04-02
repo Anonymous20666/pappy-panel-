@@ -2,6 +2,7 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\User;
 use App\Services\Acl\Api\AdminAcl;
 use League\Fractal\Resource\Collection;
@@ -46,11 +47,11 @@ class UserTransformer extends BaseTransformer
     /**
      * Return the servers associated with this user.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeServers(User $user): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVERS)) {
             return $this->null();
         }
 

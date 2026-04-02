@@ -3,18 +3,20 @@
 namespace App\Filament\Resources\Mounts;
 
 use App\Models\Mount;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
+use App\Services\Activity\ActivityLogService;
 use Filament\Actions\BulkActionGroup;
-use Filament\Forms\Components\Toggle;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
+use Filament\Tables\Table;
 
 class MountResource extends Resource
 {
@@ -23,6 +25,7 @@ class MountResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-container';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-container-filled';
 
     public static function getNavigationGroup(): ?string
@@ -53,7 +56,7 @@ class MountResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            \Filament\Schemas\Components\Section::make(trans('admin/mounts.sections.configuration'))
+            Section::make(trans('admin/mounts.sections.configuration'))
                 ->schema([
                     TextInput::make('name')
                         ->label(trans('admin/mounts.fields.name'))
@@ -126,7 +129,7 @@ class MountResource extends Resource
                 EditAction::make(),
                 DeleteAction::make()
                     ->after(function (Mount $record) {
-                        app(\App\Services\Activity\ActivityLogService::class)
+                        app(ActivityLogService::class)
                             ->subject($record)
                             ->event('mount:delete')
                             ->log();

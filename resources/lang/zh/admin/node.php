@@ -207,7 +207,7 @@ return [
             'failed' => '分配操作失败。',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => '提供的 FQDN 或 IP 地址无法解析为有效的 IP 地址。',
         'fqdn_required_for_ssl' => '要为此节点使用 SSL，需要一个能解析为公共 IP 地址的完全限定域名。',

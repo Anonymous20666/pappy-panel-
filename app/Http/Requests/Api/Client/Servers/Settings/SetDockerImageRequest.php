@@ -2,12 +2,12 @@
 
 namespace App\Http\Requests\Api\Client\Servers\Settings;
 
-use App\Models\Server;
-use App\Models\Permission;
-use Webmozart\Assert\Assert;
-use Illuminate\Validation\Rule;
 use App\Contracts\Http\ClientPermissionsRequest;
 use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Models\Permission;
+use App\Models\Server;
+use Illuminate\Validation\Rule;
+use Webmozart\Assert\Assert;
 
 class SetDockerImageRequest extends ClientApiRequest implements ClientPermissionsRequest
 {

@@ -3,9 +3,9 @@
 namespace App\Services\Eggs;
 
 use App\Contracts\Repository\EggRepositoryInterface;
+use App\Contracts\Repository\ServerRepositoryInterface;
 use App\Exceptions\Service\Egg\HasChildrenException;
 use App\Exceptions\Service\HasActiveServersException;
-use App\Contracts\Repository\ServerRepositoryInterface;
 
 class EggDeletionService
 {
@@ -15,8 +15,7 @@ class EggDeletionService
     public function __construct(
         protected ServerRepositoryInterface $serverRepository,
         protected EggRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete an Egg from the database if it has no active servers attached to it.

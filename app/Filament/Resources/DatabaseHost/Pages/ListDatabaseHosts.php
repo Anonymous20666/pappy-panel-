@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\DatabaseHost\Pages;
 
-use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\DatabaseHost\DatabaseHostResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
 
 class ListDatabaseHosts extends ListRecords
 {
@@ -12,7 +13,7 @@ class ListDatabaseHosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

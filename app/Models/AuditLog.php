@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Ramsey\Uuid\Uuid;
-use Illuminate\Http\Request;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @deprecated — this class will be dropped in a future version, use the activity log
@@ -40,7 +40,7 @@ class AuditLog extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
@@ -48,7 +48,7 @@ class AuditLog extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {
@@ -65,7 +65,7 @@ class AuditLog extends Model
     public static function instance(string $action, array $metadata, bool $isSystem = false): self
     {
         $request = Container::getInstance()->make('request');
-        if ($isSystem || !$request instanceof Request) { // @phpstan-ignore instanceof.alwaysTrue
+        if ($isSystem || ! $request instanceof Request) { // @phpstan-ignore instanceof.alwaysTrue
             $request = null;
         }
 

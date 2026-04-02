@@ -2,17 +2,17 @@
 
 namespace App\Repositories\Eloquent;
 
-use Illuminate\Http\Request;
-use Webmozart\Assert\Assert;
-use App\Repositories\Repository;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use App\Contracts\Repository\RepositoryInterface;
 use App\Exceptions\Model\DataValidationException;
 use App\Exceptions\Repository\RecordNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Repositories\Repository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Webmozart\Assert\Assert;
 
 abstract class EloquentRepository extends Repository implements RepositoryInterface
 {
@@ -43,7 +43,7 @@ abstract class EloquentRepository extends Repository implements RepositoryInterf
      */
     protected function paginate(Builder $instance, int $default = 50): LengthAwarePaginator
     {
-        if (!$this->useRequestFilters) {
+        if (! $this->useRequestFilters) {
             return $instance->paginate($default);
         }
 
@@ -77,10 +77,10 @@ abstract class EloquentRepository extends Repository implements RepositoryInterf
         $instance = $this->getBuilder()->newModelInstance();
         ($force) ? $instance->forceFill($fields) : $instance->fill($fields);
 
-        if (!$validate) {
+        if (! $validate) {
             $saved = $instance->skipValidation()->save();
         } else {
-            if (!$saved = $instance->save()) {
+            if (! $saved = $instance->save()) {
                 throw new DataValidationException($instance->getValidator(), $instance);
             }
         }
@@ -166,10 +166,10 @@ abstract class EloquentRepository extends Repository implements RepositoryInterf
 
         ($force) ? $instance->forceFill($fields) : $instance->fill($fields);
 
-        if (!$validate) {
+        if (! $validate) {
             $saved = $instance->skipValidation()->save();
         } else {
-            if (!$saved = $instance->save()) {
+            if (! $saved = $instance->save()) {
                 throw new DataValidationException($instance->getValidator(), $instance);
             }
         }

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Api\Remote\Backups;
 
-use App\Models\Backup;
-use App\Facades\Activity;
-use Carbon\CarbonImmutable;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Exceptions\DisplayException;
-use App\Http\Controllers\Controller;
+use App\Exceptions\Http\HttpForbiddenException;
 use App\Extensions\Backups\BackupManager;
 use App\Extensions\Filesystem\S3Filesystem;
-use App\Exceptions\Http\HttpForbiddenException;
+use App\Facades\Activity;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Remote\ReportBackupCompleteRequest;
+use App\Models\Backup;
+use App\Models\Node;
+use App\Models\Server;
+use Carbon\CarbonImmutable;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class BackupStatusController extends Controller
@@ -20,9 +22,7 @@ class BackupStatusController extends Controller
     /**
      * BackupStatusController constructor.
      */
-    public function __construct(private BackupManager $backupManager)
-    {
-    }
+    public function __construct(private BackupManager $backupManager) {}
 
     /**
      * Handles updating the state of a backup.
@@ -32,7 +32,7 @@ class BackupStatusController extends Controller
     public function index(ReportBackupCompleteRequest $request, string $backup): JsonResponse
     {
         // Get the node associated with the request.
-        /** @var \App\Models\Node $node */
+        /** @var Node $node */
         $node = $request->attributes->get('node');
 
         /** @var Backup $model */
@@ -42,7 +42,7 @@ class BackupStatusController extends Controller
 
         // Check that the backup is "owned" by the node making the request. This avoids other nodes
         // from messing with backups that they don't own.
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         $server = $model->server;
         if ($server->node_id !== $node->id) {
             throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
@@ -64,7 +64,7 @@ class BackupStatusController extends Controller
                 // deleted easily. Also does not make sense to have a locked backup on the system
                 // that is failed.
                 'is_locked' => $successful ? $model->is_locked : false,
-                'checksum' => $successful ? ($request->input('checksum_type') . ':' . $request->input('checksum')) : null,
+                'checksum' => $successful ? ($request->input('checksum_type').':'.$request->input('checksum')) : null,
                 'bytes' => $successful ? $request->input('size') : 0,
                 'completed_at' => CarbonImmutable::now(),
             ])->save();
@@ -125,7 +125,7 @@ class BackupStatusController extends Controller
             // A failed backup doesn't need to error here, this can happen if the backup encounters
             // an error before we even start the upload. AWS gives you tooling to clear these failed
             // multipart uploads as needed too.
-            if (!$successful) {
+            if (! $successful) {
                 return;
             }
 
@@ -139,7 +139,7 @@ class BackupStatusController extends Controller
         ];
 
         $client = $adapter->getClient();
-        if (!$successful) {
+        if (! $successful) {
             $client->execute($client->getCommand('AbortMultipartUpload', $params));
 
             return;

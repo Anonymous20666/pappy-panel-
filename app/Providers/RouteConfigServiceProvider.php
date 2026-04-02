@@ -2,14 +2,14 @@
 
 namespace App\Providers;
 
-use App\Models\Database;
 use App\Enum\ResourceLimit;
-use Illuminate\Http\Request;
 use App\Http\Middleware\TrimStrings;
+use App\Models\Database;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
 
 class RouteConfigServiceProvider extends ServiceProvider
 {

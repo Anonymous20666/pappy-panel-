@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\Mounts\Pages;
 
-use Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\Mounts\MountResource;
+use Filament\Actions\CreateAction;
+use Filament\Resources\Pages\ListRecords;
 
 class ListMounts extends ListRecords
 {
@@ -12,7 +13,7 @@ class ListMounts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

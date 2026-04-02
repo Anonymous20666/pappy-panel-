@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\Public;
 
-use App\Models\Server;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Server;
 use App\Repositories\Wings\DaemonServerRepository;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Request;
 
 class ServerStatusController extends Controller
 {
@@ -33,7 +33,7 @@ class ServerStatusController extends Controller
             'name' => $serverModel->name,
             'description' => $serverModel->description,
             'is_suspended' => $serverModel->isSuspended(),
-            'is_installing' => !$serverModel->isInstalled(),
+            'is_installing' => ! $serverModel->isInstalled(),
         ];
 
         $response['utilization'] = [
@@ -42,7 +42,7 @@ class ServerStatusController extends Controller
             'disk_bytes' => 0,
         ];
 
-        if ($serverModel->isSuspended() || !$serverModel->isInstalled()) {
+        if ($serverModel->isSuspended() || ! $serverModel->isInstalled()) {
             $response['status'] = 'offline';
 
             return response()->json($response);

@@ -2,13 +2,13 @@
 
 namespace App\Filament\Resources\Extensions\Pages;
 
-use Illuminate\Support\Arr;
-use Filament\Actions\Action;
-use Filament\Notifications\Notification;
-use Filament\Forms\Components\FileUpload;
-use Filament\Resources\Pages\ListRecords;
-use App\Services\Extensions\ExtensionManager;
 use App\Filament\Resources\Extensions\ExtensionResource;
+use App\Services\Extensions\ExtensionManager;
+use Filament\Actions\Action;
+use Filament\Forms\Components\FileUpload;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Arr;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class ListExtensions extends ListRecords
@@ -96,14 +96,14 @@ class ListExtensions extends ListRecords
 
         $value = is_array($uploaded) ? reset($uploaded) : $uploaded;
 
-        if (!is_string($value) || $value === '') {
+        if (! is_string($value) || $value === '') {
             return null;
         }
 
         $candidates = [
-            storage_path('app/livewire-tmp/' . $value),
-            storage_path('app/private/' . $value),
-            storage_path('app/' . $value),
+            storage_path('app/livewire-tmp/'.$value),
+            storage_path('app/private/'.$value),
+            storage_path('app/'.$value),
             $value,
         ];
 

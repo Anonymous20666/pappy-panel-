@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands\Environment;
 
-use Illuminate\Console\Command;
+use App\Exceptions\PanelException;
 use App\Traits\Commands\EnvironmentWriterTrait;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
 
 class EmailSettingsCommand extends Command
@@ -36,7 +37,7 @@ class EmailSettingsCommand extends Command
     /**
      * Handle command execution.
      *
-     * @throws \App\Exceptions\PanelException
+     * @throws PanelException
      */
     public function handle()
     {
@@ -52,7 +53,7 @@ class EmailSettingsCommand extends Command
             $this->config->get('mail.default', 'smtp')
         );
 
-        $method = 'setup' . studly_case($this->variables['MAIL_DRIVER']) . 'DriverVariables';
+        $method = 'setup'.studly_case($this->variables['MAIL_DRIVER']).'DriverVariables';
         if (method_exists($this, $method)) {
             $this->{$method}();
         }

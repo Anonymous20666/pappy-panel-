@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SetSecurityHeaders
 {
@@ -35,7 +36,7 @@ class SetSecurityHeaders
      * If a header has already been set in another location within the code it will be
      * skipped over here.
      *
-     * @param (\Closure(mixed): \Illuminate\Http\Response) $next
+     * @param  (\Closure(mixed): Response)  $next
      */
     public function handle(Request $request, \Closure $next): mixed
     {

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api\Client;
 
-use App\Models\Egg;
-use App\Models\Server;
-use App\Models\Permission;
-use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
-use App\Models\Filters\MultiFieldServerFilter;
-use App\Transformers\Api\Client\ServerTransformer;
 use App\Http\Requests\Api\Client\GetServersRequest;
+use App\Models\Egg;
+use App\Models\Filters\MultiFieldServerFilter;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Transformers\Api\Client\ServerTransformer;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ClientController extends ClientApiController
 {
@@ -59,7 +59,7 @@ class ClientController extends ClientApiController
         if (in_array($type, ['admin', 'admin-all'])) {
             // If they aren't an admin but want all the admin servers don't fail the request, just
             // make it a query that will never return any results back.
-            if (!$user->root_admin) {
+            if (! $user->root_admin) {
                 $builder->whereRaw('1 = 2');
             } else {
                 $builder = $type === 'admin-all'

@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Wings;
 
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Http\Server\FileSizeTooLargeException;
 use App\Models\Server;
-use Illuminate\Support\Arr;
-use Webmozart\Assert\Assert;
-use Psr\Http\Message\ResponseInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\TransferException;
-use App\Exceptions\Http\Server\FileSizeTooLargeException;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Illuminate\Support\Arr;
+use Psr\Http\Message\ResponseInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @method \App\Repositories\Wings\DaemonFileRepository setNode(\App\Models\Node $node)
@@ -20,7 +20,7 @@ class DaemonFileRepository extends DaemonRepository
     /**
      * Return the contents of a given file.
      *
-     * @param int|null $notLargerThan the maximum content length in bytes
+     * @param  int|null  $notLargerThan  the maximum content length in bytes
      *
      * @throws TransferException
      * @throws FileSizeTooLargeException
@@ -291,7 +291,7 @@ class DaemonFileRepository extends DaemonRepository
             return $this->getHttpClient()->post(
                 sprintf('/api/servers/%s/files/pull', $this->server->uuid),
                 [
-                    'json' => array_filter($attributes, fn ($value) => !is_null($value)),
+                    'json' => array_filter($attributes, fn ($value) => ! is_null($value)),
                 ]
             );
         } catch (TransferException $exception) {

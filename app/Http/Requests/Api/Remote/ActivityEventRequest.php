@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Api\Remote;
 
-use Illuminate\Support\Collection;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Collection;
 
 class ActivityEventRequest extends FormRequest
 {
@@ -41,7 +41,7 @@ class ActivityEventRequest extends FormRequest
     {
         return Collection::make($this->input('data'))
             ->filter(function ($value) {
-                return !empty($value['user']);
+                return ! empty($value['user']);
             })
             ->pluck('user')
             ->unique()

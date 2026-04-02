@@ -2,11 +2,11 @@
 
 namespace Tests\Unit\Http\Middleware;
 
-use Mockery as m;
-use Mockery\MockInterface;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Auth\AuthManager;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Middleware\RedirectIfAuthenticated;
+use Mockery as m;
+use Mockery\MockInterface;
 
 class RedirectIfAuthenticatedTest extends MiddlewareTestCase
 {
@@ -15,7 +15,7 @@ class RedirectIfAuthenticatedTest extends MiddlewareTestCase
     /**
      * Setup tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,7 +25,7 @@ class RedirectIfAuthenticatedTest extends MiddlewareTestCase
     /**
      * Test that an authenticated user is redirected.
      */
-    public function testAuthenticatedUserIsRedirected()
+    public function test_authenticated_user_is_redirected()
     {
         $this->authManager->shouldReceive('guard')->with(null)->once()->andReturnSelf();
         $this->authManager->shouldReceive('check')->withNoArgs()->once()->andReturn(true);
@@ -38,7 +38,7 @@ class RedirectIfAuthenticatedTest extends MiddlewareTestCase
     /**
      * Test that a non-authenticated user continues through the middleware.
      */
-    public function testNonAuthenticatedUserIsNotRedirected()
+    public function test_non_authenticated_user_is_not_redirected()
     {
         $this->authManager->shouldReceive('guard')->with(null)->once()->andReturnSelf();
         $this->authManager->shouldReceive('check')->withNoArgs()->once()->andReturn(false);

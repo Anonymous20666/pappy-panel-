@@ -3,8 +3,8 @@
 namespace App\Services\Servers;
 
 use App\Models\Server;
-use Illuminate\Database\ConnectionInterface;
 use App\Repositories\Wings\DaemonServerRepository;
+use Illuminate\Database\ConnectionInterface;
 
 class ReinstallServerService
 {
@@ -14,8 +14,7 @@ class ReinstallServerService
     public function __construct(
         private ConnectionInterface $connection,
         private DaemonServerRepository $daemonServerRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Reinstall a server on the remote daemon.

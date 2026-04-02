@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Egg;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -10,7 +11,7 @@ interface EggRepositoryInterface extends RepositoryInterface
     /**
      * Return an egg with the variables relation attached.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getWithVariables(int $id): Egg;
 
@@ -27,7 +28,7 @@ interface EggRepositoryInterface extends RepositoryInterface
     /**
      * Return all the data needed to export a service.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getWithExportAttributes(int $id): Egg;
 

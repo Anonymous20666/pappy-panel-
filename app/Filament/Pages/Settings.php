@@ -2,35 +2,38 @@
 
 namespace App\Filament\Pages;
 
-use Filament\Pages\Page;
-use Illuminate\Support\Str;
+use App\Contracts\Repository\SettingsRepositoryInterface;
+use App\Notifications\MailTested;
+use App\Traits\Helpers\AvailableLanguages;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Group;
 use Filament\Forms\Components\TextInput;
-use Filament\Notifications\Notification;
-use Filament\Schemas\Components\Actions;
-use Filament\Schemas\Components\Section;
-use Illuminate\Contracts\Console\Kernel;
-use Filament\Schemas\Components\Tabs\Tab;
-use App\Traits\Helpers\AvailableLanguages;
-use Filament\Schemas\Contracts\HasSchemas;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
-use Illuminate\Contracts\Encryption\Encrypter;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Notifications\Notification;
 use Filament\Pages\Concerns\InteractsWithHeaderActions;
-use App\Contracts\Repository\SettingsRepositoryInterface;
+use Filament\Pages\Page;
+use Filament\Schemas\Components\Actions;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Contracts\HasSchemas;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Support\Str;
+use Symfony\Component\Mailer\Transport\TransportInterface;
 
 class Settings extends Page implements HasSchemas
 {
+    use AvailableLanguages;
     use InteractsWithForms;
     use InteractsWithHeaderActions;
-    use AvailableLanguages;
 
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-settings';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-settings-filled';
 
     protected string $view = 'filament.pages.settings';
@@ -106,13 +109,13 @@ class Settings extends Page implements HasSchemas
 
         foreach ($this->settingKeys as $key) {
 
-            $value = $settings->get('settings::' . $key);
+            $value = $settings->get('settings::'.$key);
 
             if ($value === null) {
                 $value = $config->get(Str::replace(':', '.', $key));
             }
 
-            if ($key === 'mail:mailers:smtp:password' && !empty($value)) {
+            if ($key === 'mail:mailers:smtp:password' && ! empty($value)) {
                 try {
                     $value = $encrypter->decrypt($value);
                 } catch (\Throwable) {
@@ -550,11 +553,11 @@ class Settings extends Page implements HasSchemas
         $data = $this->form->getState();
 
         foreach ($data as $key => $value) {
-            if ($key === 'mail:mailers:smtp:password' && !empty($value)) {
+            if ($key === 'mail:mailers:smtp:password' && ! empty($value)) {
                 $value = $encrypter->encrypt($value);
             }
             $settings->set(
-                'settings::' . $key,
+                'settings::'.$key,
                 is_bool($value) ? ($value ? 'true' : 'false') : $value
             );
         }
@@ -590,7 +593,7 @@ class Settings extends Page implements HasSchemas
                 app('mailer')->forgetMailers();
             } else {
                 $transport = app('mailer')->getSymfonyTransport();
-                if ($transport instanceof \Symfony\Component\Mailer\Transport\TransportInterface) {
+                if ($transport instanceof TransportInterface) {
                     app('mailer')->forgetMailers();
                 }
             }
@@ -599,7 +602,7 @@ class Settings extends Page implements HasSchemas
 
         try {
             \Illuminate\Support\Facades\Notification::route('mail', auth()->user()->email)
-                ->notify(new \App\Notifications\MailTested(auth()->user()));
+                ->notify(new MailTested(auth()->user()));
 
             Notification::make()
                 ->title(trans('admin/settings.mail.test-sent'))

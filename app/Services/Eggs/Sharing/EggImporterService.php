@@ -2,25 +2,24 @@
 
 namespace App\Services\Eggs\Sharing;
 
+use App\Exceptions\Service\InvalidFileUploadException;
 use App\Models\Egg;
-use App\Models\Nest;
-use Ramsey\Uuid\Uuid;
 use App\Models\EggVariable;
-use Illuminate\Support\Arr;
-use Illuminate\Http\UploadedFile;
+use App\Models\Nest;
 use App\Services\Eggs\EggParserService;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Ramsey\Uuid\Uuid;
 
 class EggImporterService
 {
-    public function __construct(protected ConnectionInterface $connection, protected EggParserService $parser)
-    {
-    }
+    public function __construct(protected ConnectionInterface $connection, protected EggParserService $parser) {}
 
     /**
      * Take an uploaded JSON file and parse it into a new egg.
      *
-     * @throws \App\Exceptions\Service\InvalidFileUploadException|\Throwable
+     * @throws InvalidFileUploadException|\Throwable
      */
     public function handle(UploadedFile $file, int $nest): Egg
     {

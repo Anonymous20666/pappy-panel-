@@ -2,23 +2,24 @@
 
 namespace Tests\Integration\Services\Servers;
 
-use App\Models\Egg;
-use App\Models\Node;
-use App\Models\User;
-use App\Models\Server;
-use App\Models\Location;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Allocation;
-use Mockery\MockInterface;
+use App\Models\Egg;
+use App\Models\Location;
+use App\Models\Node;
+use App\Models\Objects\DeploymentObject;
+use App\Models\Server;
+use App\Models\User;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Services\Servers\ServerCreationService;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use App\Models\Objects\DeploymentObject;
-use Tests\Integration\IntegrationTestCase;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\WithFaker;
-use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Validation\ValidationException;
-use App\Services\Servers\ServerCreationService;
-use App\Repositories\Wings\DaemonServerRepository;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Mockery\MockInterface;
+use Tests\Integration\IntegrationTestCase;
 
 class ServerCreationServiceTest extends IntegrationTestCase
 {
@@ -31,7 +32,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
     /**
      * Stub the calls to Wings so that we don't actually hit those API endpoints.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -51,7 +52,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
      * tests to cover that the logic being used does indeed find suitable nodes and ports. For
      * this test we just care that it is recognized and passed off to those functions.
      */
-    public function testServerIsCreatedWithDeploymentObject()
+    public function test_server_is_created_with_deployment_object()
     {
         /** @var User $user */
         $user = User::factory()->create();
@@ -64,7 +65,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
             'location_id' => $location->id,
         ]);
 
-        /** @var \App\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations */
+        /** @var Allocation[]|Collection $allocations */
         $allocations = Allocation::factory()->times(5)->create([
             'node_id' => $node->id,
         ]);
@@ -153,7 +154,7 @@ class ServerCreationServiceTest extends IntegrationTestCase
      * Test that a server is deleted from the Panel if Wings returns an error during the creation
      * process.
      */
-    public function testErrorEncounteredByWingsCausesServerToBeDeleted()
+    public function test_error_encountered_by_wings_causes_server_to_be_deleted()
     {
         /** @var User $user */
         $user = User::factory()->create();

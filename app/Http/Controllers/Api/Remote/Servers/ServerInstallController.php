@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers\Api\Remote\Servers;
 
+use App\Events\Server\Installed as ServerInstalled;
+use App\Exceptions\Http\HttpForbiddenException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Remote\InstallationDataRequest;
 use App\Models\Server;
+use App\Repositories\Eloquent\ServerRepository;
 use Carbon\CarbonImmutable;
+use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Exceptions\Http\HttpForbiddenException;
-use App\Repositories\Eloquent\ServerRepository;
-use App\Events\Server\Installed as ServerInstalled;
-use App\Http\Requests\Api\Remote\InstallationDataRequest;
-use Illuminate\Contracts\Events\Dispatcher as EventDispatcher;
 
 class ServerInstallController extends Controller
 {
     /**
      * ServerInstallController constructor.
      */
-    public function __construct(private ServerRepository $repository, private EventDispatcher $eventDispatcher)
-    {
-    }
+    public function __construct(private ServerRepository $repository, private EventDispatcher $eventDispatcher) {}
 
     /**
      * Returns installation information for a server.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function index(Request $request, string $uuid): JsonResponse
     {
@@ -47,8 +47,8 @@ class ServerInstallController extends Controller
     /**
      * Updates the installation state of a server.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws RecordNotFoundException
+     * @throws DataValidationException
      */
     public function store(InstallationDataRequest $request, string $uuid): JsonResponse
     {
@@ -60,7 +60,7 @@ class ServerInstallController extends Controller
         }
 
         // Make sure the type of failure is accurate
-        if (!$request->boolean('successful')) {
+        if (! $request->boolean('successful')) {
             $status = Server::STATUS_INSTALL_FAILED;
 
             if ($request->boolean('reinstall')) {
@@ -80,7 +80,7 @@ class ServerInstallController extends Controller
         $isInitialInstall = is_null($server->installed_at);
         if ($isInitialInstall && config()->get('panel.email.send_install_notification', true)) {
             $this->eventDispatcher->dispatch(new ServerInstalled($server));
-        } elseif (!$isInitialInstall && config()->get('panel.email.send_reinstall_notification', true)) {
+        } elseif (! $isInitialInstall && config()->get('panel.email.send_reinstall_notification', true)) {
             $this->eventDispatcher->dispatch(new ServerInstalled($server));
         }
 

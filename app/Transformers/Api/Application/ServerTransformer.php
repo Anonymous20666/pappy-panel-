@@ -2,12 +2,13 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Server;
-use League\Fractal\Resource\Item;
 use App\Services\Acl\Api\AdminAcl;
-use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\NullResource;
 use App\Services\Servers\EnvironmentService;
+use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
+use League\Fractal\Resource\NullResource;
 
 class ServerTransformer extends BaseTransformer
 {
@@ -94,11 +95,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array of allocations for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeAllocations(Server $server): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_ALLOCATIONS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_ALLOCATIONS)) {
             return $this->null();
         }
 
@@ -110,11 +111,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array of data about subusers for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeSubusers(Server $server): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_USERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_USERS)) {
             return $this->null();
         }
 
@@ -126,11 +127,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array of data about subusers for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeUser(Server $server): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_USERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_USERS)) {
             return $this->null();
         }
 
@@ -142,11 +143,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with nest information for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeNest(Server $server): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_NESTS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_NESTS)) {
             return $this->null();
         }
 
@@ -158,11 +159,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with egg information for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeEgg(Server $server): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_EGGS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_EGGS)) {
             return $this->null();
         }
 
@@ -174,11 +175,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array of data about subusers for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeVariables(Server $server): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVERS)) {
             return $this->null();
         }
 
@@ -190,11 +191,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with location information for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeLocation(Server $server): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
             return $this->null();
         }
 
@@ -206,11 +207,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with node information for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeNode(Server $server): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_NODES)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_NODES)) {
             return $this->null();
         }
 
@@ -222,11 +223,11 @@ class ServerTransformer extends BaseTransformer
     /**
      * Return a generic array with database information for this server.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeDatabases(Server $server): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVER_DATABASES)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVER_DATABASES)) {
             return $this->null();
         }
 

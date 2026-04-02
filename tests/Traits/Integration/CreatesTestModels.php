@@ -2,16 +2,16 @@
 
 namespace Tests\Traits\Integration;
 
+use App\Models\Allocation;
 use App\Models\Egg;
+use App\Models\EggVariable;
+use App\Models\Location;
 use App\Models\Nest;
 use App\Models\Node;
-use App\Models\User;
-use Ramsey\Uuid\Uuid;
 use App\Models\Server;
 use App\Models\Subuser;
-use App\Models\Location;
-use App\Models\Allocation;
-use App\Models\EggVariable;
+use App\Models\User;
+use Ramsey\Uuid\Uuid;
 
 trait CreatesTestModels
 {
@@ -28,14 +28,14 @@ trait CreatesTestModels
             $attributes['owner_id'] = $attributes['user_id'];
         }
 
-        if (!isset($attributes['owner_id'])) {
+        if (! isset($attributes['owner_id'])) {
             /** @var User $user */
             $user = User::factory()->create();
             $attributes['owner_id'] = $user->id;
         }
 
-        if (!isset($attributes['node_id'])) {
-            if (!isset($attributes['location_id'])) {
+        if (! isset($attributes['node_id'])) {
+            if (! isset($attributes['location_id'])) {
                 /** @var Location $location */
                 $location = Location::factory()->create();
                 $attributes['location_id'] = $location->id;
@@ -46,14 +46,14 @@ trait CreatesTestModels
             $attributes['node_id'] = $node->id;
         }
 
-        if (!isset($attributes['allocation_id'])) {
+        if (! isset($attributes['allocation_id'])) {
             /** @var Allocation $allocation */
             $allocation = Allocation::factory()->create(['node_id' => $attributes['node_id']]);
             $attributes['allocation_id'] = $allocation->id;
         }
 
         if (empty($attributes['egg_id'])) {
-            $egg = !empty($attributes['nest_id'])
+            $egg = ! empty($attributes['nest_id'])
                 ? Egg::query()->where('nest_id', $attributes['nest_id'])->firstOrFail()
                 : $this->getBungeecordEgg();
 
@@ -81,9 +81,8 @@ trait CreatesTestModels
      * Generates a user and a server for that user. If an array of permissions is passed it
      * is assumed that the user is actually a subuser of the server.
      *
-     * @param string[] $permissions
-     *
-     * @return array{\App\Models\User, \App\Models\Server}
+     * @param  string[]  $permissions
+     * @return array{User, Server}
      */
     public function generateTestAccount(array $permissions = []): array
     {
@@ -164,7 +163,7 @@ trait CreatesTestModels
 
     private function ensureBungeecordVariables(Egg $egg): void
     {
-        if (!$egg->variables()->where('env_variable', 'BUNGEE_VERSION')->exists()) {
+        if (! $egg->variables()->where('env_variable', 'BUNGEE_VERSION')->exists()) {
             EggVariable::factory()->create([
                 'egg_id' => $egg->id,
                 'name' => 'Bungeecord Version',
@@ -177,7 +176,7 @@ trait CreatesTestModels
             ]);
         }
 
-        if (!$egg->variables()->where('env_variable', 'SERVER_JARFILE')->exists()) {
+        if (! $egg->variables()->where('env_variable', 'SERVER_JARFILE')->exists()) {
             EggVariable::factory()->create([
                 'egg_id' => $egg->id,
                 'name' => 'Bungeecord Jar File',

@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
+use App\Contracts\Repository\SettingsRepositoryInterface;
 use App\Services\Helpers\GeoIPService;
-use Illuminate\Foundation\Application;
 use App\Services\Helpers\GeoLocaleService;
 use App\Traits\Helpers\AvailableLanguages;
-use App\Contracts\Repository\SettingsRepositoryInterface;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
 class LanguageMiddleware
 {
@@ -21,8 +21,7 @@ class LanguageMiddleware
         private SettingsRepositoryInterface $settings,
         private GeoIPService $geoIP,
         private GeoLocaleService $geoLocale,
-    ) {
-    }
+    ) {}
 
     public function handle(Request $request, \Closure $next): mixed
     {

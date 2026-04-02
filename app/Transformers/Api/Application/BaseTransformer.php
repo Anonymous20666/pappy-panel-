@@ -2,15 +2,16 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\ApiKey;
+use App\Services\Acl\Api\AdminAcl;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use Illuminate\Http\Request;
-use Webmozart\Assert\Assert;
-use App\Services\Acl\Api\AdminAcl;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use League\Fractal\TransformerAbstract;
+use Webmozart\Assert\Assert;
 
 /**
  * @method array transform(Model $model)
@@ -67,7 +68,7 @@ abstract class BaseTransformer extends TransformerAbstract
         $allowed = [ApiKey::TYPE_ACCOUNT, ApiKey::TYPE_APPLICATION];
 
         $token = $this->request->user()?->currentAccessToken();
-        if (!$token instanceof ApiKey || !in_array($token->key_type, $allowed)) {
+        if (! $token instanceof ApiKey || ! in_array($token->key_type, $allowed)) {
             return false;
         }
 
@@ -87,11 +88,10 @@ abstract class BaseTransformer extends TransformerAbstract
      *
      * @template T of \App\Transformers\Api\Application\BaseTransformer
      *
-     * @param class-string<T> $abstract
-     *
+     * @param  class-string<T>  $abstract
      * @return T
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      *
      * @noinspection PhpDocSignatureInspection
      */

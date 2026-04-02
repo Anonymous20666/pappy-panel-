@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\ServerVariable;
 use App\Contracts\Repository\ServerVariableRepositoryInterface;
+use App\Models\ServerVariable;
 
 class ServerVariableRepository extends EloquentRepository implements ServerVariableRepositoryInterface
 {

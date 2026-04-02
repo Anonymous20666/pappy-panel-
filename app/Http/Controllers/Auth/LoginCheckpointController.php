@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Carbon\CarbonImmutable;
-use Carbon\CarbonInterface;
-use Illuminate\Http\JsonResponse;
-use PragmaRX\Google2FA\Google2FA;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Events\Auth\ProvidedAuthenticationToken;
 use App\Http\Requests\Auth\LoginCheckpointRequest;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Carbon\CarbonInterface;
+use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\ValidationException;
+use PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException;
+use PragmaRX\Google2FA\Exceptions\InvalidCharactersException;
+use PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException;
+use PragmaRX\Google2FA\Google2FA;
 
 class LoginCheckpointController extends AbstractLoginController
 {
@@ -35,11 +39,11 @@ class LoginCheckpointController extends AbstractLoginController
      * token. Once a user has reached this stage it is assumed that they have already
      * provided a valid username and password.
      *
-     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
-     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
-     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws IncompatibleWithGoogleAuthenticatorException
+     * @throws InvalidCharactersException
+     * @throws SecretKeyTooShortException
      * @throws \Exception
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function __invoke(LoginCheckpointRequest $request): JsonResponse
     {
@@ -48,11 +52,11 @@ class LoginCheckpointController extends AbstractLoginController
         }
 
         $details = $request->session()->get('auth_confirmation_token');
-        if (!$this->hasValidSessionData($details)) {
+        if (! $this->hasValidSessionData($details)) {
             $this->sendFailedLoginResponse($request, null, self::TOKEN_EXPIRED_MESSAGE);
         }
 
-        if (!hash_equals($request->input('confirmation_token') ?? '', $details['token_value'])) {
+        if (! hash_equals($request->input('confirmation_token') ?? '', $details['token_value'])) {
             $this->sendFailedLoginResponse($request);
         }
 
@@ -63,7 +67,7 @@ class LoginCheckpointController extends AbstractLoginController
         }
 
         // Recovery tokens go through a slightly different pathway for usage.
-        if (!is_null($recoveryToken = $request->input('recovery_token'))) {
+        if (! is_null($recoveryToken = $request->input('recovery_token'))) {
             if ($this->isValidRecoveryToken($user, $recoveryToken)) {
                 Event::dispatch(new ProvidedAuthenticationToken($user, true));
 
@@ -91,7 +95,7 @@ class LoginCheckpointController extends AbstractLoginController
             }
         }
 
-        $this->sendFailedLoginResponse($request, $user, !empty($recoveryToken) ? 'The recovery token provided is not valid.' : null);
+        $this->sendFailedLoginResponse($request, $user, ! empty($recoveryToken) ? 'The recovery token provided is not valid.' : null);
     }
 
     /**
@@ -130,7 +134,7 @@ class LoginCheckpointController extends AbstractLoginController
             return false;
         }
 
-        if (!$data['expires_at'] instanceof CarbonInterface) {
+        if (! $data['expires_at'] instanceof CarbonInterface) {
             return false;
         }
 

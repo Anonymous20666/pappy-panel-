@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
-use Carbon\Carbon;
 use App\Models\Backup;
 use App\Models\Server;
-use Illuminate\Support\Collection;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 class BackupRepository extends EloquentRepository
 {
@@ -35,7 +35,7 @@ class BackupRepository extends EloquentRepository
     /**
      * Returns a query filtering only non-failed backups for a specific server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Backup, \App\Models\Server>
+     * @return HasMany<Backup, Server>
      */
     public function getNonFailedBackups(Server $server): HasMany
     {

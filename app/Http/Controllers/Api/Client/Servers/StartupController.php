@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Facades\Activity;
-use App\Services\Servers\StartupCommandService;
-use App\Repositories\Eloquent\ServerVariableRepository;
-use App\Transformers\Api\Client\EggVariableTransformer;
 use App\Http\Controllers\Api\Client\ClientApiController;
 use App\Http\Requests\Api\Client\Servers\Startup\GetStartupRequest;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use App\Http\Requests\Api\Client\Servers\Startup\UpdateStartupVariableRequest;
+use App\Models\Server;
+use App\Repositories\Eloquent\ServerVariableRepository;
+use App\Services\Servers\StartupCommandService;
+use App\Transformers\Api\Client\EggVariableTransformer;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class StartupController extends ClientApiController
 {
@@ -46,17 +49,17 @@ class StartupController extends ClientApiController
     /**
      * Updates a single variable for a server.
      *
-     * @throws \Illuminate\Validation\ValidationException
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws ValidationException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateStartupVariableRequest $request, Server $server): array
     {
         $variable = $server->variables()->where('env_variable', $request->input('key'))->first();
 
-        if (is_null($variable) || !$variable->user_viewable) {
+        if (is_null($variable) || ! $variable->user_viewable) {
             throw new BadRequestHttpException('The environment variable you are trying to edit does not exist.');
-        } elseif (!$variable->user_editable) {
+        } elseif (! $variable->user_editable) {
             throw new BadRequestHttpException('The environment variable you are trying to edit is read-only.');
         }
 

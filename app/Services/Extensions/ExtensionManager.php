@@ -3,27 +3,28 @@
 namespace App\Services\Extensions;
 
 use App\Models\Extension;
+use App\Services\Extensions\Exceptions\ExtensionInstallException;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Console\Scheduling\Schedule;
-use App\Services\Extensions\Exceptions\ExtensionInstallException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ExtensionManager
 {
     public const API_VERSION = 'RCYL_v26';
+
     public const PACKAGE_EXTENSION = '.rext';
+
     public const MANIFEST_FILENAME = 'extension.json';
+
     public const SUPPORTED_API_VERSIONS = [
         self::API_VERSION,
     ];
 
-    public function __construct(private readonly ExtensionManifestService $manifestService)
-    {
-    }
+    public function __construct(private readonly ExtensionManifestService $manifestService) {}
 
     public function installFromSource(string $source, ?string $archiveFilename = null): Extension
     {
@@ -31,7 +32,7 @@ class ExtensionManager
         $downloadedArchive = false;
 
         if (Str::startsWith($source, ['http://', 'https://'])) {
-            if (!config('extensions.security.allow_remote_installs', true)) {
+            if (! config('extensions.security.allow_remote_installs', true)) {
                 throw new ExtensionInstallException('Remote extension installs are disabled by policy.');
             }
 
@@ -54,16 +55,16 @@ class ExtensionManager
 
     public function installFromArchive(string $archivePath, ?string $archiveFilename = null): Extension
     {
-        if (!is_file($archivePath)) {
+        if (! is_file($archivePath)) {
             throw new ExtensionInstallException('Archive file does not exist.');
         }
 
-        if (!Str::endsWith(Str::lower($archivePath), Str::lower(self::PACKAGE_EXTENSION))) {
+        if (! Str::endsWith(Str::lower($archivePath), Str::lower(self::PACKAGE_EXTENSION))) {
             throw new ExtensionInstallException('Extension package must use .rext format.');
         }
 
         [$extractPath, $rootPath] = $this->extractArchive($archivePath);
-        $manifestPath = $rootPath . DIRECTORY_SEPARATOR . self::MANIFEST_FILENAME;
+        $manifestPath = $rootPath.DIRECTORY_SEPARATOR.self::MANIFEST_FILENAME;
         $manifest = $this->manifestService->parseFromFile($manifestPath);
         $resolvedApiVersion = $this->assertApiVersionSupported($manifest);
         $this->manifestService->assertCompatible($manifest);
@@ -79,7 +80,7 @@ class ExtensionManager
             File::deleteDirectory($extensionPath);
         }
 
-        if (!File::copyDirectory($rootPath, $extensionPath)) {
+        if (! File::copyDirectory($rootPath, $extensionPath)) {
             throw new ExtensionInstallException('Unable to copy extension files into extensions directory.');
         }
 
@@ -175,7 +176,7 @@ class ExtensionManager
 
             $slots = collect(Arr::wrap(Arr::get($frontend, 'slots', [])))
                 ->map(function ($slot) use ($extension) {
-                    if (!is_array($slot)) {
+                    if (! is_array($slot)) {
                         return $slot;
                     }
 
@@ -192,7 +193,7 @@ class ExtensionManager
 
             $dashboardRoutes = collect(Arr::wrap(Arr::get($frontend, 'routes.dashboardRouter', [])))
                 ->map(function ($route) use ($extension) {
-                    if (!is_array($route)) {
+                    if (! is_array($route)) {
                         return $route;
                     }
 
@@ -209,7 +210,7 @@ class ExtensionManager
 
             $serverRoutes = collect(Arr::wrap(Arr::get($frontend, 'routes.serverRouter', [])))
                 ->map(function ($route) use ($extension) {
-                    if (!is_array($route)) {
+                    if (! is_array($route)) {
                         return $route;
                     }
 
@@ -250,8 +251,8 @@ class ExtensionManager
      */
     private function resolveRuntimeManifest(Extension $extension): array
     {
-        $manifestPath = rtrim($extension->install_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR
-            . self::MANIFEST_FILENAME;
+        $manifestPath = rtrim($extension->install_path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR
+            .self::MANIFEST_FILENAME;
 
         if (is_file($manifestPath)) {
             try {
@@ -274,7 +275,7 @@ class ExtensionManager
             $schedules = Arr::wrap(Arr::get($extension->manifest, 'backend.schedules', []));
 
             foreach ($schedules as $item) {
-                if (!is_array($item) || !isset($item['command']) || !is_string($item['command'])) {
+                if (! is_array($item) || ! isset($item['command']) || ! is_string($item['command'])) {
                     continue;
                 }
 
@@ -282,6 +283,7 @@ class ExtensionManager
 
                 if (isset($item['cron']) && is_string($item['cron'])) {
                     $event->cron($item['cron']);
+
                     continue;
                 }
 
@@ -301,7 +303,7 @@ class ExtensionManager
         $tempRoot = rtrim((string) config('extensions.storage.temp_path'), DIRECTORY_SEPARATOR);
         File::ensureDirectoryExists($tempRoot);
 
-        $extractPath = $tempRoot . DIRECTORY_SEPARATOR . Str::uuid()->toString();
+        $extractPath = $tempRoot.DIRECTORY_SEPARATOR.Str::uuid()->toString();
         File::ensureDirectoryExists($extractPath);
 
         $zip = new \ZipArchive();
@@ -310,9 +312,9 @@ class ExtensionManager
             throw new ExtensionInstallException('Could not open extension archive.');
         }
 
-        for ($i = 0; $i < $zip->numFiles; ++$i) {
+        for ($i = 0; $i < $zip->numFiles; $i++) {
             $name = $zip->getNameIndex($i);
-            if (!is_string($name)) {
+            if (! is_string($name)) {
                 continue;
             }
 
@@ -329,14 +331,14 @@ class ExtensionManager
         $zip->close();
 
         $manifestName = self::MANIFEST_FILENAME;
-        if (is_file($extractPath . DIRECTORY_SEPARATOR . $manifestName)) {
+        if (is_file($extractPath.DIRECTORY_SEPARATOR.$manifestName)) {
             return [$extractPath, $extractPath];
         }
 
         $directories = collect(File::directories($extractPath));
         if ($directories->count() === 1) {
             $root = (string) $directories->first();
-            if (is_file($root . DIRECTORY_SEPARATOR . $manifestName)) {
+            if (is_file($root.DIRECTORY_SEPARATOR.$manifestName)) {
                 return [$extractPath, $root];
             }
         }
@@ -345,7 +347,7 @@ class ExtensionManager
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function publishAssets(string $identifier, array $manifest): void
     {
@@ -358,33 +360,32 @@ class ExtensionManager
 
         File::ensureDirectoryExists($destinationRoot);
 
-        $sourcePublic = $sourceRoot . DIRECTORY_SEPARATOR . 'public';
+        $sourcePublic = $sourceRoot.DIRECTORY_SEPARATOR.'public';
         if (File::isDirectory($sourcePublic)) {
             File::copyDirectory($sourcePublic, $destinationRoot);
         }
 
         $entries = $this->resolveFrontendEntryPoints($manifest);
         foreach ($entries as $entry) {
-            if (!is_string($entry) || trim($entry) === '') {
+            if (! is_string($entry) || trim($entry) === '') {
                 continue;
             }
 
             $normalized = ltrim($entry, '/');
-            $source = $sourceRoot . DIRECTORY_SEPARATOR . $normalized;
+            $source = $sourceRoot.DIRECTORY_SEPARATOR.$normalized;
 
-            if (!File::exists($source) || !is_file($source)) {
+            if (! File::exists($source) || ! is_file($source)) {
                 continue;
             }
 
-            $target = $destinationRoot . DIRECTORY_SEPARATOR . $normalized;
+            $target = $destinationRoot.DIRECTORY_SEPARATOR.$normalized;
             File::ensureDirectoryExists(dirname($target));
             File::copy($source, $target);
         }
     }
 
     /**
-     * @param array<string, mixed> $manifest
-     *
+     * @param  array<string, mixed>  $manifest
      * @return array<int, string>
      */
     private function resolveFrontendEntryPoints(array $manifest): array
@@ -420,39 +421,39 @@ class ExtensionManager
     private function versionedFrontendModulePath(string $path, Extension $extension): string
     {
         $cleanPath = preg_replace('/\?.*$/', '', $path) ?? $path;
-        $file = rtrim($extension->install_path, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $cleanPath;
+        $file = rtrim($extension->install_path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.$cleanPath;
 
-        if (!is_file($file)) {
+        if (! is_file($file)) {
             return $path;
         }
 
         $mtime = @filemtime($file);
-        if (!is_int($mtime)) {
+        if (! is_int($mtime)) {
             return $path;
         }
 
-        return $cleanPath . '?v=' . $mtime;
+        return $cleanPath.'?v='.$mtime;
     }
 
     private function ensureCanonicalLayout(string $extensionPath): void
     {
         foreach (['backend', 'frontend', 'public', 'data', 'cache', 'private'] as $directory) {
-            File::ensureDirectoryExists($extensionPath . DIRECTORY_SEPARATOR . $directory);
+            File::ensureDirectoryExists($extensionPath.DIRECTORY_SEPARATOR.$directory);
         }
     }
 
     private function extensionPath(string $identifier): string
     {
         return rtrim(base_path('extensions'), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR
-            . $identifier;
+            .DIRECTORY_SEPARATOR
+            .$identifier;
     }
 
     private function publicExtensionPath(string $identifier): string
     {
         return rtrim((string) config('extensions.storage.public_path'), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR
-            . $identifier;
+            .DIRECTORY_SEPARATOR
+            .$identifier;
     }
 
     private function downloadArchive(string $url): string
@@ -460,10 +461,10 @@ class ExtensionManager
         $tempRoot = rtrim((string) config('extensions.storage.temp_path'), DIRECTORY_SEPARATOR);
         File::ensureDirectoryExists($tempRoot);
 
-        $target = $tempRoot . DIRECTORY_SEPARATOR . Str::uuid()->toString() . self::PACKAGE_EXTENSION;
+        $target = $tempRoot.DIRECTORY_SEPARATOR.Str::uuid()->toString().self::PACKAGE_EXTENSION;
         $response = Http::timeout(60)->get($url);
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new ExtensionInstallException('Could not download extension archive from URL.');
         }
 
@@ -481,8 +482,8 @@ class ExtensionManager
 
         $candidates = [$source];
 
-        if (!Str::endsWith(Str::lower($source), Str::lower(self::PACKAGE_EXTENSION))) {
-            $candidates[] = $source . self::PACKAGE_EXTENSION;
+        if (! Str::endsWith(Str::lower($source), Str::lower(self::PACKAGE_EXTENSION))) {
+            $candidates[] = $source.self::PACKAGE_EXTENSION;
         }
 
         $baseCandidates = [];
@@ -500,7 +501,7 @@ class ExtensionManager
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     private function assertApiVersionSupported(array $manifest): string
     {

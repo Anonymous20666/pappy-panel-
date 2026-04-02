@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Services\Nests\NestCreationService;
 use App\Contracts\Repository\NestRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Services\Nests\NestCreationService;
+use Illuminate\Database\Seeder;
 
 class NestSeeder extends Seeder
 {
@@ -32,7 +33,7 @@ class NestSeeder extends Seeder
     /**
      * Run the seeder to add missing nests to the Panel.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function run()
     {
@@ -47,7 +48,7 @@ class NestSeeder extends Seeder
 
         // migrate old nests -> new nests
         foreach ($oldItems as $oldNest) {
-            if (!isset($items[$oldNest->name])) {
+            if (! isset($items[$oldNest->name])) {
                 $this->repository->update($oldNest->id, ['author' => 'authors@reviactyl.app']);
                 $items[$oldNest->name] = $oldNest->toArray();
             }
@@ -62,7 +63,7 @@ class NestSeeder extends Seeder
     /**
      * Create the Minecraft nest to be used later on.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     private function createMinecraftNest(?array $nest = null)
     {
@@ -77,7 +78,7 @@ class NestSeeder extends Seeder
     /**
      * Create the Source Engine Games nest to be used later on.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     private function createSourceEngineNest(?array $nest = null)
     {
@@ -92,7 +93,7 @@ class NestSeeder extends Seeder
     /**
      * Create the Voice Servers nest to be used later on.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     private function createVoiceServersNest(?array $nest = null)
     {
@@ -107,7 +108,7 @@ class NestSeeder extends Seeder
     /**
      * Create the Rust nest to be used later on.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     private function createRustNest(?array $nest = null)
     {

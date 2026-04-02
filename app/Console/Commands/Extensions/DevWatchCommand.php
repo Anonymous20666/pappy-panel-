@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands\Extensions;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
-use Symfony\Component\Process\Process;
 use App\Services\Helpers\SoftwareVersionService;
+use Illuminate\Console\Command;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
+use Symfony\Component\Process\Process;
 
 class DevWatchCommand extends Command
 {
@@ -38,7 +38,7 @@ class DevWatchCommand extends Command
     public function handle(): int
     {
         $this->line('');
-        $this->line("<fg=red>REVIACTYL v{$this->config->get('app.version')}</> " . ($this->versionService->isLatestPanel() ? 'uptodate' : $this->formatText('outdated', 'bg=red')));
+        $this->line("<fg=red>REVIACTYL v{$this->config->get('app.version')}</> ".($this->versionService->isLatestPanel() ? 'uptodate' : $this->formatText('outdated', 'bg=red')));
         $this->line('');
         $source = trim((string) ($this->argument('source') ?: ''));
 
@@ -61,21 +61,21 @@ class DevWatchCommand extends Command
         }
 
         $sourceReal = realpath($sourcePath);
-        if ($sourceReal === false || !is_dir($sourceReal)) {
+        if ($sourceReal === false || ! is_dir($sourceReal)) {
             $this->error('Source directory does not exist.');
 
             return self::FAILURE;
         }
 
-        $frontendSrc = $sourceReal . '/frontend/src';
-        if (!is_dir($frontendSrc)) {
+        $frontendSrc = $sourceReal.'/frontend/src';
+        if (! is_dir($frontendSrc)) {
             $this->error('Source directory must contain frontend/src.');
 
             return self::FAILURE;
         }
 
         $scriptPath = base_path('resources/scripts/extensions/compile-extension.mjs');
-        if (!is_file($scriptPath)) {
+        if (! is_file($scriptPath)) {
             $this->error('Compiler script is missing.');
 
             return self::FAILURE;
@@ -85,8 +85,8 @@ class DevWatchCommand extends Command
         $this->line("Compiling extension frontend from {$sourceReal}");
         $this->line((bool) $this->option('once') ? 'Mode: once' : 'Mode: watch (Ctrl+C to stop)');
 
-        if (!File::isDirectory($sourceReal . '/frontend/dist')) {
-            File::ensureDirectoryExists($sourceReal . '/frontend/dist');
+        if (! File::isDirectory($sourceReal.'/frontend/dist')) {
+            File::ensureDirectoryExists($sourceReal.'/frontend/dist');
         }
 
         $process = new Process(['node', $scriptPath, $sourceReal, $mode], base_path(), null, null, 0);
@@ -100,7 +100,7 @@ class DevWatchCommand extends Command
             }
         });
 
-        if (!$process->isSuccessful()) {
+        if (! $process->isSuccessful()) {
             $this->error('Extension frontend compile failed.');
 
             return self::FAILURE;
@@ -120,6 +120,6 @@ class DevWatchCommand extends Command
             return Str::startsWith($source, '/') ? $source : base_path($source);
         }
 
-        return base_path('extensions/' . $source);
+        return base_path('extensions/'.$source);
     }
 }

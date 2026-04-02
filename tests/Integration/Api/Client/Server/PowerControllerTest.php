@@ -3,8 +3,9 @@
 namespace Tests\Integration\Api\Client\Server;
 
 use App\Models\Permission;
-use Illuminate\Http\Response;
 use App\Repositories\Wings\DaemonPowerRepository;
+use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class PowerControllerTest extends ClientApiIntegrationTestCase
@@ -14,10 +15,10 @@ class PowerControllerTest extends ClientApiIntegrationTestCase
      * an error in response. This checks against the specific permission needed to send
      * the command to the server.
      *
-     * @param string[] $permissions
+     * @param  string[]  $permissions
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('invalidPermissionDataProvider')]
-    public function testSubuserWithoutPermissionsReceivesError(string $action, array $permissions)
+    #[DataProvider('invalidPermissionDataProvider')]
+    public function test_subuser_without_permissions_receives_error(string $action, array $permissions)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -29,7 +30,7 @@ class PowerControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that sending an invalid power signal returns an error.
      */
-    public function testInvalidPowerSignalResultsInError()
+    public function test_invalid_power_signal_results_in_error()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -45,8 +46,8 @@ class PowerControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that sending a valid power actions works.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('validPowerActionDataProvider')]
-    public function testActionCanBeSentToServer(string $action, string $permission)
+    #[DataProvider('validPowerActionDataProvider')]
+    public function test_action_can_be_sent_to_server(string $action, string $permission)
     {
         $service = \Mockery::mock(DaemonPowerRepository::class);
         $this->app->instance(DaemonPowerRepository::class, $service);

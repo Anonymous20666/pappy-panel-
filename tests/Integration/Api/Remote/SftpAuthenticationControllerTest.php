@@ -3,11 +3,12 @@
 namespace Tests\Integration\Api\Remote;
 
 use App\Models\Node;
-use App\Models\User;
-use App\Models\Server;
-use phpseclib3\Crypt\EC;
 use App\Models\Permission;
+use App\Models\Server;
+use App\Models\User;
 use App\Models\UserSSHKey;
+use phpseclib3\Crypt\EC;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\IntegrationTestCase;
 
 class SftpAuthenticationControllerTest extends IntegrationTestCase
@@ -19,7 +20,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
     /**
      * Sets up the tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -36,7 +37,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
     /**
      * Test that a public key is validated correctly.
      */
-    public function testPublicKeyIsValidatedCorrectly()
+    public function test_public_key_is_validated_correctly()
     {
         $key = UserSSHKey::factory()->for($this->user)->create();
 
@@ -66,7 +67,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
     /**
      * Test that an account password is validated correctly.
      */
-    public function testPasswordIsValidatedCorrectly()
+    public function test_password_is_validated_correctly()
     {
         $this->postJson('/api/remote/sftp/auth', [
             'username' => $this->getUsername(),
@@ -95,10 +96,10 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
      * Test that providing an invalid key and/or invalid username triggers the throttle on
      * the endpoint.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('authorizationTypeDataProvider')]
-    public function testUserIsThrottledIfInvalidCredentialsAreProvided()
+    #[DataProvider('authorizationTypeDataProvider')]
+    public function test_user_is_throttled_if_invalid_credentials_are_provided()
     {
-        for ($i = 0; $i <= 10; ++$i) {
+        for ($i = 0; $i <= 10; $i++) {
             $this->postJson('/api/remote/sftp/auth', [
                 'type' => 'public_key',
                 'username' => $i % 2 === 0 ? $this->user->username : $this->getUsername(),
@@ -112,9 +113,9 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
      * Test that the user is not throttled so long as a valid public key is provided, even
      * if it doesn't actually exist in the database for the user.
      */
-    public function testUserIsNotThrottledIfNoPublicKeyMatches()
+    public function test_user_is_not_throttled_if_no_public_key_matches()
     {
-        for ($i = 0; $i <= 10; ++$i) {
+        for ($i = 0; $i <= 10; $i++) {
             $this->postJson('/api/remote/sftp/auth', [
                 'type' => 'public_key',
                 'username' => $this->getUsername(),
@@ -128,8 +129,8 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
      * Test that a request is rejected if the credentials are valid but the username indicates
      * a server on a different node.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('authorizationTypeDataProvider')]
-    public function testRequestIsRejectedIfServerBelongsToDifferentNode(string $type)
+    #[DataProvider('authorizationTypeDataProvider')]
+    public function test_request_is_rejected_if_server_belongs_to_different_node(string $type)
     {
         $node2 = $this->createServerModel()->node;
 
@@ -147,7 +148,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
             ->assertForbidden();
     }
 
-    public function testRequestIsDeniedIfUserLacksSftpPermission()
+    public function test_request_is_denied_if_user_lacks_sftp_permission()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_FILE_READ]);
 
@@ -156,15 +157,15 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
         $this->setAuthorization($server->node);
 
         $this->postJson('/api/remote/sftp/auth', [
-            'username' => $user->username . '.' . $server->uuidShort,
+            'username' => $user->username.'.'.$server->uuidShort,
             'password' => 'foobar',
         ])
             ->assertForbidden()
             ->assertJsonPath('errors.0.detail', 'You do not have permission to access SFTP for this server.');
     }
 
-    #[\PHPUnit\Framework\Attributes\DataProvider('serverStateDataProvider')]
-    public function testInvalidServerStateReturnsConflictError(string $status)
+    #[DataProvider('serverStateDataProvider')]
+    public function test_invalid_server_state_returns_conflict_error(string $status)
     {
         $this->server->update(['status' => $status]);
 
@@ -175,7 +176,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
     /**
      * Test that permissions are returned for the user account correctly.
      */
-    public function testUserPermissionsAreReturnedCorrectly()
+    public function test_user_permissions_are_returned_correctly()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_FILE_READ, Permission::ACTION_FILE_SFTP]);
 
@@ -184,7 +185,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
         $this->setAuthorization($server->node);
 
         $data = [
-            'username' => $user->username . '.' . $server->uuidShort,
+            'username' => $user->username.'.'.$server->uuidShort,
             'password' => 'foobar',
         ];
 
@@ -199,7 +200,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
             ->assertJsonPath('permissions.0', '*');
 
         $this->setAuthorization();
-        $data['username'] = $user->username . '.' . $this->server->uuidShort;
+        $data['username'] = $user->username.'.'.$this->server->uuidShort;
 
         $this->post('/api/remote/sftp/auth', $data)
             ->assertOk()
@@ -231,7 +232,7 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
      */
     protected function getUsername(bool $long = false): string
     {
-        return $this->user->username . '.' . ($long ? $this->server->uuid : $this->server->uuidShort);
+        return $this->user->username.'.'.($long ? $this->server->uuid : $this->server->uuidShort);
     }
 
     /**
@@ -241,6 +242,6 @@ class SftpAuthenticationControllerTest extends IntegrationTestCase
     {
         $node = $node ?? $this->server->node;
 
-        $this->withHeader('Authorization', 'Bearer ' . $node->daemon_token_id . '.' . decrypt($node->daemon_token));
+        $this->withHeader('Authorization', 'Bearer '.$node->daemon_token_id.'.'.decrypt($node->daemon_token));
     }
 }

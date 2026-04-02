@@ -2,11 +2,11 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\ActivityLog;
-use Filament\Schemas\Schema;
-use Filament\Schemas\Components\Section;
-use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\ActivityLogResource;
+use App\Models\ActivityLog;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class ActivityLogWidget extends BaseWidget
 {
@@ -29,16 +29,16 @@ class ActivityLogWidget extends BaseWidget
                 ->hiddenLabel()
                 ->state(
                     ($log->actor?->name ?? trans('admin/activity_log.fallback_actor'))
-                    . ' — '
-                    . $log->event
-                    . ' — '
-                    . $log->timestamp?->diffForHumans()
+                    .' — '
+                    .$log->event
+                    .' — '
+                    .$log->timestamp?->diffForHumans()
                 );
         }
 
         $entries[] = TextEntry::make('view_more')
             ->hiddenLabel()
-            ->state(trans('admin/index.more-btn') . '  →')
+            ->state(trans('admin/index.more-btn').'  →')
             ->color('primary')
             ->url(ActivityLogResource::getUrl());
 

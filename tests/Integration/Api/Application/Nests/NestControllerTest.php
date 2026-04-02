@@ -2,9 +2,12 @@
 
 namespace Tests\Integration\Api\Application\Nests;
 
-use Illuminate\Http\Response;
 use App\Contracts\Repository\NestRepositoryInterface;
+use App\Models\Egg;
+use App\Models\Nest;
 use App\Transformers\Api\Application\NestTransformer;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Response;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class NestControllerTest extends ApplicationApiIntegrationTestCase
@@ -14,7 +17,7 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Setup tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -24,11 +27,11 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that the expected nests are returned by the request.
      */
-    public function testNestResponse()
+    public function test_nest_response()
     {
-        \App\Models\Nest::factory()->count(2)->create();
+        Nest::factory()->count(2)->create();
 
-        /** @var \Illuminate\Database\Eloquent\Collection<int, \App\Models\Nest> $nests */
+        /** @var Collection<int, Nest> $nests */
         $nests = $this->repository->all();
 
         $response = $this->getJson('/api/application/nests');
@@ -65,11 +68,11 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that getting a single nest returns the expected result.
      */
-    public function testSingleNestResponse()
+    public function test_single_nest_response()
     {
-        $nest = \App\Models\Nest::factory()->create();
+        $nest = Nest::factory()->create();
 
-        $response = $this->getJson('/api/application/nests/' . $nest->id);
+        $response = $this->getJson('/api/application/nests/'.$nest->id);
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
             'object',
@@ -85,10 +88,10 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that including eggs in the response works as expected.
      */
-    public function testSingleNestWithEggsIncluded()
+    public function test_single_nest_with_eggs_included()
     {
-        $nest = \App\Models\Nest::factory()->create();
-        \App\Models\Egg::factory()->count(2)->create([
+        $nest = Nest::factory()->create();
+        Egg::factory()->count(2)->create([
             'nest_id' => $nest->id,
             'author' => 'authors@reviactyl.app',
             'docker_images' => ['ghcr.io/reviactyl/images:java_21'],
@@ -99,7 +102,7 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
         ]);
         $nest->loadMissing('eggs');
 
-        $response = $this->getJson('/api/application/nests/' . $nest->id . '?include=servers,eggs');
+        $response = $this->getJson('/api/application/nests/'.$nest->id.'?include=servers,eggs');
         $response->assertStatus(Response::HTTP_OK);
         $response->assertJsonStructure([
             'object',
@@ -117,7 +120,7 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
     /**
      * Test that a missing nest returns a 404 error.
      */
-    public function testGetMissingNest()
+    public function test_get_missing_nest()
     {
         $response = $this->getJson('/api/application/nests/nil');
         $this->assertNotFoundJson($response);
@@ -127,12 +130,12 @@ class NestControllerTest extends ApplicationApiIntegrationTestCase
      * Test that an authentication error occurs if a key does not have permission
      * to access a resource.
      */
-    public function testErrorReturnedIfNoPermission()
+    public function test_error_returned_if_no_permission()
     {
-        $nest = \App\Models\Nest::factory()->create();
+        $nest = Nest::factory()->create();
         $this->createNewDefaultApiKey($this->getApiUser(), ['r_nests' => 0]);
 
-        $response = $this->getJson('/api/application/nests/' . $nest->id);
+        $response = $this->getJson('/api/application/nests/'.$nest->id);
         $this->assertAccessDeniedJson($response);
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Console;
 
+use Illuminate\Console\Command;
+use Illuminate\Database\Migrations\Migrator;
+
 /**
- * @mixin \Illuminate\Console\Command
+ * @mixin Command
  */
 trait RequiresDatabaseMigrations
 {
@@ -12,12 +15,12 @@ trait RequiresDatabaseMigrations
      */
     protected function hasCompletedMigrations(): bool
     {
-        /** @var \Illuminate\Database\Migrations\Migrator $migrator */
+        /** @var Migrator $migrator */
         $migrator = $this->getLaravel()->make('migrator');
 
         $files = $migrator->getMigrationFiles(database_path('migrations'));
 
-        if (!$migrator->repositoryExists()) {
+        if (! $migrator->repositoryExists()) {
             return false;
         }
 

@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands\User;
 
-use Illuminate\Console\Command;
+use App\Exceptions\Model\DataValidationException;
 use App\Services\Users\UserCreationService;
+use Illuminate\Console\Command;
 
 class MakeUserCommand extends Command
 {
@@ -23,7 +24,7 @@ class MakeUserCommand extends Command
      * Handle command request to create a new user.
      *
      * @throws \Exception
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle()
     {
@@ -33,7 +34,7 @@ class MakeUserCommand extends Command
         $name_first = $this->option('name-first') ?? $this->ask(trans('command/messages.user.ask_name_first'));
         $name_last = $this->option('name-last') ?? $this->ask(trans('command/messages.user.ask_name_last'));
 
-        if (is_null($password = $this->option('password')) && !$this->option('no-password')) {
+        if (is_null($password = $this->option('password')) && ! $this->option('no-password')) {
             $this->warn(trans('command/messages.user.ask_password_help'));
             $this->line(trans('command/messages.user.ask_password_tip'));
             $password = $this->secret(trans('command/messages.user.ask_password'));

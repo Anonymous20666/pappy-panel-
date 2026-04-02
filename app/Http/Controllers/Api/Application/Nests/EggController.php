@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Application\Nests;
 
+use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Nests\Eggs\GetEggRequest;
+use App\Http\Requests\Api\Application\Nests\Eggs\GetEggsRequest;
 use App\Models\Egg;
 use App\Models\Nest;
 use App\Transformers\Api\Application\EggTransformer;
-use App\Http\Requests\Api\Application\Nests\Eggs\GetEggRequest;
-use App\Http\Requests\Api\Application\Nests\Eggs\GetEggsRequest;
-use App\Http\Controllers\Api\Application\ApplicationApiController;
 
 class EggController extends ApplicationApiController
 {

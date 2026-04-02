@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -15,7 +16,7 @@ return new class extends Migration {
         // Same as in the backups migration, we need to handle that plugin messing with the data structure
         // here. If we find a result we'll actually keep the column around since we can maintain that backup
         // limit, but we need to correct the column definition a bit.
-        
+
         // only attempt this on mysql and mariadb databases
         if (DB::getDriverName() === 'mysql' || DB::getDriverName() === 'mariadb') {
             $results = DB::select('SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = \'servers\' AND COLUMN_NAME = \'backup_limit\'', [

@@ -2,17 +2,18 @@
 
 namespace Tests\Unit\Http\Middleware\Api\Daemon;
 
-use Mockery as m;
-use App\Models\Node;
-use Mockery\MockInterface;
-use App\Repositories\Eloquent\NodeRepository;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Tests\Unit\Http\Middleware\MiddlewareTestCase;
 use App\Exceptions\Repository\RecordNotFoundException;
 use App\Http\Middleware\Api\Daemon\DaemonAuthenticate;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use App\Models\Node;
+use App\Repositories\Eloquent\NodeRepository;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Mockery as m;
+use Mockery\MockInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Tests\Unit\Http\Middleware\MiddlewareTestCase;
 
 class DaemonAuthenticateTest extends MiddlewareTestCase
 {
@@ -23,7 +24,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
     /**
      * Setup tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +36,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Test that if we are accessing the daemon.configuration route this middleware is not
      * applied in order to allow an unauthenticated request to use a token to grab data.
      */
-    public function testResponseShouldContinueIfRouteIsExempted()
+    public function test_response_should_continue_if_route_is_exempted()
     {
         $this->request->expects('route->getName')->withNoArgs()->andReturn('daemon.configuration');
 
@@ -46,7 +47,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Test that not passing in the bearer token will result in a HTTP/401 error with the
      * proper response headers.
      */
-    public function testResponseShouldFailIfNoTokenIsProvided()
+    public function test_response_should_fail_if_no_token_is_provided()
     {
         $this->request->expects('route->getName')->withNoArgs()->andReturn('random.route');
         $this->request->expects('bearerToken')->withNoArgs()->andReturnNull();
@@ -65,8 +66,8 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Test that passing in an invalid node daemon secret will result in a bad request
      * exception being returned.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('badTokenDataProvider')]
-    public function testResponseShouldFailIfTokenFormatIsIncorrect(string $token)
+    #[DataProvider('badTokenDataProvider')]
+    public function test_response_should_fail_if_token_format_is_incorrect(string $token)
     {
         $this->expectException(BadRequestHttpException::class);
 
@@ -80,7 +81,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Test that an access denied error is returned if the node is valid but the token
      * provided is not valid.
      */
-    public function testResponseShouldFailIfTokenIsNotValid()
+    public function test_response_should_fail_if_token_is_not_valid()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
@@ -88,7 +89,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
         $model = Node::factory()->make();
 
         $this->request->expects('route->getName')->withNoArgs()->andReturn('random.route');
-        $this->request->expects('bearerToken')->withNoArgs()->andReturn($model->daemon_token_id . '.random_string_123');
+        $this->request->expects('bearerToken')->withNoArgs()->andReturn($model->daemon_token_id.'.random_string_123');
 
         $this->repository->expects('findFirstWhere')->with(['daemon_token_id' => $model->daemon_token_id])->andReturn($model);
         $this->encrypter->expects('decrypt')->with($model->daemon_token)->andReturns(decrypt($model->daemon_token));
@@ -100,7 +101,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Test that an access denied exception is returned if the node is not found using
      * the token ID provided.
      */
-    public function testResponseShouldFailIfNodeIsNotFound()
+    public function test_response_should_fail_if_node_is_not_found()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
@@ -115,13 +116,13 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
     /**
      * Test a successful middleware process.
      */
-    public function testSuccessfulMiddlewareProcess()
+    public function test_successful_middleware_process()
     {
         /** @var Node $model */
         $model = Node::factory()->make();
 
         $this->request->expects('route->getName')->withNoArgs()->andReturn('random.route');
-        $this->request->expects('bearerToken')->withNoArgs()->andReturn($model->daemon_token_id . '.' . decrypt($model->daemon_token));
+        $this->request->expects('bearerToken')->withNoArgs()->andReturn($model->daemon_token_id.'.'.decrypt($model->daemon_token));
 
         $this->repository->expects('findFirstWhere')->with(['daemon_token_id' => $model->daemon_token_id])->andReturn($model);
         $this->encrypter->expects('decrypt')->with($model->daemon_token)->andReturns(decrypt($model->daemon_token));
@@ -135,7 +136,7 @@ class DaemonAuthenticateTest extends MiddlewareTestCase
      * Provides different tokens that should trigger a bad request exception due to
      * their formatting.
      *
-     * @return array|\string[][]
+     * @return array|string[][]
      */
     public static function badTokenDataProvider(): array
     {

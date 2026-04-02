@@ -2,11 +2,11 @@
 
 namespace App\Facades;
 
-use Illuminate\Support\Facades\Facade;
 use App\Services\Activity\ActivityLogTargetableService;
+use Illuminate\Support\Facades\Facade;
 
 /**
- * @mixin \App\Services\Activity\ActivityLogTargetableService
+ * @mixin ActivityLogTargetableService
  */
 class LogTarget extends Facade
 {

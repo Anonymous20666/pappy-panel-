@@ -2,8 +2,8 @@
 
 namespace App\Services\Extensions;
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
 
 class ExtensionFilesystemService
 {
@@ -24,19 +24,19 @@ class ExtensionFilesystemService
 
     public function publicDiskName(string $identifier): string
     {
-        return 'ext_' . $this->sanitizeIdentifier($identifier) . '_fs';
+        return 'ext_'.$this->sanitizeIdentifier($identifier).'_fs';
     }
 
     public function privateDiskName(string $identifier): string
     {
-        return 'ext_' . $this->sanitizeIdentifier($identifier) . '_private';
+        return 'ext_'.$this->sanitizeIdentifier($identifier).'_private';
     }
 
     public function publicRootPath(string $identifier): string
     {
         $root = rtrim((string) config('extensions.storage.public_fs_path', storage_path('extensions')), DIRECTORY_SEPARATOR)
-            . DIRECTORY_SEPARATOR
-            . $identifier;
+            .DIRECTORY_SEPARATOR
+            .$identifier;
 
         File::ensureDirectoryExists($root);
 
@@ -45,7 +45,7 @@ class ExtensionFilesystemService
 
     public function privateRootPath(string $installPath): string
     {
-        $root = rtrim($installPath, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'private';
+        $root = rtrim($installPath, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR.'private';
         File::ensureDirectoryExists($root);
 
         return $root;
@@ -60,7 +60,7 @@ class ExtensionFilesystemService
             'driver' => 'local',
             'root' => $this->publicRootPath($identifier),
             'throw' => false,
-            'url' => '/fs/' . $identifier,
+            'url' => '/fs/'.$identifier,
             'visibility' => 'public',
         ];
     }

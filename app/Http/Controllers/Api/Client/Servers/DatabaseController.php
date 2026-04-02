@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
-use App\Models\Database;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
+use App\Exceptions\Service\Database\TooManyDatabasesException;
 use App\Facades\Activity;
-use Illuminate\Http\Response;
-use App\Services\Databases\DatabasePasswordService;
-use App\Transformers\Api\Client\DatabaseTransformer;
-use App\Services\Databases\DatabaseManagementService;
-use App\Services\Databases\DeployServerDatabaseService;
 use App\Http\Controllers\Api\Client\ClientApiController;
-use App\Http\Requests\Api\Client\Servers\Databases\GetDatabasesRequest;
-use App\Http\Requests\Api\Client\Servers\Databases\StoreDatabaseRequest;
 use App\Http\Requests\Api\Client\Servers\Databases\DeleteDatabaseRequest;
+use App\Http\Requests\Api\Client\Servers\Databases\GetDatabasesRequest;
 use App\Http\Requests\Api\Client\Servers\Databases\RotatePasswordRequest;
+use App\Http\Requests\Api\Client\Servers\Databases\StoreDatabaseRequest;
+use App\Models\Database;
+use App\Models\Server;
+use App\Services\Databases\DatabaseManagementService;
+use App\Services\Databases\DatabasePasswordService;
+use App\Services\Databases\DeployServerDatabaseService;
+use App\Transformers\Api\Client\DatabaseTransformer;
+use Illuminate\Http\Response;
 
 class DatabaseController extends ClientApiController
 {
@@ -43,8 +46,8 @@ class DatabaseController extends ClientApiController
      * Create a new database for the given server and return it.
      *
      * @throws \Throwable
-     * @throws \App\Exceptions\Service\Database\TooManyDatabasesException
-     * @throws \App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException
+     * @throws TooManyDatabasesException
+     * @throws DatabaseClientFeatureNotEnabledException
      */
     public function store(StoreDatabaseRequest $request, Server $server): array
     {
@@ -90,7 +93,7 @@ class DatabaseController extends ClientApiController
     /**
      * Removes a database from the server.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function delete(DeleteDatabaseRequest $request, Server $server, Database $database): Response
     {

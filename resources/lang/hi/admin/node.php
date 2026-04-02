@@ -207,7 +207,7 @@ return [
             'failed' => 'Allocation action failed.',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => 'प्रदान किया गया FQDN या IP पता एक वैध IP पते को हल नहीं करता है।',
         'fqdn_required_for_ssl' => 'इस नोड के लिए SSL का उपयोग करने के लिए एक सार्वजनिक IP पते को हल करने वाला पूर्ण योग्य डोमेन नाम आवश्यक है।',

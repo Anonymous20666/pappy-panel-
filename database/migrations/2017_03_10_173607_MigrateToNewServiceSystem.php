@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -10,7 +11,7 @@ return new class extends Migration {
     {
         DB::transaction(function () {
             $service = DB::table('services')->where('author', config('pterodactyl.service.core'))->where('folder', 'srcds')->first();
-            if (!$service) {
+            if (! $service) {
                 return;
             }
 

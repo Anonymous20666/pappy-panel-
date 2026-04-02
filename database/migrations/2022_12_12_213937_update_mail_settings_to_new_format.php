@@ -1,10 +1,11 @@
 <?php
 
 use App\Models\Setting;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
-return new class extends Migration {
+return new class extends Migration
+{
     private array $keys = [
         ['mail:host', 'mail:mailers:smtp:host'],
         ['mail:port', 'mail:mailers:smtp:port'],

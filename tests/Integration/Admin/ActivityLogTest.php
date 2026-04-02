@@ -2,21 +2,21 @@
 
 namespace Tests\Integration\Admin;
 
-use App\Models\Node;
-use App\Models\User;
-use Livewire\Livewire;
-use App\Models\Location;
-use App\Models\ActivityLog;
-use Tests\Integration\IntegrationTestCase;
 use App\Filament\Resources\ActivityLogResource;
 use App\Filament\Resources\Nodes\Pages\CreateNode;
+use App\Models\ActivityLog;
+use App\Models\Location;
+use App\Models\Node;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\Integration\IntegrationTestCase;
 
 class ActivityLogTest extends IntegrationTestCase
 {
     use RefreshDatabase;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
     }
@@ -24,7 +24,7 @@ class ActivityLogTest extends IntegrationTestCase
     /**
      * Test that creating a server generates an activity log.
      */
-    public function testServerCreationGeneratesLog()
+    public function test_server_creation_generates_log()
     {
         $admin = User::factory()->create(['root_admin' => 1]);
         $this->actingAs($admin);
@@ -64,7 +64,7 @@ class ActivityLogTest extends IntegrationTestCase
     /**
      * Test that the admin index page loads and shows activity logs.
      */
-    public function testAdminIndexShowsLogs()
+    public function test_admin_index_shows_logs()
     {
         $admin = User::factory()->create(['root_admin' => 1]);
         $this->actingAs($admin);

@@ -3,15 +3,15 @@
 namespace App\Providers;
 
 use App\Models;
-use Illuminate\Support\Str;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Support\Facades\URL;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\Sanctum;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -74,7 +74,7 @@ class AppServiceProvider extends ServiceProvider
                 $head = explode(' ', file_get_contents(base_path('.git/HEAD')));
 
                 if (array_key_exists(1, $head)) {
-                    $path = base_path('.git/' . trim($head[1]));
+                    $path = base_path('.git/'.trim($head[1]));
                 }
             }
 

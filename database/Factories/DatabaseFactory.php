@@ -2,10 +2,10 @@
 
 namespace Database\Factories;
 
-use Carbon\Carbon;
 use App\Models\Database;
-use Illuminate\Support\Str;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DatabaseFactory extends Factory
 {

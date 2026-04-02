@@ -1,5 +1,11 @@
 <?php
 
+use App\Facades\Activity;
+use App\Facades\LogBatch;
+use App\Facades\LogTarget;
+use Illuminate\Support\Facades\Facade;
+use Laracasts\Utilities\JavaScript\JavaScriptFacade;
+use Prologue\Alerts\Facades\Alert;
 
 return [
     /*
@@ -207,14 +213,14 @@ return [
     |
     */
 
-    'aliases' => Illuminate\Support\Facades\Facade::defaultAliases()->merge([
-        'Alert' => Prologue\Alerts\Facades\Alert::class,
+    'aliases' => Facade::defaultAliases()->merge([
+        'Alert' => Alert::class,
         'Carbon' => Carbon\Carbon::class,
-        'JavaScript' => Laracasts\Utilities\JavaScript\JavaScriptFacade::class,
+        'JavaScript' => JavaScriptFacade::class,
 
         // Custom Facades
-        'Activity' => App\Facades\Activity::class,
-        'LogBatch' => App\Facades\LogBatch::class,
-        'LogTarget' => App\Facades\LogTarget::class,
+        'Activity' => Activity::class,
+        'LogBatch' => LogBatch::class,
+        'LogTarget' => LogTarget::class,
     ])->toArray(),
 ];

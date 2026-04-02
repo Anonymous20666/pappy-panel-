@@ -3,8 +3,8 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Node;
-use Filament\Schemas\Schema;
 use Filament\Forms\Components\Select;
+use Filament\Schemas\Schema;
 
 class NodeSelectorWidget extends BaseWidget
 {
@@ -16,9 +16,7 @@ class NodeSelectorWidget extends BaseWidget
 
     public ?int $nodeId = null;
 
-    public function mount(): void
-    {
-    }
+    public function mount(): void {}
 
     public function updatedNodeId(): void
     {

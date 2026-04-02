@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Api\Remote\Servers;
 
+use App\Exceptions\Http\HttpForbiddenException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Facades\Activity;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Wings\ServerConfigurationCollection;
+use App\Models\ActivityLog;
 use App\Models\Node;
 use App\Models\Server;
-use App\Facades\Activity;
+use App\Repositories\Eloquent\ServerRepository;
+use App\Services\Eggs\EggConfigurationService;
+use App\Services\Servers\ServerConfigurationStructureService;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Webmozart\Assert\Assert;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use Illuminate\Database\ConnectionInterface;
-use App\Services\Eggs\EggConfigurationService;
-use App\Exceptions\Http\HttpForbiddenException;
-use App\Repositories\Eloquent\ServerRepository;
-use App\Http\Resources\Wings\ServerConfigurationCollection;
-use App\Services\Servers\ServerConfigurationStructureService;
 
 class ServerDetailsController extends Controller
 {
@@ -26,14 +28,13 @@ class ServerDetailsController extends Controller
         private ServerRepository $repository,
         private ServerConfigurationStructureService $configurationStructureService,
         private EggConfigurationService $eggConfigurationService,
-    ) {
-    }
+    ) {}
 
     /**
      * Returns details about the server that allows Wings to self-recover and ensure
      * that the state of the server matches the Panel at all times.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function __invoke(Request $request, string $uuid): JsonResponse
     {
@@ -109,9 +110,9 @@ class ServerDetailsController extends Controller
         $this->connection->transaction(function () use ($node, $servers) {
             /** @var Server $server */
             foreach ($servers as $server) {
-                /** @var \App\Models\ActivityLog|null $activity */
+                /** @var ActivityLog|null $activity */
                 $activity = $server->activity->first();
-                if (!is_null($activity)) {
+                if (! is_null($activity)) {
                     if ($subject = $activity->subjects->where('subject_type', 'backup')->first()) {
                         // Just create a new audit entry for this event and update the server state
                         // so that power actions, file management, and backups can resume as normal.

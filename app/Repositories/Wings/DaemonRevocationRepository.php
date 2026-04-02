@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Wings;
 
-use GuzzleHttp\Exception\TransferException;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use GuzzleHttp\Exception\TransferException;
 
 class DaemonRevocationRepository extends DaemonRepository
 {
@@ -12,7 +12,7 @@ class DaemonRevocationRepository extends DaemonRepository
      * the provided servers. If no servers are provided, the user is deauthorized on all
      * servers on the instance.
      *
-     * @param string[] $servers
+     * @param  string[]  $servers
      */
     public function deauthorize(string $user, array $servers = []): void
     {

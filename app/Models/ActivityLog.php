@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
-use App\Events\ActivityLogged;
-use Illuminate\Support\Facades\Event;
 use App\Contracts\Models\Identifiable;
-use Illuminate\Database\Eloquent\Builder;
+use App\Events\ActivityLogged;
 use App\Models\Traits\HasRealtimeIdentifier;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\MassPrunable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Model as IlluminateModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Event;
 
 /**
  * \App\Models\ActivityLog.
@@ -25,10 +26,10 @@ use Illuminate\Database\Eloquent\Model as IlluminateModel;
  * @property string|null $actor_type
  * @property int|null $actor_id
  * @property int|null $api_key_id
- * @property \Illuminate\Support\Collection|null $properties
+ * @property Collection|null $properties
  * @property Carbon $timestamp
  * @property IlluminateModel|\Eloquent $actor
- * @property \Illuminate\Database\Eloquent\Collection<int, \App\Models\ActivityLogSubject> $subjects
+ * @property \Illuminate\Database\Eloquent\Collection<int, ActivityLogSubject> $subjects
  * @property int|null $subjects_count
  * @property ApiKey|null $apiKey
  *
@@ -53,8 +54,8 @@ use Illuminate\Database\Eloquent\Model as IlluminateModel;
 #[Attributes\Identifiable('actl')]
 class ActivityLog extends Model implements Identifiable
 {
-    use MassPrunable;
     use HasRealtimeIdentifier;
+    use MassPrunable;
 
     public const RESOURCE_NAME = 'activity_log';
 
@@ -87,7 +88,7 @@ class ActivityLog extends Model implements Identifiable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, $this>
+     * @return MorphTo<IlluminateModel, $this>
      */
     public function actor(): MorphTo
     {
@@ -100,7 +101,7 @@ class ActivityLog extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ActivityLogSubject, $this>
+     * @return HasMany<ActivityLogSubject, $this>
      */
     public function subjects(): HasMany
     {
@@ -108,7 +109,7 @@ class ActivityLog extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\ApiKey, $this>
+     * @return HasOne<ApiKey, $this>
      */
     public function apiKey(): HasOne
     {

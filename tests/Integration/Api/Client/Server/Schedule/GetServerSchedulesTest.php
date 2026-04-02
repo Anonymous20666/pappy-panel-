@@ -2,9 +2,10 @@
 
 namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use App\Models\Task;
-use App\Models\Schedule;
 use App\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Task;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class GetServerSchedulesTest extends ClientApiIntegrationTestCase
@@ -23,8 +24,8 @@ class GetServerSchedulesTest extends ClientApiIntegrationTestCase
     /**
      * Test that schedules for a server are returned.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testServerSchedulesAreReturned(array $permissions, bool $individual)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_server_schedules_are_returned(array $permissions, bool $individual)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -42,23 +43,23 @@ class GetServerSchedulesTest extends ClientApiIntegrationTestCase
             ->assertOk();
 
         $prefix = $individual ? '' : 'data.0.';
-        if (!$individual) {
+        if (! $individual) {
             $response->assertJsonCount(1, 'data');
         }
 
-        $response->assertJsonCount(1, $prefix . 'attributes.relationships.tasks.data');
+        $response->assertJsonCount(1, $prefix.'attributes.relationships.tasks.data');
 
-        $response->assertJsonPath($prefix . 'object', Schedule::RESOURCE_NAME);
-        $response->assertJsonPath($prefix . 'attributes.relationships.tasks.data.0.object', Task::RESOURCE_NAME);
+        $response->assertJsonPath($prefix.'object', Schedule::RESOURCE_NAME);
+        $response->assertJsonPath($prefix.'attributes.relationships.tasks.data.0.object', Task::RESOURCE_NAME);
 
-        $this->assertJsonTransformedWith($response->json($prefix . 'attributes'), $schedule);
-        $this->assertJsonTransformedWith($response->json($prefix . 'attributes.relationships.tasks.data.0.attributes'), $task);
+        $this->assertJsonTransformedWith($response->json($prefix.'attributes'), $schedule);
+        $this->assertJsonTransformedWith($response->json($prefix.'attributes.relationships.tasks.data.0.attributes'), $task);
     }
 
     /**
      * Test that a schedule belonging to another server cannot be viewed.
      */
-    public function testScheduleBelongingToAnotherServerCannotBeViewed()
+    public function test_schedule_belonging_to_another_server_cannot_be_viewed()
     {
         [$user, $server] = $this->generateTestAccount();
         $server2 = $this->createServerModel(['owner_id' => $user->id]);
@@ -73,7 +74,7 @@ class GetServerSchedulesTest extends ClientApiIntegrationTestCase
     /**
      * Test that a subuser without the required permissions is unable to access the schedules endpoint.
      */
-    public function testUserWithoutPermissionCannotViewSchedules()
+    public function test_user_without_permission_cannot_view_schedules()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
 

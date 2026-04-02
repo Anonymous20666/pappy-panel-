@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property float $cpu_usage
  * @property int $memory_bytes
  * @property int $disk_bytes
- * @property \Carbon\Carbon $created_at
+ * @property Carbon $created_at
  */
 class ServerStatsHistory extends Model
 {

@@ -2,8 +2,11 @@
 
 namespace App\Filament\Resources\Mounts\Pages;
 
-use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\Mounts\MountResource;
+use App\Models\Mount;
+use App\Services\Activity\ActivityLogService;
+use Filament\Actions\DeleteAction;
+use Filament\Resources\Pages\EditRecord;
 
 class EditMount extends EditRecord
 {
@@ -12,9 +15,9 @@ class EditMount extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\DeleteAction::make()
-                ->after(function (\App\Models\Mount $record) {
-                    app(\App\Services\Activity\ActivityLogService::class)
+            DeleteAction::make()
+                ->after(function (Mount $record) {
+                    app(ActivityLogService::class)
                         ->subject($record)
                         ->event('mount:delete')
                         ->log();
@@ -24,7 +27,7 @@ class EditMount extends EditRecord
 
     protected function afterSave(): void
     {
-        app(\App\Services\Activity\ActivityLogService::class)
+        app(ActivityLogService::class)
             ->subject($this->record)
             ->event('mount:update')
             ->log();

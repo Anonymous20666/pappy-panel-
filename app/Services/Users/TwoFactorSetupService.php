@@ -2,10 +2,12 @@
 
 namespace App\Services\Users;
 
-use App\Models\User;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\User;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Encryption\Encrypter;
 
 class TwoFactorSetupService
 {
@@ -18,22 +20,21 @@ class TwoFactorSetupService
         private ConfigRepository $config,
         private Encrypter $encrypter,
         private UserRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Generate a 2FA token and store it in the database before returning the
      * QR code URL. This URL will need to be attached to a QR generating service in
      * order to function.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function handle(User $user): array
     {
         $secret = '';
         try {
-            for ($i = 0; $i < $this->config->get('panel.auth.2fa.bytes', 16); ++$i) {
+            for ($i = 0; $i < $this->config->get('panel.auth.2fa.bytes', 16); $i++) {
                 $secret .= substr(self::VALID_BASE32_CHARACTERS, random_int(0, 31), 1);
             }
         } catch (\Exception $exception) {

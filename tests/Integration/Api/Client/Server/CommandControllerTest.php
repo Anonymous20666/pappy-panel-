@@ -2,14 +2,14 @@
 
 namespace Tests\Integration\Api\Client\Server;
 
-use App\Models\Server;
-use App\Models\Permission;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Http\Response;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use App\Repositories\Wings\DaemonCommandRepository;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonCommandRepository;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response as GuzzleResponse;
+use Illuminate\Http\Response;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CommandControllerTest extends ClientApiIntegrationTestCase
@@ -18,7 +18,7 @@ class CommandControllerTest extends ClientApiIntegrationTestCase
      * Test that a validation error is returned if there is no command present in the
      * request.
      */
-    public function testValidationErrorIsReturnedIfNoCommandIsPresent()
+    public function test_validation_error_is_returned_if_no_command_is_present()
     {
         [$user, $server] = $this->generateTestAccount();
 
@@ -34,7 +34,7 @@ class CommandControllerTest extends ClientApiIntegrationTestCase
      * Test that a subuser without the required permission receives an error when trying to
      * execute the command.
      */
-    public function testSubuserWithoutPermissionReceivesError()
+    public function test_subuser_without_permission_receives_error()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_WEBSOCKET_CONNECT]);
 
@@ -48,7 +48,7 @@ class CommandControllerTest extends ClientApiIntegrationTestCase
     /**
      * Test that a command can be sent to the server.
      */
-    public function testCommandCanSendToServer()
+    public function test_command_can_send_to_server()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_CONTROL_CONSOLE]);
 
@@ -70,7 +70,7 @@ class CommandControllerTest extends ClientApiIntegrationTestCase
      * Test that an error is returned when the server is offline that is more specific than the
      * regular daemon connection error.
      */
-    public function testErrorIsReturnedWhenServerIsOffline()
+    public function test_error_is_returned_when_server_is_offline()
     {
         [$user, $server] = $this->generateTestAccount();
 

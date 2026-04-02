@@ -4,16 +4,16 @@ namespace Tests\Integration\Services\Servers;
 
 use App\Models\Egg;
 use App\Models\User;
-use Illuminate\Support\Collection;
-use Tests\Integration\IntegrationTestCase;
-use Illuminate\Validation\ValidationException;
 use App\Services\Servers\VariableValidatorService;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
+use Tests\Integration\IntegrationTestCase;
 
 class VariableValidatorServiceTest extends IntegrationTestCase
 {
     protected Egg $egg;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -23,7 +23,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
     /**
      * Test that environment variables for a server are validated as expected.
      */
-    public function testEnvironmentVariablesCanBeValidated()
+    public function test_environment_variables_can_be_validated()
     {
         $egg = $this->cloneEggAndVariables($this->egg);
 
@@ -61,7 +61,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
      * Test that variables that are user_editable=false do not get validated (or returned) by
      * the handler.
      */
-    public function testNormalUserCannotValidateNonUserEditableVariables()
+    public function test_normal_user_cannot_validate_non_user_editable_variables()
     {
         $egg = $this->cloneEggAndVariables($this->egg);
         $egg->variables()->first()->update([
@@ -80,7 +80,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
         $this->assertSame('server.jar', $response->get(0)->value);
     }
 
-    public function testEnvironmentVariablesCanBeUpdatedAsAdmin()
+    public function test_environment_variables_can_be_updated_as_admin()
     {
         $egg = $this->cloneEggAndVariables($this->egg);
         $egg->variables()->first()->update([
@@ -112,7 +112,7 @@ class VariableValidatorServiceTest extends IntegrationTestCase
         $this->assertSame('server.jar', $response->get(1)->value);
     }
 
-    public function testNullableEnvironmentVariablesCanBeUsedCorrectly()
+    public function test_nullable_environment_variables_can_be_used_correctly()
     {
         $egg = $this->cloneEggAndVariables($this->egg);
         $egg->variables()->where('env_variable', '!=', 'BUNGEE_VERSION')->delete();

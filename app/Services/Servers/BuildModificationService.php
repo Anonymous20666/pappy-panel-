@@ -2,15 +2,16 @@
 
 namespace App\Services\Servers;
 
-use App\Models\Server;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Allocation;
+use App\Models\Server;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Services\Activity\ActivityLogService;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
-use App\Exceptions\DisplayException;
-use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Wings\DaemonServerRepository;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
 
 class BuildModificationService
 {
@@ -18,9 +19,8 @@ class BuildModificationService
         private ConnectionInterface $connection,
         private DaemonServerRepository $daemonServerRepository,
         private ServerConfigurationStructureService $structureService,
-        private \App\Services\Activity\ActivityLogService $logService,
-    ) {
-    }
+        private ActivityLogService $logService,
+    ) {}
 
     /**
      * Change the build details for a specified server.
@@ -63,7 +63,7 @@ class BuildModificationService
         // a server this type of exception can be safely "ignored" and just written to the logs.
         // Ideally this request succeeds, so we can apply resource modifications on the fly, but
         // if it fails we can just continue on as normal.
-        if (!empty($updateData['build'])) {
+        if (! empty($updateData['build'])) {
             try {
                 $this->daemonServerRepository->setServer($server)->sync();
             } catch (DaemonConnectionException $exception) {
@@ -87,7 +87,7 @@ class BuildModificationService
 
         // Handle the addition of allocations to this server. Only assign allocations that are not currently
         // assigned to a different server, and only allocations on the same node as the server.
-        if (!empty($data['add_allocations'])) {
+        if (! empty($data['add_allocations'])) {
             $query = Allocation::query()
                 ->where('node_id', $server->node_id)
                 ->whereIn('id', $data['add_allocations'])
@@ -100,7 +100,7 @@ class BuildModificationService
             $query->update(['server_id' => $server->id, 'notes' => null]);
         }
 
-        if (!empty($data['remove_allocations'])) {
+        if (! empty($data['remove_allocations'])) {
             foreach ($data['remove_allocations'] as $allocation) {
                 // If we are attempting to remove the default allocation for the server, see if we can reassign
                 // to the first provided value in add_allocations. If there is no new first allocation then we

@@ -2,27 +2,28 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use Exception;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Container\Container;
 use Illuminate\Database\Connection;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Auth\Access\AuthorizationException;
-use App\Exceptions\Repository\RecordNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\Mailer\Exception\TransportException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 class Handler extends ExceptionHandler
 {
@@ -116,13 +117,13 @@ class Handler extends ExceptionHandler
             $exception->getLine()
         );
 
-        return $message . "\nStack trace:\n" . trim($cleanedStack);
+        return $message."\nStack trace:\n".trim($cleanedStack);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      *
      * @throws \Throwable
      */
@@ -139,7 +140,7 @@ class Handler extends ExceptionHandler
         // ton of actions and were written before this bug discovery was made.
         //
         // @see https://github.com/pterodactyl/panel/pull/1468
-        if (!app()->runningUnitTests() && $connection->transactionLevel() > 0) {
+        if (! app()->runningUnitTests() && $connection->transactionLevel() > 0) {
             while ($connection->transactionLevel() > 0) {
                 $connection->rollBack();
             }
@@ -152,7 +153,7 @@ class Handler extends ExceptionHandler
      * Transform a validation exception into a consistent format to be returned for
      * calls to the API.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      */
     public function invalidJson($request, ValidationException $exception): JsonResponse
     {
@@ -172,7 +173,7 @@ class Handler extends ExceptionHandler
                     'source_field' => $field,
                     'rule' => Str::replace(self::PANEL_RULE_STRING, 'p_', Arr::get(
                         $codes,
-                        Str::replace('.', '_', $field) . '.' . $key
+                        Str::replace('.', '_', $field).'.'.$key
                     )),
                 ];
 
@@ -203,7 +204,7 @@ class Handler extends ExceptionHandler
             'status' => method_exists($e, 'getStatusCode')
                 ? strval($e->getStatusCode())
                 : strval($match ?? '500'),
-            'detail' => $e instanceof HttpExceptionInterface || !is_null($match)
+            'detail' => $e instanceof HttpExceptionInterface || ! is_null($match)
                 ? $e->getMessage()
                 : 'An unexpected error was encountered while processing this request, please try again.',
         ];
@@ -229,8 +230,8 @@ class Handler extends ExceptionHandler
                     'previous' => Collection::make($this->extractPrevious($e))
                         ->map(
                             fn ($exception) => Collection::make($exception->getTrace())
-                            ->map(fn ($trace) => Arr::except($trace, ['args']))
-                            ->all()
+                                ->map(fn ($trace) => Arr::except($trace, ['args']))
+                                ->all()
                         )
                         ->all(),
                 ],
@@ -243,7 +244,7 @@ class Handler extends ExceptionHandler
     /**
      * Return an array of exceptions that should not be reported.
      */
-    public static function isReportable(\Exception $exception): bool
+    public static function isReportable(Exception $exception): bool
     {
         return (new self(Container::getInstance()))->shouldReport($exception);
     }
@@ -251,7 +252,7 @@ class Handler extends ExceptionHandler
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  Request  $request
      */
     protected function unauthenticated($request, AuthenticationException $exception): JsonResponse|RedirectResponse
     {
@@ -272,7 +273,7 @@ class Handler extends ExceptionHandler
     {
         $previous = [];
         while ($value = $e->getPrevious()) {
-            if (!$value instanceof \Throwable) { // @phpstan-ignore instanceof.alwaysTrue
+            if (! $value instanceof \Throwable) { // @phpstan-ignore instanceof.alwaysTrue
                 break;
             }
             $previous[] = $value;

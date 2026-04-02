@@ -2,10 +2,10 @@
 
 namespace App\Transformers\Api\Client;
 
-use App\Models\User;
 use App\Models\ActivityLog;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ActivityLogTransformer extends BaseClientTransformer
 {
@@ -25,7 +25,7 @@ class ActivityLogTransformer extends BaseClientTransformer
             'id' => sha1($model->id),
             'batch' => $model->batch,
             'event' => $model->event,
-            'is_api' => !is_null($model->api_key_id),
+            'is_api' => ! is_null($model->api_key_id),
             'ip' => $this->canViewIP($model->actor) ? $model->ip : null,
             'description' => $model->description,
             'properties' => $this->properties($model),
@@ -36,7 +36,7 @@ class ActivityLogTransformer extends BaseClientTransformer
 
     public function includeActor(ActivityLog $model)
     {
-        if (!$model->actor instanceof User) {
+        if (! $model->actor instanceof User) {
             return $this->null();
         }
 
@@ -49,20 +49,20 @@ class ActivityLogTransformer extends BaseClientTransformer
      */
     protected function properties(ActivityLog $model): object
     {
-        if (!$model->properties || $model->properties->isEmpty()) {
+        if (! $model->properties || $model->properties->isEmpty()) {
             return (object) [];
         }
 
         $properties = $model->properties
             ->mapWithKeys(function ($value, $key) use ($model) {
-                if ($key === 'ip' && !optional($model->actor)->is($this->request->user())) {
+                if ($key === 'ip' && ! optional($model->actor)->is($this->request->user())) {
                     return [$key => '[hidden]'];
                 }
 
-                if (!is_array($value)) {
+                if (! is_array($value)) {
                     // Perform some directory normalization at this point.
                     if ($key === 'directory') {
-                        $value = Str::replace('//', '/', '/' . trim($value, '/') . '/');
+                        $value = Str::replace('//', '/', '/'.trim($value, '/').'/');
                     }
 
                     return [$key => $value];
@@ -94,12 +94,12 @@ class ActivityLogTransformer extends BaseClientTransformer
             return false;
         }
 
-        $str = trans('activity.' . Str::replace(':', '.', $model->event));
+        $str = trans('activity.'.Str::replace(':', '.', $model->event));
         preg_match_all('/:(?<key>[\w.-]+\w)(?:[^\w:]?|$)/', $str, $matches);
 
         $exclude = array_merge($matches['key'], ['ip', 'useragent', 'using_sftp']);
         foreach ($model->properties->keys() as $key) {
-            if (!in_array($key, $exclude, true)) {
+            if (! in_array($key, $exclude, true)) {
                 return true;
             }
         }

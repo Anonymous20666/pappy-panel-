@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Base;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 
 class PwaManifestController extends Controller
 {

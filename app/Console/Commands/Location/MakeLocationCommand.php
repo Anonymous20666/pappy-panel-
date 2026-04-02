@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands\Location;
 
-use Illuminate\Console\Command;
+use App\Exceptions\Model\DataValidationException;
 use App\Services\Locations\LocationCreationService;
+use Illuminate\Console\Command;
 
 class MakeLocationCommand extends Command
 {
@@ -24,7 +25,7 @@ class MakeLocationCommand extends Command
     /**
      * Handle the command execution process.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle()
     {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api\Client;
 
-use Illuminate\Support\Str;
-use App\Models\ServerCategory;
-use Illuminate\Http\JsonResponse;
-use App\Http\Requests\Api\Client\ClientApiRequest;
-use App\Transformers\Api\Client\ServerCategoryTransformer;
 use App\Http\Requests\Api\Client\Account\StoreServerCategoryRequest;
 use App\Http\Requests\Api\Client\Account\UpdateServerCategoryRequest;
+use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Models\ServerCategory;
+use App\Transformers\Api\Client\ServerCategoryTransformer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
 
 class CategoryController extends ClientApiController
 {

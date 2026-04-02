@@ -3,12 +3,12 @@
 namespace App\Filament\Resources\Nodes\RelationManagers;
 
 use App\Models\Allocation;
-use Filament\Tables\Table;
+use App\Services\Allocations\AllocationDeletionService;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Tables\Columns\TextColumn;
-use App\Services\Allocations\AllocationDeletionService;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class ServersRelationManager extends RelationManager
 {
@@ -32,7 +32,7 @@ class ServersRelationManager extends RelationManager
                         $email = strtolower(trim($state->email ?? ''));
                         $hash = md5($email);
                         $avatar = "https://www.gravatar.com/avatar/{$hash}?s=64&d=mp";
-                        $name = $state->name_first . ' ' . $state->name_last;
+                        $name = $state->name_first.' '.$state->name_last;
 
                         return "
                             <div style='display:flex;align-items:center;gap:8px'>

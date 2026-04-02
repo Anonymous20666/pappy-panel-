@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use Carbon\Carbon;
-use App\Models\Server;
-use App\Models\Schedule;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Facades\Activity;
 use App\Helpers\Utilities;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Exceptions\DisplayException;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\Servers\Schedules\DeleteScheduleRequest;
+use App\Http\Requests\Api\Client\Servers\Schedules\StoreScheduleRequest;
+use App\Http\Requests\Api\Client\Servers\Schedules\TriggerScheduleRequest;
+use App\Http\Requests\Api\Client\Servers\Schedules\UpdateScheduleRequest;
+use App\Http\Requests\Api\Client\Servers\Schedules\ViewScheduleRequest;
+use App\Models\Schedule;
+use App\Models\Server;
 use App\Repositories\Eloquent\ScheduleRepository;
 use App\Services\Schedules\ProcessScheduleService;
 use App\Transformers\Api\Client\ScheduleTransformer;
-use App\Http\Controllers\Api\Client\ClientApiController;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use App\Http\Requests\Api\Client\Servers\Schedules\ViewScheduleRequest;
-use App\Http\Requests\Api\Client\Servers\Schedules\StoreScheduleRequest;
-use App\Http\Requests\Api\Client\Servers\Schedules\DeleteScheduleRequest;
-use App\Http\Requests\Api\Client\Servers\Schedules\UpdateScheduleRequest;
-use App\Http\Requests\Api\Client\Servers\Schedules\TriggerScheduleRequest;
 
 class ScheduleController extends ClientApiController
 {
@@ -48,7 +50,7 @@ class ScheduleController extends ClientApiController
      * Store a new schedule for a server.
      *
      * @throws DisplayException
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function store(StoreScheduleRequest $request, Server $server): array
     {
@@ -96,8 +98,8 @@ class ScheduleController extends ClientApiController
      * Updates a given schedule with the new data provided.
      *
      * @throws DisplayException
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateScheduleRequest $request, Server $server, Schedule $schedule): array
     {

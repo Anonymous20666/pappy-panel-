@@ -2,16 +2,16 @@
 
 namespace App\Extensions\Backups;
 
-use Closure;
+use App\Extensions\Filesystem\S3Filesystem;
 use Aws\S3\S3Client;
+use Closure;
+use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use Illuminate\Foundation\Application;
 use League\Flysystem\FilesystemAdapter;
-use App\Extensions\Filesystem\S3Filesystem;
 use League\Flysystem\InMemory\InMemoryFilesystemAdapter;
-use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Webmozart\Assert\Assert;
 
 class BackupManager
 {
@@ -78,7 +78,7 @@ class BackupManager
             return $this->callCustomCreator($config);
         }
 
-        $adapterMethod = 'create' . Str::studly($adapter) . 'Adapter';
+        $adapterMethod = 'create'.Str::studly($adapter).'Adapter';
         if (method_exists($this, $adapterMethod)) {
             $instance = $this->{$adapterMethod}($config);
 
@@ -113,7 +113,7 @@ class BackupManager
     {
         $config['version'] = 'latest';
 
-        if (!empty($config['key']) && !empty($config['secret'])) {
+        if (! empty($config['key']) && ! empty($config['secret'])) {
             $config['credentials'] = Arr::only($config, ['key', 'secret', 'token']);
         }
 
@@ -149,7 +149,7 @@ class BackupManager
     /**
      * Unset the given adapter instances.
      *
-     * @param string|string[] $adapter
+     * @param  string|string[]  $adapter
      */
     public function forget(array|string $adapter): self
     {
@@ -163,7 +163,7 @@ class BackupManager
     /**
      * Register a custom adapter creator closure.
      */
-    public function extend(string $adapter, \Closure $callback): self
+    public function extend(string $adapter, Closure $callback): self
     {
         $this->customCreators[$adapter] = $callback;
 

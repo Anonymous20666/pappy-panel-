@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Contracts\Repository\SessionRepositoryInterface;
 use App\Models\Session;
 use Illuminate\Support\Collection;
-use App\Contracts\Repository\SessionRepositoryInterface;
 
 class SessionRepository extends EloquentRepository implements SessionRepositoryInterface
 {

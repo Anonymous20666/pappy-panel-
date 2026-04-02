@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Egg;
-use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Ramsey\Uuid\Uuid;
 
 class EggFactory extends Factory
 {

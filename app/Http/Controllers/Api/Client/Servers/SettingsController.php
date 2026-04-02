@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Facades\Activity;
-use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\Servers\Settings\ReinstallServerRequest;
+use App\Http\Requests\Api\Client\Servers\Settings\RenameServerRequest;
+use App\Http\Requests\Api\Client\Servers\Settings\SetCategoryRequest;
+use App\Http\Requests\Api\Client\Servers\Settings\SetDockerImageRequest;
+use App\Models\Server;
 use App\Repositories\Eloquent\ServerRepository;
 use App\Services\Servers\ReinstallServerService;
-use App\Http\Controllers\Api\Client\ClientApiController;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use App\Http\Requests\Api\Client\Servers\Settings\SetCategoryRequest;
-use App\Http\Requests\Api\Client\Servers\Settings\RenameServerRequest;
-use App\Http\Requests\Api\Client\Servers\Settings\SetDockerImageRequest;
-use App\Http\Requests\Api\Client\Servers\Settings\ReinstallServerRequest;
 
 class SettingsController extends ClientApiController
 {
@@ -30,8 +32,8 @@ class SettingsController extends ClientApiController
     /**
      * Renames a server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function rename(RenameServerRequest $request, Server $server): JsonResponse
     {
@@ -78,7 +80,7 @@ class SettingsController extends ClientApiController
      */
     public function dockerImage(SetDockerImageRequest $request, Server $server): JsonResponse
     {
-        if (!in_array($server->image, array_values($server->egg->docker_images))) {
+        if (! in_array($server->image, array_values($server->egg->docker_images))) {
             throw new BadRequestHttpException('This server\'s Docker image has been manually set by an administrator and cannot be updated.');
         }
 
@@ -104,7 +106,7 @@ class SettingsController extends ClientApiController
         $categoryUuid = $request->input('category');
         $categoryId = null;
 
-        if (!empty($categoryUuid)) {
+        if (! empty($categoryUuid)) {
             $category = $request->user()->categories()->where('uuid', $categoryUuid)->first();
             if ($category) {
                 $categoryId = $category->id;
@@ -116,8 +118,8 @@ class SettingsController extends ClientApiController
 
         if ($original !== $server->category_id) {
             Activity::event('server:settings.category')
-               ->property(['old' => $original, 'new' => $categoryId])
-               ->log();
+                ->property(['old' => $original, 'new' => $categoryId])
+                ->log();
         }
 
         return new JsonResponse([], Response::HTTP_NO_CONTENT);

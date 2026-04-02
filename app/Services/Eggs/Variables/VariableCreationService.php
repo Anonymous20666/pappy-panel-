@@ -2,11 +2,13 @@
 
 namespace App\Services\Eggs\Variables;
 
+use App\Contracts\Repository\EggVariableRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Service\Egg\Variable\BadValidationRuleException;
+use App\Exceptions\Service\Egg\Variable\ReservedVariableNameException;
 use App\Models\EggVariable;
 use App\Traits\Services\ValidatesValidationRules;
-use App\Contracts\Repository\EggVariableRepositoryInterface;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
-use App\Exceptions\Service\Egg\Variable\ReservedVariableNameException;
 
 class VariableCreationService
 {
@@ -15,9 +17,7 @@ class VariableCreationService
     /**
      * VariableCreationService constructor.
      */
-    public function __construct(private EggVariableRepositoryInterface $repository, private ValidationFactory $validator)
-    {
-    }
+    public function __construct(private EggVariableRepositoryInterface $repository, private ValidationFactory $validator) {}
 
     /**
      * Return the validation factory instance to be used by rule validation
@@ -31,8 +31,8 @@ class VariableCreationService
     /**
      * Create a new variable for a given Egg.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Service\Egg\Variable\BadValidationRuleException
+     * @throws DataValidationException
+     * @throws BadValidationRuleException
      * @throws ReservedVariableNameException
      */
     public function handle(int $egg, array $data): EggVariable
@@ -41,7 +41,7 @@ class VariableCreationService
             throw new ReservedVariableNameException(sprintf('Cannot use the protected name %s for this environment variable.', array_get($data, 'env_variable')));
         }
 
-        if (!empty($data['rules'] ?? '')) {
+        if (! empty($data['rules'] ?? '')) {
             $this->validateRules($data['rules']);
         }
 

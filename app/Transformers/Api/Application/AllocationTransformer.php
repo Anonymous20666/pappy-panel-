@@ -2,11 +2,12 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
+use App\Models\Allocation;
 use App\Models\Node;
 use App\Models\Server;
-use App\Models\Allocation;
-use League\Fractal\Resource\Item;
 use App\Services\Acl\Api\AdminAcl;
+use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
 
 class AllocationTransformer extends BaseTransformer
@@ -35,18 +36,18 @@ class AllocationTransformer extends BaseTransformer
             'alias' => $allocation->ip_alias,
             'port' => $allocation->port,
             'notes' => $allocation->notes,
-            'assigned' => !is_null($allocation->server_id),
+            'assigned' => ! is_null($allocation->server_id),
         ];
     }
 
     /**
      * Load the node relationship onto a given transformation.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeNode(Allocation $allocation): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_NODES)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_NODES)) {
             return $this->null();
         }
 
@@ -60,11 +61,11 @@ class AllocationTransformer extends BaseTransformer
     /**
      * Load the server relationship onto a given transformation.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeServer(Allocation $allocation): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVERS) || !$allocation->server) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVERS) || ! $allocation->server) {
             return $this->null();
         }
 

@@ -2,8 +2,9 @@
 
 namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use App\Models\Subuser;
 use App\Models\Schedule;
+use App\Models\Subuser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ScheduleAuthorizationTest extends ClientApiIntegrationTestCase
@@ -17,8 +18,8 @@ class ScheduleAuthorizationTest extends ClientApiIntegrationTestCase
      * The comments within the test code itself are better at explaining exactly what is
      * being tested and protected against.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('methodDataProvider')]
-    public function testAccessToAServersSchedulesIsRestrictedProperly(string $method, string $endpoint)
+    #[DataProvider('methodDataProvider')]
+    public function test_access_to_a_servers_schedules_is_restricted_properly(string $method, string $endpoint)
     {
         // The API $user is the owner of $server1.
         [$user, $server1] = $this->generateTestAccount();
@@ -37,20 +38,20 @@ class ScheduleAuthorizationTest extends ClientApiIntegrationTestCase
 
         // This is the only valid call for this test, accessing the schedule for the same
         // server that the API user is the owner of.
-        $response = $this->actingAs($user)->json($method, $this->link($server1, '/schedules/' . $schedule1->id . $endpoint));
+        $response = $this->actingAs($user)->json($method, $this->link($server1, '/schedules/'.$schedule1->id.$endpoint));
         $this->assertTrue($response->status() <= 204 || $response->status() === 400 || $response->status() === 422);
 
         // This request fails because the schedule is valid for that server but the user
         // making the request is not authorized to perform that action.
-        $this->actingAs($user)->json($method, $this->link($server2, '/schedules/' . $schedule2->id . $endpoint))->assertForbidden();
+        $this->actingAs($user)->json($method, $this->link($server2, '/schedules/'.$schedule2->id.$endpoint))->assertForbidden();
 
         // Both of these should report a 404 error due to the schedules being linked to
         // servers that are not the same as the server in the request, or are assigned
         // to a server for which the user making the request has no access to.
-        $this->actingAs($user)->json($method, $this->link($server1, '/schedules/' . $schedule2->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server1, '/schedules/' . $schedule3->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server2, '/schedules/' . $schedule3->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server3, '/schedules/' . $schedule3->id . $endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/schedules/'.$schedule2->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/schedules/'.$schedule3->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server2, '/schedules/'.$schedule3->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server3, '/schedules/'.$schedule3->id.$endpoint))->assertNotFound();
     }
 
     public static function methodDataProvider(): array

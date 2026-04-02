@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Schedule;
-use Illuminate\Support\Collection;
-use App\Exceptions\Repository\RecordNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Contracts\Repository\ScheduleRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Schedule;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 
 class ScheduleRepository extends EloquentRepository implements ScheduleRepositoryInterface
 {

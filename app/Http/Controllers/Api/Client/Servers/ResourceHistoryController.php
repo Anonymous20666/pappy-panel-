@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use Carbon\Carbon;
-use App\Models\Server;
-use App\Models\ServerStatsHistory;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Api\Client\ClientApiController;
 use App\Http\Requests\Api\Client\Servers\GetServerRequest;
+use App\Models\Server;
+use App\Models\ServerStatsHistory;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ResourceHistoryController extends ClientApiController
 {
@@ -65,7 +65,7 @@ class ResourceHistoryController extends ClientApiController
             ])
             ->where('server_id', $server->id)
             ->where('created_at', '>=', $startDate)
-            ->groupBy(DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / (' . ($intervalHours * 3600) . '))'))
+            ->groupBy(DB::raw('FLOOR(UNIX_TIMESTAMP(created_at) / ('.($intervalHours * 3600).'))'))
             ->orderBy('bucket_time', 'asc')
             ->get();
 

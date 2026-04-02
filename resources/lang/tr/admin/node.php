@@ -207,7 +207,7 @@ return [
             'failed' => 'Tahsis işlemi başarısız oldu.',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => 'Sağlanan FQDN veya IP adresi geçerli bir IP adresine çözümlenemiyor.',
         'fqdn_required_for_ssl' => 'Bu düğüm için SSL kullanabilmek amacıyla genel bir IP adresine çözümlenen tam nitelikli bir alan adı (FQDN) gereklidir.',

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\JsonResponse;
-use App\Exceptions\DisplayException;
-use App\Http\Controllers\Controller;
-use Illuminate\Contracts\Hashing\Hasher;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Contracts\Events\Dispatcher;
-use Illuminate\Foundation\Auth\ResetsPasswords;
-use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Contracts\Hashing\Hasher;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
@@ -32,8 +36,7 @@ class ResetPasswordController extends Controller
         private Dispatcher $dispatcher,
         private Hasher $hasher,
         private UserRepositoryInterface $userRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Reset the given user's password.
@@ -67,11 +70,11 @@ class ResetPasswordController extends Controller
      * account do not automatically log them in. In those cases, send the user back to the login
      * form with a note telling them their password was changed and to log back in.
      *
-     * @param \Illuminate\Contracts\Auth\CanResetPassword&\App\Models\User $user
-     * @param string $password
+     * @param  CanResetPassword&User  $user
+     * @param  string  $password
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     protected function resetPassword($user, $password)
     {
@@ -84,7 +87,7 @@ class ResetPasswordController extends Controller
 
         // If the user is not using 2FA log them in, otherwise skip this step and force a
         // fresh login where they'll be prompted to enter a token.
-        if (!$user->use_totp) {
+        if (! $user->use_totp) {
             $this->guard()->login($user);
         }
 

@@ -2,12 +2,12 @@
 
 namespace App\Services\Databases\Hosts;
 
-use App\Models\DatabaseHost;
-use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\ConnectionInterface;
-use App\Extensions\DynamicDatabaseConnection;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\DatabaseHostRepositoryInterface;
+use App\Extensions\DynamicDatabaseConnection;
+use App\Models\DatabaseHost;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Database\DatabaseManager;
 
 class HostCreationService
 {
@@ -20,8 +20,7 @@ class HostCreationService
         private DynamicDatabaseConnection $dynamic,
         private Encrypter $encrypter,
         private DatabaseHostRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Create a new database host on the Panel.

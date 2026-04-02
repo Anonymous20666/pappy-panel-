@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Designify;
 
-use Illuminate\View\View;
-use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Prologue\Alerts\AlertsMessageBag;
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\View\Factory as ViewFactory;
 use App\Contracts\Repository\SettingsRepositoryInterface;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Designify\ErrorPagesSettingsFormRequest;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\View\Factory as ViewFactory;
+use Illuminate\View\View;
+use Prologue\Alerts\AlertsMessageBag;
 
 class ErrorPagesController extends Controller
 {
@@ -24,8 +25,7 @@ class ErrorPagesController extends Controller
         private Kernel $kernel,
         private SettingsRepositoryInterface $settings,
         private ViewFactory $view,
-    ) {
-    }
+    ) {}
 
     /**
      * Render Error Pages settings UI.
@@ -41,7 +41,7 @@ class ErrorPagesController extends Controller
     public function update(ErrorPagesSettingsFormRequest $request): RedirectResponse
     {
         foreach ($request->normalize() as $key => $value) {
-            $this->settings->set('settings::' . $key, $value);
+            $this->settings->set('settings::'.$key, $value);
         }
 
         $this->kernel->call('queue:restart');
@@ -53,20 +53,20 @@ class ErrorPagesController extends Controller
     /**
      * Preview a specific error page.
      */
-    public function preview(\Illuminate\Http\Request $request, int $code): View
+    public function preview(Request $request, int $code): View
     {
-        if (!in_array($code, [403, 404, 500])) {
+        if (! in_array($code, [403, 404, 500])) {
             abort(404);
         }
 
         // Override config values if data is provided in the request (Live Preview)
         foreach ($request->all() as $key => $value) {
-            if (Str::startsWith($key, 'designify:errors:' . $code . ':')) {
+            if (Str::startsWith($key, 'designify:errors:'.$code.':')) {
                 $configKey = Str::replace(':', '.', Str::replace('designify:', 'designify.', $key));
                 $this->config->set($configKey, $value);
             }
         }
 
-        return $this->view->make('errors.' . $code);
+        return $this->view->make('errors.'.$code);
     }
 }

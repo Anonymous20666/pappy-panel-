@@ -2,16 +2,18 @@
 
 namespace App\Services\Deployment;
 
-use App\Models\Node;
-use Webmozart\Assert\Assert;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Exceptions\Service\Deployment\NoViableNodeException;
+use App\Models\Node;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Webmozart\Assert\Assert;
 
 class FindViableNodesService
 {
     protected array $locations = [];
+
     protected ?int $disk = null;
+
     protected ?int $memory = null;
 
     /**
@@ -59,10 +61,10 @@ class FindViableNodesService
      * are tossed out, as are any nodes marked as non-public, meaning automatic
      * deployments should not be done against them.
      *
-     * @param int|null $page If provided the results will be paginated by returning
-     *                       up to 50 nodes at a time starting at the provided page.
-     *                       If "null" is provided as the value no pagination will
-     *                       be used.
+     * @param  int|null  $page  If provided the results will be paginated by returning
+     *                          up to 50 nodes at a time starting at the provided page.
+     *                          If "null" is provided as the value no pagination will
+     *                          be used.
      *
      * @throws NoViableNodeException
      */
@@ -77,7 +79,7 @@ class FindViableNodesService
             ->leftJoin('servers', 'servers.node_id', '=', 'nodes.id')
             ->where('nodes.public', 1);
 
-        if (!empty($this->locations)) {
+        if (! empty($this->locations)) {
             $query = $query->whereIn('nodes.location_id', $this->locations);
         }
 
@@ -85,7 +87,7 @@ class FindViableNodesService
             ->havingRaw('(IFNULL(SUM(servers.memory), 0) + ?) <= (nodes.memory * (1 + (nodes.memory_overallocate / 100.0)))', [$this->memory])
             ->havingRaw('(IFNULL(SUM(servers.disk), 0) + ?) <= (nodes.disk * (1 + (nodes.disk_overallocate / 100.0)))', [$this->disk]);
 
-        if (!is_null($page)) {
+        if (! is_null($page)) {
             $results = $results->paginate($perPage ?? 50, ['*'], 'page', $page);
         } else {
             $results = $results->get()->toBase();

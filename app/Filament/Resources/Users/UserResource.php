@@ -2,16 +2,16 @@
 
 namespace App\Filament\Resources\Users;
 
-use App\Models\User;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
+use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
 use App\Filament\Resources\Users\Pages\ListUsers;
-use App\Filament\Resources\Users\Pages\CreateUser;
+use App\Filament\Resources\Users\RelationManagers\ServersRelationManager;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
-use App\Filament\Resources\Users\RelationManagers\ServersRelationManager;
+use App\Models\User;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
@@ -20,6 +20,7 @@ class UserResource extends Resource
     protected static ?int $navigationSort = 5;
 
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-user';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-user-filled';
 
     public static function getNavigationGroup(): ?string

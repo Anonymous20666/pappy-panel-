@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Subuser;
 
 interface SubuserRepositoryInterface extends RepositoryInterface
@@ -19,7 +20,7 @@ interface SubuserRepositoryInterface extends RepositoryInterface
     /**
      * Return a subuser and associated permissions given a user_id and server_id.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getWithPermissionsUsingUserAndServer(int $user, int $server): Subuser;
 }

@@ -2,14 +2,15 @@
 
 namespace App\Services\Users;
 
+use App\Contracts\Repository\UserRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
 use App\Models\User;
-use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Str;
 use App\Notifications\AccountCreated;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Database\ConnectionInterface;
-use Illuminate\Contracts\Auth\PasswordBroker;
-use App\Contracts\Repository\UserRepositoryInterface;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class UserCreationService
 {
@@ -21,23 +22,22 @@ class UserCreationService
         private Hasher $hasher,
         private PasswordBroker $passwordBroker,
         private UserRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Create a new user on the system.
      *
      * @throws \Exception
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle(array $data): User
     {
-        if (array_key_exists('password', $data) && !empty($data['password'])) {
+        if (array_key_exists('password', $data) && ! empty($data['password'])) {
             $data['password'] = $this->hasher->make($data['password']);
         }
 
         $this->connection->beginTransaction();
-        if (!isset($data['password']) || empty($data['password'])) {
+        if (! isset($data['password']) || empty($data['password'])) {
             $generateResetToken = true;
             $data['password'] = $this->hasher->make(Str::random(30));
         }
@@ -59,7 +59,7 @@ class UserCreationService
             \Log::error($exception);
 
             // If this was a verification/setup email (token present), we should not move forward.
-            if (!empty($token)) {
+            if (! empty($token)) {
                 throw $exception;
             }
         }

@@ -3,8 +3,8 @@
 namespace App\Services\Nests;
 
 use App\Contracts\Repository\NestRepositoryInterface;
-use App\Exceptions\Service\HasActiveServersException;
 use App\Contracts\Repository\ServerRepositoryInterface;
+use App\Exceptions\Service\HasActiveServersException;
 
 class NestDeletionService
 {
@@ -14,8 +14,7 @@ class NestDeletionService
     public function __construct(
         protected ServerRepositoryInterface $serverRepository,
         protected NestRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete a nest from the system only if there are no servers attached to it.

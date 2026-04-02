@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Contracts\Repository\NodeRepositoryInterface;
 use App\Models\Node;
 use Illuminate\Support\Collection;
-use App\Contracts\Repository\NodeRepositoryInterface;
 
 class NodeRepository extends EloquentRepository implements NodeRepositoryInterface
 {
@@ -30,8 +30,8 @@ class NodeRepository extends EloquentRepository implements NodeRepositoryInterfa
         return Collection::make(['disk' => $stats->sum_disk, 'memory' => $stats->sum_memory])
             ->mapWithKeys(function ($value, $key) use ($node) {
                 $maxUsage = $node->{$key};
-                if ($node->{$key . '_overallocate'} > 0) {
-                    $maxUsage = $node->{$key} * (1 + ($node->{$key . '_overallocate'} / 100));
+                if ($node->{$key.'_overallocate'} > 0) {
+                    $maxUsage = $node->{$key} * (1 + ($node->{$key.'_overallocate'} / 100));
                 }
 
                 $percent = ($value / $maxUsage) * 100;
@@ -59,8 +59,8 @@ class NodeRepository extends EloquentRepository implements NodeRepositoryInterfa
 
         return collect(['disk' => $stats->sum_disk, 'memory' => $stats->sum_memory])->mapWithKeys(function ($value, $key) use ($node) {
             $maxUsage = $node->{$key};
-            if ($node->{$key . '_overallocate'} > 0) {
-                $maxUsage = $node->{$key} * (1 + ($node->{$key . '_overallocate'} / 100));
+            if ($node->{$key.'_overallocate'} > 0) {
+                $maxUsage = $node->{$key} * (1 + ($node->{$key.'_overallocate'} / 100));
             }
 
             return [
@@ -77,7 +77,7 @@ class NodeRepository extends EloquentRepository implements NodeRepositoryInterfa
      */
     public function loadLocationAndServerCount(Node $node, bool $refresh = false): Node
     {
-        if (!$node->relationLoaded('location') || $refresh) {
+        if (! $node->relationLoaded('location') || $refresh) {
             $node->load('location');
         }
 

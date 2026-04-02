@@ -2,25 +2,24 @@
 
 namespace App\Services\Eggs\Sharing;
 
-use Carbon\Carbon;
+use App\Contracts\Repository\EggRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Egg;
 use App\Models\EggVariable;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
-use App\Contracts\Repository\EggRepositoryInterface;
 
 class EggExporterService
 {
     /**
      * EggExporterService constructor.
      */
-    public function __construct(protected EggRepositoryInterface $repository)
-    {
-    }
+    public function __construct(protected EggRepositoryInterface $repository) {}
 
     /**
      * Return a JSON representation of an egg and its variables.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function handle(int $egg): string
     {
@@ -40,7 +39,7 @@ class EggExporterService
             'features' => $egg->features,
             'docker_images' => $egg->docker_images,
             'file_denylist' => Collection::make($egg->inherit_file_denylist)->filter(function ($value) {
-                return !empty($value);
+                return ! empty($value);
             }),
             'startup' => $egg->startup,
             'config' => [

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api\Application\Nodes;
 
-use App\Services\Deployment\FindViableNodesService;
-use App\Transformers\Api\Application\NodeTransformer;
+use App\Exceptions\Service\Deployment\NoViableNodeException;
 use App\Http\Controllers\Api\Application\ApplicationApiController;
 use App\Http\Requests\Api\Application\Nodes\GetDeployableNodesRequest;
+use App\Services\Deployment\FindViableNodesService;
+use App\Transformers\Api\Application\NodeTransformer;
 
 class NodeDeploymentController extends ApplicationApiController
 {
@@ -22,7 +23,7 @@ class NodeDeploymentController extends ApplicationApiController
      * similarly to the server creation process, but allows you to pass the deployment object
      * to this endpoint and get back a list of all Nodes satisfying the requirements.
      *
-     * @throws \App\Exceptions\Service\Deployment\NoViableNodeException
+     * @throws NoViableNodeException
      */
     public function __invoke(GetDeployableNodesRequest $request): array
     {

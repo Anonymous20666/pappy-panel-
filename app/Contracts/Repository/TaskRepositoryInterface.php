@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Task;
 
 interface TaskRepositoryInterface extends RepositoryInterface
@@ -9,7 +10,7 @@ interface TaskRepositoryInterface extends RepositoryInterface
     /**
      * Get a task and the server relationship for that task.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getTaskForJobProcess(int $id): Task;
 

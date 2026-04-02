@@ -2,22 +2,21 @@
 
 namespace App\Services\Locations;
 
-use App\Models\Location;
 use App\Contracts\Repository\LocationRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Models\Location;
 
 class LocationCreationService
 {
     /**
      * LocationCreationService constructor.
      */
-    public function __construct(protected LocationRepositoryInterface $repository)
-    {
-    }
+    public function __construct(protected LocationRepositoryInterface $repository) {}
 
     /**
      * Create a new location.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle(array $data): Location
     {

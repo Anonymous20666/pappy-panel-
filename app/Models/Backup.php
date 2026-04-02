@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Contracts\Models\Identifiable;
 use App\Models\Traits\HasRealtimeIdentifier;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\CarbonImmutable;
+use Database\Factories\BackupFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -20,24 +22,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string|null $checksum
  * @property int $bytes
  * @property string|null $upload_id
- * @property \Carbon\CarbonImmutable|null $completed_at
- * @property \Carbon\CarbonImmutable $created_at
- * @property \Carbon\CarbonImmutable $updated_at
- * @property \Carbon\CarbonImmutable|null $deleted_at
+ * @property CarbonImmutable|null $completed_at
+ * @property CarbonImmutable $created_at
+ * @property CarbonImmutable $updated_at
+ * @property CarbonImmutable|null $deleted_at
  * @property Server $server
- * @property \App\Models\AuditLog[] $audits
+ * @property AuditLog[] $audits
  */
 #[Attributes\Identifiable('bkup')]
 class Backup extends Model implements Identifiable
 {
-    /** @use HasFactory<\Database\Factories\BackupFactory> */
+    /** @use HasFactory<BackupFactory> */
     use HasFactory;
-    use SoftDeletes;
+
     use HasRealtimeIdentifier;
+    use SoftDeletes;
 
     public const RESOURCE_NAME = 'backup';
 
     public const ADAPTER_WINGS = 'wings';
+
     public const ADAPTER_AWS_S3 = 's3';
 
     protected $table = 'backups';
@@ -77,7 +81,7 @@ class Backup extends Model implements Identifiable
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {

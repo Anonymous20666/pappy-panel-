@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Server;
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
-use App\Exceptions\Repository\RecordNotFoundException;
 use App\Contracts\Repository\ServerRepositoryInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Server;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 
 class ServerRepository extends EloquentRepository implements ServerRepositoryInterface
 {
@@ -25,7 +25,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
      */
     public function loadEggRelations(Server $server, bool $refresh = false): Server
     {
-        if (!$server->relationLoaded('egg') || $refresh) {
+        if (! $server->relationLoaded('egg') || $refresh) {
             $server->load('egg.scriptFrom');
         }
 
@@ -39,9 +39,9 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
     {
         $instance = $this->getBuilder()->with(['allocation', 'allocations', 'egg', 'node']);
 
-        if (!is_null($server) && is_null($node)) {
+        if (! is_null($server) && is_null($node)) {
             $instance = $instance->where('id', '=', $server);
-        } elseif (is_null($server) && !is_null($node)) {
+        } elseif (is_null($server) && ! is_null($node)) {
             $instance = $instance->where('node_id', '=', $node);
         }
 
@@ -55,9 +55,9 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
     {
         $instance = $this->getBuilder()->with(['allocation', 'allocations', 'egg', 'node']);
 
-        if (!is_null($server) && is_null($node)) {
+        if (! is_null($server) && is_null($node)) {
             $instance = $instance->where('id', '=', $server);
-        } elseif (is_null($server) && !is_null($node)) {
+        } elseif (is_null($server) && ! is_null($node)) {
             $instance = $instance->where('node_id', '=', $node);
         }
 
@@ -87,7 +87,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
      */
     public function getPrimaryAllocation(Server $server, bool $refresh = false): Server
     {
-        if (!$server->relationLoaded('allocation') || $refresh) {
+        if (! $server->relationLoaded('allocation') || $refresh) {
             $server->load('allocation');
         }
 
@@ -100,7 +100,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
     public function getDataForCreation(Server $server, bool $refresh = false): Server
     {
         foreach (['allocation', 'allocations', 'egg'] as $relation) {
-            if (!$server->relationLoaded($relation) || $refresh) {
+            if (! $server->relationLoaded($relation) || $refresh) {
                 $server->load($relation);
             }
         }
@@ -113,7 +113,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
      */
     public function loadDatabaseRelations(Server $server, bool $refresh = false): Server
     {
-        if (!$server->relationLoaded('databases') || $refresh) {
+        if (! $server->relationLoaded('databases') || $refresh) {
             $server->load('databases.host');
         }
 
@@ -127,7 +127,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
      */
     public function getDaemonServiceData(Server $server, bool $refresh = false): array
     {
-        if (!$server->relationLoaded('egg') || $refresh) {
+        if (! $server->relationLoaded('egg') || $refresh) {
             $server->load('egg');
         }
 
@@ -163,7 +163,7 @@ class ServerRepository extends EloquentRepository implements ServerRepositoryInt
      */
     public function isUniqueUuidCombo(string $uuid, string $short): bool
     {
-        return !$this->getBuilder()->where('uuid', '=', $uuid)->orWhere('uuidShort', '=', $short)->exists();
+        return ! $this->getBuilder()->where('uuid', '=', $uuid)->orWhere('uuidShort', '=', $short)->exists();
     }
 
     /**

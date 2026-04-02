@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Api\Remote;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Server;
-use App\Models\ActivityLog;
-use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
-use App\Models\ActivityLogSubject;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Remote\ActivityEventRequest;
+use App\Models\ActivityLog;
+use App\Models\ActivityLogSubject;
+use App\Models\Node;
+use App\Models\Server;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Webmozart\Assert\Assert;
 
 class ActivityProcessingController extends Controller
 {
@@ -19,7 +20,7 @@ class ActivityProcessingController extends Controller
     {
         $tz = Carbon::now()->getTimezone();
 
-        /** @var \App\Models\Node $node */
+        /** @var Node $node */
         $node = $request->attributes->get('node');
 
         $servers = $node->servers()->whereIn('uuid', $request->servers())->get()->keyBy('uuid');
@@ -29,7 +30,7 @@ class ActivityProcessingController extends Controller
         foreach ($request->input('data') as $datum) {
             /** @var Server|null $server */
             $server = $servers->get($datum['server']);
-            if (is_null($server) || !Str::startsWith($datum['event'], 'server:')) {
+            if (is_null($server) || ! Str::startsWith($datum['event'], 'server:')) {
                 continue;
             }
 
@@ -64,7 +65,7 @@ class ActivityProcessingController extends Controller
                 $log['actor_type'] = $user->getMorphClass();
             }
 
-            if (!isset($logs[$datum['server']])) {
+            if (! isset($logs[$datum['server']])) {
                 $logs[$datum['server']] = [];
             }
 

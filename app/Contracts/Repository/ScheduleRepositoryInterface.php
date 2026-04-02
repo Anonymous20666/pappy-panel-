@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Schedule;
 use Illuminate\Support\Collection;
 
@@ -15,7 +16,7 @@ interface ScheduleRepositoryInterface extends RepositoryInterface
     /**
      * Return a schedule model with all the associated tasks as a relationship.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getScheduleWithTasks(int $schedule): Schedule;
 }

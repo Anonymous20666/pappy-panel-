@@ -2,9 +2,9 @@
 
 namespace App\Services\Extensions;
 
+use App\Services\Extensions\Exceptions\ExtensionInstallException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use App\Services\Extensions\Exceptions\ExtensionInstallException;
 
 class ExtensionManifestService
 {
@@ -13,7 +13,7 @@ class ExtensionManifestService
      */
     public function parseFromFile(string $manifestPath): array
     {
-        if (!is_file($manifestPath)) {
+        if (! is_file($manifestPath)) {
             throw new ExtensionInstallException('Missing extension.json in package root.');
         }
 
@@ -23,7 +23,7 @@ class ExtensionManifestService
         }
 
         $manifest = json_decode($raw, true);
-        if (!is_array($manifest)) {
+        if (! is_array($manifest)) {
             throw new ExtensionInstallException('Invalid extension.json. Expected a JSON object.');
         }
 
@@ -31,20 +31,19 @@ class ExtensionManifestService
     }
 
     /**
-     * @param array<string, mixed> $manifest
-     *
+     * @param  array<string, mixed>  $manifest
      * @return array<string, mixed>
      */
     public function normalize(array $manifest): array
     {
         foreach (['id', 'name', 'version'] as $required) {
-            if (!isset($manifest[$required]) || !is_string($manifest[$required]) || trim($manifest[$required]) === '') {
+            if (! isset($manifest[$required]) || ! is_string($manifest[$required]) || trim($manifest[$required]) === '') {
                 throw new ExtensionInstallException("Missing required manifest field: {$required}");
             }
         }
 
         $identifier = trim((string) $manifest['id']);
-        if (!preg_match('/^[a-z0-9][a-z0-9-_\.]*$/i', $identifier)) {
+        if (! preg_match('/^[a-z0-9][a-z0-9-_\.]*$/i', $identifier)) {
             throw new ExtensionInstallException('Manifest id must be a slug-like identifier.');
         }
 
@@ -79,18 +78,18 @@ class ExtensionManifestService
     }
 
     /**
-     * @param array<string, mixed> $manifest
+     * @param  array<string, mixed>  $manifest
      */
     public function assertCompatible(array $manifest): void
     {
-        if (!config('extensions.security.enforce_compatibility', true)) {
+        if (! config('extensions.security.enforce_compatibility', true)) {
             return;
         }
 
         $panelVersion = (string) config('app.version', 'canary');
         $targetVersion = Arr::get($manifest, 'target_version');
 
-        if (!$this->isCalver($panelVersion)) {
+        if (! $this->isCalver($panelVersion)) {
             return;
         }
 

@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Container\Container;
-use Znck\Eloquent\Traits\BelongsToThrough;
 use App\Contracts\Extensions\HashidsInterface;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Database\Factories\TaskFactory;
+use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 /**
  * @property int $id
@@ -17,17 +19,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $time_offset
  * @property bool $is_queued
  * @property bool $continue_on_failure
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $hashid
  * @property Schedule $schedule
  * @property Server $server
  */
 class Task extends Model
 {
-    /** @use HasFactory<\Database\Factories\TaskFactory> */
-    use HasFactory;
     use BelongsToThrough;
+
+    /** @use HasFactory<TaskFactory> */
+    use HasFactory;
 
     /**
      * The resource name for this model when it is transformed into an
@@ -39,7 +42,9 @@ class Task extends Model
      * The default actions that can exist for a task in Reviactyl.
      */
     public const ACTION_POWER = 'power';
+
     public const ACTION_COMMAND = 'command';
+
     public const ACTION_BACKUP = 'backup';
 
     /**
@@ -112,7 +117,7 @@ class Task extends Model
     /**
      * Return the schedule that a task belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Schedule, $this>
+     * @return BelongsTo<Schedule, $this>
      */
     public function schedule(): BelongsTo
     {
@@ -122,7 +127,7 @@ class Task extends Model
     /**
      * Return the server a task is assigned to, acts as a belongsToThrough.
      *
-     * @return \Znck\Eloquent\Relations\BelongsToThrough<\App\Models\Server, \App\Models\Schedule>
+     * @return \Znck\Eloquent\Relations\BelongsToThrough<Server, Schedule>
      */
     public function server(): \Znck\Eloquent\Relations\BelongsToThrough
     {

@@ -2,6 +2,7 @@
 
 namespace App\Transformers\Api\Client;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Subuser;
 
 class SubuserTransformer extends BaseClientTransformer
@@ -17,7 +18,7 @@ class SubuserTransformer extends BaseClientTransformer
     /**
      * Transforms a subuser into a model that can be shown to a front-end user.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function transform(Subuser $model): array
     {

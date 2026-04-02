@@ -2,6 +2,7 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Location;
 use Illuminate\Support\Collection;
 
@@ -20,14 +21,14 @@ interface LocationRepositoryInterface extends RepositoryInterface
     /**
      * Return all the nodes and their respective count of servers for a location.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getWithNodes(int $id): Location;
 
     /**
      * Return a location and the count of nodes in that location.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getWithNodeCount(int $id): Location;
 }

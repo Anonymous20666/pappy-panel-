@@ -15,7 +15,7 @@ class SeedCommand extends BaseSeedCommand
      */
     public function handle(): int
     {
-        if (!$this->hasCompletedMigrations()) {
+        if (! $this->hasCompletedMigrations()) {
             $this->showMigrationWarning();
 
             return 1;

@@ -2,14 +2,14 @@
 
 namespace Tests\Integration\Services\Users;
 
-use App\Models\User;
 use App\Exceptions\DisplayException;
-use Tests\Integration\IntegrationTestCase;
+use App\Models\User;
 use App\Services\Users\UserDeletionService;
+use Tests\Integration\IntegrationTestCase;
 
 class UserDeletionServiceTest extends IntegrationTestCase
 {
-    public function testExceptionReturnedIfUserAssignedToServers(): void
+    public function test_exception_returned_if_user_assigned_to_servers(): void
     {
         $server = $this->createServerModel();
 
@@ -21,7 +21,7 @@ class UserDeletionServiceTest extends IntegrationTestCase
         $this->assertModelExists($server->user);
     }
 
-    public function testUserIsDeleted(): void
+    public function test_user_is_deleted(): void
     {
         $user = User::factory()->create();
 

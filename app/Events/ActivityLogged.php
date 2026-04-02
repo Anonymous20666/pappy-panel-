@@ -3,14 +3,12 @@
 namespace App\Events;
 
 use App\Models\ActivityLog;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class ActivityLogged extends Event
 {
-    public function __construct(public ActivityLog $model)
-    {
-    }
+    public function __construct(public ActivityLog $model) {}
 
     public function is(string $event): bool
     {

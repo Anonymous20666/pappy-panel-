@@ -2,13 +2,14 @@
 
 namespace App\Services\Servers;
 
+use App\Exceptions\DisplayException;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Server;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\ConnectionInterface;
 use App\Repositories\Wings\DaemonServerRepository;
 use App\Services\Databases\DatabaseManagementService;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class ServerDeletionService
 {
@@ -21,8 +22,7 @@ class ServerDeletionService
         private ConnectionInterface $connection,
         private DaemonServerRepository $daemonServerRepository,
         private DatabaseManagementService $databaseManagementService,
-    ) {
-    }
+    ) {}
 
     /**
      * Set if the server should be forcibly deleted from the panel (ignoring daemon errors) or not.
@@ -38,7 +38,7 @@ class ServerDeletionService
      * Delete a server from the panel, clear any allocation notes, and remove any associated databases from hosts.
      *
      * @throws \Throwable
-     * @throws \App\Exceptions\DisplayException
+     * @throws DisplayException
      */
     public function handle(Server $server): void
     {
@@ -49,7 +49,7 @@ class ServerDeletionService
             // go ahead and bail out. We specifically ignore a 404 since that can be assumed
             // to be a safe error, meaning the server doesn't exist at all on Wings so there
             // is no reason we need to bail out from that.
-            if (!$this->force && $exception->getStatusCode() !== Response::HTTP_NOT_FOUND) {
+            if (! $this->force && $exception->getStatusCode() !== Response::HTTP_NOT_FOUND) {
                 throw $exception;
             }
 
@@ -61,7 +61,7 @@ class ServerDeletionService
                 try {
                     $this->databaseManagementService->delete($database);
                 } catch (\Exception $exception) {
-                    if (!$this->force) {
+                    if (! $this->force) {
                         throw $exception;
                     }
 
@@ -79,7 +79,6 @@ class ServerDeletionService
 
             // clear any allocation notes for the server
             $server->allocations()->update(['notes' => null]);
-
 
             $server->delete();
         });

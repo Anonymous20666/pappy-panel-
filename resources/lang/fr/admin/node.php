@@ -207,7 +207,7 @@ return [
             'failed' => 'Échec de l\'action d\'allocation.',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => 'Le FQDN ou l\'adresse IP fourni ne résout pas en une adresse IP valide.',
         'fqdn_required_for_ssl' => 'Un nom de domaine complet qui résout une adresse IP publique est nécessaire pour utiliser SSL pour ce noeud.',

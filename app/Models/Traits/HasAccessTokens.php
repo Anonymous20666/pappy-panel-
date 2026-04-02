@@ -2,21 +2,22 @@
 
 namespace App\Models\Traits;
 
-use App\Models\ApiKey;
-use Illuminate\Support\Str;
-use Laravel\Sanctum\Sanctum;
-use Laravel\Sanctum\HasApiTokens;
 use App\Extensions\Laravel\Sanctum\NewAccessToken;
+use App\Models\ApiKey;
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\Sanctum;
 
 /**
  * @template TToken of \Laravel\Sanctum\Contracts\HasAbilities
  *
- * @mixin \App\Models\Model
+ * @mixin Model
  */
 trait HasAccessTokens
 {
-    /** @use \Laravel\Sanctum\HasApiTokens<TToken> */
+    /** @use HasApiTokens<TToken> */
     use HasApiTokens {
         tokens as private _tokens;
         createToken as private _createToken;

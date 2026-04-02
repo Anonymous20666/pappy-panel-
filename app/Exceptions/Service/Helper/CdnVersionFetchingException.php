@@ -2,6 +2,4 @@
 
 namespace App\Exceptions\Service\Helper;
 
-class CdnVersionFetchingException extends \Exception
-{
-}
+class CdnVersionFetchingException extends \Exception {}

@@ -1,4 +1,5 @@
 <?php
+
 /*
 | Developer Notes:
 | This Admin Panel is depreciated. We've switched over to FilamentPHP.
@@ -8,11 +9,10 @@
 */
 
 use App\Http\Controllers\Admin;
-use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin\Servers\ServerInstalled;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
-
 
 /*
 |--------------------------------------------------------------------------

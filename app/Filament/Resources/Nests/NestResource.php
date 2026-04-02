@@ -3,16 +3,17 @@
 namespace App\Filament\Resources\Nests;
 
 use App\Models\Nest;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Actions\EditAction;
-use Filament\Resources\Resource;
-use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class NestResource extends Resource
 {
@@ -21,6 +22,7 @@ class NestResource extends Resource
     protected static ?int $navigationSort = 3;
 
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-egg';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-egg-filled';
 
     public static function getNavigationGroup(): ?string
@@ -51,7 +53,7 @@ class NestResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
-            \Filament\Schemas\Components\Section::make(trans('admin/nests.sections.configuration'))
+            Section::make(trans('admin/nests.sections.configuration'))
                 ->schema([
                     TextInput::make('name')
                         ->label(trans('admin/nests.fields.name'))

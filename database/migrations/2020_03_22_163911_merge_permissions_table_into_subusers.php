@@ -2,13 +2,14 @@
 
 use App\Models\Permission;
 use App\Models\Permission as P;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * A list of all pre-1.0 permissions available to a user and their associated
      * casting for the new permissions system.
@@ -85,7 +86,7 @@ return new class extends Migration {
                     ->map(function ($value) {
                         return self::$permissionsMap[$value] ?? null;
                     })->filter(function ($value) {
-                        return !is_null($value) && $value !== Permission::ACTION_WEBSOCKET_CONNECT;
+                        return ! is_null($value) && $value !== Permission::ACTION_WEBSOCKET_CONNECT;
                     })
                     // All subusers get this permission, so make sure it gets pushed into the array.
                     ->merge([Permission::ACTION_WEBSOCKET_CONNECT])
@@ -109,16 +110,16 @@ return new class extends Migration {
             $values = [];
             foreach (json_decode($datum->permissions, true) as $permission) {
                 $v = $flipped[$permission] ?? null;
-                if (!empty($v)) {
+                if (! empty($v)) {
                     $values[] = $datum->id;
                     $values[] = $v;
                 }
             }
 
-            if (!empty($values)) {
-                $string = 'VALUES ' . implode(', ', array_fill(0, count($values) / 2, '(?, ?)'));
+            if (! empty($values)) {
+                $string = 'VALUES '.implode(', ', array_fill(0, count($values) / 2, '(?, ?)'));
 
-                DB::insert('INSERT INTO permissions(`subuser_id`, `permission`) ' . $string, $values);
+                DB::insert('INSERT INTO permissions(`subuser_id`, `permission`) '.$string, $values);
             }
         }
 

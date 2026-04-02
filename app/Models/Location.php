@@ -2,22 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
+use Database\Factories\LocationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
  * @property string $short
  * @property string $long
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
- * @property \App\Models\Node[] $nodes
- * @property \App\Models\Server[] $servers
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Node[] $nodes
+ * @property Server[] $servers
  */
 class Location extends Model
 {
-    /** @use HasFactory<\Database\Factories\LocationFactory> */
+    /** @use HasFactory<LocationFactory> */
     use HasFactory;
 
     /**
@@ -52,7 +54,7 @@ class Location extends Model
     /**
      * Gets the nodes in a specified location.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Node, $this>
+     * @return HasMany<Node, $this>
      */
     public function nodes(): HasMany
     {
@@ -62,7 +64,7 @@ class Location extends Model
     /**
      * Gets the servers within a given location.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\App\Models\Server, \App\Models\Node, $this>
+     * @return HasManyThrough<Server, Node, $this>
      */
     public function servers(): HasManyThrough
     {

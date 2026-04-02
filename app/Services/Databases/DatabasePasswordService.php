@@ -2,12 +2,12 @@
 
 namespace App\Services\Databases;
 
-use App\Models\Database;
-use App\Helpers\Utilities;
-use Illuminate\Database\ConnectionInterface;
-use App\Extensions\DynamicDatabaseConnection;
-use Illuminate\Contracts\Encryption\Encrypter;
 use App\Contracts\Repository\DatabaseRepositoryInterface;
+use App\Extensions\DynamicDatabaseConnection;
+use App\Helpers\Utilities;
+use App\Models\Database;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
 
 class DatabasePasswordService
 {
@@ -19,8 +19,7 @@ class DatabasePasswordService
         private DynamicDatabaseConnection $dynamic,
         private Encrypter $encrypter,
         private DatabaseRepositoryInterface $repository,
-    ) {
-    }
+    ) {}
 
     /**
      * Updates a password for a given database.

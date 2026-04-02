@@ -3,10 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Node;
-use Ramsey\Uuid\Uuid;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
+use Ramsey\Uuid\Uuid;
 
 class NodeFactory extends Factory
 {
@@ -25,7 +25,7 @@ class NodeFactory extends Factory
         return [
             'uuid' => Uuid::uuid4()->toString(),
             'public' => true,
-            'name' => 'FactoryNode_' . Str::random(10),
+            'name' => 'FactoryNode_'.Str::random(10),
             'fqdn' => $this->faker->unique()->ipv4,
             'scheme' => 'http',
             'behind_proxy' => false,

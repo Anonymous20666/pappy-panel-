@@ -2,12 +2,12 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Tables\Table;
+use App\Filament\Resources\ActivityLogResource\Pages\ListActivityLogs;
 use App\Models\ActivityLog;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Resources\ActivityLogResource\Pages\ListActivityLogs;
+use Filament\Tables\Table;
 
 class ActivityLogResource extends Resource
 {

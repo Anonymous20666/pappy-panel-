@@ -2,11 +2,11 @@
 
 namespace Tests\Integration;
 
-use Illuminate\Http\Response;
 use App\Exceptions\DisplayException;
+use Illuminate\Http\Response;
 use Illuminate\Testing\Assert as PHPUnit;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Testing\TestResponse as IlluminateTestResponse;
+use Illuminate\Validation\ValidationException;
 
 class TestResponse extends IlluminateTestResponse
 {
@@ -23,7 +23,7 @@ class TestResponse extends IlluminateTestResponse
         // to fail so that debugging isn't such a nightmare.
         if ($actual !== $status && $status !== 500) {
             $this->dump();
-            if (!is_null($this->exception) && !$this->exception instanceof DisplayException && !$this->exception instanceof ValidationException) {
+            if (! is_null($this->exception) && ! $this->exception instanceof DisplayException && ! $this->exception instanceof ValidationException) {
                 dump([
                     'exception_class' => get_class($this->exception),
                     'message' => $this->exception->getMessage(),

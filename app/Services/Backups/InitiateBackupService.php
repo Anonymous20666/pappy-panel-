@@ -2,17 +2,17 @@
 
 namespace App\Services\Backups;
 
-use Ramsey\Uuid\Uuid;
+use App\Exceptions\Service\Backup\TooManyBackupsException;
+use App\Extensions\Backups\BackupManager;
 use App\Models\Backup;
 use App\Models\Server;
-use Carbon\CarbonImmutable;
-use Webmozart\Assert\Assert;
-use App\Extensions\Backups\BackupManager;
-use Illuminate\Database\ConnectionInterface;
 use App\Repositories\Eloquent\BackupRepository;
 use App\Repositories\Wings\DaemonBackupRepository;
-use App\Exceptions\Service\Backup\TooManyBackupsException;
+use Carbon\CarbonImmutable;
+use Illuminate\Database\ConnectionInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
+use Webmozart\Assert\Assert;
 
 class InitiateBackupService
 {
@@ -29,8 +29,7 @@ class InitiateBackupService
         private DaemonBackupRepository $daemonBackupRepository,
         private DeleteBackupService $deleteBackupService,
         private BackupManager $backupManager,
-    ) {
-    }
+    ) {}
 
     /**
      * Set if the backup should be locked once it is created which will prevent
@@ -46,7 +45,7 @@ class InitiateBackupService
     /**
      * Sets the files to be ignored by this backup.
      *
-     * @param string[]|null $ignored
+     * @param  string[]|null  $ignored
      */
     public function setIgnoredFiles(?array $ignored): self
     {
@@ -89,9 +88,9 @@ class InitiateBackupService
         // Check if the server has reached or exceeded its backup limit.
         // completed_at == null will cover any ongoing backups, while is_successful == true will cover any completed backups.
         $successful = $this->repository->getNonFailedBackups($server);
-        if (!$server->backup_limit || $successful->count() >= $server->backup_limit) {
+        if (! $server->backup_limit || $successful->count() >= $server->backup_limit) {
             // Do not allow the user to continue if this server is already at its limit and can't override.
-            if (!$override || $server->backup_limit <= 0) {
+            if (! $override || $server->backup_limit <= 0) {
                 throw new TooManyBackupsException($server->backup_limit);
             }
 
@@ -99,7 +98,7 @@ class InitiateBackupService
             // never be automatically purged). If we find a backup we will delete it and then continue with
             // this process. If no backup is found that can be used an exception is thrown.
             $oldest = $successful->where('is_locked', false)->orderBy('created_at')->first();
-            if (!$oldest) {
+            if (! $oldest) {
                 throw new TooManyBackupsException($server->backup_limit);
             }
 

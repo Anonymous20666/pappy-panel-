@@ -2,18 +2,19 @@
 
 namespace Tests\Integration\Api\Client\Server\Database;
 
-use App\Models\Subuser;
+use App\Contracts\Extensions\HashidsInterface;
 use App\Models\Database;
 use App\Models\DatabaseHost;
-use App\Contracts\Extensions\HashidsInterface;
-use App\Services\Databases\DatabasePasswordService;
+use App\Models\Subuser;
 use App\Services\Databases\DatabaseManagementService;
+use App\Services\Databases\DatabasePasswordService;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class DatabaseAuthorizationTest extends ClientApiIntegrationTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('methodDataProvider')]
-    public function testAccessToAServersDatabasesIsRestrictedProperly(string $method, string $endpoint)
+    #[DataProvider('methodDataProvider')]
+    public function test_access_to_a_servers_databases_is_restricted_properly(string $method, string $endpoint)
     {
         // The API $user is the owner of $server1.
         [$user, $server1] = $this->generateTestAccount();
@@ -40,20 +41,20 @@ class DatabaseAuthorizationTest extends ClientApiIntegrationTestCase
         $hashids = $this->app->make(HashidsInterface::class);
         // This is the only valid call for this test, accessing the database for the same
         // server that the API user is the owner of.
-        $this->actingAs($user)->json($method, $this->link($server1, '/databases/' . $hashids->encode($database1->id) . $endpoint))
+        $this->actingAs($user)->json($method, $this->link($server1, '/databases/'.$hashids->encode($database1->id).$endpoint))
             ->assertStatus($method === 'DELETE' ? 204 : 200);
 
         // This request fails because the database is valid for that server but the user
         // making the request is not authorized to perform that action.
-        $this->actingAs($user)->json($method, $this->link($server2, '/databases/' . $hashids->encode($database2->id) . $endpoint))->assertForbidden();
+        $this->actingAs($user)->json($method, $this->link($server2, '/databases/'.$hashids->encode($database2->id).$endpoint))->assertForbidden();
 
         // Both of these should report a 404 error due to the database being linked to
         // servers that are not the same as the server in the request, or are assigned
         // to a server for which the user making the request has no access to.
-        $this->actingAs($user)->json($method, $this->link($server1, '/databases/' . $hashids->encode($database2->id) . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server1, '/databases/' . $hashids->encode($database3->id) . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server2, '/databases/' . $hashids->encode($database3->id) . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server3, '/databases/' . $hashids->encode($database3->id) . $endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/databases/'.$hashids->encode($database2->id).$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/databases/'.$hashids->encode($database3->id).$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server2, '/databases/'.$hashids->encode($database3->id).$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server3, '/databases/'.$hashids->encode($database3->id).$endpoint))->assertNotFound();
     }
 
     public static function methodDataProvider(): array

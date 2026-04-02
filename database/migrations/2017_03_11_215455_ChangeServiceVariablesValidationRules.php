@@ -1,11 +1,12 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -17,7 +18,7 @@ return new class extends Migration {
 
         DB::transaction(function () {
             foreach (DB::table('service_variables')->get() as $variable) {
-                $rules = $variable->required ? 'required|regex:' . $variable->rules : 'regex:' . $variable->rules;
+                $rules = $variable->required ? 'required|regex:'.$variable->rules : 'regex:'.$variable->rules;
 
                 DB::table('service_variables')
                     ->where('id', $variable->id)

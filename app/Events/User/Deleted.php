@@ -2,8 +2,8 @@
 
 namespace App\Events\User;
 
-use App\Models\User;
 use App\Events\Event;
+use App\Models\User;
 use Illuminate\Queue\SerializesModels;
 
 class Deleted extends Event
@@ -13,7 +13,5 @@ class Deleted extends Event
     /**
      * Create a new event instance.
      */
-    public function __construct(public User $user)
-    {
-    }
+    public function __construct(public User $user) {}
 }

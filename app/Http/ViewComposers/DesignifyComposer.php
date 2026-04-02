@@ -2,18 +2,25 @@
 
 namespace App\Http\ViewComposers;
 
-use Illuminate\View\View;
 use App\Contracts\Repository\SettingsRepositoryInterface;
+use Illuminate\View\View;
 
 class DesignifyComposer
 {
     private array $reviactylDefaults;
+
     private array $Theme1;
+
     private array $Theme2;
+
     private array $Theme3;
+
     private array $Theme4;
+
     private array $Theme5;
+
     private array $Theme6;
+
     private array $Theme7;
 
     public function __construct(
@@ -187,13 +194,13 @@ class DesignifyComposer
             $alerts = is_array($decoded) ? $decoded : [];
         }
 
-        if (!is_array($alerts) || empty($alerts)) {
+        if (! is_array($alerts) || empty($alerts)) {
             return $fallback;
         }
 
         $normalized = [];
         foreach ($alerts as $alert) {
-            if (!is_array($alert)) {
+            if (! is_array($alert)) {
                 continue;
             }
 
@@ -218,13 +225,13 @@ class DesignifyComposer
             $buttons = is_array($decoded) ? $decoded : [];
         }
 
-        if (!is_array($buttons)) {
+        if (! is_array($buttons)) {
             return [];
         }
 
         $normalized = [];
         foreach ($buttons as $button) {
-            if (!is_array($button)) {
+            if (! is_array($button)) {
                 continue;
             }
 

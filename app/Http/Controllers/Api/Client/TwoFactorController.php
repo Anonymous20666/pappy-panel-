@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Api\Client;
 
-use Carbon\Carbon;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Facades\Activity;
+use App\Models\User;
+use App\Services\Users\ToggleTwoFactorService;
+use App\Services\Users\TwoFactorSetupService;
+use Carbon\Carbon;
+use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Http\JsonResponse;
-use App\Services\Users\TwoFactorSetupService;
-use App\Services\Users\ToggleTwoFactorService;
-use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TwoFactorController extends ClientApiController
@@ -30,8 +34,8 @@ class TwoFactorController extends ClientApiController
      * it on their account. If two-factor is already enabled this endpoint
      * will return a 400 error.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function index(Request $request): JsonResponse
     {
@@ -48,7 +52,7 @@ class TwoFactorController extends ClientApiController
      * Updates a user's account to have two-factor enabled.
      *
      * @throws \Throwable
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): JsonResponse
     {
@@ -58,7 +62,7 @@ class TwoFactorController extends ClientApiController
         ]);
 
         $data = $validator->validate();
-        if (!password_verify($data['password'], $request->user()->password)) {
+        if (! password_verify($data['password'], $request->user()->password)) {
             throw new BadRequestHttpException('The password provided was not valid.');
         }
 
@@ -82,11 +86,11 @@ class TwoFactorController extends ClientApiController
      */
     public function delete(Request $request): JsonResponse
     {
-        if (!password_verify($request->input('password') ?? '', $request->user()->password)) {
+        if (! password_verify($request->input('password') ?? '', $request->user()->password)) {
             throw new BadRequestHttpException('The password provided was not valid.');
         }
 
-        /** @var \App\Models\User $user */
+        /** @var User $user */
         $user = $request->user();
 
         $user->update([

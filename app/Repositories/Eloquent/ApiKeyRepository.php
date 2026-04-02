@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\User;
-use App\Models\ApiKey;
-use Illuminate\Support\Collection;
 use App\Contracts\Repository\ApiKeyRepositoryInterface;
+use App\Models\ApiKey;
+use App\Models\User;
+use Illuminate\Support\Collection;
 
 class ApiKeyRepository extends EloquentRepository implements ApiKeyRepositoryInterface
 {

@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -15,7 +16,7 @@ return new class extends Migration {
         // There exists a backups plugin for the 0.7 version of the Panel. However, it didn't properly
         // namespace itself so now we have to deal with these tables being in the way of tables we're trying
         // to use. For now, just rename them to maintain the data.
-        
+
         // only attempt this on mysql nd mariadb databases that support information_schema
         if (DB::getDriverName() === 'mysql' || DB::getDriverName() === 'mariadb') {
             $results = DB::select('SELECT TABLE_NAME FROM information_schema.tables WHERE table_schema = ? AND table_name LIKE ? AND table_name NOT LIKE \'%_plugin_bak\'', [
@@ -26,7 +27,7 @@ return new class extends Migration {
             // Take any of the results, most likely "backups" and "backup_logs" and rename them to have a
             // suffix so data isn't completely lost, but they're no longer in the way of this migration...
             foreach ($results as $result) {
-                Schema::rename($result->TABLE_NAME, $result->TABLE_NAME . '_plugin_bak');
+                Schema::rename($result->TABLE_NAME, $result->TABLE_NAME.'_plugin_bak');
             }
         }
 

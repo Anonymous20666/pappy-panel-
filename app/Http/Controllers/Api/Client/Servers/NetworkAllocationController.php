@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
-use App\Facades\Activity;
-use App\Models\Allocation;
-use Illuminate\Http\JsonResponse;
 use App\Exceptions\DisplayException;
-use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Eloquent\ServerRepository;
-use App\Transformers\Api\Client\AllocationTransformer;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Facades\Activity;
 use App\Http\Controllers\Api\Client\ClientApiController;
-use App\Services\Allocations\FindAssignableAllocationService;
+use App\Http\Requests\Api\Client\Servers\Network\DeleteAllocationRequest;
 use App\Http\Requests\Api\Client\Servers\Network\GetNetworkRequest;
 use App\Http\Requests\Api\Client\Servers\Network\NewAllocationRequest;
-use App\Http\Requests\Api\Client\Servers\Network\DeleteAllocationRequest;
-use App\Http\Requests\Api\Client\Servers\Network\UpdateAllocationRequest;
 use App\Http\Requests\Api\Client\Servers\Network\SetPrimaryAllocationRequest;
+use App\Http\Requests\Api\Client\Servers\Network\UpdateAllocationRequest;
+use App\Models\Allocation;
+use App\Models\Server;
+use App\Repositories\Eloquent\ServerRepository;
+use App\Services\Allocations\FindAssignableAllocationService;
+use App\Transformers\Api\Client\AllocationTransformer;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\JsonResponse;
 
 class NetworkAllocationController extends ClientApiController
 {
@@ -45,8 +47,8 @@ class NetworkAllocationController extends ClientApiController
     /**
      * Set the primary allocation for a server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateAllocationRequest $request, Server $server, Allocation $allocation): array
     {
@@ -69,8 +71,8 @@ class NetworkAllocationController extends ClientApiController
     /**
      * Set the primary allocation for a server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function setPrimary(SetPrimaryAllocationRequest $request, Server $server, Allocation $allocation): array
     {

@@ -2,19 +2,21 @@
 
 namespace App\Filament\Resources\DatabaseHost\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\DatabaseHost\DatabaseHostResource;
+use App\Services\Activity\ActivityLogService;
+use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class CreateDatabaseHost extends CreateRecord
 {
     protected static string $resource = DatabaseHostResource::class;
 
-    protected function handleRecordCreation(array $data): \Illuminate\Database\Eloquent\Model
+    protected function handleRecordCreation(array $data): Model
     {
         $record = parent::handleRecordCreation($data);
 
-        /** @var \App\Services\Activity\ActivityLogService $logService */
-        $logService = app(\App\Services\Activity\ActivityLogService::class);
+        /** @var ActivityLogService $logService */
+        $logService = app(ActivityLogService::class);
         $logService->subject($record)->event('server:database-host.create')->log();
 
         return $record;

@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Http\Middleware;
 
-use App\Models\User;
 use App\Http\Middleware\AdminAuthenticate;
+use App\Models\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class AdminAuthenticateTest extends MiddlewareTestCase
@@ -11,7 +11,7 @@ class AdminAuthenticateTest extends MiddlewareTestCase
     /**
      * Test that an admin is authenticated.
      */
-    public function testAdminsAreAuthenticated()
+    public function test_admins_are_authenticated()
     {
         $user = User::factory()->make(['root_admin' => 1]);
 
@@ -23,7 +23,7 @@ class AdminAuthenticateTest extends MiddlewareTestCase
     /**
      * Test that a missing user in the request triggers an error.
      */
-    public function testExceptionIsThrownIfUserDoesNotExist()
+    public function test_exception_is_thrown_if_user_does_not_exist()
     {
         $this->expectException(AccessDeniedHttpException::class);
 
@@ -35,7 +35,7 @@ class AdminAuthenticateTest extends MiddlewareTestCase
     /**
      * Test that an exception is thrown if the user is not an admin.
      */
-    public function testExceptionIsThrownIfUserIsNotAnAdmin()
+    public function test_exception_is_thrown_if_user_is_not_an_admin()
     {
         $this->expectException(AccessDeniedHttpException::class);
 

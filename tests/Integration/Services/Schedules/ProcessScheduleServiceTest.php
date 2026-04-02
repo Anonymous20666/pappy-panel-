@@ -2,23 +2,24 @@
 
 namespace Tests\Integration\Services\Schedules;
 
-use Exception;
-use App\Models\Task;
-use App\Models\Schedule;
-use Carbon\CarbonImmutable;
-use App\Jobs\Schedule\RunTaskJob;
-use Illuminate\Support\Facades\Bus;
 use App\Exceptions\DisplayException;
-use Illuminate\Contracts\Bus\Dispatcher;
-use Tests\Integration\IntegrationTestCase;
+use App\Jobs\Schedule\RunTaskJob;
+use App\Models\Schedule;
+use App\Models\Task;
 use App\Services\Schedules\ProcessScheduleService;
+use Carbon\CarbonImmutable;
+use Exception;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Support\Facades\Bus;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\Integration\IntegrationTestCase;
 
 class ProcessScheduleServiceTest extends IntegrationTestCase
 {
     /**
      * Test that a schedule with no tasks registered returns an error.
      */
-    public function testScheduleWithNoTasksReturnsException()
+    public function test_schedule_with_no_tasks_returns_exception()
     {
         $server = $this->createServerModel();
         $schedule = Schedule::factory()->create(['server_id' => $server->id]);
@@ -32,7 +33,7 @@ class ProcessScheduleServiceTest extends IntegrationTestCase
     /**
      * Test that an error during the schedule update is not persisted to the database.
      */
-    public function testErrorDuringScheduleDataUpdateDoesNotPersistChanges()
+    public function test_error_during_schedule_data_update_does_not_persist_changes()
     {
         $server = $this->createServerModel();
 
@@ -56,8 +57,8 @@ class ProcessScheduleServiceTest extends IntegrationTestCase
     /**
      * Test that a job is dispatched as expected using the initial delay.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('dispatchNowDataProvider')]
-    public function testJobCanBeDispatchedWithExpectedInitialDelay(bool $now)
+    #[DataProvider('dispatchNowDataProvider')]
+    public function test_job_can_be_dispatched_with_expected_initial_delay(bool $now)
     {
         Bus::fake();
 
@@ -90,7 +91,7 @@ class ProcessScheduleServiceTest extends IntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2534
      */
-    public function testFirstSequenceTaskIsFound()
+    public function test_first_sequence_task_is_found()
     {
         Bus::fake();
 
@@ -121,7 +122,7 @@ class ProcessScheduleServiceTest extends IntegrationTestCase
      *
      * @see https://github.com/pterodactyl/panel/issues/2550
      */
-    public function testTaskDispatchedNowIsResetProperlyIfErrorIsEncountered()
+    public function test_task_dispatched_now_is_reset_properly_if_error_is_encountered()
     {
         $this->swap(Dispatcher::class, $dispatcher = \Mockery::mock(Dispatcher::class));
 
@@ -131,9 +132,9 @@ class ProcessScheduleServiceTest extends IntegrationTestCase
         /** @var Task $task */
         $task = Task::factory()->create(['schedule_id' => $schedule->id, 'sequence_id' => 1]);
 
-        $dispatcher->expects('dispatchNow')->andThrows(new \Exception('Test thrown exception'));
+        $dispatcher->expects('dispatchNow')->andThrows(new Exception('Test thrown exception'));
 
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage('Test thrown exception');
 
         $this->getService()->handle($schedule, true);

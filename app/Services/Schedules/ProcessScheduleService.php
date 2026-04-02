@@ -2,23 +2,21 @@
 
 namespace App\Services\Schedules;
 
-use Exception;
-use App\Models\Schedule;
-use App\Jobs\Schedule\RunTaskJob;
 use App\Exceptions\DisplayException;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Jobs\Schedule\RunTaskJob;
+use App\Models\Schedule;
+use App\Repositories\Wings\DaemonServerRepository;
+use Exception;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Database\ConnectionInterface;
-use App\Repositories\Wings\DaemonServerRepository;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
 
 class ProcessScheduleService
 {
     /**
      * ProcessScheduleService constructor.
      */
-    public function __construct(private ConnectionInterface $connection, private Dispatcher $dispatcher, private DaemonServerRepository $serverRepository)
-    {
-    }
+    public function __construct(private ConnectionInterface $connection, private Dispatcher $dispatcher, private DaemonServerRepository $serverRepository) {}
 
     /**
      * Process a schedule and push the first task onto the queue worker.
@@ -54,8 +52,8 @@ class ProcessScheduleService
 
                     return;
                 }
-            } catch (\Exception $exception) {
-                if (!$exception instanceof DaemonConnectionException) {
+            } catch (Exception $exception) {
+                if (! $exception instanceof DaemonConnectionException) {
                     // If we encountered some exception during this process that wasn't just an
                     // issue connecting to Wings run the failed sequence for a job. Otherwise we
                     // can just quietly mark the task as completed without actually running anything.
@@ -67,7 +65,7 @@ class ProcessScheduleService
             }
         }
 
-        if (!$now) {
+        if (! $now) {
             $this->dispatcher->dispatch($job->delay($task->time_offset));
         } else {
             // When using dispatchNow the RunTaskJob::failed() function is not called automatically
@@ -76,7 +74,7 @@ class ProcessScheduleService
             // @see https://github.com/pterodactyl/panel/issues/2550
             try {
                 $this->dispatcher->dispatchNow($job);
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 $job->failed($exception);
 
                 throw $exception;

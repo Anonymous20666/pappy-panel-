@@ -3,10 +3,10 @@
 namespace Tests\Integration\Services\Servers;
 
 use App\Models\Server;
+use App\Repositories\Wings\DaemonServerRepository;
+use App\Services\Servers\SuspensionService;
 use Mockery\MockInterface;
 use Tests\Integration\IntegrationTestCase;
-use App\Services\Servers\SuspensionService;
-use App\Repositories\Wings\DaemonServerRepository;
 
 class SuspensionServiceTest extends IntegrationTestCase
 {
@@ -15,7 +15,7 @@ class SuspensionServiceTest extends IntegrationTestCase
     /**
      * Setup test instance.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -23,7 +23,7 @@ class SuspensionServiceTest extends IntegrationTestCase
         $this->app->instance(DaemonServerRepository::class, $this->repository);
     }
 
-    public function testServerIsSuspendedAndUnsuspended()
+    public function test_server_is_suspended_and_unsuspended()
     {
         $server = $this->createServerModel();
 
@@ -38,7 +38,7 @@ class SuspensionServiceTest extends IntegrationTestCase
         $this->assertFalse($server->refresh()->isSuspended());
     }
 
-    public function testNoActionIsTakenIfSuspensionStatusIsUnchanged()
+    public function test_no_action_is_taken_if_suspension_status_is_unchanged()
     {
         $server = $this->createServerModel();
 
@@ -54,7 +54,7 @@ class SuspensionServiceTest extends IntegrationTestCase
         $this->assertTrue($server->isSuspended());
     }
 
-    public function testExceptionIsThrownIfInvalidActionsArePassed()
+    public function test_exception_is_thrown_if_invalid_actions_are_passed()
     {
         $server = $this->createServerModel();
 

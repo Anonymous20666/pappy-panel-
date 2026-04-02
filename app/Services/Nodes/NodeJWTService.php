@@ -2,15 +2,15 @@
 
 namespace App\Services\Nodes;
 
+use App\Extensions\Lcobucci\JWT\Encoding\TimestampDates;
 use App\Models\Node;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Str;
 use Lcobucci\JWT\Configuration;
-use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key\InMemory;
-use App\Extensions\Lcobucci\JWT\Encoding\TimestampDates;
+use Lcobucci\JWT\UnencryptedToken;
 
 class NodeJWTService
 {
@@ -77,7 +77,7 @@ class NodeJWTService
             $builder = $builder->expiresAt($this->expiresAt);
         }
 
-        if (!empty($this->subject)) {
+        if (! empty($this->subject)) {
             $builder = $builder->relatedTo($this->subject)->withHeader('sub', $this->subject);
         }
 
@@ -85,7 +85,7 @@ class NodeJWTService
             $builder = $builder->withClaim($key, $value);
         }
 
-        if (!is_null($this->user)) {
+        if (! is_null($this->user)) {
             $builder = $builder
                 ->withClaim('user_uuid', $this->user->uuid)
                 // The "user_id" claim is deprecated and should not be referenced — it remains

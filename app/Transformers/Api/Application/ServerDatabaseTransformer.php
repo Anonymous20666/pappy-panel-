@@ -2,12 +2,13 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Database;
 use App\Models\DatabaseHost;
-use League\Fractal\Resource\Item;
 use App\Services\Acl\Api\AdminAcl;
-use League\Fractal\Resource\NullResource;
 use Illuminate\Contracts\Encryption\Encrypter;
+use League\Fractal\Resource\Item;
+use League\Fractal\Resource\NullResource;
 
 class ServerDatabaseTransformer extends BaseTransformer
 {
@@ -64,11 +65,11 @@ class ServerDatabaseTransformer extends BaseTransformer
     /**
      * Return the database host relationship for this server database.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeHost(Database $model): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_DATABASE_HOSTS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_DATABASE_HOSTS)) {
             return $this->null();
         }
 

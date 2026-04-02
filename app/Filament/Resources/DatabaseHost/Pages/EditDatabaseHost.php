@@ -2,20 +2,23 @@
 
 namespace App\Filament\Resources\DatabaseHost\Pages;
 
-use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\DatabaseHost\DatabaseHostResource;
+use App\Services\Activity\ActivityLogService;
+use Filament\Actions;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
 
 class EditDatabaseHost extends EditRecord
 {
     protected static string $resource = DatabaseHostResource::class;
 
-    protected function handleRecordUpdate(\Illuminate\Database\Eloquent\Model $record, array $data): \Illuminate\Database\Eloquent\Model
+    protected function handleRecordUpdate(Model $record, array $data): Model
     {
         $record = parent::handleRecordUpdate($record, $data);
 
-        /** @var \App\Services\Activity\ActivityLogService $logService */
-        $logService = app(\App\Services\Activity\ActivityLogService::class);
+        /** @var ActivityLogService $logService */
+        $logService = app(ActivityLogService::class);
         $logService->subject($record)->event('server:database-host.update')->log();
 
         return $record;
@@ -27,7 +30,7 @@ class EditDatabaseHost extends EditRecord
             Actions\DeleteAction::make()
                 ->before(function (Actions\DeleteAction $action) {
                     if ($this->record->databases()->count() > 0) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/databases.errors.cannot_delete'))
                             ->danger()
                             ->send();
@@ -36,8 +39,8 @@ class EditDatabaseHost extends EditRecord
                     }
                 })
                 ->after(function () {
-                    /** @var \App\Services\Activity\ActivityLogService $logService */
-                    $logService = app(\App\Services\Activity\ActivityLogService::class);
+                    /** @var ActivityLogService $logService */
+                    $logService = app(ActivityLogService::class);
                     // logging handled via model events or manually here?
                     // DeleteAction deletes the record, so we might need to log BEFORE or grab details.
                     // Actually, DeleteAction runs inside a transaction usually.
@@ -49,7 +52,7 @@ class EditDatabaseHost extends EditRecord
                 // Let's use clean action implementation
                 ->action(function (DatabaseHost $record, Actions\Action $action) {
                     if ($record->databases()->count() > 0) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/databases.errors.cannot_delete'))
                             ->danger()
                             ->send();
@@ -57,8 +60,8 @@ class EditDatabaseHost extends EditRecord
                         $action->halt();
                     }
 
-                    /** @var \App\Services\Activity\ActivityLogService $logService */
-                    $logService = app(\App\Services\Activity\ActivityLogService::class);
+                    /** @var ActivityLogService $logService */
+                    $logService = app(ActivityLogService::class);
                     $logService->subject($record)->event('server:database-host.delete')->log();
 
                     $record->delete();

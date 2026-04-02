@@ -2,9 +2,10 @@
 
 namespace App\Contracts\Repository;
 
+use App\Exceptions\Repository\RecordNotFoundException;
 use App\Models\Server;
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface ServerRepositoryInterface extends RepositoryInterface
 {
@@ -26,7 +27,7 @@ interface ServerRepositoryInterface extends RepositoryInterface
     /**
      * Return a server model and all variables associated with the server.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function findWithVariables(int $id): Server;
 
@@ -57,7 +58,7 @@ interface ServerRepositoryInterface extends RepositoryInterface
     /**
      * Return a server by UUID.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function getByUuid(string $uuid): Server;
 

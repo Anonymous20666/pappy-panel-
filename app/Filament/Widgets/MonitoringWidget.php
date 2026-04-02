@@ -3,12 +3,12 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Node;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Log;
-use Filament\Widgets\StatsOverviewWidget\Stat;
 use App\Repositories\Wings\DaemonMonitoringRepository;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 
 class MonitoringWidget extends BaseWidget
 {
@@ -17,9 +17,11 @@ class MonitoringWidget extends BaseWidget
     public ?int $selectedNodeId = null;
 
     /** @var float[] Rolling history for chart sparklines (max 10 points each) */
-    public array $cpuHistory    = [];
+    public array $cpuHistory = [];
+
     public array $memoryHistory = [];
-    public array $diskHistory   = [];
+
+    public array $diskHistory = [];
 
     private const HISTORY_MAX = 10;
 
@@ -29,18 +31,16 @@ class MonitoringWidget extends BaseWidget
 
     protected ?string $pollingInterval = '1s';
 
-    public function mount(): void
-    {
-    }
+    public function mount(): void {}
 
     #[On('nodeChanged')]
     public function updateNodeId(?int $nodeId = null): void
     {
         if ($nodeId && $nodeId !== $this->selectedNodeId) {
             $this->selectedNodeId = $nodeId;
-            $this->cpuHistory     = [];
-            $this->memoryHistory  = [];
-            $this->diskHistory    = [];
+            $this->cpuHistory = [];
+            $this->memoryHistory = [];
+            $this->diskHistory = [];
         }
     }
 
@@ -52,7 +52,7 @@ class MonitoringWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        if (!$this->selectedNodeId) {
+        if (! $this->selectedNodeId) {
             return [];
         }
 
@@ -71,16 +71,16 @@ class MonitoringWidget extends BaseWidget
         }
 
         return [
-            Stat::make(trans('admin/monitoring.stats.cpu_usage'), number_format($data['cpu']['usage_percent'], 2) . '%')
+            Stat::make(trans('admin/monitoring.stats.cpu_usage'), number_format($data['cpu']['usage_percent'], 2).'%')
                 ->description(trans('admin/monitoring.stats.cpu_cores', ['count' => $data['cpu']['cores']]))
                 ->descriptionIcon('heroicon-o-cpu-chip')
                 ->chart($this->pushHistory('cpuHistory', $data['cpu']['usage_percent']))
                 ->color($this->getColorForPercentage($data['cpu']['usage_percent']))
                 ->icon('heroicon-o-cpu-chip'),
 
-            Stat::make(trans('admin/monitoring.stats.memory_usage'), number_format($data['memory']['usage_percent'], 2) . '%')
+            Stat::make(trans('admin/monitoring.stats.memory_usage'), number_format($data['memory']['usage_percent'], 2).'%')
                 ->description(
-                    $this->formatBytes($data['memory']['used_bytes']) . ' / ' .
+                    $this->formatBytes($data['memory']['used_bytes']).' / '.
                     $this->formatBytes($data['memory']['total_bytes'])
                 )
                 ->descriptionIcon('heroicon-o-circle-stack')
@@ -88,9 +88,9 @@ class MonitoringWidget extends BaseWidget
                 ->color($this->getColorForPercentage($data['memory']['usage_percent']))
                 ->icon('heroicon-o-circle-stack'),
 
-            Stat::make(trans('admin/monitoring.stats.disk_usage'), number_format($data['disk']['usage_percent'], 2) . '%')
+            Stat::make(trans('admin/monitoring.stats.disk_usage'), number_format($data['disk']['usage_percent'], 2).'%')
                 ->description(
-                    $this->formatBytes($data['disk']['used_bytes']) . ' / ' .
+                    $this->formatBytes($data['disk']['used_bytes']).' / '.
                     $this->formatBytes($data['disk']['total_bytes'])
                 )
                 ->descriptionIcon('heroicon-o-server-stack')
@@ -100,15 +100,15 @@ class MonitoringWidget extends BaseWidget
 
             Stat::make(trans('admin/monitoring.stats.network_traffic'), $this->formatBytes($data['network']['bytes_sent'] + $data['network']['bytes_recv']))
                 ->description(
-                    '↑ ' . $this->formatBytes($data['network']['bytes_sent']) . ' | ' .
-                    '↓ ' . $this->formatBytes($data['network']['bytes_recv'])
+                    '↑ '.$this->formatBytes($data['network']['bytes_sent']).' | '.
+                    '↓ '.$this->formatBytes($data['network']['bytes_recv'])
                 )
                 ->descriptionIcon('heroicon-o-signal')
                 ->color('info')
                 ->icon('heroicon-o-signal'),
 
             Stat::make(trans('admin/monitoring.stats.uptime'), $this->formatUptime($data['runtime']['uptime_seconds']))
-                ->description(trans('admin/monitoring.stats.goroutines', ['count' => $data['runtime']['goroutines']]) . ' | ' . $data['runtime']['go_version'])
+                ->description(trans('admin/monitoring.stats.goroutines', ['count' => $data['runtime']['goroutines']]).' | '.$data['runtime']['go_version'])
                 ->descriptionIcon('heroicon-o-clock')
                 ->color('success')
                 ->icon('heroicon-o-clock'),
@@ -129,7 +129,7 @@ class MonitoringWidget extends BaseWidget
 
             return $repository->getSystemMonitoring();
         } catch (\Throwable $e) {
-            Log::warning('MonitoringWidget: failed to fetch data for node ' . $node->id, [
+            Log::warning('MonitoringWidget: failed to fetch data for node '.$node->id, [
                 'error' => $e->getMessage(),
             ]);
 
@@ -153,7 +153,7 @@ class MonitoringWidget extends BaseWidget
         return match (true) {
             $percentage >= 80 => 'danger',
             $percentage >= 50 => 'warning',
-            default           => 'success',
+            default => 'success',
         };
     }
 
@@ -164,15 +164,15 @@ class MonitoringWidget extends BaseWidget
             return '0 B';
         }
         $units = ['B', 'KB', 'MB', 'GB', 'TB'];
-        $pow   = (int) min(floor(log($bytes) / log(1024)), count($units) - 1);
+        $pow = (int) min(floor(log($bytes) / log(1024)), count($units) - 1);
 
-        return round($bytes / (1024 ** $pow), 2) . ' ' . $units[$pow];
+        return round($bytes / (1024 ** $pow), 2).' '.$units[$pow];
     }
 
     protected function formatUptime(int $seconds): string
     {
-        $days    = intdiv($seconds, 86400);
-        $hours   = intdiv($seconds % 86400, 3600);
+        $days = intdiv($seconds, 86400);
+        $hours = intdiv($seconds % 86400, 3600);
         $minutes = intdiv($seconds % 3600, 60);
 
         if ($days > 0) {

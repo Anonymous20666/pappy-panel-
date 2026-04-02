@@ -2,12 +2,13 @@
 
 namespace Tests\Integration\Api\Client\Server\Schedule;
 
-use App\Models\Task;
-use App\Models\Schedule;
-use App\Models\Permission;
-use Illuminate\Http\Response;
 use App\Jobs\Schedule\RunTaskJob;
+use App\Models\Permission;
+use App\Models\Schedule;
+use App\Models\Task;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Bus;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ExecuteScheduleTest extends ClientApiIntegrationTestCase
@@ -15,8 +16,8 @@ class ExecuteScheduleTest extends ClientApiIntegrationTestCase
     /**
      * Test that a schedule can be executed and is updated in the database correctly.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionsDataProvider')]
-    public function testScheduleIsExecutedRightAway(array $permissions)
+    #[DataProvider('permissionsDataProvider')]
+    public function test_schedule_is_executed_right_away(array $permissions)
     {
         [$user, $server] = $this->generateTestAccount($permissions);
 
@@ -53,7 +54,7 @@ class ExecuteScheduleTest extends ClientApiIntegrationTestCase
     /**
      * Test that a user without the schedule update permission cannot execute it.
      */
-    public function testUserWithoutScheduleUpdatePermissionCannotExecute()
+    public function test_user_without_schedule_update_permission_cannot_execute()
     {
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_SCHEDULE_CREATE]);
 

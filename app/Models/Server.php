@@ -3,17 +3,22 @@
 namespace App\Models;
 
 use App\Contracts\Models\Identifiable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Query\JoinClause;
-use Znck\Eloquent\Traits\BelongsToThrough;
-use App\Models\Traits\HasRealtimeIdentifier;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use App\Exceptions\Http\Server\ServerStateConflictException;
+use App\Models\Traits\HasRealtimeIdentifier;
+use Database\Factories\ServerFactory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Query\JoinClause;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\DatabaseNotificationCollection;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 /**
  * \App\Models\Server.
@@ -43,32 +48,32 @@ use App\Exceptions\Http\Server\ServerStateConflictException;
  * @property int|null $allocation_limit
  * @property int|null $database_limit
  * @property int $backup_limit
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $installed_at
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\ActivityLog[] $activity
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $installed_at
+ * @property Collection|ActivityLog[] $activity
  * @property int|null $activity_count
  * @property Allocation|null $allocation
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Allocation[] $allocations
+ * @property Collection|Allocation[] $allocations
  * @property int|null $allocations_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Backup[] $backups
+ * @property Collection|Backup[] $backups
  * @property int|null $backups_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Database[] $databases
+ * @property Collection|Database[] $databases
  * @property int|null $databases_count
  * @property Egg|null $egg
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Mount[] $mounts
+ * @property Collection|Mount[] $mounts
  * @property int|null $mounts_count
  * @property Nest $nest
  * @property Node $node
- * @property \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property int|null $notifications_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Schedule[] $schedules
+ * @property Collection|Schedule[] $schedules
  * @property int|null $schedules_count
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\Subuser[] $subusers
+ * @property Collection|Subuser[] $subusers
  * @property int|null $subusers_count
  * @property ServerTransfer|null $transfer
  * @property User $user
- * @property \Illuminate\Database\Eloquent\Collection|\App\Models\EggVariable[] $variables
+ * @property Collection|EggVariable[] $variables
  * @property int|null $variables_count
  *
  * @method static \Database\Factories\ServerFactory factory(...$parameters)
@@ -108,21 +113,28 @@ use App\Exceptions\Http\Server\ServerStateConflictException;
 #[Attributes\Identifiable('serv')]
 class Server extends Model implements Identifiable
 {
-    /** @use HasFactory<\Database\Factories\ServerFactory> */
-    use HasFactory;
     use BelongsToThrough;
-    use Notifiable;
+
+    /** @use HasFactory<ServerFactory> */
+    use HasFactory;
+
     use HasRealtimeIdentifier;
+    use Notifiable;
 
     /**
      * The resource name for this model when it is transformed into an
      * API representation using fractal.
      */
     public const RESOURCE_NAME = 'server';
+
     public const STATUS_INSTALLING = 'installing';
+
     public const STATUS_INSTALL_FAILED = 'install_failed';
+
     public const STATUS_REINSTALL_FAILED = 'reinstall_failed';
+
     public const STATUS_SUSPENDED = 'suspended';
+
     public const STATUS_RESTORING_BACKUP = 'restoring_backup';
 
     /**
@@ -223,7 +235,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets the user who owns the server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\User, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
@@ -231,7 +243,7 @@ class Server extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\ServerCategory, $this>
+     * @return BelongsTo<ServerCategory, $this>
      */
     public function category(): BelongsTo
     {
@@ -241,7 +253,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets the subusers associated with a server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Subuser, $this>
+     * @return HasMany<Subuser, $this>
      */
     public function subusers(): HasMany
     {
@@ -251,7 +263,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets the default allocation for a server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Allocation, $this>
+     * @return HasOne<Allocation, $this>
      */
     public function allocation(): HasOne
     {
@@ -261,7 +273,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets all allocations associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Allocation, $this>
+     * @return HasMany<Allocation, $this>
      */
     public function allocations(): HasMany
     {
@@ -271,7 +283,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets information for the nest associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Nest, $this>
+     * @return BelongsTo<Nest, $this>
      */
     public function nest(): BelongsTo
     {
@@ -281,7 +293,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets information for the egg associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Egg, $this>
+     * @return HasOne<Egg, $this>
      */
     public function egg(): HasOne
     {
@@ -291,7 +303,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets information for the service variables associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\EggVariable, $this>
+     * @return HasMany<EggVariable, $this>
      */
     public function variables(): HasMany
     {
@@ -311,7 +323,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets information for the node associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Node, $this>
+     * @return BelongsTo<Node, $this>
      */
     public function node(): BelongsTo
     {
@@ -321,7 +333,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets information for the tasks associated with this server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Schedule, $this>
+     * @return HasMany<Schedule, $this>
      */
     public function schedules(): HasMany
     {
@@ -331,7 +343,7 @@ class Server extends Model implements Identifiable
     /**
      * Gets all databases associated with a server.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Database, $this>
+     * @return HasMany<Database, $this>
      */
     public function databases(): HasMany
     {
@@ -341,7 +353,7 @@ class Server extends Model implements Identifiable
     /**
      * Returns the location that a server belongs to.
      *
-     * @return \Znck\Eloquent\Relations\BelongsToThrough<\App\Models\Location, \App\Models\Node>
+     * @return \Znck\Eloquent\Relations\BelongsToThrough<Location, Node>
      *
      * @throws \Exception
      */
@@ -353,7 +365,7 @@ class Server extends Model implements Identifiable
     /**
      * Returns the associated server transfer.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\ServerTransfer, $this>
+     * @return HasOne<ServerTransfer, $this>
      */
     public function transfer(): HasOne
     {
@@ -361,7 +373,7 @@ class Server extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Backup, $this>
+     * @return HasMany<Backup, $this>
      */
     public function backups(): HasMany
     {
@@ -371,7 +383,7 @@ class Server extends Model implements Identifiable
     /**
      * Returns all mounts that have this server has mounted.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\App\Models\Mount, \App\Models\MountServer, $this>
+     * @return HasManyThrough<Mount, MountServer, $this>
      */
     public function mounts(): HasManyThrough
     {
@@ -381,7 +393,7 @@ class Server extends Model implements Identifiable
     /**
      * Returns all of the activity log entries where the server is the subject.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany<\App\Models\ActivityLog, $this>
+     * @return MorphToMany<ActivityLog, $this>
      */
     public function activity(): MorphToMany
     {
@@ -400,9 +412,9 @@ class Server extends Model implements Identifiable
         if (
             $this->isSuspended()
             || $this->node->isUnderMaintenance()
-            || !$this->isInstalled()
+            || ! $this->isInstalled()
             || $this->status === self::STATUS_RESTORING_BACKUP
-            || !is_null($this->transfer)
+            || ! is_null($this->transfer)
         ) {
             throw new ServerStateConflictException($this);
         }
@@ -417,9 +429,9 @@ class Server extends Model implements Identifiable
     public function validateTransferState()
     {
         if (
-            !$this->isInstalled()
+            ! $this->isInstalled()
             || $this->status === self::STATUS_RESTORING_BACKUP
-            || !is_null($this->transfer)
+            || ! is_null($this->transfer)
         ) {
             throw new ServerStateConflictException($this);
         }

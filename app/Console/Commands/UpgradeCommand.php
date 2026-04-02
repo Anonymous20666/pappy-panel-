@@ -4,8 +4,9 @@ namespace App\Console\Commands;
 
 use App\Console\Kernel;
 use Illuminate\Console\Command;
-use Symfony\Component\Process\Process;
+use Illuminate\Foundation\Application;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Process\Process;
 
 class UpgradeCommand extends Command
 {
@@ -33,28 +34,28 @@ class UpgradeCommand extends Command
     public function handle()
     {
         $skipDownload = $this->option('skip-download');
-        if (!$skipDownload) {
+        if (! $skipDownload) {
             $this->output->warning('This command does not verify the integrity of downloaded assets. Please ensure that you trust the download source before continuing. If you do not wish to download an archive, please indicate that using the --skip-download flag, or answering "no" to the question below.');
             $this->output->comment('Download Source (set with --url=):');
             $this->line($this->getUrl());
         }
 
         if (version_compare(PHP_VERSION, '8.2.0', '<')) {
-            $this->error('Cannot execute self-upgrade process. The minimum required PHP version required is 8.2.0, you have [' . PHP_VERSION . '].');
+            $this->error('Cannot execute self-upgrade process. The minimum required PHP version required is 8.2.0, you have ['.PHP_VERSION.'].');
         }
 
         $user = 'www-data';
         $group = 'www-data';
         if ($this->input->isInteractive()) {
-            if (!$skipDownload) {
-                $skipDownload = !$this->confirm('Would you like to download and unpack the archive files for the latest version?', true);
+            if (! $skipDownload) {
+                $skipDownload = ! $this->confirm('Would you like to download and unpack the archive files for the latest version?', true);
             }
 
             if (is_null($this->option('user'))) {
                 $userDetails = posix_getpwuid(fileowner('public'));
                 $user = $userDetails['name'] ?? 'www-data';
 
-                if (!$this->confirm("Your webserver user has been detected as <fg=blue>[{$user}]:</> is this correct?", true)) {
+                if (! $this->confirm("Your webserver user has been detected as <fg=blue>[{$user}]:</> is this correct?", true)) {
                     $user = $this->anticipate(
                         'Please enter the name of the user running your webserver process. This varies from system to system, but is generally "www-data", "nginx", or "apache".',
                         [
@@ -70,7 +71,7 @@ class UpgradeCommand extends Command
                 $groupDetails = posix_getgrgid(filegroup('public'));
                 $group = $groupDetails['name'] ?? 'www-data';
 
-                if (!$this->confirm("Your webserver group has been detected as <fg=blue>[{$group}]:</> is this correct?", true)) {
+                if (! $this->confirm("Your webserver group has been detected as <fg=blue>[{$group}]:</> is this correct?", true)) {
                     $group = $this->anticipate(
                         'Please enter the name of the group running your webserver process. Normally this is the same as your user.',
                         [
@@ -82,7 +83,7 @@ class UpgradeCommand extends Command
                 }
             }
 
-            if (!$this->confirm('Are you sure you want to run the upgrade process for your Panel?')) {
+            if (! $this->confirm('Are you sure you want to run the upgrade process for your Panel?')) {
                 $this->warn('Upgrade process terminated by user.');
 
                 return;
@@ -93,7 +94,7 @@ class UpgradeCommand extends Command
         $bar = $this->output->createProgressBar($skipDownload ? 9 : 10);
         $bar->start();
 
-        if (!$skipDownload) {
+        if (! $skipDownload) {
             $this->withProgress($bar, function () {
                 $this->line("\$upgrader> curl -L \"{$this->getUrl()}\" | tar -xzv");
                 $process = Process::fromShellCommandline("curl -L \"{$this->getUrl()}\" | tar -xzv");
@@ -118,12 +119,12 @@ class UpgradeCommand extends Command
 
         $this->withProgress($bar, function () {
             $command = ['composer', 'install', '--no-ansi'];
-            if (config('app.env') === 'production' && !config('app.debug')) {
+            if (config('app.env') === 'production' && ! config('app.debug')) {
                 $command[] = '--optimize-autoloader';
                 $command[] = '--no-dev';
             }
 
-            $this->line('$upgrader> ' . implode(' ', $command));
+            $this->line('$upgrader> '.implode(' ', $command));
             $process = new Process($command);
             $process->setTimeout(10 * 60);
             $process->run(function ($type, $buffer) {
@@ -131,8 +132,8 @@ class UpgradeCommand extends Command
             });
         });
 
-        /** @var \Illuminate\Foundation\Application $app */
-        $app = require __DIR__ . '/../../../bootstrap/app.php';
+        /** @var Application $app */
+        $app = require __DIR__.'/../../../bootstrap/app.php';
         /** @var Kernel $kernel */
         $kernel = $app->make(Kernel::class);
         $kernel->bootstrap();
@@ -190,6 +191,6 @@ class UpgradeCommand extends Command
             return $this->option('url');
         }
 
-        return sprintf(self::DEFAULT_URL, $this->option('release') ? 'download/v' . $this->option('release') : 'latest/download');
+        return sprintf(self::DEFAULT_URL, $this->option('release') ? 'download/v'.$this->option('release') : 'latest/download');
     }
 }

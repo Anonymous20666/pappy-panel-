@@ -2,17 +2,15 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
 class EditorMiddleware
 {
     /**
      * EditorMiddleware constructor.
      */
-    public function __construct(private Application $app)
-    {
-    }
+    public function __construct(private Application $app) {}
 
     /**
      * Handle an incoming request and set the user's preferred file editor.

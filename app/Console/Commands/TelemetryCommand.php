@@ -2,9 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Exceptions\Model\DataValidationException;
+use App\Services\Telemetry\TelemetryCollectionService;
 use Illuminate\Console\Command;
 use Symfony\Component\VarDumper\VarDumper;
-use App\Services\Telemetry\TelemetryCollectionService;
 
 class TelemetryCommand extends Command
 {
@@ -23,7 +24,7 @@ class TelemetryCommand extends Command
     /**
      * Handle execution of command.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle()
     {

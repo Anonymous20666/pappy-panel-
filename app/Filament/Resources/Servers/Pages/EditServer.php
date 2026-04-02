@@ -2,22 +2,24 @@
 
 namespace App\Filament\Resources\Servers\Pages;
 
-use App\Models\User;
-use App\Models\Server;
-use Illuminate\Support\Arr;
-use Filament\Actions\Action;
 use App\Exceptions\DisplayException;
-use Illuminate\Database\Eloquent\Model;
-use Filament\Resources\Pages\EditRecord;
-use App\Services\Servers\SuspensionService;
-use App\Services\Activity\ActivityLogService;
-use App\Repositories\Eloquent\ServerRepository;
-use App\Services\Servers\ServerDeletionService;
-use App\Services\Servers\ReinstallServerService;
 use App\Filament\Resources\Servers\ServerResource;
+use App\Models\Egg;
+use App\Models\Server;
+use App\Models\User;
+use App\Repositories\Eloquent\ServerRepository;
+use App\Services\Activity\ActivityLogService;
 use App\Services\Servers\BuildModificationService;
 use App\Services\Servers\DetailsModificationService;
+use App\Services\Servers\ReinstallServerService;
+use App\Services\Servers\ServerDeletionService;
 use App\Services\Servers\StartupModificationService;
+use App\Services\Servers\SuspensionService;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
+use Filament\Resources\Pages\EditRecord;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class EditServer extends EditRecord
 {
@@ -35,8 +37,8 @@ class EditServer extends EditRecord
         if (empty($data['startup'])) {
             $data['startup'] = $record->startup;
 
-            if (empty($data['startup']) && !empty($data['egg_id'])) {
-                $egg = \App\Models\Egg::find($data['egg_id']);
+            if (empty($data['startup']) && ! empty($data['egg_id'])) {
+                $egg = Egg::find($data['egg_id']);
                 $data['startup'] = $egg?->startup ?? '';
             }
         }
@@ -48,7 +50,7 @@ class EditServer extends EditRecord
     {
         $detailsData = Arr::only($data, ['external_id', 'owner_id', 'name', 'description']);
 
-        if (!empty($detailsData)) {
+        if (! empty($detailsData)) {
             app(DetailsModificationService::class)->handle($record, $detailsData);
         }
 
@@ -102,12 +104,12 @@ class EditServer extends EditRecord
 
                         app(ActivityLogService::class)->subject($server)->event('server:toggle-install')->log();
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/server.alerts.install_toggled'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title($e->getMessage())
                             ->danger()
                             ->send();
@@ -126,14 +128,14 @@ class EditServer extends EditRecord
 
                     try {
                         app(SuspensionService::class)->toggle($server, $action);
-                        app(ActivityLogService::class)->subject($server)->event('server:' . $action)->log();
+                        app(ActivityLogService::class)->subject($server)->event('server:'.$action)->log();
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/server.alerts.server_suspended', ['action' => $server->isSuspended() ? trans('admin/server.actions.suspended') : trans('admin/server.actions.unsuspended')]))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title($e->getMessage())
                             ->danger()
                             ->send();
@@ -150,12 +152,12 @@ class EditServer extends EditRecord
                         app(ReinstallServerService::class)->handle($this->record);
                         app(ActivityLogService::class)->subject($this->record)->event('server:reinstall')->log();
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/server.alerts.server_reinstalled'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title($e->getMessage())
                             ->danger()
                             ->send();
@@ -172,12 +174,12 @@ class EditServer extends EditRecord
                         app(ServerDeletionService::class)->handle($this->record);
                         app(ActivityLogService::class)->subject($this->record)->event('server:delete')->log();
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/server.alerts.server_deleted'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title($e->getMessage())
                             ->danger()
                             ->send();
@@ -195,12 +197,12 @@ class EditServer extends EditRecord
                         app(ServerDeletionService::class)->withForce()->handle($this->record);
                         app(ActivityLogService::class)->subject($this->record)->event('server:delete')->log();
 
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title(trans('admin/server.alerts.server_deleted'))
                             ->success()
                             ->send();
                     } catch (\Exception $e) {
-                        \Filament\Notifications\Notification::make()
+                        Notification::make()
                             ->title($e->getMessage())
                             ->danger()
                             ->send();
@@ -211,7 +213,7 @@ class EditServer extends EditRecord
 
             Action::make('view')
                 ->label(trans('admin/server.actions.view'))
-                ->url(fn () => config('app.url') . '/server/' . $this->record->uuidShort)
+                ->url(fn () => config('app.url').'/server/'.$this->record->uuidShort)
                 ->openUrlInNewTab(),
         ];
     }

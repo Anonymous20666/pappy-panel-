@@ -2,17 +2,15 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Http\Request;
 use Illuminate\Auth\AuthManager;
+use Illuminate\Http\Request;
 
 class RedirectIfAuthenticated
 {
     /**
      * RedirectIfAuthenticated constructor.
      */
-    public function __construct(private AuthManager $authManager)
-    {
-    }
+    public function __construct(private AuthManager $authManager) {}
 
     /**
      * Handle an incoming request.

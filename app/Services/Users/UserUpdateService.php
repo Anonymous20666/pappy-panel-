@@ -13,9 +13,7 @@ class UserUpdateService
     /**
      * UserUpdateService constructor.
      */
-    public function __construct(private Hasher $hasher)
-    {
-    }
+    public function __construct(private Hasher $hasher) {}
 
     /**
      * Update the user model instance and return the updated model.
@@ -24,7 +22,7 @@ class UserUpdateService
      */
     public function handle(User $user, array $data): User
     {
-        if (!empty(array_get($data, 'password'))) {
+        if (! empty(array_get($data, 'password'))) {
             $data['password'] = $this->hasher->make($data['password']);
         } else {
             unset($data['password']);

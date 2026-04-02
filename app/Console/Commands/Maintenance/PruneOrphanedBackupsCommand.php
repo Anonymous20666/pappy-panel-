@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands\Maintenance;
 
+use App\Repositories\Eloquent\BackupRepository;
 use Carbon\CarbonImmutable;
 use Illuminate\Console\Command;
-use App\Repositories\Eloquent\BackupRepository;
 
 class PruneOrphanedBackupsCommand extends Command
 {
@@ -23,7 +23,7 @@ class PruneOrphanedBackupsCommand extends Command
     public function handle()
     {
         $since = $this->option('prune-age') ?? config('backups.prune_age', 360);
-        if (!$since || !is_digit($since)) {
+        if (! $since || ! is_digit($since)) {
             throw new \InvalidArgumentException('The "--prune-age" argument must be a value greater than 0.');
         }
 
@@ -32,7 +32,7 @@ class PruneOrphanedBackupsCommand extends Command
             ->where('created_at', '<=', CarbonImmutable::now()->subMinutes($since)->toDateTimeString());
 
         $count = $query->count();
-        if (!$count) {
+        if (! $count) {
             $this->info('There are no orphaned backups to be marked as failed.');
 
             return;

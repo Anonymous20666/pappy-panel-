@@ -3,12 +3,12 @@
 namespace App\Services\Servers;
 
 use App\Models\Egg;
-use App\Models\User;
 use App\Models\Server;
-use Illuminate\Support\Arr;
 use App\Models\ServerVariable;
+use App\Models\User;
 use App\Traits\Services\HasUserLevels;
 use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Arr;
 
 class StartupModificationService
 {
@@ -17,9 +17,7 @@ class StartupModificationService
     /**
      * StartupModificationService constructor.
      */
-    public function __construct(private ConnectionInterface $connection, private VariableValidatorService $validatorService)
-    {
-    }
+    public function __construct(private ConnectionInterface $connection, private VariableValidatorService $validatorService) {}
 
     /**
      * Process startup modification for a server.
@@ -29,7 +27,7 @@ class StartupModificationService
     public function handle(Server $server, array $data): Server
     {
         return $this->connection->transaction(function () use ($server, $data) {
-            if (!empty($data['environment'])) {
+            if (! empty($data['environment'])) {
                 $egg = $this->isUserLevel(User::USER_LEVEL_ADMIN) ? ($data['egg_id'] ?? $server->egg_id) : $server->egg_id;
 
                 $results = $this->validatorService

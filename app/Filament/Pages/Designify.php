@@ -7,7 +7,9 @@ use Filament\Pages\Page;
 class Designify extends Page
 {
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-palette';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-palette-filled';
+
     protected static ?int $navigationSort = 2;
 
     public static function getNavigationLabel(): string

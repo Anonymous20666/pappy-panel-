@@ -2,22 +2,27 @@
 
 namespace App\Http\Controllers\Api\Client\Servers;
 
-use App\Models\Server;
-use App\Facades\Activity;
-use App\Models\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
-use App\Repositories\Eloquent\SubuserRepository;
-use App\Services\Subusers\SubuserCreationService;
-use App\Transformers\Api\Client\SubuserTransformer;
-use App\Repositories\Wings\DaemonRevocationRepository;
-use App\Http\Controllers\Api\Client\ClientApiController;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Exceptions\Service\Subuser\ServerSubuserExistsException;
+use App\Exceptions\Service\Subuser\UserIsServerOwnerException;
+use App\Facades\Activity;
+use App\Http\Controllers\Api\Client\ClientApiController;
+use App\Http\Requests\Api\Client\Servers\Subusers\DeleteSubuserRequest;
 use App\Http\Requests\Api\Client\Servers\Subusers\GetSubuserRequest;
 use App\Http\Requests\Api\Client\Servers\Subusers\StoreSubuserRequest;
-use App\Http\Requests\Api\Client\Servers\Subusers\DeleteSubuserRequest;
 use App\Http\Requests\Api\Client\Servers\Subusers\UpdateSubuserRequest;
+use App\Models\Permission;
+use App\Models\Server;
+use App\Models\Subuser;
+use App\Repositories\Eloquent\SubuserRepository;
+use App\Repositories\Wings\DaemonRevocationRepository;
+use App\Services\Subusers\SubuserCreationService;
+use App\Transformers\Api\Client\SubuserTransformer;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class SubuserController extends ClientApiController
 {
@@ -57,9 +62,9 @@ class SubuserController extends ClientApiController
     /**
      * Create a new subuser for the given server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Service\Subuser\ServerSubuserExistsException
-     * @throws \App\Exceptions\Service\Subuser\UserIsServerOwnerException
+     * @throws DataValidationException
+     * @throws ServerSubuserExistsException
+     * @throws UserIsServerOwnerException
      * @throws \Throwable
      */
     public function store(StoreSubuserRequest $request, Server $server): array
@@ -83,12 +88,12 @@ class SubuserController extends ClientApiController
     /**
      * Update a given subuser in the system for the server.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateSubuserRequest $request, Server $server): array
     {
-        /** @var \App\Models\Subuser $subuser */
+        /** @var Subuser $subuser */
         $subuser = $request->attributes->get('subuser');
 
         $permissions = $this->getDefaultPermissions($request);
@@ -141,7 +146,7 @@ class SubuserController extends ClientApiController
      */
     public function delete(DeleteSubuserRequest $request, Server $server): JsonResponse
     {
-        /** @var \App\Models\Subuser $subuser */
+        /** @var Subuser $subuser */
         $subuser = $request->attributes->get('subuser');
 
         $log = Activity::event('server:subuser.delete')

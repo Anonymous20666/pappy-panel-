@@ -2,14 +2,15 @@
 
 namespace Tests\Integration\Api\Client\Server\Allocation;
 
-use App\Models\Subuser;
 use App\Models\Allocation;
+use App\Models\Subuser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class AllocationAuthorizationTest extends ClientApiIntegrationTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('methodDataProvider')]
-    public function testAccessToAServersAllocationsIsRestrictedProperly(string $method, string $endpoint)
+    #[DataProvider('methodDataProvider')]
+    public function test_access_to_a_servers_allocations_is_restricted_properly(string $method, string $endpoint)
     {
         // The API $user is the owner of $server1.
         [$user, $server1] = $this->generateTestAccount();
@@ -28,22 +29,22 @@ class AllocationAuthorizationTest extends ClientApiIntegrationTestCase
 
         // This is the only valid call for this test, accessing the allocation for the same
         // server that the API user is the owner of.
-        $response = $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/' . $allocation1->id . $endpoint));
+        $response = $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/'.$allocation1->id.$endpoint));
         $this->assertTrue($response->status() <= 204 || $response->status() === 400 || $response->status() === 422);
 
         // This request fails because the allocation is valid for that server but the user
         // making the request is not authorized to perform that action. Depending on middleware
         // ordering this can resolve as a 403 or a 404, both of which are acceptable.
-        $response = $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/' . $allocation2->id . $endpoint));
+        $response = $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/'.$allocation2->id.$endpoint));
         $this->assertContains($response->status(), [403, 404]);
 
         // Both of these should report a 404 error due to the allocations being linked to
         // servers that are not the same as the server in the request, or are assigned
         // to a server for which the user making the request has no access to.
-        $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/' . $allocation2->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/' . $allocation3->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/' . $allocation3->id . $endpoint))->assertNotFound();
-        $this->actingAs($user)->json($method, $this->link($server3, '/network/allocations/' . $allocation3->id . $endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/'.$allocation2->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server1, '/network/allocations/'.$allocation3->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server2, '/network/allocations/'.$allocation3->id.$endpoint))->assertNotFound();
+        $this->actingAs($user)->json($method, $this->link($server3, '/network/allocations/'.$allocation3->id.$endpoint))->assertNotFound();
     }
 
     public static function methodDataProvider(): array

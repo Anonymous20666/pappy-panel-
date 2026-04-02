@@ -2,17 +2,18 @@
 
 namespace App\Services\Databases;
 
-use App\Models\Server;
-use App\Models\Database;
-use App\Helpers\Utilities;
-use Illuminate\Support\Str;
-use Illuminate\Database\ConnectionInterface;
-use App\Extensions\DynamicDatabaseConnection;
-use Illuminate\Contracts\Encryption\Encrypter;
-use App\Repositories\Eloquent\DatabaseRepository;
 use App\Exceptions\Repository\DuplicateDatabaseNameException;
-use App\Exceptions\Service\Database\TooManyDatabasesException;
 use App\Exceptions\Service\Database\DatabaseClientFeatureNotEnabledException;
+use App\Exceptions\Service\Database\TooManyDatabasesException;
+use App\Extensions\DynamicDatabaseConnection;
+use App\Helpers\Utilities;
+use App\Models\Database;
+use App\Models\Server;
+use App\Repositories\Eloquent\DatabaseRepository;
+use App\Services\Activity\ActivityLogService;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Support\Str;
 
 class DatabaseManagementService
 {
@@ -20,7 +21,7 @@ class DatabaseManagementService
      * The regex used to validate that the database name passed through to the function is
      * in the expected format.
      *
-     * @see \App\Services\Databases\DatabaseManagementService::generateUniqueDatabaseName()
+     * @see DatabaseManagementService::generateUniqueDatabaseName()
      */
     private const MATCH_NAME_REGEX = '/^(s[\d]+_)(.*)$/';
 
@@ -37,9 +38,8 @@ class DatabaseManagementService
         protected DynamicDatabaseConnection $dynamic,
         protected Encrypter $encrypter,
         protected DatabaseRepository $repository,
-        protected \App\Services\Activity\ActivityLogService $logService,
-    ) {
-    }
+        protected ActivityLogService $logService,
+    ) {}
 
     /**
      * Generates a unique database name for the given server. This name should be passed through when
@@ -72,20 +72,20 @@ class DatabaseManagementService
      */
     public function create(Server $server, array $data): Database
     {
-        if (!config('panel.client_features.databases.enabled')) {
+        if (! config('panel.client_features.databases.enabled')) {
             throw new DatabaseClientFeatureNotEnabledException();
         }
 
         if ($this->validateDatabaseLimit) {
             // If the server has a limit assigned and we've already reached that limit, throw back
             // an exception and kill the process.
-            if (!is_null($server->database_limit) && $server->databases()->count() >= $server->database_limit) {
+            if (! is_null($server->database_limit) && $server->databases()->count() >= $server->database_limit) {
                 throw new TooManyDatabasesException();
             }
         }
 
         // Protect against developer mistakes...
-        if (empty($data['database']) || !preg_match(self::MATCH_NAME_REGEX, $data['database'])) {
+        if (empty($data['database']) || ! preg_match(self::MATCH_NAME_REGEX, $data['database'])) {
             throw new \InvalidArgumentException('The database name passed to DatabaseManagementService::handle MUST be prefixed with "s{server_id}_".');
         }
 

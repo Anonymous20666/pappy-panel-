@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Server;
-use Illuminate\Console\Command;
 use App\Models\ServerStatsHistory;
 use App\Repositories\Wings\DaemonServerRepository;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
 
 class CaptureServerStats extends Command
 {
@@ -68,6 +68,7 @@ class CaptureServerStats extends Command
                         continue;
                     } catch (\Exception $e) {
                         $this->error("Error processing server {$server->uuid}: {$e->getMessage()}");
+
                         continue;
                     }
                 }

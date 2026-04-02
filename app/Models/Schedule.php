@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use Cron\CronExpression;
-use Carbon\CarbonImmutable;
-use Illuminate\Container\Container;
 use App\Contracts\Extensions\HashidsInterface;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
+use Cron\CronExpression;
+use Database\Factories\ScheduleFactory;
+use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
@@ -22,17 +25,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property bool $is_active
  * @property bool $is_processing
  * @property bool $only_when_online
- * @property \Carbon\Carbon|null $last_run_at
- * @property \Carbon\Carbon|null $next_run_at
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon|null $last_run_at
+ * @property Carbon|null $next_run_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $hashid
  * @property Server $server
- * @property \Illuminate\Database\Eloquent\Collection<int, \App\Models\Task> $tasks
+ * @property Collection<int, Task> $tasks
  */
 class Schedule extends Model
 {
-    /** @use HasFactory<\Database\Factories\ScheduleFactory> */
+    /** @use HasFactory<ScheduleFactory> */
     use HasFactory;
 
     /**
@@ -134,7 +137,7 @@ class Schedule extends Model
     /**
      * Return tasks belonging to a schedule.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Task, $this>
+     * @return HasMany<Task, $this>
      */
     public function tasks(): HasMany
     {
@@ -144,7 +147,7 @@ class Schedule extends Model
     /**
      * Return the server model that a schedule belongs to.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {

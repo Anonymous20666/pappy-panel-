@@ -2,20 +2,20 @@
 
 namespace Tests\Integration;
 
-use Tests\TestCase;
+use App\Events\ActivityLogged;
+use App\Transformers\Api\Application\BaseTransformer;
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use App\Events\ActivityLogged;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Testing\DatabaseTruncation;
+use Illuminate\Support\Facades\Event;
 use Tests\Assertions\AssertsActivityLogged;
+use Tests\TestCase;
 use Tests\Traits\Integration\CreatesTestModels;
-use App\Transformers\Api\Application\BaseTransformer;
 
 abstract class IntegrationTestCase extends TestCase
 {
-    use CreatesTestModels;
     use AssertsActivityLogged;
+    use CreatesTestModels;
     use DatabaseTruncation;
 
     protected $defaultHeaders = [

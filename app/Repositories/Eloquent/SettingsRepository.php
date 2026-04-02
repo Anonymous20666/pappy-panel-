@@ -2,8 +2,9 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Setting;
 use App\Contracts\Repository\SettingsRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Models\Setting;
 
 class SettingsRepository extends EloquentRepository implements SettingsRepositoryInterface
 {
@@ -22,7 +23,7 @@ class SettingsRepository extends EloquentRepository implements SettingsRepositor
     /**
      * Store a new persistent setting in the database.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function set(string $key, ?string $value = null)
     {

@@ -2,19 +2,20 @@
 
 namespace Tests\Integration\Api\Client\Server;
 
-use App\Models\User;
+use App\Models\Server;
 use App\Models\ServerCategory;
+use App\Models\User;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class ClientServerCategoryTest extends ClientApiIntegrationTestCase
 {
-    /** @var \App\Models\Server */
+    /** @var Server */
     private $server;
 
     /** @var User */
     private $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +23,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
         $this->server = $this->createServerModel(['user_id' => $this->user->id]);
     }
 
-    public function testUserCanListCategories()
+    public function test_user_can_list_categories()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
         $otherCategory = ServerCategory::factory()->create(); // different user (default factory)
@@ -34,7 +35,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
             ->assertJsonPath('data.0.attributes.uuid', $category->uuid);
     }
 
-    public function testUserCanCreateCategory()
+    public function test_user_can_create_category()
     {
         $response = $this->actingAs($this->user)->postJson('/api/client/account/categories', [
             'name' => 'Test Category',
@@ -53,7 +54,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
         ]);
     }
 
-    public function testUserCanUpdateCategory()
+    public function test_user_can_update_category()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
 
@@ -70,7 +71,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
         ]);
     }
 
-    public function testUserCanDeleteCategory()
+    public function test_user_can_delete_category()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
 
@@ -81,7 +82,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
         $this->assertDatabaseMissing('server_categories', ['id' => $category->id]);
     }
 
-    public function testServerResponseIncludesCategory()
+    public function test_server_response_includes_category()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
         $this->server->update(['category_id' => $category->id]);
@@ -92,7 +93,7 @@ class ClientServerCategoryTest extends ClientApiIntegrationTestCase
             ->assertJsonPath('attributes.relationships.category.attributes.uuid', $category->uuid);
     }
 
-    public function testFilterServersByCategory()
+    public function test_filter_servers_by_category()
     {
         $category = ServerCategory::factory()->create(['user_id' => $this->user->id]);
         $server1 = $this->createServerModel(['user_id' => $this->user->id, 'category_id' => $category->id]);

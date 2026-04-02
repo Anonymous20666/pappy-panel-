@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use App\Models\SocialLogin;
-use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Models\SocialLogin;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialLoginController extends Controller
@@ -15,11 +15,11 @@ class SocialLoginController extends Controller
 
     public function redirect(string $provider)
     {
-        if (!in_array($provider, $this->supportedProviders)) {
+        if (! in_array($provider, $this->supportedProviders)) {
             return redirect()->route('auth.login')->with('error', 'Provider not supported.');
         }
 
-        if (!$this->configureDriver($provider)) {
+        if (! $this->configureDriver($provider)) {
             return redirect()->route('auth.login')->with('error', 'Provider is not enabled or configured.');
         }
 
@@ -28,18 +28,18 @@ class SocialLoginController extends Controller
 
     public function callback(string $provider)
     {
-        if (!in_array($provider, $this->supportedProviders)) {
+        if (! in_array($provider, $this->supportedProviders)) {
             return redirect()->route('auth.login')->with('error', 'Provider not supported.');
         }
 
-        if (!$this->configureDriver($provider)) {
+        if (! $this->configureDriver($provider)) {
             return redirect()->route('auth.login')->with('error', 'Provider is not enabled or configured.');
         }
 
         try {
             $socialUser = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
-            return redirect()->route('auth.login')->with('error', 'Failed to authenticate with ' . $provider . '.');
+            return redirect()->route('auth.login')->with('error', 'Failed to authenticate with '.$provider.'.');
         }
 
         // User is already logged in (Linking Account)
@@ -102,8 +102,8 @@ class SocialLoginController extends Controller
         $counter = 1;
 
         while (User::where('username', $username)->exists()) {
-            $username = $base . $counter;
-            ++$counter;
+            $username = $base.$counter;
+            $counter++;
         }
 
         return $username;
@@ -111,22 +111,22 @@ class SocialLoginController extends Controller
 
     protected function configureDriver(string $provider): bool
     {
-        $enabled = config('panel.auth.' . $provider . '_enabled');
-        if (!$enabled) {
+        $enabled = config('panel.auth.'.$provider.'_enabled');
+        if (! $enabled) {
             return false;
         }
 
-        $clientId = config('panel.auth.' . $provider . '_client_id');
-        $clientSecret = config('panel.auth.' . $provider . '_client_secret');
+        $clientId = config('panel.auth.'.$provider.'_client_id');
+        $clientSecret = config('panel.auth.'.$provider.'_client_secret');
         $redirectUri = route('auth.social.callback', ['provider' => $provider]);
 
         if (empty($clientId) || empty($clientSecret)) {
             return false;
         }
 
-        config(['services.' . $provider . '.client_id' => $clientId]);
-        config(['services.' . $provider . '.client_secret' => $clientSecret]);
-        config(['services.' . $provider . '.redirect' => $redirectUri]);
+        config(['services.'.$provider.'.client_id' => $clientId]);
+        config(['services.'.$provider.'.client_secret' => $clientSecret]);
+        config(['services.'.$provider.'.redirect' => $redirectUri]);
 
         return true;
     }

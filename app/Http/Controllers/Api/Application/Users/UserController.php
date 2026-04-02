@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers\Api\Application\Users;
 
-use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Spatie\QueryBuilder\QueryBuilder;
-use App\Services\Users\UserUpdateService;
-use App\Services\Users\UserCreationService;
-use App\Services\Users\UserDeletionService;
-use App\Transformers\Api\Application\UserTransformer;
+use App\Exceptions\DisplayException;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Http\Requests\Api\Application\Users\DeleteUserRequest;
 use App\Http\Requests\Api\Application\Users\GetUsersRequest;
 use App\Http\Requests\Api\Application\Users\StoreUserRequest;
-use App\Http\Requests\Api\Application\Users\DeleteUserRequest;
 use App\Http\Requests\Api\Application\Users\UpdateUserRequest;
-use App\Http\Controllers\Api\Application\ApplicationApiController;
+use App\Models\User;
+use App\Services\Users\UserCreationService;
+use App\Services\Users\UserDeletionService;
+use App\Services\Users\UserUpdateService;
+use App\Transformers\Api\Application\UserTransformer;
+use Illuminate\Http\JsonResponse;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserController extends ApplicationApiController
 {
@@ -64,8 +67,8 @@ class UserController extends ApplicationApiController
      * Revocation errors are returned under the 'revocation_errors' key in the response
      * meta. If there are no errors this is an empty array.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(UpdateUserRequest $request, User $user): array
     {
@@ -83,7 +86,7 @@ class UserController extends ApplicationApiController
      * header on successful creation.
      *
      * @throws \Exception
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function store(StoreUserRequest $request): JsonResponse
     {
@@ -103,7 +106,7 @@ class UserController extends ApplicationApiController
      * Handle a request to delete a user from the Panel. Returns a HTTP/204 response
      * on successful deletion.
      *
-     * @throws \App\Exceptions\DisplayException
+     * @throws DisplayException
      */
     public function delete(DeleteUserRequest $request, User $user): JsonResponse
     {

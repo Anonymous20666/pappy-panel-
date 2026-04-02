@@ -2,10 +2,10 @@
 
 namespace App\Services\Locations;
 
-use App\Models\Location;
-use App\Contracts\Repository\NodeRepositoryInterface;
 use App\Contracts\Repository\LocationRepositoryInterface;
+use App\Contracts\Repository\NodeRepositoryInterface;
 use App\Exceptions\Service\Location\HasActiveNodesException;
+use App\Models\Location;
 
 class LocationDeletionService
 {
@@ -15,8 +15,7 @@ class LocationDeletionService
     public function __construct(
         protected LocationRepositoryInterface $repository,
         protected NodeRepositoryInterface $nodeRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * Delete an existing location.

@@ -2,26 +2,28 @@
 
 namespace App\Filament\Resources\Api;
 
-use Filament\Panel;
-use App\Models\ApiKey;
-use Filament\Tables\Table;
-use Filament\Actions\Action;
-use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
-use App\Services\Acl\Api\AdminAcl;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Schemas\Components\Fieldset;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\ToggleButtons;
-use App\Filament\Resources\Api\Pages\ListApiKeys;
 use App\Filament\Resources\Api\Pages\CreateApiKey;
+use App\Filament\Resources\Api\Pages\ListApiKeys;
+use App\Models\ApiKey;
+use App\Services\Acl\Api\AdminAcl;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Panel;
+use Filament\Resources\Resource;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\Builder;
 
 class ApiKeyResource extends Resource
 {
     protected static ?string $model = ApiKey::class;
 
     protected static string|\BackedEnum|null $navigationIcon = 'tabler-key';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'tabler-key-filled';
 
     public static function getNavigationLabel(): string
@@ -60,26 +62,26 @@ class ApiKeyResource extends Resource
                 ->columnSpanFull()
                 ->schema(
                     collect(AdminAcl::getResourceList())->map(
-                        fn (string $resource) => ToggleButtons::make(AdminAcl::COLUMN_IDENTIFIER . $resource)
-                                ->label(str($resource)->replace('_', ' ')->title())
-                                ->inline()
-                                ->options([
-                                    AdminAcl::NONE => trans('admin/api.none'),
-                                    AdminAcl::READ => trans('admin/api.read-only'),
-                                    AdminAcl::READ | AdminAcl::WRITE => trans('admin/api.read-write'),
-                                ])
-                                ->icons([
-                                    AdminAcl::NONE => 'tabler-lock-access-off',
-                                    AdminAcl::READ => 'tabler-scan-eye',
-                                    AdminAcl::READ | AdminAcl::WRITE => 'tabler-grid-scan',
-                                ])
-                                ->colors([
-                                    AdminAcl::NONE => 'success',
-                                    AdminAcl::READ => 'warning',
-                                    AdminAcl::READ | AdminAcl::WRITE => 'danger',
-                                ])
-                                ->required()
-                                ->default(AdminAcl::NONE)
+                        fn (string $resource) => ToggleButtons::make(AdminAcl::COLUMN_IDENTIFIER.$resource)
+                            ->label(str($resource)->replace('_', ' ')->title())
+                            ->inline()
+                            ->options([
+                                AdminAcl::NONE => trans('admin/api.none'),
+                                AdminAcl::READ => trans('admin/api.read-only'),
+                                AdminAcl::READ | AdminAcl::WRITE => trans('admin/api.read-write'),
+                            ])
+                            ->icons([
+                                AdminAcl::NONE => 'tabler-lock-access-off',
+                                AdminAcl::READ => 'tabler-scan-eye',
+                                AdminAcl::READ | AdminAcl::WRITE => 'tabler-grid-scan',
+                            ])
+                            ->colors([
+                                AdminAcl::NONE => 'success',
+                                AdminAcl::READ => 'warning',
+                                AdminAcl::READ | AdminAcl::WRITE => 'danger',
+                            ])
+                            ->required()
+                            ->default(AdminAcl::NONE)
                     )->all()
                 ),
 
@@ -98,9 +100,9 @@ class ApiKeyResource extends Resource
                     ->label(trans('admin/api.key'))
                     ->state(function (ApiKey $key) {
                         try {
-                            return $key->identifier . decrypt($key->token);
-                        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
-                            return $key->identifier . '(encrypted with old key)';
+                            return $key->identifier.decrypt($key->token);
+                        } catch (DecryptException $e) {
+                            return $key->identifier.'(encrypted with old key)';
                         }
                     })
                     ->copyable(),

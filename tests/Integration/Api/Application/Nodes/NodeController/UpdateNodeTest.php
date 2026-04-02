@@ -2,16 +2,16 @@
 
 namespace Tests\Integration\Api\Application\Nodes\NodeController;
 
-use App\Models\Node;
 use App\Models\Location;
-use Mockery\MockInterface;
-use GuzzleHttp\Psr7\Response;
+use App\Models\Node;
 use App\Repositories\Wings\DaemonConfigurationRepository;
+use GuzzleHttp\Psr7\Response;
+use Mockery\MockInterface;
 use Tests\Integration\Api\Application\ApplicationApiIntegrationTestCase;
 
 class UpdateNodeTest extends ApplicationApiIntegrationTestCase
 {
-    public function testCanUpdateNodeProperties(): void
+    public function test_can_update_node_properties(): void
     {
         $node = Node::factory()->for(Location::factory())->create();
         $location = Location::factory()->create();

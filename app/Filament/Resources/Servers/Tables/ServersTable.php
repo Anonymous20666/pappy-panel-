@@ -3,13 +3,13 @@
 namespace App\Filament\Resources\Servers\Tables;
 
 use App\Models\Server;
-use Filament\Tables\Table;
-use Filament\Actions\EditAction;
-use Filament\Actions\ViewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class ServersTable
 {
@@ -36,7 +36,7 @@ class ServersTable
                         $email = strtolower(trim($record->user->email ?? ''));
                         $hash = md5($email);
                         $avatar = $record->user->getFilamentAvatarUrl();
-                        $name = $record->user->name_first . ' ' . $record->user->name_last;
+                        $name = $record->user->name_first.' '.$record->user->name_last;
 
                         return "
                             <div style='display:flex;align-items:center;gap:8px'>
@@ -78,9 +78,9 @@ class ServersTable
                         if ($state === 0) {
                             return '∞';
                         } elseif ($state >= 1024) {
-                            return round($state / 1024, 2) . ' GiB';
+                            return round($state / 1024, 2).' GiB';
                         } else {
-                            return $state . ' MiB';
+                            return $state.' MiB';
                         }
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -94,9 +94,9 @@ class ServersTable
                         if ($state === 0) {
                             return '∞';
                         } elseif ($state >= 1024) {
-                            return round($state / 1024, 2) . ' GiB';
+                            return round($state / 1024, 2).' GiB';
                         } else {
-                            return $state . ' MiB';
+                            return $state.' MiB';
                         }
                     })
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -106,7 +106,7 @@ class ServersTable
                     ->numeric()
                     ->sortable()
                     // Change to Infinity and remove the percent suffix if the value is 0 (which indicates no CPU limit)
-                    ->formatStateUsing(fn ($state) => $state === 0 ? '∞' : $state . ' %')
+                    ->formatStateUsing(fn ($state) => $state === 0 ? '∞' : $state.' %')
                     ->toggleable(isToggledHiddenByDefault: true),
 
                 IconColumn::make('skip_scripts')
@@ -142,7 +142,7 @@ class ServersTable
                 ViewAction::make('view')
                     ->label(trans('admin/server.actions.view'))
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Server $record) => config('app.url') . '/server/' . $record->uuidShort)
+                    ->url(fn (Server $record) => config('app.url').'/server/'.$record->uuidShort)
                     ->openUrlInNewTab(),
             ])
             ->toolbarActions([

@@ -2,31 +2,34 @@
 
 namespace App\Services\Allocations;
 
-use App\Models\Node;
-use IPTools\Network;
-use App\Exceptions\DisplayException;
-use Illuminate\Database\ConnectionInterface;
 use App\Contracts\Repository\AllocationRepositoryInterface;
+use App\Exceptions\DisplayException;
 use App\Exceptions\Service\Allocation\CidrOutOfRangeException;
-use App\Exceptions\Service\Allocation\PortOutOfRangeException;
 use App\Exceptions\Service\Allocation\InvalidPortMappingException;
+use App\Exceptions\Service\Allocation\PortOutOfRangeException;
 use App\Exceptions\Service\Allocation\TooManyPortsInRangeException;
+use App\Models\Node;
+use Illuminate\Database\ConnectionInterface;
+use IPTools\Network;
 
 class AssignmentService
 {
     public const CIDR_MAX_BITS = 25;
+
     public const CIDR_MIN_BITS = 32;
+
     public const PORT_FLOOR = 1024;
+
     public const PORT_CEIL = 65535;
+
     public const PORT_RANGE_LIMIT = 1000;
+
     public const PORT_RANGE_REGEX = '/^(\d{4,5})-(\d{4,5})$/';
 
     /**
      * AssignmentService constructor.
      */
-    public function __construct(protected AllocationRepositoryInterface $repository, protected ConnectionInterface $connection)
-    {
-    }
+    public function __construct(protected AllocationRepositoryInterface $repository, protected ConnectionInterface $connection) {}
 
     /**
      * Insert allocations into the database and link them to a specific node.
@@ -41,7 +44,7 @@ class AssignmentService
     {
         $explode = explode('/', $data['allocation_ip']);
         if (count($explode) !== 1) {
-            if (!ctype_digit($explode[1]) || ($explode[1] > self::CIDR_MIN_BITS || $explode[1] < self::CIDR_MAX_BITS)) {
+            if (! ctype_digit($explode[1]) || ($explode[1] > self::CIDR_MIN_BITS || $explode[1] < self::CIDR_MAX_BITS)) {
                 throw new CidrOutOfRangeException();
             }
         }
@@ -61,7 +64,7 @@ class AssignmentService
         $this->connection->beginTransaction();
         foreach ($parsed as $ip) {
             foreach ($data['allocation_ports'] as $port) {
-                if (!is_digit($port) && !preg_match(self::PORT_RANGE_REGEX, $port)) {
+                if (! is_digit($port) && ! preg_match(self::PORT_RANGE_REGEX, $port)) {
                     throw new InvalidPortMappingException($port);
                 }
 

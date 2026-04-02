@@ -10,9 +10,7 @@ class ServerConfigurationStructureService
     /**
      * ServerConfigurationStructureService constructor.
      */
-    public function __construct(private EnvironmentService $environment)
-    {
-    }
+    public function __construct(private EnvironmentService $environment) {}
 
     /**
      * Return a configuration array for a specific server when passed a server model.
@@ -25,7 +23,7 @@ class ServerConfigurationStructureService
         $clone = $server;
         // If any overrides have been set on this call make sure to update them on the
         // cloned instance so that the configuration generated uses them.
-        if (!empty($override)) {
+        if (! empty($override)) {
             $clone = $server->fresh();
             foreach ($override as $key => $value) {
                 $clone->setAttribute($key, $value);

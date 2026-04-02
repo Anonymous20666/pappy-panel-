@@ -3,9 +3,9 @@
 namespace App\Console\Commands\User;
 
 use App\Models\User;
-use Webmozart\Assert\Assert;
-use Illuminate\Console\Command;
 use App\Services\Users\UserDeletionService;
+use Illuminate\Console\Command;
+use Webmozart\Assert\Assert;
 
 class DeleteUserCommand extends Command
 {
@@ -48,7 +48,7 @@ class DeleteUserCommand extends Command
             }
 
             $this->table(['User ID', 'Email', 'Name'], $tableValues);
-            if (!$deleteUser = $this->ask(trans('command/messages.user.select_search_user'))) {
+            if (! $deleteUser = $this->ask(trans('command/messages.user.select_search_user'))) {
                 return $this->handle();
             }
         } else {
@@ -61,7 +61,7 @@ class DeleteUserCommand extends Command
             $deleteUser = $results->first();
         }
 
-        if ($this->confirm(trans('command/messages.user.confirm_delete')) || !$this->input->isInteractive()) {
+        if ($this->confirm(trans('command/messages.user.confirm_delete')) || ! $this->input->isInteractive()) {
             $this->deletionService->handle($deleteUser);
             $this->info(trans('command/messages.user.deleted'));
         }

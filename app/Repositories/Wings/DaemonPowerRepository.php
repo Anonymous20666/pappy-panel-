@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Wings;
 
-use App\Models\Server;
-use Webmozart\Assert\Assert;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\TransferException;
 use App\Exceptions\Http\Connection\DaemonConnectionException;
+use App\Models\Server;
+use GuzzleHttp\Exception\TransferException;
+use Psr\Http\Message\ResponseInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @method \App\Repositories\Wings\DaemonPowerRepository setNode(\App\Models\Node $node)

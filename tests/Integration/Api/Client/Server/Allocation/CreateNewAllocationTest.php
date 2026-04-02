@@ -4,7 +4,9 @@ namespace Tests\Integration\Api\Client\Server\Allocation;
 
 use App\Models\Allocation;
 use App\Models\Permission;
+use App\Models\Server;
 use Illuminate\Http\Response;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\Integration\Api\Client\ClientApiIntegrationTestCase;
 
 class CreateNewAllocationTest extends ClientApiIntegrationTestCase
@@ -12,7 +14,7 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Setup tests.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -24,10 +26,10 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Tests that a new allocation can be properly assigned to a server.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('permissionDataProvider')]
-    public function testNewAllocationCanBeAssignedToServer(array $permission)
+    #[DataProvider('permissionDataProvider')]
+    public function test_new_allocation_can_be_assigned_to_server(array $permission)
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount($permission);
         $server->update(['allocation_limit' => 2]);
 
@@ -45,9 +47,9 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
      * Test that a user without the required permissions cannot create an allocation for
      * the server instance.
      */
-    public function testAllocationCannotBeCreatedIfUserDoesNotHavePermission()
+    public function test_allocation_cannot_be_created_if_user_does_not_have_permission()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount([Permission::ACTION_ALLOCATION_UPDATE]);
         $server->update(['allocation_limit' => 2]);
 
@@ -57,11 +59,11 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Test that an error is returned to the user if this feature is not enabled on the system.
      */
-    public function testAllocationCannotBeCreatedIfNotEnabled()
+    public function test_allocation_cannot_be_created_if_not_enabled()
     {
         config()->set('panel.client_features.allocations.enabled', false);
 
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
         $server->update(['allocation_limit' => 2]);
 
@@ -74,9 +76,9 @@ class CreateNewAllocationTest extends ClientApiIntegrationTestCase
     /**
      * Test that an allocation cannot be created if the server has reached its allocation limit.
      */
-    public function testAllocationCannotBeCreatedIfServerIsAtLimit()
+    public function test_allocation_cannot_be_created_if_server_is_at_limit()
     {
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         [$user, $server] = $this->generateTestAccount();
         $server->update(['allocation_limit' => 1]);
 

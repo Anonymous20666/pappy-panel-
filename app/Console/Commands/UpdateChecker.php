@@ -45,7 +45,7 @@ class UpdateChecker extends Command
             $data = $response->json();
             $latestVersion = $data['panel'] ?? null;
 
-            if (!$latestVersion) {
+            if (! $latestVersion) {
                 $this->error('Server sent invalid response. Reach out to Reviactyl support team.');
 
                 return Command::FAILURE;
@@ -63,7 +63,7 @@ class UpdateChecker extends Command
                 $this->info('You\'re running pre-release of Reviactyl Panel.');
             }
         } catch (\Exception $e) {
-            $this->error('Error: ' . $e->getMessage());
+            $this->error('Error: '.$e->getMessage());
 
             return Command::FAILURE;
         }

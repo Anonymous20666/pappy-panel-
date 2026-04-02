@@ -207,7 +207,7 @@ return [
             'failed' => 'Åtgärden för allokering misslyckades.',
         ],
     ],
-    
+
     'validation' => [
         'fqdn_not_resolvable' => 'Det angivna FQDN eller IP-adressen löser inte till en giltig IP-adress.',
         'fqdn_required_for_ssl' => 'Ett fullständigt kvalificerat domännamn som löser till en offentlig IP-adress krävs för att använda SSL för denna nod.',

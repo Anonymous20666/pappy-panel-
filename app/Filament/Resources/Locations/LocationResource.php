@@ -2,14 +2,14 @@
 
 namespace App\Filament\Resources\Locations;
 
-use Filament\Actions;
 use App\Models\Location;
-use Filament\Tables\Table;
-use Filament\Schemas\Schema;
-use Filament\Resources\Resource;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Actions;
 use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class LocationResource extends Resource
 {
@@ -18,6 +18,7 @@ class LocationResource extends Resource
     protected static ?int $navigationSort = 2;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-globe-alt';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'heroicon-s-globe-alt';
 
     public static function getNavigationGroup(): ?string

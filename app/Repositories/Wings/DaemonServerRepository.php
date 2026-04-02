@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Wings;
 
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Models\Server;
-use Webmozart\Assert\Assert;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\TransferException;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Webmozart\Assert\Assert;
 
 /**
  * @method \App\Repositories\Wings\DaemonServerRepository setNode(\App\Models\Node $node)
@@ -81,7 +81,7 @@ class DaemonServerRepository extends DaemonRepository
         Assert::isInstanceOf($this->server, Server::class);
 
         try {
-            $this->getHttpClient()->delete('/api/servers/' . $this->server->uuid);
+            $this->getHttpClient()->delete('/api/servers/'.$this->server->uuid);
         } catch (TransferException $exception) {
             throw new DaemonConnectionException($exception);
         }
@@ -132,7 +132,7 @@ class DaemonServerRepository extends DaemonRepository
      * correctly and avoids any costly mistakes in the codebase.
      *
      * @deprecated
-     * @see \App\Repositories\Wings\DaemonRevocationRepository::deauthorize()
+     * @see DaemonRevocationRepository::deauthorize()
      *
      * @throws DaemonConnectionException
      */
@@ -140,7 +140,7 @@ class DaemonServerRepository extends DaemonRepository
     {
         Assert::isInstanceOf($this->server, Server::class);
 
-        $this->revokeJTIs([md5($id . $this->server->uuid)]);
+        $this->revokeJTIs([md5($id.$this->server->uuid)]);
     }
 
     /**

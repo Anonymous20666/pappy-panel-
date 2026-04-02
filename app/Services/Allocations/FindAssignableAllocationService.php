@@ -2,35 +2,38 @@
 
 namespace App\Services\Allocations;
 
-use App\Models\Server;
-use App\Models\Allocation;
-use Webmozart\Assert\Assert;
+use App\Exceptions\DisplayException;
 use App\Exceptions\Service\Allocation\AutoAllocationNotEnabledException;
+use App\Exceptions\Service\Allocation\CidrOutOfRangeException;
+use App\Exceptions\Service\Allocation\InvalidPortMappingException;
 use App\Exceptions\Service\Allocation\NoAutoAllocationSpaceAvailableException;
+use App\Exceptions\Service\Allocation\PortOutOfRangeException;
+use App\Exceptions\Service\Allocation\TooManyPortsInRangeException;
+use App\Models\Allocation;
+use App\Models\Server;
+use Webmozart\Assert\Assert;
 
 class FindAssignableAllocationService
 {
     /**
      * FindAssignableAllocationService constructor.
      */
-    public function __construct(private AssignmentService $service)
-    {
-    }
+    public function __construct(private AssignmentService $service) {}
 
     /**
      * Finds an existing unassigned allocation and attempts to assign it to the given server. If
      * no allocation can be found, a new one will be created with a random port between the defined
      * range from the configuration.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \App\Exceptions\Service\Allocation\CidrOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\InvalidPortMappingException
-     * @throws \App\Exceptions\Service\Allocation\PortOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\TooManyPortsInRangeException
+     * @throws DisplayException
+     * @throws CidrOutOfRangeException
+     * @throws InvalidPortMappingException
+     * @throws PortOutOfRangeException
+     * @throws TooManyPortsInRangeException
      */
     public function handle(Server $server): Allocation
     {
-        if (!config('panel.client_features.allocations.enabled')) {
+        if (! config('panel.client_features.allocations.enabled')) {
             throw new AutoAllocationNotEnabledException();
         }
 
@@ -56,18 +59,18 @@ class FindAssignableAllocationService
      * in the settings. If there are no matches in that range, or something is wrong with the
      * range information provided an exception will be raised.
      *
-     * @throws \App\Exceptions\DisplayException
-     * @throws \App\Exceptions\Service\Allocation\CidrOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\InvalidPortMappingException
-     * @throws \App\Exceptions\Service\Allocation\PortOutOfRangeException
-     * @throws \App\Exceptions\Service\Allocation\TooManyPortsInRangeException
+     * @throws DisplayException
+     * @throws CidrOutOfRangeException
+     * @throws InvalidPortMappingException
+     * @throws PortOutOfRangeException
+     * @throws TooManyPortsInRangeException
      */
     protected function createNewAllocation(Server $server): Allocation
     {
         $start = config('panel.client_features.allocations.range_start', null);
         $end = config('panel.client_features.allocations.range_end', null);
 
-        if (!$start || !$end) {
+        if (! $start || ! $end) {
             throw new NoAutoAllocationSpaceAvailableException();
         }
 

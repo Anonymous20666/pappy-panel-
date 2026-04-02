@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Extensions\Hashids;
-use Illuminate\Support\ServiceProvider;
 use App\Contracts\Extensions\HashidsInterface;
+use App\Extensions\Hashids;
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Support\ServiceProvider;
 
 class HashidsServiceProvider extends ServiceProvider
 {
@@ -14,7 +15,7 @@ class HashidsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(HashidsInterface::class, function () {
-            /** @var \Illuminate\Contracts\Config\Repository $config */
+            /** @var Repository $config */
             $config = $this->app['config'];
 
             return new Hashids(

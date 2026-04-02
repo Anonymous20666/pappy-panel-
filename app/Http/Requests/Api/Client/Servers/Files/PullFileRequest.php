@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\Client\Servers\Files;
 
-use App\Models\Permission;
-use Illuminate\Support\Str;
 use App\Contracts\Http\ClientPermissionsRequest;
 use App\Http\Requests\Api\Client\ClientApiRequest;
+use App\Models\Permission;
+use Illuminate\Support\Str;
 
 class PullFileRequest extends ClientApiRequest implements ClientPermissionsRequest
 {
@@ -23,7 +23,7 @@ class PullFileRequest extends ClientApiRequest implements ClientPermissionsReque
                 'url',
                 // HTTPS only — prevents downloading over unencrypted connections.
                 function (string $attribute, mixed $value, \Closure $fail) {
-                    if (!Str::startsWith(strtolower((string) $value), 'https://')) {
+                    if (! Str::startsWith(strtolower((string) $value), 'https://')) {
                         $fail('Only HTTPS URLs are permitted.');
                     }
                 },

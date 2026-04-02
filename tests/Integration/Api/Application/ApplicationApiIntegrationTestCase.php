@@ -2,16 +2,16 @@
 
 namespace Tests\Integration\Api\Application;
 
-use App\Models\User;
 use App\Models\ApiKey;
-use Illuminate\Http\Request;
-use PHPUnit\Framework\Assert;
+use App\Models\User;
 use App\Services\Acl\Api\AdminAcl;
-use Tests\Integration\IntegrationTestCase;
-use Tests\Traits\Integration\CreatesTestModels;
 use App\Transformers\Api\Application\BaseTransformer;
 use App\Transformers\Api\Client\BaseClientTransformer;
+use Illuminate\Http\Request;
+use PHPUnit\Framework\Assert;
+use Tests\Integration\IntegrationTestCase;
 use Tests\Traits\Http\IntegrationJsonRequestAssertions;
+use Tests\Traits\Integration\CreatesTestModels;
 
 abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
 {
@@ -26,7 +26,7 @@ abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
      * Bootstrap application API tests. Creates a default admin user and associated API key
      * and also sets some default headers required for accessing the API.
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -35,7 +35,7 @@ abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
 
         $this
             ->withHeader('Accept', 'application/vnd.reviactyl.v26+json, application/vnd.pterodactyl.v1+json')
-            ->withHeader('Authorization', 'Bearer ' . $this->key->identifier . decrypt($this->key->token));
+            ->withHeader('Authorization', 'Bearer '.$this->key->identifier.decrypt($this->key->token));
     }
 
     public function getApiUser(): User
@@ -55,7 +55,7 @@ abstract class ApplicationApiIntegrationTestCase extends IntegrationTestCase
     {
         $this->key = $this->createApiKey($user, $permissions);
 
-        $this->withHeader('Authorization', 'Bearer ' . $this->key->identifier . decrypt($this->key->token));
+        $this->withHeader('Authorization', 'Bearer '.$this->key->identifier.decrypt($this->key->token));
 
         return $this->key;
     }

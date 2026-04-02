@@ -2,12 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Database;
-use Illuminate\Support\Collection;
-use Illuminate\Foundation\Application;
-use Illuminate\Database\DatabaseManager;
 use App\Contracts\Repository\DatabaseRepositoryInterface;
+use App\Models\Database;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\DatabaseManager;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Collection;
 
 class DatabaseRepository extends EloquentRepository implements DatabaseRepositoryInterface
 {
@@ -81,7 +81,7 @@ class DatabaseRepository extends EloquentRepository implements DatabaseRepositor
         $args = [$username, $remote, $password];
         $command = 'CREATE USER `%s`@`%s` IDENTIFIED BY \'%s\'';
 
-        if (!empty($max_connections)) {
+        if (! empty($max_connections)) {
             $args[] = $max_connections;
             $command .= ' WITH MAX_USER_CONNECTIONS %s';
         }

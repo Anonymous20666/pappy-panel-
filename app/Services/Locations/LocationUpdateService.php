@@ -2,23 +2,23 @@
 
 namespace App\Services\Locations;
 
-use App\Models\Location;
 use App\Contracts\Repository\LocationRepositoryInterface;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Location;
 
 class LocationUpdateService
 {
     /**
      * LocationUpdateService constructor.
      */
-    public function __construct(protected LocationRepositoryInterface $repository)
-    {
-    }
+    public function __construct(protected LocationRepositoryInterface $repository) {}
 
     /**
      * Update an existing location.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function handle(Location|int $location, array $data): Location
     {

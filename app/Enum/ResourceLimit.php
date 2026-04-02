@@ -3,11 +3,11 @@
 namespace App\Enum;
 
 use App\Models\Server;
-use Illuminate\Http\Request;
-use Webmozart\Assert\Assert;
 use Illuminate\Cache\RateLimiting\Limit;
-use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Middleware\ThrottleRequests;
+use Illuminate\Support\Facades\RateLimiter;
+use Webmozart\Assert\Assert;
 
 /**
  * A basic resource throttler for individual servers. This is applied in addition
@@ -42,7 +42,7 @@ enum ResourceLimit
 
     public function limit(): Limit
     {
-        return match($this) {
+        return match ($this) {
             self::Backup => Limit::perMinutes(15, 3),
             self::Database => Limit::perMinute(2),
             self::FilePull => Limit::perMinutes(10, 5),

@@ -2,10 +2,11 @@
 
 namespace App\Transformers\Api\Application;
 
+use App\Exceptions\Transformer\InvalidTransformerLevelException;
 use App\Models\Node;
-use League\Fractal\Resource\Item;
 use App\Services\Acl\Api\AdminAcl;
 use League\Fractal\Resource\Collection;
+use League\Fractal\Resource\Item;
 use League\Fractal\Resource\NullResource;
 
 class NodeTransformer extends BaseTransformer
@@ -53,11 +54,11 @@ class NodeTransformer extends BaseTransformer
     /**
      * Return the nodes associated with this location.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeAllocations(Node $node): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_ALLOCATIONS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_ALLOCATIONS)) {
             return $this->null();
         }
 
@@ -73,11 +74,11 @@ class NodeTransformer extends BaseTransformer
     /**
      * Return the nodes associated with this location.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeLocation(Node $node): Item|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_LOCATIONS)) {
             return $this->null();
         }
 
@@ -93,11 +94,11 @@ class NodeTransformer extends BaseTransformer
     /**
      * Return the nodes associated with this location.
      *
-     * @throws \App\Exceptions\Transformer\InvalidTransformerLevelException
+     * @throws InvalidTransformerLevelException
      */
     public function includeServers(Node $node): Collection|NullResource
     {
-        if (!$this->authorize(AdminAcl::RESOURCE_SERVERS)) {
+        if (! $this->authorize(AdminAcl::RESOURCE_SERVERS)) {
             return $this->null();
         }
 

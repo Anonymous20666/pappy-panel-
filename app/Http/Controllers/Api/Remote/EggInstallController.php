@@ -2,33 +2,33 @@
 
 namespace App\Http\Controllers\Api\Remote;
 
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
-use App\Services\Servers\EnvironmentService;
 use App\Contracts\Repository\ServerRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Http\Controllers\Controller;
+use App\Models\Server;
+use App\Services\Servers\EnvironmentService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class EggInstallController extends Controller
 {
     /**
      * EggInstallController constructor.
      */
-    public function __construct(private EnvironmentService $environment, private ServerRepositoryInterface $repository)
-    {
-    }
+    public function __construct(private EnvironmentService $environment, private ServerRepositoryInterface $repository) {}
 
     /**
      * Handle request to get script and installation information for a server
      * that is being created on the node.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function index(Request $request, string $uuid): JsonResponse
     {
         $node = $request->attributes->get('node');
 
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         $server = $this->repository->findFirstWhere([
             ['uuid', '=', $uuid],
             ['node_id', '=', $node->id],
@@ -39,7 +39,7 @@ class EggInstallController extends Controller
 
         return response()->json([
             'scripts' => [
-                'install' => !$egg->copy_script_install ? null : Str::replace(["\r\n", "\n", "\r"], "\n", $egg->copy_script_install),
+                'install' => ! $egg->copy_script_install ? null : Str::replace(["\r\n", "\n", "\r"], "\n", $egg->copy_script_install),
                 'privileged' => $egg->script_is_privileged,
             ],
             'config' => [

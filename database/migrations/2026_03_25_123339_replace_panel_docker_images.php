@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -39,7 +40,7 @@ return new class extends Migration {
                     foreach ($eggs as $egg) {
                         $images = json_decode($egg->docker_images, true);
 
-                        if (!is_array($images)) {
+                        if (! is_array($images)) {
                             continue; // skip invalid JSON
                         }
 
@@ -76,8 +77,5 @@ return new class extends Migration {
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
-
-    }
+    public function down(): void {}
 };

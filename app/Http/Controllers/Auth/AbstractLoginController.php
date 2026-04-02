@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Events\Auth\DirectLogin;
-use Illuminate\Auth\AuthManager;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Auth\Events\Failed;
-use Illuminate\Container\Container;
 use App\Exceptions\DisplayException;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Event;
+use App\Models\User;
+use Illuminate\Auth\AuthManager;
+use Illuminate\Auth\Events\Failed;
+use Illuminate\Container\Container;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 
 abstract class AbstractLoginController extends Controller
 {

@@ -2,12 +2,12 @@
 
 namespace Tests\Traits;
 
-use PDO;
-use Mockery;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\MySqlConnection;
 use Illuminate\Database\ConnectionResolver;
 use Illuminate\Database\ConnectionResolverInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\MySqlConnection;
+use Mockery;
+use PDO;
 
 trait MocksPdoConnection
 {
@@ -23,7 +23,7 @@ trait MocksPdoConnection
 
         Model::unsetConnectionResolver();
 
-        $connection = new MySqlConnection($mock = \Mockery::mock(\PDO::class), 'testing_mock');
+        $connection = new MySqlConnection($mock = Mockery::mock(PDO::class), 'testing_mock');
         $resolver = new ConnectionResolver(['mocked' => $connection]);
         $resolver->setDefaultConnection('mocked');
 
@@ -37,7 +37,7 @@ trait MocksPdoConnection
      */
     protected function tearDownPdoMock(): void
     {
-        if (!self::$initialResolver) {
+        if (! self::$initialResolver) {
             return;
         }
 

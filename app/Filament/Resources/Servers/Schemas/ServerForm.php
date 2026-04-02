@@ -2,21 +2,21 @@
 
 namespace App\Filament\Resources\Servers\Schemas;
 
-use App\Models\Egg;
-use App\Models\User;
-use App\Models\Server;
 use App\Models\Allocation;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Tabs;
+use App\Models\Egg;
+use App\Models\Server;
+use App\Models\User;
 use Filament\Forms\Components\KeyValue;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 
 class ServerForm
 {
@@ -94,7 +94,7 @@ class ServerForm
                                             ->options(function (Get $get, ?Server $record) {
                                                 $nodeId = $get('node_id') ?? $record?->node_id;
 
-                                                if (!$nodeId) {
+                                                if (! $nodeId) {
                                                     return [];
                                                 }
 
@@ -125,7 +125,7 @@ class ServerForm
                                             ->options(function (Get $get, ?Server $record) {
                                                 $nodeId = $get('node_id') ?? $record?->node_id;
 
-                                                if (!$nodeId) {
+                                                if (! $nodeId) {
                                                     return [];
                                                 }
 
@@ -181,7 +181,7 @@ class ServerForm
                                             )
                                             ->reactive()
                                             ->afterStateUpdated(function (Set $set, Get $get, ?string $state) {
-                                                if (!$state) {
+                                                if (! $state) {
                                                     $set('environment', []);
                                                     $set('startup', '');
 
@@ -190,7 +190,7 @@ class ServerForm
 
                                                 $egg = Egg::query()->with('variables')->find($state);
 
-                                                if (!$egg) {
+                                                if (! $egg) {
                                                     return;
                                                 }
 
@@ -233,7 +233,6 @@ class ServerForm
                                             ->helperText(trans('admin/server.fields.use_custom_image.helper'))
                                             ->visible(fn (Get $get) => $get('advanced_mode') === true),
 
-
                                         // Image
                                         TextInput::make('image')
                                             ->label(trans('admin/server.fields.image.label'))
@@ -249,14 +248,14 @@ class ServerForm
                                                 $eggId = $get('egg_id') ?? $record?->egg_id;
                                                 $currentImage = $get('image') ?? $record?->image;
 
-                                                if (!$eggId) {
+                                                if (! $eggId) {
                                                     return $currentImage
                                                         ? [$currentImage => trans('admin/server.fields.image.custom')]
                                                         : [];
                                                 }
 
                                                 $egg = Egg::query()->find($eggId);
-                                                if (!$egg) {
+                                                if (! $egg) {
                                                     return $currentImage
                                                         ? [$currentImage => trans('admin/server.fields.image.custom')]
                                                         : [];
@@ -275,7 +274,7 @@ class ServerForm
                                                     }
                                                 }
 
-                                                if ($currentImage && !array_key_exists($currentImage, $options)) {
+                                                if ($currentImage && ! array_key_exists($currentImage, $options)) {
                                                     $options = [$currentImage => trans('admin/server.fields.image.custom')] + $options;
                                                 }
 
@@ -436,28 +435,28 @@ class ServerForm
 
                                 Section::make(trans('admin/server.sections.feature_limits.title'))
                                     ->description(trans('admin/server.sections.feature_limits.description'))
-                    ->schema([
-                        TextInput::make('database_limit')
-                            ->label(trans('admin/server.fields.database_limit.label'))
-                            ->numeric()
-                            ->minValue(0)
-                            ->default(0)
-                            ->helperText(trans('admin/server.fields.database_limit.helper')),
+                                    ->schema([
+                                        TextInput::make('database_limit')
+                                            ->label(trans('admin/server.fields.database_limit.label'))
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->default(0)
+                                            ->helperText(trans('admin/server.fields.database_limit.helper')),
 
-                        TextInput::make('allocation_limit')
-                            ->label(trans('admin/server.fields.allocation_limit.label'))
-                            ->numeric()
-                            ->minValue(0)
-                            ->default(0)
-                            ->helperText(trans('admin/server.fields.allocation_limit.helper')),
+                                        TextInput::make('allocation_limit')
+                                            ->label(trans('admin/server.fields.allocation_limit.label'))
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->default(0)
+                                            ->helperText(trans('admin/server.fields.allocation_limit.helper')),
 
-                        TextInput::make('backup_limit')
-                            ->label(trans('admin/server.fields.backup_limit.label'))
-                            ->numeric()
-                            ->minValue(0)
-                            ->default(0)
-                            ->helperText(trans('admin/server.fields.backup_limit.helper')),
-                    ])
+                                        TextInput::make('backup_limit')
+                                            ->label(trans('admin/server.fields.backup_limit.label'))
+                                            ->numeric()
+                                            ->minValue(0)
+                                            ->default(0)
+                                            ->helperText(trans('admin/server.fields.backup_limit.helper')),
+                                    ])
                                     ->columns(2),
                             ]),
 

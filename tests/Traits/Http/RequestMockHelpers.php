@@ -2,10 +2,10 @@
 
 namespace Tests\Traits\Http;
 
-use Mockery as m;
-use Mockery\Mock;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Mockery as m;
+use Mockery\Mock;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 trait RequestMockHelpers
@@ -66,8 +66,8 @@ trait RequestMockHelpers
     protected function buildRequestMock(): void
     {
         $this->request = m::mock($this->requestMockClass);
-        if (!$this->request instanceof Request) {
-            throw new \InvalidArgumentException('Request mock class must be an instance of ' . Request::class . ' when mocked.');
+        if (! $this->request instanceof Request) {
+            throw new \InvalidArgumentException('Request mock class must be an instance of '.Request::class.' when mocked.');
         }
 
         $this->request->attributes = new ParameterBag();

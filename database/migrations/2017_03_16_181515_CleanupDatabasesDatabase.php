@@ -1,10 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     public $withinTransaction = false;
 
     /**
@@ -26,7 +27,7 @@ return new class extends Migration {
 
         try {
             Schema::table('databases', function (Blueprint $table) {
-            $table->foreign('database_host_id')->references('id')->on('database_hosts');
+                $table->foreign('database_host_id')->references('id')->on('database_hosts');
             });
         } catch (Throwable) {
             // Ignore foreign key recreation issues on legacy or partially rolled back schemas.
@@ -52,7 +53,7 @@ return new class extends Migration {
 
         try {
             Schema::table('databases', function (Blueprint $table) {
-            $table->foreign('db_server')->references('id')->on('database_hosts');
+                $table->foreign('db_server')->references('id')->on('database_hosts');
             });
         } catch (Throwable) {
             // Ignore foreign key recreation issues on legacy or partially rolled back schemas.

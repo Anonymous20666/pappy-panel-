@@ -2,18 +2,20 @@
 
 namespace App\Rules;
 
-use Illuminate\Support\Arr;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Contracts\Validation\DataAwareRule;
+use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Arr;
 
-class Fqdn implements Rule, DataAwareRule
+class Fqdn implements DataAwareRule, Rule
 {
     protected array $data = [];
+
     protected string $message = '';
+
     protected ?string $schemeField = null;
 
     /**
-     * @param array $data
+     * @param  array  $data
      */
     public function setData($data): self
     {
@@ -26,7 +28,7 @@ class Fqdn implements Rule, DataAwareRule
      * Validates that the value provided resolves to an IP address. If a scheme is
      * specified when this rule is created additional checks will be applied.
      *
-     * @param string $attribute
+     * @param  string  $attribute
      */
     public function passes($attribute, $value): bool
     {
@@ -53,7 +55,7 @@ class Fqdn implements Rule, DataAwareRule
         // If no records were returned fall back to trying to resolve the value using the hosts DNS
         // resolution. This will not work for IPv6 which is why we prefer to use `dns_get_record`
         // first.
-        if (!empty($records) || filter_var(gethostbyname($value), FILTER_VALIDATE_IP)) {
+        if (! empty($records) || filter_var(gethostbyname($value), FILTER_VALIDATE_IP)) {
             return true;
         }
 

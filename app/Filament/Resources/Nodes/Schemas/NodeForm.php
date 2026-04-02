@@ -2,23 +2,23 @@
 
 namespace App\Filament\Resources\Nodes\Schemas;
 
-use App\Models\Node;
 use App\Models\ApiKey;
-use Phiki\Grammar\Grammar;
-use Filament\Actions\Action;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Tabs;
-use Filament\Forms\Components\Textarea;
+use App\Models\Node;
 use App\Services\Api\KeyCreationService;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Infolists\Components\CodeEntry;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Infolists\Components\CodeEntry;
+use Filament\Schemas\Schema;
 use Illuminate\Contracts\Encryption\Encrypter;
+use Phiki\Grammar\Grammar;
 
 class NodeForm
 {
@@ -246,7 +246,7 @@ class NodeForm
                                                         ->helperText(trans('admin/node.deployment.command_helper')),
                                                 ])
                                                 ->fillForm(function ($record) {
-                                                    if (!$record || !$record->id) {
+                                                    if (! $record || ! $record->id) {
                                                         return ['command' => 'Please save the node first.'];
                                                     }
 
@@ -269,7 +269,7 @@ class NodeForm
                                                             ->first();
 
                                                         // Create a Deployment Key if one doesn't exist
-                                                        if (!$key) {
+                                                        if (! $key) {
                                                             $keyCreationService = app(KeyCreationService::class);
                                                             $key = $keyCreationService->setKeyType(ApiKey::TYPE_APPLICATION)->handle([
                                                                 'user_id' => $user->id,
@@ -279,7 +279,7 @@ class NodeForm
                                                         }
 
                                                         $encrypter = app(Encrypter::class);
-                                                        $token = $key->identifier . $encrypter->decrypt($key->token);
+                                                        $token = $key->identifier.$encrypter->decrypt($key->token);
 
                                                         $appUrl = config('app.url');
                                                         $debug = config('app.debug');
@@ -302,11 +302,11 @@ class NodeForm
                                                     // No action needed, just close the modal
                                                 }),
                                         ])
-                                        ->fullWidth(),
+                                            ->fullWidth(),
                                     ])
                                     ->visible(fn ($record) => $record && $record->id),
                             ])
-                            ->hidden(fn ($record) => !$record || !$record->id),
+                            ->hidden(fn ($record) => ! $record || ! $record->id),
                     ])
                     ->columnSpanFull()
                     ->persistTabInQueryString(),

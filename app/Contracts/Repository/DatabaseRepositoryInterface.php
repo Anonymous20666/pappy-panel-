@@ -2,8 +2,8 @@
 
 namespace App\Contracts\Repository;
 
-use Illuminate\Support\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 interface DatabaseRepositoryInterface extends RepositoryInterface
 {

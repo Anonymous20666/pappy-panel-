@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Designify;
 
-use Illuminate\Support\Collection;
 use App\Http\Requests\Admin\AdminFormRequest;
+use Illuminate\Support\Collection;
 
 class AlertSettingsFormRequest extends AdminFormRequest
 {

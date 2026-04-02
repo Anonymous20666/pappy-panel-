@@ -2,9 +2,9 @@
 
 namespace App\Repositories;
 
-use Illuminate\Foundation\Application;
-use Illuminate\Database\Eloquent\Model;
 use App\Contracts\Repository\RepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Application;
 
 abstract class Repository implements RepositoryInterface
 {
@@ -38,7 +38,7 @@ abstract class Repository implements RepositoryInterface
     /**
      * Setup column selection functionality.
      *
-     * @param array|string $columns
+     * @param  array|string  $columns
      */
     public function setColumns($columns = ['*']): self
     {

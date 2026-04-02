@@ -2,14 +2,15 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
-use App\Models\User;
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Schemas\Components\Group;
-use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Section;
 use App\Contracts\Repository\SettingsRepositoryInterface;
+use App\Models\User;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Resources\Pages\CreateRecord;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 
 class UserForm
 {
@@ -65,12 +66,12 @@ class UserForm
                                     ->label(trans('admin/user.details.password'))
                                     ->password()
                                     ->confirmed()
-                                    ->required(fn ($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord)
+                                    ->required(fn ($livewire) => $livewire instanceof CreateRecord)
                                     ->dehydrated(fn ($state) => filled($state)),
                                 TextInput::make('password_confirmation')
                                     ->label(trans('admin/user.details.password_confirmation'))
                                     ->password()
-                                    ->required(fn ($livewire) => $livewire instanceof \Filament\Resources\Pages\CreateRecord)
+                                    ->required(fn ($livewire) => $livewire instanceof CreateRecord)
                                     ->dehydrated(false),
                             ]),
 

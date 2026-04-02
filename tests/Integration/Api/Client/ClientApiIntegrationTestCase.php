@@ -2,22 +2,24 @@
 
 namespace Tests\Integration\Api\Client;
 
+use App\Models\Allocation;
+use App\Models\Backup;
+use App\Models\Database;
+use App\Models\DatabaseHost;
+use App\Models\Location;
+use App\Models\Model;
 use App\Models\Node;
+use App\Models\Schedule;
+use App\Models\Server;
 use App\Models\Task;
 use App\Models\User;
-use App\Models\Model;
-use App\Models\Backup;
-use App\Models\Server;
-use App\Models\Database;
-use App\Models\Location;
-use App\Models\Schedule;
-use App\Models\Allocation;
-use App\Models\DatabaseHost;
-use Illuminate\Support\Collection;
-use Tests\Integration\TestResponse;
-use Tests\Integration\IntegrationTestCase;
 use App\Transformers\Api\Client\BaseClientTransformer;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Tests\Integration\IntegrationTestCase;
+use Tests\Integration\TestResponse;
 
 abstract class ClientApiIntegrationTestCase extends IntegrationTestCase
 {
@@ -42,9 +44,8 @@ abstract class ClientApiIntegrationTestCase extends IntegrationTestCase
      * just dump 500-level errors to the screen in the tests without having
      * to keep re-assigning variables.
      *
-     * @param \Illuminate\Http\Response $response
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  Response  $response
+     * @param  Request  $request
      * @return \Illuminate\Testing\TestResponse
      */
     protected function createTestResponse($response, $request)
@@ -77,7 +78,7 @@ abstract class ClientApiIntegrationTestCase extends IntegrationTestCase
                 throw new \InvalidArgumentException(sprintf('Cannot create link for Model of type %s', class_basename($model)));
         }
 
-        return $link . ($append ? '/' . ltrim($append, '/') : '');
+        return $link.($append ? '/'.ltrim($append, '/') : '');
     }
 
     /**

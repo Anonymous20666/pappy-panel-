@@ -2,8 +2,9 @@
 
 namespace App\Console\Commands\Node;
 
-use Illuminate\Console\Command;
+use App\Exceptions\Model\DataValidationException;
 use App\Services\Nodes\NodeCreationService;
+use Illuminate\Console\Command;
 
 class MakeNodeCommand extends Command
 {
@@ -38,7 +39,7 @@ class MakeNodeCommand extends Command
     /**
      * Handle the command execution process.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function handle()
     {
@@ -64,6 +65,6 @@ class MakeNodeCommand extends Command
         $data['daemonBase'] = $this->option('daemonBase') ?? $this->ask('Enter the base folder', '/var/lib/reviactyl/volumes');
 
         $node = $this->creationService->handle($data);
-        $this->line('Successfully created a new node on the location ' . $data['location_id'] . ' with the name ' . $data['name'] . ' and has an id of ' . $node->id . '.');
+        $this->line('Successfully created a new node on the location '.$data['location_id'].' with the name '.$data['name'].' and has an id of '.$node->id.'.');
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Contracts\Repository;
 
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
+use App\Exceptions\Model\DataValidationException;
+use App\Exceptions\Repository\RecordNotFoundException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 interface RepositoryInterface
 {
@@ -54,14 +56,14 @@ interface RepositoryInterface
     /**
      * Create a new model instance and persist it to the database.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function create(array $fields, bool $validate = true, bool $force = false): mixed;
 
     /**
      * Find a model that has the specific ID passed.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function find(int $id): mixed;
 
@@ -73,7 +75,7 @@ interface RepositoryInterface
     /**
      * Find and return the first matching instance for the given fields.
      *
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws RecordNotFoundException
      */
     public function findFirstWhere(array $fields): mixed;
 
@@ -95,8 +97,8 @@ interface RepositoryInterface
     /**
      * Update a given ID with the passed array of fields.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
-     * @throws \App\Exceptions\Repository\RecordNotFoundException
+     * @throws DataValidationException
+     * @throws RecordNotFoundException
      */
     public function update(int $id, array $fields, bool $validate = true, bool $force = false): mixed;
 
@@ -109,7 +111,7 @@ interface RepositoryInterface
     /**
      * Update a record if it exists in the database, otherwise create it.
      *
-     * @throws \App\Exceptions\Model\DataValidationException
+     * @throws DataValidationException
      */
     public function updateOrCreate(array $where, array $fields, bool $validate = true, bool $force = false): mixed;
 

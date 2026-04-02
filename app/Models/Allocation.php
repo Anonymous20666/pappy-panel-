@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
+use Database\Factories\AllocationFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Allocation.
@@ -15,8 +17,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property int $port
  * @property int|null $server_id
  * @property string|null $notes
- * @property \Carbon\Carbon|null $created_at
- * @property \Carbon\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $alias
  * @property bool $has_alias
  * @property Server|null $server
@@ -41,7 +43,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Allocation extends Model
 {
-    /** @use HasFactory<\Database\Factories\AllocationFactory> */
+    /** @use HasFactory<AllocationFactory> */
     use HasFactory;
 
     /**
@@ -104,7 +106,7 @@ class Allocation extends Model
      */
     public function getHasAliasAttribute(?string $value): bool
     {
-        return !is_null($this->ip_alias);
+        return ! is_null($this->ip_alias);
     }
 
     public function toString(): string
@@ -115,7 +117,7 @@ class Allocation extends Model
     /**
      * Gets information for the server associated with this allocation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Server, $this>
+     * @return BelongsTo<Server, $this>
      */
     public function server(): BelongsTo
     {
@@ -125,7 +127,7 @@ class Allocation extends Model
     /**
      * Return the Node model associated with this allocation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Node, $this>
+     * @return BelongsTo<Node, $this>
      */
     public function node(): BelongsTo
     {

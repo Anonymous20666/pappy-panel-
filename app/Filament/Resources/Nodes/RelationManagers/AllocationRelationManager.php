@@ -3,15 +3,16 @@
 namespace App\Filament\Resources\Nodes\RelationManagers;
 
 use App\Models\Allocation;
-use Filament\Tables\Table;
+use App\Services\Activity\ActivityLogService;
+use App\Services\Allocations\AllocationDeletionService;
+use App\Services\Allocations\AssignmentService;
 use Filament\Actions\Action;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
-use App\Services\Allocations\AssignmentService;
-use App\Services\Allocations\AllocationDeletionService;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class AllocationRelationManager extends RelationManager
 {
@@ -69,7 +70,7 @@ class AllocationRelationManager extends RelationManager
                         try {
                             app(AssignmentService::class)->handle($this->getOwnerRecord(), $data);
 
-                            app(\App\Services\Activity\ActivityLogService::class)
+                            app(ActivityLogService::class)
                                 ->subject($this->getOwnerRecord())
                                 ->event('node:allocation.create')
                                 ->log();
@@ -98,7 +99,7 @@ class AllocationRelationManager extends RelationManager
                         try {
                             app(AllocationDeletionService::class)->handle($record);
 
-                            app(\App\Services\Activity\ActivityLogService::class)
+                            app(ActivityLogService::class)
                                 ->subject($this->getOwnerRecord())
                                 ->event('node:allocation.delete')
                                 ->log();

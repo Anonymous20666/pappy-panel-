@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Location;
-use Illuminate\Support\Collection;
-use App\Exceptions\Repository\RecordNotFoundException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Contracts\Repository\LocationRepositoryInterface;
+use App\Exceptions\Repository\RecordNotFoundException;
+use App\Models\Location;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Collection;
 
 class LocationRepository extends EloquentRepository implements LocationRepositoryInterface
 {

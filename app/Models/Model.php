@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
-use Illuminate\Support\Carbon;
-use Illuminate\Validation\Rule;
-use Illuminate\Container\Container;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
 use App\Exceptions\Model\DataValidationException;
-use Illuminate\Database\Eloquent\Model as IlluminateModel;
+use Carbon\CarbonImmutable;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Database\Eloquent\Model as IlluminateModel;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
 abstract class Model extends IlluminateModel
 {
@@ -35,7 +36,7 @@ abstract class Model extends IlluminateModel
      * Listen for the model saving event and fire off the validation
      * function before it is saved.
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     protected static function boot()
     {
@@ -128,7 +129,7 @@ abstract class Model extends IlluminateModel
             // working model, so we don't run into errors due to the way that field validation
             // works.
             foreach ($data as &$datum) {
-                if (!is_string($datum) || !Str::startsWith($datum, 'unique')) {
+                if (! is_string($datum) || ! Str::startsWith($datum, 'unique')) {
                     continue;
                 }
 
@@ -164,7 +165,7 @@ abstract class Model extends IlluminateModel
             )
         );
 
-        if (!$validator->passes()) {
+        if (! $validator->passes()) {
             throw new ValidationException($validator);
         }
     }
@@ -174,7 +175,7 @@ abstract class Model extends IlluminateModel
      */
     protected function asDateTime($value): Carbon|CarbonImmutable
     {
-        if (!$this->immutableDates) {
+        if (! $this->immutableDates) {
             return parent::asDateTime($value);
         }
 

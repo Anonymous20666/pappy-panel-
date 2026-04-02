@@ -2,15 +2,16 @@
 
 namespace Tests\Unit\Rules;
 
-use Tests\TestCase;
 use App\Rules\Username;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Tests\TestCase;
 
 class UsernameTest extends TestCase
 {
     /**
      * Test that this rule can be cast to a string correctly.
      */
-    public function testRuleIsStringable()
+    public function test_rule_is_stringable()
     {
         $this->assertSame('p_username', (string) new Username());
     }
@@ -18,8 +19,8 @@ class UsernameTest extends TestCase
     /**
      * Test valid usernames.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('validUsernameDataProvider')]
-    public function testValidUsernames(string $username)
+    #[DataProvider('validUsernameDataProvider')]
+    public function test_valid_usernames(string $username)
     {
         $this->assertTrue((new Username())->passes('test', $username), 'Assert username is valid.');
     }
@@ -27,8 +28,8 @@ class UsernameTest extends TestCase
     /**
      * Test invalid usernames return false.
      */
-    #[\PHPUnit\Framework\Attributes\DataProvider('invalidUsernameDataProvider')]
-    public function testInvalidUsernames(string $username)
+    #[DataProvider('invalidUsernameDataProvider')]
+    public function test_invalid_usernames(string $username)
     {
         $this->assertFalse((new Username())->passes('test', $username), 'Assert username is not valid.');
     }

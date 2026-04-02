@@ -2,11 +2,11 @@
 
 namespace App\Services\Eggs;
 
-use App\Models\Egg;
-use Illuminate\Support\Arr;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Collection;
 use App\Exceptions\Service\InvalidFileUploadException;
+use App\Models\Egg;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class EggParserService
 {
@@ -18,13 +18,13 @@ class EggParserService
      */
     public function handle(UploadedFile $file): array
     {
-        if ($file->getError() !== UPLOAD_ERR_OK || !$file->isFile()) {
+        if ($file->getError() !== UPLOAD_ERR_OK || ! $file->isFile()) {
             throw new InvalidFileUploadException('The selected file is not valid and cannot be imported.');
         }
 
         /** @var array $parsed */
         $parsed = json_decode($file->openFile()->fread($file->getSize()), true, 512, JSON_THROW_ON_ERROR);
-        if (!in_array(Arr::get($parsed, 'meta.version') ?? '', ['PTDL_v1', 'PTDL_v2', 'RCYL_v26'])) {
+        if (! in_array(Arr::get($parsed, 'meta.version') ?? '', ['PTDL_v1', 'PTDL_v2', 'RCYL_v26'])) {
             throw new InvalidFileUploadException('The JSON file provided is not in a format that can be recognized.');
         }
 
@@ -42,7 +42,7 @@ class EggParserService
             'features' => Arr::get($parsed, 'features'),
             'docker_images' => Arr::get($parsed, 'docker_images'),
             'file_denylist' => Collection::make(Arr::get($parsed, 'file_denylist'))
-                ->filter(fn ($value) => !empty($value)),
+                ->filter(fn ($value) => ! empty($value)),
             'update_url' => Arr::get($parsed, 'meta.update_url'),
             'config_files' => Arr::get($parsed, 'config.files'),
             'config_startup' => Arr::get($parsed, 'config.startup'),
@@ -68,7 +68,7 @@ class EggParserService
 
         // Maintain backwards compatability for eggs that are still using the old single image
         // string format. New eggs can provide an array of Docker images that can be used.
-        if (!isset($parsed['images'])) {
+        if (! isset($parsed['images'])) {
             $images = [Arr::get($parsed, 'image') ?? 'nil'];
         } else {
             $images = $parsed['images'];

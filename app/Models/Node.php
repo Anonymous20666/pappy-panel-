@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use App\Contracts\Models\Identifiable;
+use App\Exceptions\DisplayException;
+use App\Models\Traits\HasRealtimeIdentifier;
+use Carbon\Carbon;
+use Database\Factories\NodeFactory;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Symfony\Component\Yaml\Yaml;
-use Illuminate\Container\Container;
-use App\Contracts\Models\Identifiable;
-use Illuminate\Notifications\Notifiable;
-use App\Models\Traits\HasRealtimeIdentifier;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 /**
  * @property int $id
@@ -35,20 +39,21 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * @property int $daemonListen
  * @property int $daemonSFTP
  * @property string $daemonBase
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property Location $location
- * @property \App\Models\Mount[]|\Illuminate\Database\Eloquent\Collection $mounts
- * @property \App\Models\Server[]|\Illuminate\Database\Eloquent\Collection $servers
- * @property \App\Models\Allocation[]|\Illuminate\Database\Eloquent\Collection $allocations
+ * @property Mount[]|Collection $mounts
+ * @property Server[]|Collection $servers
+ * @property Allocation[]|Collection $allocations
  */
 #[Attributes\Identifiable('node')]
 class Node extends Model implements Identifiable
 {
-    /** @use HasFactory<\Database\Factories\NodeFactory> */
+    /** @use HasFactory<NodeFactory> */
     use HasFactory;
-    use Notifiable;
+
     use HasRealtimeIdentifier;
+    use Notifiable;
 
     /**
      * The resource name for this model when it is transformed into an
@@ -57,6 +62,7 @@ class Node extends Model implements Identifiable
     public const RESOURCE_NAME = 'node';
 
     public const DAEMON_TOKEN_ID_LENGTH = 16;
+
     public const DAEMON_TOKEN_LENGTH = 64;
 
     /**
@@ -152,9 +158,9 @@ class Node extends Model implements Identifiable
                 'host' => '0.0.0.0',
                 'port' => $this->daemonListen,
                 'ssl' => [
-                    'enabled' => (!$this->behind_proxy && $this->scheme === 'https'),
-                    'cert' => '/etc/letsencrypt/live/' . Str::lower($this->fqdn) . '/fullchain.pem',
-                    'key' => '/etc/letsencrypt/live/' . Str::lower($this->fqdn) . '/privkey.pem',
+                    'enabled' => (! $this->behind_proxy && $this->scheme === 'https'),
+                    'cert' => '/etc/letsencrypt/live/'.Str::lower($this->fqdn).'/fullchain.pem',
+                    'key' => '/etc/letsencrypt/live/'.Str::lower($this->fqdn).'/privkey.pem',
                 ],
                 'upload_limit' => $this->upload_size,
             ],
@@ -195,7 +201,7 @@ class Node extends Model implements Identifiable
                 $this->daemon_token
             );
         } catch (\Exception $e) {
-            throw new \App\Exceptions\DisplayException('The daemon token for this node is invalid (decryption failed). This usually happens after an APP_KEY change.');
+            throw new DisplayException('The daemon token for this node is invalid (decryption failed). This usually happens after an APP_KEY change.');
         }
     }
 
@@ -205,7 +211,7 @@ class Node extends Model implements Identifiable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough<\App\Models\Mount, \App\Models\MountNode, $this>
+     * @return HasManyThrough<Mount, MountNode, $this>
      */
     public function mounts(): HasManyThrough
     {
@@ -215,7 +221,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the location associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Location, $this>
+     * @return BelongsTo<Location, $this>
      */
     public function location(): BelongsTo
     {
@@ -225,7 +231,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the servers associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Server, $this>
+     * @return HasMany<Server, $this>
      */
     public function servers(): HasMany
     {
@@ -235,7 +241,7 @@ class Node extends Model implements Identifiable
     /**
      * Gets the allocations associated with a node.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Allocation, $this>
+     * @return HasMany<Allocation, $this>
      */
     public function allocations(): HasMany
     {

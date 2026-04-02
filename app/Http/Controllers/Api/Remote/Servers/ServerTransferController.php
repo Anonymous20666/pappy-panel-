@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Api\Remote\Servers;
 
-use App\Models\Allocation;
-use Illuminate\Http\Response;
-use App\Models\ServerTransfer;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use Illuminate\Database\ConnectionInterface;
+use App\Exceptions\Http\Connection\DaemonConnectionException;
 use App\Exceptions\Http\HttpForbiddenException;
+use App\Http\Controllers\Controller;
+use App\Models\Allocation;
+use App\Models\Server;
+use App\Models\ServerTransfer;
 use App\Repositories\Eloquent\ServerRepository;
 use App\Repositories\Wings\DaemonServerRepository;
-use App\Exceptions\Http\Connection\DaemonConnectionException;
+use Illuminate\Database\ConnectionInterface;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class ServerTransferController extends Controller
@@ -24,8 +25,7 @@ class ServerTransferController extends Controller
         private ConnectionInterface $connection,
         private ServerRepository $repository,
         private DaemonServerRepository $daemonServerRepository,
-    ) {
-    }
+    ) {}
 
     /**
      * The daemon notifies us about a transfer failure.
@@ -68,7 +68,7 @@ class ServerTransferController extends Controller
             throw new HttpForbiddenException('Requesting node does not have permission to access this server.');
         }
 
-        /** @var \App\Models\Server $server */
+        /** @var Server $server */
         $server = $this->connection->transaction(function () use ($server, $transfer) {
             $allocations = array_merge([$transfer->old_allocation], $transfer->old_additional_allocations);
 

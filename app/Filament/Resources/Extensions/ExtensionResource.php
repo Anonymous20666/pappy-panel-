@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources\Extensions;
 
+use App\Filament\Resources\Extensions\Pages\ListExtensions;
 use App\Models\Extension;
-use Filament\Tables\Table;
+use App\Services\Extensions\ExtensionManager;
 use Filament\Actions\Action;
-use Filament\Resources\Resource;
 use Filament\Actions\DeleteAction;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Notifications\Notification;
+use Filament\Resources\Resource;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Notifications\Notification;
-use App\Services\Extensions\ExtensionManager;
-use App\Filament\Resources\Extensions\Pages\ListExtensions;
+use Filament\Tables\Table;
 
 class ExtensionResource extends Resource
 {
@@ -20,6 +21,7 @@ class ExtensionResource extends Resource
     protected static ?int $navigationSort = 1;
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-puzzle-piece';
+
     protected static string|\BackedEnum|null $activeNavigationIcon = 'heroicon-s-puzzle-piece';
 
     public static function getNavigationGroup(): ?string
@@ -81,10 +83,10 @@ class ExtensionResource extends Resource
                     ->modalSubmitAction(false)
                     ->modalCancelActionLabel(trans('admin/extensions.actions.close'))
                     ->infolist([
-                        \Filament\Infolists\Components\TextEntry::make('identifier')->label(trans('admin/extensions.columns.id')),
-                        \Filament\Infolists\Components\TextEntry::make('name')->label(trans('admin/extensions.columns.name')),
-                        \Filament\Infolists\Components\TextEntry::make('version')->label(trans('admin/extensions.columns.version')),
-                        \Filament\Infolists\Components\TextEntry::make('manifest_json')
+                        TextEntry::make('identifier')->label(trans('admin/extensions.columns.id')),
+                        TextEntry::make('name')->label(trans('admin/extensions.columns.name')),
+                        TextEntry::make('version')->label(trans('admin/extensions.columns.version')),
+                        TextEntry::make('manifest_json')
                             ->label(trans('admin/extensions.columns.manifest_json'))
                             ->state(fn (Extension $record) => json_encode($record->manifest ?? [], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)),
                     ]),
@@ -92,7 +94,7 @@ class ExtensionResource extends Resource
                 Action::make('enable')
                     ->icon('heroicon-o-check-circle')
                     ->label(trans('admin/extensions.actions.enable'))
-                    ->visible(fn (Extension $record): bool => !$record->enabled)
+                    ->visible(fn (Extension $record): bool => ! $record->enabled)
                     ->action(function (Extension $record): void {
                         try {
                             app(ExtensionManager::class)->enable($record->identifier);

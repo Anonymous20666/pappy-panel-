@@ -2,13 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-use Psr\Log\LoggerInterface as Log;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\ServiceProvider;
 use App\Contracts\Repository\SettingsRepositoryInterface;
 use Illuminate\Contracts\Config\Repository as ConfigRepository;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Psr\Log\LoggerInterface as Log;
 
 class DesignifyServiceProvider extends ServiceProvider
 {
@@ -166,13 +166,13 @@ class DesignifyServiceProvider extends ServiceProvider
                 return [$setting->key => $setting->value];
             })->toArray();
         } catch (QueryException $exception) {
-            $log->notice('A query exception was encountered while trying to load settings from the database: ' . $exception->getMessage());
+            $log->notice('A query exception was encountered while trying to load settings from the database: '.$exception->getMessage());
 
             return;
         }
 
         foreach ($this->keys as $key) {
-            $value = array_get($values, 'settings::' . $key, $config->get(Str::replace(':', '.', $key)));
+            $value = array_get($values, 'settings::'.$key, $config->get(Str::replace(':', '.', $key)));
 
             if (is_string($value)) {
                 switch (strtolower($value)) {
@@ -207,7 +207,7 @@ class DesignifyServiceProvider extends ServiceProvider
 
             $log->info('All Designify settings have been reset to defaults.');
         } catch (QueryException $exception) {
-            $log->error('Failed to reset Designify settings: ' . $exception->getMessage());
+            $log->error('Failed to reset Designify settings: '.$exception->getMessage());
         }
     }
 }

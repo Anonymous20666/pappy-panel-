@@ -3,9 +3,9 @@
 namespace App\Console\Commands\Extensions;
 
 use App\Models\Extension;
-use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class DevInitCommand extends Command
 {
@@ -64,7 +64,7 @@ class DevInitCommand extends Command
         $updateUrlInput = 'none';
         $targetVersionInput = $panelVersion !== '' ? $panelVersion : 'none';
 
-        if (!$nonInteractive) {
+        if (! $nonInteractive) {
             $description = trim((string) $this->ask('Description', $description));
             $author = trim((string) $this->ask('Author', $author));
             $websiteInput = trim((string) $this->ask('Website (none = null)', $websiteInput));
@@ -97,8 +97,8 @@ class DevInitCommand extends Command
         ];
 
         File::put(
-            $path . '/extension.json',
-            json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL
+            $path.'/extension.json',
+            json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES).PHP_EOL
         );
 
         // Register the rextension in database
@@ -135,7 +135,7 @@ class DevInitCommand extends Command
             return Str::startsWith($path, '/') ? $path : base_path($path);
         }
 
-        return base_path('extensions/' . $path);
+        return base_path('extensions/'.$path);
     }
 
     private function nullablePromptValue(string $value): ?string

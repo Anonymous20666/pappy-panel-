@@ -3,14 +3,15 @@
 namespace App\Filament\Resources\Users\RelationManagers;
 
 use App\Models\Server;
-use Filament\Tables\Table;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
-use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class ServersRelationManager extends RelationManager
 {
@@ -65,9 +66,9 @@ class ServersRelationManager extends RelationManager
                         if ($state === 0) {
                             return '∞';
                         } elseif ($state >= 1024) {
-                            return round($state / 1024, 2) . ' GiB';
+                            return round($state / 1024, 2).' GiB';
                         } else {
-                            return $state . ' MiB';
+                            return $state.' MiB';
                         }
                     })
                     ->toggleable(),
@@ -80,9 +81,9 @@ class ServersRelationManager extends RelationManager
                         if ($state === 0) {
                             return '∞';
                         } elseif ($state >= 1024) {
-                            return round($state / 1024, 2) . ' GiB';
+                            return round($state / 1024, 2).' GiB';
                         } else {
-                            return $state . ' MiB';
+                            return $state.' MiB';
                         }
                     })
                     ->toggleable(),
@@ -91,7 +92,7 @@ class ServersRelationManager extends RelationManager
                     ->label(trans('admin/server.table.cpu'))
                     ->numeric()
                     ->sortable()
-                    ->formatStateUsing(fn ($state) => $state === 0 ? '∞' : $state . ' %')
+                    ->formatStateUsing(fn ($state) => $state === 0 ? '∞' : $state.' %')
                     ->toggleable(),
 
                 TextColumn::make('created_at')
@@ -127,7 +128,7 @@ class ServersRelationManager extends RelationManager
                 Action::make('view')
                     ->label(trans('admin/server.actions.view'))
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Server $record) => config('app.url') . '/server/' . $record->uuid)
+                    ->url(fn (Server $record) => config('app.url').'/server/'.$record->uuid)
                     ->openUrlInNewTab(),
             ])
             ->bulkActions([
@@ -140,7 +141,7 @@ class ServersRelationManager extends RelationManager
             ->defaultSort('created_at', 'desc');
     }
 
-    public static function getTitle(\Illuminate\Database\Eloquent\Model $ownerRecord, string $pageClass): string
+    public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return trans('admin/server.plural-label');
     }

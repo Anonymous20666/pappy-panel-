@@ -47,9 +47,9 @@
         "barryvdh/laravel-ide-helper": "^3.6",
         "fakerphp/faker": "^1.24",
         "filament/upgrade": "^5.0",
-        "friendsofphp/php-cs-fixer": "~3.64.0",
         "itsgoingd/clockwork": "^5.3",
         "larastan/larastan": "^3.8",
+        "laravel/pint": "^1.29",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.5",
         "pestphp/pest": "^3.8",
@@ -73,8 +73,8 @@
         }
     },
     "scripts": {
-        "cs:fix": "php-cs-fixer fix",
-        "cs:check": "php-cs-fixer fix --dry-run --diff --verbose",
+        "pint:fix": "./vendor/bin/pint",
+        "pint:check": "./vendor/bin/pint --test -v",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi || true",

@@ -39,7 +39,7 @@ return new class extends Migration
                 break;
             case 'pgsql':
                 DB::table('eggs')->update([
-                    'config_startup' => DB::raw('jsonb_set(config_startup::jsonb, \'$.userInteraction\', jsonb_build_array())'),
+                    'config_startup' => DB::raw("jsonb_set(config_startup::jsonb, '{userInteraction}', jsonb_build_array(), true)"),
                 ]);
                 break;
         }

@@ -86,7 +86,7 @@ return new class extends Migration
             $table->dropForeign(['egg_id']);
             $table->renameColumn('egg_id', 'option_id');
 
-            $table->foreign('option_id')->references('id')->on('options')->onDelete('CASCADE');
+            $table->foreign('option_id')->references('id')->on('service_options')->onDelete('CASCADE');
         });
 
         Schema::enableForeignKeyConstraints();

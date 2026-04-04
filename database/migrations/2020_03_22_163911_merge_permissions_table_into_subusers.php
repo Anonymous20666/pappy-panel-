@@ -107,19 +107,19 @@ return new class extends Migration
         $flipped = array_flip(array_filter(self::$permissionsMap));
 
         foreach (DB::select('SELECT id, permissions FROM subusers') as $datum) {
-            $values = [];
-            foreach (json_decode($datum->permissions, true) as $permission) {
+            $rows = [];
+            foreach ((array) json_decode((string) $datum->permissions, true) as $permission) {
                 $v = $flipped[$permission] ?? null;
                 if (! empty($v)) {
-                    $values[] = $datum->id;
-                    $values[] = $v;
+                    $rows[] = [
+                        'subuser_id' => $datum->id,
+                        'permission' => $v,
+                    ];
                 }
             }
 
-            if (! empty($values)) {
-                $string = 'VALUES '.implode(', ', array_fill(0, count($values) / 2, '(?, ?)'));
-
-                DB::insert('INSERT INTO permissions(`subuser_id`, `permission`) '.$string, $values);
+            if (! empty($rows)) {
+                DB::table('permissions')->insert($rows);
             }
         }
 

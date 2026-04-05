@@ -1,3 +1,8 @@
+> [!NOTE]
+> **Contribution Information**: We are currently not accepting PRs with new features since we believe v26 has most of the good features.
+> Help us find and fix bugs with the `develop (v26 Fission Falcon)` branch. It will be much appreciated.
+
+
 <p align="center">
 <a href="https://reviactyl.dev/">
 <img width="632" height="245" alt="Reviactyl Banner" src="https://github.com/user-attachments/assets/41380d89-b9cd-4c3d-95be-7fb68d7cb8e1" />

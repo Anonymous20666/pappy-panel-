@@ -1,6 +1,9 @@
 name: Tests
 
 on:
+  push:
+    branches:
+      - "develop"
   pull_request:
     branches:
       - "develop"
@@ -11,6 +14,24 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+    env:
+      APP_ENV: testing
+      APP_DEBUG: "false"
+      APP_KEY: SomeRandomString3232RandomString
+      APP_TIMEZONE: UTC
+      APP_URL: http://localhost/
+      CACHE_DRIVER: array
+      MAIL_MAILER: array
+      SESSION_DRIVER: array
+      QUEUE_DRIVER: sync
+      HASHIDS_SALT: test123
+
+      DB_CONNECTION: mysql
+      DB_HOST: database
+      DB_DATABASE: testing
+      DB_USERNAME: root
+      DB_PASSWORD: ""
+
     strategy:
       fail-fast: false
       matrix:
@@ -47,13 +68,16 @@ jobs:
           extensions: bcmath, cli, curl, gd, mbstring, mysql, openssl, pdo, tokenizer, xml, zip, intl
           tools: composer:v2
           coverage: none
-      - run: cp .env.ci .env
+
       - run: composer install --no-interaction --no-progress --no-suggest --prefer-dist
       - run: vendor/bin/pint -v
-      - run: vendor/bin/pest tests/Unit
+
+      - name: Unit tests
+        run: vendor/bin/pest tests/Unit
         env:
           DB_HOST: UNIT_NO_DB
-      - run: vendor/bin/pest tests/Integration
+
+      - name: Integration tests
+        run: vendor/bin/pest tests/Integration
         env:
           DB_PORT: ${{ job.services.database.ports[3306] }}
-          DB_USERNAME: root

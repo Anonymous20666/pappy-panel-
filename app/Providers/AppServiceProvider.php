@@ -70,19 +70,25 @@ class AppServiceProvider extends ServiceProvider
     protected function versionData(): array
     {
         return Cache::remember('git-version', 5, function () {
-            if (file_exists(base_path('.git/HEAD'))) {
-                $head = explode(' ', file_get_contents(base_path('.git/HEAD')));
+            $headPath = base_path('.git/HEAD');
 
-                if (array_key_exists(1, $head)) {
-                    $path = base_path('.git/'.trim($head[1]));
+            if (is_file($headPath)) {
+                $head = trim((string) file_get_contents($headPath));
+
+                if (Str::startsWith($head, 'ref: ')) {
+                    $referencePath = base_path('.git/'.trim(Str::after($head, 'ref: ')));
+
+                    if (is_file($referencePath)) {
+                        $version = trim((string) file_get_contents($referencePath));
+
+                        if ($version !== '') {
+                            return [
+                                'version' => substr($version, 0, 8),
+                                'is_git' => true,
+                            ];
+                        }
+                    }
                 }
-            }
-
-            if (isset($path) && file_exists($path)) {
-                return [
-                    'version' => substr(file_get_contents($path), 0, 8),
-                    'is_git' => true,
-                ];
             }
 
             return [

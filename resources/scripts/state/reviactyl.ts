@@ -1,17 +1,17 @@
 import { action, Action } from 'easy-peasy';
 
-export interface ReviactylAlert {
+export interface MerlinHostAlert {
     type: string;
     message: string;
 }
 
-export interface ReviactylSidebarButton {
+export interface MerlinHostSidebarButton {
     label: string;
     url: string;
     newTab: boolean;
 }
 
-export interface ReviactylSettings {
+export interface MerlinHostSettings {
     customCopyright: boolean;
     copyright: string;
     isUnderMaintenance: boolean;
@@ -21,25 +21,25 @@ export interface ReviactylSettings {
     allocationBlur: boolean;
     alertType: string;
     alertMessage: string;
-    alerts?: ReviactylAlert[];
-    sidebarButtons?: ReviactylSidebarButton[];
+    alerts?: MerlinHostAlert[];
+    sidebarButtons?: MerlinHostSidebarButton[];
     statusCardLink: string;
     supportCardLink: string;
     billingCardLink: string;
     alwaysShowKillButton: boolean;
 }
 
-export interface ReviactylSettingsStore {
-    data?: ReviactylSettings;
-    setReviactyl: Action<ReviactylSettingsStore, ReviactylSettings>;
+export interface MerlinHostSettingsStore {
+    data?: MerlinHostSettings;
+    setMerlinHost: Action<MerlinHostSettingsStore, MerlinHostSettings>;
 }
 
-const reviactyl: ReviactylSettingsStore = {
+const merlinhost: MerlinHostSettingsStore = {
     data: undefined,
 
-    setReviactyl: action((state, payload) => {
+    setMerlinHost: action((state, payload) => {
         state.data = payload;
     }),
 };
 
-export default reviactyl;
+export default merlinhost;

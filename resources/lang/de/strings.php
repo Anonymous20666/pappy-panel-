@@ -91,7 +91,7 @@ return [
     'enable' => 'Aktivieren',
     'disable' => 'Deaktivieren',
     'save' => 'Speichern',
-    'copyright' => '&copy; :year Reviactyl™ Software',
+    'copyright' => '&copy; :year MerlinHost™ Software',
     'local_network' => 'Lokales Netzwerk',
     'server-status' => 'Server Status',
     'loading-server-status' => 'Loading server status...',

@@ -8,7 +8,7 @@ return [
     | Lockout Configuration
     |--------------------------------------------------------------------------
     |
-    | These options are Reviactyl specific and allow you to configure how
+    | These options are MerlinHost specific and allow you to configure how
     | long a user should be locked out for if they input a username or
     | password incorrectly.
     |

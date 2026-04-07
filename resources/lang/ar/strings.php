@@ -91,7 +91,7 @@ return [
     'enable' => 'تفعيل',
     'disable' => 'تعطيل',
     'save' => 'حفظ',
-    'copyright' => '&copy; :year Reviactyl™ Software',
+    'copyright' => '&copy; :year MerlinHost™ Software',
     'local_network' => 'الشبكة المحلية',
     'server-status' => 'Server Status',
     'loading-server-status' => 'Loading server status...',

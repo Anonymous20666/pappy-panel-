@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Reviactyl
+    // Internal validation logic for MerlinHost
     'internal' => [
         'variable_value' => ':env 变量',
         'invalid_password' => '为此账户提供的密码无效。',

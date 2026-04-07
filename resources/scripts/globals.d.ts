@@ -19,5 +19,5 @@ interface Window {
         discord: boolean;
         github: boolean;
     };
-    ReviactylConfiguration?: Record<string, any>;
+    MerlinHostConfiguration?: Record<string, any>;
 }

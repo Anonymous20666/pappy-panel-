@@ -55,7 +55,7 @@ const hexToRgbString = (hex: string) => {
 };
 
 const getThemeFromConfig = (key: PaletteKey): ThemeData => {
-    const conf = typeof window !== 'undefined' ? window.ReviactylConfiguration || {} : {};
+    const conf = typeof window !== 'undefined' ? window.MerlinHostConfiguration || {} : {};
     const t = conf[key.toLowerCase()] || {};
     return {
         displayName: t.name || key,
@@ -136,7 +136,7 @@ const ThemeSelector = () => {
                 <button
                     onClick={() => handleThemeChange('default')}
                     className={`w-10 h-10 flex items-center justify-center rounded-full border text-sm hover:bg-gray-300 dark:hover:bg-gray-700 ${
-                        selected === 'default' ? 'ring-2 ring-reviactyl' : ''
+                        selected === 'default' ? 'ring-2 ring-merlinhost' : ''
                     }`}
                     title={t('theme-selector.default')}
                 >
@@ -152,7 +152,7 @@ const ThemeSelector = () => {
                             key={name}
                             onClick={() => handleThemeChange(name)}
                             className={`w-10 h-10 rounded-full border shadow-sm transition ${
-                                selected === name ? 'ring-2 ring-reviactyl' : ''
+                                selected === name ? 'ring-2 ring-merlinhost' : ''
                             }`}
                             style={{ background: gradient }}
                             title={theme.displayName}

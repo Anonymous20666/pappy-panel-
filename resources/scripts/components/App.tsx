@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from 'easy-peasy';
 import { store } from '@/state';
 import { SiteSettings } from '@/state/settings';
-import { ReviactylSettings } from '@/state/reviactyl';
+import { MerlinHostSettings } from '@/state.reviactyl';
 import ProgressBar from '@/components/elements/ProgressBar';
 import { NotFound } from '@/components/elements/ScreenBlock';
 import tw from 'twin.macro';
@@ -23,7 +23,7 @@ const PublicServerStatus = lazy(() => import('@/components/public/PublicServerSt
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
-    ReviactylConfiguration?: ReviactylSettings;
+    MerlinHostConfiguration?: MerlinHostSettings;
     PanelUser?: {
         uuid: string;
         username: string;
@@ -42,7 +42,7 @@ interface ExtendedWindow extends Window {
 // setupInterceptors(history);
 
 function App() {
-    const { PanelUser, SiteConfiguration, ReviactylConfiguration } = window as ExtendedWindow;
+    const { PanelUser, SiteConfiguration, MerlinHostConfiguration } = window as ExtendedWindow;
     if (PanelUser && !store.getState().user.data) {
         store.getActions().user.setUserData({
             uuid: PanelUser.uuid,
@@ -63,8 +63,8 @@ function App() {
         store.getActions().settings.setSettings(SiteConfiguration!);
     }
 
-    if (!store.getState().reviactyl.data) {
-        store.getActions().reviactyl.setReviactyl(ReviactylConfiguration!);
+    if (!store.getState().merlinhost.data) {
+        store.getActions().merlinhost.setMerlinHost(MerlinHostConfiguration!);
     }
 
     return (

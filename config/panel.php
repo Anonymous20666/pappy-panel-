@@ -20,7 +20,7 @@ return [
     |
     | Each panel installation is assigned a unique UUID to identify the
     | author of custom services, and make upgrades easier by identifying
-    | standard Reviactyl shipped services.
+    | standard MerlinHost shipped services.
     */
 
     'service' => [
@@ -92,7 +92,7 @@ return [
 
     'cdn' => [
         'cache_time' => 60,
-        'url' => 'https://reviactyl.app/api/v26/get-version',
+        'url' => 'https://merlinhost.app/api/v26/get-version',
     ],
 
     /*
@@ -183,7 +183,7 @@ return [
     | Telemetry Settings
     |--------------------------------------------------------------------------
     |
-    | This section controls the telemetry sent by Reviactyl.
+    | This section controls the telemetry sent by MerlinHost.
     */
 
     'telemetry' => [

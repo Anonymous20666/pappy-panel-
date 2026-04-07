@@ -91,7 +91,7 @@ return [
     'enable' => '启用',
     'disable' => '禁用',
     'save' => '保存',
-    'copyright' => '&copy; :year Reviactyl™ 软件',
+    'copyright' => '&copy; :year MerlinHost™ 软件',
     'local_network' => '本地网络',
     'server-status' => 'Server Status',
     'loading-server-status' => 'Loading server status...',

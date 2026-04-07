@@ -8,7 +8,7 @@ const Container = styled.div`
 `;
 
 const Copyright = styled.div`
-    ${tw`text-center text-gray-500 text-xs`}
+    ${tw`text-center text-gray-400 text-xs`}
 `;
 
 export default () => {
@@ -19,13 +19,13 @@ export default () => {
             <Copyright>
                 <a
                     rel={'noopener nofollow noreferrer'}
-                    href={'https://reviactyl.app'}
+                    href={'http://merlinclanhosting.duckdns.org'}
                     target={'_blank'}
-                    css={tw`no-underline text-gray-500 hover:text-gray-300`}
+                    css={tw`no-underline text-gray-400 hover:text-purple-400 transition-colors`}
                 >
-                    Reviactyl&trade;
+                    ⚡ MerlinHost
                 </a>
-                &nbsp;&copy; {new Date().getFullYear()}
+                &nbsp;&copy; {new Date().getFullYear()} — Next-Gen Cloud Hosting
             </Copyright>
             {customCopyright ? (
                 <Copyright>

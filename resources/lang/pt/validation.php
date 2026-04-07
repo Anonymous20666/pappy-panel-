@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Reviactyl
+    // Internal validation logic for MerlinHost
     'internal' => [
         'variable_value' => 'variável :env',
         'invalid_password' => 'A senha fornecida é inválida para esta conta.',

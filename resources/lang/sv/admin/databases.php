@@ -25,7 +25,7 @@ return [
     'placeholders' => [
         'name' => 'Produktions-MySQL',
         'host' => '127.0.0.1',
-        'username' => 'reviactyl',
+        'username' => 'merlinhost',
     ],
 
     'helpers' => [

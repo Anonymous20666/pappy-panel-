@@ -214,9 +214,9 @@ function LoginContainer() {
                         >
                             Don&apos;t have an account? Create one
                         </Link>
-                        {window.ReviactylConfiguration?.billingCardLink && (
+                        {window.MerlinHostConfiguration?.billingCardLink && (
                             <a
-                                href={window.ReviactylConfiguration.billingCardLink}
+                                href={window.MerlinHostConfiguration.billingCardLink}
                                 target={'_blank'}
                                 rel={'noreferrer'}
                                 css={tw`mt-2 flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300 no-underline transition-colors duration-200`}

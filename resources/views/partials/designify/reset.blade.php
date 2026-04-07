@@ -9,7 +9,7 @@
     </button>
 </form>
 <x-designify.modal id="resetModal" title="Reset settings?" variant="danger">
-    Are you sure you want to reset Reviactyl settings to default? This action cannot be undone.
+    Are you sure you want to reset MerlinHost settings to default? This action cannot be undone.
     <x-slot name="footer">
         <button onclick="closeModal('resetModal')"
             class="flex-1 px-4 py-2 rounded-lg bg-zinc-800 text-zinc-300 hover:bg-zinc-700">

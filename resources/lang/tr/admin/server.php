@@ -80,7 +80,7 @@ return [
         ],
         'image' => [
             'label' => 'Docker Görüntüsü',
-            'placeholder' => 'e.g. ghcr.io/reviactyl/images:java_17',
+            'placeholder' => 'e.g. ghcr.io/merlinhost/images:java_17',
             'helper' => 'Bu sunucuyu çalıştırmak için kullanılan Docker görüntüsü.',
             'custom' => 'Özel',
         ],

@@ -23,7 +23,7 @@ const MaintenanceAlert = () => {
                             <ExclamationIcon className='h-5 w-5 font-bold !text-yellow-500' />
                         </div>
                         <div>
-                            <b>Maintenance Mode!</b> Your clients will be unable to access Reviactyl panel until you
+                            <b>Maintenance Mode!</b> Your clients will be unable to access MerlinHost panel until you
                             disable Maintenance mode.
                         </div>
                     </AlertContainer>

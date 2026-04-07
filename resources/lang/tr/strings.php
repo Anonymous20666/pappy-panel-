@@ -91,7 +91,7 @@ return [
     'enable' => 'Etkinleştir',
     'disable' => 'Devre Dışı Bırak',
     'save' => 'Kaydet',
-    'copyright' => '&copy; :year Reviactyl™ Yazılım',
+    'copyright' => '&copy; :year MerlinHost™ Yazılım',
     'local_network' => 'Yerel Ağ',
     'server-status' => 'Server Status',
     'loading-server-status' => 'Loading server status...',

@@ -6,7 +6,7 @@
     <title>Designify - @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="_token" content="{{ csrf_token() }}">
-    <link rel="shortcut icon" href="/reviactyl/designify.png">
+    <link rel="shortcut icon" href="/merlinhost/designify.png">
     <meta name="msapplication-config" content="/favicons/browserconfig.xml">
 
     @include('layouts.scripts')

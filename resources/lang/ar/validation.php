@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Reviactyl
+    // Internal validation logic for MerlinHost
     'internal' => [
         'variable_value' => 'متغير:env',
         'invalid_password' => 'كلمة المرور المقدمة غير صالحة لهذا الحساب.',

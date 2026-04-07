@@ -22,7 +22,7 @@ import QuickLinks from '@/reviactyl/ui/QuickLinks';
 import Maintenance from '@/reviactyl/ui/Maintenance';
 import { useTranslation } from 'react-i18next';
 import { FaHouse } from 'react-icons/fa6';
-import { ReviactylSidebarButton } from '@/state/reviactyl';
+import { MerlinHostSidebarButton } from '@/state.reviactyl';
 import { ExtensionSlot } from '@/extensions/ExtensionSlot';
 import { useExtensionRoutes } from '@/extensions/useExtensionRoutes';
 import { useExtensions } from '@/extensions/useExtensions';
@@ -66,7 +66,7 @@ const DashboardNavigation = () => {
             }))
     );
     const normalizedSidebarButtons = (Array.isArray(customSidebarButtons) ? customSidebarButtons : []).filter(
-        (button): button is ReviactylSidebarButton =>
+        (button): button is MerlinHostSidebarButton =>
             typeof button?.label === 'string' &&
             button.label.trim().length > 0 &&
             typeof button?.url === 'string' &&

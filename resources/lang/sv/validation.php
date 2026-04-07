@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Reviactyl
+    // Internal validation logic for MerlinHost
     'internal' => [
         'variable_value' => ':env-variabel',
         'invalid_password' => 'Lösenordet som angavs var ogiltigt för detta konto.',

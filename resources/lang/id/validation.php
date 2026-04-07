@@ -98,7 +98,7 @@ return [
 
     'attributes' => [],
 
-    // Internal validation logic for Reviactyl
+    // Internal validation logic for MerlinHost
     'internal' => [
         'variable_value' => 'Variabel :env',
         'invalid_password' => 'Kata sandi yang diberikan tidak valid untuk akun ini.',

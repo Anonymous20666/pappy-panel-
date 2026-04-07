@@ -91,7 +91,7 @@ return [
     'enable' => 'सक्षम करें',
     'disable' => 'अक्षम करें',
     'save' => 'सहेजें',
-    'copyright' => '&copy; :year Reviactyl™ Software',
+    'copyright' => '&copy; :year MerlinHost™ Software',
     'local_network' => 'Local Network',
     'server-status' => 'Server Status',
     'loading-server-status' => 'Loading server status...',

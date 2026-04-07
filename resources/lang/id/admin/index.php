@@ -7,10 +7,10 @@ return [
     'notuptodate-header' => 'Panel Anda belum terbaru',
     'notuptodate-body' => ':latest sekarang tersedia! Baca dokumentasi kami untuk memperbarui Panel Anda.',
     'feedback-header' => 'Ada Masukan?',
-    'feedback-body' => 'Jika Anda menikmati fitur dan kemudahan penggunaan yang dibawa oleh Reviactyl, beri tahu kami! Masukan Anda membantu kami meningkatkan dan membuat alat yang lebih hebat lagi untuk Anda.',
+    'feedback-body' => 'Jika Anda menikmati fitur dan kemudahan penggunaan yang dibawa oleh MerlinHost, beri tahu kami! Masukan Anda membantu kami meningkatkan dan membuat alat yang lebih hebat lagi untuk Anda.',
     'feedback-btn' => 'Buat Isu',
-    'sponsor-header' => 'Dukung Reviactyl',
-    'sponsor-body' => 'Terima kasih telah menggunakan Panel Reviactyl, ini hanya dapat dicapai melalui dukungan Anda, kontributor kami, dan pendukung kami lainnya! Kami menghargai setiap dukungan dari siapa saja.',
+    'sponsor-header' => 'Dukung MerlinHost',
+    'sponsor-body' => 'Terima kasih telah menggunakan Panel MerlinHost, ini hanya dapat dicapai melalui dukungan Anda, kontributor kami, dan pendukung kami lainnya! Kami menghargai setiap dukungan dari siapa saja.',
     'sponsor-btn' => 'Sponsori Proyek',
 
     'help-btn' => 'Dapatkan Bantuan',

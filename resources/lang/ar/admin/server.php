@@ -80,7 +80,7 @@ return [
         ],
         'image' => [
             'label' => 'صورة دوكر',
-            'placeholder' => 'e.g. ghcr.io/reviactyl/images:java_17',
+            'placeholder' => 'e.g. ghcr.io/merlinhost/images:java_17',
             'helper' => 'صورة دوكر المستخدمة لتشغيل هذا الخادم.',
             'custom' => 'مخصص',
         ],

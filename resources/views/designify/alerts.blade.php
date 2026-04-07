@@ -6,7 +6,7 @@
 
 @section('content')
     @php
-        $fallbackMessage = '**Welcome to Reviactyl!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.';
+        $fallbackMessage = '**Welcome to MerlinHost!** You can modify Theme Look & Feel using [Designify](/admin/designify) at the administration area.';
         $configuredAlerts = config('designify.alerts');
 
         if (is_string($configuredAlerts)) {
@@ -105,7 +105,7 @@
                             type="text"
                             name="alerts[${index}][message]"
                             class="alert-message w-full px-4 py-3 bg-zinc-800/50 border border-zinc-700 rounded-xl text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                            placeholder="**bold** [link](https://reviactyl.dev)"
+                            placeholder="**bold** [link](https://merlinhost.dev)"
                             value="${escapeHtml(alert.message)}"
                         />
                     </div>

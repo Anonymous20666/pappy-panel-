@@ -12,7 +12,7 @@ return [
     |--------------------------------------------------------------------------
     | Application Version
     |--------------------------------------------------------------------------
-    | This value is set when creating a Reviactyl release. You should not
+    | This value is set when creating a MerlinHost release. You should not
     | change this value if you are not maintaining your own internal versions.
     */
 
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Reviactyl'),
+    'name' => env('APP_NAME', 'MerlinHost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'logo' => env('APP_LOGO', '/reviactyl/logo.png'),
+    'logo' => env('APP_LOGO', '/merlinhost/logo.png'),
 
     /*
     |--------------------------------------------------------------------------
